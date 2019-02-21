@@ -1,0 +1,1193 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Biswajit Sahoo on Biswajit Sahoo</title>
+    <link>/</link>
+    <description>Recent content in Biswajit Sahoo on Biswajit Sahoo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Biswajit Sahoo</copyright>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0530</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Revisiting Systems of Linear Equations</title>
+      <link>/post/revisiting-systems-of-linear-equations/</link>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/revisiting-systems-of-linear-equations/</guid>
+      <description>&lt;p&gt;Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable. Then the final solution is obtained by back substituting the obtained value of the variable into remaining equations. This method, in mathematical jargon, is called Gaussian elimination and back substitution.&lt;/p&gt;
+&lt;p&gt;It turns out (surprisingly) that linear systems form the basis of many interesting engineering applications. Ultimately the problem boils down to solution (or approximate solution) of a system of linear equations. So a thorough understanding of linear systems is essential to appreciate the applications. In this post we will outline all possible cases of finding solutions to linear systems and briefly outline two most important applications.&lt;/p&gt;
+&lt;p&gt;We will use matrix notation to represent the equations succinctly. It also gives us better insight into their solution. Using matrix notation the system can be represented as &lt;span class=&#34;math display&#34;&gt;\[\textbf{Ax}=\textbf{b}\]&lt;/span&gt; Where &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt; is the matrix of coefficients of size &lt;span class=&#34;math inline&#34;&gt;\((m\times n)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{x}\)&lt;/span&gt; is a vector of variables of size &lt;span class=&#34;math inline&#34;&gt;\((n\times 1)\)&lt;/span&gt;, and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\)&lt;/span&gt; is a vector of size &lt;span class=&#34;math inline&#34;&gt;\((m\times 1)\)&lt;/span&gt; representing constant right hand sides. Note that &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\)&lt;/span&gt; can be a vector of all zeros, i.e., &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} = \textbf{0}\)&lt;/span&gt; or it can be any arbitrary vector with some nonzero values, i.e.,&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\neq \textbf{0}\)&lt;/span&gt;. The solution(s) of linear systems depend to a large extent on what the right hand side is as we will see shortly.&lt;/p&gt;
+&lt;p&gt;Apart from notation, we need two other concepts from matrix theory. One is of rank and other is the range space (or column space) of a matrix. Rank &lt;span class=&#34;math inline&#34;&gt;\((Rank(\textbf{A}))\)&lt;/span&gt; of a matrix (say, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt;) is defined as number of independent rows or columns of a matrix. It is a well known result in matrix theory that row rank (number of independent rows) is equal to column rank (number of independent columns) and &lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A})\leq min(m,n)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Range space &lt;span class=&#34;math inline&#34;&gt;\((\mathcal{R}(A))\)&lt;/span&gt;(in short, Range) of a matrix is the vector space of all possible linear combinations of columns of the matrix. As we take all possible linear combination of columns, it is also known as column space. Readers who are slightly more familiar with linear algebra may know that Range is the span of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt;. Zero vector &lt;span class=&#34;math inline&#34;&gt;\((\textbf{0})\)&lt;/span&gt; is &lt;strong&gt;always&lt;/strong&gt; in the range of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt; because if we take linear combination of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt; with all coefficients as 0’s, we get zero vector. Hence &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}=0 \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; is always true.&lt;/p&gt;
+&lt;p&gt;Let’s now discuss different cases separately and their solutions. We will assume that our system of equations has real entries.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Case - I: &lt;span class=&#34;math inline&#34;&gt;\((m = n)\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) = m\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Unique solution (for any &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\)&lt;/span&gt;). For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+\begin{bmatrix}
+1 &amp;amp; 2 &amp;amp; 3 \\
+2 &amp;amp; 4 &amp;amp; 8 \\
+3 &amp;amp; 5 &amp;amp; 7 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix}
+= 
+\begin{bmatrix}
+3 \\
+5 \\
+7
+\end{bmatrix}
+\end{equation}\]&lt;/span&gt; This system has unique solution.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Impossible (This case will never happen because &lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A})=m\)&lt;/span&gt;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) &amp;lt; m\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+\begin{bmatrix}
+1 &amp;amp; 2 &amp;amp; 3 \\
+2 &amp;amp; 4 &amp;amp; 6 \\
+3 &amp;amp; 5 &amp;amp; 7 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix}
+= 
+\begin{bmatrix}
+3 \\
+6 \\
+8
+\end{bmatrix}
+\end{equation}\]&lt;/span&gt; This system has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+\begin{bmatrix}
+1 &amp;amp; 2 &amp;amp; 3 \\
+2 &amp;amp; 4 &amp;amp; 6 \\
+3 &amp;amp; 5 &amp;amp; 7 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix}
+= 
+\begin{bmatrix}
+1 \\
+5 \\
+7
+\end{bmatrix}
+\end{equation}\]&lt;/span&gt; This system has no solution.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Case - II: &lt;span class=&#34;math inline&#34;&gt;\((m &amp;gt; n)\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) = n\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Unique solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+\begin{bmatrix}
+1 &amp;amp; 2 \\
+2 &amp;amp; 7 \\
+3 &amp;amp; 8 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 
+\end{bmatrix}
+= 
+\begin{bmatrix}
+3 \\
+9 \\
+11
+\end{bmatrix}
+\end{equation}\]&lt;/span&gt; This system has unique solution.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+\begin{bmatrix}
+1 &amp;amp; 2 \\
+2 &amp;amp; 7 \\
+3 &amp;amp; 8 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 
+\end{bmatrix}
+= 
+\begin{bmatrix}
+3 \\
+9 \\
+11
+\end{bmatrix}
+\end{equation}\]&lt;/span&gt; This system has no solution. But this case is immensely useful from application point of view. Sometimes it is not desirable to obtain the exact solution. Rather an approximate solution suffices for all practical purposes. Finding an approximate solution to an overdetermined system leads to the famous &lt;a href=&#34;https://en.wikipedia.org/wiki/Least_squares&#34;&gt;Least Squares&lt;/a&gt; problem.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) &amp;lt; n\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+\begin{bmatrix}
+1 &amp;amp; 2 \\
+2 &amp;amp; 4 \\
+3 &amp;amp; 6 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 
+\end{bmatrix}
+= 
+\begin{bmatrix}
+3 \\
+6 \\
+9
+\end{bmatrix}
+\end{equation}\]&lt;/span&gt; It has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+\begin{bmatrix}
+1 &amp;amp; 2 \\
+2 &amp;amp; 4 \\
+3 &amp;amp; 6 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 
+\end{bmatrix}
+= 
+\begin{bmatrix}
+3 \\
+6 \\
+8
+\end{bmatrix}
+\end{equation}\]&lt;/span&gt; This system has no solution.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Case - III: &lt;span class=&#34;math inline&#34;&gt;\((m &amp;lt; n)\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) = m\)&lt;/span&gt; :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example, &lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+\begin{bmatrix}
+1 &amp;amp; 2 &amp;amp; 3 \\
+2 &amp;amp; 4 &amp;amp; 5 
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix}
+= 
+\begin{bmatrix}
+2 \\
+3 
+\end{bmatrix}
+\end{equation}\]&lt;/span&gt; This system has infinitely many solutions. This case is also used in many applications. As there are infinitely many solutions, a natural choice is to choose the best solution. The qualifier ‘best’ determines what application we have in our mind. If we seek minimum &lt;span class=&#34;math inline&#34;&gt;\((l_2)\)&lt;/span&gt; norm, we get the so called minimum energy solution, a concept used in signal processing. Yet another concern is to seek for the sparsest solution (a solution with only a few nonzero entries and all other entries being zero). This idea is used in &lt;a href=&#34;https://en.wikipedia.org/wiki/Compressed_sensing&#34;&gt;Compressed Sensing&lt;/a&gt;, an active research area with many interesting applications.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Impossible. This case will never happen since &lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A})=m\)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) &amp;lt; m\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example, &lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+\begin{bmatrix}
+1 &amp;amp; 2 &amp;amp; 3 \\
+2 &amp;amp; 4 &amp;amp; 6 
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix}
+= 
+\begin{bmatrix}
+4 \\
+8 
+\end{bmatrix}
+\end{equation}\]&lt;/span&gt; This system has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example, &lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+\begin{bmatrix}
+1 &amp;amp; 2 &amp;amp; 3 \\
+2 &amp;amp; 4 &amp;amp; 6 
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix}
+= 
+\begin{bmatrix}
+1 \\
+5 
+\end{bmatrix}
+\end{equation}\]&lt;/span&gt; This system has no solution.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hope this post gives a clear overview of linear systems of equations. Interested reader may explore further applications. Comments and clarifications are welcome.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Principal Component Analysis - Part III</title>
+      <link>/post/principal-component-analysis-part-iii/</link>
+      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/principal-component-analysis-part-iii/</guid>
+      <description>&lt;p&gt;This post is Part-III of a three part series post on PCA. Other parts of the series can be found at the links below.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/&#34;&gt;Part-II: PCA Implementation with and without using built-in functions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. This paper got published in 2010 and since then its popularity has only grown. The paper has been cited 3800+ times as per Google scholar data.&lt;/p&gt;
+&lt;p&gt;This post contains code snippets in R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;MATLAB codes&lt;/a&gt; can be obtained by using commands of &lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/28/principal-component-analysis---part-ii/&#34;&gt;Part-II&lt;/a&gt;. For figures, the reader has to write his/her own code in MATLAB.&lt;/p&gt;
+&lt;div id=&#34;structure-of-the-paper&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Structure of the paper&lt;/h1&gt;
+&lt;p&gt;Along with basic theory the paper contains three examples on PCA, one example on correspondence analysis and one example on multiple factor analysis. In this post we will only focus on PCA examples.&lt;/p&gt;
+&lt;p&gt;Data for the examples have been taken from the paper [1]. To get the original source of the data, refer to the paper.&lt;/p&gt;
+&lt;p&gt;To run following R codes seamlessly, readers have to load following three packages. If these packages have not been installed previously use ‘install.packages(“package_name”)’ to install those.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+library(ggrepel)
+library(raster)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: sp&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 1
+# Load data
+(words = read.csv(&amp;quot;pca_abdi_words.csv&amp;quot;,header = T))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          Words Word_length Lines_in_dict
+## 1          Bag           3            14
+## 2       Across           6             7
+## 3           On           2            11
+## 4       Insane           6             9
+## 5           By           2             9
+## 6    MOnastery           9             4
+## 7       Relief           6             8
+## 8        Slope           5            11
+## 9    Scoundrel           9             5
+## 10        With           4             8
+## 11     Neither           7             2
+## 12 Pretentious          11             4
+## 13       Solid           5            12
+## 14        This           4             9
+## 15         For           3             8
+## 16   Therefore           9             1
+## 17  Generality          10             4
+## 18       Arise           5            13
+## 19        Blot           4            15
+## 20  Infectious          10             6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(words_centered = scale(words[,2:3],scale = F)) # Removing the first column&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       Word_length Lines_in_dict
+##  [1,]          -3             6
+##  [2,]           0            -1
+##  [3,]          -4             3
+##  [4,]           0             1
+##  [5,]          -4             1
+##  [6,]           3            -4
+##  [7,]           0             0
+##  [8,]          -1             3
+##  [9,]           3            -3
+## [10,]          -2             0
+## [11,]           1            -6
+## [12,]           5            -4
+## [13,]          -1             4
+## [14,]          -2             1
+## [15,]          -3             0
+## [16,]           3            -7
+## [17,]           4            -4
+## [18,]          -1             5
+## [19,]          -2             7
+## [20,]           4            -2
+## attr(,&amp;quot;scaled:center&amp;quot;)
+##   Word_length Lines_in_dict 
+##             6             8&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_words_cov = prcomp(words[,2:3],scale = F) # cov stands for Covariance PCA
+factor_scores_words = pca_words_cov$x
+round(factor_scores_words,2)# Observer that factor scores for PC1 are negatives of what has been given in the paper. This is not a problem as it is negative of the direction given in the paper. It can also be checked that both the principal components are orthogonal.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##         PC1   PC2
+##  [1,] -6.67  0.69
+##  [2,]  0.84 -0.54
+##  [3,] -4.68 -1.76
+##  [4,] -0.84  0.54
+##  [5,] -2.99 -2.84
+##  [6,]  4.99  0.38
+##  [7,]  0.00  0.00
+##  [8,] -3.07  0.77
+##  [9,]  4.14  0.92
+## [10,] -1.07 -1.69
+## [11,]  5.60 -2.38
+## [12,]  6.06  2.07
+## [13,] -3.91  1.30
+## [14,] -1.92 -1.15
+## [15,] -1.61 -2.53
+## [16,]  7.52 -1.23
+## [17,]  5.52  1.23
+## [18,] -4.76  1.84
+## [19,] -6.98  2.07
+## [20,]  3.83  2.30&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sum(factor_scores_words[,1]*factor_scores_words[,2]) # PCs are orthogonal&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] -4.773959e-15&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Contibution of each factor (It is defined as square of factor score divided by sum of squares of factor scores in that column)
+round(factor_scores_words[,1]^2/sum(factor_scores_words[,1]^2)*100,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] 11.36  0.18  5.58  0.18  2.28  6.34  0.00  2.40  4.38  0.29  8.00
+## [12]  9.37  3.90  0.94  0.66 14.41  7.78  5.77 12.43  3.75&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(factor_scores_words[,2]^2/sum(factor_scores_words[,2]^2)*100,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1]  0.92  0.55  5.98  0.55 15.49  0.28  0.00  1.13  1.63  5.48 10.87
+## [12]  8.25  3.27  2.55 12.32  2.90  2.90  6.52  8.25 10.18&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# The calculations in above two lines can be done in a single line
+round(factor_scores_words^2/matrix(rep(colSums(factor_scores_words^2),nrow(words)),ncol = 2,byrow = T)*100,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##         PC1   PC2
+##  [1,] 11.36  0.92
+##  [2,]  0.18  0.55
+##  [3,]  5.58  5.98
+##  [4,]  0.18  0.55
+##  [5,]  2.28 15.49
+##  [6,]  6.34  0.28
+##  [7,]  0.00  0.00
+##  [8,]  2.40  1.13
+##  [9,]  4.38  1.63
+## [10,]  0.29  5.48
+## [11,]  8.00 10.87
+## [12,]  9.37  8.25
+## [13,]  3.90  3.27
+## [14,]  0.94  2.55
+## [15,]  0.66 12.32
+## [16,] 14.41  2.90
+## [17,]  7.78  2.90
+## [18,]  5.77  6.52
+## [19,] 12.43  8.25
+## [20,]  3.75 10.18&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Squared distance to center of gravity
+(dist = rowSums(factor_scores_words^2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] 45  1 25  1 17 25  0 10 18  4 37 41 17  5  9 58 32 26 53 20&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Ssquared cosine of observations of first PC
+(sq_cos = round(factor_scores_words^2/rowSums(factor_scores_words^2)*100))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       PC1 PC2
+##  [1,]  99   1
+##  [2,]  71  29
+##  [3,]  88  12
+##  [4,]  71  29
+##  [5,]  53  47
+##  [6,]  99   1
+##  [7,] NaN NaN
+##  [8,]  94   6
+##  [9,]  95   5
+## [10,]  29  71
+## [11,]  85  15
+## [12,]  90  10
+## [13,]  90  10
+## [14,]  74  26
+## [15,]  29  71
+## [16,]  97   3
+## [17,]  95   5
+## [18,]  87  13
+## [19,]  92   8
+## [20,]  74  26&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Nan’s are produced because of division by zero.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Figue 1
+p = ggplot(words,aes(x = Lines_in_dict,y = Word_length,label = Words))+
+  geom_point()+ geom_text_repel()+ 
+  geom_hline(yintercept = 6)+geom_vline(xintercept = 8)+
+  labs(x = &amp;quot;Lines in dictionary&amp;quot;,y = &amp;quot;Word length&amp;quot;)
+print(p)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Show directions of PCs
+# Note that intercept argument in geom_abline considers the line to be at the origin. In our case the data are mean shifted.
+# So we have to adjust the intercept taking new origin into consideration. These adjustments have been made below.
+slope1 = pca_words_cov$rotation[1,1]/pca_words_cov$rotation[2,1] # Slope of first PC
+slope2 = pca_words_cov$rotation[1,2]/pca_words_cov$rotation[2,2] # Slope of second PC
+(new_origin = c(mean(words$Lines_in_dict),mean(words$Word_length)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 8 6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;intercept1 = 6 - slope1*8
+intercept2 = 6 - slope2*8
+p+geom_abline(slope = slope1,intercept = intercept1,linetype = &amp;quot;dashed&amp;quot;,size = 1.2,col = &amp;quot;red&amp;quot;)+
+  geom_abline(slope = slope2,intercept = intercept2,linetype = &amp;quot;dashed&amp;quot;,size = 1.2,col = &amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-3-2.png&#34; width=&#34;672&#34; /&gt; In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Rotated PCs
+# This figure is obtained by plotting facotor scores. Note that we will plot negative of the factor scores of 1st PC to make the figure consistent with the paper.
+ggplot(as.data.frame(pca_words_cov$x),aes(-pca_words_cov$x[,1],pca_words_cov$x[,2],label = words$Words))+
+  geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt; Given a supplementary point (a point previously not used in finding principal components),we have to first center the data point. Its factor scores can then be obtained by multiplying it with the loading matrix.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Finding factor score of a new point
+sur = c(3,12) # It has 3 letter and 12 lines of dictionary entry
+(sur_centered = sur - colMeans(words[,2:3]))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Word_length Lines_in_dict 
+##            -3             4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(factor_scores_sur = round(sur_centered %*% pca_words_cov$rotation,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        PC1   PC2
+## [1,] -4.99 -0.38&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;eigenvalues-and-variance&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Eigenvalues and variance&lt;/h3&gt;
+&lt;p&gt;See &lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt; for details. Total variance before transformation&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(total_var_before = round(sum(diag(var(words_centered))),3))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 23.368&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(total_var_after = round(sum(diag(var(pca_words_cov$x))),3))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 23.368&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Correlation between principal components and original variables (In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; (see &lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/&#34;&gt;Part-I&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Correlation between PCs and original variables
+(cor(pca_words_cov$x,words_centered))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Word_length Lines_in_dict
+## PC1   0.8679026    -0.9741764
+## PC2   0.4967344     0.2257884&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that the answers for correlation coefficients don’t match with that of the paper. Readers who get actual answers as given in paper are encouraged to comment below the post. However our procedure is correct and it does indeed give the correct answer for supplementary data as described below.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Squared correaltion
+(cor(pca_words_cov$x,words_centered)^2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Word_length Lines_in_dict
+## PC1   0.7532549    0.94901961
+## PC2   0.2467451    0.05098039&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# sum of correlation coefficients between variables and principal components is 1
+colSums((cor(pca_words_cov$x,words_centered)^2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Word_length Lines_in_dict 
+##             1             1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(loading_matrix = pca_words_cov$rotation)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                      PC1       PC2
+## Word_length    0.5368755 0.8436615
+## Lines_in_dict -0.8436615 0.5368755&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Correlation score for supplementary variable&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Supplementary variable (Table 4)
+Frequency = c(8,230,700,1,500,1,9,2,1,700,7,1,4,500,900,3,1,10,1,1)
+Num_entries = c(6,3,12,2,7,1,1,6,1,5,2,1,5,9,7,1,1,4,4,2)
+supp_data = data.frame(Frequency,Num_entries) # Supplementary data
+# Table 5
+supp_data_cent = scale(supp_data,scale = F) # Centered supplementary data
+(corr_score_supp = round(cor(pca_words_cov$x,supp_data),4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Frequency Num_entries
+## PC1   -0.3012     -0.6999
+## PC2   -0.7218     -0.4493&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Note that correlation doesn&amp;#39;t depent on whether supplementary data is centered or not.
+(round(cor(pca_words_cov$x,supp_data_cent),4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Frequency Num_entries
+## PC1   -0.3012     -0.6999
+## PC2   -0.7218     -0.4493&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Squared correlation
+(round(cor(pca_words_cov$x,supp_data_cent)^2,4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Frequency Num_entries
+## PC1    0.0907      0.4899
+## PC2    0.5210      0.2019&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(colSums(cor(pca_words_cov$x,supp_data_cent)^2),4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Frequency Num_entries 
+##      0.6118      0.6918&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Correlation circle plot&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# First plot correlation circle
+x = seq(0,2*pi,length.out = 300)
+circle = ggplot() + geom_path(data = data.frame(a = cos(x),b = sin(x)),
+                     aes(cos(x),sin(x)),alpha = 0.3, size = 1.5)+
+            geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  annotate(&amp;quot;text&amp;quot;,x = c(1.08,0.05),y = c(0.05,1.08),label = c(&amp;quot;PC1&amp;quot;,&amp;quot;PC2&amp;quot;),angle = c(0,90))+
+            xlab(NULL)+ylab(NULL)
+# Plotting original variables
+variable_plot_original = circle + geom_point(data = as.data.frame(pca_words_cov$rotation),
+                      aes(pca_words_cov$rotation[,1],pca_words_cov$rotation[,2]))+
+  geom_text_repel(aes(pca_words_cov$rotation[,1],pca_words_cov$rotation[,2],
+                      label = c(&amp;quot;Length of words&amp;quot;,&amp;quot;Number of lines in Dict.&amp;quot;))) 
+print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plotting supplementary variables
+variable_plot_original+
+  geom_point(data = as.data.frame(corr_score_supp),
+             aes(corr_score_supp[,1],corr_score_supp[,2]))+
+  geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
+                      label = c(&amp;quot;Frequency&amp;quot;,&amp;quot;Number of entries&amp;quot;))) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;example-2&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Example 2&lt;/h1&gt;
+&lt;div id=&#34;wine-example&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Wine example&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Correlation PCA using wine data 
+# Table 6
+(wine = read.csv(&amp;quot;pca_abdi_wine.csv&amp;quot;,header = T))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   wine_type hedonic for_meat for_dessert price sugar alcohol acidity
+## 1    wine_1      14        7           8     7     7      13       7
+## 2    wine_2      10        7           6     4     3      14       7
+## 3    wine_3       8        5           5    10     5      12       5
+## 4    wine_4       2        4           7    16     7      11       3
+## 5    wine_5       6        2           4    13     3      10       3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_wine_cor = prcomp(wine[2:8],scale = T)
+ggplot(as.data.frame(pca_wine_cor$x),aes(x = pca_wine_cor$x[,1],y =  pca_wine_cor$x[,2], label = paste0(&amp;quot;wine &amp;quot;,1:5)))+
+  geom_point()+geom_text_repel()+ geom_vline(xintercept = 0)+ geom_hline(yintercept = 0)+
+  xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigen vector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 7
+# Factor scores along 1st and 2nd PC
+(pca_wine_cor$x[,1:2])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             PC1       PC2
+## [1,] -2.3301649  1.095284
+## [2,] -2.0842419 -1.223185
+## [3,]  0.1673228 -0.370258
+## [4,]  1.7842392  1.712563
+## [5,]  2.4628448 -1.214405&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Contibution of each observation to principal component
+round(pca_wine_cor$x[,1:2]^2/matrix(rep(colSums(pca_wine_cor$x[,1:2]^2),nrow(wine)),ncol = 2,byrow = T)*100,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        PC1   PC2
+## [1,] 28.50 16.57
+## [2,] 22.80 20.66
+## [3,]  0.15  1.89
+## [4,] 16.71 40.51
+## [5,] 31.84 20.37&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Squared cosine of observations of first PC
+(sq_cos = round(pca_wine_cor$x[,1:2]^2/rowSums(pca_wine_cor$x^2)*100))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      PC1 PC2
+## [1,]  77  17
+## [2,]  69  24
+## [3,]   7  34
+## [4,]  50  46
+## [5,]  78  19&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Loading scores corresponding to first two principal components
+(round(pca_wine_cor$rotation[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##               PC1   PC2
+## hedonic     -0.40 -0.11
+## for_meat    -0.45  0.11
+## for_dessert -0.26  0.59
+## price        0.42  0.31
+## sugar       -0.05  0.72
+## alcohol     -0.44 -0.06
+## acidity     -0.45 -0.09&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Correlation score variables with first two principal compoents
+(corr_score_wine = round(cor(pca_wine_cor$x,wine[,2:8])[1:2,],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     hedonic for_meat for_dessert price sugar alcohol acidity
+## PC1   -0.87    -0.97       -0.58  0.91 -0.11   -0.96   -0.99
+## PC2   -0.15     0.15        0.79  0.42  0.97   -0.07   -0.12&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Correlation circle for wine data
+# Figure 6
+corr_score_wine = t(corr_score_wine)
+circle + 
+  geom_point(data = as.data.frame(corr_score_wine),
+             aes(corr_score_wine[,1],corr_score_wine[,2]))+
+  geom_text_repel(aes(corr_score_wine[,1],corr_score_wine[,2],
+                      label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;varimax-rotation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Varimax rotation&lt;/h3&gt;
+&lt;p&gt;Rotation is applied to loading matrix such that after rotation principal components are interpretable. By interpretable, we mean, some of the loading scores will have higher values and some other loading scores will have lower values. So it can be said that the variables whose loading scores have higher value, contribute significantly towards principal components as compared to other variables with lesser loading scores. Though rotation works in certain cases, it must be remembered that it is no magic wand for principal component interpretability. One of the popular rotations is Varimax rotation. R has a built-in command to perform varimax rotation.&lt;/p&gt;
+&lt;p&gt;Varimax rotation can be performed on the whole loading matrix or on a few components only. In the paper, varimax has been applied to first two principal components.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Loading scores of first two principal components
+(round(pca_wine_cor$rotation[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##               PC1   PC2
+## hedonic     -0.40 -0.11
+## for_meat    -0.45  0.11
+## for_dessert -0.26  0.59
+## price        0.42  0.31
+## sugar       -0.05  0.72
+## alcohol     -0.44 -0.06
+## acidity     -0.45 -0.09&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Varimax applied to first two principal components
+rotated_loading_scores = varimax(pca_wine_cor$rotation[,1:2])
+# Loading scores after rotation (Table 10)
+(round(rotated_loading_scores$loadings[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##               PC1   PC2
+## hedonic     -0.41 -0.02
+## for_meat    -0.41  0.21
+## for_dessert -0.12  0.63
+## price        0.48  0.21
+## sugar        0.12  0.72
+## alcohol     -0.44  0.05
+## acidity     -0.46  0.02&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# The same result can also be obtained by mulitplying the original loading 
+# matrix by the rotation matrix obtained from varimax
+(round(pca_wine_cor$rotation[,1:2] %*% rotated_loading_scores$rotmat,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##              [,1]  [,2]
+## hedonic     -0.41 -0.02
+## for_meat    -0.41  0.21
+## for_dessert -0.12  0.63
+## price        0.48  0.21
+## sugar        0.12  0.72
+## alcohol     -0.44  0.05
+## acidity     -0.46  0.02&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#Figure 7
+# Plot of loading socres before rotation
+ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[,1],y = pca_wine_cor$rotation[,2],
+                                                      label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))+
+  geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  xlab(&amp;quot;Loading score along PC1&amp;quot;)+ylab(&amp;quot;Loading score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot of loading scores after rotation
+ggplot(as.data.frame(rotated_loading_scores$loadings[,1:2]),
+                     aes(x = rotated_loading_scores$loadings[,1],
+                         y = rotated_loading_scores$loadings[,2],
+                         label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))+
+  geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+    xlab(&amp;quot;Loading score along PC1 after rotation&amp;quot;)+
+    ylab(&amp;quot;Loading score along PC2 after rotation&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-15-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;example-3&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Example 3&lt;/h1&gt;
+&lt;div id=&#34;french-food-example-covariance-pca-example&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;French food example (Covariance PCA example)&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Load data (Table 11) 
+(food = read.csv(&amp;quot;pca_abdi_food.csv&amp;quot;,header = T))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           class children bread vegetables fruit meat poultry milk wine
+## 1   Blue_collar        2   332        428   354 1437     526  247  427
+## 2  White_collar        2   293        559   388 1527     567  239  258
+## 3   Upper_class        2   372        767   562 1948     927  235  433
+## 4   Blue_collar        3   406        563   341 1507     544  324  407
+## 5  White_collar        3   386        608   396 1501     558  319  363
+## 6   Upper_class        3   438        843   689 2345    1148  243  341
+## 7   Blue_collar        4   534        660   367 1620     638  414  407
+## 8  White_collar        4   460        699   484 1856     762  400  416
+## 9   Upper_class        4   385        789   621 2366    1149  304  282
+## 10  Blue_collar        5   655        776   423 1848     759  495  486
+## 11 White_collar        5   584        995   548 2056     893  518  319
+## 12  Upper_class        5   515       1097   887 2630    1167  561  284&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_food_cov = prcomp(food[,3:9],scale = F)
+
+# Table 12
+# Factor scores
+(factor_scores_food = round(pca_food_cov$x[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           PC1     PC2
+##  [1,] -635.05  120.89
+##  [2,] -488.56  142.33
+##  [3,]  112.03  139.75
+##  [4,] -520.01  -12.05
+##  [5,] -485.94   -1.17
+##  [6,]  588.17  188.44
+##  [7,] -333.95 -144.54
+##  [8,]  -57.51  -42.86
+##  [9,]  571.32  206.76
+## [10,]  -39.38 -264.47
+## [11,]  296.04 -235.92
+## [12,]  992.83  -97.15&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Contibution of each observation to principal component
+round(pca_food_cov$x[,1:2]^2/matrix(rep(colSums(pca_food_cov$x[,1:2]^2),nrow(food)),ncol = 2,byrow = T)*100,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##         PC1   PC2
+##  [1,] 13.34  5.03
+##  [2,]  7.90  6.97
+##  [3,]  0.42  6.72
+##  [4,]  8.94  0.05
+##  [5,]  7.81  0.00
+##  [6,] 11.44 12.22
+##  [7,]  3.69  7.19
+##  [8,]  0.11  0.63
+##  [9,] 10.80 14.71
+## [10,]  0.05 24.07
+## [11,]  2.90 19.15
+## [12,] 32.61  3.25&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dist = pca_food_cov$x[,1]^2+pca_food_cov$x[,2]^2
+# Squared cosine of observations of first PC (rowSums command from &amp;#39;raster&amp;#39; pcakage has been used)
+(sq_cos = round(pca_food_cov$x[,1:2]^2/rowSums(pca_food_cov$x^2)*100))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       PC1 PC2
+##  [1,]  95   3
+##  [2,]  86   7
+##  [3,]  26  40
+##  [4,] 100   0
+##  [5,]  98   0
+##  [6,]  89   9
+##  [7,]  83  15
+##  [8,]  40  22
+##  [9,]  86  11
+## [10,]   2  79
+## [11,]  57  36
+## [12,]  97   1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 13
+# squared loading score
+(round(pca_food_cov$rotation[,1:2]^2,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             PC1  PC2
+## bread      0.01 0.33
+## vegetables 0.11 0.17
+## fruit      0.09 0.01
+## meat       0.57 0.01
+## poultry    0.22 0.06
+## milk       0.01 0.40
+## wine       0.00 0.02&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that this table doesn’t match with that of the paper. We will stick to our analysis.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Correlation score
+(corr_score_food = round((cor(pca_food_cov$x,food[,3:9])[1:2,]),2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     bread vegetables fruit meat poultry  milk  wine
+## PC1  0.36       0.91  0.96 1.00    0.98  0.41 -0.43
+## PC2 -0.87      -0.35  0.10 0.04    0.16 -0.88 -0.33&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# squared correlation score
+(round((cor(pca_food_cov$x,food[,3:9])[1:2,])^2,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     bread vegetables fruit meat poultry milk wine
+## PC1  0.13       0.83  0.92    1    0.96 0.17 0.18
+## PC2  0.76       0.12  0.01    0    0.03 0.77 0.11&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Figure 9
+# Correlation circle for food data
+corr_score_food = t(corr_score_food)
+circle + geom_point(data = as.data.frame(corr_score_food), 
+                    aes(x = corr_score_food[,1],y = corr_score_food[,2]))+
+  geom_text_repel(data = as.data.frame(corr_score_food), 
+                  aes(x = corr_score_food[,1],y = corr_score_food[,2],
+                      label = c(&amp;quot;Bread&amp;quot;,&amp;quot;Vegetables&amp;quot;,&amp;quot;Fruit&amp;quot;,&amp;quot;Meat&amp;quot;,&amp;quot;Poultry&amp;quot;,&amp;quot;Milk&amp;quot;,&amp;quot;Wine&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;672&#34; /&gt; Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Table 14
+cent_food = food[,3:9]-matrix(rep(colMeans(food[,3:9]),times = 12),nrow = 12,
+                              byrow = T)
+svd_food = svd(cent_food)
+# Eigenvalues
+(Eigenvalues = (svd_food$d)^2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 3023141.2354  290575.8390   68795.2333   25298.9496   22992.2474
+## [6]    3722.3214     723.9238&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Important Note:&lt;/strong&gt; These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by &lt;span class=&#34;math inline&#34;&gt;\((n-1)\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is number of data points (in this case &lt;span class=&#34;math inline&#34;&gt;\(n = 12\)&lt;/span&gt;). If this point is still not clear, refer to Part-II.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Percentage contribution of each PC
+(round(Eigenvalues/sum(Eigenvalues),2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.88 0.08 0.02 0.01 0.01 0.00 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Cumulative sum of eigen values
+(round(cumsum(Eigenvalues),2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 3023141 3313717 3382512 3407811 3430804 3434526 3435250&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Cumulative percentage
+(round(cumsum(Eigenvalues)/sum(Eigenvalues),2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.88 0.96 0.98 0.99 1.00 1.00 1.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# RESS (Refer to the paper for a description)
+RESS = array(rep(0,7))
+for (i in 1:7){
+  RESS[i] = sum(Eigenvalues)-sum(Eigenvalues[1:i])
+}
+RESS&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 412108.5146 121532.6756  52737.4423  27438.4927   4446.2453    723.9238
+## [7]      0.0000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# RESS/sum of eigenvalues
+round(RESS/sum(Eigenvalues),2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have not calculated the value of PRESS in this post as it will require us to consider random models. We will not pursue it here.&lt;/p&gt;
+&lt;p&gt;Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through till end. Please comment below if you find any errors or omissions.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_3.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;reference&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Reference&lt;/h2&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Principal Component Analysis - Part II</title>
+      <link>/post/principal-component-analysis-part-ii/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/principal-component-analysis-part-ii/</guid>
+      <description>&lt;p&gt;This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-iii/&#34;&gt;Part-III: Reproducing results of a published paper on PCA&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this post we will first apply built in commands to obtain results and then we will show how the same results can be obtained without using built-in commands. By this post, our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.&lt;/p&gt;
+&lt;p&gt;In this post readers can find code snippets for R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;MATLAB codes&lt;/a&gt; for the same can be obtained from this &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result.&lt;/p&gt;
+&lt;div id=&#34;load-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Load Data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#Load abdi food data
+(food = read.csv(&amp;quot;pca_abdi_food.csv&amp;quot;,header= T))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           class children bread vegetables fruit meat poultry milk wine
+## 1   Blue_collar        2   332        428   354 1437     526  247  427
+## 2  White_collar        2   293        559   388 1527     567  239  258
+## 3   Upper_class        2   372        767   562 1948     927  235  433
+## 4   Blue_collar        3   406        563   341 1507     544  324  407
+## 5  White_collar        3   386        608   396 1501     558  319  363
+## 6   Upper_class        3   438        843   689 2345    1148  243  341
+## 7   Blue_collar        4   534        660   367 1620     638  414  407
+## 8  White_collar        4   460        699   484 1856     762  400  416
+## 9   Upper_class        4   385        789   621 2366    1149  304  282
+## 10  Blue_collar        5   655        776   423 1848     759  495  486
+## 11 White_collar        5   584        995   548 2056     893  518  319
+## 12  Upper_class        5   515       1097   887 2630    1167  561  284&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Centerd data matrix
+cent_food = scale(food[,3:9],scale = F)
+# Scaled data matrix
+scale_food = scale(food[,3:9],scale = T)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;covariance-pca&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Covariance PCA&lt;/h2&gt;
+&lt;div id=&#34;using-built-in-function&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Using built-in function&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Using built-in function
+pca_food_cov = prcomp(food[,3:9],scale = F)
+# Loading scores (we have printed only four columns out of seven)
+(round(pca_food_cov$rotation[,1:4],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##              PC1   PC2   PC3   PC4
+## bread       0.07 -0.58 -0.40  0.11
+## vegetables  0.33 -0.41  0.29  0.61
+## fruit       0.30  0.10  0.34 -0.40
+## meat        0.75  0.11 -0.07 -0.29
+## poultry     0.47  0.24 -0.38  0.33
+## milk        0.09 -0.63  0.23 -0.41
+## wine       -0.06 -0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor score (we have printed only four PCs out of seven)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have printed only four columns of loading scores out of seven.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(pca_food_cov$x[,1:4],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           PC1     PC2     PC3    PC4
+##  [1,] -635.05  120.89  -21.14 -68.97
+##  [2,] -488.56  142.33  132.37  34.91
+##  [3,]  112.03  139.75  -61.86  44.19
+##  [4,] -520.01  -12.05    2.85 -13.70
+##  [5,] -485.94   -1.17   65.75  11.51
+##  [6,]  588.17  188.44  -71.85  28.56
+##  [7,] -333.95 -144.54  -34.94  10.07
+##  [8,]  -57.51  -42.86  -26.26 -46.55
+##  [9,]  571.32  206.76  -38.45   3.69
+## [10,]  -39.38 -264.47 -126.43 -12.74
+## [11,]  296.04 -235.92   58.84  87.43
+## [12,]  992.83  -97.15  121.13 -78.39&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have printed only four principal components out of seven.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variances using built-in function
+(round(pca_food_cov$sdev^2,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance
+(sum(round(pca_food_cov$sdev^2,2)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;comparison-of-variance-before-and-after-transformation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Comparison of variance before and after transformation&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance before transformation
+sum(diag(cov(food[,3:9])))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance after transformation
+sum(diag(cov(pca_food_cov$x)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along variables before transformation
+round(diag(cov(food[,3:9])),2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      bread vegetables      fruit       meat    poultry       milk 
+##   11480.61   35789.09   27255.45  156618.39   62280.52   13718.75 
+##       wine 
+##    5152.63&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that calculation of variance is unaffected by centering data matrix. So variance of original data matrix as well as centered data matrix is same. Check it for yourself. Now see how PCA transforms these variance.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal compoennts
+round(diag(cov(pca_food_cov$x)),2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       PC1       PC2       PC3       PC4       PC5       PC6       PC7 
+## 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We can obtain the same result using built-in fucntion
+round(pca_food_cov$sdev^2,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;performing-covariance-pca-manually-using-svd&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Performing covariance PCA manually using SVD&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;svd_food_cov = svd(cent_food)
+# Loading scores
+round(svd_food_cov$v[,1:4],2) # We have printed only four columns&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       [,1]  [,2]  [,3]  [,4]
+## [1,]  0.07 -0.58 -0.40  0.11
+## [2,]  0.33 -0.41  0.29  0.61
+## [3,]  0.30  0.10  0.34 -0.40
+## [4,]  0.75  0.11 -0.07 -0.29
+## [5,]  0.47  0.24 -0.38  0.33
+## [6,]  0.09 -0.63  0.23 -0.41
+## [7,] -0.06 -0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
+round((cent_food %*% svd_food_cov$v)[,1:4],2) # only 4 columns printed&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          [,1]    [,2]    [,3]   [,4]
+##  [1,] -635.05  120.89  -21.14 -68.97
+##  [2,] -488.56  142.33  132.37  34.91
+##  [3,]  112.03  139.75  -61.86  44.19
+##  [4,] -520.01  -12.05    2.85 -13.70
+##  [5,] -485.94   -1.17   65.75  11.51
+##  [6,]  588.17  188.44  -71.85  28.56
+##  [7,] -333.95 -144.54  -34.94  10.07
+##  [8,]  -57.51  -42.86  -26.26 -46.55
+##  [9,]  571.32  206.76  -38.45   3.69
+## [10,]  -39.38 -264.47 -126.43 -12.74
+## [11,]  296.04 -235.92   58.84  87.43
+## [12,]  992.83  -97.15  121.13 -78.39&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance of principal components
+round(svd_food_cov$d^2/11,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer &lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/&#34;&gt;Part-I&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;performing-covariance-pca-using-eigen-decomopositionnot-recommended&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Performing covariance PCA using Eigen-decomoposition(Not recommended)&lt;/h3&gt;
+&lt;p&gt;This procedure is not recommended because forming a covariance matrix is computationally not efficient for large matrices if data matrix contains smaller entries. So doing eigen analysis on covariance matrix may give erroneous results. However, for our example we can use it to obtain results.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;eigen_food_cov = eigen(cov(cent_food))
+# Loading scores
+round(eigen_food_cov$vectors[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       [,1]  [,2]  [,3]  [,4]
+## [1,] -0.07  0.58 -0.40  0.11
+## [2,] -0.33  0.41  0.29  0.61
+## [3,] -0.30 -0.10  0.34 -0.40
+## [4,] -0.75 -0.11 -0.07 -0.29
+## [5,] -0.47 -0.24 -0.38  0.33
+## [6,] -0.09  0.63  0.23 -0.41
+## [7,]  0.06  0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
+round((cent_food %*% eigen_food_cov$vectors)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          [,1]    [,2]    [,3]   [,4]
+##  [1,]  635.05 -120.89  -21.14 -68.97
+##  [2,]  488.56 -142.33  132.37  34.91
+##  [3,] -112.03 -139.75  -61.86  44.19
+##  [4,]  520.01   12.05    2.85 -13.70
+##  [5,]  485.94    1.17   65.75  11.51
+##  [6,] -588.17 -188.44  -71.85  28.56
+##  [7,]  333.95  144.54  -34.94  10.07
+##  [8,]   57.51   42.86  -26.26 -46.55
+##  [9,] -571.32 -206.76  -38.45   3.69
+## [10,]   39.38  264.47 -126.43 -12.74
+## [11,] -296.04  235.92   58.84  87.43
+## [12,] -992.83   97.15  121.13 -78.39&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal components
+round(eigen_food_cov$values,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Instead of using the ‘cov()’ command to find the covariance matrix manually and perform its eigen analysis.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cov_matrix_manual_food = (1/11)*t(cent_food) %*% cent_food
+eigen_food_new = eigen(cov_matrix_manual_food)
+# Loading scores
+round(eigen_food_new$vectors[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       [,1]  [,2]  [,3]  [,4]
+## [1,] -0.07  0.58 -0.40  0.11
+## [2,] -0.33  0.41  0.29  0.61
+## [3,] -0.30 -0.10  0.34 -0.40
+## [4,] -0.75 -0.11 -0.07 -0.29
+## [5,] -0.47 -0.24 -0.38  0.33
+## [6,] -0.09  0.63  0.23 -0.41
+## [7,]  0.06  0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal components
+round(eigen_food_new$values,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are also different ways to find total variance of the data matrix. We will explore some of the options.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total varaiance before transformation
+sum(diag(cov(cent_food)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that total variance is invariant to translations. So calculating the total variance on raw data will also give the same answer. Check it to convince yourself.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-pca&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Correlation PCA&lt;/h2&gt;
+&lt;p&gt;When PCA is performed on a scaled data matrix (each variable is centered as well as variance of each variable is one), it is called correlation PCA. Before discussing correlation PCA we will take some time to see different ways in which we can obtain correlation matrix.&lt;/p&gt;
+&lt;div id=&#34;different-ways-to-obtain-correlation-matrix.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Different ways to obtain correlation matrix.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Using built-in command
+round(cor(food[,3:9]),2)[,1:4] # We have printed only four columns&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##            bread vegetables fruit  meat
+## bread       1.00       0.59  0.20  0.32
+## vegetables  0.59       1.00  0.86  0.88
+## fruit       0.20       0.86  1.00  0.96
+## meat        0.32       0.88  0.96  1.00
+## poultry     0.25       0.83  0.93  0.98
+## milk        0.86       0.66  0.33  0.37
+## wine        0.30      -0.36 -0.49 -0.44&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# manually
+round((1/11)*t(scale_food) %*% scale_food,2)[,1:4]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##            bread vegetables fruit  meat
+## bread       1.00       0.59  0.20  0.32
+## vegetables  0.59       1.00  0.86  0.88
+## fruit       0.20       0.86  1.00  0.96
+## meat        0.32       0.88  0.96  1.00
+## poultry     0.25       0.83  0.93  0.98
+## milk        0.86       0.66  0.33  0.37
+## wine        0.30      -0.36 -0.49 -0.44&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;performing-correlation-pca-using-built-in-function&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Performing correlation PCA using built-in function&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_food_cor = prcomp(food[,3:9],scale = T)
+# Loading scores
+round(pca_food_cor$rotation[,1:4],2) # Printed only four&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##              PC1   PC2   PC3   PC4
+## bread       0.24 -0.62  0.01 -0.54
+## vegetables  0.47 -0.10  0.06 -0.02
+## fruit       0.45  0.21 -0.15  0.55
+## meat        0.46  0.14 -0.21 -0.05
+## poultry     0.44  0.20 -0.36 -0.32
+## milk        0.28 -0.52  0.44  0.45
+## wine       -0.21 -0.48 -0.78  0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
+round(pca_food_cor$x[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##         PC1   PC2   PC3   PC4
+##  [1,] -2.86  0.36 -0.40  0.36
+##  [2,] -1.89  1.79  1.31 -0.16
+##  [3,] -0.12  0.73 -1.42  0.20
+##  [4,] -2.04 -0.32  0.11  0.10
+##  [5,] -1.69  0.16  0.51  0.16
+##  [6,]  1.69  1.35 -0.99 -0.43
+##  [7,] -0.93 -1.37  0.28 -0.26
+##  [8,] -0.25 -0.63 -0.27  0.29
+##  [9,]  1.60  1.74 -0.10 -0.40
+## [10,]  0.22 -2.78 -0.57 -0.25
+## [11,]  1.95 -1.13  0.99 -0.32
+## [12,]  4.32  0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variances along principal componentes
+round(pca_food_cor$sdev^2,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Sum of vairances
+sum(pca_food_cor$sdev^2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;comparison-of-variance-before-and-after-transformation-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Comparison of variance before and after transformation&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance before transformation
+sum(diag(cov(scale_food)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance after transformation
+sum(diag(cov(pca_food_cor$x)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along variables before transformation
+round(diag(cov(scale_food)),2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      bread vegetables      fruit       meat    poultry       milk 
+##          1          1          1          1          1          1 
+##       wine 
+##          1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is obvious as we have scaled the matrix. Now see how PCA transforms these variance.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal compoennts
+round(diag(cov(pca_food_cor$x)),2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  PC1  PC2  PC3  PC4  PC5  PC6  PC7 
+## 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We can obtain the same result using built-in fucntion
+round(pca_food_cor$sdev^2,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;performing-correlation-pca-manually-using-svd&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Performing correlation PCA manually using SVD&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;svd_food_cor = svd(scale_food)
+# Loading scores
+round(svd_food_cor$v[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##       [,1]  [,2]  [,3]  [,4]
+## [1,]  0.24 -0.62  0.01 -0.54
+## [2,]  0.47 -0.10  0.06 -0.02
+## [3,]  0.45  0.21 -0.15  0.55
+## [4,]  0.46  0.14 -0.21 -0.05
+## [5,]  0.44  0.20 -0.36 -0.32
+## [6,]  0.28 -0.52  0.44  0.45
+## [7,] -0.21 -0.48 -0.78  0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
+round((scale_food %*% svd_food_cor$v)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        [,1]  [,2]  [,3]  [,4]
+##  [1,] -2.86  0.36 -0.40  0.36
+##  [2,] -1.89  1.79  1.31 -0.16
+##  [3,] -0.12  0.73 -1.42  0.20
+##  [4,] -2.04 -0.32  0.11  0.10
+##  [5,] -1.69  0.16  0.51  0.16
+##  [6,]  1.69  1.35 -0.99 -0.43
+##  [7,] -0.93 -1.37  0.28 -0.26
+##  [8,] -0.25 -0.63 -0.27  0.29
+##  [9,]  1.60  1.74 -0.10 -0.40
+## [10,]  0.22 -2.78 -0.57 -0.25
+## [11,]  1.95 -1.13  0.99 -0.32
+## [12,]  4.32  0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along each principcal component
+round(svd_food_cor$d^2/11,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Sum of variances
+sum(svd_food_cor$d^2/11)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again we have to divide by 11 to get eigenvalues of correlation matrix. Check the formulation of correlation matrix using scaled data matrix to convince yourself.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;using-eigen-decomposition-not-recommended&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Using eigen-decomposition (Not Recommended)&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;eigen_food_cor = eigen(cor(food[,3:9]))
+# Loading scores
+round(eigen_food_cor$vectors)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]    0    1    0   -1    0    1    0
+## [2,]    0    0    0    0    1    0    0
+## [3,]    0    0    0    1    0    1    0
+## [4,]    0    0    0    0    0    0    1
+## [5,]    0    0    0    0    0    0   -1
+## [6,]    0    1    0    0    0    0    0
+## [7,]    0    0   -1    0    0    0    0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
+round((scale_food %*% eigen_food_cor$vectors)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        [,1]  [,2]  [,3]  [,4]
+##  [1,]  2.86 -0.36 -0.40  0.36
+##  [2,]  1.89 -1.79  1.31 -0.16
+##  [3,]  0.12 -0.73 -1.42  0.20
+##  [4,]  2.04  0.32  0.11  0.10
+##  [5,]  1.69 -0.16  0.51  0.16
+##  [6,] -1.69 -1.35 -0.99 -0.43
+##  [7,]  0.93  1.37  0.28 -0.26
+##  [8,]  0.25  0.63 -0.27  0.29
+##  [9,] -1.60 -1.74 -0.10 -0.40
+## [10,] -0.22  2.78 -0.57 -0.25
+## [11,] -1.95  1.13  0.99 -0.32
+## [12,] -4.32 -0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variances along each principal component
+round(eigen_food_cor$values,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I hope this post would help clear some of the confusions that a beginner might have while encountering PCA for the first time. Please comment below if you find any errors.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_2.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New York,2002.&lt;/li&gt;
+&lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Principal Component Analysis - Part I</title>
+      <link>/post/principal-component-analysis-part-i/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/principal-component-analysis-part-i/</guid>
+      <description>&lt;p&gt;In this post we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The application of PCA and its variants are ubiquitous. In almost all software, such as MATLAB, R, etc., built-in commands are available to perform PCA. In this post we will show how can we obtain results of PCA from raw data first using and then without using built in commands. Then we will reproduce the results of a published paper on PCA that is very popular in academic circles. The post is divided into three parts to make it manageable to read. Readers who are totally familiar with PCA should read none and leave the page immediately. Other readers who are familiar with PCA but want to see different implementations, should jump to the part they wish to read. Absolute beginners should start with Part-I and work their way through gradually. Beginners are also encouraged to explore the references for further information. Here is the outline of different parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/&#34;&gt;Part-II: PCA Implementation with and without using built-in functions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-iii/&#34;&gt;Part-III: Reproducing results of a published paper on PCA&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For &lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;, both MATLAB and R codes are available to reproduce all the results. &lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-iii/&#34;&gt;Part-III&lt;/a&gt; contains only R codes. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;MATLAB codes&lt;/a&gt; can be obtained by using commands of &lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;. In this post, we will discuss the theory behind PCA.&lt;/p&gt;
+&lt;p&gt;Principal Component Analysis (PCA) is one of the most popular dimensionality reduction techniques. Though its origin dates back to early 20th century, it has never gone out of fashion it seems. Its popularity grows steady as can be gauged by the number of papers and articles published related to PCA or its variants.&lt;/p&gt;
+&lt;p&gt;All popular programming platforms contain built in functions that perform PCA given a data matrix. In this blog we will use the open source statistical programming environment R to demonstrate the result.&lt;/p&gt;
+&lt;p&gt;We will also show how we can obtain the results using simple matrix operations without using the built-in function.&lt;/p&gt;
+&lt;p&gt;In this blog we will reproduce using R all the results of an immensely popular paper on PCA by Abdi et. al. The paper got published in 2010 and within 8 years it has got more than 3800 citations. The data will be taken from the paper itself.&lt;/p&gt;
+&lt;div id=&#34;principal-component-analysis&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Principal Component Analysis&lt;/h1&gt;
+&lt;div id=&#34;theory&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Theory:&lt;/h2&gt;
+&lt;p&gt;The usual convention is to place variables as columns and different observations as rows (Data frames in R follow this convention). For example, let’s suppose we are collecting data about daily weather for a year. Our variables of interest may include maximum temperature in a day, minimum temperature, humidity, max. wind speed, etc. For every day, we have to collect observations for each of these variables. In vector form, our data point for one day will contain number of observations equal to the number of variables under study and this becomes one row of our data matrix. Assuming that we are observing 10 variables everyday, our data matrix for one year (assuming it’s not a leap year) will contain 365 rows and 10 columns. Once data matrix is obtained, further analysis is done on this data matrix to obtain important hidden information regarding the data. We will use notations from matrix theory to simplify our analysis.&lt;/p&gt;
+&lt;p&gt;Let be the data matrix of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;, where is the number of data points and is the number of variables. We can assume without any loss of generality that is centered, meaning its column means are zero. This only shifts the data towards the origin without changing their relative orientation. So if originally is not centered, it is first centered before doing PCA. From now onward we will assume that is always centered.&lt;/p&gt;
+&lt;p&gt;Variance of a variable (a column)in &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; is equal to sum of squares of entries (because the column is centered) of that column divided by (n - 1) to make it unbiased. So sum of variance of all variables is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times sum of squares of all elements of the matrix . Readers who are familiar with matrix norms would instantly recognize that total variance is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt; of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Total variance before transformation = &lt;span class=&#34;math display&#34;&gt;\[\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})=\frac{1}{n-1}\|\textbf{X}\|_{F}^2\]&lt;/span&gt; Where trace of a matrix is sum of its diagonal entries.&lt;/p&gt;
+&lt;p&gt;The aim of PCA is to transform the data in such a way that along first principal direction, variance of transformed data is maximum. It subsequently finds second principal direction orthogonal to the first one in such a way that it explains maximum of the remaining variance among all possible direction in the orthogonal subspace.&lt;/p&gt;
+&lt;p&gt;In matrix form the transformation can be written as &lt;span class=&#34;math display&#34;&gt;\[\textbf{Y}_{n\times p}=\textbf{X}_{n\times p}\textbf{P}_{p\times p}\]&lt;/span&gt; Where &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is the transformed data matrix. The columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are called principal components and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is usually called loading matrix. Our aim is to find matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. Once we find &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; we can then find &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; just by a matrix multiplication. Though we will not go into to proof here, it can be easily proved (see references), that matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is the eigenvector matrix of the covariance matrix. Let’s first define covariance matrix.&lt;/p&gt;
+&lt;p&gt;Given a data matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;(centered), its covariance matrix &lt;span class=&#34;math inline&#34;&gt;\((\textbf{S})\)&lt;/span&gt; is defined as &lt;span class=&#34;math display&#34;&gt;\[\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}\]&lt;/span&gt; As principal directions are orthogonal, we will also require &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; to be an orthogonal matrix.&lt;/p&gt;
+&lt;p&gt;Now, it is straightforward to form the covariance matrix and by placing its eigenvectors as columns, we can find matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; and consequently the principal components. The eigenvectors are arranged in such a way that first column is the eigenvector corresponding to largest eigenvector, second column (second eigenvector) corresponds to second largest eigenvalue and so on. Here we have assumed that we will always be able to find all the &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; orthogonal eigenvectors. In fact, we will always be able to find &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; orthogonal eigenvectors as the matrix is symmetric. It can also be shown that the transformed matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is centered and more remarkably, total variance of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is same as total variance of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;. We will prove these two propositions as the proof are short.&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}\)&lt;/span&gt; be a column vector of all ones of size &lt;span class=&#34;math inline&#34;&gt;\((n\times 1)\)&lt;/span&gt;. To prove that columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are centered, just premultiply it by &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T\)&lt;/span&gt; (this finds column sum for each column). So &lt;span class=&#34;math display&#34;&gt;\[\textbf{1}^T \textbf{Y} = \textbf{1}^T\textbf{X}\textbf{P}\]&lt;/span&gt; But columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; are already centered, so &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T\textbf{X}=\textbf{0}\)&lt;/span&gt;. Thus &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T \textbf{Y}= \textbf{0}\)&lt;/span&gt;. Hence columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are centered.&lt;/p&gt;
+&lt;p&gt;To prove that total variance of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; also remains same, observe that&lt;/p&gt;
+&lt;p&gt;total covariance of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; = &lt;span class=&#34;math display&#34;&gt;\[trace(\frac{1}{n-1}\textbf{Y}^{T}\textbf{Y})=\frac{1}{n-1}trace((\textbf{P}^T\textbf{X}^{T}\textbf{X})\textbf{P})=\\\frac{1}{n-1}trace((\textbf{P}\textbf{P}^T)\textbf{X}^{T}\textbf{X})=trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})\]&lt;/span&gt; The previous equation uses the fact that trace is commutative(i.e.&lt;span class=&#34;math inline&#34;&gt;\(trace(\textbf{AB})=trace(\textbf{BA})\)&lt;/span&gt;) and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is orthogonal (i.e. &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\textbf{P}^T=\textbf{I}\)&lt;/span&gt;).&lt;/p&gt;
+&lt;div id=&#34;link-between-total-variance-and-eigenvalues&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Link between total variance and eigenvalues&lt;/h3&gt;
+&lt;p&gt;Total variance is sum of eigenvalues of covriance matrix &lt;span class=&#34;math inline&#34;&gt;\((\textbf{S})\)&lt;/span&gt;. We will further discuss this point in &lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;variations-in-pca&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Variations in PCA&lt;/h3&gt;
+&lt;p&gt;Sometimes our data matrix contains variables that are measured in different units. So we might have to scale the centered matrix to reduce the effect of variables with large variation. So depending on the matrix on which PCA is performed, it is divided into two types.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Covariance PCA (Data matrix is centered but not scaled)&lt;/li&gt;
+&lt;li&gt;Correlation PCA (Data matrix is centered and scaled)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Examples of these two types can be found in &lt;a href=&#34;https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;some-common-terminology-associated-with-pca&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Some common terminology associated with PCA:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Factor scores corresponding to a principal component&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Values of that column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; that corresponds to the principal component.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Loading score&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Values corresponding to a column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. For example,loading scores of variables corresponding to first principal component are the values of the first column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inertia&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Square of Frobenius norm of the matrix.&lt;/p&gt;
+&lt;div id=&#34;how-actually-are-principal-components-computed&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;How actually are principal components computed&lt;/h3&gt;
+&lt;p&gt;The previously stated method of finding eigenvectors of covariance matrix is not computationally effective. In practice, singular value decomposition (SVD) is used to find the matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. SVD theorem tells that any real matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; can be decomposed into three matrices such that &lt;span class=&#34;math display&#34;&gt;\[ \textbf{X} = \textbf{U}\Sigma\textbf{V}^T\]&lt;/span&gt; Where, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; is of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;. &lt;span class=&#34;math inline&#34;&gt;\(\textbf{U}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{V}\)&lt;/span&gt; are orthogonal matrices of size &lt;span class=&#34;math inline&#34;&gt;\(n\times n\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(p\times p\)&lt;/span&gt; respectively. &lt;span class=&#34;math inline&#34;&gt;\(\Sigma\)&lt;/span&gt; is a diagonal matrix of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Given the SVD decomposition of a matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;, &lt;span class=&#34;math display&#34;&gt;\[\textbf{X}^T\textbf{X}=\textbf{V}\Sigma^2\textbf{V}^T\]&lt;/span&gt; This is the eigen-decomposition of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt;. So &lt;span class=&#34;math inline&#34;&gt;\(\textbf{V}\)&lt;/span&gt; is the eigenvector matrix of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt;. For PCA we need eigenvector matrix of covariance matrix. So converting the equation into convenient form, we get &lt;span class=&#34;math display&#34;&gt;\[\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}=\textbf{V}(\frac{1}{n-1}\Sigma^2)\textbf{V}^T\]&lt;/span&gt; Thus eigenvalues of S are diagonal entries of &lt;span class=&#34;math inline&#34;&gt;\((\frac{1}{n-1}\Sigma^2)\)&lt;/span&gt;. As SVD is computationally efficient, all built-in functions use SVD to find the loading matrix and then use it to find principal components.&lt;/p&gt;
+&lt;p&gt;In the interest of keeping the post at a reasonable length, we will stop our exposition of theory here. Whatever we have discussed is only a fraction of everything. Entire books have been written on PCA. Interested readers who want to pursue further can refer to the references given here and later to the references given in the references. Please comment below if you find any errors.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_interpretation_part_1.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New York,2002.&lt;/li&gt;
+&lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PCA on Biswajit Sahoo</title>
+    <link>/tags/pca/</link>
+    <description>Recent content in PCA on Biswajit Sahoo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Biswajit Sahoo</copyright>
+    <lastBuildDate>Tue, 05 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/pca/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Principal Component Analysis - Part III</title>
+      <link>/post/principal-component-analysis-part-iii/</link>
+      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/principal-component-analysis-part-iii/</guid>
+      <description>This post is Part-III of a three part series post on PCA. Other parts of the series can be found at the links below.
+Part-I: Basic Theory of PCAPart-II: PCA Implementation with and without using built-in functionsIn this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams.</description>
+    </item>
+    
+    <item>
+      <title>Principal Component Analysis - Part II</title>
+      <link>/post/principal-component-analysis-part-ii/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/principal-component-analysis-part-ii/</guid>
+      <description>This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
+Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post we will first apply built in commands to obtain results and then we will show how the same results can be obtained without using built-in commands. By this post, our aim is not to advocate the use of non-built-in functions.</description>
+    </item>
+    
+    <item>
+      <title>Principal Component Analysis - Part I</title>
+      <link>/post/principal-component-analysis-part-i/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/principal-component-analysis-part-i/</guid>
+      <description>In this post we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The application of PCA and its variants are ubiquitous. In almost all software, such as MATLAB, R, etc., built-in commands are available to perform PCA. In this post we will show how can we obtain results of PCA from raw data first using and then without using built in commands.</description>
+    </item>
+    
+  </channel>
+</rss>

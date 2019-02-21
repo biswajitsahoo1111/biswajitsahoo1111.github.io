@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 2.4.0">
+  <meta name="generator" content="Hugo 0.47" />
+  <meta name="author" content="Biswajit Sahoo">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
+Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post we will first apply built in commands to obtain results and then we will show how the same results can be obtained without using built-in commands. By this post, our aim is not to advocate the use of non-built-in functions.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/principal-component-analysis-part-ii/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Biswajit Sahoo">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Biswajit Sahoo">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/principal-component-analysis-part-ii/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@biswajitsahoo11">
+  <meta property="twitter:creator" content="@biswajitsahoo11">
+  
+  <meta property="og:site_name" content="Biswajit Sahoo">
+  <meta property="og:url" content="/post/principal-component-analysis-part-ii/">
+  <meta property="og:title" content="Principal Component Analysis - Part II | Biswajit Sahoo">
+  <meta property="og:description" content="This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
+Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post we will first apply built in commands to obtain results and then we will show how the same results can be obtained without using built-in commands. By this post, our aim is not to advocate the use of non-built-in functions.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-02-04T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-02-04T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Principal Component Analysis - Part II | Biswajit Sahoo</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Biswajit Sahoo</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#blog">
+            
+            <span>Blog</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Principal Component Analysis - Part II</h1>
+
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Biswajit Sahoo">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2019-02-04 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2019-02-04 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      Feb 4, 2019
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Biswajit Sahoo">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    11 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/blog/">Blog</a>
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Principal%20Component%20Analysis%20-%20Part%20II&amp;url=%2fpost%2fprincipal-component-analysis-part-ii%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fprincipal-component-analysis-part-ii%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fprincipal-component-analysis-part-ii%2f&amp;title=Principal%20Component%20Analysis%20-%20Part%20II"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fprincipal-component-analysis-part-ii%2f&amp;title=Principal%20Component%20Analysis%20-%20Part%20II"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Principal%20Component%20Analysis%20-%20Part%20II&amp;body=%2fpost%2fprincipal-component-analysis-part-ii%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <p>This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.</p>
+<ul>
+<li><a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/">Part-I: Basic Theory of PCA</a></li>
+<li><a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-iii/">Part-III: Reproducing results of a published paper on PCA</a></li>
+</ul>
+<p>In this post we will first apply built in commands to obtain results and then we will show how the same results can be obtained without using built-in commands. By this post, our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.</p>
+<p>In this post readers can find code snippets for R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> for the same can be obtained from this <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">link</a>.</p>
+<p>We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result.</p>
+<div id="load-data" class="section level3">
+<h3>Load Data</h3>
+<pre class="r"><code>#Load abdi food data
+(food = read.csv(&quot;pca_abdi_food.csv&quot;,header= T))</code></pre>
+<pre><code>##           class children bread vegetables fruit meat poultry milk wine
+## 1   Blue_collar        2   332        428   354 1437     526  247  427
+## 2  White_collar        2   293        559   388 1527     567  239  258
+## 3   Upper_class        2   372        767   562 1948     927  235  433
+## 4   Blue_collar        3   406        563   341 1507     544  324  407
+## 5  White_collar        3   386        608   396 1501     558  319  363
+## 6   Upper_class        3   438        843   689 2345    1148  243  341
+## 7   Blue_collar        4   534        660   367 1620     638  414  407
+## 8  White_collar        4   460        699   484 1856     762  400  416
+## 9   Upper_class        4   385        789   621 2366    1149  304  282
+## 10  Blue_collar        5   655        776   423 1848     759  495  486
+## 11 White_collar        5   584        995   548 2056     893  518  319
+## 12  Upper_class        5   515       1097   887 2630    1167  561  284</code></pre>
+<pre class="r"><code># Centerd data matrix
+cent_food = scale(food[,3:9],scale = F)
+# Scaled data matrix
+scale_food = scale(food[,3:9],scale = T)</code></pre>
+</div>
+<div id="covariance-pca" class="section level2">
+<h2>Covariance PCA</h2>
+<div id="using-built-in-function" class="section level3">
+<h3>Using built-in function</h3>
+<pre class="r"><code># Using built-in function
+pca_food_cov = prcomp(food[,3:9],scale = F)
+# Loading scores (we have printed only four columns out of seven)
+(round(pca_food_cov$rotation[,1:4],2))</code></pre>
+<pre><code>##              PC1   PC2   PC3   PC4
+## bread       0.07 -0.58 -0.40  0.11
+## vegetables  0.33 -0.41  0.29  0.61
+## fruit       0.30  0.10  0.34 -0.40
+## meat        0.75  0.11 -0.07 -0.29
+## poultry     0.47  0.24 -0.38  0.33
+## milk        0.09 -0.63  0.23 -0.41
+## wine       -0.06 -0.14 -0.66 -0.31</code></pre>
+<pre class="r"><code># Factor score (we have printed only four PCs out of seven)</code></pre>
+<p>We have printed only four columns of loading scores out of seven.</p>
+<pre class="r"><code>(round(pca_food_cov$x[,1:4],2))</code></pre>
+<pre><code>##           PC1     PC2     PC3    PC4
+##  [1,] -635.05  120.89  -21.14 -68.97
+##  [2,] -488.56  142.33  132.37  34.91
+##  [3,]  112.03  139.75  -61.86  44.19
+##  [4,] -520.01  -12.05    2.85 -13.70
+##  [5,] -485.94   -1.17   65.75  11.51
+##  [6,]  588.17  188.44  -71.85  28.56
+##  [7,] -333.95 -144.54  -34.94  10.07
+##  [8,]  -57.51  -42.86  -26.26 -46.55
+##  [9,]  571.32  206.76  -38.45   3.69
+## [10,]  -39.38 -264.47 -126.43 -12.74
+## [11,]  296.04 -235.92   58.84  87.43
+## [12,]  992.83  -97.15  121.13 -78.39</code></pre>
+<p>We have printed only four principal components out of seven.</p>
+<pre class="r"><code># Variances using built-in function
+(round(pca_food_cov$sdev^2,2))</code></pre>
+<pre><code>## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81</code></pre>
+<pre class="r"><code># Total variance
+(sum(round(pca_food_cov$sdev^2,2)))</code></pre>
+<pre><code>## [1] 312295.4</code></pre>
+</div>
+</div>
+<div id="comparison-of-variance-before-and-after-transformation" class="section level2">
+<h2>Comparison of variance before and after transformation</h2>
+<pre class="r"><code># Total variance before transformation
+sum(diag(cov(food[,3:9])))</code></pre>
+<pre><code>## [1] 312295.4</code></pre>
+<pre class="r"><code># Total variance after transformation
+sum(diag(cov(pca_food_cov$x)))</code></pre>
+<pre><code>## [1] 312295.4</code></pre>
+<p>Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.</p>
+<pre class="r"><code># Variance along variables before transformation
+round(diag(cov(food[,3:9])),2)</code></pre>
+<pre><code>##      bread vegetables      fruit       meat    poultry       milk 
+##   11480.61   35789.09   27255.45  156618.39   62280.52   13718.75 
+##       wine 
+##    5152.63</code></pre>
+<p>Note that calculation of variance is unaffected by centering data matrix. So variance of original data matrix as well as centered data matrix is same. Check it for yourself. Now see how PCA transforms these variance.</p>
+<pre class="r"><code># Variance along principal compoennts
+round(diag(cov(pca_food_cov$x)),2)</code></pre>
+<pre><code>##       PC1       PC2       PC3       PC4       PC5       PC6       PC7 
+## 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81</code></pre>
+<pre class="r"><code># We can obtain the same result using built-in fucntion
+round(pca_food_cov$sdev^2,2)</code></pre>
+<pre><code>## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81</code></pre>
+<div id="performing-covariance-pca-manually-using-svd" class="section level3">
+<h3>Performing covariance PCA manually using SVD</h3>
+<pre class="r"><code>svd_food_cov = svd(cent_food)
+# Loading scores
+round(svd_food_cov$v[,1:4],2) # We have printed only four columns</code></pre>
+<pre><code>##       [,1]  [,2]  [,3]  [,4]
+## [1,]  0.07 -0.58 -0.40  0.11
+## [2,]  0.33 -0.41  0.29  0.61
+## [3,]  0.30  0.10  0.34 -0.40
+## [4,]  0.75  0.11 -0.07 -0.29
+## [5,]  0.47  0.24 -0.38  0.33
+## [6,]  0.09 -0.63  0.23 -0.41
+## [7,] -0.06 -0.14 -0.66 -0.31</code></pre>
+<pre class="r"><code># Factor scores
+round((cent_food %*% svd_food_cov$v)[,1:4],2) # only 4 columns printed</code></pre>
+<pre><code>##          [,1]    [,2]    [,3]   [,4]
+##  [1,] -635.05  120.89  -21.14 -68.97
+##  [2,] -488.56  142.33  132.37  34.91
+##  [3,]  112.03  139.75  -61.86  44.19
+##  [4,] -520.01  -12.05    2.85 -13.70
+##  [5,] -485.94   -1.17   65.75  11.51
+##  [6,]  588.17  188.44  -71.85  28.56
+##  [7,] -333.95 -144.54  -34.94  10.07
+##  [8,]  -57.51  -42.86  -26.26 -46.55
+##  [9,]  571.32  206.76  -38.45   3.69
+## [10,]  -39.38 -264.47 -126.43 -12.74
+## [11,]  296.04 -235.92   58.84  87.43
+## [12,]  992.83  -97.15  121.13 -78.39</code></pre>
+<pre class="r"><code># Variance of principal components
+round(svd_food_cov$d^2/11,2)</code></pre>
+<pre><code>## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81</code></pre>
+<p>Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer <a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/">Part-I</a></p>
+</div>
+<div id="performing-covariance-pca-using-eigen-decomopositionnot-recommended" class="section level3">
+<h3>Performing covariance PCA using Eigen-decomoposition(Not recommended)</h3>
+<p>This procedure is not recommended because forming a covariance matrix is computationally not efficient for large matrices if data matrix contains smaller entries. So doing eigen analysis on covariance matrix may give erroneous results. However, for our example we can use it to obtain results.</p>
+<pre class="r"><code>eigen_food_cov = eigen(cov(cent_food))
+# Loading scores
+round(eigen_food_cov$vectors[,1:4],2)</code></pre>
+<pre><code>##       [,1]  [,2]  [,3]  [,4]
+## [1,] -0.07  0.58 -0.40  0.11
+## [2,] -0.33  0.41  0.29  0.61
+## [3,] -0.30 -0.10  0.34 -0.40
+## [4,] -0.75 -0.11 -0.07 -0.29
+## [5,] -0.47 -0.24 -0.38  0.33
+## [6,] -0.09  0.63  0.23 -0.41
+## [7,]  0.06  0.14 -0.66 -0.31</code></pre>
+<pre class="r"><code># Factor scores
+round((cent_food %*% eigen_food_cov$vectors)[,1:4],2)</code></pre>
+<pre><code>##          [,1]    [,2]    [,3]   [,4]
+##  [1,]  635.05 -120.89  -21.14 -68.97
+##  [2,]  488.56 -142.33  132.37  34.91
+##  [3,] -112.03 -139.75  -61.86  44.19
+##  [4,]  520.01   12.05    2.85 -13.70
+##  [5,]  485.94    1.17   65.75  11.51
+##  [6,] -588.17 -188.44  -71.85  28.56
+##  [7,]  333.95  144.54  -34.94  10.07
+##  [8,]   57.51   42.86  -26.26 -46.55
+##  [9,] -571.32 -206.76  -38.45   3.69
+## [10,]   39.38  264.47 -126.43 -12.74
+## [11,] -296.04  235.92   58.84  87.43
+## [12,] -992.83   97.15  121.13 -78.39</code></pre>
+<pre class="r"><code># Variance along principal components
+round(eigen_food_cov$values,2)</code></pre>
+<pre><code>## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81</code></pre>
+<p>Instead of using the ‘cov()’ command to find the covariance matrix manually and perform its eigen analysis.</p>
+<pre class="r"><code>cov_matrix_manual_food = (1/11)*t(cent_food) %*% cent_food
+eigen_food_new = eigen(cov_matrix_manual_food)
+# Loading scores
+round(eigen_food_new$vectors[,1:4],2)</code></pre>
+<pre><code>##       [,1]  [,2]  [,3]  [,4]
+## [1,] -0.07  0.58 -0.40  0.11
+## [2,] -0.33  0.41  0.29  0.61
+## [3,] -0.30 -0.10  0.34 -0.40
+## [4,] -0.75 -0.11 -0.07 -0.29
+## [5,] -0.47 -0.24 -0.38  0.33
+## [6,] -0.09  0.63  0.23 -0.41
+## [7,]  0.06  0.14 -0.66 -0.31</code></pre>
+<pre class="r"><code># Variance along principal components
+round(eigen_food_new$values,2)</code></pre>
+<pre><code>## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81</code></pre>
+<p>There are also different ways to find total variance of the data matrix. We will explore some of the options.</p>
+<pre class="r"><code># Total varaiance before transformation
+sum(diag(cov(cent_food)))</code></pre>
+<pre><code>## [1] 312295.4</code></pre>
+<p>Note that total variance is invariant to translations. So calculating the total variance on raw data will also give the same answer. Check it to convince yourself.</p>
+</div>
+</div>
+<div id="correlation-pca" class="section level2">
+<h2>Correlation PCA</h2>
+<p>When PCA is performed on a scaled data matrix (each variable is centered as well as variance of each variable is one), it is called correlation PCA. Before discussing correlation PCA we will take some time to see different ways in which we can obtain correlation matrix.</p>
+<div id="different-ways-to-obtain-correlation-matrix." class="section level3">
+<h3>Different ways to obtain correlation matrix.</h3>
+<pre class="r"><code># Using built-in command
+round(cor(food[,3:9]),2)[,1:4] # We have printed only four columns</code></pre>
+<pre><code>##            bread vegetables fruit  meat
+## bread       1.00       0.59  0.20  0.32
+## vegetables  0.59       1.00  0.86  0.88
+## fruit       0.20       0.86  1.00  0.96
+## meat        0.32       0.88  0.96  1.00
+## poultry     0.25       0.83  0.93  0.98
+## milk        0.86       0.66  0.33  0.37
+## wine        0.30      -0.36 -0.49 -0.44</code></pre>
+<pre class="r"><code># manually
+round((1/11)*t(scale_food) %*% scale_food,2)[,1:4]</code></pre>
+<pre><code>##            bread vegetables fruit  meat
+## bread       1.00       0.59  0.20  0.32
+## vegetables  0.59       1.00  0.86  0.88
+## fruit       0.20       0.86  1.00  0.96
+## meat        0.32       0.88  0.96  1.00
+## poultry     0.25       0.83  0.93  0.98
+## milk        0.86       0.66  0.33  0.37
+## wine        0.30      -0.36 -0.49 -0.44</code></pre>
+</div>
+</div>
+<div id="performing-correlation-pca-using-built-in-function" class="section level2">
+<h2>Performing correlation PCA using built-in function</h2>
+<pre class="r"><code>pca_food_cor = prcomp(food[,3:9],scale = T)
+# Loading scores
+round(pca_food_cor$rotation[,1:4],2) # Printed only four</code></pre>
+<pre><code>##              PC1   PC2   PC3   PC4
+## bread       0.24 -0.62  0.01 -0.54
+## vegetables  0.47 -0.10  0.06 -0.02
+## fruit       0.45  0.21 -0.15  0.55
+## meat        0.46  0.14 -0.21 -0.05
+## poultry     0.44  0.20 -0.36 -0.32
+## milk        0.28 -0.52  0.44  0.45
+## wine       -0.21 -0.48 -0.78  0.31</code></pre>
+<pre class="r"><code># Factor scores
+round(pca_food_cor$x[,1:4],2)</code></pre>
+<pre><code>##         PC1   PC2   PC3   PC4
+##  [1,] -2.86  0.36 -0.40  0.36
+##  [2,] -1.89  1.79  1.31 -0.16
+##  [3,] -0.12  0.73 -1.42  0.20
+##  [4,] -2.04 -0.32  0.11  0.10
+##  [5,] -1.69  0.16  0.51  0.16
+##  [6,]  1.69  1.35 -0.99 -0.43
+##  [7,] -0.93 -1.37  0.28 -0.26
+##  [8,] -0.25 -0.63 -0.27  0.29
+##  [9,]  1.60  1.74 -0.10 -0.40
+## [10,]  0.22 -2.78 -0.57 -0.25
+## [11,]  1.95 -1.13  0.99 -0.32
+## [12,]  4.32  0.10  0.57  0.72</code></pre>
+<pre class="r"><code># Variances along principal componentes
+round(pca_food_cor$sdev^2,2)</code></pre>
+<pre><code>## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00</code></pre>
+<pre class="r"><code># Sum of vairances
+sum(pca_food_cor$sdev^2)</code></pre>
+<pre><code>## [1] 7</code></pre>
+</div>
+<div id="comparison-of-variance-before-and-after-transformation-1" class="section level2">
+<h2>Comparison of variance before and after transformation</h2>
+<pre class="r"><code># Total variance before transformation
+sum(diag(cov(scale_food)))</code></pre>
+<pre><code>## [1] 7</code></pre>
+<pre class="r"><code># Total variance after transformation
+sum(diag(cov(pca_food_cor$x)))</code></pre>
+<pre><code>## [1] 7</code></pre>
+<p>Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.</p>
+<pre class="r"><code># Variance along variables before transformation
+round(diag(cov(scale_food)),2)</code></pre>
+<pre><code>##      bread vegetables      fruit       meat    poultry       milk 
+##          1          1          1          1          1          1 
+##       wine 
+##          1</code></pre>
+<p>This is obvious as we have scaled the matrix. Now see how PCA transforms these variance.</p>
+<pre class="r"><code># Variance along principal compoennts
+round(diag(cov(pca_food_cor$x)),2)</code></pre>
+<pre><code>##  PC1  PC2  PC3  PC4  PC5  PC6  PC7 
+## 4.33 1.83 0.63 0.13 0.06 0.02 0.00</code></pre>
+<pre class="r"><code># We can obtain the same result using built-in fucntion
+round(pca_food_cor$sdev^2,2)</code></pre>
+<pre><code>## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00</code></pre>
+<div id="performing-correlation-pca-manually-using-svd" class="section level3">
+<h3>Performing correlation PCA manually using SVD</h3>
+<pre class="r"><code>svd_food_cor = svd(scale_food)
+# Loading scores
+round(svd_food_cor$v[,1:4],2)</code></pre>
+<pre><code>##       [,1]  [,2]  [,3]  [,4]
+## [1,]  0.24 -0.62  0.01 -0.54
+## [2,]  0.47 -0.10  0.06 -0.02
+## [3,]  0.45  0.21 -0.15  0.55
+## [4,]  0.46  0.14 -0.21 -0.05
+## [5,]  0.44  0.20 -0.36 -0.32
+## [6,]  0.28 -0.52  0.44  0.45
+## [7,] -0.21 -0.48 -0.78  0.31</code></pre>
+<pre class="r"><code># Factor scores
+round((scale_food %*% svd_food_cor$v)[,1:4],2)</code></pre>
+<pre><code>##        [,1]  [,2]  [,3]  [,4]
+##  [1,] -2.86  0.36 -0.40  0.36
+##  [2,] -1.89  1.79  1.31 -0.16
+##  [3,] -0.12  0.73 -1.42  0.20
+##  [4,] -2.04 -0.32  0.11  0.10
+##  [5,] -1.69  0.16  0.51  0.16
+##  [6,]  1.69  1.35 -0.99 -0.43
+##  [7,] -0.93 -1.37  0.28 -0.26
+##  [8,] -0.25 -0.63 -0.27  0.29
+##  [9,]  1.60  1.74 -0.10 -0.40
+## [10,]  0.22 -2.78 -0.57 -0.25
+## [11,]  1.95 -1.13  0.99 -0.32
+## [12,]  4.32  0.10  0.57  0.72</code></pre>
+<pre class="r"><code># Variance along each principcal component
+round(svd_food_cor$d^2/11,2)</code></pre>
+<pre><code>## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00</code></pre>
+<pre class="r"><code># Sum of variances
+sum(svd_food_cor$d^2/11)</code></pre>
+<pre><code>## [1] 7</code></pre>
+<p>Again we have to divide by 11 to get eigenvalues of correlation matrix. Check the formulation of correlation matrix using scaled data matrix to convince yourself.</p>
+</div>
+<div id="using-eigen-decomposition-not-recommended" class="section level3">
+<h3>Using eigen-decomposition (Not Recommended)</h3>
+<pre class="r"><code>eigen_food_cor = eigen(cor(food[,3:9]))
+# Loading scores
+round(eigen_food_cor$vectors)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]    0    1    0   -1    0    1    0
+## [2,]    0    0    0    0    1    0    0
+## [3,]    0    0    0    1    0    1    0
+## [4,]    0    0    0    0    0    0    1
+## [5,]    0    0    0    0    0    0   -1
+## [6,]    0    1    0    0    0    0    0
+## [7,]    0    0   -1    0    0    0    0</code></pre>
+<pre class="r"><code># Factor scores
+round((scale_food %*% eigen_food_cor$vectors)[,1:4],2)</code></pre>
+<pre><code>##        [,1]  [,2]  [,3]  [,4]
+##  [1,]  2.86 -0.36 -0.40  0.36
+##  [2,]  1.89 -1.79  1.31 -0.16
+##  [3,]  0.12 -0.73 -1.42  0.20
+##  [4,]  2.04  0.32  0.11  0.10
+##  [5,]  1.69 -0.16  0.51  0.16
+##  [6,] -1.69 -1.35 -0.99 -0.43
+##  [7,]  0.93  1.37  0.28 -0.26
+##  [8,]  0.25  0.63 -0.27  0.29
+##  [9,] -1.60 -1.74 -0.10 -0.40
+## [10,] -0.22  2.78 -0.57 -0.25
+## [11,] -1.95  1.13  0.99 -0.32
+## [12,] -4.32 -0.10  0.57  0.72</code></pre>
+<pre class="r"><code># Variances along each principal component
+round(eigen_food_cor$values,2)</code></pre>
+<pre><code>## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00</code></pre>
+<p>I hope this post would help clear some of the confusions that a beginner might have while encountering PCA for the first time. Please comment below if you find any errors.</p>
+<p><a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_2.Rmd">R Markdown file for this post</a></p>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<ol style="list-style-type: decimal">
+<li>I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New York,2002.</li>
+<li>Abdi, H., &amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.</li>
+</ol>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="label label-default" href="/tags/pca/">PCA</a>
+  
+  <a class="label label-default" href="/tags/machine-learning/">Machine Learning</a>
+  
+  <a class="label label-default" href="/tags/r/">R</a>
+  
+  <a class="label label-default" href="/tags/matlab/">MATLAB</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/principal-component-analysis-part-i/">Principal Component Analysis - Part I</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+
+    
+
+    <p class="powered-by">
+
+      &copy; 2019 Biswajit Sahoo &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: { linebreaks: { automatic: true } },
+        tex2jax: { inlineMath: [ ['$', '$'], ['\\(','\\)'] ], displayMath: [ ['$$','$$'], ['\\[', '\\]'] ], processEscapes: false },
+        TeX: { noUndefined: { attributes: { mathcolor: 'red', mathbackground: '#FFEEEE', mathsize: '90%' } } },
+        messageStyle: 'none'
+      });
+    </script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/search.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+
+  </body>
+</html>
+
