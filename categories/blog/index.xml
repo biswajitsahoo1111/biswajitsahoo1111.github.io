@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2019 Biswajit Sahoo</copyright>
-    <lastBuildDate>Tue, 12 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fault Diagnosis of Machines</title>
+      <link>/post/fault-diagnosis-of-machines/</link>
+      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fault-diagnosis-of-machines/</guid>
+      <description>This story was originally written for “Augmented Writing Skills for Articulating Research (AWSAR)” award 2018. It is written in a non-technical way so as to be accessible to as many people as possible irrespective of their educational background. The story also featured in the top 100 list of stories for the award. The full list of awardees and the title of their stories can be found here.
+PreludeRising sun with its gentle light marks the arrival of morning.</description>
+    </item>
     
     <item>
       <title>Revisiting Systems of Linear Equations</title>
@@ -28,7 +38,7 @@
       
       <guid>/post/principal-component-analysis-part-iii/</guid>
       <description>This post is Part-III of a three part series post on PCA. Other parts of the series can be found at the links below.
-Part-I: Basic Theory of PCAPart-II: PCA Implementation with and without using built-in functionsIn this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams.</description>
+Part-I: Basic Theory of PCAPart-II: PCA Implementation with and without using built-in functionsIn this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J.</description>
     </item>
     
     <item>

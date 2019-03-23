@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Source Themes Academic 2.4.0">
-  <meta name="generator" content="Hugo 0.47" />
+  <meta name="generator" content="Hugo 0.54.0" />
   <meta name="author" content="Biswajit Sahoo">
 
   
@@ -301,7 +301,10 @@
 
 
     <div class="article-style" itemprop="articleBody">
-      <p>Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable. Then the final solution is obtained by back substituting the obtained value of the variable into remaining equations. This method, in mathematical jargon, is called Gaussian elimination and back substitution.</p>
+      
+
+
+<p>Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable. Then the final solution is obtained by back substituting the obtained value of the variable into remaining equations. This method, in mathematical jargon, is called Gaussian elimination and back substitution.</p>
 <p>It turns out (surprisingly) that linear systems form the basis of many interesting engineering applications. Ultimately the problem boils down to solution (or approximate solution) of a system of linear equations. So a thorough understanding of linear systems is essential to appreciate the applications. In this post we will outline all possible cases of finding solutions to linear systems and briefly outline two most important applications.</p>
 <p>We will use matrix notation to represent the equations succinctly. It also gives us better insight into their solution. Using matrix notation the system can be represented as <span class="math display">\[\textbf{Ax}=\textbf{b}\]</span> Where <span class="math inline">\(\textbf{A}\)</span> is the matrix of coefficients of size <span class="math inline">\((m\times n)\)</span>, <span class="math inline">\(\textbf{x}\)</span> is a vector of variables of size <span class="math inline">\((n\times 1)\)</span>, and <span class="math inline">\(\textbf{b}\)</span> is a vector of size <span class="math inline">\((m\times 1)\)</span> representing constant right hand sides. Note that <span class="math inline">\(\textbf{b}\)</span> can be a vector of all zeros, i.e., <span class="math inline">\(\textbf{b} = \textbf{0}\)</span> or it can be any arbitrary vector with some nonzero values, i.e.,<span class="math inline">\(\textbf{b}\neq \textbf{0}\)</span>. The solution(s) of linear systems depend to a large extent on what the right hand side is as we will see shortly.</p>
 <p>Apart from notation, we need two other concepts from matrix theory. One is of rank and other is the range space (or column space) of a matrix. Rank <span class="math inline">\((Rank(\textbf{A}))\)</span> of a matrix (say, <span class="math inline">\(\textbf{A}\)</span>) is defined as number of independent rows or columns of a matrix. It is a well known result in matrix theory that row rank (number of independent rows) is equal to column rank (number of independent columns) and <span class="math inline">\(Rank(\textbf{A})\leq min(m,n)\)</span>.</p>
