@@ -164,6 +164,25 @@
         
 
         <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
           <a href="/#blog">
             
             <span>Blog</span>
@@ -472,13 +491,15 @@ slope2 = pca_words_cov$rotation[1,2]/pca_words_cov$rotation[2,2] # Slope of seco
 intercept2 = 6 - slope2*8
 p+geom_abline(slope = slope1,intercept = intercept1,linetype = &quot;dashed&quot;,size = 1.2,col = &quot;red&quot;)+
   geom_abline(slope = slope2,intercept = intercept2,linetype = &quot;dashed&quot;,size = 1.2,col = &quot;blue&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-3-2.png" width="672" /> In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.</p>
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-3-2.png" width="672" />
+In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.</p>
 <pre class="r"><code># Rotated PCs
 # This figure is obtained by plotting facotor scores. Note that we will plot negative of the factor scores of 1st PC to make the figure consistent with the paper.
 ggplot(as.data.frame(pca_words_cov$x),aes(-pca_words_cov$x[,1],pca_words_cov$x[,2],label = words$Words))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&quot;Factor score along PC1&quot;)+ylab(&quot;Factor score along PC2&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-4-1.png" width="672" /> Given a supplementary point (a point previously not used in finding principal components),we have to first center the data point. Its factor scores can then be obtained by multiplying it with the loading matrix.</p>
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+Given a supplementary point (a point previously not used in finding principal components),we have to first center the data point. Its factor scores can then be obtained by multiplying it with the loading matrix.</p>
 <pre class="r"><code># Finding factor score of a new point
 sur = c(3,12) # It has 3 letter and 12 lines of dictionary entry
 (sur_centered = sur - colMeans(words[,2:3]))</code></pre>
@@ -489,12 +510,14 @@ sur = c(3,12) # It has 3 letter and 12 lines of dictionary entry
 ## [1,] -4.99 -0.38</code></pre>
 <div id="eigenvalues-and-variance" class="section level3">
 <h3>Eigenvalues and variance</h3>
-<p>See <a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/">Part-II</a> for details. Total variance before transformation</p>
+<p>See <a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/">Part-II</a> for details.
+Total variance before transformation</p>
 <pre class="r"><code>(total_var_before = round(sum(diag(var(words_centered))),3))</code></pre>
 <pre><code>## [1] 23.368</code></pre>
 <pre class="r"><code>(total_var_after = round(sum(diag(var(pca_words_cov$x))),3))</code></pre>
 <pre><code>## [1] 23.368</code></pre>
-<p>Correlation between principal components and original variables (In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix <span class="math inline">\(\textbf{P}\)</span> (see <a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/">Part-I</a>)</p>
+<p>Correlation between principal components and original variables
+(In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix <span class="math inline">\(\textbf{P}\)</span> (see <a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/">Part-I</a>)</p>
 <p>The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.</p>
 <pre class="r"><code># Correlation between PCs and original variables
 (cor(pca_words_cov$x,words_centered))</code></pre>
@@ -785,7 +808,8 @@ circle + geom_point(data = as.data.frame(corr_score_food),
   geom_text_repel(data = as.data.frame(corr_score_food), 
                   aes(x = corr_score_food[,1],y = corr_score_food[,2],
                       label = c(&quot;Bread&quot;,&quot;Vegetables&quot;,&quot;Fruit&quot;,&quot;Meat&quot;,&quot;Poultry&quot;,&quot;Milk&quot;,&quot;Wine&quot;)))</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-17-1.png" width="672" /> Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).</p>
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).</p>
 <pre class="r"><code>## Table 14
 cent_food = food[,3:9]-matrix(rep(colMeans(food[,3:9]),times = 12),nrow = 12,
                               byrow = T)
