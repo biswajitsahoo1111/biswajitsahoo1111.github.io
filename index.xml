@@ -1326,10 +1326,13 @@ applications. We will use one of those for our demonstrations.&lt;/p&gt;
 &lt;h2 id=&#34;results&#34;&gt;Results&lt;/h2&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_multiclass_time.pdf&#34; target=&#34;_blank&#34;&gt;Multiclass bearing fault classifical using SVM on time domain
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_multiclass_time.pdf&#34; target=&#34;_blank&#34;&gt;Multiclass bearing fault classifical using SVM on time domain
 features&lt;/a&gt;
 (On &lt;a href=&#34;https://csegroups.case.edu/bearingdatacenter/pages/welcome-case-western-reserve-university-bearing-data-center-website&#34; target=&#34;_blank&#34;&gt;Case Western Reserve University Bearing
-Data&lt;/a&gt;)&lt;/li&gt;
+Data&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_wavelet_energy_multiclass_cwru.pdf&#34; target=&#34;_blank&#34;&gt;Multiclass bearning fault classification using SVM on wavelet packet energy features&lt;/a&gt; (On &lt;a href=&#34;https://csegroups.case.edu/bearingdatacenter/pages/welcome-case-western-reserve-university-bearing-data-center-website&#34; target=&#34;_blank&#34;&gt;Case Western Reserve University Bearing
+Data&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;(This list will be updated gradually.)&lt;/p&gt;
