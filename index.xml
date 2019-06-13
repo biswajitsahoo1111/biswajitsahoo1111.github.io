@@ -1335,6 +1335,8 @@ Data&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_wavelet_entropy_multiclass_cwru.pdf&#34; target=&#34;_blank&#34;&gt;Multiclass bearing fault classification using SVM on wavelet packet entropy features&lt;/a&gt; (On &lt;a href=&#34;https://csegroups.case.edu/bearingdatacenter/pages/welcome-case-western-reserve-university-bearing-data-center-website&#34; target=&#34;_blank&#34;&gt;Case Western Reserve University Bearing
 Data&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/svm_12k_cwru.pdf&#34; target=&#34;_blank&#34;&gt;Multiclass bearing fault classification using SVM on CWRU data (sampling frequency 12k)&lt;/a&gt; (&lt;strong&gt;Achieves 100% test accuracy in one case&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;(This list will be updated gradually.)&lt;/p&gt;
