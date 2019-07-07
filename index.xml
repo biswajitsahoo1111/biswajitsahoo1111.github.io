@@ -1550,20 +1550,36 @@ applications. We will use those for our demonstrations.&lt;/p&gt;
 &lt;h2 id=&#34;results&#34;&gt;Results&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://csegroups.case.edu/bearingdatacenter/pages/welcome-case-western-reserve-university-bearing-data-center-website&#34; target=&#34;_blank&#34;&gt;Using Case Western Reserve University Bearing
+&lt;li&gt;&lt;p&gt;Multiclass Bearing Fault Classification Using &lt;a href=&#34;https://csegroups.case.edu/bearingdatacenter/pages/welcome-case-western-reserve-university-bearing-data-center-website&#34; target=&#34;_blank&#34;&gt;Case Western Reserve University Bearing
 Data&lt;/a&gt;&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_multiclass_time.pdf&#34; target=&#34;_blank&#34;&gt;Bearing fault classification using SVM on time domain
-features (10 classes, Sampling frequency: 48k)&lt;/a&gt;(Overall accuracy achieved: &lt;strong&gt;96.4%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_multiclass_time.pdf&#34; target=&#34;_blank&#34;&gt;SVM on time domain
+features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;96.4%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_wavelet_energy_multiclass_cwru.pdf&#34; target=&#34;_blank&#34;&gt;Bearing fault classification using SVM on wavelet packet energy features (10 classes, Sampling frequency: 48k)&lt;/a&gt; (Overall accuracy achieved: &lt;strong&gt;99.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_wavelet_energy_multiclass_cwru.pdf&#34; target=&#34;_blank&#34;&gt;SVM on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Dimensionality_Reduction.ipynb&#34; target=&#34;_blank&#34;&gt;Visualizing High Dimensional Data Using Dimensionality Reduction Techniques&lt;/a&gt; (&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Dimensionality_Reduction.ipynb&#34; target=&#34;_blank&#34;&gt;Python Code&lt;/a&gt;) (&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/dimensionality_reduction_projection.pdf&#34; target=&#34;_blank&#34;&gt;R Code&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_wavelet_entropy_multiclass_cwru.pdf&#34; target=&#34;_blank&#34;&gt;Bearing fault classification using SVM on wavelet packet entropy features (10 classes, Sampling frequency: 48k)&lt;/a&gt; (Overall accuracy achieved: &lt;strong&gt;99.2%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_wavelet_entropy_multiclass_cwru.pdf&#34; target=&#34;_blank&#34;&gt;SVM on wavelet packet entropy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.2%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/svm_12k_cwru.pdf&#34; target=&#34;_blank&#34;&gt;Bearing fault classification using SVM on time and wavelet packet features (10 classes, Sampling frequency: 12k)&lt;/a&gt; (&lt;strong&gt;Achieves 100% test accuracy in one case&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/svm_12k_cwru.pdf&#34; target=&#34;_blank&#34;&gt;SVM on time and wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (&lt;strong&gt;Achieves 100% test accuracy in one case&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/multiclass_logistic_regression.pdf&#34; target=&#34;_blank&#34;&gt;Multiclass Logistic Regression on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;93.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/multiclass_logistic_regression_12k.pdf&#34; target=&#34;_blank&#34;&gt;Multiclass Logistic Regression on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;98.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;10 classes, sampling frequency: 48k&#34; target=&#34;_blank&#34;&gt;LDA on wavelet packet energy features&lt;/a&gt;](&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/LDA_48k.pdf)(Overall&#34; target=&#34;_blank&#34;&gt;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/LDA_48k.pdf)(Overall&lt;/a&gt; accuracy: &lt;strong&gt;88.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;12 classes, sampling frequency: 12k&#34; target=&#34;_blank&#34;&gt;LDA on wavelet packet energy features&lt;/a&gt;](&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/LDA_12k.pdf)(Overall&#34; target=&#34;_blank&#34;&gt;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/LDA_12k.pdf)(Overall&lt;/a&gt; accuracy: &lt;strong&gt;99.5%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/QDA_48k.pdf&#34; target=&#34;_blank&#34;&gt;QDA on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;97.7%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/QDA_12k.pdf&#34; target=&#34;_blank&#34;&gt;QDA on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;99.5%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/kNN_48k.pdf&#34; target=&#34;_blank&#34;&gt;kNN on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;89%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/kNN_12k.pdf&#34; target=&#34;_blank&#34;&gt;kNN on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;98.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
