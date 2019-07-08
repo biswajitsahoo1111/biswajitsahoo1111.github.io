@@ -1580,6 +1580,22 @@ features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;s
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/kNN_48k.pdf&#34; target=&#34;_blank&#34;&gt;kNN on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;89%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/kNN_12k.pdf&#34; target=&#34;_blank&#34;&gt;kNN on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/decision_tree_48k.pdf&#34; target=&#34;_blank&#34;&gt;Decision tree on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;91.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/decision_tree_12k.pdf&#34; target=&#34;_blank&#34;&gt;Decision tree on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/bagging_48k.pdf&#34; target=&#34;_blank&#34;&gt;Bagging on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;96.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/bagging_12k.pdf&#34; target=&#34;_blank&#34;&gt;Bagging on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;100%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/boosting_48k.pdf&#34; target=&#34;_blank&#34;&gt;Boosting on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.6%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/boosting_12k.pdf&#34; target=&#34;_blank&#34;&gt;Boosting on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.5%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/random_forest_48k.pdf&#34; target=&#34;_blank&#34;&gt;Random forest on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/random_forest_12k.pdf&#34; target=&#34;_blank&#34;&gt;Random forest on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;100%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
