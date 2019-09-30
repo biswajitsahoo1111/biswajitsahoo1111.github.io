@@ -330,17 +330,21 @@
 <li><a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/">Part-I: Basic Theory of PCA</a></li>
 <li><a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/">Part-II: PCA Implementation with and without using built-in functions</a></li>
 </ul>
-<p>In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. This paper got published in 2010 and since then its popularity has only grown. The paper has been cited 3800+ times as per Google scholar data.</p>
-<p>This post contains code snippets in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> can be obtained by using commands of <a href="https://biswajitsahoo1111.wordpress.com/2018/12/28/principal-component-analysis---part-ii/">Part-II</a>. For figures, the reader has to write his/her own code in MATLAB.</p>
+<p>In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. This paper got published in 2010 and since then its popularity has only grown. The paper has been cited 3800+ times as per Google scholar data (This was the number when this post was first written).</p>
+<p>This post contains code snippets in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> can also be written using commands of <a href="https://biswajitsahoo1111.wordpress.com/2018/12/28/principal-component-analysis---part-ii/">Part-II</a>. For figures, the reader has to write his/her own code in MATLAB.</p>
 <div id="structure-of-the-paper" class="section level1">
 <h1>Structure of the paper</h1>
 <p>Along with basic theory the paper contains three examples on PCA, one example on correspondence analysis and one example on multiple factor analysis. In this post we will only focus on PCA examples.</p>
-<p>Data for the examples have been taken from the paper [1]. To get the original source of the data, refer to the paper.</p>
 <p>To run following R codes seamlessly, readers have to load following three packages. If these packages have not been installed previously use ‘install.packages(“package_name”)’ to install those.</p>
 <pre class="r"><code>library(ggplot2)
 library(ggrepel)
 library(raster)</code></pre>
 <pre><code>## Loading required package: sp</code></pre>
+</div>
+<div id="how-to-get-data" class="section level1">
+<h1>How to get data</h1>
+<p>Data for the examples have been taken from the paper [1]. The data sets are pretty small. So one way to read the data is to create a dataframe itself in R using the values given in paper. Otherwise, the values can first be stored in a csv file and then read into R. We have used the later approach.</p>
+<p><strong>Note</strong>: Throughout this article, additional comments have been made beside code segments. It would be a good idea to read those commented lines along with the codes.</p>
 <pre class="r"><code># Table 1
 # Load data
 (words = read.csv(&quot;pca_abdi_words.csv&quot;,header = T))</code></pre>
@@ -524,7 +528,7 @@ Total variance before transformation</p>
 <pre><code>##     Word_length Lines_in_dict
 ## PC1   0.8679026    -0.9741764
 ## PC2   0.4967344     0.2257884</code></pre>
-<p><strong>Note</strong> that the answers for correlation coefficients don’t match with that of the paper. Readers who get actual answers as given in paper are encouraged to comment below the post. However our procedure is correct and it does indeed give the correct answer for supplementary data as described below.</p>
+<p><strong>Note</strong> that the answers for correlation coefficients don’t match with that of the paper. Readers who get actual answers as given in paper are encouraged to send me an email using my contact details. However our procedure is correct and it does indeed give the correct answer for supplementary data as described below.</p>
 <pre class="r"><code># Squared correaltion
 (cor(pca_words_cov$x,words_centered)^2)</code></pre>
 <pre><code>##     Word_length Lines_in_dict
@@ -840,7 +844,7 @@ RESS</code></pre>
 round(RESS/sum(Eigenvalues),2)</code></pre>
 <pre><code>## [1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00</code></pre>
 <p>We have not calculated the value of PRESS in this post as it will require us to consider random models. We will not pursue it here.</p>
-<p>Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through till end. Please comment below if you find any errors or omissions.</p>
+<p>Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Please comment using my contact details if you find any errors or omissions.</p>
 <p><a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_3.Rmd">R Markdown file for this post</a></p>
 </div>
 <div id="reference" class="section level2">
@@ -848,6 +852,7 @@ round(RESS/sum(Eigenvalues),2)</code></pre>
 <ol style="list-style-type: decimal">
 <li>Abdi, H., &amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.</li>
 </ol>
+<p>Last Modified: 30th September, 2019</p>
 </div>
 </div>
 
