@@ -327,11 +327,11 @@
 
 <p>This post is Part-III of a three part series post on PCA. Other parts of the series can be found at the links below.</p>
 <ul>
-<li><a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/">Part-I: Basic Theory of PCA</a></li>
-<li><a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/">Part-II: PCA Implementation with and without using built-in functions</a></li>
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I: Basic Theory of PCA</a></li>
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II: PCA Implementation with and without using built-in functions</a></li>
 </ul>
 <p>In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. This paper got published in 2010 and since then its popularity has only grown. The paper has been cited 3800+ times as per Google scholar data (This was the number when this post was first written).</p>
-<p>This post contains code snippets in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> can also be written using commands of <a href="https://biswajitsahoo1111.wordpress.com/2018/12/28/principal-component-analysis---part-ii/">Part-II</a>. For figures, the reader has to write his/her own code in MATLAB.</p>
+<p>This post contains code snippets in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> can also be written using commands of <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>. For figures, the reader has to write his/her own code in MATLAB.</p>
 <div id="structure-of-the-paper" class="section level1">
 <h1>Structure of the paper</h1>
 <p>Along with basic theory the paper contains three examples on PCA, one example on correspondence analysis and one example on multiple factor analysis. In this post we will only focus on PCA examples.</p>
@@ -514,14 +514,14 @@ sur = c(3,12) # It has 3 letter and 12 lines of dictionary entry
 ## [1,] -4.99 -0.38</code></pre>
 <div id="eigenvalues-and-variance" class="section level3">
 <h3>Eigenvalues and variance</h3>
-<p>See <a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-ii/">Part-II</a> for details.
+<p>See <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a> for details.
 Total variance before transformation</p>
 <pre class="r"><code>(total_var_before = round(sum(diag(var(words_centered))),3))</code></pre>
 <pre><code>## [1] 23.368</code></pre>
 <pre class="r"><code>(total_var_after = round(sum(diag(var(pca_words_cov$x))),3))</code></pre>
 <pre><code>## [1] 23.368</code></pre>
 <p>Correlation between principal components and original variables
-(In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix <span class="math inline">\(\textbf{P}\)</span> (see <a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/">Part-I</a>)</p>
+(In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix <span class="math inline">\(\textbf{P}\)</span> (see <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I</a>)</p>
 <p>The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.</p>
 <pre class="r"><code># Correlation between PCs and original variables
 (cor(pca_words_cov$x,words_centered))</code></pre>

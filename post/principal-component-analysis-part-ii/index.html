@@ -327,8 +327,8 @@
 
 <p>This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.</p>
 <ul>
-<li><a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/">Part-I: Basic Theory of PCA</a></li>
-<li><a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-iii/">Part-III: Reproducing results of a published paper on PCA</a></li>
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I: Basic Theory of PCA</a></li>
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/">Part-III: Reproducing results of a published paper on PCA</a></li>
 </ul>
 <p>In this post we will first apply built in commands to obtain results and then we will show how the same results can be obtained without using built-in commands. By this post, our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.</p>
 <p>In this post readers can find code snippets for R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> for the same can be obtained from this <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">link</a>.</p>
@@ -450,7 +450,7 @@ round((cent_food %*% svd_food_cov$v)[,1:4],2) # only 4 columns printed</code></p
 <pre class="r"><code># Variance of principal components
 round(svd_food_cov$d^2/11,2)</code></pre>
 <pre><code>## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81</code></pre>
-<p>Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer <a href="https://biswajitsahoo1111.wordpress.com/2018/12/29/principal-component-analysis-part-i/">Part-I</a></p>
+<p>Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I</a></p>
 </div>
 <div id="performing-covariance-pca-using-eigen-decomopositionnot-recommended" class="section level3">
 <h3>Performing covariance PCA using Eigen-decomoposition(Not recommended)</h3>
@@ -659,7 +659,7 @@ round((scale_food %*% eigen_food_cor$vectors)[,1:4],2)</code></pre>
 <pre class="r"><code># Variances along each principal component
 round(eigen_food_cor$values,2)</code></pre>
 <pre><code>## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00</code></pre>
-<p>I hope this post would help clear some of the confusions that a beginner might have while encountering PCA for the first time. Please comment below if you find any errors.</p>
+<p>I hope this post would help clear some of the confusions that a beginner might have while encountering PCA for the first time. Please send me a note if you find any errors.</p>
 <p><a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_2.Rmd">R Markdown file for this post</a></p>
 </div>
 </div>
