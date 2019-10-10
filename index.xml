@@ -757,9 +757,9 @@ circle = ggplot() + geom_path(data = data.frame(a = cos(x),b = sin(x)),
   annotate(&amp;quot;text&amp;quot;,x = c(1.08,0.05),y = c(0.05,1.08),label = c(&amp;quot;PC1&amp;quot;,&amp;quot;PC2&amp;quot;),angle = c(0,90))+
             xlab(NULL)+ylab(NULL)
 # Plotting original variables
-variable_plot_original = circle + geom_point(data = as.data.frame(pca_words_cov$rotation),
-                      aes(pca_words_cov$rotation[,1],pca_words_cov$rotation[,2]))+
-  geom_text_repel(aes(pca_words_cov$rotation[,1],pca_words_cov$rotation[,2],
+cor_score = as.data.frame(cor(words_centered,pca_words_cov$x))
+variable_plot_original = circle + geom_point(data = cor_score,  aes(cor_score[,1],cor_score[,2]))+
+  geom_text_repel(aes(cor_score[,1],cor_score[,2],
                       label = c(&amp;quot;Length of words&amp;quot;,&amp;quot;Number of lines in Dict.&amp;quot;))) 
 print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
@@ -770,6 +770,7 @@ variable_plot_original+
   geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
                       label = c(&amp;quot;Frequency&amp;quot;,&amp;quot;Number of entries&amp;quot;))) &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative eigenvector results in negative correlation scores. Hence, our plot flips about y-axis.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;example-2&#34; class=&#34;section level1&#34;&gt;
@@ -790,7 +791,7 @@ ggplot(as.data.frame(pca_wine_cor$x),aes(x = pca_wine_cor$x[,1],y =  pca_wine_co
   geom_point()+geom_text_repel()+ geom_vline(xintercept = 0)+ geom_hline(yintercept = 0)+
   xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigen vector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.&lt;/p&gt;
+&lt;p&gt;Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigenvector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 7
 # Factor scores along 1st and 2nd PC
 (pca_wine_cor$x[,1:2])&lt;/code&gt;&lt;/pre&gt;
