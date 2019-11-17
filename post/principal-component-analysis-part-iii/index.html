@@ -725,8 +725,10 @@ circle +
 <div id="varimax-rotation" class="section level3">
 <h3>Varimax rotation</h3>
 <p>Rotation is applied to loading matrix such that after rotation principal components are interpretable. By interpretable, we mean, some of the loading scores will have higher values and some other loading scores will have lower values. So it can be said that the variables whose loading scores have higher value, contribute significantly towards principal components as compared to other variables with lesser loading scores. Though rotation works in certain cases, it must be remembered that it is no magic wand for principal component interpretability. One of the popular rotations is Varimax rotation. R has a built-in command to perform varimax rotation.</p>
-<p>Varimax rotation can be performed on the whole loading matrix or on a few components only. In the paper, varimax has been applied to first two principal components.
-### Loading scores of first two principal components</p>
+<p>Varimax rotation can be performed on the whole loading matrix or on a few components only. In the paper, varimax has been applied to first two principal components.</p>
+</div>
+<div id="loading-scores-of-first-two-principal-components" class="section level3">
+<h3>Loading scores of first two principal components</h3>
 <pre class="r"><code>(round(pca_wine_cor$rotation[,1:2],2))</code></pre>
 <pre><code>##               PC1   PC2
 ## hedonic     -0.40 -0.11
