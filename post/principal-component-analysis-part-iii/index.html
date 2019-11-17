@@ -335,17 +335,15 @@
 </ul>
 <p>In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. This paper got published in 2010 and since then its popularity has only grown. The paper has been cited 3800+ times as per Google scholar data (This was the number when this post was first written).</p>
 <p>This post contains code snippets in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> can also be written using commands of <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>. For figures, the reader has to write his/her own code in MATLAB.</p>
-<div id="structure-of-the-paper" class="section level1">
-<h1>Structure of the paper</h1>
+<div id="structure-of-the-paper" class="section level3">
+<h3>Structure of the paper</h3>
 <p>Along with basic theory the paper contains three examples on PCA, one example on correspondence analysis and one example on multiple factor analysis. In this post we will only focus on PCA examples.</p>
 <p>To run following R codes seamlessly, readers have to load following three packages. If these packages have not been installed previously use ‘install.packages(“package_name”)’ to install those.</p>
 <pre class="r"><code>library(ggplot2)
-library(ggrepel)
-library(raster)</code></pre>
-<pre><code>## Loading required package: sp</code></pre>
+library(ggrepel)</code></pre>
 </div>
-<div id="how-to-get-data" class="section level1">
-<h1>How to get data</h1>
+<div id="how-to-get-data" class="section level3">
+<h3>How to get data</h3>
 <p>Data for the examples have been taken from the paper [1]. The data sets are pretty small. So one way to read the data is to create a dataframe itself in R using the values given in paper. Otherwise, the values can first be stored in a csv file and then read into R. We have used the later approach.</p>
 <p><strong>Note</strong>: Throughout this article, additional comments have been made beside code segments. It would be a good idea to read those commented lines along with the codes.</p>
 <pre class="r"><code># Table 1
@@ -397,9 +395,13 @@ library(raster)</code></pre>
 ## attr(,&quot;scaled:center&quot;)
 ##   Word_length Lines_in_dict 
 ##             6             8</code></pre>
+</div>
+<div id="covariance-pca" class="section level3">
+<h3>Covariance PCA</h3>
+<p>Covariance PCA uses centered data matrix. But data matrix is not scaled. <code>prcomp()</code> centers data by default.</p>
 <pre class="r"><code>pca_words_cov = prcomp(words[,2:3],scale = F) # cov stands for Covariance PCA
 factor_scores_words = pca_words_cov$x
-round(factor_scores_words,2)# Observer that factor scores for PC1 are negatives of what has been given in the paper. This is not a problem as it is negative of the direction given in the paper. It can also be checked that both the principal components are orthogonal.</code></pre>
+round(factor_scores_words,2)</code></pre>
 <pre><code>##         PC1   PC2
 ##  [1,] -6.67  0.69
 ##  [2,]  0.84 -0.54
@@ -421,17 +423,25 @@ round(factor_scores_words,2)# Observer that factor scores for PC1 are negatives 
 ## [18,] -4.76  1.84
 ## [19,] -6.98  2.07
 ## [20,]  3.83  2.30</code></pre>
-<pre class="r"><code>sum(factor_scores_words[,1]*factor_scores_words[,2]) # PCs are orthogonal</code></pre>
+<p>Observer that factor scores for PC1 are negatives of what has been given in the paper. This is not a problem as principal directions are orthogonal.</p>
+</div>
+<div id="principal-directions-are-orthogonal" class="section level3">
+<h3>Principal directions are orthogonal</h3>
+<pre class="r"><code>#  It can also be checked that both the principal components are orthogonal.
+sum(factor_scores_words[,1]*factor_scores_words[,2]) # PCs are orthogonal</code></pre>
 <pre><code>## [1] -4.773959e-15</code></pre>
-<pre class="r"><code># Contibution of each factor (It is defined as square of factor score divided by sum of squares of factor scores in that column)
-round(factor_scores_words[,1]^2/sum(factor_scores_words[,1]^2)*100,2)</code></pre>
+</div>
+<div id="contribution-of-each-factor" class="section level3">
+<h3>Contribution of each factor</h3>
+<p>It is defined as square of factor score divided by sum of squares of factor scores in that column.</p>
+<pre class="r"><code>round(factor_scores_words[,1]^2/sum(factor_scores_words[,1]^2)*100,2)</code></pre>
 <pre><code>##  [1] 11.36  0.18  5.58  0.18  2.28  6.34  0.00  2.40  4.38  0.29  8.00
 ## [12]  9.37  3.90  0.94  0.66 14.41  7.78  5.77 12.43  3.75</code></pre>
 <pre class="r"><code>round(factor_scores_words[,2]^2/sum(factor_scores_words[,2]^2)*100,2)</code></pre>
 <pre><code>##  [1]  0.92  0.55  5.98  0.55 15.49  0.28  0.00  1.13  1.63  5.48 10.87
 ## [12]  8.25  3.27  2.55 12.32  2.90  2.90  6.52  8.25 10.18</code></pre>
-<pre class="r"><code># The calculations in above two lines can be done in a single line
-round(factor_scores_words^2/matrix(rep(colSums(factor_scores_words^2),nrow(words)),ncol = 2,byrow = T)*100,2)</code></pre>
+<p>The calculations in above two lines can be done in a single line</p>
+<pre class="r"><code>round(factor_scores_words^2/matrix(rep(colSums(factor_scores_words^2),nrow(words)),ncol = 2,byrow = T)*100,2)</code></pre>
 <pre><code>##         PC1   PC2
 ##  [1,] 11.36  0.92
 ##  [2,]  0.18  0.55
@@ -453,11 +463,15 @@ round(factor_scores_words^2/matrix(rep(colSums(factor_scores_words^2),nrow(words
 ## [18,]  5.77  6.52
 ## [19,] 12.43  8.25
 ## [20,]  3.75 10.18</code></pre>
-<pre class="r"><code># Squared distance to center of gravity
-(dist = rowSums(factor_scores_words^2))</code></pre>
+</div>
+<div id="squared-distance-to-center-of-gravity" class="section level3">
+<h3>Squared distance to center of gravity</h3>
+<pre class="r"><code>(dist = rowSums(factor_scores_words^2))</code></pre>
 <pre><code>##  [1] 45  1 25  1 17 25  0 10 18  4 37 41 17  5  9 58 32 26 53 20</code></pre>
-<pre class="r"><code># Ssquared cosine of observations of first PC
-(sq_cos = round(factor_scores_words^2/rowSums(factor_scores_words^2)*100))</code></pre>
+</div>
+<div id="squared-cosine-of-observations" class="section level3">
+<h3>Squared cosine of observations</h3>
+<pre class="r"><code>(sq_cos = round(factor_scores_words^2/rowSums(factor_scores_words^2)*100))</code></pre>
 <pre><code>##       PC1 PC2
 ##  [1,]  99   1
 ##  [2,]  71  29
@@ -486,7 +500,7 @@ p = ggplot(words,aes(x = Lines_in_dict,y = Word_length,label = Words))+
   geom_hline(yintercept = 6)+geom_vline(xintercept = 8)+
   labs(x = &quot;Lines in dictionary&quot;,y = &quot;Word length&quot;)
 print(p)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre class="r"><code># Show directions of PCs
 # Note that intercept argument in geom_abline considers the line to be at the origin. In our case the data are mean shifted.
 # So we have to adjust the intercept taking new origin into consideration. These adjustments have been made below.
@@ -498,78 +512,111 @@ slope2 = pca_words_cov$rotation[1,2]/pca_words_cov$rotation[2,2] # Slope of seco
 intercept2 = 6 - slope2*8
 p+geom_abline(slope = slope1,intercept = intercept1,linetype = &quot;dashed&quot;,size = 1.2,col = &quot;red&quot;)+
   geom_abline(slope = slope2,intercept = intercept2,linetype = &quot;dashed&quot;,size = 1.2,col = &quot;blue&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-3-2.png" width="672" />
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-9-2.png" width="672" />
 In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.</p>
-<pre class="r"><code># Rotated PCs
-# This figure is obtained by plotting facotor scores. Note that we will plot negative of the factor scores of 1st PC to make the figure consistent with the paper.
-ggplot(as.data.frame(pca_words_cov$x),aes(-pca_words_cov$x[,1],pca_words_cov$x[,2],label = words$Words))+
+</div>
+<div id="rotated-pcs" class="section level3">
+<h3>Rotated PCs</h3>
+<p>This figure is obtained by plotting factor scores. Note that we will plot negative of the factor scores of 1st PC to make the figure consistent with the paper.</p>
+<pre class="r"><code>ggplot(as.data.frame(pca_words_cov$x),aes(-pca_words_cov$x[,1],pca_words_cov$x[,2],label = words$Words))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&quot;Factor score along PC1&quot;)+ylab(&quot;Factor score along PC2&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-4-1.png" width="672" />
-Given a supplementary point (a point previously not used in finding principal components),we have to first center the data point. Its factor scores can then be obtained by multiplying it with the loading matrix.</p>
-<pre class="r"><code># Finding factor score of a new point
-sur = c(3,12) # It has 3 letter and 12 lines of dictionary entry
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="with-supplementary-data" class="section level3">
+<h3>With supplementary data</h3>
+<p>Given a supplementary point (a point previously not used in finding principal components),we have to first center the data point. Its factor scores can then be obtained by multiplying it with the loading matrix.</p>
+</div>
+<div id="factor-score-of-the-new-word-sur" class="section level3">
+<h3>Factor score of the new word ‘sur’</h3>
+<pre class="r"><code>sur = c(3,12) # It has 3 letter and 12 lines of dictionary entry
 (sur_centered = sur - colMeans(words[,2:3]))</code></pre>
 <pre><code>##   Word_length Lines_in_dict 
 ##            -3             4</code></pre>
 <pre class="r"><code>(factor_scores_sur = round(sur_centered %*% pca_words_cov$rotation,2))</code></pre>
 <pre><code>##        PC1   PC2
 ## [1,] -4.99 -0.38</code></pre>
+</div>
 <div id="eigenvalues-and-variance" class="section level3">
 <h3>Eigenvalues and variance</h3>
-<p>See <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a> for details.
-Total variance before transformation</p>
+<p>See <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a> for details.</p>
+</div>
+<div id="total-variance-before-transformation" class="section level3">
+<h3>Total variance before transformation</h3>
 <pre class="r"><code>(total_var_before = round(sum(diag(var(words_centered))),3))</code></pre>
 <pre><code>## [1] 23.368</code></pre>
+</div>
+<div id="total-variance-after-transformation" class="section level3">
+<h3>Total variance after transformation</h3>
 <pre class="r"><code>(total_var_after = round(sum(diag(var(pca_words_cov$x))),3))</code></pre>
 <pre><code>## [1] 23.368</code></pre>
 <p>Correlation between principal components and original variables
 (In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix <span class="math inline">\(\textbf{P}\)</span> (see <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I</a>)</p>
-<p>The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.</p>
+<p>The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.
+### Correlation matrix</p>
 <pre class="r"><code># Correlation between PCs and original variables
 (cor(pca_words_cov$x,words_centered))</code></pre>
 <pre><code>##     Word_length Lines_in_dict
 ## PC1   0.8679026    -0.9741764
 ## PC2   0.4967344     0.2257884</code></pre>
 <p><strong>Note</strong> that the answers for correlation coefficients don’t match with that of the paper. Readers who get actual answers as given in paper are encouraged to send me an email using my contact details. However our procedure is correct and it does indeed give the correct answer for supplementary data as described below.</p>
-<pre class="r"><code># Squared correaltion
-(cor(pca_words_cov$x,words_centered)^2)</code></pre>
+</div>
+<div id="squared-correlation" class="section level3">
+<h3>Squared correlation</h3>
+<pre class="r"><code>(cor(pca_words_cov$x,words_centered)^2)</code></pre>
 <pre><code>##     Word_length Lines_in_dict
 ## PC1   0.7532549    0.94901961
 ## PC2   0.2467451    0.05098039</code></pre>
-<pre class="r"><code># sum of correlation coefficients between variables and principal components is 1
-colSums((cor(pca_words_cov$x,words_centered)^2))</code></pre>
+<p>Sum of correlation coefficients between variables and principal components is 1.</p>
+<pre class="r"><code>colSums((cor(pca_words_cov$x,words_centered)^2))</code></pre>
 <pre><code>##   Word_length Lines_in_dict 
 ##             1             1</code></pre>
+</div>
+<div id="loading-matrix" class="section level3">
+<h3>Loading matrix</h3>
 <pre class="r"><code>(loading_matrix = pca_words_cov$rotation)</code></pre>
 <pre><code>##                      PC1       PC2
 ## Word_length    0.5368755 0.8436615
 ## Lines_in_dict -0.8436615 0.5368755</code></pre>
-<p>Correlation score for supplementary variable</p>
+</div>
+<div id="correlation-score-for-supplementary-variables" class="section level3">
+<h3>Correlation score for supplementary variables</h3>
 <pre class="r"><code># Supplementary variable (Table 4)
 Frequency = c(8,230,700,1,500,1,9,2,1,700,7,1,4,500,900,3,1,10,1,1)
 Num_entries = c(6,3,12,2,7,1,1,6,1,5,2,1,5,9,7,1,1,4,4,2)
-supp_data = data.frame(Frequency,Num_entries) # Supplementary data
-# Table 5
-supp_data_cent = scale(supp_data,scale = F) # Centered supplementary data
-(corr_score_supp = round(cor(pca_words_cov$x,supp_data),4))</code></pre>
+supp_data = data.frame(Frequency,Num_entries) # Supplementary data</code></pre>
+</div>
+<div id="centered-supplementary-data" class="section level3">
+<h3>Centered supplementary data</h3>
+<pre class="r"><code>supp_data_cent = scale(supp_data,scale = F) # Centered supplementary data</code></pre>
+</div>
+<div id="correlation-score-for-supplementary-data" class="section level3">
+<h3>Correlation score for supplementary data</h3>
+<pre class="r"><code>(corr_score_supp = round(cor(pca_words_cov$x,supp_data),4))</code></pre>
 <pre><code>##     Frequency Num_entries
 ## PC1   -0.3012     -0.6999
 ## PC2   -0.7218     -0.4493</code></pre>
-<pre class="r"><code># Note that correlation doesn&#39;t depent on whether supplementary data is centered or not.
-(round(cor(pca_words_cov$x,supp_data_cent),4))</code></pre>
+<p>Note that correlation score doesn’t depend on whether supplementary data is centered or not.</p>
+<pre class="r"><code>(round(cor(pca_words_cov$x,supp_data_cent),4))</code></pre>
 <pre><code>##     Frequency Num_entries
 ## PC1   -0.3012     -0.6999
 ## PC2   -0.7218     -0.4493</code></pre>
-<pre class="r"><code># Squared correlation
-(round(cor(pca_words_cov$x,supp_data_cent)^2,4))</code></pre>
+</div>
+<div id="squared-correlation-1" class="section level3">
+<h3>Squared correlation</h3>
+<pre class="r"><code>(round(cor(pca_words_cov$x,supp_data_cent)^2,4))</code></pre>
 <pre><code>##     Frequency Num_entries
 ## PC1    0.0907      0.4899
 ## PC2    0.5210      0.2019</code></pre>
+</div>
+<div id="column-sums-of-squared-correlation-for-support-data" class="section level3">
+<h3>Column sums of squared correlation for support data</h3>
 <pre class="r"><code>(round(colSums(cor(pca_words_cov$x,supp_data_cent)^2),4))</code></pre>
 <pre><code>##   Frequency Num_entries 
 ##      0.6118      0.6918</code></pre>
-<p>Correlation circle plot</p>
+</div>
+<div id="correlation-circle-plot" class="section level3">
+<h3>Correlation circle plot</h3>
 <pre class="r"><code># First plot correlation circle
 x = seq(0,2*pi,length.out = 300)
 circle = ggplot() + geom_path(data = data.frame(a = cos(x),b = sin(x)),
@@ -583,23 +630,23 @@ variable_plot_original = circle + geom_point(data = cor_score,  aes(cor_score[,1
   geom_text_repel(aes(cor_score[,1],cor_score[,2],
                       label = c(&quot;Length of words&quot;,&quot;Number of lines in Dict.&quot;))) 
 print(variable_plot_original)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<pre class="r"><code># Plotting supplementary variables
-variable_plot_original+
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+<div id="plotting-supplementary-variables" class="section level3">
+<h3>Plotting supplementary variables</h3>
+<pre class="r"><code>variable_plot_original+
   geom_point(data = as.data.frame(corr_score_supp),
              aes(corr_score_supp[,1],corr_score_supp[,2]))+
   geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
                       label = c(&quot;Frequency&quot;,&quot;Number of entries&quot;))) </code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative eigenvector results in negative correlation scores. Hence, our plot flips about y-axis.</p>
 </div>
-</div>
-<div id="example-2" class="section level1">
-<h1>Example 2</h1>
-<div id="wine-example" class="section level3">
-<h3>Wine example</h3>
-<pre class="r"><code># Correlation PCA using wine data 
-# Table 6
+<div id="example-2-wine-example" class="section level2">
+<h2>Example 2 (Wine example)</h2>
+<div id="correlation-pca-with-wine-data" class="section level3">
+<h3>Correlation PCA with wine data</h3>
+<pre class="r"><code># Table 6
 (wine = read.csv(&quot;pca_abdi_wine.csv&quot;,header = T))</code></pre>
 <pre><code>##   wine_type hedonic for_meat for_dessert price sugar alcohol acidity
 ## 1    wine_1      14        7           8     7     7      13       7
@@ -611,10 +658,12 @@ variable_plot_original+
 ggplot(as.data.frame(pca_wine_cor$x),aes(x = pca_wine_cor$x[,1],y =  pca_wine_cor$x[,2], label = paste0(&quot;wine &quot;,1:5)))+
   geom_point()+geom_text_repel()+ geom_vline(xintercept = 0)+ geom_hline(yintercept = 0)+
   xlab(&quot;Factor score along PC1&quot;)+ylab(&quot;Factor score along PC2&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigenvector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.</p>
+</div>
+<div id="factor-scores-along-1st-and-2nd-pc" class="section level3">
+<h3>Factor scores along 1st and 2nd PC</h3>
 <pre class="r"><code># Table 7
-# Factor scores along 1st and 2nd PC
 (pca_wine_cor$x[,1:2])</code></pre>
 <pre><code>##             PC1       PC2
 ## [1,] -2.3301649  1.095284
@@ -622,24 +671,30 @@ ggplot(as.data.frame(pca_wine_cor$x),aes(x = pca_wine_cor$x[,1],y =  pca_wine_co
 ## [3,]  0.1673228 -0.370258
 ## [4,]  1.7842392  1.712563
 ## [5,]  2.4628448 -1.214405</code></pre>
-<pre class="r"><code># Contibution of each observation to principal component
-round(pca_wine_cor$x[,1:2]^2/matrix(rep(colSums(pca_wine_cor$x[,1:2]^2),nrow(wine)),ncol = 2,byrow = T)*100,2)</code></pre>
+</div>
+<div id="contribution-of-each-observation-to-principal-component" class="section level3">
+<h3>Contribution of each observation to principal component</h3>
+<pre class="r"><code>round(pca_wine_cor$x[,1:2]^2/matrix(rep(colSums(pca_wine_cor$x[,1:2]^2),nrow(wine)),ncol = 2,byrow = T)*100,2)</code></pre>
 <pre><code>##        PC1   PC2
 ## [1,] 28.50 16.57
 ## [2,] 22.80 20.66
 ## [3,]  0.15  1.89
 ## [4,] 16.71 40.51
 ## [5,] 31.84 20.37</code></pre>
-<pre class="r"><code># Squared cosine of observations of first PC
-(sq_cos = round(pca_wine_cor$x[,1:2]^2/rowSums(pca_wine_cor$x^2)*100))</code></pre>
+</div>
+<div id="squared-cosine-of-observations-of-first-pc" class="section level3">
+<h3>Squared cosine of observations of first PC</h3>
+<pre class="r"><code>(sq_cos = round(pca_wine_cor$x[,1:2]^2/rowSums(pca_wine_cor$x^2)*100))</code></pre>
 <pre><code>##      PC1 PC2
 ## [1,]  77  17
 ## [2,]  69  24
 ## [3,]   7  34
 ## [4,]  50  46
 ## [5,]  78  19</code></pre>
-<pre class="r"><code># Loading scores corresponding to first two principal components
-(round(pca_wine_cor$rotation[,1:2],2))</code></pre>
+</div>
+<div id="loading-scores-corresponding-to-first-two-principal-components" class="section level3">
+<h3>Loading scores corresponding to first two principal components</h3>
+<pre class="r"><code>(round(pca_wine_cor$rotation[,1:2],2))</code></pre>
 <pre><code>##               PC1   PC2
 ## hedonic     -0.40 -0.11
 ## for_meat    -0.45  0.11
@@ -648,27 +703,31 @@ round(pca_wine_cor$x[,1:2]^2/matrix(rep(colSums(pca_wine_cor$x[,1:2]^2),nrow(win
 ## sugar       -0.05  0.72
 ## alcohol     -0.44 -0.06
 ## acidity     -0.45 -0.09</code></pre>
-<pre class="r"><code># Correlation score variables with first two principal compoents
-(corr_score_wine = round(cor(pca_wine_cor$x,wine[,2:8])[1:2,],2))</code></pre>
+</div>
+<div id="correlation-score-variables-with-first-two-principal-components" class="section level3">
+<h3>Correlation score variables with first two principal components</h3>
+<pre class="r"><code>(corr_score_wine = round(cor(pca_wine_cor$x,wine[,2:8])[1:2,],2))</code></pre>
 <pre><code>##     hedonic for_meat for_dessert price sugar alcohol acidity
 ## PC1   -0.87    -0.97       -0.58  0.91 -0.11   -0.96   -0.99
 ## PC2   -0.15     0.15        0.79  0.42  0.97   -0.07   -0.12</code></pre>
-<pre class="r"><code># Correlation circle for wine data
-# Figure 6
+</div>
+<div id="correlation-circle-for-wine-data" class="section level3">
+<h3>Correlation circle for wine data</h3>
+<pre class="r"><code># Figure 6
 corr_score_wine = t(corr_score_wine)
 circle + 
   geom_point(data = as.data.frame(corr_score_wine),
              aes(corr_score_wine[,1],corr_score_wine[,2]))+
   geom_text_repel(aes(corr_score_wine[,1],corr_score_wine[,2],
                       label = c(&quot;Hedonic&quot;,&quot;For Meat&quot;,&quot;For dessert&quot;,&quot;Price&quot;,&quot;Sugar&quot;,&quot;Alcohol&quot;,&quot;Acidity&quot;)))</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 </div>
 <div id="varimax-rotation" class="section level3">
 <h3>Varimax rotation</h3>
 <p>Rotation is applied to loading matrix such that after rotation principal components are interpretable. By interpretable, we mean, some of the loading scores will have higher values and some other loading scores will have lower values. So it can be said that the variables whose loading scores have higher value, contribute significantly towards principal components as compared to other variables with lesser loading scores. Though rotation works in certain cases, it must be remembered that it is no magic wand for principal component interpretability. One of the popular rotations is Varimax rotation. R has a built-in command to perform varimax rotation.</p>
-<p>Varimax rotation can be performed on the whole loading matrix or on a few components only. In the paper, varimax has been applied to first two principal components.</p>
-<pre class="r"><code># Loading scores of first two principal components
-(round(pca_wine_cor$rotation[,1:2],2))</code></pre>
+<p>Varimax rotation can be performed on the whole loading matrix or on a few components only. In the paper, varimax has been applied to first two principal components.
+### Loading scores of first two principal components</p>
+<pre class="r"><code>(round(pca_wine_cor$rotation[,1:2],2))</code></pre>
 <pre><code>##               PC1   PC2
 ## hedonic     -0.40 -0.11
 ## for_meat    -0.45  0.11
@@ -677,9 +736,14 @@ circle +
 ## sugar       -0.05  0.72
 ## alcohol     -0.44 -0.06
 ## acidity     -0.45 -0.09</code></pre>
-<pre class="r"><code># Varimax applied to first two principal components
-rotated_loading_scores = varimax(pca_wine_cor$rotation[,1:2])
-# Loading scores after rotation (Table 10)
+</div>
+<div id="varimax-applied-to-first-two-principal-components" class="section level3">
+<h3>Varimax applied to first two principal components</h3>
+<pre class="r"><code>rotated_loading_scores = varimax(pca_wine_cor$rotation[,1:2])</code></pre>
+</div>
+<div id="loading-scores-after-rotation" class="section level3">
+<h3>Loading scores after rotation</h3>
+<pre class="r"><code># Table 10
 (round(rotated_loading_scores$loadings[,1:2],2))</code></pre>
 <pre><code>##               PC1   PC2
 ## hedonic     -0.41 -0.02
@@ -689,9 +753,8 @@ rotated_loading_scores = varimax(pca_wine_cor$rotation[,1:2])
 ## sugar        0.12  0.72
 ## alcohol     -0.44  0.05
 ## acidity     -0.46  0.02</code></pre>
-<pre class="r"><code># The same result can also be obtained by mulitplying the original loading 
-# matrix by the rotation matrix obtained from varimax
-(round(pca_wine_cor$rotation[,1:2] %*% rotated_loading_scores$rotmat,2))</code></pre>
+<p>The same result can also be obtained by multiplying the original loading matrix by the rotation matrix obtained from varimax.</p>
+<pre class="r"><code>(round(pca_wine_cor$rotation[,1:2] %*% rotated_loading_scores$rotmat,2))</code></pre>
 <pre><code>##              [,1]  [,2]
 ## hedonic     -0.41 -0.02
 ## for_meat    -0.41  0.21
@@ -700,26 +763,30 @@ rotated_loading_scores = varimax(pca_wine_cor$rotation[,1:2])
 ## sugar        0.12  0.72
 ## alcohol     -0.44  0.05
 ## acidity     -0.46  0.02</code></pre>
+</div>
+<div id="plot-of-loading-scores-before-rotation" class="section level3">
+<h3>Plot of loading scores before rotation</h3>
 <pre class="r"><code>#Figure 7
-# Plot of loading socres before rotation
 ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[,1],y = pca_wine_cor$rotation[,2],
                                                       label = c(&quot;Hedonic&quot;,&quot;For Meat&quot;,&quot;For dessert&quot;,&quot;Price&quot;,&quot;Sugar&quot;,&quot;Alcohol&quot;,&quot;Acidity&quot;)))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&quot;Loading score along PC1&quot;)+ylab(&quot;Loading score along PC2&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<pre class="r"><code># Plot of loading scores after rotation
-ggplot(as.data.frame(rotated_loading_scores$loadings[,1:2]),
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+</div>
+<div id="plot-of-loading-scores-after-rotation" class="section level3">
+<h3>Plot of loading scores after rotation</h3>
+<pre class="r"><code>ggplot(as.data.frame(rotated_loading_scores$loadings[,1:2]),
                      aes(x = rotated_loading_scores$loadings[,1],
                          y = rotated_loading_scores$loadings[,2],
                          label = c(&quot;Hedonic&quot;,&quot;For Meat&quot;,&quot;For dessert&quot;,&quot;Price&quot;,&quot;Sugar&quot;,&quot;Alcohol&quot;,&quot;Acidity&quot;)))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
     xlab(&quot;Loading score along PC1 after rotation&quot;)+
     ylab(&quot;Loading score along PC2 after rotation&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 </div>
-<div id="example-3" class="section level1">
-<h1>Example 3</h1>
+<div id="example-3" class="section level2">
+<h2>Example 3</h2>
 <div id="french-food-example-covariance-pca-example" class="section level3">
 <h3>French food example (Covariance PCA example)</h3>
 <pre class="r"><code># Load data (Table 11) 
@@ -737,10 +804,11 @@ ggplot(as.data.frame(rotated_loading_scores$loadings[,1:2]),
 ## 10  Blue_collar        5   655        776   423 1848     759  495  486
 ## 11 White_collar        5   584        995   548 2056     893  518  319
 ## 12  Upper_class        5   515       1097   887 2630    1167  561  284</code></pre>
-<pre class="r"><code>pca_food_cov = prcomp(food[,3:9],scale = F)
-
-# Table 12
-# Factor scores
+<pre class="r"><code>pca_food_cov = prcomp(food[,3:9],scale = F)</code></pre>
+</div>
+<div id="factor-scores" class="section level3">
+<h3>Factor scores</h3>
+<pre class="r"><code># Table 12
 (factor_scores_food = round(pca_food_cov$x[,1:2],2))</code></pre>
 <pre><code>##           PC1     PC2
 ##  [1,] -635.05  120.89
@@ -755,8 +823,10 @@ ggplot(as.data.frame(rotated_loading_scores$loadings[,1:2]),
 ## [10,]  -39.38 -264.47
 ## [11,]  296.04 -235.92
 ## [12,]  992.83  -97.15</code></pre>
-<pre class="r"><code># Contibution of each observation to principal component
-round(pca_food_cov$x[,1:2]^2/matrix(rep(colSums(pca_food_cov$x[,1:2]^2),nrow(food)),ncol = 2,byrow = T)*100,2)</code></pre>
+</div>
+<div id="contribution-of-each-observation-to-principal-component-1" class="section level3">
+<h3>Contribution of each observation to principal component</h3>
+<pre class="r"><code>round(pca_food_cov$x[,1:2]^2/matrix(rep(colSums(pca_food_cov$x[,1:2]^2),nrow(food)),ncol = 2,byrow = T)*100,2)</code></pre>
 <pre><code>##         PC1   PC2
 ##  [1,] 13.34  5.03
 ##  [2,]  7.90  6.97
@@ -770,9 +840,11 @@ round(pca_food_cov$x[,1:2]^2/matrix(rep(colSums(pca_food_cov$x[,1:2]^2),nrow(foo
 ## [10,]  0.05 24.07
 ## [11,]  2.90 19.15
 ## [12,] 32.61  3.25</code></pre>
-<pre class="r"><code>dist = pca_food_cov$x[,1]^2+pca_food_cov$x[,2]^2
-# Squared cosine of observations of first PC (rowSums command from &#39;raster&#39; pcakage has been used)
-(sq_cos = round(pca_food_cov$x[,1:2]^2/rowSums(pca_food_cov$x^2)*100))</code></pre>
+<pre class="r"><code>dist = pca_food_cov$x[,1]^2+pca_food_cov$x[,2]^2</code></pre>
+</div>
+<div id="squared-cosine-of-observations-1" class="section level3">
+<h3>Squared cosine of observations</h3>
+<pre class="r"><code>(sq_cos = round(pca_food_cov$x[,1:2]^2/rowSums(pca_food_cov$x^2)*100))</code></pre>
 <pre><code>##       PC1 PC2
 ##  [1,]  95   3
 ##  [2,]  86   7
@@ -786,8 +858,10 @@ round(pca_food_cov$x[,1:2]^2/matrix(rep(colSums(pca_food_cov$x[,1:2]^2),nrow(foo
 ## [10,]   2  79
 ## [11,]  57  36
 ## [12,]  97   1</code></pre>
+</div>
+<div id="squared-loading-scores" class="section level3">
+<h3>Squared loading scores</h3>
 <pre class="r"><code># Table 13
-# squared loading score
 (round(pca_food_cov$rotation[,1:2]^2,2))</code></pre>
 <pre><code>##             PC1  PC2
 ## bread      0.01 0.33
@@ -798,66 +872,85 @@ round(pca_food_cov$x[,1:2]^2/matrix(rep(colSums(pca_food_cov$x[,1:2]^2),nrow(foo
 ## milk       0.01 0.40
 ## wine       0.00 0.02</code></pre>
 <p><strong>Note</strong> that this table doesn’t match with that of the paper. We will stick to our analysis.</p>
-<pre class="r"><code># Correlation score
-(corr_score_food = round((cor(pca_food_cov$x,food[,3:9])[1:2,]),2))</code></pre>
+</div>
+<div id="correlation-score" class="section level3">
+<h3>Correlation score</h3>
+<pre class="r"><code>(corr_score_food = round((cor(pca_food_cov$x,food[,3:9])[1:2,]),2))</code></pre>
 <pre><code>##     bread vegetables fruit meat poultry  milk  wine
 ## PC1  0.36       0.91  0.96 1.00    0.98  0.41 -0.43
 ## PC2 -0.87      -0.35  0.10 0.04    0.16 -0.88 -0.33</code></pre>
-<pre class="r"><code># squared correlation score
-(round((cor(pca_food_cov$x,food[,3:9])[1:2,])^2,2))</code></pre>
+</div>
+<div id="squared-correlation-score" class="section level3">
+<h3>Squared correlation score</h3>
+<pre class="r"><code>(round((cor(pca_food_cov$x,food[,3:9])[1:2,])^2,2))</code></pre>
 <pre><code>##     bread vegetables fruit meat poultry milk wine
 ## PC1  0.13       0.83  0.92    1    0.96 0.17 0.18
 ## PC2  0.76       0.12  0.01    0    0.03 0.77 0.11</code></pre>
+</div>
+<div id="correlation-circle-for-food-data" class="section level3">
+<h3>Correlation circle for food data</h3>
 <pre class="r"><code># Figure 9
-# Correlation circle for food data
 corr_score_food = t(corr_score_food)
 circle + geom_point(data = as.data.frame(corr_score_food), 
                     aes(x = corr_score_food[,1],y = corr_score_food[,2]))+
   geom_text_repel(data = as.data.frame(corr_score_food), 
                   aes(x = corr_score_food[,1],y = corr_score_food[,2],
                       label = c(&quot;Bread&quot;,&quot;Vegetables&quot;,&quot;Fruit&quot;,&quot;Meat&quot;,&quot;Poultry&quot;,&quot;Milk&quot;,&quot;Wine&quot;)))</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-46-1.png" width="672" />
 Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).</p>
+</div>
+<div id="eigenvalues" class="section level3">
+<h3>Eigenvalues</h3>
+<p>Eigen values of data covariance matrix is square of singular values of centered data matrix. Hence eigen values of data covariance matrix can be obtained as below.</p>
 <pre class="r"><code>## Table 14
 cent_food = food[,3:9]-matrix(rep(colMeans(food[,3:9]),times = 12),nrow = 12,
                               byrow = T)
 svd_food = svd(cent_food)
-# Eigenvalues
 (Eigenvalues = (svd_food$d)^2)</code></pre>
 <pre><code>## [1] 3023141.2354  290575.8390   68795.2333   25298.9496   22992.2474
 ## [6]    3722.3214     723.9238</code></pre>
 <p><strong>Important Note:</strong> These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by <span class="math inline">\((n-1)\)</span>, where <span class="math inline">\(n\)</span> is number of data points (in this case <span class="math inline">\(n = 12\)</span>). If this point is still not clear, refer to Part-II.</p>
-<pre class="r"><code># Percentage contribution of each PC
-(round(Eigenvalues/sum(Eigenvalues),2))</code></pre>
+</div>
+<div id="percentage-contribution-of-each-principal-component" class="section level3">
+<h3>Percentage contribution of each principal component</h3>
+<pre class="r"><code>(round(Eigenvalues/sum(Eigenvalues),2))</code></pre>
 <pre><code>## [1] 0.88 0.08 0.02 0.01 0.01 0.00 0.00</code></pre>
-<pre class="r"><code># Cumulative sum of eigen values
-(round(cumsum(Eigenvalues),2))</code></pre>
+</div>
+<div id="cumulative-sum-of-eigenvalues" class="section level3">
+<h3>Cumulative sum of eigenvalues</h3>
+<pre class="r"><code>(round(cumsum(Eigenvalues),2))</code></pre>
 <pre><code>## [1] 3023141 3313717 3382512 3407811 3430804 3434526 3435250</code></pre>
-<pre class="r"><code># Cumulative percentage
-(round(cumsum(Eigenvalues)/sum(Eigenvalues),2))</code></pre>
+</div>
+<div id="cumulative-percentage-contribution" class="section level3">
+<h3>Cumulative percentage contribution</h3>
+<pre class="r"><code>(round(cumsum(Eigenvalues)/sum(Eigenvalues),2))</code></pre>
 <pre><code>## [1] 0.88 0.96 0.98 0.99 1.00 1.00 1.00</code></pre>
-<pre class="r"><code># RESS (Refer to the paper for a description)
-RESS = array(rep(0,7))
+</div>
+<div id="ress-refer-to-the-paper-for-a-description" class="section level3">
+<h3>RESS (Refer to the paper for a description)</h3>
+<pre class="r"><code>RESS = array(rep(0,7))
 for (i in 1:7){
   RESS[i] = sum(Eigenvalues)-sum(Eigenvalues[1:i])
 }
 RESS</code></pre>
 <pre><code>## [1] 412108.5146 121532.6756  52737.4423  27438.4927   4446.2453    723.9238
 ## [7]      0.0000</code></pre>
-<pre class="r"><code># RESS/sum of eigenvalues
-round(RESS/sum(Eigenvalues),2)</code></pre>
+</div>
+<div id="ratio-of-ress-and-sum-of-eigenvalues" class="section level3">
+<h3>Ratio of RESS and sum of eigenvalues</h3>
+<pre class="r"><code>round(RESS/sum(Eigenvalues),2)</code></pre>
 <pre><code>## [1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00</code></pre>
 <p>We have not calculated the value of PRESS in this post as it will require us to consider random models. We will not pursue it here.</p>
-<p>Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Please comment using my contact details if you find any errors or omissions.</p>
+<p>Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to <a href="https://biswajitsahoo1111.github.io/">the author’s</a> email.</p>
 <p><a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_3.Rmd">R Markdown file for this post</a></p>
+</div>
 </div>
 <div id="reference" class="section level2">
 <h2>Reference</h2>
 <ol style="list-style-type: decimal">
 <li>Abdi, H., &amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.</li>
 </ol>
-<p>Last Modified: 30th September, 2019</p>
-</div>
+<p>Last Modified: 17th November, 2019</p>
 </div>
 
     </div>
