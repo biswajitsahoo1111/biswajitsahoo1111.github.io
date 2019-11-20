@@ -617,11 +617,11 @@ sum(factor_scores_words[,1]*factor_scores_words[,2]) # PCs are orthogonal&lt;/co
 &lt;h3&gt;Contribution of each factor&lt;/h3&gt;
 &lt;p&gt;It is defined as square of factor score divided by sum of squares of factor scores in that column.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(factor_scores_words[,1]^2/sum(factor_scores_words[,1]^2)*100,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] 11.36  0.18  5.58  0.18  2.28  6.34  0.00  2.40  4.38  0.29  8.00
-## [12]  9.37  3.90  0.94  0.66 14.41  7.78  5.77 12.43  3.75&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] 11.36  0.18  5.58  0.18  2.28  6.34  0.00  2.40  4.38  0.29  8.00  9.37
+## [13]  3.90  0.94  0.66 14.41  7.78  5.77 12.43  3.75&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(factor_scores_words[,2]^2/sum(factor_scores_words[,2]^2)*100,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1]  0.92  0.55  5.98  0.55 15.49  0.28  0.00  1.13  1.63  5.48 10.87
-## [12]  8.25  3.27  2.55 12.32  2.90  2.90  6.52  8.25 10.18&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1]  0.92  0.55  5.98  0.55 15.49  0.28  0.00  1.13  1.63  5.48 10.87  8.25
+## [13]  3.27  2.55 12.32  2.90  2.90  6.52  8.25 10.18&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The calculations in above two lines can be done in a single line&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(factor_scores_words^2/matrix(rep(colSums(factor_scores_words^2),nrow(words)),ncol = 2,byrow = T)*100,2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##         PC1   PC2
@@ -734,8 +734,10 @@ In the above figure red dashed line is the 1st principal component (PC) and blue
 &lt;pre&gt;&lt;code&gt;## [1] 23.368&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Correlation between principal components and original variables
 (In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; (see &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.
-### Correlation matrix&lt;/p&gt;
+&lt;p&gt;The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-matrix&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Correlation matrix&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Correlation between PCs and original variables
 (cor(pca_words_cov$x,words_centered))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##     Word_length Lines_in_dict
@@ -822,7 +824,7 @@ print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
   geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
                       label = c(&amp;quot;Frequency&amp;quot;,&amp;quot;Number of entries&amp;quot;))) &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative eigenvector results in negative correlation scores. Hence, our plot flips about y-axis.&lt;/p&gt;
+&lt;p&gt;Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative principal component results in negative correlation scores. Hence, our plot flips about y-axis.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;example-2-wine-example&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Example 2 (Wine example)&lt;/h2&gt;
@@ -1093,7 +1095,7 @@ svd_food = svd(cent_food)
 (Eigenvalues = (svd_food$d)^2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 3023141.2354  290575.8390   68795.2333   25298.9496   22992.2474
 ## [6]    3722.3214     723.9238&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Important Note:&lt;/strong&gt; These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by &lt;span class=&#34;math inline&#34;&gt;\((n-1)\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is number of data points (in this case &lt;span class=&#34;math inline&#34;&gt;\(n = 12\)&lt;/span&gt;). If this point is still not clear, refer to Part-II.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Important Note:&lt;/strong&gt; These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by &lt;span class=&#34;math inline&#34;&gt;\((n-1)\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is number of data points (in this case &lt;span class=&#34;math inline&#34;&gt;\(n = 12\)&lt;/span&gt;). If this point is still not clear, refer to &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;percentage-contribution-of-each-principal-component&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Percentage contribution of each principal component&lt;/h3&gt;
@@ -1598,42 +1600,18 @@ Thus eigenvalues of S are diagonal entries of &lt;span class=&#34;math inline&#3
 
 &lt;h2 id=&#34;introduction-to-the-problem&#34;&gt;Introduction to the problem&lt;/h2&gt;
 
-&lt;p&gt;Condition based maintenance is the process of doing maintenance only
-when it is required. This has many advantages along with monetary gain
-as it precludes periodic maintenance and reduces unplanned downtime. The
-next logical question is to figure out when maintenance is required.
-Maintenance is required if fault has either occurred or is imminent.
-This leads us to the problem of fault diagnosis and prognostics.&lt;/p&gt;
+&lt;p&gt;Condition based maintenance is the process of doing maintenance only when it is required. Adoption of this maintenance strategy leads to significant monetary gains as it precludes periodic maintenance and reduces unplanned downtime. Another term commonly used for condition based maintenance is predictive maintenance. As the name suggests, in this method we predict in advance when to perform maintenance. Maintenance is required, if fault has already occurred or is imminent. This leads us to the problem of fault diagnosis and prognosis.&lt;/p&gt;
 
-&lt;p&gt;In fault diagnosis, fault has already occurred and our aim is to find
-what type of fault is there and what is its severity. In fault
-prognostics out aim is to predict the time of occurrence of fault in
-future, given its present state. These two problem are central to
-condition based maintenance. There are many methods to solve these
-problems. These methods can be broadly divided into two groups:&lt;/p&gt;
+&lt;p&gt;In fault diagnosis, fault has already occurred and our aim is to find what type of fault is there and what is its severity. In fault prognosis out aim is to predict the time of occurrence of fault in future, given its present state. These two problem are central to condition based maintenance. There are many methods to solve these problems. These methods can be broadly divided into two groups:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Model Based Approach&lt;/li&gt;
-&lt;li&gt;Data-Driven Approach&lt;/li&gt;
+&lt;li&gt;Model Based Approaches&lt;/li&gt;
+&lt;li&gt;Data-Driven Approaches&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;In model based a complete model of the system is formulated and it is
-then used for fault diagnosis and prognostics. But this method has
-several limitations. Firstly, it is a difficult task to accurately model
-a system. Modelling becomes even more challenging with variations in
-working conditions. Secondly, we have to formulate different models for
-different tasks. For example, to diagnose bearing fault and gear fault,
-we have to formulate two different models. Data-driven methods provide a
-convenient alternative to these problems.&lt;/p&gt;
+&lt;p&gt;In model based approach, a complete model of the system is formulated and it is then used for fault diagnosis and prognosis. But this method has several limitations. Firstly, it is a difficult task to accurately model a system. Modelling becomes even more challenging with variations in working conditions. Secondly, we have to formulate different models for different tasks. For example, to diagnose bearing fault and gear fault, we have to formulate two different models. Data-driven methods provide a convenient alternative to these problems.&lt;/p&gt;
 
-&lt;p&gt;In data-driven approach, we use operational data of the machine to
-design algorithms that are then used for fault diagnosis and
-prognostics. The operational data may be vibration data, thermal imaging
-data, acoustic emission data, or something else. These techniques are
-robust to environmental variations. Accuracy obtained by data-driven
-methods is also at par and sometimes even better than accuracy obtained
-by model based approaches. Due to these reasons data-driven methods are
-becoming increasingly popular at diagnosis and prognostics tasks.&lt;/p&gt;
+&lt;p&gt;In data-driven approach, we use operational data of the machine to design algorithms that are then used for fault diagnosis and prognosis. The operational data may be vibration data, thermal imaging data, acoustic emission data, or something else. These techniques are robust to environmental variations. Accuracy obtained by data-driven methods is also at par and sometimes even better than accuracy obtained by model based approaches. Due to these reasons data-driven methods are becoming increasingly popular at diagnosis and prognosis tasks.&lt;/p&gt;
 
 &lt;h2 id=&#34;aim-of-the-project&#34;&gt;Aim of the project&lt;/h2&gt;
 

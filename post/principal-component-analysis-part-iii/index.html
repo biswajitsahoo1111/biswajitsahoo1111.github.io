@@ -435,11 +435,11 @@ sum(factor_scores_words[,1]*factor_scores_words[,2]) # PCs are orthogonal</code>
 <h3>Contribution of each factor</h3>
 <p>It is defined as square of factor score divided by sum of squares of factor scores in that column.</p>
 <pre class="r"><code>round(factor_scores_words[,1]^2/sum(factor_scores_words[,1]^2)*100,2)</code></pre>
-<pre><code>##  [1] 11.36  0.18  5.58  0.18  2.28  6.34  0.00  2.40  4.38  0.29  8.00
-## [12]  9.37  3.90  0.94  0.66 14.41  7.78  5.77 12.43  3.75</code></pre>
+<pre><code>##  [1] 11.36  0.18  5.58  0.18  2.28  6.34  0.00  2.40  4.38  0.29  8.00  9.37
+## [13]  3.90  0.94  0.66 14.41  7.78  5.77 12.43  3.75</code></pre>
 <pre class="r"><code>round(factor_scores_words[,2]^2/sum(factor_scores_words[,2]^2)*100,2)</code></pre>
-<pre><code>##  [1]  0.92  0.55  5.98  0.55 15.49  0.28  0.00  1.13  1.63  5.48 10.87
-## [12]  8.25  3.27  2.55 12.32  2.90  2.90  6.52  8.25 10.18</code></pre>
+<pre><code>##  [1]  0.92  0.55  5.98  0.55 15.49  0.28  0.00  1.13  1.63  5.48 10.87  8.25
+## [13]  3.27  2.55 12.32  2.90  2.90  6.52  8.25 10.18</code></pre>
 <p>The calculations in above two lines can be done in a single line</p>
 <pre class="r"><code>round(factor_scores_words^2/matrix(rep(colSums(factor_scores_words^2),nrow(words)),ncol = 2,byrow = T)*100,2)</code></pre>
 <pre><code>##         PC1   PC2
@@ -552,8 +552,10 @@ In the above figure red dashed line is the 1st principal component (PC) and blue
 <pre><code>## [1] 23.368</code></pre>
 <p>Correlation between principal components and original variables
 (In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix <span class="math inline">\(\textbf{P}\)</span> (see <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I</a>)</p>
-<p>The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.
-### Correlation matrix</p>
+<p>The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.</p>
+</div>
+<div id="correlation-matrix" class="section level3">
+<h3>Correlation matrix</h3>
 <pre class="r"><code># Correlation between PCs and original variables
 (cor(pca_words_cov$x,words_centered))</code></pre>
 <pre><code>##     Word_length Lines_in_dict
@@ -640,7 +642,7 @@ print(variable_plot_original)</code></pre>
   geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
                       label = c(&quot;Frequency&quot;,&quot;Number of entries&quot;))) </code></pre>
 <p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<p>Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative eigenvector results in negative correlation scores. Hence, our plot flips about y-axis.</p>
+<p>Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative principal component results in negative correlation scores. Hence, our plot flips about y-axis.</p>
 </div>
 <div id="example-2-wine-example" class="section level2">
 <h2>Example 2 (Wine example)</h2>
@@ -911,7 +913,7 @@ svd_food = svd(cent_food)
 (Eigenvalues = (svd_food$d)^2)</code></pre>
 <pre><code>## [1] 3023141.2354  290575.8390   68795.2333   25298.9496   22992.2474
 ## [6]    3722.3214     723.9238</code></pre>
-<p><strong>Important Note:</strong> These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by <span class="math inline">\((n-1)\)</span>, where <span class="math inline">\(n\)</span> is number of data points (in this case <span class="math inline">\(n = 12\)</span>). If this point is still not clear, refer to Part-II.</p>
+<p><strong>Important Note:</strong> These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by <span class="math inline">\((n-1)\)</span>, where <span class="math inline">\(n\)</span> is number of data points (in this case <span class="math inline">\(n = 12\)</span>). If this point is still not clear, refer to <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>.</p>
 </div>
 <div id="percentage-contribution-of-each-principal-component" class="section level3">
 <h3>Percentage contribution of each principal component</h3>
