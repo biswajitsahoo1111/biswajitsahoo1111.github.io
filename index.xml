@@ -520,7 +520,7 @@ is a vector of size &lt;span class=&#34;math inline&#34;&gt;\((m\times 1)\)&lt;/
 &lt;div id=&#34;structure-of-the-paper&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Structure of the paper&lt;/h3&gt;
 &lt;p&gt;Along with basic theory the paper contains three examples on PCA, one example on correspondence analysis and one example on multiple factor analysis. In this post we will only focus on PCA examples.&lt;/p&gt;
-&lt;p&gt;To run following R codes seamlessly, readers have to load following packages. If these packages have not been installed previously, use ‘install.packages(“package_name”)’ to install those.&lt;/p&gt;
+&lt;p&gt;To run following R codes seamlessly, readers have to load following packages. If these packages have not been installed previously, use &lt;code&gt;install.packages(&#34;package_name&#34;)&lt;/code&gt; to install those.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
 library(ggrepel)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
