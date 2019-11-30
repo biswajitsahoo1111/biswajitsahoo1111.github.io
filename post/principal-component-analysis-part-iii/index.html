@@ -15,8 +15,7 @@
   
     
   
-  <meta name="description" content="(Python codes for this post can be found here)This post is Part-III of a three part series post on PCA. Other parts of the series can be found at the links below.
-Part-I: Basic Theory of PCAPart-II: PCA Implementation with and without using built-in functionsIn this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J.">
+  <meta name="description" content="(Python codes for this post can be found here)In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/principal-component-analysis-part-iii/">
@@ -107,8 +106,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo">
   <meta property="og:url" content="/post/principal-component-analysis-part-iii/">
   <meta property="og:title" content="Principal Component Analysis - Part III | Biswajit Sahoo">
-  <meta property="og:description" content="(Python codes for this post can be found here)This post is Part-III of a three part series post on PCA. Other parts of the series can be found at the links below.
-Part-I: Basic Theory of PCAPart-II: PCA Implementation with and without using built-in functionsIn this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J.">
+  <meta property="og:description" content="(Python codes for this post can be found here)In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2019-02-05T00:00:00&#43;00:00">
@@ -342,23 +340,23 @@
 <center>
 (<a href="https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/PCA_Abdi_in_python.ipynb">Python codes for this post can be found here</a>)
 </center>
-<p>This post is Part-III of a three part series post on PCA. Other parts of the series can be found at the links below.</p>
+<p>In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘<a href="https://onlinelibrary.wiley.com/doi/full/10.1002/wics.101">Principal component analysis</a>’ and is authored by <a href="https://personal.utdallas.edu/~herve/">Herve Abdi</a> and <a href="https://ljwilliams.github.io/">Lynne J. Williams</a>. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).</p>
+<p>This post is Part-III of a three part series on PCA. Other parts of the series can be found at the links below.</p>
 <ul>
 <li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I: Basic Theory of PCA</a></li>
 <li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II: PCA Implementation with and without using built-in functions</a></li>
 </ul>
-<p>In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. This paper got published in 2010 and since then its popularity has only grown. The paper has been cited 3800+ times as per Google scholar data (This was the number when this post was first written).</p>
-<p>This post contains code snippets in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> can also be written using commands of <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>. For figures, the reader has to write his/her own code in MATLAB.</p>
+<p>This post contains code snippets in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> can be written using commands of <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>. For figures, the reader has to write his/her own code in MATLAB.</p>
 <div id="structure-of-the-paper" class="section level3">
 <h3>Structure of the paper</h3>
-<p>Along with basic theory the paper contains three examples on PCA, one example on correspondence analysis and one example on multiple factor analysis. In this post we will only focus on PCA examples.</p>
+<p>Along with basic theory, the paper contains three examples on PCA, one example on correspondence analysis, and one example on multiple factor analysis. We will only focus on PCA examples in this post.</p>
 <p>To run following R codes seamlessly, readers have to load following packages. If these packages have not been installed previously, use <code>install.packages("package_name")</code> to install those.</p>
 <pre class="r"><code>library(ggplot2)
 library(ggrepel)</code></pre>
 </div>
 <div id="how-to-get-data" class="section level3">
 <h3>How to get data</h3>
-<p>Data for the examples have been taken from the paper [1]. The data sets are pretty small. So one way to read the data is to create a dataframe itself in R using the values given in paper. Otherwise, the values can first be stored in a csv file and then read into R. We have used the later approach.</p>
+<p>Data for the examples have been taken from the paper [1]. The datasets are pretty small. So one way to read the data is to create a dataframe itself in R using the values given in paper. Otherwise, the values can first be stored in a csv file and then read into R. We have used the later approach.</p>
 <p><strong>Note</strong>: Throughout this article, additional comments have been made beside code segments. It would be a good idea to read those commented lines along with the codes.</p>
 <pre class="r"><code># Table 1
 # Load data
@@ -941,7 +939,7 @@ Now observe that our correlation circle plot is almost close to that of the pape
 </div>
 <div id="eigenvalues" class="section level3">
 <h3>Eigenvalues</h3>
-<p>Eigen values of data covariance matrix is square of singular values of centered data matrix. Hence eigen values of data covariance matrix can be obtained as below.</p>
+<p>Eigenvalues of data covariance matrix is square of singular values of centered data matrix. Hence eigenvalues of data covariance matrix can be obtained as below.</p>
 <pre class="r"><code>## Table 14
 cent_food = food[,3:9]-matrix(rep(colMeans(food[,3:9]),times = 12),nrow = 12,
                               byrow = T)
@@ -990,7 +988,7 @@ RESS</code></pre>
 <ol style="list-style-type: decimal">
 <li>Abdi, H., &amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.</li>
 </ol>
-<p>Last Modified: 17th November, 2019</p>
+<p>Last updated: 30th November, 2019</p>
 </div>
 
     </div>
