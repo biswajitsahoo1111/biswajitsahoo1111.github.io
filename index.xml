@@ -1620,6 +1620,8 @@ Thus eigenvalues of S are diagonal entries of &lt;span class=&#34;math inline&#3
       <guid>/project/personal-project/</guid>
       <description>
 
+&lt;p&gt;&lt;center&gt;(&lt;a href=&#34;https://biswajitsahoo1111.github.io/cbm_codes_open/&#34; target=&#34;_blank&#34;&gt;Visit this page for an updated list of results&lt;/a&gt;)&lt;/center&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;introduction-to-the-problem&#34;&gt;Introduction to the problem&lt;/h2&gt;
 
 &lt;p&gt;Condition based maintenance is the process of doing maintenance only when it is required. Adoption of this maintenance strategy leads to significant monetary gains as it precludes periodic maintenance and reduces unplanned downtime. Another term commonly used for condition based maintenance is predictive maintenance. As the name suggests, in this method we predict in advance when to perform maintenance. Maintenance is required, if fault has already occurred or is imminent. This leads us to the problem of fault diagnosis and prognosis.&lt;/p&gt;
@@ -1708,7 +1710,7 @@ features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;s
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/CWRU_CNN_Wavelet_Git_Final.ipynb&#34; target=&#34;_blank&#34;&gt;CNN based fault diagnosis using continuous wavelet transform (CWT) (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;(This list will be updated gradually.)&lt;/p&gt;
+&lt;p&gt;(This list will be updated gradually. Visit &lt;a href=&#34;https://biswajitsahoo1111.github.io/cbm_codes_open/&#34; target=&#34;_blank&#34;&gt;this page&lt;/a&gt; for an updated list of results.)&lt;/p&gt;
 
 &lt;h2 id=&#34;some-other-related-stuff&#34;&gt;Some other related stuff&lt;/h2&gt;
 
