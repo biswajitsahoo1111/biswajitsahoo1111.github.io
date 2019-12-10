@@ -15,7 +15,7 @@
   
     
   
-  <meta name="description" content="(Jupyter notebook for this post can be found here.)In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it. Generators help us do just that. Generators are almost like functions but with a vital difference.">
+  <meta name="description" content="(Jupyter notebook for this post can be found here)In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it. Generators help us do just that. Generators are almost like functions but with a vital difference.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/using-python-generators/">
@@ -106,7 +106,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo">
   <meta property="og:url" content="/post/using-python-generators/">
   <meta property="og:title" content="Using Python Generators | Biswajit Sahoo">
-  <meta property="og:description" content="(Jupyter notebook for this post can be found here.)In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it. Generators help us do just that. Generators are almost like functions but with a vital difference.">
+  <meta property="og:description" content="(Jupyter notebook for this post can be found here)In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it. Generators help us do just that. Generators are almost like functions but with a vital difference.">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2019-06-29T00:00:00&#43;00:00">
@@ -341,7 +341,7 @@
 
 
 <center>
-(<a href="https://gist.github.com/biswajitsahoo1111/33cea59f24de6c19d1a513b42d28674d">Jupyter notebook for this post can be found here.</a>)
+(<a href="https://gist.github.com/biswajitsahoo1111/33cea59f24de6c19d1a513b42d28674d">Jupyter notebook for this post can be found here</a>)
 </center>
 <p>In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it. Generators help us do just that. Generators are almost like functions but with a vital difference. While functions produce all their outputs at once, generators produce their outputs one by one and that too when asked. Much has been written about generators. So our aim is not to restate those again. We would rather give two toy examples showing how generators work. Hopefully, these examples will be useful to the beginner.</p>
 <p>While functions use keyword return to produce outputs, generators use yield. Use of yield in a function automatically makes that function a generator. We can write generators that work for few iterations or indefinitely (It’s an infinite loop). Deep learning frameworks like Keras expect the generators to work indefinitely. So we will also write generators that work indefinitely.</p>
@@ -350,37 +350,37 @@
 data = np.random.randint(100,150, size = (10,2,2))
 labels = np.random.permutation(10)
 print(data)</code></pre>
-<pre><code>[[[115 117]
-  [118 140]]
+<pre><code>[[[120 113]
+  [133 135]]
 
- [[143 144]
-  [137 115]]
+ [[104 124]
+  [133 142]]
 
- [[128 115]
-  [105 147]]
+ [[107 110]
+  [121 126]]
 
- [[134 128]
-  [145 115]]
+ [[109 102]
+  [149 103]]
 
- [[147 146]
-  [120 104]]
+ [[126 142]
+  [145 124]]
 
- [[112 105]
-  [129 145]]
+ [[128 107]
+  [144 106]]
 
- [[101 124]
-  [106 111]]
+ [[149 143]
+  [122 147]]
 
- [[100 103]
-  [118 130]]
+ [[143 109]
+  [147 143]]
 
- [[130 148]
-  [102 140]]
+ [[119 100]
+  [129 110]]
 
- [[127 119]
-  [140 111]]]</code></pre>
+ [[120 133]
+  [146 105]]]</code></pre>
 <pre class="python"><code>print(&quot;labels:&quot;, labels)</code></pre>
-<pre><code>labels: [0 7 1 8 9 6 5 4 2 3]</code></pre>
+<pre><code>labels: [4 1 5 6 0 8 7 9 3 2]</code></pre>
 <p>Let’s pretend that the above dataset is huge and we need to extract chunks of it. Now we will write a generator to extract from the above data a batch of two items, two data points and corresponding two labels. In deep learning applications, we want our data to be shuffled between epochs. For the first run, we can shuffle the data itself and from next epoch onwards generator will shuffle it for us. And the generator must run indefinitely.</p>
 <pre class="python"><code>def my_gen(data, labels, batch_size = 2):
     i = 0
@@ -403,74 +403,74 @@ for i in range(10):
     print(X,y)
     print(X.shape, y.shape)
     print(&quot;=========================&quot;)</code></pre>
-<pre><code>[[[115 117]
-  [118 140]]
+<pre><code>[[[120 113]
+  [133 135]]
 
- [[143 144]
-  [137 115]]] [0 7]
+ [[104 124]
+  [133 142]]] [4 1]
 (2, 2, 2) (2,)
 =========================
-[[[128 115]
-  [105 147]]
+[[[107 110]
+  [121 126]]
 
- [[134 128]
-  [145 115]]] [1 8]
+ [[109 102]
+  [149 103]]] [5 6]
 (2, 2, 2) (2,)
 =========================
-[[[147 146]
-  [120 104]]
+[[[126 142]
+  [145 124]]
 
- [[112 105]
-  [129 145]]] [9 6]
+ [[128 107]
+  [144 106]]] [0 8]
 (2, 2, 2) (2,)
 =========================
-[[[101 124]
-  [106 111]]
+[[[149 143]
+  [122 147]]
 
- [[100 103]
-  [118 130]]] [5 4]
+ [[143 109]
+  [147 143]]] [7 9]
 (2, 2, 2) (2,)
 =========================
-[[[130 148]
-  [102 140]]
+[[[119 100]
+  [129 110]]
 
- [[127 119]
-  [140 111]]] [2 3]
+ [[120 133]
+  [146 105]]] [3 2]
 (2, 2, 2) (2,)
 =========================
-[[[101 124]
-  [106 111]]
+[[[128 107]
+  [144 106]]
 
- [[130 148]
-  [102 140]]] [5 2]
+ [[119 100]
+  [129 110]]] [8 3]
 (2, 2, 2) (2,)
 =========================
-[[[128 115]
-  [105 147]]
+[[[109 102]
+  [149 103]]
 
- [[127 119]
-  [140 111]]] [1 3]
+ [[120 133]
+  [146 105]]] [6 2]
 (2, 2, 2) (2,)
 =========================
-[[[100 103]
-  [118 130]]
+[[[143 109]
+  [147 143]]
 
- [[147 146]
-  [120 104]]] [4 9]
+ [[149 143]
+  [122 147]]] [9 7]
 (2, 2, 2) (2,)
 =========================
-[[[134 128]
-  [145 115]]
+[[[107 110]
+  [121 126]]
 
- [[115 117]
-  [118 140]]] [8 0]
+ [[120 113]
+  [133 135]]] [5 4]
 (2, 2, 2) (2,)
 =========================
-[[[112 105]
-  [129 145]]
+[[[104 124]
+  [133 142]]
 
- [[143 144]
-  [137 115]]] [6 7]
+ [[126 142]
+  [145 124]]] [1 0]
 (2, 2, 2) (2,)
 =========================</code></pre>
 <p>In the above generator code, we manually shuffled the data between epochs. But in keras we can use Sequence class to do this for us automatically. The added advantage of using this class is that we can use multiprocessing capabilities. So the new generator code becomes:</p>
@@ -507,74 +507,74 @@ for i in range(10):
     print(dat,labs)
     print(dat.shape, labs.shape)
     print(&quot;===========================&quot;)</code></pre>
-<pre><code>[[[115 117]
-  [118 140]]
+<pre><code>[[[120 113]
+  [133 135]]
 
- [[143 144]
-  [137 115]]] [0 7]
+ [[104 124]
+  [133 142]]] [4 1]
 (2, 2, 2) (2,)
 ===========================
-[[[128 115]
-  [105 147]]
+[[[107 110]
+  [121 126]]
 
- [[134 128]
-  [145 115]]] [1 8]
+ [[109 102]
+  [149 103]]] [5 6]
 (2, 2, 2) (2,)
 ===========================
-[[[147 146]
-  [120 104]]
+[[[126 142]
+  [145 124]]
 
- [[112 105]
-  [129 145]]] [9 6]
+ [[128 107]
+  [144 106]]] [0 8]
 (2, 2, 2) (2,)
 ===========================
-[[[101 124]
-  [106 111]]
+[[[149 143]
+  [122 147]]
 
- [[100 103]
-  [118 130]]] [5 4]
+ [[143 109]
+  [147 143]]] [7 9]
 (2, 2, 2) (2,)
 ===========================
-[[[130 148]
-  [102 140]]
+[[[119 100]
+  [129 110]]
 
- [[127 119]
-  [140 111]]] [2 3]
+ [[120 133]
+  [146 105]]] [3 2]
 (2, 2, 2) (2,)
 ===========================
-[[[143 144]
-  [137 115]]
+[[[107 110]
+  [121 126]]
 
- [[101 124]
-  [106 111]]] [7 5]
+ [[109 102]
+  [149 103]]] [5 6]
 (2, 2, 2) (2,)
 ===========================
-[[[112 105]
-  [129 145]]
+[[[149 143]
+  [122 147]]
 
- [[147 146]
-  [120 104]]] [6 9]
+ [[104 124]
+  [133 142]]] [7 1]
 (2, 2, 2) (2,)
 ===========================
-[[[134 128]
-  [145 115]]
+[[[143 109]
+  [147 143]]
 
- [[115 117]
-  [118 140]]] [8 0]
+ [[128 107]
+  [144 106]]] [9 8]
 (2, 2, 2) (2,)
 ===========================
-[[[128 115]
-  [105 147]]
+[[[120 113]
+  [133 135]]
 
- [[100 103]
-  [118 130]]] [1 4]
+ [[120 133]
+  [146 105]]] [4 2]
 (2, 2, 2) (2,)
 ===========================
-[[[127 119]
-  [140 111]]
+[[[119 100]
+  [129 110]]
 
- [[130 148]
-  [102 140]]] [3 2]
+ [[126 142]
+  [145 124]]] [3 0]
 (2, 2, 2) (2,)
 ===========================</code></pre>
 <p>We have also used generators to train MNIST example. The code can be found <a href="https://gist.github.com/biswajitsahoo1111/33cea59f24de6c19d1a513b42d28674d">here</a>. The example might seem bit stretched as we don’t need generators for small data sets like MNIST. The aim of the example is just to show different implementation using generators.</p>
