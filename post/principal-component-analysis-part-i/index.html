@@ -15,7 +15,7 @@
   
     
   
-  <meta name="description" content="In this post we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The application of PCA and its variants are ubiquitous. In almost all software, such as MATLAB, R, etc., built-in commands are available to perform PCA. In this post we will show how can we obtain results of PCA from raw data first using and then without using built in commands.">
+  <meta name="description" content="In this post, we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The applications of PCA and its variants are ubiquitous. Thus, a through understanding of PCA is considered essential to start one’s journey into machine learning. In this and subsequent posts, we will first discuss relevant theory of PCA. Then we will implement PCA from scratch without using any built-in function.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/principal-component-analysis-part-i/">
@@ -106,7 +106,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo">
   <meta property="og:url" content="/post/principal-component-analysis-part-i/">
   <meta property="og:title" content="Principal Component Analysis - Part I | Biswajit Sahoo">
-  <meta property="og:description" content="In this post we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The application of PCA and its variants are ubiquitous. In almost all software, such as MATLAB, R, etc., built-in commands are available to perform PCA. In this post we will show how can we obtain results of PCA from raw data first using and then without using built in commands.">
+  <meta property="og:description" content="In this post, we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The applications of PCA and its variants are ubiquitous. Thus, a through understanding of PCA is considered essential to start one’s journey into machine learning. In this and subsequent posts, we will first discuss relevant theory of PCA. Then we will implement PCA from scratch without using any built-in function.">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2019-02-03T00:00:00&#43;00:00">
@@ -266,7 +266,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    8 min read
+    7 min read
   </span>
   
 
@@ -340,23 +340,18 @@
       
 
 
-<p>In this post we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The application of PCA and its variants are ubiquitous. In almost all software, such as MATLAB, R, etc., built-in commands are available to perform PCA. In this post we will show how can we obtain results of PCA from raw data first using and then without using built in commands. Then we will reproduce the results of a published paper on PCA that is very popular in academic circles. The post is divided into three parts to make it manageable to read. Readers who are totally familiar with PCA should read none and leave the page immediately. Other readers who are familiar with PCA but want to see different implementations, should jump to the part they wish to read. Absolute beginners should start with Part-I and work their way through gradually. Beginners are also encouraged to explore the references for further information. Here is the outline of different parts:</p>
+<p>In this post, we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The applications of PCA and its variants are ubiquitous. Thus, a through understanding of PCA is considered essential to start one’s journey into machine learning. In this and subsequent posts, we will first discuss relevant theory of PCA. Then we will implement PCA from scratch without using any built-in function. This will give us an idea as to what happens under the hood when a built-in function is called in any software environment. Simultaneously, we will also show how to use built-in commands to obtain results. Finally, we will reproduce the results of a popular paper on PCA. Including all this in a single post will make it very very long. Therefore, the post has been divided into three parts. Readers totally familiar with PCA should read none and leave this page immediately to save their precious time. Other readers, who have a passing knowledge of PCA and want to see different implementations, should pick and choose material from different parts as per their need. Absolute beginners should start with Part-I and work their way through gradually. Beginners are also encouraged to explore the references at the end of this post for further information. Here is the outline of different parts:</p>
 <ul>
 <li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I: Basic Theory of PCA</a></li>
 <li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II: PCA Implementation with and without using built-in functions</a></li>
 <li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/">Part-III: Reproducing results of a published paper on PCA</a></li>
 </ul>
-<p>For <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>, both MATLAB and R codes are available to reproduce all the results. <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/">Part-III</a> contains only R codes. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> can be obtained by using commands of <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>. In this post, we will discuss the theory behind PCA.</p>
-<p>Principal Component Analysis (PCA) is one of the most popular dimensionality reduction techniques. Though its origin dates back to early 20th century, it has never gone out of fashion it seems. Its popularity grows steady as can be gauged by the number of papers and articles published related to PCA or its variants.</p>
-<p>All popular programming platforms contain built in functions that perform PCA given a data matrix. In this blog we will use the open source statistical programming environment R to demonstrate the result.</p>
-<p>We will also show how we can obtain the results using simple matrix operations without using the built-in function.</p>
-<p>In this blog we will reproduce using R all the results of an immensely popular paper on PCA by Abdi et. al. The paper got published in 2010 and within 8 years it has got more than 3800 citations. The data will be taken from the
-paper itself.</p>
+<p>For <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>, both MATLAB and R codes are available to reproduce all the results. <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/">Part-III</a> contains both R and Python codes to reproduce results of the paper. In this post, we will discuss only the theory behind PCA.</p>
 <div id="principal-component-analysis" class="section level1">
 <h1>Principal Component Analysis</h1>
 <div id="theory" class="section level2">
 <h2>Theory:</h2>
-<p>The usual convention is to place variables as columns and different observations as rows (Data frames in R follow this convention). For example, let’s suppose we are collecting data about daily weather for a year. Our variables of interest may include maximum temperature in a day, minimum temperature, humidity, max. wind speed, etc. For every day, we have to collect observations for each of these variables. In vector form, our data point for one day will contain number of observations equal to the number of variables under study and this becomes one row of our data matrix. Assuming that we are observing 10 variables everyday, our data matrix for one year (assuming it’s not a leap year) will contain 365 rows and 10 columns. Once data matrix is obtained, further analysis is done on this data matrix to obtain important hidden information regarding the data. We will use notations from matrix theory to simplify our analysis.</p>
+<p>Given a data matrix, we apply PCA to transform it in a way such that the transformed data reveals maximum information. So we have to first get the data on which we want to perform PCA. The usual convention in storing data is to place variables as columns and different observations as rows (Data frames in R follow this convention by default). For example, let’s suppose we are collecting data about daily weather for a year. Our variables of interest may include maximum temperature in a day, minimum temperature, humidity, max. wind speed, etc. For every day, we have to collect observations for each of these variables. In vector form, our data point for one day will contain number of observations equal to the number of variables under study and this becomes one row of our data matrix. Assuming that we are observing 10 variables everyday, our data matrix for one year (assuming it’s not a leap year) will contain 365 rows and 10 columns. Once data matrix is obtained, further analysis is done on this data matrix to obtain important hidden information regarding the data. We will use notations from matrix theory to simplify our analysis.</p>
 <p>Let <span class="math inline">\(\textbf{X}\)</span> be the data matrix of size <span class="math inline">\(n\times p\)</span>, where is the number of data points and is the number of variables. We can assume without any loss of generality that is centered, meaning its column means are zero. This only shifts the data towards the origin without changing their relative orientation. So if originally is not centered, it is first centered before doing PCA. From now onward we will assume that is always centered.</p>
 <p>Variance of a variable (a column)in <span class="math inline">\(\textbf{X}\)</span> is equal to sum of squares of entries (because the column is centered) of that column divided by (n - 1) to make it unbiased. So sum of variance of all variables is <span class="math inline">\(\frac{1}{n - 1}\)</span> times sum of squares of all elements of the matrix . Readers who are familiar with matrix norms would instantly recognize that total variance is <span class="math inline">\(\frac{1}{n - 1}\)</span> times the square of <strong>Frobenius norm</strong> of <span class="math inline">\(\textbf{X}\)</span>.</p>
 <p>Total variance before transformation =
@@ -379,7 +374,7 @@ But columns of <span class="math inline">\(\textbf{X}\)</span> are already cente
 The previous equation uses the fact that trace is commutative(i.e.<span class="math inline">\(trace(\textbf{AB})=trace(\textbf{BA})\)</span>) and <span class="math inline">\(\textbf{P}\)</span> is orthogonal (i.e. <span class="math inline">\(\textbf{P}\textbf{P}^T=\textbf{I}\)</span>).</p>
 <div id="link-between-total-variance-and-eigenvalues" class="section level3">
 <h3>Link between total variance and eigenvalues</h3>
-<p>Total variance is sum of eigenvalues of covriance matrix <span class="math inline">\((\textbf{S})\)</span>. We will further discuss this point in <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>.</p>
+<p>Total variance is sum of eigenvalues of covariance matrix <span class="math inline">\((\textbf{S})\)</span>. We will further discuss this point in <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>.</p>
 </div>
 <div id="variations-in-pca" class="section level3">
 <h3>Variations in PCA</h3>
@@ -391,7 +386,7 @@ The previous equation uses the fact that trace is commutative(i.e.<span class="m
 <p>Examples of these two types can be found in <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>.</p>
 </div>
 <div id="some-common-terminology-associated-with-pca" class="section level3">
-<h3>Some common terminology associated with PCA:</h3>
+<h3>Some common terminology associated with PCA</h3>
 <ul>
 <li><p><strong>Factor scores</strong> corresponding to a principal component: Values of that column of <span class="math inline">\(\textbf{Y}\)</span> that corresponds to the desired principal component.</p></li>
 <li><p><strong>Loading score</strong>: Values corresponding to a column of <span class="math inline">\(\textbf{P}\)</span>. For example,loading scores of variables corresponding to first principal component are the values of the first column of <span class="math inline">\(\textbf{P}\)</span>.</p></li>

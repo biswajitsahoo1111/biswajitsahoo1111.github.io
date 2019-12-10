@@ -16,7 +16,7 @@
     
   
   <meta name="description" content="This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
-Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post we will first apply built in commands to obtain results and then we will show how the same results can be obtained without using built-in commands. By this post, our aim is not to advocate the use of non-built-in functions.">
+Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/principal-component-analysis-part-ii/">
@@ -108,7 +108,7 @@
   <meta property="og:url" content="/post/principal-component-analysis-part-ii/">
   <meta property="og:title" content="Principal Component Analysis - Part II | Biswajit Sahoo">
   <meta property="og:description" content="This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
-Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post we will first apply built in commands to obtain results and then we will show how the same results can be obtained without using built-in commands. By this post, our aim is not to advocate the use of non-built-in functions.">
+Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions.">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2019-02-04T00:00:00&#43;00:00">
@@ -347,9 +347,9 @@
 <li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I: Basic Theory of PCA</a></li>
 <li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/">Part-III: Reproducing results of a published paper on PCA</a></li>
 </ul>
-<p>In this post we will first apply built in commands to obtain results and then we will show how the same results can be obtained without using built-in commands. By this post, our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.</p>
-<p>In this post readers can find code snippets for R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> for the same can be obtained from this <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">link</a>.</p>
-<p>We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result.</p>
+<p>In this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.</p>
+<p>This post is written in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> for the same can be obtained from this <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">link</a>.</p>
+<p>We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result. As the dataset is pretty small, one way to load the data into R is to create a dataframe in R using the values in the paper. Another way is to first create a csv file and then read the file into R/MATLAB. We have used the later approach.</p>
 <div id="load-data" class="section level3">
 <h3>Load Data</h3>
 <pre class="r"><code>#Load abdi food data
@@ -424,10 +424,8 @@ sum(diag(cov(pca_food_cov$x)))</code></pre>
 <p>Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.</p>
 <pre class="r"><code># Variance along variables before transformation
 round(diag(cov(food[,3:9])),2)</code></pre>
-<pre><code>##      bread vegetables      fruit       meat    poultry       milk 
-##   11480.61   35789.09   27255.45  156618.39   62280.52   13718.75 
-##       wine 
-##    5152.63</code></pre>
+<pre><code>##      bread vegetables      fruit       meat    poultry       milk       wine 
+##   11480.61   35789.09   27255.45  156618.39   62280.52   13718.75    5152.63</code></pre>
 <p>Note that calculation of variance is unaffected by centering data matrix. So variance of original data matrix as well as centered data matrix is same. Check it for yourself. Now see how PCA transforms these variance.</p>
 <pre class="r"><code># Variance along principal compoennts
 round(diag(cov(pca_food_cov$x)),2)</code></pre>
@@ -476,28 +474,28 @@ round(svd_food_cov$d^2/11,2)</code></pre>
 # Loading scores
 round(eigen_food_cov$vectors[,1:4],2)</code></pre>
 <pre><code>##       [,1]  [,2]  [,3]  [,4]
-## [1,] -0.07  0.58 -0.40  0.11
-## [2,] -0.33  0.41  0.29  0.61
-## [3,] -0.30 -0.10  0.34 -0.40
-## [4,] -0.75 -0.11 -0.07 -0.29
-## [5,] -0.47 -0.24 -0.38  0.33
-## [6,] -0.09  0.63  0.23 -0.41
-## [7,]  0.06  0.14 -0.66 -0.31</code></pre>
+## [1,] -0.07  0.58 -0.40 -0.11
+## [2,] -0.33  0.41  0.29 -0.61
+## [3,] -0.30 -0.10  0.34  0.40
+## [4,] -0.75 -0.11 -0.07  0.29
+## [5,] -0.47 -0.24 -0.38 -0.33
+## [6,] -0.09  0.63  0.23  0.41
+## [7,]  0.06  0.14 -0.66  0.31</code></pre>
 <pre class="r"><code># Factor scores
 round((cent_food %*% eigen_food_cov$vectors)[,1:4],2)</code></pre>
 <pre><code>##          [,1]    [,2]    [,3]   [,4]
-##  [1,]  635.05 -120.89  -21.14 -68.97
-##  [2,]  488.56 -142.33  132.37  34.91
-##  [3,] -112.03 -139.75  -61.86  44.19
-##  [4,]  520.01   12.05    2.85 -13.70
-##  [5,]  485.94    1.17   65.75  11.51
-##  [6,] -588.17 -188.44  -71.85  28.56
-##  [7,]  333.95  144.54  -34.94  10.07
-##  [8,]   57.51   42.86  -26.26 -46.55
-##  [9,] -571.32 -206.76  -38.45   3.69
-## [10,]   39.38  264.47 -126.43 -12.74
-## [11,] -296.04  235.92   58.84  87.43
-## [12,] -992.83   97.15  121.13 -78.39</code></pre>
+##  [1,]  635.05 -120.89  -21.14  68.97
+##  [2,]  488.56 -142.33  132.37 -34.91
+##  [3,] -112.03 -139.75  -61.86 -44.19
+##  [4,]  520.01   12.05    2.85  13.70
+##  [5,]  485.94    1.17   65.75 -11.51
+##  [6,] -588.17 -188.44  -71.85 -28.56
+##  [7,]  333.95  144.54  -34.94 -10.07
+##  [8,]   57.51   42.86  -26.26  46.55
+##  [9,] -571.32 -206.76  -38.45  -3.69
+## [10,]   39.38  264.47 -126.43  12.74
+## [11,] -296.04  235.92   58.84 -87.43
+## [12,] -992.83   97.15  121.13  78.39</code></pre>
 <pre class="r"><code># Variance along principal components
 round(eigen_food_cov$values,2)</code></pre>
 <pre><code>## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81</code></pre>
@@ -507,13 +505,13 @@ eigen_food_new = eigen(cov_matrix_manual_food)
 # Loading scores
 round(eigen_food_new$vectors[,1:4],2)</code></pre>
 <pre><code>##       [,1]  [,2]  [,3]  [,4]
-## [1,] -0.07  0.58 -0.40 -0.11
-## [2,] -0.33  0.41  0.29 -0.61
-## [3,] -0.30 -0.10  0.34  0.40
-## [4,] -0.75 -0.11 -0.07  0.29
-## [5,] -0.47 -0.24 -0.38 -0.33
-## [6,] -0.09  0.63  0.23  0.41
-## [7,]  0.06  0.14 -0.66  0.31</code></pre>
+## [1,] -0.07  0.58 -0.40  0.11
+## [2,] -0.33  0.41  0.29  0.61
+## [3,] -0.30 -0.10  0.34 -0.40
+## [4,] -0.75 -0.11 -0.07 -0.29
+## [5,] -0.47 -0.24 -0.38  0.33
+## [6,] -0.09  0.63  0.23 -0.41
+## [7,]  0.06  0.14 -0.66 -0.31</code></pre>
 <pre class="r"><code># Variance along principal components
 round(eigen_food_new$values,2)</code></pre>
 <pre><code>## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81</code></pre>
@@ -597,10 +595,8 @@ sum(diag(cov(pca_food_cor$x)))</code></pre>
 <p>Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.</p>
 <pre class="r"><code># Variance along variables before transformation
 round(diag(cov(scale_food)),2)</code></pre>
-<pre><code>##      bread vegetables      fruit       meat    poultry       milk 
-##          1          1          1          1          1          1 
-##       wine 
-##          1</code></pre>
+<pre><code>##      bread vegetables      fruit       meat    poultry       milk       wine 
+##          1          1          1          1          1          1          1</code></pre>
 <p>This is obvious as we have scaled the matrix. Now see how PCA transforms these variance.</p>
 <pre class="r"><code># Variance along principal compoennts
 round(diag(cov(pca_food_cor$x)),2)</code></pre>
@@ -654,8 +650,8 @@ round(eigen_food_cor$vectors)</code></pre>
 ## [1,]    0    1    0   -1    0    1    0
 ## [2,]    0    0    0    0    1    0    0
 ## [3,]    0    0    0    1    0    1    0
-## [4,]    0    0    0    0    0    0    1
-## [5,]    0    0    0    0    0    0   -1
+## [4,]    0    0    0    0    0    0   -1
+## [5,]    0    0    0    0    0    0    1
 ## [6,]    0    1    0    0    0    0    0
 ## [7,]    0    0   -1    0    0    0    0</code></pre>
 <pre class="r"><code># Factor scores

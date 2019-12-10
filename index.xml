@@ -1182,9 +1182,9 @@ RESS&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III: Reproducing results of a published paper on PCA&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;In this post we will first apply built in commands to obtain results and then we will show how the same results can be obtained without using built-in commands. By this post, our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.&lt;/p&gt;
-&lt;p&gt;In this post readers can find code snippets for R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;MATLAB codes&lt;/a&gt; for the same can be obtained from this &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result.&lt;/p&gt;
+&lt;p&gt;In this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.&lt;/p&gt;
+&lt;p&gt;This post is written in R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;MATLAB codes&lt;/a&gt; for the same can be obtained from this &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result. As the dataset is pretty small, one way to load the data into R is to create a dataframe in R using the values in the paper. Another way is to first create a csv file and then read the file into R/MATLAB. We have used the later approach.&lt;/p&gt;
 &lt;div id=&#34;load-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Load Data&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#Load abdi food data
@@ -1259,10 +1259,8 @@ sum(diag(cov(pca_food_cov$x)))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along variables before transformation
 round(diag(cov(food[,3:9])),2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      bread vegetables      fruit       meat    poultry       milk 
-##   11480.61   35789.09   27255.45  156618.39   62280.52   13718.75 
-##       wine 
-##    5152.63&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      bread vegetables      fruit       meat    poultry       milk       wine 
+##   11480.61   35789.09   27255.45  156618.39   62280.52   13718.75    5152.63&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note that calculation of variance is unaffected by centering data matrix. So variance of original data matrix as well as centered data matrix is same. Check it for yourself. Now see how PCA transforms these variance.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal compoennts
 round(diag(cov(pca_food_cov$x)),2)&lt;/code&gt;&lt;/pre&gt;
@@ -1311,28 +1309,28 @@ round(svd_food_cov$d^2/11,2)&lt;/code&gt;&lt;/pre&gt;
 # Loading scores
 round(eigen_food_cov$vectors[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##       [,1]  [,2]  [,3]  [,4]
-## [1,] -0.07  0.58 -0.40  0.11
-## [2,] -0.33  0.41  0.29  0.61
-## [3,] -0.30 -0.10  0.34 -0.40
-## [4,] -0.75 -0.11 -0.07 -0.29
-## [5,] -0.47 -0.24 -0.38  0.33
-## [6,] -0.09  0.63  0.23 -0.41
-## [7,]  0.06  0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+## [1,] -0.07  0.58 -0.40 -0.11
+## [2,] -0.33  0.41  0.29 -0.61
+## [3,] -0.30 -0.10  0.34  0.40
+## [4,] -0.75 -0.11 -0.07  0.29
+## [5,] -0.47 -0.24 -0.38 -0.33
+## [6,] -0.09  0.63  0.23  0.41
+## [7,]  0.06  0.14 -0.66  0.31&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
 round((cent_food %*% eigen_food_cov$vectors)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##          [,1]    [,2]    [,3]   [,4]
-##  [1,]  635.05 -120.89  -21.14 -68.97
-##  [2,]  488.56 -142.33  132.37  34.91
-##  [3,] -112.03 -139.75  -61.86  44.19
-##  [4,]  520.01   12.05    2.85 -13.70
-##  [5,]  485.94    1.17   65.75  11.51
-##  [6,] -588.17 -188.44  -71.85  28.56
-##  [7,]  333.95  144.54  -34.94  10.07
-##  [8,]   57.51   42.86  -26.26 -46.55
-##  [9,] -571.32 -206.76  -38.45   3.69
-## [10,]   39.38  264.47 -126.43 -12.74
-## [11,] -296.04  235.92   58.84  87.43
-## [12,] -992.83   97.15  121.13 -78.39&lt;/code&gt;&lt;/pre&gt;
+##  [1,]  635.05 -120.89  -21.14  68.97
+##  [2,]  488.56 -142.33  132.37 -34.91
+##  [3,] -112.03 -139.75  -61.86 -44.19
+##  [4,]  520.01   12.05    2.85  13.70
+##  [5,]  485.94    1.17   65.75 -11.51
+##  [6,] -588.17 -188.44  -71.85 -28.56
+##  [7,]  333.95  144.54  -34.94 -10.07
+##  [8,]   57.51   42.86  -26.26  46.55
+##  [9,] -571.32 -206.76  -38.45  -3.69
+## [10,]   39.38  264.47 -126.43  12.74
+## [11,] -296.04  235.92   58.84 -87.43
+## [12,] -992.83   97.15  121.13  78.39&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal components
 round(eigen_food_cov$values,2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
@@ -1342,13 +1340,13 @@ eigen_food_new = eigen(cov_matrix_manual_food)
 # Loading scores
 round(eigen_food_new$vectors[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##       [,1]  [,2]  [,3]  [,4]
-## [1,] -0.07  0.58 -0.40 -0.11
-## [2,] -0.33  0.41  0.29 -0.61
-## [3,] -0.30 -0.10  0.34  0.40
-## [4,] -0.75 -0.11 -0.07  0.29
-## [5,] -0.47 -0.24 -0.38 -0.33
-## [6,] -0.09  0.63  0.23  0.41
-## [7,]  0.06  0.14 -0.66  0.31&lt;/code&gt;&lt;/pre&gt;
+## [1,] -0.07  0.58 -0.40  0.11
+## [2,] -0.33  0.41  0.29  0.61
+## [3,] -0.30 -0.10  0.34 -0.40
+## [4,] -0.75 -0.11 -0.07 -0.29
+## [5,] -0.47 -0.24 -0.38  0.33
+## [6,] -0.09  0.63  0.23 -0.41
+## [7,]  0.06  0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal components
 round(eigen_food_new$values,2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
@@ -1432,10 +1430,8 @@ sum(diag(cov(pca_food_cor$x)))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along variables before transformation
 round(diag(cov(scale_food)),2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      bread vegetables      fruit       meat    poultry       milk 
-##          1          1          1          1          1          1 
-##       wine 
-##          1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      bread vegetables      fruit       meat    poultry       milk       wine 
+##          1          1          1          1          1          1          1&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is obvious as we have scaled the matrix. Now see how PCA transforms these variance.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal compoennts
 round(diag(cov(pca_food_cor$x)),2)&lt;/code&gt;&lt;/pre&gt;
@@ -1489,8 +1485,8 @@ round(eigen_food_cor$vectors)&lt;/code&gt;&lt;/pre&gt;
 ## [1,]    0    1    0   -1    0    1    0
 ## [2,]    0    0    0    0    1    0    0
 ## [3,]    0    0    0    1    0    1    0
-## [4,]    0    0    0    0    0    0    1
-## [5,]    0    0    0    0    0    0   -1
+## [4,]    0    0    0    0    0    0   -1
+## [5,]    0    0    0    0    0    0    1
 ## [6,]    0    1    0    0    0    0    0
 ## [7,]    0    0   -1    0    0    0    0&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
@@ -1534,23 +1530,18 @@ round(eigen_food_cor$values,2)&lt;/code&gt;&lt;/pre&gt;
       <description>
 
 
-&lt;p&gt;In this post we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The application of PCA and its variants are ubiquitous. In almost all software, such as MATLAB, R, etc., built-in commands are available to perform PCA. In this post we will show how can we obtain results of PCA from raw data first using and then without using built in commands. Then we will reproduce the results of a published paper on PCA that is very popular in academic circles. The post is divided into three parts to make it manageable to read. Readers who are totally familiar with PCA should read none and leave the page immediately. Other readers who are familiar with PCA but want to see different implementations, should jump to the part they wish to read. Absolute beginners should start with Part-I and work their way through gradually. Beginners are also encouraged to explore the references for further information. Here is the outline of different parts:&lt;/p&gt;
+&lt;p&gt;In this post, we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The applications of PCA and its variants are ubiquitous. Thus, a through understanding of PCA is considered essential to start one’s journey into machine learning. In this and subsequent posts, we will first discuss relevant theory of PCA. Then we will implement PCA from scratch without using any built-in function. This will give us an idea as to what happens under the hood when a built-in function is called in any software environment. Simultaneously, we will also show how to use built-in commands to obtain results. Finally, we will reproduce the results of a popular paper on PCA. Including all this in a single post will make it very very long. Therefore, the post has been divided into three parts. Readers totally familiar with PCA should read none and leave this page immediately to save their precious time. Other readers, who have a passing knowledge of PCA and want to see different implementations, should pick and choose material from different parts as per their need. Absolute beginners should start with Part-I and work their way through gradually. Beginners are also encouraged to explore the references at the end of this post for further information. Here is the outline of different parts:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II: PCA Implementation with and without using built-in functions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III: Reproducing results of a published paper on PCA&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;For &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;, both MATLAB and R codes are available to reproduce all the results. &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III&lt;/a&gt; contains only R codes. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;MATLAB codes&lt;/a&gt; can be obtained by using commands of &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;. In this post, we will discuss the theory behind PCA.&lt;/p&gt;
-&lt;p&gt;Principal Component Analysis (PCA) is one of the most popular dimensionality reduction techniques. Though its origin dates back to early 20th century, it has never gone out of fashion it seems. Its popularity grows steady as can be gauged by the number of papers and articles published related to PCA or its variants.&lt;/p&gt;
-&lt;p&gt;All popular programming platforms contain built in functions that perform PCA given a data matrix. In this blog we will use the open source statistical programming environment R to demonstrate the result.&lt;/p&gt;
-&lt;p&gt;We will also show how we can obtain the results using simple matrix operations without using the built-in function.&lt;/p&gt;
-&lt;p&gt;In this blog we will reproduce using R all the results of an immensely popular paper on PCA by Abdi et. al. The paper got published in 2010 and within 8 years it has got more than 3800 citations. The data will be taken from the
-paper itself.&lt;/p&gt;
+&lt;p&gt;For &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;, both MATLAB and R codes are available to reproduce all the results. &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III&lt;/a&gt; contains both R and Python codes to reproduce results of the paper. In this post, we will discuss only the theory behind PCA.&lt;/p&gt;
 &lt;div id=&#34;principal-component-analysis&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Principal Component Analysis&lt;/h1&gt;
 &lt;div id=&#34;theory&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Theory:&lt;/h2&gt;
-&lt;p&gt;The usual convention is to place variables as columns and different observations as rows (Data frames in R follow this convention). For example, let’s suppose we are collecting data about daily weather for a year. Our variables of interest may include maximum temperature in a day, minimum temperature, humidity, max. wind speed, etc. For every day, we have to collect observations for each of these variables. In vector form, our data point for one day will contain number of observations equal to the number of variables under study and this becomes one row of our data matrix. Assuming that we are observing 10 variables everyday, our data matrix for one year (assuming it’s not a leap year) will contain 365 rows and 10 columns. Once data matrix is obtained, further analysis is done on this data matrix to obtain important hidden information regarding the data. We will use notations from matrix theory to simplify our analysis.&lt;/p&gt;
+&lt;p&gt;Given a data matrix, we apply PCA to transform it in a way such that the transformed data reveals maximum information. So we have to first get the data on which we want to perform PCA. The usual convention in storing data is to place variables as columns and different observations as rows (Data frames in R follow this convention by default). For example, let’s suppose we are collecting data about daily weather for a year. Our variables of interest may include maximum temperature in a day, minimum temperature, humidity, max. wind speed, etc. For every day, we have to collect observations for each of these variables. In vector form, our data point for one day will contain number of observations equal to the number of variables under study and this becomes one row of our data matrix. Assuming that we are observing 10 variables everyday, our data matrix for one year (assuming it’s not a leap year) will contain 365 rows and 10 columns. Once data matrix is obtained, further analysis is done on this data matrix to obtain important hidden information regarding the data. We will use notations from matrix theory to simplify our analysis.&lt;/p&gt;
 &lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; be the data matrix of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;, where is the number of data points and is the number of variables. We can assume without any loss of generality that is centered, meaning its column means are zero. This only shifts the data towards the origin without changing their relative orientation. So if originally is not centered, it is first centered before doing PCA. From now onward we will assume that is always centered.&lt;/p&gt;
 &lt;p&gt;Variance of a variable (a column)in &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; is equal to sum of squares of entries (because the column is centered) of that column divided by (n - 1) to make it unbiased. So sum of variance of all variables is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times sum of squares of all elements of the matrix . Readers who are familiar with matrix norms would instantly recognize that total variance is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt; of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;Total variance before transformation =
@@ -1573,7 +1564,7 @@ But columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&g
 The previous equation uses the fact that trace is commutative(i.e.&lt;span class=&#34;math inline&#34;&gt;\(trace(\textbf{AB})=trace(\textbf{BA})\)&lt;/span&gt;) and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is orthogonal (i.e. &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\textbf{P}^T=\textbf{I}\)&lt;/span&gt;).&lt;/p&gt;
 &lt;div id=&#34;link-between-total-variance-and-eigenvalues&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Link between total variance and eigenvalues&lt;/h3&gt;
-&lt;p&gt;Total variance is sum of eigenvalues of covriance matrix &lt;span class=&#34;math inline&#34;&gt;\((\textbf{S})\)&lt;/span&gt;. We will further discuss this point in &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Total variance is sum of eigenvalues of covariance matrix &lt;span class=&#34;math inline&#34;&gt;\((\textbf{S})\)&lt;/span&gt;. We will further discuss this point in &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;variations-in-pca&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Variations in PCA&lt;/h3&gt;
@@ -1585,7 +1576,7 @@ The previous equation uses the fact that trace is commutative(i.e.&lt;span class
 &lt;p&gt;Examples of these two types can be found in &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;some-common-terminology-associated-with-pca&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Some common terminology associated with PCA:&lt;/h3&gt;
+&lt;h3&gt;Some common terminology associated with PCA&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Factor scores&lt;/strong&gt; corresponding to a principal component: Values of that column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; that corresponds to the desired principal component.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Loading score&lt;/strong&gt;: Values corresponding to a column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. For example,loading scores of variables corresponding to first principal component are the values of the first column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
