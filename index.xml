@@ -556,52 +556,52 @@ library(ggrepel)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 1
 # Load data
 (words = read.csv(&amp;quot;pca_abdi_words.csv&amp;quot;,header = T))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##          Words Word_length Lines_in_dict
-## 1          Bag           3            14
-## 2       Across           6             7
-## 3           On           2            11
-## 4       Insane           6             9
-## 5           By           2             9
-## 6    MOnastery           9             4
-## 7       Relief           6             8
-## 8        Slope           5            11
-## 9    Scoundrel           9             5
-## 10        With           4             8
-## 11     Neither           7             2
-## 12 Pretentious          11             4
-## 13       Solid           5            12
-## 14        This           4             9
-## 15         For           3             8
-## 16   Therefore           9             1
-## 17  Generality          10             4
-## 18       Arise           5            13
-## 19        Blot           4            15
-## 20  Infectious          10             6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;         Words Word_length Lines_in_dict
+1          Bag           3            14
+2       Across           6             7
+3           On           2            11
+4       Insane           6             9
+5           By           2             9
+6    MOnastery           9             4
+7       Relief           6             8
+8        Slope           5            11
+9    Scoundrel           9             5
+10        With           4             8
+11     Neither           7             2
+12 Pretentious          11             4
+13       Solid           5            12
+14        This           4             9
+15         For           3             8
+16   Therefore           9             1
+17  Generality          10             4
+18       Arise           5            13
+19        Blot           4            15
+20  Infectious          10             6&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(words_centered = scale(words[,2:3],scale = F)) # Removing the first column&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##       Word_length Lines_in_dict
-##  [1,]          -3             6
-##  [2,]           0            -1
-##  [3,]          -4             3
-##  [4,]           0             1
-##  [5,]          -4             1
-##  [6,]           3            -4
-##  [7,]           0             0
-##  [8,]          -1             3
-##  [9,]           3            -3
-## [10,]          -2             0
-## [11,]           1            -6
-## [12,]           5            -4
-## [13,]          -1             4
-## [14,]          -2             1
-## [15,]          -3             0
-## [16,]           3            -7
-## [17,]           4            -4
-## [18,]          -1             5
-## [19,]          -2             7
-## [20,]           4            -2
-## attr(,&amp;quot;scaled:center&amp;quot;)
-##   Word_length Lines_in_dict 
-##             6             8&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      Word_length Lines_in_dict
+ [1,]          -3             6
+ [2,]           0            -1
+ [3,]          -4             3
+ [4,]           0             1
+ [5,]          -4             1
+ [6,]           3            -4
+ [7,]           0             0
+ [8,]          -1             3
+ [9,]           3            -3
+[10,]          -2             0
+[11,]           1            -6
+[12,]           5            -4
+[13,]          -1             4
+[14,]          -2             1
+[15,]          -3             0
+[16,]           3            -7
+[17,]           4            -4
+[18,]          -1             5
+[19,]          -2             7
+[20,]           4            -2
+attr(,&amp;quot;scaled:center&amp;quot;)
+  Word_length Lines_in_dict 
+            6             8 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;covariance-pca&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Covariance PCA&lt;/h3&gt;
@@ -609,97 +609,97 @@ library(ggrepel)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_words_cov = prcomp(words[,2:3],scale = F) # cov stands for Covariance PCA
 factor_scores_words = pca_words_cov$x
 round(factor_scores_words,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##         PC1   PC2
-##  [1,] -6.67  0.69
-##  [2,]  0.84 -0.54
-##  [3,] -4.68 -1.76
-##  [4,] -0.84  0.54
-##  [5,] -2.99 -2.84
-##  [6,]  4.99  0.38
-##  [7,]  0.00  0.00
-##  [8,] -3.07  0.77
-##  [9,]  4.14  0.92
-## [10,] -1.07 -1.69
-## [11,]  5.60 -2.38
-## [12,]  6.06  2.07
-## [13,] -3.91  1.30
-## [14,] -1.92 -1.15
-## [15,] -1.61 -2.53
-## [16,]  7.52 -1.23
-## [17,]  5.52  1.23
-## [18,] -4.76  1.84
-## [19,] -6.98  2.07
-## [20,]  3.83  2.30&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;        PC1   PC2
+ [1,] -6.67  0.69
+ [2,]  0.84 -0.54
+ [3,] -4.68 -1.76
+ [4,] -0.84  0.54
+ [5,] -2.99 -2.84
+ [6,]  4.99  0.38
+ [7,]  0.00  0.00
+ [8,] -3.07  0.77
+ [9,]  4.14  0.92
+[10,] -1.07 -1.69
+[11,]  5.60 -2.38
+[12,]  6.06  2.07
+[13,] -3.91  1.30
+[14,] -1.92 -1.15
+[15,] -1.61 -2.53
+[16,]  7.52 -1.23
+[17,]  5.52  1.23
+[18,] -4.76  1.84
+[19,] -6.98  2.07
+[20,]  3.83  2.30&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Observer that factor scores for PC1 are negatives of what has been given in the paper. This is not a problem as principal directions are orthogonal.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;principal-directions-are-orthogonal&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Principal directions are orthogonal&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  It can also be checked that both the principal components are orthogonal.
 sum(factor_scores_words[,1]*factor_scores_words[,2]) # PCs are orthogonal&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -4.773959e-15&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] -4.773959e-15&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;contribution-of-each-factor&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Contribution of each factor&lt;/h3&gt;
 &lt;p&gt;It is defined as square of factor score divided by sum of squares of factor scores in that column.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(factor_scores_words[,1]^2/sum(factor_scores_words[,1]^2)*100,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] 11.36  0.18  5.58  0.18  2.28  6.34  0.00  2.40  4.38  0.29  8.00  9.37
-## [13]  3.90  0.94  0.66 14.41  7.78  5.77 12.43  3.75&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt; [1] 11.36  0.18  5.58  0.18  2.28  6.34  0.00  2.40  4.38  0.29  8.00  9.37
+[13]  3.90  0.94  0.66 14.41  7.78  5.77 12.43  3.75&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(factor_scores_words[,2]^2/sum(factor_scores_words[,2]^2)*100,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1]  0.92  0.55  5.98  0.55 15.49  0.28  0.00  1.13  1.63  5.48 10.87  8.25
-## [13]  3.27  2.55 12.32  2.90  2.90  6.52  8.25 10.18&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt; [1]  0.92  0.55  5.98  0.55 15.49  0.28  0.00  1.13  1.63  5.48 10.87  8.25
+[13]  3.27  2.55 12.32  2.90  2.90  6.52  8.25 10.18&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The calculations in above two lines can be done in a single line&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(factor_scores_words^2/matrix(rep(colSums(factor_scores_words^2),nrow(words)),ncol = 2,byrow = T)*100,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##         PC1   PC2
-##  [1,] 11.36  0.92
-##  [2,]  0.18  0.55
-##  [3,]  5.58  5.98
-##  [4,]  0.18  0.55
-##  [5,]  2.28 15.49
-##  [6,]  6.34  0.28
-##  [7,]  0.00  0.00
-##  [8,]  2.40  1.13
-##  [9,]  4.38  1.63
-## [10,]  0.29  5.48
-## [11,]  8.00 10.87
-## [12,]  9.37  8.25
-## [13,]  3.90  3.27
-## [14,]  0.94  2.55
-## [15,]  0.66 12.32
-## [16,] 14.41  2.90
-## [17,]  7.78  2.90
-## [18,]  5.77  6.52
-## [19,] 12.43  8.25
-## [20,]  3.75 10.18&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;        PC1   PC2
+ [1,] 11.36  0.92
+ [2,]  0.18  0.55
+ [3,]  5.58  5.98
+ [4,]  0.18  0.55
+ [5,]  2.28 15.49
+ [6,]  6.34  0.28
+ [7,]  0.00  0.00
+ [8,]  2.40  1.13
+ [9,]  4.38  1.63
+[10,]  0.29  5.48
+[11,]  8.00 10.87
+[12,]  9.37  8.25
+[13,]  3.90  3.27
+[14,]  0.94  2.55
+[15,]  0.66 12.32
+[16,] 14.41  2.90
+[17,]  7.78  2.90
+[18,]  5.77  6.52
+[19,] 12.43  8.25
+[20,]  3.75 10.18&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;squared-distance-to-center-of-gravity&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Squared distance to center of gravity&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(dist = rowSums(factor_scores_words^2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] 45  1 25  1 17 25  0 10 18  4 37 41 17  5  9 58 32 26 53 20&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt; [1] 45  1 25  1 17 25  0 10 18  4 37 41 17  5  9 58 32 26 53 20&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;squared-cosine-of-observations&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Squared cosine of observations&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(sq_cos = round(factor_scores_words^2/rowSums(factor_scores_words^2)*100))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##       PC1 PC2
-##  [1,]  99   1
-##  [2,]  71  29
-##  [3,]  88  12
-##  [4,]  71  29
-##  [5,]  53  47
-##  [6,]  99   1
-##  [7,] NaN NaN
-##  [8,]  94   6
-##  [9,]  95   5
-## [10,]  29  71
-## [11,]  85  15
-## [12,]  90  10
-## [13,]  90  10
-## [14,]  74  26
-## [15,]  29  71
-## [16,]  97   3
-## [17,]  95   5
-## [18,]  87  13
-## [19,]  92   8
-## [20,]  74  26&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      PC1 PC2
+ [1,]  99   1
+ [2,]  71  29
+ [3,]  88  12
+ [4,]  71  29
+ [5,]  53  47
+ [6,]  99   1
+ [7,] NaN NaN
+ [8,]  94   6
+ [9,]  95   5
+[10,]  29  71
+[11,]  85  15
+[12,]  90  10
+[13,]  90  10
+[14,]  74  26
+[15,]  29  71
+[16,]  97   3
+[17,]  95   5
+[18,]  87  13
+[19,]  92   8
+[20,]  74  26&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Nan’s are produced because of division by zero.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Figue 1
 p = ggplot(words,aes(x = Lines_in_dict,y = Word_length,label = Words))+
@@ -707,19 +707,19 @@ p = ggplot(words,aes(x = Lines_in_dict,y = Word_length,label = Words))+
   geom_hline(yintercept = 6)+geom_vline(xintercept = 8)+
   labs(x = &amp;quot;Lines in dictionary&amp;quot;,y = &amp;quot;Word length&amp;quot;)
 print(p)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Show directions of PCs
 # Note that intercept argument in geom_abline considers the line to be at the origin. In our case the data are mean shifted.
 # So we have to adjust the intercept taking new origin into consideration. These adjustments have been made below.
 slope1 = pca_words_cov$rotation[1,1]/pca_words_cov$rotation[2,1] # Slope of first PC
 slope2 = pca_words_cov$rotation[1,2]/pca_words_cov$rotation[2,2] # Slope of second PC
 (new_origin = c(mean(words$Lines_in_dict),mean(words$Word_length)))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 8 6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 8 6&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;intercept1 = 6 - slope1*8
 intercept2 = 6 - slope2*8
 p+geom_abline(slope = slope1,intercept = intercept1,linetype = &amp;quot;dashed&amp;quot;,size = 1.2,col = &amp;quot;red&amp;quot;)+
   geom_abline(slope = slope2,intercept = intercept2,linetype = &amp;quot;dashed&amp;quot;,size = 1.2,col = &amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-9-2.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-2.png&#34; width=&#34;672&#34; /&gt;
 In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;rotated-pcs&#34; class=&#34;section level3&#34;&gt;
@@ -728,7 +728,7 @@ In the above figure red dashed line is the 1st principal component (PC) and blue
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(as.data.frame(pca_words_cov$x),aes(-pca_words_cov$x[,1],pca_words_cov$x[,2],label = words$Words))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;with-supplementary-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;With supplementary data&lt;/h3&gt;
@@ -738,11 +738,11 @@ In the above figure red dashed line is the 1st principal component (PC) and blue
 &lt;h3&gt;Factor score of the new word ‘sur’&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sur = c(3,12) # It has 3 letter and 12 lines of dictionary entry
 (sur_centered = sur - colMeans(words[,2:3]))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   Word_length Lines_in_dict 
-##            -3             4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;  Word_length Lines_in_dict 
+           -3             4 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(factor_scores_sur = round(sur_centered %*% pca_words_cov$rotation,2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        PC1   PC2
-## [1,] -4.99 -0.38&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;       PC1   PC2
+[1,] -4.99 -0.38&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;eigenvalues-and-variance&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Eigenvalues and variance&lt;/h3&gt;
@@ -751,12 +751,12 @@ In the above figure red dashed line is the 1st principal component (PC) and blue
 &lt;div id=&#34;total-variance-before-transformation&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Total variance before transformation&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(total_var_before = round(sum(diag(var(words_centered))),3))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 23.368&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 23.368&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;total-variance-after-transformation&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Total variance after transformation&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(total_var_after = round(sum(diag(var(pca_words_cov$x))),3))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 23.368&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 23.368&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Correlation between principal components and original variables
 (In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; (see &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I&lt;/a&gt;)&lt;/p&gt;
 &lt;p&gt;The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.&lt;/p&gt;
@@ -765,28 +765,28 @@ In the above figure red dashed line is the 1st principal component (PC) and blue
 &lt;h3&gt;Correlation matrix&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Correlation between PCs and original variables
 (cor(pca_words_cov$x,words_centered))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##     Word_length Lines_in_dict
-## PC1   0.8679026    -0.9741764
-## PC2   0.4967344     0.2257884&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    Word_length Lines_in_dict
+PC1   0.8679026    -0.9741764
+PC2   0.4967344     0.2257884&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that the answers for correlation coefficients don’t match with that of the paper. Readers who get actual answers as given in paper are encouraged to send me an email using my contact details. However our procedure is correct and it does indeed give the correct answer for supplementary data as described below.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;squared-correlation&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Squared correlation&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(cor(pca_words_cov$x,words_centered)^2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##     Word_length Lines_in_dict
-## PC1   0.7532549    0.94901961
-## PC2   0.2467451    0.05098039&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    Word_length Lines_in_dict
+PC1   0.7532549    0.94901961
+PC2   0.2467451    0.05098039&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Sum of correlation coefficients between variables and principal components is 1.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;colSums((cor(pca_words_cov$x,words_centered)^2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   Word_length Lines_in_dict 
-##             1             1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;  Word_length Lines_in_dict 
+            1             1 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;loading-matrix&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Loading matrix&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(loading_matrix = pca_words_cov$rotation)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##                      PC1       PC2
-## Word_length    0.5368755 0.8436615
-## Lines_in_dict -0.8436615 0.5368755&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;                     PC1       PC2
+Word_length    0.5368755 0.8436615
+Lines_in_dict -0.8436615 0.5368755&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;correlation-score-for-supplementary-variables&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Correlation score for supplementary variables&lt;/h3&gt;
@@ -795,27 +795,27 @@ Frequency = c(8,230,700,1,500,1,9,2,1,700,7,1,4,500,900,3,1,10,1,1)
 Num_entries = c(6,3,12,2,7,1,1,6,1,5,2,1,5,9,7,1,1,4,4,2)
 supp_data = data.frame(Frequency,Num_entries) # Supplementary data
 supp_data&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##    Frequency Num_entries
-## 1          8           6
-## 2        230           3
-## 3        700          12
-## 4          1           2
-## 5        500           7
-## 6          1           1
-## 7          9           1
-## 8          2           6
-## 9          1           1
-## 10       700           5
-## 11         7           2
-## 12         1           1
-## 13         4           5
-## 14       500           9
-## 15       900           7
-## 16         3           1
-## 17         1           1
-## 18        10           4
-## 19         1           4
-## 20         1           2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;   Frequency Num_entries
+1          8           6
+2        230           3
+3        700          12
+4          1           2
+5        500           7
+6          1           1
+7          9           1
+8          2           6
+9          1           1
+10       700           5
+11         7           2
+12         1           1
+13         4           5
+14       500           9
+15       900           7
+16         3           1
+17         1           1
+18        10           4
+19         1           4
+20         1           2&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;centered-supplementary-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Centered supplementary data&lt;/h3&gt;
@@ -824,27 +824,27 @@ supp_data&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;correlation-score-for-supplementary-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Correlation score for supplementary data&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(corr_score_supp = round(cor(pca_words_cov$x,supp_data),4))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##     Frequency Num_entries
-## PC1   -0.3012     -0.6999
-## PC2   -0.7218     -0.4493&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    Frequency Num_entries
+PC1   -0.3012     -0.6999
+PC2   -0.7218     -0.4493&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note that correlation score doesn’t depend on whether supplementary data is centered or not.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(cor(pca_words_cov$x,supp_data_cent),4))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##     Frequency Num_entries
-## PC1   -0.3012     -0.6999
-## PC2   -0.7218     -0.4493&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    Frequency Num_entries
+PC1   -0.3012     -0.6999
+PC2   -0.7218     -0.4493&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;squared-correlation-1&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Squared correlation&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(cor(pca_words_cov$x,supp_data_cent)^2,4))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##     Frequency Num_entries
-## PC1    0.0907      0.4899
-## PC2    0.5210      0.2019&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    Frequency Num_entries
+PC1    0.0907      0.4899
+PC2    0.5210      0.2019&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;column-sums-of-squared-correlation-for-support-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Column sums of squared correlation for support data&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(colSums(cor(pca_words_cov$x,supp_data_cent)^2),4))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   Frequency Num_entries 
-##      0.6118      0.6918&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;  Frequency Num_entries 
+     0.6118      0.6918 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;correlation-circle-plot&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Correlation circle plot&lt;/h3&gt;
@@ -861,7 +861,7 @@ variable_plot_original = circle + geom_point(data = cor_score,  aes(cor_score[,1
   geom_text_repel(aes(cor_score[,1],cor_score[,2],
                       label = c(&amp;quot;Length of words&amp;quot;,&amp;quot;Number of lines in Dict.&amp;quot;))) 
 print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-24-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;plotting-supplementary-variables&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Plotting supplementary variables&lt;/h3&gt;
@@ -870,7 +870,7 @@ print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
              aes(corr_score_supp[,1],corr_score_supp[,2]))+
   geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
                       label = c(&amp;quot;Frequency&amp;quot;,&amp;quot;Number of entries&amp;quot;))) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative principal component results in negative correlation scores. Hence, our plot flips about y-axis.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;example-2-wine-example&#34; class=&#34;section level2&#34;&gt;
@@ -879,68 +879,68 @@ print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;Correlation PCA with wine data&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 6
 (wine = read.csv(&amp;quot;pca_abdi_wine.csv&amp;quot;,header = T))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   wine_type hedonic for_meat for_dessert price sugar alcohol acidity
-## 1    wine_1      14        7           8     7     7      13       7
-## 2    wine_2      10        7           6     4     3      14       7
-## 3    wine_3       8        5           5    10     5      12       5
-## 4    wine_4       2        4           7    16     7      11       3
-## 5    wine_5       6        2           4    13     3      10       3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;  wine_type hedonic for_meat for_dessert price sugar alcohol acidity
+1    wine_1      14        7           8     7     7      13       7
+2    wine_2      10        7           6     4     3      14       7
+3    wine_3       8        5           5    10     5      12       5
+4    wine_4       2        4           7    16     7      11       3
+5    wine_5       6        2           4    13     3      10       3&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_wine_cor = prcomp(wine[2:8],scale = T)
 ggplot(as.data.frame(pca_wine_cor$x),aes(x = pca_wine_cor$x[,1],y =  pca_wine_cor$x[,2], label = paste0(&amp;quot;wine &amp;quot;,1:5)))+
   geom_point()+geom_text_repel()+ geom_vline(xintercept = 0)+ geom_hline(yintercept = 0)+
   xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigenvector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;factor-scores-along-1st-and-2nd-pc&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Factor scores along 1st and 2nd PC&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 7
 (pca_wine_cor$x[,1:2])&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##             PC1       PC2
-## [1,] -2.3301649  1.095284
-## [2,] -2.0842419 -1.223185
-## [3,]  0.1673228 -0.370258
-## [4,]  1.7842392  1.712563
-## [5,]  2.4628448 -1.214405&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;            PC1       PC2
+[1,] -2.3301649  1.095284
+[2,] -2.0842419 -1.223185
+[3,]  0.1673228 -0.370258
+[4,]  1.7842392  1.712563
+[5,]  2.4628448 -1.214405&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;contribution-of-each-observation-to-principal-component&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Contribution of each observation to principal component&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(pca_wine_cor$x[,1:2]^2/matrix(rep(colSums(pca_wine_cor$x[,1:2]^2),nrow(wine)),ncol = 2,byrow = T)*100,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        PC1   PC2
-## [1,] 28.50 16.57
-## [2,] 22.80 20.66
-## [3,]  0.15  1.89
-## [4,] 16.71 40.51
-## [5,] 31.84 20.37&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;       PC1   PC2
+[1,] 28.50 16.57
+[2,] 22.80 20.66
+[3,]  0.15  1.89
+[4,] 16.71 40.51
+[5,] 31.84 20.37&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;squared-cosine-of-observations-of-first-pc&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Squared cosine of observations of first PC&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(sq_cos = round(pca_wine_cor$x[,1:2]^2/rowSums(pca_wine_cor$x^2)*100))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      PC1 PC2
-## [1,]  77  17
-## [2,]  69  24
-## [3,]   7  34
-## [4,]  50  46
-## [5,]  78  19&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;     PC1 PC2
+[1,]  77  17
+[2,]  69  24
+[3,]   7  34
+[4,]  50  46
+[5,]  78  19&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;loading-scores-corresponding-to-first-two-principal-components&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Loading scores corresponding to first two principal components&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(pca_wine_cor$rotation[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##               PC1   PC2
-## hedonic     -0.40 -0.11
-## for_meat    -0.45  0.11
-## for_dessert -0.26  0.59
-## price        0.42  0.31
-## sugar       -0.05  0.72
-## alcohol     -0.44 -0.06
-## acidity     -0.45 -0.09&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;              PC1   PC2
+hedonic     -0.40 -0.11
+for_meat    -0.45  0.11
+for_dessert -0.26  0.59
+price        0.42  0.31
+sugar       -0.05  0.72
+alcohol     -0.44 -0.06
+acidity     -0.45 -0.09&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;correlation-score-variables-with-first-two-principal-components&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Correlation score variables with first two principal components&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(corr_score_wine = round(cor(pca_wine_cor$x,wine[,2:8])[1:2,],2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##     hedonic for_meat for_dessert price sugar alcohol acidity
-## PC1   -0.87    -0.97       -0.58  0.91 -0.11   -0.96   -0.99
-## PC2   -0.15     0.15        0.79  0.42  0.97   -0.07   -0.12&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    hedonic for_meat for_dessert price sugar alcohol acidity
+PC1   -0.87    -0.97       -0.58  0.91 -0.11   -0.96   -0.99
+PC2   -0.15     0.15        0.79  0.42  0.97   -0.07   -0.12&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;correlation-circle-for-wine-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Correlation circle for wine data&lt;/h3&gt;
@@ -951,7 +951,7 @@ circle +
              aes(corr_score_wine[,1],corr_score_wine[,2]))+
   geom_text_repel(aes(corr_score_wine[,1],corr_score_wine[,2],
                       label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-32-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-33-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;varimax-rotation&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Varimax rotation&lt;/h3&gt;
@@ -961,14 +961,14 @@ circle +
 &lt;div id=&#34;loading-scores-of-first-two-principal-components&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Loading scores of first two principal components&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(pca_wine_cor$rotation[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##               PC1   PC2
-## hedonic     -0.40 -0.11
-## for_meat    -0.45  0.11
-## for_dessert -0.26  0.59
-## price        0.42  0.31
-## sugar       -0.05  0.72
-## alcohol     -0.44 -0.06
-## acidity     -0.45 -0.09&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;              PC1   PC2
+hedonic     -0.40 -0.11
+for_meat    -0.45  0.11
+for_dessert -0.26  0.59
+price        0.42  0.31
+sugar       -0.05  0.72
+alcohol     -0.44 -0.06
+acidity     -0.45 -0.09&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;varimax-applied-to-first-two-principal-components&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Varimax applied to first two principal components&lt;/h3&gt;
@@ -978,24 +978,24 @@ circle +
 &lt;h3&gt;Loading scores after rotation&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 10
 (round(rotated_loading_scores$loadings[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##               PC1   PC2
-## hedonic     -0.41 -0.02
-## for_meat    -0.41  0.21
-## for_dessert -0.12  0.63
-## price        0.48  0.21
-## sugar        0.12  0.72
-## alcohol     -0.44  0.05
-## acidity     -0.46  0.02&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;              PC1   PC2
+hedonic     -0.41 -0.02
+for_meat    -0.41  0.21
+for_dessert -0.12  0.63
+price        0.48  0.21
+sugar        0.12  0.72
+alcohol     -0.44  0.05
+acidity     -0.46  0.02&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The same result can also be obtained by multiplying the original loading matrix by the rotation matrix obtained from varimax.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(pca_wine_cor$rotation[,1:2] %*% rotated_loading_scores$rotmat,2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##              [,1]  [,2]
-## hedonic     -0.41 -0.02
-## for_meat    -0.41  0.21
-## for_dessert -0.12  0.63
-## price        0.48  0.21
-## sugar        0.12  0.72
-## alcohol     -0.44  0.05
-## acidity     -0.46  0.02&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;             [,1]  [,2]
+hedonic     -0.41 -0.02
+for_meat    -0.41  0.21
+for_dessert -0.12  0.63
+price        0.48  0.21
+sugar        0.12  0.72
+alcohol     -0.44  0.05
+acidity     -0.46  0.02&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;plot-of-loading-scores-before-rotation&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Plot of loading scores before rotation&lt;/h3&gt;
@@ -1004,7 +1004,7 @@ ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[
                                                       label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&amp;quot;Loading score along PC1&amp;quot;)+ylab(&amp;quot;Loading score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-37-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;plot-of-loading-scores-after-rotation&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Plot of loading scores after rotation&lt;/h3&gt;
@@ -1015,7 +1015,7 @@ ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
     xlab(&amp;quot;Loading score along PC1 after rotation&amp;quot;)+
     ylab(&amp;quot;Loading score along PC2 after rotation&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-39-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;example-3&#34; class=&#34;section level2&#34;&gt;
@@ -1024,101 +1024,101 @@ ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[
 &lt;h3&gt;French food example (Covariance PCA example)&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Load data (Table 11) 
 (food = read.csv(&amp;quot;pca_abdi_food.csv&amp;quot;,header = T))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##           class children bread vegetables fruit meat poultry milk wine
-## 1   Blue_collar        2   332        428   354 1437     526  247  427
-## 2  White_collar        2   293        559   388 1527     567  239  258
-## 3   Upper_class        2   372        767   562 1948     927  235  433
-## 4   Blue_collar        3   406        563   341 1507     544  324  407
-## 5  White_collar        3   386        608   396 1501     558  319  363
-## 6   Upper_class        3   438        843   689 2345    1148  243  341
-## 7   Blue_collar        4   534        660   367 1620     638  414  407
-## 8  White_collar        4   460        699   484 1856     762  400  416
-## 9   Upper_class        4   385        789   621 2366    1149  304  282
-## 10  Blue_collar        5   655        776   423 1848     759  495  486
-## 11 White_collar        5   584        995   548 2056     893  518  319
-## 12  Upper_class        5   515       1097   887 2630    1167  561  284&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;          class children bread vegetables fruit meat poultry milk wine
+1   Blue_collar        2   332        428   354 1437     526  247  427
+2  White_collar        2   293        559   388 1527     567  239  258
+3   Upper_class        2   372        767   562 1948     927  235  433
+4   Blue_collar        3   406        563   341 1507     544  324  407
+5  White_collar        3   386        608   396 1501     558  319  363
+6   Upper_class        3   438        843   689 2345    1148  243  341
+7   Blue_collar        4   534        660   367 1620     638  414  407
+8  White_collar        4   460        699   484 1856     762  400  416
+9   Upper_class        4   385        789   621 2366    1149  304  282
+10  Blue_collar        5   655        776   423 1848     759  495  486
+11 White_collar        5   584        995   548 2056     893  518  319
+12  Upper_class        5   515       1097   887 2630    1167  561  284&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_food_cov = prcomp(food[,3:9],scale = F)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;factor-scores&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Factor scores&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 12
 (factor_scores_food = round(pca_food_cov$x[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##           PC1     PC2
-##  [1,] -635.05  120.89
-##  [2,] -488.56  142.33
-##  [3,]  112.03  139.75
-##  [4,] -520.01  -12.05
-##  [5,] -485.94   -1.17
-##  [6,]  588.17  188.44
-##  [7,] -333.95 -144.54
-##  [8,]  -57.51  -42.86
-##  [9,]  571.32  206.76
-## [10,]  -39.38 -264.47
-## [11,]  296.04 -235.92
-## [12,]  992.83  -97.15&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;          PC1     PC2
+ [1,] -635.05  120.89
+ [2,] -488.56  142.33
+ [3,]  112.03  139.75
+ [4,] -520.01  -12.05
+ [5,] -485.94   -1.17
+ [6,]  588.17  188.44
+ [7,] -333.95 -144.54
+ [8,]  -57.51  -42.86
+ [9,]  571.32  206.76
+[10,]  -39.38 -264.47
+[11,]  296.04 -235.92
+[12,]  992.83  -97.15&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;contribution-of-each-observation-to-principal-component-1&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Contribution of each observation to principal component&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(pca_food_cov$x[,1:2]^2/matrix(rep(colSums(pca_food_cov$x[,1:2]^2),nrow(food)),ncol = 2,byrow = T)*100,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##         PC1   PC2
-##  [1,] 13.34  5.03
-##  [2,]  7.90  6.97
-##  [3,]  0.42  6.72
-##  [4,]  8.94  0.05
-##  [5,]  7.81  0.00
-##  [6,] 11.44 12.22
-##  [7,]  3.69  7.19
-##  [8,]  0.11  0.63
-##  [9,] 10.80 14.71
-## [10,]  0.05 24.07
-## [11,]  2.90 19.15
-## [12,] 32.61  3.25&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;        PC1   PC2
+ [1,] 13.34  5.03
+ [2,]  7.90  6.97
+ [3,]  0.42  6.72
+ [4,]  8.94  0.05
+ [5,]  7.81  0.00
+ [6,] 11.44 12.22
+ [7,]  3.69  7.19
+ [8,]  0.11  0.63
+ [9,] 10.80 14.71
+[10,]  0.05 24.07
+[11,]  2.90 19.15
+[12,] 32.61  3.25&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dist = pca_food_cov$x[,1]^2+pca_food_cov$x[,2]^2&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;squared-cosine-of-observations-1&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Squared cosine of observations&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(sq_cos = round(pca_food_cov$x[,1:2]^2/rowSums(pca_food_cov$x^2)*100))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##       PC1 PC2
-##  [1,]  95   3
-##  [2,]  86   7
-##  [3,]  26  40
-##  [4,] 100   0
-##  [5,]  98   0
-##  [6,]  89   9
-##  [7,]  83  15
-##  [8,]  40  22
-##  [9,]  86  11
-## [10,]   2  79
-## [11,]  57  36
-## [12,]  97   1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      PC1 PC2
+ [1,]  95   3
+ [2,]  86   7
+ [3,]  26  40
+ [4,] 100   0
+ [5,]  98   0
+ [6,]  89   9
+ [7,]  83  15
+ [8,]  40  22
+ [9,]  86  11
+[10,]   2  79
+[11,]  57  36
+[12,]  97   1&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;squared-loading-scores&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Squared loading scores&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 13
 (round(pca_food_cov$rotation[,1:2]^2,2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##             PC1  PC2
-## bread      0.01 0.33
-## vegetables 0.11 0.17
-## fruit      0.09 0.01
-## meat       0.57 0.01
-## poultry    0.22 0.06
-## milk       0.01 0.40
-## wine       0.00 0.02&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;            PC1  PC2
+bread      0.01 0.33
+vegetables 0.11 0.17
+fruit      0.09 0.01
+meat       0.57 0.01
+poultry    0.22 0.06
+milk       0.01 0.40
+wine       0.00 0.02&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that this table doesn’t match with that of the paper. We will stick to our analysis.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;correlation-score&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Correlation score&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(corr_score_food = round((cor(pca_food_cov$x,food[,3:9])[1:2,]),2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##     bread vegetables fruit meat poultry  milk  wine
-## PC1  0.36       0.91  0.96 1.00    0.98  0.41 -0.43
-## PC2 -0.87      -0.35  0.10 0.04    0.16 -0.88 -0.33&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    bread vegetables fruit meat poultry  milk  wine
+PC1  0.36       0.91  0.96 1.00    0.98  0.41 -0.43
+PC2 -0.87      -0.35  0.10 0.04    0.16 -0.88 -0.33&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;squared-correlation-score&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Squared correlation score&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round((cor(pca_food_cov$x,food[,3:9])[1:2,])^2,2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##     bread vegetables fruit meat poultry milk wine
-## PC1  0.13       0.83  0.92    1    0.96 0.17 0.18
-## PC2  0.76       0.12  0.01    0    0.03 0.77 0.11&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    bread vegetables fruit meat poultry milk wine
+PC1  0.13       0.83  0.92    1    0.96 0.17 0.18
+PC2  0.76       0.12  0.01    0    0.03 0.77 0.11&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;correlation-circle-for-food-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Correlation circle for food data&lt;/h3&gt;
@@ -1129,7 +1129,7 @@ circle + geom_point(data = as.data.frame(corr_score_food),
   geom_text_repel(data = as.data.frame(corr_score_food), 
                   aes(x = corr_score_food[,1],y = corr_score_food[,2],
                       label = c(&amp;quot;Bread&amp;quot;,&amp;quot;Vegetables&amp;quot;,&amp;quot;Fruit&amp;quot;,&amp;quot;Meat&amp;quot;,&amp;quot;Poultry&amp;quot;,&amp;quot;Milk&amp;quot;,&amp;quot;Wine&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-46-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-47-1.png&#34; width=&#34;672&#34; /&gt;
 Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;eigenvalues&#34; class=&#34;section level3&#34;&gt;
@@ -1140,24 +1140,24 @@ cent_food = food[,3:9]-matrix(rep(colMeans(food[,3:9]),times = 12),nrow = 12,
                               byrow = T)
 svd_food = svd(cent_food)
 (Eigenvalues = (svd_food$d)^2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 3023141.2354  290575.8390   68795.2333   25298.9496   22992.2474
-## [6]    3722.3214     723.9238&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 3023141.2354  290575.8390   68795.2333   25298.9496   22992.2474
+[6]    3722.3214     723.9238&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;Important Note:&lt;/strong&gt; These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by &lt;span class=&#34;math inline&#34;&gt;\((n-1)\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is number of data points (in this case &lt;span class=&#34;math inline&#34;&gt;\(n = 12\)&lt;/span&gt;). If this point is still not clear, refer to &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;percentage-contribution-of-each-principal-component&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Percentage contribution of each principal component&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(Eigenvalues/sum(Eigenvalues),2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.88 0.08 0.02 0.01 0.01 0.00 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 0.88 0.08 0.02 0.01 0.01 0.00 0.00&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;cumulative-sum-of-eigenvalues&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Cumulative sum of eigenvalues&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(cumsum(Eigenvalues),2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 3023141 3313717 3382512 3407811 3430804 3434526 3435250&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 3023141 3313717 3382512 3407811 3430804 3434526 3435250&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;cumulative-percentage-contribution&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Cumulative percentage contribution&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(cumsum(Eigenvalues)/sum(Eigenvalues),2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.88 0.96 0.98 0.99 1.00 1.00 1.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 0.88 0.96 0.98 0.99 1.00 1.00 1.00&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ress-refer-to-the-paper-for-a-description&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;RESS (Refer to the paper for a description)&lt;/h3&gt;
@@ -1166,13 +1166,13 @@ for (i in 1:7){
   RESS[i] = sum(Eigenvalues)-sum(Eigenvalues[1:i])
 }
 RESS&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 412108.5146 121532.6756  52737.4423  27438.4927   4446.2453    723.9238
-## [7]      0.0000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 412108.5146 121532.6756  52737.4423  27438.4927   4446.2453    723.9238
+[7]      0.0000&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ratio-of-ress-and-sum-of-eigenvalues&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Ratio of RESS and sum of eigenvalues&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(RESS/sum(Eigenvalues),2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We have not calculated the value of PRESS in this post as it will require us to consider random models. We will not pursue it here.&lt;/p&gt;
 &lt;p&gt;Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to &lt;a href=&#34;https://biswajitsahoo1111.github.io/&#34;&gt;the author’s&lt;/a&gt; email.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_3.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
@@ -1209,19 +1209,19 @@ RESS&lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;Load Data&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#Load abdi food data
 (food = read.csv(&amp;quot;pca_abdi_food.csv&amp;quot;,header= T))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##           class children bread vegetables fruit meat poultry milk wine
-## 1   Blue_collar        2   332        428   354 1437     526  247  427
-## 2  White_collar        2   293        559   388 1527     567  239  258
-## 3   Upper_class        2   372        767   562 1948     927  235  433
-## 4   Blue_collar        3   406        563   341 1507     544  324  407
-## 5  White_collar        3   386        608   396 1501     558  319  363
-## 6   Upper_class        3   438        843   689 2345    1148  243  341
-## 7   Blue_collar        4   534        660   367 1620     638  414  407
-## 8  White_collar        4   460        699   484 1856     762  400  416
-## 9   Upper_class        4   385        789   621 2366    1149  304  282
-## 10  Blue_collar        5   655        776   423 1848     759  495  486
-## 11 White_collar        5   584        995   548 2056     893  518  319
-## 12  Upper_class        5   515       1097   887 2630    1167  561  284&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;          class children bread vegetables fruit meat poultry milk wine
+1   Blue_collar        2   332        428   354 1437     526  247  427
+2  White_collar        2   293        559   388 1527     567  239  258
+3   Upper_class        2   372        767   562 1948     927  235  433
+4   Blue_collar        3   406        563   341 1507     544  324  407
+5  White_collar        3   386        608   396 1501     558  319  363
+6   Upper_class        3   438        843   689 2345    1148  243  341
+7   Blue_collar        4   534        660   367 1620     638  414  407
+8  White_collar        4   460        699   484 1856     762  400  416
+9   Upper_class        4   385        789   621 2366    1149  304  282
+10  Blue_collar        5   655        776   423 1848     759  495  486
+11 White_collar        5   584        995   548 2056     893  518  319
+12  Upper_class        5   515       1097   887 2630    1167  561  284&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Centerd data matrix
 cent_food = scale(food[,3:9],scale = F)
 # Scaled data matrix
@@ -1235,91 +1235,91 @@ scale_food = scale(food[,3:9],scale = T)&lt;/code&gt;&lt;/pre&gt;
 pca_food_cov = prcomp(food[,3:9],scale = F)
 # Loading scores (we have printed only four columns out of seven)
 (round(pca_food_cov$rotation[,1:4],2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##              PC1   PC2   PC3   PC4
-## bread       0.07 -0.58 -0.40  0.11
-## vegetables  0.33 -0.41  0.29  0.61
-## fruit       0.30  0.10  0.34 -0.40
-## meat        0.75  0.11 -0.07 -0.29
-## poultry     0.47  0.24 -0.38  0.33
-## milk        0.09 -0.63  0.23 -0.41
-## wine       -0.06 -0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;             PC1   PC2   PC3   PC4
+bread       0.07 -0.58 -0.40  0.11
+vegetables  0.33 -0.41  0.29  0.61
+fruit       0.30  0.10  0.34 -0.40
+meat        0.75  0.11 -0.07 -0.29
+poultry     0.47  0.24 -0.38  0.33
+milk        0.09 -0.63  0.23 -0.41
+wine       -0.06 -0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor score (we have printed only four PCs out of seven)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We have printed only four columns of loading scores out of seven.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(pca_food_cov$x[,1:4],2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##           PC1     PC2     PC3    PC4
-##  [1,] -635.05  120.89  -21.14 -68.97
-##  [2,] -488.56  142.33  132.37  34.91
-##  [3,]  112.03  139.75  -61.86  44.19
-##  [4,] -520.01  -12.05    2.85 -13.70
-##  [5,] -485.94   -1.17   65.75  11.51
-##  [6,]  588.17  188.44  -71.85  28.56
-##  [7,] -333.95 -144.54  -34.94  10.07
-##  [8,]  -57.51  -42.86  -26.26 -46.55
-##  [9,]  571.32  206.76  -38.45   3.69
-## [10,]  -39.38 -264.47 -126.43 -12.74
-## [11,]  296.04 -235.92   58.84  87.43
-## [12,]  992.83  -97.15  121.13 -78.39&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;          PC1     PC2     PC3    PC4
+ [1,] -635.05  120.89  -21.14 -68.97
+ [2,] -488.56  142.33  132.37  34.91
+ [3,]  112.03  139.75  -61.86  44.19
+ [4,] -520.01  -12.05    2.85 -13.70
+ [5,] -485.94   -1.17   65.75  11.51
+ [6,]  588.17  188.44  -71.85  28.56
+ [7,] -333.95 -144.54  -34.94  10.07
+ [8,]  -57.51  -42.86  -26.26 -46.55
+ [9,]  571.32  206.76  -38.45   3.69
+[10,]  -39.38 -264.47 -126.43 -12.74
+[11,]  296.04 -235.92   58.84  87.43
+[12,]  992.83  -97.15  121.13 -78.39&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We have printed only four principal components out of seven.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variances using built-in function
 (round(pca_food_cov$sdev^2,2))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance
 (sum(round(pca_food_cov$sdev^2,2)))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 312295.4&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;comparison-of-variance-before-and-after-transformation&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Comparison of variance before and after transformation&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance before transformation
 sum(diag(cov(food[,3:9])))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 312295.4&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance after transformation
 sum(diag(cov(pca_food_cov$x)))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 312295.4&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along variables before transformation
 round(diag(cov(food[,3:9])),2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      bread vegetables      fruit       meat    poultry       milk       wine 
-##   11480.61   35789.09   27255.45  156618.39   62280.52   13718.75    5152.63&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;     bread vegetables      fruit       meat    poultry       milk       wine 
+  11480.61   35789.09   27255.45  156618.39   62280.52   13718.75    5152.63 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note that calculation of variance is unaffected by centering data matrix. So variance of original data matrix as well as centered data matrix is same. Check it for yourself. Now see how PCA transforms these variance.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal compoennts
 round(diag(cov(pca_food_cov$x)),2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##       PC1       PC2       PC3       PC4       PC5       PC6       PC7 
-## 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      PC1       PC2       PC3       PC4       PC5       PC6       PC7 
+274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We can obtain the same result using built-in fucntion
 round(pca_food_cov$sdev^2,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;performing-covariance-pca-manually-using-svd&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Performing covariance PCA manually using SVD&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;svd_food_cov = svd(cent_food)
 # Loading scores
 round(svd_food_cov$v[,1:4],2) # We have printed only four columns&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##       [,1]  [,2]  [,3]  [,4]
-## [1,]  0.07 -0.58 -0.40  0.11
-## [2,]  0.33 -0.41  0.29  0.61
-## [3,]  0.30  0.10  0.34 -0.40
-## [4,]  0.75  0.11 -0.07 -0.29
-## [5,]  0.47  0.24 -0.38  0.33
-## [6,]  0.09 -0.63  0.23 -0.41
-## [7,] -0.06 -0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      [,1]  [,2]  [,3]  [,4]
+[1,]  0.07 -0.58 -0.40  0.11
+[2,]  0.33 -0.41  0.29  0.61
+[3,]  0.30  0.10  0.34 -0.40
+[4,]  0.75  0.11 -0.07 -0.29
+[5,]  0.47  0.24 -0.38  0.33
+[6,]  0.09 -0.63  0.23 -0.41
+[7,] -0.06 -0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
 round((cent_food %*% svd_food_cov$v)[,1:4],2) # only 4 columns printed&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##          [,1]    [,2]    [,3]   [,4]
-##  [1,] -635.05  120.89  -21.14 -68.97
-##  [2,] -488.56  142.33  132.37  34.91
-##  [3,]  112.03  139.75  -61.86  44.19
-##  [4,] -520.01  -12.05    2.85 -13.70
-##  [5,] -485.94   -1.17   65.75  11.51
-##  [6,]  588.17  188.44  -71.85  28.56
-##  [7,] -333.95 -144.54  -34.94  10.07
-##  [8,]  -57.51  -42.86  -26.26 -46.55
-##  [9,]  571.32  206.76  -38.45   3.69
-## [10,]  -39.38 -264.47 -126.43 -12.74
-## [11,]  296.04 -235.92   58.84  87.43
-## [12,]  992.83  -97.15  121.13 -78.39&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;         [,1]    [,2]    [,3]   [,4]
+ [1,] -635.05  120.89  -21.14 -68.97
+ [2,] -488.56  142.33  132.37  34.91
+ [3,]  112.03  139.75  -61.86  44.19
+ [4,] -520.01  -12.05    2.85 -13.70
+ [5,] -485.94   -1.17   65.75  11.51
+ [6,]  588.17  188.44  -71.85  28.56
+ [7,] -333.95 -144.54  -34.94  10.07
+ [8,]  -57.51  -42.86  -26.26 -46.55
+ [9,]  571.32  206.76  -38.45   3.69
+[10,]  -39.38 -264.47 -126.43 -12.74
+[11,]  296.04 -235.92   58.84  87.43
+[12,]  992.83  -97.15  121.13 -78.39&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance of principal components
 round(svd_food_cov$d^2/11,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;performing-covariance-pca-using-eigen-decomopositionnot-recommended&#34; class=&#34;section level3&#34;&gt;
@@ -1328,52 +1328,52 @@ round(svd_food_cov$d^2/11,2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;eigen_food_cov = eigen(cov(cent_food))
 # Loading scores
 round(eigen_food_cov$vectors[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##       [,1]  [,2]  [,3]  [,4]
-## [1,] -0.07  0.58 -0.40 -0.11
-## [2,] -0.33  0.41  0.29 -0.61
-## [3,] -0.30 -0.10  0.34  0.40
-## [4,] -0.75 -0.11 -0.07  0.29
-## [5,] -0.47 -0.24 -0.38 -0.33
-## [6,] -0.09  0.63  0.23  0.41
-## [7,]  0.06  0.14 -0.66  0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      [,1]  [,2]  [,3]  [,4]
+[1,] -0.07  0.58 -0.40 -0.11
+[2,] -0.33  0.41  0.29 -0.61
+[3,] -0.30 -0.10  0.34  0.40
+[4,] -0.75 -0.11 -0.07  0.29
+[5,] -0.47 -0.24 -0.38 -0.33
+[6,] -0.09  0.63  0.23  0.41
+[7,]  0.06  0.14 -0.66  0.31&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
 round((cent_food %*% eigen_food_cov$vectors)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##          [,1]    [,2]    [,3]   [,4]
-##  [1,]  635.05 -120.89  -21.14  68.97
-##  [2,]  488.56 -142.33  132.37 -34.91
-##  [3,] -112.03 -139.75  -61.86 -44.19
-##  [4,]  520.01   12.05    2.85  13.70
-##  [5,]  485.94    1.17   65.75 -11.51
-##  [6,] -588.17 -188.44  -71.85 -28.56
-##  [7,]  333.95  144.54  -34.94 -10.07
-##  [8,]   57.51   42.86  -26.26  46.55
-##  [9,] -571.32 -206.76  -38.45  -3.69
-## [10,]   39.38  264.47 -126.43  12.74
-## [11,] -296.04  235.92   58.84 -87.43
-## [12,] -992.83   97.15  121.13  78.39&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;         [,1]    [,2]    [,3]   [,4]
+ [1,]  635.05 -120.89  -21.14  68.97
+ [2,]  488.56 -142.33  132.37 -34.91
+ [3,] -112.03 -139.75  -61.86 -44.19
+ [4,]  520.01   12.05    2.85  13.70
+ [5,]  485.94    1.17   65.75 -11.51
+ [6,] -588.17 -188.44  -71.85 -28.56
+ [7,]  333.95  144.54  -34.94 -10.07
+ [8,]   57.51   42.86  -26.26  46.55
+ [9,] -571.32 -206.76  -38.45  -3.69
+[10,]   39.38  264.47 -126.43  12.74
+[11,] -296.04  235.92   58.84 -87.43
+[12,] -992.83   97.15  121.13  78.39&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal components
 round(eigen_food_cov$values,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Instead of using the ‘cov()’ command to find the covariance matrix manually and perform its eigen analysis.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cov_matrix_manual_food = (1/11)*t(cent_food) %*% cent_food
 eigen_food_new = eigen(cov_matrix_manual_food)
 # Loading scores
 round(eigen_food_new$vectors[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##       [,1]  [,2]  [,3]  [,4]
-## [1,] -0.07  0.58 -0.40  0.11
-## [2,] -0.33  0.41  0.29  0.61
-## [3,] -0.30 -0.10  0.34 -0.40
-## [4,] -0.75 -0.11 -0.07 -0.29
-## [5,] -0.47 -0.24 -0.38  0.33
-## [6,] -0.09  0.63  0.23 -0.41
-## [7,]  0.06  0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      [,1]  [,2]  [,3]  [,4]
+[1,] -0.07  0.58 -0.40  0.11
+[2,] -0.33  0.41  0.29  0.61
+[3,] -0.30 -0.10  0.34 -0.40
+[4,] -0.75 -0.11 -0.07 -0.29
+[5,] -0.47 -0.24 -0.38  0.33
+[6,] -0.09  0.63  0.23 -0.41
+[7,]  0.06  0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal components
 round(eigen_food_new$values,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;There are also different ways to find total variance of the data matrix. We will explore some of the options.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total varaiance before transformation
 sum(diag(cov(cent_food)))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 312295.4&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note that total variance is invariant to translations. So calculating the total variance on raw data will also give the same answer. Check it to convince yourself.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1384,24 +1384,24 @@ sum(diag(cov(cent_food)))&lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;Different ways to obtain correlation matrix.&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Using built-in command
 round(cor(food[,3:9]),2)[,1:4] # We have printed only four columns&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##            bread vegetables fruit  meat
-## bread       1.00       0.59  0.20  0.32
-## vegetables  0.59       1.00  0.86  0.88
-## fruit       0.20       0.86  1.00  0.96
-## meat        0.32       0.88  0.96  1.00
-## poultry     0.25       0.83  0.93  0.98
-## milk        0.86       0.66  0.33  0.37
-## wine        0.30      -0.36 -0.49 -0.44&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;           bread vegetables fruit  meat
+bread       1.00       0.59  0.20  0.32
+vegetables  0.59       1.00  0.86  0.88
+fruit       0.20       0.86  1.00  0.96
+meat        0.32       0.88  0.96  1.00
+poultry     0.25       0.83  0.93  0.98
+milk        0.86       0.66  0.33  0.37
+wine        0.30      -0.36 -0.49 -0.44&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# manually
 round((1/11)*t(scale_food) %*% scale_food,2)[,1:4]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##            bread vegetables fruit  meat
-## bread       1.00       0.59  0.20  0.32
-## vegetables  0.59       1.00  0.86  0.88
-## fruit       0.20       0.86  1.00  0.96
-## meat        0.32       0.88  0.96  1.00
-## poultry     0.25       0.83  0.93  0.98
-## milk        0.86       0.66  0.33  0.37
-## wine        0.30      -0.36 -0.49 -0.44&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;           bread vegetables fruit  meat
+bread       1.00       0.59  0.20  0.32
+vegetables  0.59       1.00  0.86  0.88
+fruit       0.20       0.86  1.00  0.96
+meat        0.32       0.88  0.96  1.00
+poultry     0.25       0.83  0.93  0.98
+milk        0.86       0.66  0.33  0.37
+wine        0.30      -0.36 -0.49 -0.44&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;performing-correlation-pca-using-built-in-function&#34; class=&#34;section level2&#34;&gt;
@@ -1409,91 +1409,91 @@ round((1/11)*t(scale_food) %*% scale_food,2)[,1:4]&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_food_cor = prcomp(food[,3:9],scale = T)
 # Loading scores
 round(pca_food_cor$rotation[,1:4],2) # Printed only four&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##              PC1   PC2   PC3   PC4
-## bread       0.24 -0.62  0.01 -0.54
-## vegetables  0.47 -0.10  0.06 -0.02
-## fruit       0.45  0.21 -0.15  0.55
-## meat        0.46  0.14 -0.21 -0.05
-## poultry     0.44  0.20 -0.36 -0.32
-## milk        0.28 -0.52  0.44  0.45
-## wine       -0.21 -0.48 -0.78  0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;             PC1   PC2   PC3   PC4
+bread       0.24 -0.62  0.01 -0.54
+vegetables  0.47 -0.10  0.06 -0.02
+fruit       0.45  0.21 -0.15  0.55
+meat        0.46  0.14 -0.21 -0.05
+poultry     0.44  0.20 -0.36 -0.32
+milk        0.28 -0.52  0.44  0.45
+wine       -0.21 -0.48 -0.78  0.31&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
 round(pca_food_cor$x[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##         PC1   PC2   PC3   PC4
-##  [1,] -2.86  0.36 -0.40  0.36
-##  [2,] -1.89  1.79  1.31 -0.16
-##  [3,] -0.12  0.73 -1.42  0.20
-##  [4,] -2.04 -0.32  0.11  0.10
-##  [5,] -1.69  0.16  0.51  0.16
-##  [6,]  1.69  1.35 -0.99 -0.43
-##  [7,] -0.93 -1.37  0.28 -0.26
-##  [8,] -0.25 -0.63 -0.27  0.29
-##  [9,]  1.60  1.74 -0.10 -0.40
-## [10,]  0.22 -2.78 -0.57 -0.25
-## [11,]  1.95 -1.13  0.99 -0.32
-## [12,]  4.32  0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;        PC1   PC2   PC3   PC4
+ [1,] -2.86  0.36 -0.40  0.36
+ [2,] -1.89  1.79  1.31 -0.16
+ [3,] -0.12  0.73 -1.42  0.20
+ [4,] -2.04 -0.32  0.11  0.10
+ [5,] -1.69  0.16  0.51  0.16
+ [6,]  1.69  1.35 -0.99 -0.43
+ [7,] -0.93 -1.37  0.28 -0.26
+ [8,] -0.25 -0.63 -0.27  0.29
+ [9,]  1.60  1.74 -0.10 -0.40
+[10,]  0.22 -2.78 -0.57 -0.25
+[11,]  1.95 -1.13  0.99 -0.32
+[12,]  4.32  0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variances along principal componentes
 round(pca_food_cor$sdev^2,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Sum of vairances
 sum(pca_food_cor$sdev^2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 7&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;comparison-of-variance-before-and-after-transformation-1&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Comparison of variance before and after transformation&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance before transformation
 sum(diag(cov(scale_food)))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 7&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance after transformation
 sum(diag(cov(pca_food_cor$x)))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 7&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along variables before transformation
 round(diag(cov(scale_food)),2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      bread vegetables      fruit       meat    poultry       milk       wine 
-##          1          1          1          1          1          1          1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;     bread vegetables      fruit       meat    poultry       milk       wine 
+         1          1          1          1          1          1          1 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is obvious as we have scaled the matrix. Now see how PCA transforms these variance.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal compoennts
 round(diag(cov(pca_food_cor$x)),2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  PC1  PC2  PC3  PC4  PC5  PC6  PC7 
-## 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt; PC1  PC2  PC3  PC4  PC5  PC6  PC7 
+4.33 1.83 0.63 0.13 0.06 0.02 0.00 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We can obtain the same result using built-in fucntion
 round(pca_food_cor$sdev^2,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;performing-correlation-pca-manually-using-svd&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Performing correlation PCA manually using SVD&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;svd_food_cor = svd(scale_food)
 # Loading scores
 round(svd_food_cor$v[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##       [,1]  [,2]  [,3]  [,4]
-## [1,]  0.24 -0.62  0.01 -0.54
-## [2,]  0.47 -0.10  0.06 -0.02
-## [3,]  0.45  0.21 -0.15  0.55
-## [4,]  0.46  0.14 -0.21 -0.05
-## [5,]  0.44  0.20 -0.36 -0.32
-## [6,]  0.28 -0.52  0.44  0.45
-## [7,] -0.21 -0.48 -0.78  0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      [,1]  [,2]  [,3]  [,4]
+[1,]  0.24 -0.62  0.01 -0.54
+[2,]  0.47 -0.10  0.06 -0.02
+[3,]  0.45  0.21 -0.15  0.55
+[4,]  0.46  0.14 -0.21 -0.05
+[5,]  0.44  0.20 -0.36 -0.32
+[6,]  0.28 -0.52  0.44  0.45
+[7,] -0.21 -0.48 -0.78  0.31&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
 round((scale_food %*% svd_food_cor$v)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        [,1]  [,2]  [,3]  [,4]
-##  [1,] -2.86  0.36 -0.40  0.36
-##  [2,] -1.89  1.79  1.31 -0.16
-##  [3,] -0.12  0.73 -1.42  0.20
-##  [4,] -2.04 -0.32  0.11  0.10
-##  [5,] -1.69  0.16  0.51  0.16
-##  [6,]  1.69  1.35 -0.99 -0.43
-##  [7,] -0.93 -1.37  0.28 -0.26
-##  [8,] -0.25 -0.63 -0.27  0.29
-##  [9,]  1.60  1.74 -0.10 -0.40
-## [10,]  0.22 -2.78 -0.57 -0.25
-## [11,]  1.95 -1.13  0.99 -0.32
-## [12,]  4.32  0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;       [,1]  [,2]  [,3]  [,4]
+ [1,] -2.86  0.36 -0.40  0.36
+ [2,] -1.89  1.79  1.31 -0.16
+ [3,] -0.12  0.73 -1.42  0.20
+ [4,] -2.04 -0.32  0.11  0.10
+ [5,] -1.69  0.16  0.51  0.16
+ [6,]  1.69  1.35 -0.99 -0.43
+ [7,] -0.93 -1.37  0.28 -0.26
+ [8,] -0.25 -0.63 -0.27  0.29
+ [9,]  1.60  1.74 -0.10 -0.40
+[10,]  0.22 -2.78 -0.57 -0.25
+[11,]  1.95 -1.13  0.99 -0.32
+[12,]  4.32  0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along each principcal component
 round(svd_food_cor$d^2/11,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Sum of variances
 sum(svd_food_cor$d^2/11)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 7&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Again we have to divide by 11 to get eigenvalues of correlation matrix. Check the formulation of correlation matrix using scaled data matrix to convince yourself.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;using-eigen-decomposition-not-recommended&#34; class=&#34;section level3&#34;&gt;
@@ -1501,32 +1501,32 @@ sum(svd_food_cor$d^2/11)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;eigen_food_cor = eigen(cor(food[,3:9]))
 # Loading scores
 round(eigen_food_cor$vectors)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
-## [1,]    0    1    0   -1    0    1    0
-## [2,]    0    0    0    0    1    0    0
-## [3,]    0    0    0    1    0    1    0
-## [4,]    0    0    0    0    0    0   -1
-## [5,]    0    0    0    0    0    0    1
-## [6,]    0    1    0    0    0    0    0
-## [7,]    0    0   -1    0    0    0    0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+[1,]    0    1    0   -1    0    1    0
+[2,]    0    0    0    0    1    0    0
+[3,]    0    0    0    1    0    1    0
+[4,]    0    0    0    0    0    0   -1
+[5,]    0    0    0    0    0    0    1
+[6,]    0    1    0    0    0    0    0
+[7,]    0    0   -1    0    0    0    0&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
 round((scale_food %*% eigen_food_cor$vectors)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        [,1]  [,2]  [,3]  [,4]
-##  [1,]  2.86 -0.36 -0.40  0.36
-##  [2,]  1.89 -1.79  1.31 -0.16
-##  [3,]  0.12 -0.73 -1.42  0.20
-##  [4,]  2.04  0.32  0.11  0.10
-##  [5,]  1.69 -0.16  0.51  0.16
-##  [6,] -1.69 -1.35 -0.99 -0.43
-##  [7,]  0.93  1.37  0.28 -0.26
-##  [8,]  0.25  0.63 -0.27  0.29
-##  [9,] -1.60 -1.74 -0.10 -0.40
-## [10,] -0.22  2.78 -0.57 -0.25
-## [11,] -1.95  1.13  0.99 -0.32
-## [12,] -4.32 -0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;       [,1]  [,2]  [,3]  [,4]
+ [1,]  2.86 -0.36 -0.40  0.36
+ [2,]  1.89 -1.79  1.31 -0.16
+ [3,]  0.12 -0.73 -1.42  0.20
+ [4,]  2.04  0.32  0.11  0.10
+ [5,]  1.69 -0.16  0.51  0.16
+ [6,] -1.69 -1.35 -0.99 -0.43
+ [7,]  0.93  1.37  0.28 -0.26
+ [8,]  0.25  0.63 -0.27  0.29
+ [9,] -1.60 -1.74 -0.10 -0.40
+[10,] -0.22  2.78 -0.57 -0.25
+[11,] -1.95  1.13  0.99 -0.32
+[12,] -4.32 -0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variances along each principal component
 round(eigen_food_cor$values,2)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I hope this post would help clear some of the confusions that a beginner might have while encountering PCA for the first time. Please send me a note if you find any errors.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_2.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
