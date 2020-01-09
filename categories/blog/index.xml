@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2019 Biswajit Sahoo</copyright>
-    <lastBuildDate>Sat, 29 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reading multiple files in Tensorflow 2</title>
+      <link>/post/reading-multiple-files-in-tensorflow-2/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/reading-multiple-files-in-tensorflow-2/</guid>
+      <description>(Jupyter notebook for this post can be found here)In this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 .csv files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of .</description>
+    </item>
     
     <item>
       <title>Using Python Generators</title>

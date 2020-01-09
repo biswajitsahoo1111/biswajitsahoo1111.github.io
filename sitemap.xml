@@ -4,6 +4,14 @@
     
     <url>
     
+      <loc>/post/reading-multiple-files-in-tensorflow-2/</loc>
+      <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/post/using-python-generators/</loc>
       <lastmod>2019-06-29T00:00:00+00:00</lastmod>
     </url>
@@ -78,7 +86,7 @@
     <url>
     
       <loc>/categories/blog/</loc>
-      <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+      <lastmod>2020-01-09T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -87,7 +95,7 @@
     <url>
     
       <loc>/categories/</loc>
-      <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+      <lastmod>2020-01-09T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -96,7 +104,7 @@
     <url>
     
       <loc>/tags/deep-learning/</loc>
-      <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+      <lastmod>2020-01-09T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -123,7 +131,7 @@
     <url>
     
       <loc>/tags/machine-learning/</loc>
-      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+      <lastmod>2020-01-09T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -141,7 +149,7 @@
     <url>
     
       <loc>/post/</loc>
-      <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+      <lastmod>2020-01-09T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -186,7 +194,16 @@
     <url>
     
       <loc>/tags/</loc>
-      <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+      <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/tensorflow/</loc>
+      <lastmod>2020-01-09T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
