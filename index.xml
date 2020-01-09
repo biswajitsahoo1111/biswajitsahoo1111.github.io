@@ -34,10 +34,12 @@
 &lt;/ol&gt;
 &lt;div id=&#34;create-500-.csv-files-of-random-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;1. Create 500 &lt;code&gt;.csv&lt;/code&gt; files of random data&lt;/h3&gt;
-&lt;p&gt;As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.
-* Each &lt;code&gt;.csv&lt;/code&gt; file will have one column of data with 1024 entries.
-* Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
-category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.&lt;/p&gt;
+&lt;p&gt;As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Each &lt;code&gt;.csv&lt;/code&gt; file will have one column of data with 1024 entries.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
+category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
 import os
 import glob

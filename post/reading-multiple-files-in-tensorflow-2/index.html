@@ -355,10 +355,12 @@
 </ol>
 <div id="create-500-.csv-files-of-random-data" class="section level3">
 <h3>1. Create 500 <code>.csv</code> files of random data</h3>
-<p>As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.
-* Each <code>.csv</code> file will have one column of data with 1024 entries.
-* Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
-category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.</p>
+<p>As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.</p>
+<ul>
+<li><p>Each <code>.csv</code> file will have one column of data with 1024 entries.</p></li>
+<li><p>Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
+category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.</p></li>
+</ul>
 <pre class="python"><code>import numpy as np
 import os
 import glob
