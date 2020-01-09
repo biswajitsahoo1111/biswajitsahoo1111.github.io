@@ -27,7 +27,7 @@
       <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/using-python-generators/</guid>
-      <description>(Jupyter notebook for this post can be found here)In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it. Generators help us do just that. Generators are almost like functions but with a vital difference.</description>
+      <description>(Jupyter notebook for this post can be found here)(Check out this post for an end-to-end data pipeline and training using generators in Tensorflow 2)In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it.</description>
     </item>
     
     <item>

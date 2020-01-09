@@ -372,6 +372,9 @@ Test accuracy: 0.18&lt;/code&gt;&lt;/pre&gt;
 &lt;center&gt;
 (&lt;a href=&#34;https://gist.github.com/biswajitsahoo1111/33cea59f24de6c19d1a513b42d28674d&#34;&gt;Jupyter notebook for this post can be found here&lt;/a&gt;)
 &lt;/center&gt;
+&lt;center&gt;
+(&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/&#34;&gt;Check out this post for an end-to-end data pipeline and training using generators in &lt;code&gt;Tensorflow 2&lt;/code&gt;&lt;/a&gt;)
+&lt;/center&gt;
 &lt;p&gt;In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it. Generators help us do just that. Generators are almost like functions but with a vital difference. While functions produce all their outputs at once, generators produce their outputs one by one and that too when asked. Much has been written about generators. So our aim is not to restate those again. We would rather give two toy examples showing how generators work. Hopefully, these examples will be useful to the beginner.&lt;/p&gt;
 &lt;p&gt;While functions use keyword return to produce outputs, generators use yield. Use of yield in a function automatically makes that function a generator. We can write generators that work for few iterations or indefinitely (It’s an infinite loop). Deep learning frameworks like Keras expect the generators to work indefinitely. So we will also write generators that work indefinitely.&lt;/p&gt;
 &lt;p&gt;First let’s create artificial data that we will extract later batch by batch.&lt;/p&gt;
@@ -379,37 +382,37 @@ Test accuracy: 0.18&lt;/code&gt;&lt;/pre&gt;
 data = np.random.randint(100,150, size = (10,2,2))
 labels = np.random.permutation(10)
 print(data)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;[[[120 113]
-  [133 135]]
+&lt;pre&gt;&lt;code&gt;[[[143 119]
+  [102 146]]
 
- [[104 124]
-  [133 142]]
+ [[115 122]
+  [100 124]]
 
- [[107 110]
-  [121 126]]
+ [[108 139]
+  [141 142]]
 
- [[109 102]
-  [149 103]]
+ [[129 146]
+  [138 109]]
 
- [[126 142]
-  [145 124]]
+ [[115 110]
+  [102 101]]
 
- [[128 107]
-  [144 106]]
+ [[117 128]
+  [117 119]]
 
- [[149 143]
-  [122 147]]
+ [[145 114]
+  [125 141]]
 
- [[143 109]
-  [147 143]]
+ [[108 146]
+  [125 133]]
 
- [[119 100]
-  [129 110]]
+ [[105 128]
+  [148 141]]
 
- [[120 133]
-  [146 105]]]&lt;/code&gt;&lt;/pre&gt;
+ [[115 128]
+  [149 149]]]&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(&amp;quot;labels:&amp;quot;, labels)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;labels: [4 1 5 6 0 8 7 9 3 2]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;labels: [7 0 6 4 2 5 3 9 1 8]&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Let’s pretend that the above dataset is huge and we need to extract chunks of it. Now we will write a generator to extract from the above data a batch of two items, two data points and corresponding two labels. In deep learning applications, we want our data to be shuffled between epochs. For the first run, we can shuffle the data itself and from next epoch onwards generator will shuffle it for us. And the generator must run indefinitely.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;def my_gen(data, labels, batch_size = 2):
     i = 0
@@ -432,74 +435,74 @@ for i in range(10):
     print(X,y)
     print(X.shape, y.shape)
     print(&amp;quot;=========================&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;[[[120 113]
-  [133 135]]
+&lt;pre&gt;&lt;code&gt;[[[143 119]
+  [102 146]]
 
- [[104 124]
-  [133 142]]] [4 1]
+ [[115 122]
+  [100 124]]] [7 0]
 (2, 2, 2) (2,)
 =========================
-[[[107 110]
-  [121 126]]
+[[[108 139]
+  [141 142]]
 
- [[109 102]
-  [149 103]]] [5 6]
+ [[129 146]
+  [138 109]]] [6 4]
 (2, 2, 2) (2,)
 =========================
-[[[126 142]
-  [145 124]]
+[[[115 110]
+  [102 101]]
 
- [[128 107]
-  [144 106]]] [0 8]
+ [[117 128]
+  [117 119]]] [2 5]
 (2, 2, 2) (2,)
 =========================
-[[[149 143]
-  [122 147]]
+[[[145 114]
+  [125 141]]
 
- [[143 109]
-  [147 143]]] [7 9]
+ [[108 146]
+  [125 133]]] [3 9]
 (2, 2, 2) (2,)
 =========================
-[[[119 100]
-  [129 110]]
+[[[105 128]
+  [148 141]]
 
- [[120 133]
-  [146 105]]] [3 2]
+ [[115 128]
+  [149 149]]] [1 8]
 (2, 2, 2) (2,)
 =========================
-[[[128 107]
-  [144 106]]
+[[[108 146]
+  [125 133]]
 
- [[119 100]
-  [129 110]]] [8 3]
+ [[115 110]
+  [102 101]]] [9 2]
 (2, 2, 2) (2,)
 =========================
-[[[109 102]
-  [149 103]]
+[[[143 119]
+  [102 146]]
 
- [[120 133]
-  [146 105]]] [6 2]
+ [[115 122]
+  [100 124]]] [7 0]
 (2, 2, 2) (2,)
 =========================
-[[[143 109]
-  [147 143]]
+[[[117 128]
+  [117 119]]
 
- [[149 143]
-  [122 147]]] [9 7]
+ [[105 128]
+  [148 141]]] [5 1]
 (2, 2, 2) (2,)
 =========================
-[[[107 110]
-  [121 126]]
+[[[115 128]
+  [149 149]]
 
- [[120 113]
-  [133 135]]] [5 4]
+ [[108 139]
+  [141 142]]] [8 6]
 (2, 2, 2) (2,)
 =========================
-[[[104 124]
-  [133 142]]
+[[[145 114]
+  [125 141]]
 
- [[126 142]
-  [145 124]]] [1 0]
+ [[129 146]
+  [138 109]]] [3 4]
 (2, 2, 2) (2,)
 =========================&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In the above generator code, we manually shuffled the data between epochs. But in keras we can use Sequence class to do this for us automatically. The added advantage of using this class is that we can use multiprocessing capabilities. So the new generator code becomes:&lt;/p&gt;
@@ -536,79 +539,79 @@ for i in range(10):
     print(dat,labs)
     print(dat.shape, labs.shape)
     print(&amp;quot;===========================&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;[[[120 113]
-  [133 135]]
+&lt;pre&gt;&lt;code&gt;[[[143 119]
+  [102 146]]
 
- [[104 124]
-  [133 142]]] [4 1]
+ [[115 122]
+  [100 124]]] [7 0]
 (2, 2, 2) (2,)
 ===========================
-[[[107 110]
-  [121 126]]
+[[[108 139]
+  [141 142]]
 
- [[109 102]
-  [149 103]]] [5 6]
+ [[129 146]
+  [138 109]]] [6 4]
 (2, 2, 2) (2,)
 ===========================
-[[[126 142]
-  [145 124]]
+[[[115 110]
+  [102 101]]
 
- [[128 107]
-  [144 106]]] [0 8]
+ [[117 128]
+  [117 119]]] [2 5]
 (2, 2, 2) (2,)
 ===========================
-[[[149 143]
-  [122 147]]
+[[[145 114]
+  [125 141]]
 
- [[143 109]
-  [147 143]]] [7 9]
+ [[108 146]
+  [125 133]]] [3 9]
 (2, 2, 2) (2,)
 ===========================
-[[[119 100]
-  [129 110]]
+[[[105 128]
+  [148 141]]
 
- [[120 133]
-  [146 105]]] [3 2]
+ [[115 128]
+  [149 149]]] [1 8]
 (2, 2, 2) (2,)
 ===========================
-[[[107 110]
-  [121 126]]
+[[[115 128]
+  [149 149]]
 
- [[109 102]
-  [149 103]]] [5 6]
+ [[108 139]
+  [141 142]]] [8 6]
 (2, 2, 2) (2,)
 ===========================
-[[[149 143]
-  [122 147]]
+[[[117 128]
+  [117 119]]
 
- [[104 124]
-  [133 142]]] [7 1]
+ [[105 128]
+  [148 141]]] [5 1]
 (2, 2, 2) (2,)
 ===========================
-[[[143 109]
-  [147 143]]
+[[[108 146]
+  [125 133]]
 
- [[128 107]
-  [144 106]]] [9 8]
+ [[115 122]
+  [100 124]]] [9 0]
 (2, 2, 2) (2,)
 ===========================
-[[[120 113]
-  [133 135]]
+[[[145 114]
+  [125 141]]
 
- [[120 133]
-  [146 105]]] [4 2]
+ [[129 146]
+  [138 109]]] [3 4]
 (2, 2, 2) (2,)
 ===========================
-[[[119 100]
-  [129 110]]
+[[[143 119]
+  [102 146]]
 
- [[126 142]
-  [145 124]]] [3 0]
+ [[115 110]
+  [102 101]]] [7 2]
 (2, 2, 2) (2,)
 ===========================&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We have also used generators to train MNIST example. The code can be found &lt;a href=&#34;https://gist.github.com/biswajitsahoo1111/33cea59f24de6c19d1a513b42d28674d&#34;&gt;here&lt;/a&gt;. The example might seem bit stretched as we don’t need generators for small data sets like MNIST. The aim of the example is just to show different implementation using generators.&lt;/p&gt;
 &lt;p&gt;Perhaps the most detailed blog about using generators for deep learning is &lt;a href=&#34;https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly&#34;&gt;this one&lt;/a&gt;. I also found &lt;a href=&#34;https://github.com/keras-team/keras/issues/9707#issuecomment-374609666&#34;&gt;these comments&lt;/a&gt; helpful.&lt;/p&gt;
-&lt;p&gt;Note: With the release of &lt;code&gt;tensorflow-2.0&lt;/code&gt;, it is much easier to use &lt;code&gt;tf.data.Dataset&lt;/code&gt; API for handling large datasets. Geneators can still be used for training using &lt;code&gt;tf.keras&lt;/code&gt;. As a final note, use generators if it is absolutely essential to do so. Otherwise, use &lt;code&gt;tf.data.Dataset&lt;/code&gt; API.&lt;/p&gt;
+&lt;p&gt;Update: With the release of &lt;code&gt;tensorflow-2.0&lt;/code&gt;, it is much easier to use &lt;code&gt;tf.data.Dataset&lt;/code&gt; API for handling large datasets. Generators can still be used for training using &lt;code&gt;tf.keras&lt;/code&gt;. As a final note, use generators if it is absolutely essential to do so. Otherwise, use &lt;code&gt;tf.data.Dataset&lt;/code&gt; API. Check out &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/&#34;&gt;this post&lt;/a&gt; for an end-to-end data pipeline and training using generators in &lt;code&gt;Tensorflow 2&lt;/code&gt;.&lt;/p&gt;
 </description>
     </item>
     
