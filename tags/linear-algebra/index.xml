@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linear Algebra | BISWAJIT SAHOO</title>
+    <link>/tags/linear-algebra/</link>
+      <atom:link href="/tags/linear-algebra/index.xml" rel="self" type="application/rss+xml" />
+    <description>Linear Algebra</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Biswajit Sahoo</copyright><lastBuildDate>Tue, 12 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Linear Algebra</title>
+      <link>/tags/linear-algebra/</link>
+    </image>
+    
+    <item>
+      <title>Revisiting Systems of Linear Equations</title>
+      <link>/post/revisiting-systems-of-linear-equations/</link>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>/post/revisiting-systems-of-linear-equations/</guid>
+      <description>
+
+
+&lt;p&gt;Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable. Then the final solution is obtained by back substituting the obtained value of the variable into remaining equations. This method, in mathematical jargon, is called Gaussian elimination and back substitution.&lt;/p&gt;
+&lt;p&gt;It turns out (surprisingly) that linear systems form the basis of many interesting engineering applications. Ultimately the problem boils down to solution (or approximate solution) of a system of linear equations. So a thorough understanding of linear systems is essential to appreciate the applications. In this post we will outline all possible cases of finding solutions to linear systems and briefly outline two most important applications.&lt;/p&gt;
+&lt;p&gt;We will use matrix notation to represent the equations succinctly. It also gives us better insight into their solution. Using matrix notation the system can be represented as
+&lt;span class=&#34;math display&#34;&gt;\[\textbf{Ax}=\textbf{b}\]&lt;/span&gt;
+Where &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt; is the matrix of coefficients of size &lt;span class=&#34;math inline&#34;&gt;\((m\times n)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{x}\)&lt;/span&gt; is a vector of variables of size &lt;span class=&#34;math inline&#34;&gt;\((n\times 1)\)&lt;/span&gt;, and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\)&lt;/span&gt;
+is a vector of size &lt;span class=&#34;math inline&#34;&gt;\((m\times 1)\)&lt;/span&gt; representing constant right hand sides. Note that &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\)&lt;/span&gt; can be a vector of all zeros, i.e., &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} = \textbf{0}\)&lt;/span&gt; or it can be any arbitrary vector with some nonzero values, i.e.,&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\neq \textbf{0}\)&lt;/span&gt;. The solution(s) of linear systems depend to a large extent on what the right hand side is as we will see shortly.&lt;/p&gt;
+&lt;p&gt;Apart from notation, we need two other concepts from matrix theory. One is of rank and other is the range space (or column space) of a matrix. Rank &lt;span class=&#34;math inline&#34;&gt;\((Rank(\textbf{A}))\)&lt;/span&gt; of a matrix (say, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt;) is defined as number of independent rows or columns of a matrix. It is a well known result in matrix theory that row rank (number of independent rows) is equal to column rank (number of independent columns) and &lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A})\leq min(m,n)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Range space &lt;span class=&#34;math inline&#34;&gt;\((\mathcal{R}(A))\)&lt;/span&gt;(in short, Range) of a matrix is the vector space of all possible linear combinations of columns of the matrix. As we take all possible linear combination of columns, it is also known as column space. Readers who are slightly more familiar with linear algebra may know that Range is the span of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt;. Zero vector &lt;span class=&#34;math inline&#34;&gt;\((\textbf{0})\)&lt;/span&gt; is &lt;strong&gt;always&lt;/strong&gt; in the range of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt; because if we take linear combination of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt; with all coefficients as 0’s, we get zero vector. Hence &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}=0 \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; is always true.&lt;/p&gt;
+&lt;p&gt;Let’s now discuss different cases separately and their solutions. We will assume that our system of equations has real entries.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Case - I: &lt;span class=&#34;math inline&#34;&gt;\((m = n)\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) = m\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Unique solution (for any &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\)&lt;/span&gt;). For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 8 \\
+  3 &amp;amp; 5 &amp;amp; 7 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  5 \\
+  7
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has unique solution.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Impossible (This case will never happen because &lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A})=m\)&lt;/span&gt;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) &amp;lt; m\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 6 \\
+  3 &amp;amp; 5 &amp;amp; 7 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  6 \\
+  8
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 6 \\
+  3 &amp;amp; 5 &amp;amp; 7 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  1 \\
+  5 \\
+  7
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has no solution.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Case - II: &lt;span class=&#34;math inline&#34;&gt;\((m &amp;gt; n)\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) = n\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Unique solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 \\
+  2 &amp;amp; 7 \\
+  3 &amp;amp; 8 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  9 \\
+  11
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has unique solution.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 \\
+  2 &amp;amp; 7 \\
+  3 &amp;amp; 8 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  9 \\
+  11
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has no solution. But this case is immensely useful from application point of view. Sometimes it is not desirable to obtain the exact solution. Rather an approximate solution suffices for all practical purposes. Finding an approximate solution to an overdetermined system leads to the famous &lt;a href=&#34;https://en.wikipedia.org/wiki/Least_squares&#34;&gt;Least Squares&lt;/a&gt; problem.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) &amp;lt; n\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 \\
+  2 &amp;amp; 4 \\
+  3 &amp;amp; 6 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  6 \\
+  9
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; It has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 \\
+  2 &amp;amp; 4 \\
+  3 &amp;amp; 6 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  6 \\
+  8
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has no solution.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Case - III: &lt;span class=&#34;math inline&#34;&gt;\((m &amp;lt; n)\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) = m\)&lt;/span&gt; :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example, &lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 5 
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  2 \\
+  3 
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has infinitely many solutions. This case is also used in many applications. As there are infinitely many solutions, a natural choice is to choose the best solution. The qualifier ‘best’ determines what application we have in our mind. If we seek minimum &lt;span class=&#34;math inline&#34;&gt;\((l_2)\)&lt;/span&gt; norm, we get the so called minimum energy solution, a concept used in signal processing. Yet another concern is to seek for the sparsest solution (a solution with only a few nonzero entries and all other entries being zero). This idea is used in &lt;a href=&#34;https://en.wikipedia.org/wiki/Compressed_sensing&#34;&gt;Compressed Sensing&lt;/a&gt;, an active research area with many interesting applications.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Impossible. This case will never happen since &lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A})=m\)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) &amp;lt; m\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example, &lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 6 
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  4 \\
+  8 
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example, &lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 6 
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  1 \\
+  5 
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has no solution.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hope this post gives a clear overview of linear systems of equations. Interested reader may explore further applications. Comments and clarifications are welcome.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/blog/</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/deep-learning/</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/machine-learning/</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/reading-multiple-files-in-tensorflow-2/</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tensorflow/</loc>
+    <lastmod>2020-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/python/</loc>
+    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/using-python-generators/</loc>
+    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/fault-diagnosis-of-machines/</loc>
+    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/story/</loc>
+    <lastmod>2019-03-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/linear-algebra/</loc>
+    <lastmod>2019-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/revisiting-systems-of-linear-equations/</loc>
+    <lastmod>2019-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/pca/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/principal-component-analysis-part-iii/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/matlab/</loc>
+    <lastmod>2019-02-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/principal-component-analysis-part-ii/</loc>
+    <lastmod>2019-02-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/principal-component-analysis-part-i/</loc>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/</loc>
+    <lastmod>2017-01-01T00:00:00+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/personal-project/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/admin/</loc>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+  </url>
+  
+  <url>
+    <loc>/publication_types/</loc>
+  </url>
+  
+</urlset>
