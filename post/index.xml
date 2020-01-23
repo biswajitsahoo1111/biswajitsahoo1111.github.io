@@ -1,81 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on Biswajit Sahoo</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on Biswajit Sahoo</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2020 Biswajit Sahoo</copyright>
-    <lastBuildDate>Thu, 09 Jan 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Reading multiple files in Tensorflow 2</title>
-      <link>/post/reading-multiple-files-in-tensorflow-2/</link>
-      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/reading-multiple-files-in-tensorflow-2/</guid>
-      <description>(Jupyter notebook for this post can be found here)In this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 .csv files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of .</description>
-    </item>
-    
-    <item>
-      <title>Using Python Generators</title>
-      <link>/post/using-python-generators/</link>
-      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/using-python-generators/</guid>
-      <description>(Jupyter notebook for this post can be found here)(Check out this post for an end-to-end data pipeline and training using generators in Tensorflow 2)In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it.</description>
-    </item>
-    
-    <item>
-      <title>Fault Diagnosis of Machines</title>
-      <link>/post/fault-diagnosis-of-machines/</link>
-      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/fault-diagnosis-of-machines/</guid>
-      <description>This story was originally written for “Augmented Writing Skills for Articulating Research (AWSAR)” award 2018. It is written in a non-technical way so as to be accessible to as many people as possible irrespective of their educational background. The story also featured in the top 100 list of stories for the award. Full list of awardees and their stories can be found here.
-PreludeRising sun with its gentle light marks the arrival of morning.</description>
-    </item>
-    
-    <item>
-      <title>Revisiting Systems of Linear Equations</title>
-      <link>/post/revisiting-systems-of-linear-equations/</link>
-      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/revisiting-systems-of-linear-equations/</guid>
-      <description>Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable.</description>
-    </item>
-    
-    <item>
-      <title>Principal Component Analysis - Part III</title>
-      <link>/post/principal-component-analysis-part-iii/</link>
-      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/principal-component-analysis-part-iii/</guid>
-      <description>(Python codes for this post can be found here)In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).</description>
-    </item>
-    
-    <item>
-      <title>Principal Component Analysis - Part II</title>
-      <link>/post/principal-component-analysis-part-ii/</link>
-      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/principal-component-analysis-part-ii/</guid>
-      <description>This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
-Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions.</description>
-    </item>
-    
-    <item>
-      <title>Principal Component Analysis - Part I</title>
-      <link>/post/principal-component-analysis-part-i/</link>
-      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/principal-component-analysis-part-i/</guid>
-      <description>In this post, we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The applications of PCA and its variants are ubiquitous. Thus, a through understanding of PCA is considered essential to start one’s journey into machine learning. In this and subsequent posts, we will first discuss relevant theory of PCA. Then we will implement PCA from scratch without using any built-in function.</description>
-    </item>
-    
-  </channel>
-</rss>
