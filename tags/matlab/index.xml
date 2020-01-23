@@ -1,26 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>MATLAB on Biswajit Sahoo</title>
-    <link>/tags/matlab/</link>
-    <description>Recent content in MATLAB on Biswajit Sahoo</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2020 Biswajit Sahoo</copyright>
-    <lastBuildDate>Mon, 04 Feb 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/matlab/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Principal Component Analysis - Part II</title>
-      <link>/post/principal-component-analysis-part-ii/</link>
-      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/principal-component-analysis-part-ii/</guid>
-      <description>This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
-Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions.</description>
-    </item>
-    
-  </channel>
-</rss>

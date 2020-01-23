@@ -1,26 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Story on Biswajit Sahoo</title>
-    <link>/tags/story/</link>
-    <description>Recent content in Story on Biswajit Sahoo</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2020 Biswajit Sahoo</copyright>
-    <lastBuildDate>Sun, 24 Mar 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/story/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Fault Diagnosis of Machines</title>
-      <link>/post/fault-diagnosis-of-machines/</link>
-      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/fault-diagnosis-of-machines/</guid>
-      <description>This story was originally written for “Augmented Writing Skills for Articulating Research (AWSAR)” award 2018. It is written in a non-technical way so as to be accessible to as many people as possible irrespective of their educational background. The story also featured in the top 100 list of stories for the award. Full list of awardees and their stories can be found here.
-PreludeRising sun with its gentle light marks the arrival of morning.</description>
-    </item>
-    
-  </channel>
-</rss>

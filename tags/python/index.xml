@@ -1,25 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Python on Biswajit Sahoo</title>
-    <link>/tags/python/</link>
-    <description>Recent content in Python on Biswajit Sahoo</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2020 Biswajit Sahoo</copyright>
-    <lastBuildDate>Sat, 29 Jun 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Using Python Generators</title>
-      <link>/post/using-python-generators/</link>
-      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/using-python-generators/</guid>
-      <description>(Jupyter notebook for this post can be found here)(Check out this post for an end-to-end data pipeline and training using generators in Tensorflow 2)In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it.</description>
-    </item>
-    
-  </channel>
-</rss>
