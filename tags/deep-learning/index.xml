@@ -645,7 +645,7 @@ for i in range(10):
 
 &lt;p&gt;In this project we will apply some of the standard machine learning techniques to publicly available data sets and show their results with code. There are not many publicly available data sets in machinery condition monitoring. So we will manage with those that are publicly available. Unlike machine learning community where almost all data and codes are open, in condition monitoring very few things are open, though some people are gradually making codes open. This project is a step towards that direction, even though a tiny one.&lt;/p&gt;
 
-&lt;p&gt;This is an ongoing project and modifications and additions of new techniques will be done over time. Python, R, and MATLAB are popular programming languages that are used for machine learning applications. We will use those for our demonstrations. &lt;strong&gt;This page contains results on fault diagnosis only. Results on fault prognosis will be summerized in a separate webpage.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This is an ongoing project and modifications and additions of new techniques will be done over time. Python, R, and MATLAB are popular programming languages that are used for machine learning applications. We will use those for our demonstrations. &lt;strong&gt;This page contains results on fault diagnosis only. Results on fault prognosis will be summarized in a separate webpage.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;results-using-case-western-reserve-university-bearing-data-https-csegroups-case-edu-bearingdatacenter-pages-welcome-case-western-reserve-university-bearing-data-center-website&#34;&gt;Results using &lt;a href=&#34;https://csegroups.case.edu/bearingdatacenter/pages/welcome-case-western-reserve-university-bearing-data-center-website&#34;&gt;Case Western Reserve University Bearing Data&lt;/a&gt;&lt;/h2&gt;
 
@@ -715,6 +715,28 @@ features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;s
 
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/hilbert_inst_freq_modulation.pdf&#34;&gt;Simple examples on finding instantaneous frequency using Hilbert transform&lt;/a&gt; (&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/hilbert_inst_freq_modulation.pdf&#34;&gt;MATLAB Code&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Readers who use the processed datasets of this page &lt;strong&gt;must&lt;/strong&gt; cite the original data source as&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;BibTeX citation
+@misc{casewesternbearingdata,
+  url = {https://csegroups.case.edu/bearingdatacenter/home},
+  note = {This data come from Case Western Reserve University Bearing Data Center Website}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For attribution, readers &lt;strong&gt;may&lt;/strong&gt; cite this project as&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;BibTeX citation
+@misc{sahoo2016datadriven,
+  author = {Sahoo, Biswajit},
+  title = Data-Driven Machinery Fault Diagnosis},
+  url = {https://biswajitsahoo1111.github.io/cbm_codes_open/},
+  year = {2016}
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
