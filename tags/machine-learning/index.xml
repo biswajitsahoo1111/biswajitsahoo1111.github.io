@@ -1529,5 +1529,106 @@ Thus eigenvalues of S are diagonal entries of &lt;span class=&#34;math inline&#3
 </description>
     </item>
     
+    <item>
+      <title>Data-Driven Machinery Fault Diagnosis</title>
+      <link>/project/personal-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/project/personal-project/</guid>
+      <description>
+
+&lt;p&gt;&lt;center&gt;(&lt;a href=&#34;https://biswajitsahoo1111.github.io/cbm_codes_open/&#34;&gt;Visit this page for an updated list of results&lt;/a&gt;)&lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;introduction-to-the-problem&#34;&gt;Introduction to the problem&lt;/h2&gt;
+
+&lt;p&gt;Condition based maintenance is the process of doing maintenance only when it is required. Adoption of this maintenance strategy leads to significant monetary gains as it precludes periodic maintenance and reduces unplanned downtime. Another term commonly used for condition based maintenance is predictive maintenance. As the name suggests, in this method we predict in advance when to perform maintenance. Maintenance is required, if fault has already occurred or is imminent. This leads us to the problem of fault diagnosis and prognosis.&lt;/p&gt;
+
+&lt;p&gt;In fault diagnosis, fault has already occurred and our aim is to find what type of fault is there and what is its severity. In fault prognosis, our aim is to predict the time of occurrence of fault in future, given its present state. These two problem are central to condition based maintenance. There are many methods to solve these problems. These methods can be broadly divided into two groups:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Model Based Approaches&lt;/li&gt;
+&lt;li&gt;Data-Driven Approaches&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In model based approach, a complete model of the system is formulated and it is then used for fault diagnosis and prognosis. But this method has several limitations. Firstly, it is a difficult task to accurately model a system. Modelling becomes even more challenging with variations in working conditions. Secondly, we have to formulate different models for different tasks. For example, to diagnose bearing fault and gear fault, we have to formulate two different models. Data-driven methods provide a convenient alternative to these problems.&lt;/p&gt;
+
+&lt;p&gt;In data-driven approach, we use operational data of the machine to design algorithms that are then used for fault diagnosis and prognosis. The operational data may be vibration data, thermal imaging data, acoustic emission data, or something else. These techniques are robust to environmental variations. Accuracy obtained by data-driven methods is also at par and sometimes even better than accuracy obtained by model based approaches. Due to these reasons data-driven methods are becoming increasingly popular at diagnosis and prognosis tasks.&lt;/p&gt;
+
+&lt;h2 id=&#34;aim-of-the-project&#34;&gt;Aim of the project&lt;/h2&gt;
+
+&lt;p&gt;In this project we will apply some of the standard machine learning techniques to publicly available data sets and show their results with code. There are not many publicly available data sets in machinery condition monitoring. So we will manage with those that are publicly available. Unlike machine learning community where almost all data and codes are open, in condition monitoring very few things are open, though some people are gradually making codes open. This project is a step towards that direction, even though a tiny one.&lt;/p&gt;
+
+&lt;p&gt;This is an ongoing project and modifications and additions of new techniques will be done over time. Python, R, and MATLAB are popular programming languages that are used for machine learning applications. We will use those for our demonstrations. &lt;strong&gt;This page contains results on fault diagnosis only. Results on fault prognosis will be summerized in a separate webpage.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;results-using-case-western-reserve-university-bearing-data-https-csegroups-case-edu-bearingdatacenter-pages-welcome-case-western-reserve-university-bearing-data-center-website&#34;&gt;Results using &lt;a href=&#34;https://csegroups.case.edu/bearingdatacenter/pages/welcome-case-western-reserve-university-bearing-data-center-website&#34;&gt;Case Western Reserve University Bearing Data&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_multiclass_time.pdf&#34;&gt;SVM on time domain
+features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;96.4%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_wavelet_energy_multiclass_cwru.pdf&#34;&gt;SVM on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Dimensionality_Reduction.ipynb&#34;&gt;Visualizing High Dimensional Data Using Dimensionality Reduction Techniques&lt;/a&gt; (&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Dimensionality_Reduction.ipynb&#34;&gt;Python Code&lt;/a&gt;) (&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/dimensionality_reduction_projection.pdf&#34;&gt;R Code&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_wavelet_entropy_multiclass_cwru.pdf&#34;&gt;SVM on wavelet packet entropy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.2%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/svm_12k_cwru.pdf&#34;&gt;SVM on time and wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (&lt;strong&gt;Achieves 100% test accuracy in one case&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/multiclass_logistic_regression.pdf&#34;&gt;Multiclass Logistic Regression on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;93.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/multiclass_logistic_regression_12k.pdf&#34;&gt;Multiclass Logistic Regression on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/LDA_48k.pdf&#34;&gt;LDA on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;88.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/LDA_12k.pdf&#34;&gt;LDA on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.5%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/QDA_48k.pdf&#34;&gt;QDA on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;97.7%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/QDA_12k.pdf&#34;&gt;QDA on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.5%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/kNN_48k.pdf&#34;&gt;kNN on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;89%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/kNN_12k.pdf&#34;&gt;kNN on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/decision_tree_48k.pdf&#34;&gt;Decision tree on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;91.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/decision_tree_12k.pdf&#34;&gt;Decision tree on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/bagging_48k.pdf&#34;&gt;Bagging on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;96.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/bagging_12k.pdf&#34;&gt;Bagging on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;100%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/boosting_48k.pdf&#34;&gt;Boosting on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.6%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/boosting_12k.pdf&#34;&gt;Boosting on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.5%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/random_forest_48k.pdf&#34;&gt;Random forest on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/random_forest_12k.pdf&#34;&gt;Random forest on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;100%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;enter-deep-learning&#34;&gt;Enter Deep Learning&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Deep_Learning_CWRU_Blog.ipynb&#34;&gt;Fault diagnosis using convolutional neural network (CNN) (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;96.2%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/CWRU_CNN_Wavelet_Git_Final.ipynb&#34;&gt;CNN based fault diagnosis using continuous wavelet transform (CWT) (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;(This list will be updated gradually.)&lt;/p&gt;
+
+&lt;h2 id=&#34;some-other-related-stuff&#34;&gt;Some other related stuff&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.awsar-dst.in/assets/winner_article_2018/30_PhD.pdf&#34;&gt;Fault diagnosis of machines (A non-technical introduction)&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/matlab_intro.pdf&#34;&gt;A quick introduction to MATLAB&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/transient_vibration_and_SRS_plots.pdf&#34;&gt;Transient vibration and shock response spectrum plots in MATLAB&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/hilbert_inst_freq_modulation.pdf&#34;&gt;Simple examples on finding instantaneous frequency using Hilbert transform&lt;/a&gt; (&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/hilbert_inst_freq_modulation.pdf&#34;&gt;MATLAB Code&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
