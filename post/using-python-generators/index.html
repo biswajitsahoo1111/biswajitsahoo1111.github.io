@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Biswajit Sahoo">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="(Jupyter notebook for this post can be found here)(Check out this post for an end-to-end data pipeline and training using generators in Tensorflow 2)In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/using-python-generators/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153208457-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-153208457-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_huffc8dce834b4c0aec33122a3663a38ac_177939_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huffc8dce834b4c0aec33122a3663a38ac_177939_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/using-python-generators/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Biswajit Sahoo">
+  <meta property="og:url" content="/post/using-python-generators/">
+  <meta property="og:title" content="Using Python Generators | Biswajit Sahoo">
+  <meta property="og:description" content="(Jupyter notebook for this post can be found here)(Check out this post for an end-to-end data pipeline and training using generators in Tensorflow 2)In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it."><meta property="og:image" content="/img/icon.png">
+  <meta property="twitter:image" content="/img/icon.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-06-29T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-06-29T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/using-python-generators/"
+  },
+  "headline": "Using Python Generators",
+  
+  "datePublished": "2019-06-29T00:00:00Z",
+  "dateModified": "2019-06-29T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Biswajit Sahoo"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Biswajit Sahoo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img//"
+    }
+  },
+  "description": "(Jupyter notebook for this post can be found here)\r\r\r(Check out this post for an end-to-end data pipeline and training using generators in Tensorflow 2)\r\rIn this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Using Python Generators | Biswajit Sahoo</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Biswajit Sahoo</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Biswajit Sahoo</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#blog"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Using Python Generators</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jun 29, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/blog/">Blog</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+
+<center>
+(<a href="https://gist.github.com/biswajitsahoo1111/33cea59f24de6c19d1a513b42d28674d">Jupyter notebook for this post can be found here</a>)
+</center>
+<center>
+(<a href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/">Check out this post for an end-to-end data pipeline and training using generators in <code>Tensorflow 2</code></a>)
+</center>
+<p>In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it. Generators help us do just that. Generators are almost like functions but with a vital difference. While functions produce all their outputs at once, generators produce their outputs one by one and that too when asked. Much has been written about generators. So our aim is not to restate those again. We would rather give two toy examples showing how generators work. Hopefully, these examples will be useful to the beginner.</p>
+<p>While functions use keyword return to produce outputs, generators use yield. Use of yield in a function automatically makes that function a generator. We can write generators that work for few iterations or indefinitely (It’s an infinite loop). Deep learning frameworks like Keras expect the generators to work indefinitely. So we will also write generators that work indefinitely.</p>
+<p>First let’s create artificial data that we will extract later batch by batch.</p>
+<pre class="python"><code>import numpy as np
+data = np.random.randint(100,150, size = (10,2,2))
+labels = np.random.permutation(10)
+print(data)</code></pre>
+<pre><code>[[[142 149]
+  [119 144]]
+
+ [[142 120]
+  [119 103]]
+
+ [[128 120]
+  [125 136]]
+
+ [[113 133]
+  [145 120]]
+
+ [[139 126]
+  [119 108]]
+
+ [[131 123]
+  [134 125]]
+
+ [[130 147]
+  [108 115]]
+
+ [[110 115]
+  [106 123]]
+
+ [[128 124]
+  [127 148]]
+
+ [[127 101]
+  [146 126]]]</code></pre>
+<pre class="python"><code>print(&quot;labels:&quot;, labels)</code></pre>
+<pre><code>labels: [4 2 5 7 3 6 8 9 0 1]</code></pre>
+<p>Let’s pretend that the above dataset is huge and we need to extract chunks of it. Now we will write a generator to extract from the above data a batch of two items, two data points and corresponding two labels. In deep learning applications, we want our data to be shuffled between epochs. For the first run, we can shuffle the data itself and from next epoch onwards generator will shuffle it for us. And the generator must run indefinitely.</p>
+<pre class="python"><code>def my_gen(data, labels, batch_size = 2):
+    i = 0
+    while True:
+        if i*batch_size &gt;= len(labels):
+            i = 0
+            idx = np.random.permutation(len(labels))
+            data, labels = data[idx], labels[idx]
+            continue
+        else:
+            X = data[i*batch_size:(i+1)*batch_size,:]
+            y = labels[i*batch_size:(i+1)*batch_size]
+            i += 1
+            yield X,y</code></pre>
+<p><strong>Note</strong> that we have conveniently glossed over a technical point here. As the data is a numpy ndarry, to extract parts of it, we have to first load it. If our data set is huge, this method fails there. But there are ways to work around this problem. First, we can read numpy files without loading the whole file into RAM. More details can be found <a href="https://stackoverflow.com/questions/42727412/efficient-way-to-partially-read-large-numpy-file">here</a>. Secondly, in deep learning we encounter multiple files each of small size. In that case we can create a dictionary of indexes and file names and then load only a few of those as per index value. These modifications can be easily incorporated as per our need. Details can be found <a href="https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly">here</a>.</p>
+<p>Now that we have created a generator, we have to test it to see whether it functions as intended or not. So we will extract 10 batches of size 2 each from the (data, labels) pair and see. Here we have assumed that our original data is shuffled. If it is not, we can easily shuffle it by using “np.shuffle()”.</p>
+<pre class="python"><code>get_data = my_gen(data,labels)
+for i in range(10):
+    X,y = next(get_data)
+    print(X,y)
+    print(X.shape, y.shape)
+    print(&quot;=========================&quot;)</code></pre>
+<pre><code>[[[142 149]
+  [119 144]]
+
+ [[142 120]
+  [119 103]]] [4 2]
+(2, 2, 2) (2,)
+=========================
+[[[128 120]
+  [125 136]]
+
+ [[113 133]
+  [145 120]]] [5 7]
+(2, 2, 2) (2,)
+=========================
+[[[139 126]
+  [119 108]]
+
+ [[131 123]
+  [134 125]]] [3 6]
+(2, 2, 2) (2,)
+=========================
+[[[130 147]
+  [108 115]]
+
+ [[110 115]
+  [106 123]]] [8 9]
+(2, 2, 2) (2,)
+=========================
+[[[128 124]
+  [127 148]]
+
+ [[127 101]
+  [146 126]]] [0 1]
+(2, 2, 2) (2,)
+=========================
+[[[142 149]
+  [119 144]]
+
+ [[128 124]
+  [127 148]]] [4 0]
+(2, 2, 2) (2,)
+=========================
+[[[131 123]
+  [134 125]]
+
+ [[128 120]
+  [125 136]]] [6 5]
+(2, 2, 2) (2,)
+=========================
+[[[139 126]
+  [119 108]]
+
+ [[110 115]
+  [106 123]]] [3 9]
+(2, 2, 2) (2,)
+=========================
+[[[127 101]
+  [146 126]]
+
+ [[130 147]
+  [108 115]]] [1 8]
+(2, 2, 2) (2,)
+=========================
+[[[113 133]
+  [145 120]]
+
+ [[142 120]
+  [119 103]]] [7 2]
+(2, 2, 2) (2,)
+=========================</code></pre>
+<p>In the above generator code, we manually shuffled the data between epochs. But in keras we can use Sequence class to do this for us automatically. The added advantage of using this class is that we can use multiprocessing capabilities. So the new generator code becomes:</p>
+<pre class="python"><code>import tensorflow as tf
+import math
+
+class my_new_gen(tf.keras.utils.Sequence):
+    def __init__(self, data, labels, batch_size= 2 ):
+        self.x, self.y = data, labels
+        self.batch_size = batch_size
+        self.indices = np.arange(self.x.shape[0])
+
+    def __len__(self):
+        return math.floor(self.x.shape[0] / self.batch_size)
+
+    def __getitem__(self, idx):
+        inds = self.indices[idx * self.batch_size:(idx + 1) * self.batch_size]
+        batch_x = self.x[inds]
+        batch_y = self.y[inds]
+        return batch_x, batch_y
+    
+    def on_epoch_end(self):
+        np.random.shuffle(self.indices)</code></pre>
+<p>In this case we must add <code>len</code> method and <code>getitem</code> method within the class and if we want to shuffle data between epochs, we have to add <code>on_epoch_end()</code> method. <code>len</code> finds out the number of batches possible in an epoch and <code>getitem</code> extracts batches one by one. When one epoch is complete, <code>on_epoch_end()</code> shuffles the data and the process continues. We will test it with an example.</p>
+<pre class="python"><code>get_new_data = my_new_gen(data, labels)
+
+for i in range(10):
+    if i == 5:
+        get_new_data.on_epoch_end()
+        i = 0
+    elif i &gt; 5:
+        i = i-5
+    dat,labs = get_new_data.__getitem__(i)
+    print(dat,labs)
+    print(dat.shape, labs.shape)
+    print(&quot;===========================&quot;)</code></pre>
+<pre><code>[[[142 149]
+  [119 144]]
+
+ [[142 120]
+  [119 103]]] [4 2]
+(2, 2, 2) (2,)
+===========================
+[[[128 120]
+  [125 136]]
+
+ [[113 133]
+  [145 120]]] [5 7]
+(2, 2, 2) (2,)
+===========================
+[[[139 126]
+  [119 108]]
+
+ [[131 123]
+  [134 125]]] [3 6]
+(2, 2, 2) (2,)
+===========================
+[[[130 147]
+  [108 115]]
+
+ [[110 115]
+  [106 123]]] [8 9]
+(2, 2, 2) (2,)
+===========================
+[[[128 124]
+  [127 148]]
+
+ [[127 101]
+  [146 126]]] [0 1]
+(2, 2, 2) (2,)
+===========================
+[[[142 120]
+  [119 103]]
+
+ [[128 124]
+  [127 148]]] [2 0]
+(2, 2, 2) (2,)
+===========================
+[[[113 133]
+  [145 120]]
+
+ [[142 149]
+  [119 144]]] [7 4]
+(2, 2, 2) (2,)
+===========================
+[[[110 115]
+  [106 123]]
+
+ [[128 120]
+  [125 136]]] [9 5]
+(2, 2, 2) (2,)
+===========================
+[[[139 126]
+  [119 108]]
+
+ [[130 147]
+  [108 115]]] [3 8]
+(2, 2, 2) (2,)
+===========================
+[[[131 123]
+  [134 125]]
+
+ [[127 101]
+  [146 126]]] [6 1]
+(2, 2, 2) (2,)
+===========================</code></pre>
+<p>We have also used generators to train MNIST example. The code can be found <a href="https://gist.github.com/biswajitsahoo1111/33cea59f24de6c19d1a513b42d28674d">here</a>. The example might seem bit stretched as we don’t need generators for small data sets like MNIST. The aim of the example is just to show different implementation using generators.</p>
+<p>Perhaps the most detailed blog about using generators for deep learning is <a href="https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly">this one</a>. I also found <a href="https://github.com/keras-team/keras/issues/9707#issuecomment-374609666">these comments</a> helpful.</p>
+<p>Update: With the release of <code>tensorflow-2.0</code>, it is much easier to use <code>tf.data.Dataset</code> API for handling large datasets. Generators can still be used for training using <code>tf.keras</code>. As a final note, use generators if it is absolutely essential to do so. Otherwise, use <code>tf.data.Dataset</code> API. Check out <a href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/">this post</a> for an end-to-end data pipeline and training using generators in <code>Tensorflow 2</code>.</p>
+
+    </div>
+
+    
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/python/">Python</a>
+  
+  <a class="badge badge-light" href="/tags/deep-learning/">Deep Learning</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/using-python-generators/&amp;text=Using%20Python%20Generators" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/using-python-generators/&amp;t=Using%20Python%20Generators" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Using%20Python%20Generators&amp;body=/post/using-python-generators/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/using-python-generators/&amp;title=Using%20Python%20Generators" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Using%20Python%20Generators%20/post/using-python-generators/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/using-python-generators/&amp;title=Using%20Python%20Generators" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu43a4d92e507f8fd6150aa45a41e27c0c_293040_270x270_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Biswajit Sahoo</a></h5>
+      <h6 class="card-subtitle">PhD Student</h6>
+      <p class="card-text">My research interests include Machine Learning, Deep Learning, and Machinery Condition Monitoring.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:biswajitsahoo1111@iitkgp.ac.in" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/biswajitsahoo1111" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/biswajitsahoo1111/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/biswajitsahoo11" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://medium.com/@biswajitsahoo1111" target="_blank" rel="noopener">
+        <i class="fab fa-medium"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/project/personal-project/">Data-Driven Machinery Fault Diagnosis</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.c6f9beab6fb83af42b79b98b1b192e24.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2020 Biswajit Sahoo &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

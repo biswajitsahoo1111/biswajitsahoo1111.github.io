@@ -1,0 +1,2170 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Biswajit Sahoo</title>
+    <link>/</link>
+      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <description>Biswajit Sahoo</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Biswajit Sahoo</copyright><lastBuildDate>Thu, 09 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon.png</url>
+      <title>Biswajit Sahoo</title>
+      <link>/</link>
+    </image>
+    
+    <item>
+      <title>Reading multiple files in Tensorflow 2</title>
+      <link>/post/reading-multiple-files-in-tensorflow-2/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/post/reading-multiple-files-in-tensorflow-2/</guid>
+      <description>
+
+
+&lt;center&gt;
+(&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;Jupyter notebook for this post can be found here&lt;/a&gt;)
+&lt;/center&gt;
+&lt;p&gt;In this post, we will read multiple &lt;code&gt;.csv&lt;/code&gt; files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 &lt;code&gt;.csv&lt;/code&gt; files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of &lt;code&gt;.csv&lt;/code&gt; files. As the number of files becomes large, we can’t load the whole data into memory. So we have to work with chunks of it. Generators help us do just that conveniently. In this post, we will read multiple files using a custom generator.&lt;/p&gt;
+&lt;p&gt;This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and &lt;code&gt;.csv&lt;/code&gt; files will be saved in it. Subsequently files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following codes. Jupyter notebook of this post can be found &lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We will use &lt;code&gt;Tensorflow 2&lt;/code&gt; to run our deep learning model. &lt;code&gt;Tensorflow&lt;/code&gt; is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.&lt;/p&gt;
+&lt;div id=&#34;outline&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Outline:&lt;/h2&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Create 500 &lt;code&gt;&#34;.csv&#34;&lt;/code&gt; files and save it in the folder “random_data” in current directory.&lt;/li&gt;
+&lt;li&gt;Write a generator that reads data from the folder in chunks and preprocesses it.&lt;/li&gt;
+&lt;li&gt;Feed the chunks of data to a CNN model and train it for several epochs.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div id=&#34;create-500-.csv-files-of-random-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;1. Create 500 &lt;code&gt;.csv&lt;/code&gt; files of random data&lt;/h3&gt;
+&lt;p&gt;As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Each &lt;code&gt;.csv&lt;/code&gt; file will have one column of data with 1024 entries.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
+category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
+import os
+import glob
+np.random.seed(1111)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First create a function that will generate random files.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;def create_random_csv_files(fault_classes, number_of_files_in_each_class):
+    os.mkdir(&amp;quot;./random_data/&amp;quot;)  # Make a directory to save created files.
+    for fault_class in fault_classes:
+        for i in range(number_of_files_in_each_class):
+            data = np.random.rand(1024,)
+            file_name = &amp;quot;./random_data/&amp;quot; + eval(&amp;quot;fault_class&amp;quot;) + &amp;quot;_&amp;quot; + &amp;quot;{0:03}&amp;quot;.format(i+1) + &amp;quot;.csv&amp;quot; # This creates file_name
+            np.savetxt(eval(&amp;quot;file_name&amp;quot;), data, delimiter = &amp;quot;,&amp;quot;, header = &amp;quot;V1&amp;quot;, comments = &amp;quot;&amp;quot;)
+        print(str(eval(&amp;quot;number_of_files_in_each_class&amp;quot;)) + &amp;quot; &amp;quot; + eval(&amp;quot;fault_class&amp;quot;) + &amp;quot; files&amp;quot;  + &amp;quot; created.&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now use the function to create 100 files each for five fault types.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;create_random_csv_files([&amp;quot;Fault_1&amp;quot;, &amp;quot;Fault_2&amp;quot;, &amp;quot;Fault_3&amp;quot;, &amp;quot;Fault_4&amp;quot;, &amp;quot;Fault_5&amp;quot;], number_of_files_in_each_class = 100)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;100 Fault_1 files created.
+100 Fault_2 files created.
+100 Fault_3 files created.
+100 Fault_4 files created.
+100 Fault_5 files created.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;files = glob.glob(&amp;quot;./random_data/*&amp;quot;)
+print(&amp;quot;Total number of files: &amp;quot;, len(files))
+print(&amp;quot;Showing first 10 files...&amp;quot;)
+files[:10]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Total number of files:  500
+Showing first 10 files...
+[&amp;#39;./random_data\\Fault_1_001.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_002.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_003.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_004.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_005.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_006.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_007.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_008.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_009.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_010.csv&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To extract labels from file name, extract the part of the file name that corresponds to fault type.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(files[0])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;./random_data\Fault_1_001.csv&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(files[0][14:21])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Fault_1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that data has been created, we will go to the next step. That is, define a generator, preprocess the time series like data into a matrix like shape such that a 2-D CNN can ingest it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;write-a-generator-that-reads-data-in-chunks-and-preprocesses-it&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2. Write a generator that reads data in chunks and preprocesses it&lt;/h3&gt;
+&lt;p&gt;Generator are similar to functions with one important difference. While functions produce all their outputs at once, generators produce their outputs one by one and that too when asked. &lt;code&gt;yield&lt;/code&gt; keyword converts a function into a generator. Generators can run for a fixed number of times or indefinitely depending on the loop structure used inside it. For out application, we will use a generator that runs indefinitely.&lt;/p&gt;
+&lt;p&gt;The following generator takes a list of file names as first input. The second argument is &lt;code&gt;batch_size&lt;/code&gt;. &lt;code&gt;batch_size&lt;/code&gt; determines how many files we will process at one go. This is determined by how much memory do we have. If all data can be loaded into memory, there is no need for generators. In case our data size is huge, we can process chunks of it.&lt;/p&gt;
+&lt;p&gt;As we will be solving a classification problem, we have to assign labels to each raw data. We will use following labels for convenience.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;Class&lt;/th&gt;
+&lt;th&gt;Label&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Fault_1&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;Fault_2&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Fault_3&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;Fault_4&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Fault_5&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The generator will &lt;code&gt;yield&lt;/code&gt; both data and labels.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
+import re            # To match regular expression for extracting labels&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;def data_generator(file_list, batch_size = 20):
+    i = 0
+    while True:
+        if i*batch_size &amp;gt;= len(file_list):  # This loop is used to run the generator indefinitely.
+            i = 0
+            np.random.shuffle(file_list)
+        else:
+            file_chunk = file_list[i*batch_size:(i+1)*batch_size] 
+            data = []
+            labels = []
+            label_classes = [&amp;quot;Fault_1&amp;quot;, &amp;quot;Fault_2&amp;quot;, &amp;quot;Fault_3&amp;quot;, &amp;quot;Fault_4&amp;quot;, &amp;quot;Fault_5&amp;quot;]
+            for file in file_chunk:
+                temp = pd.read_csv(open(file,&amp;#39;r&amp;#39;)) # Change this line to read any other type of file
+                data.append(temp.values.reshape(32,32,1)) # Convert column data to matrix like data with one channel
+                pattern = &amp;quot;^&amp;quot; + eval(&amp;quot;file[14:21]&amp;quot;)      # Pattern extracted from file_name
+                for j in range(len(label_classes)):
+                    if re.match(pattern, label_classes[j]): # Pattern is matched against different label_classes
+                        labels.append(j)  
+            data = np.asarray(data).reshape(-1,32,32,1)
+            labels = np.asarray(labels)
+            yield data, labels
+            i = i + 1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To read any other file format, inside the generator change the line that reads files. This will enable us to read different file formats, be it &lt;code&gt;.txt&lt;/code&gt; or &lt;code&gt;.npz&lt;/code&gt; or any other.&lt;/p&gt;
+&lt;p&gt;Now we will check whether the generator works as intended or not. We will set &lt;code&gt;batch_size&lt;/code&gt; to 10. This means that files in chunks of 10 will be read and processed. The list of files from which 10 are chosen can be an ordered file list or shuffled list. In case, the files are not shuffled, use &lt;code&gt;np.random.shuffle(file_list)&lt;/code&gt; to shuffle files.&lt;/p&gt;
+&lt;p&gt;In the demonstration, we will read files from an ordered list. This will help us check any errors in the code.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;generated_data = data_generator(files, batch_size = 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;num = 0
+for data, labels in generated_data:
+    print(data.shape, labels.shape)
+    print(labels, &amp;quot;&amp;lt;--Labels&amp;quot;)  # Just to see the lables
+    print()
+    num = num + 1
+    if num &amp;gt; 5: break&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels
+
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels
+
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels
+
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels
+
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels
+
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Run the above cell multiple times to observe different labels. Label 1 appears only when all the files corresponding to “Fault_1” have been read. There are 100 files for “Fault_1” and we have set batch_size to 10. In the above cell we are iterating over the generator only 6 times. When number of iterations become greater than 10, we see label 1 and subsequently other labels. This will happen only if our initial file list is not shuffled. If the original list is shuffled, we will get random labels.&lt;/p&gt;
+&lt;p&gt;Now we will create a &lt;code&gt;tensorflow dataset&lt;/code&gt; using the generator. &lt;code&gt;Tensorflow&lt;/code&gt; datasets can conveniently be used to train &lt;code&gt;tensorflow&lt;/code&gt; models.&lt;/p&gt;
+&lt;p&gt;A &lt;code&gt;tensorflow dataset&lt;/code&gt; can be created form numpy arrays or from generators.Here, we will create it using a generator. Use of the previously created generator as it is in &lt;code&gt;tensorflow datasets&lt;/code&gt; doesn’t work (Readers can verify this). This happens because of the inability of regular expression to compare a “string” with a “byte string”. “byte strings” are generated by default in tensorflow. As a way around, we will make modifications to the earlier generator and use it with tensorflow datasets. Note that we will only modified three lines. Modified lines are accompanied by commented texts beside it.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import tensorflow as tf&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;def tf_data_generator(file_list, batch_size = 20):
+    i = 0
+    while True:
+        if i*batch_size &amp;gt;= len(file_list):  
+            i = 0
+            np.random.shuffle(file_list)
+        else:
+            file_chunk = file_list[i*batch_size:(i+1)*batch_size] 
+            data = []
+            labels = []
+            label_classes = tf.constant([&amp;quot;Fault_1&amp;quot;, &amp;quot;Fault_2&amp;quot;, &amp;quot;Fault_3&amp;quot;, &amp;quot;Fault_4&amp;quot;, &amp;quot;Fault_5&amp;quot;]) # This line has changed.
+            for file in file_chunk:
+                temp = pd.read_csv(open(file,&amp;#39;r&amp;#39;))
+                data.append(temp.values.reshape(32,32,1)) 
+                pattern = tf.constant(eval(&amp;quot;file[14:21]&amp;quot;))  # This line has changed
+                for j in range(len(label_classes)):
+                    if re.match(pattern.numpy(), label_classes[j].numpy()):  # This line has changed.
+                        labels.append(j)
+            data = np.asarray(data).reshape(-1,32,32,1)
+            labels = np.asarray(labels)
+            yield data, labels
+            i = i + 1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test whether modified generator works or not.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;check_data = tf_data_generator(files, batch_size = 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;num = 0
+for data, labels in check_data:
+    print(data.shape, labels.shape)
+    print(labels, &amp;quot;&amp;lt;--Labels&amp;quot;)
+    print()
+    num = num + 1
+    if num &amp;gt; 5: break&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels
+
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels
+
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels
+
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels
+
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels
+
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0] &amp;lt;--Labels&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that the new generator created by using a few &lt;code&gt;tensorflow&lt;/code&gt; commands works just fine as our previous generator. This new generator can now be integrated with a &lt;code&gt;tensorflow dataset&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;batch_size = 15
+dataset = tf.data.Dataset.from_generator(tf_data_generator,args= [files, batch_size],output_types = (tf.float32, tf.float32),
+                                                output_shapes = ((None,32,32,1),(None,)))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Check whether &lt;code&gt;dataset&lt;/code&gt; works or not.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;num = 0
+for data, labels in dataset:
+    print(data.shape, labels.shape)
+    print(labels)
+    print()
+    num = num + 1
+    if num &amp;gt; 7: break&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;(15, 32, 32, 1) (15,)
+tf.Tensor([0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.], shape=(15,), dtype=float32)
+
+(15, 32, 32, 1) (15,)
+tf.Tensor([0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.], shape=(15,), dtype=float32)
+
+(15, 32, 32, 1) (15,)
+tf.Tensor([0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.], shape=(15,), dtype=float32)
+
+(15, 32, 32, 1) (15,)
+tf.Tensor([0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.], shape=(15,), dtype=float32)
+
+(15, 32, 32, 1) (15,)
+tf.Tensor([0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.], shape=(15,), dtype=float32)
+
+(15, 32, 32, 1) (15,)
+tf.Tensor([0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.], shape=(15,), dtype=float32)
+
+(15, 32, 32, 1) (15,)
+tf.Tensor([0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 1.], shape=(15,), dtype=float32)
+
+(15, 32, 32, 1) (15,)
+tf.Tensor([1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.], shape=(15,), dtype=float32)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This also works fine. Now, we will train a full CNN model using the generator. As is done in every model, we will first shuffle data files. Split the files into train, validation, and test set. Using the &lt;code&gt;tf_data_generator&lt;/code&gt; create three tensorflow datasets corresponding to train, validation, and test data respectively. Finally, we will create a simple CNN model. Train it using train dataset, see its performance on validation dataset, and obtain prediction using test dataset. Keep in mind that our aim is not to improve performance of the model. As the data are random, don’t expect to see good performance. The aim is only to create a pipeline.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;building-data-pipeline-and-training-cnn-model&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;3. Building data pipeline and training CNN model&lt;/h3&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from sklearn.model_selection import train_test_split&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;train_file_names, test_file_names = train_test_split(files, test_size = 0.2, random_state = 321)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;train_file_names, validation_file_names = train_test_split(train_file_names, test_size = 0.15, random_state = 232)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(&amp;quot;Number of train_files:&amp;quot; ,len(train_file_names))
+print(&amp;quot;Number of validation_files:&amp;quot; ,len(validation_file_names))
+print(&amp;quot;Number of test_files:&amp;quot; ,len(test_file_names))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Number of train_files: 340
+Number of validation_files: 60
+Number of test_files: 100&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;batch_size = 10
+train_dataset = tf.data.Dataset.from_generator(tf_data_generator, args = [train_file_names, batch_size], 
+                                              output_shapes = ((None,32,32,1),(None,)),
+                                              output_types = (tf.float32, tf.float32))
+
+validation_dataset = tf.data.Dataset.from_generator(tf_data_generator, args = [validation_file_names, batch_size],
+                                                   output_shapes = ((None,32,32,1),(None,)),
+                                                   output_types = (tf.float32, tf.float32))
+
+test_dataset = tf.data.Dataset.from_generator(tf_data_generator, args = [test_file_names, batch_size],
+                                             output_shapes = ((None,32,32,1),(None,)),
+                                             output_types = (tf.float32, tf.float32))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now create the model.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from tensorflow.keras import layers&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;model = tf.keras.Sequential([
+    layers.Conv2D(16, 3, activation = &amp;quot;relu&amp;quot;, input_shape = (32,32,1)),
+    layers.MaxPool2D(2),
+    layers.Conv2D(32, 3, activation = &amp;quot;relu&amp;quot;),
+    layers.MaxPool2D(2),
+    layers.Flatten(),
+    layers.Dense(16, activation = &amp;quot;relu&amp;quot;),
+    layers.Dense(5, activation = &amp;quot;softmax&amp;quot;)
+])
+model.summary()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Model: &amp;quot;sequential&amp;quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 30, 30, 16)        160       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 15, 15, 16)        0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 13, 13, 32)        4640      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 6, 6, 32)          0         
+_________________________________________________________________
+flatten (Flatten)            (None, 1152)              0         
+_________________________________________________________________
+dense (Dense)                (None, 16)                18448     
+_________________________________________________________________
+dense_1 (Dense)              (None, 5)                 85        
+=================================================================
+Total params: 23,333
+Trainable params: 23,333
+Non-trainable params: 0
+_________________________________________________________________&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Compile the model.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;model.compile(loss = &amp;quot;sparse_categorical_crossentropy&amp;quot;, optimizer = &amp;quot;adam&amp;quot;, metrics = [&amp;quot;accuracy&amp;quot;])&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Before we fit the model, we have to do one important calculation. Remember that our generators are infinite loops. So if no stopping criteria is given, it will run indefinitely. But we want our model to run for, say, 10 epochs. So our generator should loop over the data files just 10 times and no more. This is achieved by setting the arguments &lt;code&gt;steps_per_epoch&lt;/code&gt; and &lt;code&gt;validation_steps&lt;/code&gt; to desired numbers in &lt;code&gt;model.fit()&lt;/code&gt;. Similarly while evaluating model, we need to set the argument &lt;code&gt;steps&lt;/code&gt; to a desired number in &lt;code&gt;model.evaluate()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;There are 340 files in training set. Batch_size is 10. So if the generator runs 34 times, it will correspond to one epoch. Therefor, we should set &lt;code&gt;steps_per_epoch&lt;/code&gt; to 34. Similarly, &lt;code&gt;validation_steps = 6&lt;/code&gt; and in &lt;code&gt;model.evaluate()&lt;/code&gt;, &lt;code&gt;steps = 10&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;steps_per_epoch = 34
+validation_steps = 6
+steps = 10&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;model.fit(train_dataset, validation_data = validation_dataset, steps_per_epoch = steps_per_epoch,
+         validation_steps = validation_steps, epochs = 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Train for 34 steps, validate for 6 steps
+Epoch 1/10
+34/34 [==============================] - 2s 56ms/step - loss: 1.6156 - accuracy: 0.1735 - val_loss: 1.6097 - val_accuracy: 0.2000
+Epoch 2/10
+34/34 [==============================] - 1s 40ms/step - loss: 1.6094 - accuracy: 0.2059 - val_loss: 1.6108 - val_accuracy: 0.0833
+Epoch 3/10
+34/34 [==============================] - 1s 39ms/step - loss: 1.6091 - accuracy: 0.2265 - val_loss: 1.6115 - val_accuracy: 0.0833
+Epoch 4/10
+34/34 [==============================] - 1s 38ms/step - loss: 1.6089 - accuracy: 0.2265 - val_loss: 1.6123 - val_accuracy: 0.0833
+Epoch 5/10
+34/34 [==============================] - 1s 38ms/step - loss: 1.6087 - accuracy: 0.2265 - val_loss: 1.6134 - val_accuracy: 0.0833
+Epoch 6/10
+34/34 [==============================] - 1s 39ms/step - loss: 1.6084 - accuracy: 0.2265 - val_loss: 1.6140 - val_accuracy: 0.0833
+Epoch 7/10
+34/34 [==============================] - 1s 40ms/step - loss: 1.6084 - accuracy: 0.2265 - val_loss: 1.6150 - val_accuracy: 0.0833
+Epoch 8/10
+34/34 [==============================] - 1s 40ms/step - loss: 1.6082 - accuracy: 0.2265 - val_loss: 1.6159 - val_accuracy: 0.0833
+Epoch 9/10
+34/34 [==============================] - 1s 39ms/step - loss: 1.6080 - accuracy: 0.2265 - val_loss: 1.6166 - val_accuracy: 0.0833
+Epoch 10/10
+34/34 [==============================] - 1s 39ms/step - loss: 1.6079 - accuracy: 0.2265 - val_loss: 1.6171 - val_accuracy: 0.0833
+&amp;lt;tensorflow.python.keras.callbacks.History at 0x65ec0f0&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;test_loss, test_accuracy = model.evaluate(test_dataset, steps = 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;10/10 [==============================] - 0s 31ms/step - loss: 1.6133 - accuracy: 0.1800&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(&amp;quot;Test loss: &amp;quot;, test_loss)
+print(&amp;quot;Test accuracy:&amp;quot;, test_accuracy)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Test loss:  1.6132649421691894
+Test accuracy: 0.18&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As expected, model performs terribly. This brings us to the end of the blog. As we had planned in the beginning, we have created random data files, a generator, and trained a model using that generator. The above code can be tweaked slightly to read any type of files other than &lt;code&gt;.csv&lt;/code&gt;. And now we can train our model without worrying about the data size. Whether the data size is 10GB or 750GB, our approach will work for both.&lt;/p&gt;
+&lt;p&gt;As a final note, I want to stress that, this is not the only approach to do the task. As I have mentioned previously, in &lt;code&gt;Tensorflow&lt;/code&gt;, you can do the same thing in several different ways. The approach I have chosen seemed natural to me. I have neither strived for efficiency nor elegance. If readers have any better idea, I would be happy to know of it.&lt;/p&gt;
+&lt;p&gt;I hope, this blog will be of help to readers. Please bring any errors or omissions to my notice.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using Python Generators</title>
+      <link>/post/using-python-generators/</link>
+      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>/post/using-python-generators/</guid>
+      <description>
+
+
+&lt;center&gt;
+(&lt;a href=&#34;https://gist.github.com/biswajitsahoo1111/33cea59f24de6c19d1a513b42d28674d&#34;&gt;Jupyter notebook for this post can be found here&lt;/a&gt;)
+&lt;/center&gt;
+&lt;center&gt;
+(&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/&#34;&gt;Check out this post for an end-to-end data pipeline and training using generators in &lt;code&gt;Tensorflow 2&lt;/code&gt;&lt;/a&gt;)
+&lt;/center&gt;
+&lt;p&gt;In this post, we will discuss about generators in python. In this age of big data it is not unlikely to encounter a large dataset that can’t be loaded into RAM. In such scenarios, it is natural to extract workable chunks of data and work on it. Generators help us do just that. Generators are almost like functions but with a vital difference. While functions produce all their outputs at once, generators produce their outputs one by one and that too when asked. Much has been written about generators. So our aim is not to restate those again. We would rather give two toy examples showing how generators work. Hopefully, these examples will be useful to the beginner.&lt;/p&gt;
+&lt;p&gt;While functions use keyword return to produce outputs, generators use yield. Use of yield in a function automatically makes that function a generator. We can write generators that work for few iterations or indefinitely (It’s an infinite loop). Deep learning frameworks like Keras expect the generators to work indefinitely. So we will also write generators that work indefinitely.&lt;/p&gt;
+&lt;p&gt;First let’s create artificial data that we will extract later batch by batch.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
+data = np.random.randint(100,150, size = (10,2,2))
+labels = np.random.permutation(10)
+print(data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[[[142 149]
+  [119 144]]
+
+ [[142 120]
+  [119 103]]
+
+ [[128 120]
+  [125 136]]
+
+ [[113 133]
+  [145 120]]
+
+ [[139 126]
+  [119 108]]
+
+ [[131 123]
+  [134 125]]
+
+ [[130 147]
+  [108 115]]
+
+ [[110 115]
+  [106 123]]
+
+ [[128 124]
+  [127 148]]
+
+ [[127 101]
+  [146 126]]]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(&amp;quot;labels:&amp;quot;, labels)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;labels: [4 2 5 7 3 6 8 9 0 1]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s pretend that the above dataset is huge and we need to extract chunks of it. Now we will write a generator to extract from the above data a batch of two items, two data points and corresponding two labels. In deep learning applications, we want our data to be shuffled between epochs. For the first run, we can shuffle the data itself and from next epoch onwards generator will shuffle it for us. And the generator must run indefinitely.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;def my_gen(data, labels, batch_size = 2):
+    i = 0
+    while True:
+        if i*batch_size &amp;gt;= len(labels):
+            i = 0
+            idx = np.random.permutation(len(labels))
+            data, labels = data[idx], labels[idx]
+            continue
+        else:
+            X = data[i*batch_size:(i+1)*batch_size,:]
+            y = labels[i*batch_size:(i+1)*batch_size]
+            i += 1
+            yield X,y&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that we have conveniently glossed over a technical point here. As the data is a numpy ndarry, to extract parts of it, we have to first load it. If our data set is huge, this method fails there. But there are ways to work around this problem. First, we can read numpy files without loading the whole file into RAM. More details can be found &lt;a href=&#34;https://stackoverflow.com/questions/42727412/efficient-way-to-partially-read-large-numpy-file&#34;&gt;here&lt;/a&gt;. Secondly, in deep learning we encounter multiple files each of small size. In that case we can create a dictionary of indexes and file names and then load only a few of those as per index value. These modifications can be easily incorporated as per our need. Details can be found &lt;a href=&#34;https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now that we have created a generator, we have to test it to see whether it functions as intended or not. So we will extract 10 batches of size 2 each from the (data, labels) pair and see. Here we have assumed that our original data is shuffled. If it is not, we can easily shuffle it by using “np.shuffle()”.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;get_data = my_gen(data,labels)
+for i in range(10):
+    X,y = next(get_data)
+    print(X,y)
+    print(X.shape, y.shape)
+    print(&amp;quot;=========================&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[[[142 149]
+  [119 144]]
+
+ [[142 120]
+  [119 103]]] [4 2]
+(2, 2, 2) (2,)
+=========================
+[[[128 120]
+  [125 136]]
+
+ [[113 133]
+  [145 120]]] [5 7]
+(2, 2, 2) (2,)
+=========================
+[[[139 126]
+  [119 108]]
+
+ [[131 123]
+  [134 125]]] [3 6]
+(2, 2, 2) (2,)
+=========================
+[[[130 147]
+  [108 115]]
+
+ [[110 115]
+  [106 123]]] [8 9]
+(2, 2, 2) (2,)
+=========================
+[[[128 124]
+  [127 148]]
+
+ [[127 101]
+  [146 126]]] [0 1]
+(2, 2, 2) (2,)
+=========================
+[[[142 149]
+  [119 144]]
+
+ [[128 124]
+  [127 148]]] [4 0]
+(2, 2, 2) (2,)
+=========================
+[[[131 123]
+  [134 125]]
+
+ [[128 120]
+  [125 136]]] [6 5]
+(2, 2, 2) (2,)
+=========================
+[[[139 126]
+  [119 108]]
+
+ [[110 115]
+  [106 123]]] [3 9]
+(2, 2, 2) (2,)
+=========================
+[[[127 101]
+  [146 126]]
+
+ [[130 147]
+  [108 115]]] [1 8]
+(2, 2, 2) (2,)
+=========================
+[[[113 133]
+  [145 120]]
+
+ [[142 120]
+  [119 103]]] [7 2]
+(2, 2, 2) (2,)
+=========================&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the above generator code, we manually shuffled the data between epochs. But in keras we can use Sequence class to do this for us automatically. The added advantage of using this class is that we can use multiprocessing capabilities. So the new generator code becomes:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import tensorflow as tf
+import math
+
+class my_new_gen(tf.keras.utils.Sequence):
+    def __init__(self, data, labels, batch_size= 2 ):
+        self.x, self.y = data, labels
+        self.batch_size = batch_size
+        self.indices = np.arange(self.x.shape[0])
+
+    def __len__(self):
+        return math.floor(self.x.shape[0] / self.batch_size)
+
+    def __getitem__(self, idx):
+        inds = self.indices[idx * self.batch_size:(idx + 1) * self.batch_size]
+        batch_x = self.x[inds]
+        batch_y = self.y[inds]
+        return batch_x, batch_y
+    
+    def on_epoch_end(self):
+        np.random.shuffle(self.indices)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this case we must add &lt;code&gt;len&lt;/code&gt; method and &lt;code&gt;getitem&lt;/code&gt; method within the class and if we want to shuffle data between epochs, we have to add &lt;code&gt;on_epoch_end()&lt;/code&gt; method. &lt;code&gt;len&lt;/code&gt; finds out the number of batches possible in an epoch and &lt;code&gt;getitem&lt;/code&gt; extracts batches one by one. When one epoch is complete, &lt;code&gt;on_epoch_end()&lt;/code&gt; shuffles the data and the process continues. We will test it with an example.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;get_new_data = my_new_gen(data, labels)
+
+for i in range(10):
+    if i == 5:
+        get_new_data.on_epoch_end()
+        i = 0
+    elif i &amp;gt; 5:
+        i = i-5
+    dat,labs = get_new_data.__getitem__(i)
+    print(dat,labs)
+    print(dat.shape, labs.shape)
+    print(&amp;quot;===========================&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[[[142 149]
+  [119 144]]
+
+ [[142 120]
+  [119 103]]] [4 2]
+(2, 2, 2) (2,)
+===========================
+[[[128 120]
+  [125 136]]
+
+ [[113 133]
+  [145 120]]] [5 7]
+(2, 2, 2) (2,)
+===========================
+[[[139 126]
+  [119 108]]
+
+ [[131 123]
+  [134 125]]] [3 6]
+(2, 2, 2) (2,)
+===========================
+[[[130 147]
+  [108 115]]
+
+ [[110 115]
+  [106 123]]] [8 9]
+(2, 2, 2) (2,)
+===========================
+[[[128 124]
+  [127 148]]
+
+ [[127 101]
+  [146 126]]] [0 1]
+(2, 2, 2) (2,)
+===========================
+[[[142 120]
+  [119 103]]
+
+ [[128 124]
+  [127 148]]] [2 0]
+(2, 2, 2) (2,)
+===========================
+[[[113 133]
+  [145 120]]
+
+ [[142 149]
+  [119 144]]] [7 4]
+(2, 2, 2) (2,)
+===========================
+[[[110 115]
+  [106 123]]
+
+ [[128 120]
+  [125 136]]] [9 5]
+(2, 2, 2) (2,)
+===========================
+[[[139 126]
+  [119 108]]
+
+ [[130 147]
+  [108 115]]] [3 8]
+(2, 2, 2) (2,)
+===========================
+[[[131 123]
+  [134 125]]
+
+ [[127 101]
+  [146 126]]] [6 1]
+(2, 2, 2) (2,)
+===========================&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have also used generators to train MNIST example. The code can be found &lt;a href=&#34;https://gist.github.com/biswajitsahoo1111/33cea59f24de6c19d1a513b42d28674d&#34;&gt;here&lt;/a&gt;. The example might seem bit stretched as we don’t need generators for small data sets like MNIST. The aim of the example is just to show different implementation using generators.&lt;/p&gt;
+&lt;p&gt;Perhaps the most detailed blog about using generators for deep learning is &lt;a href=&#34;https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly&#34;&gt;this one&lt;/a&gt;. I also found &lt;a href=&#34;https://github.com/keras-team/keras/issues/9707#issuecomment-374609666&#34;&gt;these comments&lt;/a&gt; helpful.&lt;/p&gt;
+&lt;p&gt;Update: With the release of &lt;code&gt;tensorflow-2.0&lt;/code&gt;, it is much easier to use &lt;code&gt;tf.data.Dataset&lt;/code&gt; API for handling large datasets. Generators can still be used for training using &lt;code&gt;tf.keras&lt;/code&gt;. As a final note, use generators if it is absolutely essential to do so. Otherwise, use &lt;code&gt;tf.data.Dataset&lt;/code&gt; API. Check out &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/&#34;&gt;this post&lt;/a&gt; for an end-to-end data pipeline and training using generators in &lt;code&gt;Tensorflow 2&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fault Diagnosis of Machines</title>
+      <link>/post/fault-diagnosis-of-machines/</link>
+      <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>/post/fault-diagnosis-of-machines/</guid>
+      <description>
+
+
+&lt;blockquote&gt;
+&lt;p&gt;This story was originally written for &lt;a href=&#34;https://www.awsar-dst.in/&#34;&gt;“Augmented Writing Skills for Articulating Research (AWSAR)”&lt;/a&gt; award 2018. It is written in a non-technical way so as to be accessible to as many people as possible irrespective of their educational background. The story also featured in the top 100 list of stories for the award. Full list of awardees and their stories can be found &lt;a href=&#34;https://www.awsar-dst.in/awsar_awarded_articles_2018&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div id=&#34;prelude&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Prelude&lt;/h2&gt;
+&lt;p&gt;Rising sun with its gentle light marks the arrival of morning. Birds’ chirp as well as time on our clock, sometimes with a blaring alarm, confirm the arrival of morning. Each of these, among several others, is an indicator of the morning. But can we know about morning by following only one indicator? Let’s deliberate. What if the sky is cloudy and we don’t see the sun rising, will this mean that morning is yet to come? Of course not! Our alarm will remind us of morning irrespective of whether there is sun or not. But what if, on some occasion, our clock doesn’t work. In that case, birds may chirp or sun may rise or our near and dear ones may remind us that it’s morning already. So in essence, we usually don’t look for only one indicator, rather we consider several indicators. If one indicator fails, we can check another and thus be sure. It is very unlikely that all the indicators will fail simultaneously.&lt;/p&gt;
+&lt;p&gt;So the best way to get an idea about an event, it seems, is not to rely on only one indicator. Rather, observe several indicators and depending on their collective state, arrive at some conclusion. In this way, we deliberately add redundancy in order to get reliable results. This is exactly what we do in fault diagnosis of machines. Fault diagnosis is a broad term that addresses mainly three questions. First, find out whether fault is there in the machine or not. If fault is present, next question is to find the location of the fault. Once location of the fault is found, finally, find out the type of fault and its severity. In this article, we will only limit ourselves to the last aspect. But for simplicity, we will still use the term fault diagnosis to address that particular problem.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-method&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The method&lt;/h2&gt;
+&lt;p&gt;To determine the health of a machine, we collect a set of indicators that best explain the condition of the machine. In scientific jargon, we call those features. Before discussing further let’s first discuss what are those features and how they are calculated.&lt;/p&gt;
+&lt;p&gt;First, data needs to be collected from a machine whose health needs to be assessed. Data might pertain to vibration level of the machine or its temperature distribution or the sound produced by the machine or something else. Sensors are needed to collect each type of data. By analogy, a thermometer, which is used to measure body temperature of humans, is a sensor that measures temperature. Likewise different types of sensors are available to measure different quantities of interest related to the machine. From research it has been found that vibration based data are more suitable for fault diagnosis as compared to other types of data, say temperature or sound. So in this article, we will limit our attention to vibration based fault diagnosis. And the sensor that is most commonly used to measure the vibration of a machine is called an accelerometer. Form the data collected by accelerometer(s) we calculate features like the maximum level of vibration, similarly, the minimum level and other statistical features like skewness, kurtosis, etc. It is not uncommon to collect 10-15 features.&lt;/p&gt;
+&lt;p&gt;After feature collection, the next task is to find out what type of faults are present by using those features. One way to do this is by comparing the obtained feature values to pre-existing standards. But standards are available for few specialized cases when each feature is considered in isolation. For multiple features, no concrete information can be obtained from standards. The way out of this problem is to come up with an algorithm that takes all feature values as input and produces the output related to the type of fault present.&lt;/p&gt;
+&lt;p&gt;Construction of such an algorithm requires prior faulty and non-faulty data of similar machine be fed to it. The algorithm should ideally work well on this prior data. Once fine-tuning of its parameters are done, new data are fed into the algorithm and from its output, we infer the fault type. If the algorithm is carefully constructed, error in prediction of fault type will be very small. In some cases, it is also possible to get perfect accuracy. The problem just considered is a sub-class of a broad field called pattern recognition. In pattern recognition, we try to find underlying patterns in features that correspond to different fault types. This type of pattern recognition tasks are best performed by machine learning algorithms. The simple technique just described works fine for a large class of problems. But there exist some problems for which the features previously calculated are not sufficient to identify fault. However, it is possible to modify the technique by using transformation of data as well as features. Transformations are a way of converting the original data into another type such that after transformation more insight is gained out of it. This is similar to using logarithms in mathematics to do complex calculations. While direct computation of complex multiplications and divisions is difficult, using logarithm we transform the original problem into a simpler form that can be solved easily in less time. The transformation trick along with pattern recognition methods are surprisingly effective for most fault diagnosis task.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;some-recent-advances&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Some recent advances&lt;/h2&gt;
+&lt;p&gt;Up to this point, we have argued that redundancy is important. It helps us take reliable decisions. However, it requires collection of huge amounts of data. Thus, continuous monitoring of machine, also known as online monitoring, becomes infeasible. So we seek an algorithm that is capable of finding fault types using only a few measurements. One way to do this is to select a few important features that can perform fault diagnosis. Research shows that it is indeed possible. But merely finding best features is not enough. Because to calculate the features, even though small in number, we need to collect all data. Hence issues related to online monitoring will still exist. A way around this problem is not to collect all data but only a fraction of it randomly in time. And the data should be collected in such a way that all information regarding the machine can be extracted from these limited observations. An even optimistic goal is to reconstruct the original data from the limited collected data. By analogy, this is similar to reconstructing the speech of a person, who speaks, say, 3000 words, from 300 random words that you have remembered of their entire speech. The problem just described is known as compressed sensing. And no matter how much counter-intuitive it may seem, encouraging results for this problem have been obtained in signal processing and these methods are beginning to get applied to problems of fault diagnosis. The problem is still in its infancy in fault diagnosis field.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-we-learned-and-what-we-didnt&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What we learned (and what we didn’t!)&lt;/h2&gt;
+&lt;p&gt;In summary, we have learned that to diagnose faults, we need multiple features and sometimes we have to transform the data into different domains for better accuracy. We then observed that we can get rid of the redundancy inherent in this method by using compressed sensing methods. All these techniques come under data-driven methods. It is called data-driven because all analyses are done after we collect relevant data from the machine. These methods are quite general purpose and can be used to diagnose faults in different components, say detecting faults in cars or in other machines.&lt;/p&gt;
+&lt;p&gt;Apart from data-driven methods there also exists another class of techniques that go by the broad name of model-based methods. In model-based methods, we formulate a full mathematical model of the machine and then try to find out how the response of the model changes if a fault is introduced and using this fact, try to find the nature of fault for a new problem. Though model-based techniques are important in their own right, in some cases it becomes very difficult to find an accurate model of the system. In contrast, data-driven methods are more robust against external noise and flexible, meaning we can perform different analysis using the same data and obtain different insights. Another advantage of using data-driven methods is that the whole process of fault diagnosis can easily be automated.&lt;/p&gt;
+&lt;p&gt;In this article, we have only considered the field of fault diagnosis. In fault diagnosis, faults are already present and we wish to either detect them or segregate them depending on fault type. But there exists another branch that deals with ways to predict the time of occurrence of fault in future, given the present state. Basically, they determine the remaining useful life of the machine. This sub-branch is called fault prognosis which is also an active area of research.&lt;/p&gt;
+&lt;p&gt;Given the advancement of research and scope for automation, it may be possible, in not so distant future, to get updates on your phone about possible malfunction of a part of your car while driving your car or while enjoying a ride in a self-driving car, maybe!!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.awsar-dst.in/assets/winner_article_2018/30_PhD.pdf&#34;&gt;Published story can be found at this link&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Revisiting Systems of Linear Equations</title>
+      <link>/post/revisiting-systems-of-linear-equations/</link>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>/post/revisiting-systems-of-linear-equations/</guid>
+      <description>
+
+
+&lt;p&gt;Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable. Then the final solution is obtained by back substituting the obtained value of the variable into remaining equations. This method, in mathematical jargon, is called Gaussian elimination and back substitution.&lt;/p&gt;
+&lt;p&gt;It turns out (surprisingly) that linear systems form the basis of many interesting engineering applications. Ultimately the problem boils down to solution (or approximate solution) of a system of linear equations. So a thorough understanding of linear systems is essential to appreciate the applications. In this post we will outline all possible cases of finding solutions to linear systems and briefly outline two most important applications.&lt;/p&gt;
+&lt;p&gt;We will use matrix notation to represent the equations succinctly. It also gives us better insight into their solution. Using matrix notation the system can be represented as
+&lt;span class=&#34;math display&#34;&gt;\[\textbf{Ax}=\textbf{b}\]&lt;/span&gt;
+Where &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt; is the matrix of coefficients of size &lt;span class=&#34;math inline&#34;&gt;\((m\times n)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{x}\)&lt;/span&gt; is a vector of variables of size &lt;span class=&#34;math inline&#34;&gt;\((n\times 1)\)&lt;/span&gt;, and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\)&lt;/span&gt;
+is a vector of size &lt;span class=&#34;math inline&#34;&gt;\((m\times 1)\)&lt;/span&gt; representing constant right hand sides. Note that &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\)&lt;/span&gt; can be a vector of all zeros, i.e., &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} = \textbf{0}\)&lt;/span&gt; or it can be any arbitrary vector with some nonzero values, i.e.,&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\neq \textbf{0}\)&lt;/span&gt;. The solution(s) of linear systems depend to a large extent on what the right hand side is as we will see shortly.&lt;/p&gt;
+&lt;p&gt;Apart from notation, we need two other concepts from matrix theory. One is of rank and other is the range space (or column space) of a matrix. Rank &lt;span class=&#34;math inline&#34;&gt;\((Rank(\textbf{A}))\)&lt;/span&gt; of a matrix (say, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt;) is defined as number of independent rows or columns of a matrix. It is a well known result in matrix theory that row rank (number of independent rows) is equal to column rank (number of independent columns) and &lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A})\leq min(m,n)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Range space &lt;span class=&#34;math inline&#34;&gt;\((\mathcal{R}(A))\)&lt;/span&gt;(in short, Range) of a matrix is the vector space of all possible linear combinations of columns of the matrix. As we take all possible linear combination of columns, it is also known as column space. Readers who are slightly more familiar with linear algebra may know that Range is the span of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt;. Zero vector &lt;span class=&#34;math inline&#34;&gt;\((\textbf{0})\)&lt;/span&gt; is &lt;strong&gt;always&lt;/strong&gt; in the range of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt; because if we take linear combination of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{A}\)&lt;/span&gt; with all coefficients as 0’s, we get zero vector. Hence &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}=0 \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; is always true.&lt;/p&gt;
+&lt;p&gt;Let’s now discuss different cases separately and their solutions. We will assume that our system of equations has real entries.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Case - I: &lt;span class=&#34;math inline&#34;&gt;\((m = n)\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) = m\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Unique solution (for any &lt;span class=&#34;math inline&#34;&gt;\(\textbf{b}\)&lt;/span&gt;). For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 8 \\
+  3 &amp;amp; 5 &amp;amp; 7 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  5 \\
+  7
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has unique solution.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Impossible (This case will never happen because &lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A})=m\)&lt;/span&gt;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) &amp;lt; m\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 6 \\
+  3 &amp;amp; 5 &amp;amp; 7 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  6 \\
+  8
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 6 \\
+  3 &amp;amp; 5 &amp;amp; 7 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  1 \\
+  5 \\
+  7
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has no solution.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Case - II: &lt;span class=&#34;math inline&#34;&gt;\((m &amp;gt; n)\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) = n\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Unique solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 \\
+  2 &amp;amp; 7 \\
+  3 &amp;amp; 8 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  9 \\
+  11
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has unique solution.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 \\
+  2 &amp;amp; 7 \\
+  3 &amp;amp; 8 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  9 \\
+  11
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has no solution. But this case is immensely useful from application point of view. Sometimes it is not desirable to obtain the exact solution. Rather an approximate solution suffices for all practical purposes. Finding an approximate solution to an overdetermined system leads to the famous &lt;a href=&#34;https://en.wikipedia.org/wiki/Least_squares&#34;&gt;Least Squares&lt;/a&gt; problem.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) &amp;lt; n\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 \\
+  2 &amp;amp; 4 \\
+  3 &amp;amp; 6 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  6 \\
+  9
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; It has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example,&lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 \\
+  2 &amp;amp; 4 \\
+  3 &amp;amp; 6 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  3 \\
+  6 \\
+  8
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has no solution.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Case - III: &lt;span class=&#34;math inline&#34;&gt;\((m &amp;lt; n)\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) = m\)&lt;/span&gt; :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example, &lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 5 
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  2 \\
+  3 
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has infinitely many solutions. This case is also used in many applications. As there are infinitely many solutions, a natural choice is to choose the best solution. The qualifier ‘best’ determines what application we have in our mind. If we seek minimum &lt;span class=&#34;math inline&#34;&gt;\((l_2)\)&lt;/span&gt; norm, we get the so called minimum energy solution, a concept used in signal processing. Yet another concern is to seek for the sparsest solution (a solution with only a few nonzero entries and all other entries being zero). This idea is used in &lt;a href=&#34;https://en.wikipedia.org/wiki/Compressed_sensing&#34;&gt;Compressed Sensing&lt;/a&gt;, an active research area with many interesting applications.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Impossible. This case will never happen since &lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A})=m\)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(Rank(\textbf{A}) &amp;lt; m\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : Infinitely many solutions. For example, &lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 6 
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  4 \\
+  8 
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/span&gt; : No solution. For example, &lt;span class=&#34;math display&#34;&gt;\[ \begin{equation}
+  \begin{bmatrix}
+  1 &amp;amp; 2 &amp;amp; 3 \\
+  2 &amp;amp; 4 &amp;amp; 6 
+  \end{bmatrix}
+  \begin{bmatrix}
+  x_1 \\
+  x_2 \\
+  x_3
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+  1 \\
+  5 
+  \end{bmatrix}
+  \end{equation}\]&lt;/span&gt; This system has no solution.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hope this post gives a clear overview of linear systems of equations. Interested reader may explore further applications. Comments and clarifications are welcome.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Principal Component Analysis - Part III</title>
+      <link>/post/principal-component-analysis-part-iii/</link>
+      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>/post/principal-component-analysis-part-iii/</guid>
+      <description>
+
+
+&lt;center&gt;
+(&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/PCA_Abdi_in_python.ipynb&#34;&gt;Python codes for this post can be found here&lt;/a&gt;)
+&lt;/center&gt;
+&lt;p&gt;In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘&lt;a href=&#34;https://onlinelibrary.wiley.com/doi/full/10.1002/wics.101&#34;&gt;Principal component analysis&lt;/a&gt;’ and is authored by &lt;a href=&#34;https://personal.utdallas.edu/~herve/&#34;&gt;Herve Abdi&lt;/a&gt; and &lt;a href=&#34;https://ljwilliams.github.io/&#34;&gt;Lynne J. Williams&lt;/a&gt;. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).&lt;/p&gt;
+&lt;p&gt;This post is Part-III of a three part series on PCA. Other parts of the series can be found at the links below.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II: PCA Implementation with and without using built-in functions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This post contains code snippets in R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;MATLAB codes&lt;/a&gt; can be written using commands of &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;. For figures, the reader has to write his/her own code in MATLAB.&lt;/p&gt;
+&lt;div id=&#34;structure-of-the-paper&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Structure of the paper&lt;/h3&gt;
+&lt;p&gt;Along with basic theory, the paper contains three examples on PCA, one example on correspondence analysis, and one example on multiple factor analysis. We will only focus on PCA examples in this post.&lt;/p&gt;
+&lt;p&gt;To run following R codes seamlessly, readers have to load following packages. If these packages have not been installed previously, use &lt;code&gt;install.packages(&#34;package_name&#34;)&lt;/code&gt; to install those.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+library(ggrepel)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-get-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;How to get data&lt;/h3&gt;
+&lt;p&gt;Data for the examples have been taken from the paper [1]. The datasets are pretty small. So one way to read the data is to create a dataframe itself in R using the values given in paper. Otherwise, the values can first be stored in a csv file and then read into R. To make this post self-sufficient, we will adopt the former approach.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Throughout this article, additional comments have been made beside code segments. It would be a good idea to read those commented lines along with the codes.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 1
+# Create a dataframe
+Words = c(&amp;quot;Bag&amp;quot;, &amp;quot;Across&amp;quot;, &amp;quot;On&amp;quot;, &amp;quot;Insane&amp;quot;, &amp;quot;By&amp;quot;, &amp;quot;Monastery&amp;quot;, &amp;quot;Relief&amp;quot;, &amp;quot;Slope&amp;quot;, &amp;quot;Scoundrel&amp;quot;, &amp;quot;With&amp;quot;, &amp;quot;Neither&amp;quot;, &amp;quot;Pretentious&amp;quot;, &amp;quot;Solid&amp;quot;, &amp;quot;This&amp;quot;, &amp;quot;For&amp;quot;, &amp;quot;Therefore&amp;quot;, &amp;quot;Generality&amp;quot;, &amp;quot;Arise&amp;quot;, &amp;quot;Blot&amp;quot;, &amp;quot;Infectious&amp;quot;)
+Word_length = c(3, 6, 2, 6, 2, 9, 6, 5, 9, 4, 7, 11, 5, 4, 3, 9, 10, 5, 4, 10)
+Lines_in_dict = c(14, 7, 11, 9, 9, 4, 8, 11, 5, 8, 2, 4, 12, 9, 8, 1, 4, 13, 15, 6)
+words = data.frame(Words, Word_length, Lines_in_dict, stringsAsFactors = F)
+words&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;         Words Word_length Lines_in_dict
+1          Bag           3            14
+2       Across           6             7
+3           On           2            11
+4       Insane           6             9
+5           By           2             9
+6    Monastery           9             4
+7       Relief           6             8
+8        Slope           5            11
+9    Scoundrel           9             5
+10        With           4             8
+11     Neither           7             2
+12 Pretentious          11             4
+13       Solid           5            12
+14        This           4             9
+15         For           3             8
+16   Therefore           9             1
+17  Generality          10             4
+18       Arise           5            13
+19        Blot           4            15
+20  Infectious          10             6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(words_centered = scale(words[,2:3],scale = F)) # Centering after reemoving the first column&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      Word_length Lines_in_dict
+ [1,]          -3             6
+ [2,]           0            -1
+ [3,]          -4             3
+ [4,]           0             1
+ [5,]          -4             1
+ [6,]           3            -4
+ [7,]           0             0
+ [8,]          -1             3
+ [9,]           3            -3
+[10,]          -2             0
+[11,]           1            -6
+[12,]           5            -4
+[13,]          -1             4
+[14,]          -2             1
+[15,]          -3             0
+[16,]           3            -7
+[17,]           4            -4
+[18,]          -1             5
+[19,]          -2             7
+[20,]           4            -2
+attr(,&amp;quot;scaled:center&amp;quot;)
+  Word_length Lines_in_dict 
+            6             8 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;covariance-pca&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Covariance PCA&lt;/h3&gt;
+&lt;p&gt;Covariance PCA uses centered data matrix. But data matrix is not scaled. &lt;code&gt;prcomp()&lt;/code&gt; centers data by default.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_words_cov = prcomp(words[,2:3],scale = F) # cov stands for Covariance PCA
+factor_scores_words = pca_words_cov$x
+round(factor_scores_words,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;        PC1   PC2
+ [1,] -6.67  0.69
+ [2,]  0.84 -0.54
+ [3,] -4.68 -1.76
+ [4,] -0.84  0.54
+ [5,] -2.99 -2.84
+ [6,]  4.99  0.38
+ [7,]  0.00  0.00
+ [8,] -3.07  0.77
+ [9,]  4.14  0.92
+[10,] -1.07 -1.69
+[11,]  5.60 -2.38
+[12,]  6.06  2.07
+[13,] -3.91  1.30
+[14,] -1.92 -1.15
+[15,] -1.61 -2.53
+[16,]  7.52 -1.23
+[17,]  5.52  1.23
+[18,] -4.76  1.84
+[19,] -6.98  2.07
+[20,]  3.83  2.30&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Observer that factor scores for PC1 are negatives of what has been given in the paper. This is not a problem as principal directions are orthogonal.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;principal-directions-are-orthogonal&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Principal directions are orthogonal&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  It can also be checked that both the principal components are orthogonal.
+sum(factor_scores_words[,1]*factor_scores_words[,2]) # PCs are orthogonal&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] -4.773959e-15&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;contribution-of-each-factor&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Contribution of each factor&lt;/h3&gt;
+&lt;p&gt;It is defined as square of factor score divided by sum of squares of factor scores in that column.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(factor_scores_words[,1]^2/sum(factor_scores_words[,1]^2)*100,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt; [1] 11.36  0.18  5.58  0.18  2.28  6.34  0.00  2.40  4.38  0.29  8.00  9.37
+[13]  3.90  0.94  0.66 14.41  7.78  5.77 12.43  3.75&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(factor_scores_words[,2]^2/sum(factor_scores_words[,2]^2)*100,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt; [1]  0.92  0.55  5.98  0.55 15.49  0.28  0.00  1.13  1.63  5.48 10.87  8.25
+[13]  3.27  2.55 12.32  2.90  2.90  6.52  8.25 10.18&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The calculations in above two lines can be done in a single line&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(factor_scores_words^2/matrix(rep(colSums(factor_scores_words^2),nrow(words)),ncol = 2,byrow = T)*100,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;        PC1   PC2
+ [1,] 11.36  0.92
+ [2,]  0.18  0.55
+ [3,]  5.58  5.98
+ [4,]  0.18  0.55
+ [5,]  2.28 15.49
+ [6,]  6.34  0.28
+ [7,]  0.00  0.00
+ [8,]  2.40  1.13
+ [9,]  4.38  1.63
+[10,]  0.29  5.48
+[11,]  8.00 10.87
+[12,]  9.37  8.25
+[13,]  3.90  3.27
+[14,]  0.94  2.55
+[15,]  0.66 12.32
+[16,] 14.41  2.90
+[17,]  7.78  2.90
+[18,]  5.77  6.52
+[19,] 12.43  8.25
+[20,]  3.75 10.18&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;squared-distance-to-center-of-gravity&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Squared distance to center of gravity&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(dist = rowSums(factor_scores_words^2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt; [1] 45  1 25  1 17 25  0 10 18  4 37 41 17  5  9 58 32 26 53 20&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;squared-cosine-of-observations&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Squared cosine of observations&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(sq_cos = round(factor_scores_words^2/rowSums(factor_scores_words^2)*100))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      PC1 PC2
+ [1,]  99   1
+ [2,]  71  29
+ [3,]  88  12
+ [4,]  71  29
+ [5,]  53  47
+ [6,]  99   1
+ [7,] NaN NaN
+ [8,]  94   6
+ [9,]  95   5
+[10,]  29  71
+[11,]  85  15
+[12,]  90  10
+[13,]  90  10
+[14,]  74  26
+[15,]  29  71
+[16,]  97   3
+[17,]  95   5
+[18,]  87  13
+[19,]  92   8
+[20,]  74  26&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Nan’s are produced because of division by zero.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Figue 1
+p = ggplot(words,aes(x = Lines_in_dict,y = Word_length,label = Words))+
+  geom_point()+ geom_text_repel()+ 
+  geom_hline(yintercept = 6)+geom_vline(xintercept = 8)+
+  labs(x = &amp;quot;Lines in dictionary&amp;quot;,y = &amp;quot;Word length&amp;quot;)
+print(p)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Show directions of PCs
+# Note that intercept argument in geom_abline considers the line to be at the origin. In our case the data are mean shifted.
+# So we have to adjust the intercept taking new origin into consideration. These adjustments have been made below.
+slope1 = pca_words_cov$rotation[1,1]/pca_words_cov$rotation[2,1] # Slope of first PC
+slope2 = pca_words_cov$rotation[1,2]/pca_words_cov$rotation[2,2] # Slope of second PC
+(new_origin = c(mean(words$Lines_in_dict),mean(words$Word_length)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 8 6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;intercept1 = 6 - slope1*8
+intercept2 = 6 - slope2*8
+p+geom_abline(slope = slope1,intercept = intercept1,linetype = &amp;quot;dashed&amp;quot;,size = 1.2,col = &amp;quot;red&amp;quot;)+
+  geom_abline(slope = slope2,intercept = intercept2,linetype = &amp;quot;dashed&amp;quot;,size = 1.2,col = &amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-2.png&#34; width=&#34;672&#34; /&gt;
+In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;rotated-pcs&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Rotated PCs&lt;/h3&gt;
+&lt;p&gt;This figure is obtained by plotting factor scores. Note that we will plot negative of the factor scores of 1st PC to make the figure consistent with the paper.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(as.data.frame(pca_words_cov$x),aes(-pca_words_cov$x[,1],pca_words_cov$x[,2],label = words$Words))+
+  geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;with-supplementary-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;With supplementary data&lt;/h3&gt;
+&lt;p&gt;Given a supplementary point (a point previously not used in finding principal components),we have to first center the data point. Its factor scores can then be obtained by multiplying it with the loading matrix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;factor-score-of-the-new-word-sur&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Factor score of the new word ‘sur’&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sur = c(3,12) # It has 3 letter and 12 lines of dictionary entry
+(sur_centered = sur - colMeans(words[,2:3]))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;  Word_length Lines_in_dict 
+           -3             4 &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(factor_scores_sur = round(sur_centered %*% pca_words_cov$rotation,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;       PC1   PC2
+[1,] -4.99 -0.38&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;eigenvalues-and-variance&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Eigenvalues and variance&lt;/h3&gt;
+&lt;p&gt;See &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt; for details.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;total-variance-before-transformation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Total variance before transformation&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(total_var_before = round(sum(diag(var(words_centered))),3))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 23.368&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;total-variance-after-transformation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Total variance after transformation&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(total_var_after = round(sum(diag(var(pca_words_cov$x))),3))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 23.368&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Correlation between principal components and original variables
+(In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; (see &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-matrix&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Correlation matrix&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Correlation between PCs and original variables
+(cor(pca_words_cov$x,words_centered))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    Word_length Lines_in_dict
+PC1   0.8679026    -0.9741764
+PC2   0.4967344     0.2257884&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that the answers for correlation coefficients don’t match with that of the paper. Readers who get actual answers as given in paper are encouraged to send me an email using my contact details. However our procedure is correct and it does indeed give the correct answer for supplementary data as described below.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;squared-correlation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Squared correlation&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(cor(pca_words_cov$x,words_centered)^2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    Word_length Lines_in_dict
+PC1   0.7532549    0.94901961
+PC2   0.2467451    0.05098039&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Sum of correlation coefficients between variables and principal components is 1.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;colSums((cor(pca_words_cov$x,words_centered)^2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;  Word_length Lines_in_dict 
+            1             1 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;loading-matrix&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Loading matrix&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(loading_matrix = pca_words_cov$rotation)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;                     PC1       PC2
+Word_length    0.5368755 0.8436615
+Lines_in_dict -0.8436615 0.5368755&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-score-for-supplementary-variables&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Correlation score for supplementary variables&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Supplementary variable (Table 4)
+Frequency = c(8,230,700,1,500,1,9,2,1,700,7,1,4,500,900,3,1,10,1,1)
+Num_entries = c(6,3,12,2,7,1,1,6,1,5,2,1,5,9,7,1,1,4,4,2)
+supp_data = data.frame(Frequency,Num_entries) # Supplementary data
+supp_data&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;   Frequency Num_entries
+1          8           6
+2        230           3
+3        700          12
+4          1           2
+5        500           7
+6          1           1
+7          9           1
+8          2           6
+9          1           1
+10       700           5
+11         7           2
+12         1           1
+13         4           5
+14       500           9
+15       900           7
+16         3           1
+17         1           1
+18        10           4
+19         1           4
+20         1           2&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;centered-supplementary-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Centered supplementary data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;supp_data_cent = scale(supp_data,scale = F) # Centered supplementary data&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-score-for-supplementary-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Correlation score for supplementary data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(corr_score_supp = round(cor(pca_words_cov$x,supp_data),4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    Frequency Num_entries
+PC1   -0.3012     -0.6999
+PC2   -0.7218     -0.4493&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that correlation score doesn’t depend on whether supplementary data is centered or not.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(cor(pca_words_cov$x,supp_data_cent),4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    Frequency Num_entries
+PC1   -0.3012     -0.6999
+PC2   -0.7218     -0.4493&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;squared-correlation-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Squared correlation&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(cor(pca_words_cov$x,supp_data_cent)^2,4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    Frequency Num_entries
+PC1    0.0907      0.4899
+PC2    0.5210      0.2019&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;column-sums-of-squared-correlation-for-support-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Column sums of squared correlation for support data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(colSums(cor(pca_words_cov$x,supp_data_cent)^2),4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;  Frequency Num_entries 
+     0.6118      0.6918 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-circle-plot&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Correlation circle plot&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# First plot correlation circle
+x = seq(0,2*pi,length.out = 300)
+circle = ggplot() + geom_path(data = data.frame(a = cos(x),b = sin(x)),
+                     aes(cos(x),sin(x)),alpha = 0.3, size = 1.5)+
+            geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  annotate(&amp;quot;text&amp;quot;,x = c(1.08,0.05),y = c(0.05,1.08),label = c(&amp;quot;PC1&amp;quot;,&amp;quot;PC2&amp;quot;),angle = c(0,90))+
+            xlab(NULL)+ylab(NULL)
+# Plotting original variables
+cor_score = as.data.frame(cor(words_centered,pca_words_cov$x))
+variable_plot_original = circle + geom_point(data = cor_score,  aes(cor_score[,1],cor_score[,2]))+
+  geom_text_repel(aes(cor_score[,1],cor_score[,2],
+                      label = c(&amp;quot;Length of words&amp;quot;,&amp;quot;Number of lines in Dict.&amp;quot;))) 
+print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plotting-supplementary-variables&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Plotting supplementary variables&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;variable_plot_original+
+  geom_point(data = as.data.frame(corr_score_supp),
+             aes(corr_score_supp[,1],corr_score_supp[,2]))+
+  geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
+                      label = c(&amp;quot;Frequency&amp;quot;,&amp;quot;Number of entries&amp;quot;))) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative principal component results in negative correlation scores. Hence, our plot flips about y-axis.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;example-2-wine-example&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Example 2 (Wine example)&lt;/h2&gt;
+&lt;div id=&#34;correlation-pca-with-wine-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Correlation PCA with wine data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 6
+wine_type = c(paste(&amp;quot;wine&amp;quot;, 1:5, sep = &amp;quot;_&amp;quot;))
+hedonic = c(14, 10, 8, 2, 6)
+for_meat = c(7, 7, 5, 4, 2)
+for_dessert = c(8, 6, 5, 7, 4)
+price = c(7, 4, 10, 16, 13)
+sugar = c(7, 3, 5, 7, 3)
+alcohol = c(13, 14, 12, 11, 10)
+acidity = c(7, 7, 5, 3, 3)
+wine = data.frame(wine_type, hedonic, for_meat, for_dessert, price, sugar, alcohol, acidity, stringsAsFactors = F)
+wine&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;  wine_type hedonic for_meat for_dessert price sugar alcohol acidity
+1    wine_1      14        7           8     7     7      13       7
+2    wine_2      10        7           6     4     3      14       7
+3    wine_3       8        5           5    10     5      12       5
+4    wine_4       2        4           7    16     7      11       3
+5    wine_5       6        2           4    13     3      10       3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_wine_cor = prcomp(wine[2:8],scale = T)
+ggplot(as.data.frame(pca_wine_cor$x),aes(x = pca_wine_cor$x[,1],y =  pca_wine_cor$x[,2], label = paste0(&amp;quot;wine &amp;quot;,1:5)))+
+  geom_point()+geom_text_repel()+ geom_vline(xintercept = 0)+ geom_hline(yintercept = 0)+
+  xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigenvector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;factor-scores-along-1st-and-2nd-pc&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Factor scores along 1st and 2nd PC&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 7
+(pca_wine_cor$x[,1:2])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;            PC1       PC2
+[1,] -2.3301649  1.095284
+[2,] -2.0842419 -1.223185
+[3,]  0.1673228 -0.370258
+[4,]  1.7842392  1.712563
+[5,]  2.4628448 -1.214405&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;contribution-of-each-observation-to-principal-component&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Contribution of each observation to principal component&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(pca_wine_cor$x[,1:2]^2/matrix(rep(colSums(pca_wine_cor$x[,1:2]^2),nrow(wine)),ncol = 2,byrow = T)*100,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;       PC1   PC2
+[1,] 28.50 16.57
+[2,] 22.80 20.66
+[3,]  0.15  1.89
+[4,] 16.71 40.51
+[5,] 31.84 20.37&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;squared-cosine-of-observations-of-first-pc&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Squared cosine of observations of first PC&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(sq_cos = round(pca_wine_cor$x[,1:2]^2/rowSums(pca_wine_cor$x^2)*100))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;     PC1 PC2
+[1,]  77  17
+[2,]  69  24
+[3,]   7  34
+[4,]  50  46
+[5,]  78  19&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;loading-scores-corresponding-to-first-two-principal-components&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Loading scores corresponding to first two principal components&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(pca_wine_cor$rotation[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;              PC1   PC2
+hedonic     -0.40 -0.11
+for_meat    -0.45  0.11
+for_dessert -0.26  0.59
+price        0.42  0.31
+sugar       -0.05  0.72
+alcohol     -0.44 -0.06
+acidity     -0.45 -0.09&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-score-variables-with-first-two-principal-components&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Correlation score variables with first two principal components&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(corr_score_wine = round(cor(pca_wine_cor$x,wine[,2:8])[1:2,],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    hedonic for_meat for_dessert price sugar alcohol acidity
+PC1   -0.87    -0.97       -0.58  0.91 -0.11   -0.96   -0.99
+PC2   -0.15     0.15        0.79  0.42  0.97   -0.07   -0.12&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-circle-for-wine-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Correlation circle for wine data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Figure 6
+corr_score_wine = t(corr_score_wine)
+circle + 
+  geom_point(data = as.data.frame(corr_score_wine),
+             aes(corr_score_wine[,1],corr_score_wine[,2]))+
+  geom_text_repel(aes(corr_score_wine[,1],corr_score_wine[,2],
+                      label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-33-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;varimax-rotation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Varimax rotation&lt;/h3&gt;
+&lt;p&gt;Rotation is applied to loading matrix such that after rotation principal components are interpretable. By interpretable, we mean, some of the loading scores will have higher values and some other loading scores will have lower values. So it can be said that the variables whose loading scores have higher value, contribute significantly towards principal components as compared to other variables with lesser loading scores. Though rotation works in certain cases, it must be remembered that it is no magic wand for principal component interpretability. One of the popular rotations is Varimax rotation. R has a built-in command to perform varimax rotation.&lt;/p&gt;
+&lt;p&gt;Varimax rotation can be performed on the whole loading matrix or on a few components only. In the paper, varimax has been applied to first two principal components.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;loading-scores-of-first-two-principal-components&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Loading scores of first two principal components&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(pca_wine_cor$rotation[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;              PC1   PC2
+hedonic     -0.40 -0.11
+for_meat    -0.45  0.11
+for_dessert -0.26  0.59
+price        0.42  0.31
+sugar       -0.05  0.72
+alcohol     -0.44 -0.06
+acidity     -0.45 -0.09&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;varimax-applied-to-first-two-principal-components&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Varimax applied to first two principal components&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rotated_loading_scores = varimax(pca_wine_cor$rotation[,1:2])&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;loading-scores-after-rotation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Loading scores after rotation&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 10
+(round(rotated_loading_scores$loadings[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;              PC1   PC2
+hedonic     -0.41 -0.02
+for_meat    -0.41  0.21
+for_dessert -0.12  0.63
+price        0.48  0.21
+sugar        0.12  0.72
+alcohol     -0.44  0.05
+acidity     -0.46  0.02&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The same result can also be obtained by multiplying the original loading matrix by the rotation matrix obtained from varimax.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(pca_wine_cor$rotation[,1:2] %*% rotated_loading_scores$rotmat,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;             [,1]  [,2]
+hedonic     -0.41 -0.02
+for_meat    -0.41  0.21
+for_dessert -0.12  0.63
+price        0.48  0.21
+sugar        0.12  0.72
+alcohol     -0.44  0.05
+acidity     -0.46  0.02&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plot-of-loading-scores-before-rotation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Plot of loading scores before rotation&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#Figure 7
+ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[,1],y = pca_wine_cor$rotation[,2],
+                                                      label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))+
+  geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  xlab(&amp;quot;Loading score along PC1&amp;quot;)+ylab(&amp;quot;Loading score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plot-of-loading-scores-after-rotation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Plot of loading scores after rotation&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(as.data.frame(rotated_loading_scores$loadings[,1:2]),
+                     aes(x = rotated_loading_scores$loadings[,1],
+                         y = rotated_loading_scores$loadings[,2],
+                         label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))+
+  geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+    xlab(&amp;quot;Loading score along PC1 after rotation&amp;quot;)+
+    ylab(&amp;quot;Loading score along PC2 after rotation&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-39-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;example-3&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Example 3&lt;/h2&gt;
+&lt;div id=&#34;french-food-example-covariance-pca-example&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;French food example (Covariance PCA example)&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 11 
+class = rep(c(&amp;quot;Blue_collar&amp;quot;, &amp;quot;White_collar&amp;quot;, &amp;quot;Upper_class&amp;quot;), times = 4)
+children = rep(c(2,3,4,5), each = 3)
+bread = c(332, 293, 372, 406, 386, 438, 534, 460, 385, 655, 584, 515)
+vegetables = c(428, 559, 767, 563, 608, 843, 660, 699, 789, 776, 995, 1097)
+fruit = c(354, 388, 562, 341, 396, 689, 367, 484, 621, 423, 548, 887)
+meat = c(1437, 1527, 1948, 1507, 1501, 2345, 1620, 1856, 2366, 1848, 2056, 2630)
+poultry = c(526, 567, 927, 544, 558, 1148, 638, 762, 1149, 759, 893, 1167)
+milk = c(247, 239, 235, 324, 319, 243, 414, 400, 304, 495, 518, 561)
+wine = c(427, 258, 433, 407, 363, 341, 407, 416, 282, 486, 319, 284)
+food = data.frame(class, children, bread, vegetables, fruit, meat, poultry, milk, wine, stringsAsFactors = F)
+food&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;          class children bread vegetables fruit meat poultry milk wine
+1   Blue_collar        2   332        428   354 1437     526  247  427
+2  White_collar        2   293        559   388 1527     567  239  258
+3   Upper_class        2   372        767   562 1948     927  235  433
+4   Blue_collar        3   406        563   341 1507     544  324  407
+5  White_collar        3   386        608   396 1501     558  319  363
+6   Upper_class        3   438        843   689 2345    1148  243  341
+7   Blue_collar        4   534        660   367 1620     638  414  407
+8  White_collar        4   460        699   484 1856     762  400  416
+9   Upper_class        4   385        789   621 2366    1149  304  282
+10  Blue_collar        5   655        776   423 1848     759  495  486
+11 White_collar        5   584        995   548 2056     893  518  319
+12  Upper_class        5   515       1097   887 2630    1167  561  284&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_food_cov = prcomp(food[,3:9],scale = F)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;factor-scores&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Factor scores&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 12
+(factor_scores_food = round(pca_food_cov$x[,1:2],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;          PC1     PC2
+ [1,] -635.05  120.89
+ [2,] -488.56  142.33
+ [3,]  112.03  139.75
+ [4,] -520.01  -12.05
+ [5,] -485.94   -1.17
+ [6,]  588.17  188.44
+ [7,] -333.95 -144.54
+ [8,]  -57.51  -42.86
+ [9,]  571.32  206.76
+[10,]  -39.38 -264.47
+[11,]  296.04 -235.92
+[12,]  992.83  -97.15&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;contribution-of-each-observation-to-principal-component-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Contribution of each observation to principal component&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(pca_food_cov$x[,1:2]^2/matrix(rep(colSums(pca_food_cov$x[,1:2]^2),nrow(food)),ncol = 2,byrow = T)*100,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;        PC1   PC2
+ [1,] 13.34  5.03
+ [2,]  7.90  6.97
+ [3,]  0.42  6.72
+ [4,]  8.94  0.05
+ [5,]  7.81  0.00
+ [6,] 11.44 12.22
+ [7,]  3.69  7.19
+ [8,]  0.11  0.63
+ [9,] 10.80 14.71
+[10,]  0.05 24.07
+[11,]  2.90 19.15
+[12,] 32.61  3.25&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dist = pca_food_cov$x[,1]^2+pca_food_cov$x[,2]^2&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;squared-cosine-of-observations-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Squared cosine of observations&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(sq_cos = round(pca_food_cov$x[,1:2]^2/rowSums(pca_food_cov$x^2)*100))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      PC1 PC2
+ [1,]  95   3
+ [2,]  86   7
+ [3,]  26  40
+ [4,] 100   0
+ [5,]  98   0
+ [6,]  89   9
+ [7,]  83  15
+ [8,]  40  22
+ [9,]  86  11
+[10,]   2  79
+[11,]  57  36
+[12,]  97   1&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;squared-loading-scores&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Squared loading scores&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Table 13
+(round(pca_food_cov$rotation[,1:2]^2,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;            PC1  PC2
+bread      0.01 0.33
+vegetables 0.11 0.17
+fruit      0.09 0.01
+meat       0.57 0.01
+poultry    0.22 0.06
+milk       0.01 0.40
+wine       0.00 0.02&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that this table doesn’t match with that of the paper. We will stick to our analysis.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-score&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Correlation score&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(corr_score_food = round((cor(pca_food_cov$x,food[,3:9])[1:2,]),2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    bread vegetables fruit meat poultry  milk  wine
+PC1  0.36       0.91  0.96 1.00    0.98  0.41 -0.43
+PC2 -0.87      -0.35  0.10 0.04    0.16 -0.88 -0.33&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;squared-correlation-score&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Squared correlation score&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round((cor(pca_food_cov$x,food[,3:9])[1:2,])^2,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    bread vegetables fruit meat poultry milk wine
+PC1  0.13       0.83  0.92    1    0.96 0.17 0.18
+PC2  0.76       0.12  0.01    0    0.03 0.77 0.11&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-circle-for-food-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Correlation circle for food data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Figure 9
+corr_score_food = t(corr_score_food)
+circle + geom_point(data = as.data.frame(corr_score_food), 
+                    aes(x = corr_score_food[,1],y = corr_score_food[,2]))+
+  geom_text_repel(data = as.data.frame(corr_score_food), 
+                  aes(x = corr_score_food[,1],y = corr_score_food[,2],
+                      label = c(&amp;quot;Bread&amp;quot;,&amp;quot;Vegetables&amp;quot;,&amp;quot;Fruit&amp;quot;,&amp;quot;Meat&amp;quot;,&amp;quot;Poultry&amp;quot;,&amp;quot;Milk&amp;quot;,&amp;quot;Wine&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-47-1.png&#34; width=&#34;672&#34; /&gt;
+Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;eigenvalues&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Eigenvalues&lt;/h3&gt;
+&lt;p&gt;Eigenvalues of data covariance matrix is square of singular values of centered data matrix. Hence eigenvalues of data covariance matrix can be obtained as below.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Table 14
+cent_food = food[,3:9]-matrix(rep(colMeans(food[,3:9]),times = 12),nrow = 12,
+                              byrow = T)
+svd_food = svd(cent_food)
+(Eigenvalues = (svd_food$d)^2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 3023141.2354  290575.8390   68795.2333   25298.9496   22992.2474
+[6]    3722.3214     723.9238&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Important Note:&lt;/strong&gt; These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by &lt;span class=&#34;math inline&#34;&gt;\((n-1)\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is number of data points (in this case &lt;span class=&#34;math inline&#34;&gt;\(n = 12\)&lt;/span&gt;). If this point is still not clear, refer to &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;percentage-contribution-of-each-principal-component&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Percentage contribution of each principal component&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(Eigenvalues/sum(Eigenvalues),2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 0.88 0.08 0.02 0.01 0.01 0.00 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;cumulative-sum-of-eigenvalues&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Cumulative sum of eigenvalues&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(cumsum(Eigenvalues),2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 3023141 3313717 3382512 3407811 3430804 3434526 3435250&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;cumulative-percentage-contribution&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Cumulative percentage contribution&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(cumsum(Eigenvalues)/sum(Eigenvalues),2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 0.88 0.96 0.98 0.99 1.00 1.00 1.00&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ress-refer-to-the-paper-for-a-description&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;RESS (Refer to the paper for a description)&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;RESS = array(rep(0,7))
+for (i in 1:7){
+  RESS[i] = sum(Eigenvalues)-sum(Eigenvalues[1:i])
+}
+RESS&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 412108.5146 121532.6756  52737.4423  27438.4927   4446.2453    723.9238
+[7]      0.0000&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ratio-of-ress-and-sum-of-eigenvalues&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Ratio of RESS and sum of eigenvalues&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;round(RESS/sum(Eigenvalues),2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We will not calculate the value of PRESS in this post as it requires us to consider random models. We will not pursue that here.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sessionInfo()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;R version 3.6.2 (2019-12-12)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 7 x64 (build 7601) Service Pack 1
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.1252 
+[2] LC_CTYPE=English_United States.1252   
+[3] LC_MONETARY=English_United States.1252
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggrepel_0.8.1 ggplot2_3.2.1
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.3       knitr_1.27       magrittr_1.5     tidyselect_0.2.5
+ [5] munsell_0.5.0    colorspace_1.4-1 R6_2.4.1         rlang_0.4.2     
+ [9] dplyr_0.8.3      stringr_1.4.0    tools_3.6.2      grid_3.6.2      
+[13] gtable_0.3.0     xfun_0.12        withr_2.1.2      htmltools_0.4.0 
+[17] assertthat_0.2.1 yaml_2.2.0       lazyeval_0.2.2   digest_0.6.23   
+[21] tibble_2.1.3     lifecycle_0.1.0  crayon_1.3.4     bookdown_0.17   
+[25] farver_2.0.1     purrr_0.3.3      glue_1.3.1       evaluate_0.14   
+[29] rmarkdown_2.1    blogdown_0.17.1  labeling_0.3     stringi_1.4.5   
+[33] compiler_3.6.2   pillar_1.4.2     scales_1.1.0     pkgconfig_2.0.3 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to &lt;a href=&#34;https://biswajitsahoo1111.github.io/&#34;&gt;the author’s&lt;/a&gt; email.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_3.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;reference&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Reference&lt;/h2&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Last updated: 19th January, 2020&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Principal Component Analysis - Part II</title>
+      <link>/post/principal-component-analysis-part-ii/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>/post/principal-component-analysis-part-ii/</guid>
+      <description>
+
+
+&lt;p&gt;This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III: Reproducing results of a published paper on PCA&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.&lt;/p&gt;
+&lt;p&gt;This post is written in R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;MATLAB codes&lt;/a&gt; for the same can be obtained from this &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result. As the dataset is pretty small, one way to load the data into R is to create a dataframe in R using the values in the paper. Another way is to first create a csv file and then read the file into R/MATLAB. We have used the later approach.&lt;/p&gt;
+&lt;div id=&#34;load-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Load Data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#Create a dataframe of food data
+class = rep(c(&amp;quot;Blue_collar&amp;quot;, &amp;quot;White_collar&amp;quot;, &amp;quot;Upper_class&amp;quot;), times = 4)
+children = rep(c(2,3,4,5), each = 3)
+bread = c(332, 293, 372, 406, 386, 438, 534, 460, 385, 655, 584, 515)
+vegetables = c(428, 559, 767, 563, 608, 843, 660, 699, 789, 776, 995, 1097)
+fruit = c(354, 388, 562, 341, 396, 689, 367, 484, 621, 423, 548, 887)
+meat = c(1437, 1527, 1948, 1507, 1501, 2345, 1620, 1856, 2366, 1848, 2056, 2630)
+poultry = c(526, 567, 927, 544, 558, 1148, 638, 762, 1149, 759, 893, 1167)
+milk = c(247, 239, 235, 324, 319, 243, 414, 400, 304, 495, 518, 561)
+wine = c(427, 258, 433, 407, 363, 341, 407, 416, 282, 486, 319, 284)
+food = data.frame(class, children, bread, vegetables, fruit, meat, poultry, milk, wine, stringsAsFactors = F)
+food&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;          class children bread vegetables fruit meat poultry milk wine
+1   Blue_collar        2   332        428   354 1437     526  247  427
+2  White_collar        2   293        559   388 1527     567  239  258
+3   Upper_class        2   372        767   562 1948     927  235  433
+4   Blue_collar        3   406        563   341 1507     544  324  407
+5  White_collar        3   386        608   396 1501     558  319  363
+6   Upper_class        3   438        843   689 2345    1148  243  341
+7   Blue_collar        4   534        660   367 1620     638  414  407
+8  White_collar        4   460        699   484 1856     762  400  416
+9   Upper_class        4   385        789   621 2366    1149  304  282
+10  Blue_collar        5   655        776   423 1848     759  495  486
+11 White_collar        5   584        995   548 2056     893  518  319
+12  Upper_class        5   515       1097   887 2630    1167  561  284&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Centerd data matrix
+cent_food = scale(food[,3:9],scale = F)
+# Scaled data matrix
+scale_food = scale(food[,3:9],scale = T)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;covariance-pca&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Covariance PCA&lt;/h2&gt;
+&lt;div id=&#34;using-built-in-function&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Using built-in function&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Using built-in function
+pca_food_cov = prcomp(food[,3:9],scale = F)
+# Loading scores (we have printed only four columns out of seven)
+(round(pca_food_cov$rotation[,1:4],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;             PC1   PC2   PC3   PC4
+bread       0.07 -0.58 -0.40  0.11
+vegetables  0.33 -0.41  0.29  0.61
+fruit       0.30  0.10  0.34 -0.40
+meat        0.75  0.11 -0.07 -0.29
+poultry     0.47  0.24 -0.38  0.33
+milk        0.09 -0.63  0.23 -0.41
+wine       -0.06 -0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor score (we have printed only four PCs out of seven)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have printed only four columns of loading scores out of seven.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(round(pca_food_cov$x[,1:4],2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;          PC1     PC2     PC3    PC4
+ [1,] -635.05  120.89  -21.14 -68.97
+ [2,] -488.56  142.33  132.37  34.91
+ [3,]  112.03  139.75  -61.86  44.19
+ [4,] -520.01  -12.05    2.85 -13.70
+ [5,] -485.94   -1.17   65.75  11.51
+ [6,]  588.17  188.44  -71.85  28.56
+ [7,] -333.95 -144.54  -34.94  10.07
+ [8,]  -57.51  -42.86  -26.26 -46.55
+ [9,]  571.32  206.76  -38.45   3.69
+[10,]  -39.38 -264.47 -126.43 -12.74
+[11,]  296.04 -235.92   58.84  87.43
+[12,]  992.83  -97.15  121.13 -78.39&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have printed only four principal components out of seven.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variances using built-in function
+(round(pca_food_cov$sdev^2,2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance
+(sum(round(pca_food_cov$sdev^2,2)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;comparison-of-variance-before-and-after-transformation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Comparison of variance before and after transformation&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance before transformation
+sum(diag(cov(food[,3:9])))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance after transformation
+sum(diag(cov(pca_food_cov$x)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along variables before transformation
+round(diag(cov(food[,3:9])),2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;     bread vegetables      fruit       meat    poultry       milk       wine 
+  11480.61   35789.09   27255.45  156618.39   62280.52   13718.75    5152.63 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that calculation of variance is unaffected by centering data matrix. So variance of original data matrix as well as centered data matrix is same. Check it for yourself. Now see how PCA transforms these variance.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal compoennts
+round(diag(cov(pca_food_cov$x)),2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      PC1       PC2       PC3       PC4       PC5       PC6       PC7 
+274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81 &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We can obtain the same result using built-in fucntion
+round(pca_food_cov$sdev^2,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;performing-covariance-pca-manually-using-svd&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Performing covariance PCA manually using SVD&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;svd_food_cov = svd(cent_food)
+# Loading scores
+round(svd_food_cov$v[,1:4],2) # We have printed only four columns&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      [,1]  [,2]  [,3]  [,4]
+[1,]  0.07 -0.58 -0.40  0.11
+[2,]  0.33 -0.41  0.29  0.61
+[3,]  0.30  0.10  0.34 -0.40
+[4,]  0.75  0.11 -0.07 -0.29
+[5,]  0.47  0.24 -0.38  0.33
+[6,]  0.09 -0.63  0.23 -0.41
+[7,] -0.06 -0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
+round((cent_food %*% svd_food_cov$v)[,1:4],2) # only 4 columns printed&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;         [,1]    [,2]    [,3]   [,4]
+ [1,] -635.05  120.89  -21.14 -68.97
+ [2,] -488.56  142.33  132.37  34.91
+ [3,]  112.03  139.75  -61.86  44.19
+ [4,] -520.01  -12.05    2.85 -13.70
+ [5,] -485.94   -1.17   65.75  11.51
+ [6,]  588.17  188.44  -71.85  28.56
+ [7,] -333.95 -144.54  -34.94  10.07
+ [8,]  -57.51  -42.86  -26.26 -46.55
+ [9,]  571.32  206.76  -38.45   3.69
+[10,]  -39.38 -264.47 -126.43 -12.74
+[11,]  296.04 -235.92   58.84  87.43
+[12,]  992.83  -97.15  121.13 -78.39&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance of principal components
+round(svd_food_cov$d^2/11,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;performing-covariance-pca-using-eigen-decomopositionnot-recommended&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Performing covariance PCA using Eigen-decomoposition(Not recommended)&lt;/h3&gt;
+&lt;p&gt;This procedure is not recommended because forming a covariance matrix is computationally not efficient for large matrices if data matrix contains smaller entries. So doing eigen analysis on covariance matrix may give erroneous results. However, for our example we can use it to obtain results.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;eigen_food_cov = eigen(cov(cent_food))
+# Loading scores
+round(eigen_food_cov$vectors[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      [,1]  [,2]  [,3]  [,4]
+[1,] -0.07  0.58 -0.40 -0.11
+[2,] -0.33  0.41  0.29 -0.61
+[3,] -0.30 -0.10  0.34  0.40
+[4,] -0.75 -0.11 -0.07  0.29
+[5,] -0.47 -0.24 -0.38 -0.33
+[6,] -0.09  0.63  0.23  0.41
+[7,]  0.06  0.14 -0.66  0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
+round((cent_food %*% eigen_food_cov$vectors)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;         [,1]    [,2]    [,3]   [,4]
+ [1,]  635.05 -120.89  -21.14  68.97
+ [2,]  488.56 -142.33  132.37 -34.91
+ [3,] -112.03 -139.75  -61.86 -44.19
+ [4,]  520.01   12.05    2.85  13.70
+ [5,]  485.94    1.17   65.75 -11.51
+ [6,] -588.17 -188.44  -71.85 -28.56
+ [7,]  333.95  144.54  -34.94 -10.07
+ [8,]   57.51   42.86  -26.26  46.55
+ [9,] -571.32 -206.76  -38.45  -3.69
+[10,]   39.38  264.47 -126.43  12.74
+[11,] -296.04  235.92   58.84 -87.43
+[12,] -992.83   97.15  121.13  78.39&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal components
+round(eigen_food_cov$values,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Instead of using the ‘cov()’ command to find the covariance matrix manually and perform its eigen analysis.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cov_matrix_manual_food = (1/11)*t(cent_food) %*% cent_food
+eigen_food_new = eigen(cov_matrix_manual_food)
+# Loading scores
+round(eigen_food_new$vectors[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      [,1]  [,2]  [,3]  [,4]
+[1,] -0.07  0.58 -0.40  0.11
+[2,] -0.33  0.41  0.29  0.61
+[3,] -0.30 -0.10  0.34 -0.40
+[4,] -0.75 -0.11 -0.07 -0.29
+[5,] -0.47 -0.24 -0.38  0.33
+[6,] -0.09  0.63  0.23 -0.41
+[7,]  0.06  0.14 -0.66 -0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal components
+round(eigen_food_new$values,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are also different ways to find total variance of the data matrix. We will explore some of the options.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total varaiance before transformation
+sum(diag(cov(cent_food)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 312295.4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that total variance is invariant to translations. So calculating the total variance on raw data will also give the same answer. Check it to convince yourself.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;correlation-pca&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Correlation PCA&lt;/h2&gt;
+&lt;p&gt;When PCA is performed on a scaled data matrix (each variable is centered as well as variance of each variable is one), it is called correlation PCA. Before discussing correlation PCA we will take some time to see different ways in which we can obtain correlation matrix.&lt;/p&gt;
+&lt;div id=&#34;different-ways-to-obtain-correlation-matrix.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Different ways to obtain correlation matrix.&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Using built-in command
+round(cor(food[,3:9]),2)[,1:4] # We have printed only four columns&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;           bread vegetables fruit  meat
+bread       1.00       0.59  0.20  0.32
+vegetables  0.59       1.00  0.86  0.88
+fruit       0.20       0.86  1.00  0.96
+meat        0.32       0.88  0.96  1.00
+poultry     0.25       0.83  0.93  0.98
+milk        0.86       0.66  0.33  0.37
+wine        0.30      -0.36 -0.49 -0.44&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# manually
+round((1/11)*t(scale_food) %*% scale_food,2)[,1:4]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;           bread vegetables fruit  meat
+bread       1.00       0.59  0.20  0.32
+vegetables  0.59       1.00  0.86  0.88
+fruit       0.20       0.86  1.00  0.96
+meat        0.32       0.88  0.96  1.00
+poultry     0.25       0.83  0.93  0.98
+milk        0.86       0.66  0.33  0.37
+wine        0.30      -0.36 -0.49 -0.44&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;performing-correlation-pca-using-built-in-function&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Performing correlation PCA using built-in function&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pca_food_cor = prcomp(food[,3:9],scale = T)
+# Loading scores
+round(pca_food_cor$rotation[,1:4],2) # Printed only four&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;             PC1   PC2   PC3   PC4
+bread       0.24 -0.62  0.01 -0.54
+vegetables  0.47 -0.10  0.06 -0.02
+fruit       0.45  0.21 -0.15  0.55
+meat        0.46  0.14 -0.21 -0.05
+poultry     0.44  0.20 -0.36 -0.32
+milk        0.28 -0.52  0.44  0.45
+wine       -0.21 -0.48 -0.78  0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
+round(pca_food_cor$x[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;        PC1   PC2   PC3   PC4
+ [1,] -2.86  0.36 -0.40  0.36
+ [2,] -1.89  1.79  1.31 -0.16
+ [3,] -0.12  0.73 -1.42  0.20
+ [4,] -2.04 -0.32  0.11  0.10
+ [5,] -1.69  0.16  0.51  0.16
+ [6,]  1.69  1.35 -0.99 -0.43
+ [7,] -0.93 -1.37  0.28 -0.26
+ [8,] -0.25 -0.63 -0.27  0.29
+ [9,]  1.60  1.74 -0.10 -0.40
+[10,]  0.22 -2.78 -0.57 -0.25
+[11,]  1.95 -1.13  0.99 -0.32
+[12,]  4.32  0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variances along principal componentes
+round(pca_food_cor$sdev^2,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Sum of vairances
+sum(pca_food_cor$sdev^2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;comparison-of-variance-before-and-after-transformation-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Comparison of variance before and after transformation&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance before transformation
+sum(diag(cov(scale_food)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Total variance after transformation
+sum(diag(cov(pca_food_cor$x)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along variables before transformation
+round(diag(cov(scale_food)),2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;     bread vegetables      fruit       meat    poultry       milk       wine 
+         1          1          1          1          1          1          1 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is obvious as we have scaled the matrix. Now see how PCA transforms these variance.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along principal compoennts
+round(diag(cov(pca_food_cor$x)),2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt; PC1  PC2  PC3  PC4  PC5  PC6  PC7 
+4.33 1.83 0.63 0.13 0.06 0.02 0.00 &lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We can obtain the same result using built-in fucntion
+round(pca_food_cor$sdev^2,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;performing-correlation-pca-manually-using-svd&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Performing correlation PCA manually using SVD&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;svd_food_cor = svd(scale_food)
+# Loading scores
+round(svd_food_cor$v[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;      [,1]  [,2]  [,3]  [,4]
+[1,]  0.24 -0.62  0.01 -0.54
+[2,]  0.47 -0.10  0.06 -0.02
+[3,]  0.45  0.21 -0.15  0.55
+[4,]  0.46  0.14 -0.21 -0.05
+[5,]  0.44  0.20 -0.36 -0.32
+[6,]  0.28 -0.52  0.44  0.45
+[7,] -0.21 -0.48 -0.78  0.31&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
+round((scale_food %*% svd_food_cor$v)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;       [,1]  [,2]  [,3]  [,4]
+ [1,] -2.86  0.36 -0.40  0.36
+ [2,] -1.89  1.79  1.31 -0.16
+ [3,] -0.12  0.73 -1.42  0.20
+ [4,] -2.04 -0.32  0.11  0.10
+ [5,] -1.69  0.16  0.51  0.16
+ [6,]  1.69  1.35 -0.99 -0.43
+ [7,] -0.93 -1.37  0.28 -0.26
+ [8,] -0.25 -0.63 -0.27  0.29
+ [9,]  1.60  1.74 -0.10 -0.40
+[10,]  0.22 -2.78 -0.57 -0.25
+[11,]  1.95 -1.13  0.99 -0.32
+[12,]  4.32  0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variance along each principcal component
+round(svd_food_cor$d^2/11,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Sum of variances
+sum(svd_food_cor$d^2/11)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 7&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again we have to divide by 11 to get eigenvalues of correlation matrix. Check the formulation of correlation matrix using scaled data matrix to convince yourself.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;using-eigen-decomposition-not-recommended&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Using eigen-decomposition (Not Recommended)&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;eigen_food_cor = eigen(cor(food[,3:9]))
+# Loading scores
+round(eigen_food_cor$vectors)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+[1,]    0    1    0   -1    0    1    0
+[2,]    0    0    0    0    1    0    0
+[3,]    0    0    0    1    0    1    0
+[4,]    0    0    0    0    0    0   -1
+[5,]    0    0    0    0    0    0    1
+[6,]    0    1    0    0    0    0    0
+[7,]    0    0   -1    0    0    0    0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Factor scores
+round((scale_food %*% eigen_food_cor$vectors)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;       [,1]  [,2]  [,3]  [,4]
+ [1,]  2.86 -0.36 -0.40  0.36
+ [2,]  1.89 -1.79  1.31 -0.16
+ [3,]  0.12 -0.73 -1.42  0.20
+ [4,]  2.04  0.32  0.11  0.10
+ [5,]  1.69 -0.16  0.51  0.16
+ [6,] -1.69 -1.35 -0.99 -0.43
+ [7,]  0.93  1.37  0.28 -0.26
+ [8,]  0.25  0.63 -0.27  0.29
+ [9,] -1.60 -1.74 -0.10 -0.40
+[10,] -0.22  2.78 -0.57 -0.25
+[11,] -1.95  1.13  0.99 -0.32
+[12,] -4.32 -0.10  0.57  0.72&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Variances along each principal component
+round(eigen_food_cor$values,2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I hope this post would help clear some of the confusions that a beginner might have while encountering PCA for the first time. Please send me a note if you find any errors.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_2.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New York,2002.&lt;/li&gt;
+&lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Principal Component Analysis - Part I</title>
+      <link>/post/principal-component-analysis-part-i/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>/post/principal-component-analysis-part-i/</guid>
+      <description>
+
+
+&lt;p&gt;In this post, we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The applications of PCA and its variants are ubiquitous. Thus, a through understanding of PCA is considered essential to start one’s journey into machine learning. In this and subsequent posts, we will first discuss relevant theory of PCA. Then we will implement PCA from scratch without using any built-in function. This will give us an idea as to what happens under the hood when a built-in function is called in any software environment. Simultaneously, we will also show how to use built-in commands to obtain results. Finally, we will reproduce the results of a popular paper on PCA. Including all this in a single post will make it very very long. Therefore, the post has been divided into three parts. Readers totally familiar with PCA should read none and leave this page immediately to save their precious time. Other readers, who have a passing knowledge of PCA and want to see different implementations, should pick and choose material from different parts as per their need. Absolute beginners should start with Part-I and work their way through gradually. Beginners are also encouraged to explore the references at the end of this post for further information. Here is the outline of different parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II: PCA Implementation with and without using built-in functions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III: Reproducing results of a published paper on PCA&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;, both MATLAB and R codes are available to reproduce all the results. &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III&lt;/a&gt; contains both R and Python codes to reproduce results of the paper. In this post, we will discuss only the theory behind PCA.&lt;/p&gt;
+&lt;div id=&#34;principal-component-analysis&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Principal Component Analysis&lt;/h1&gt;
+&lt;div id=&#34;theory&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Theory:&lt;/h2&gt;
+&lt;p&gt;Given a data matrix, we apply PCA to transform it in a way such that the transformed data reveals maximum information. So we have to first get the data on which we want to perform PCA. The usual convention in storing data is to place variables as columns and different observations as rows (Data frames in R follow this convention by default). For example, let’s suppose we are collecting data about daily weather for a year. Our variables of interest may include maximum temperature in a day, minimum temperature, humidity, max. wind speed, etc. For every day, we have to collect observations for each of these variables. In vector form, our data point for one day will contain number of observations equal to the number of variables under study and this becomes one row of our data matrix. Assuming that we are observing 10 variables everyday, our data matrix for one year (assuming it’s not a leap year) will contain 365 rows and 10 columns. Once data matrix is obtained, further analysis is done on this data matrix to obtain important hidden information regarding the data. We will use notations from matrix theory to simplify our analysis.&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; be the data matrix of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is the number of data points and &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; is the number of variables. We can assume without any loss of generality that data is centered, meaning its column means are zero. This only shifts the data towards the origin without changing their relative orientation. So if originally not centered, it is first centered before doing PCA. From now onward we will assume that data is always centered.&lt;/p&gt;
+&lt;p&gt;Variance of a variable (a column)in &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; is equal to sum of squares of entries (because the column is centered) of that column divided by (n - 1) (to make it unbiased). So sum of variance of all variables is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times sum of squares of all elements of the matrix . Readers who are familiar with matrix norms would instantly recognize that total variance is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt; of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;. Frobenius norm is nothing but square root of sum of squares of all elements of a matrix.
+&lt;span class=&#34;math display&#34;&gt;\[ \|\textbf{X}\|_{F} = (\sum_{i,j}{x_{ij}^2})^{\frac{1}{2}}=trace(\textbf{X}^T\textbf{X})=trace(\textbf{X}\textbf{X}^T)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Using this definition, total variance before transformation =
+&lt;span class=&#34;math display&#34;&gt;\[\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})=\frac{1}{n-1}\|\textbf{X}\|_{F}^2\]&lt;/span&gt;
+Where trace of a matrix is sum of its diagonal entries and &lt;span class=&#34;math inline&#34;&gt;\(\|\textbf{X}\|_{F}^2\)&lt;/span&gt; is the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The aim of PCA is to transform the data in such a way that along first principal direction, variance of transformed data is maximum. It subsequently finds second principal direction orthogonal to the first one in such a way that it explains maximum of the remaining variance among all possible direction in the orthogonal subspace.&lt;/p&gt;
+&lt;p&gt;In matrix form the transformation can be written as
+&lt;span class=&#34;math display&#34;&gt;\[\textbf{Y}_{n\times p}=\textbf{X}_{n\times p}\textbf{P}_{p\times p}\]&lt;/span&gt;
+Where &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is the transformed data matrix. The columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are called principal components and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is usually called loading matrix. Our aim is to find matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. Once we find &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; we can then find &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; just by a matrix multiplication. Though we will not go into to proof here, it can be easily proved (see references), that matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is the eigenvector matrix of the covariance matrix. Let’s first define covariance matrix.&lt;/p&gt;
+&lt;p&gt;Given a data matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;(centered), its covariance matrix &lt;span class=&#34;math inline&#34;&gt;\((\textbf{S})\)&lt;/span&gt; is defined as
+&lt;span class=&#34;math display&#34;&gt;\[\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}\]&lt;/span&gt;
+As principal directions are orthogonal, we will also require &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; to be an orthogonal matrix.&lt;/p&gt;
+&lt;p&gt;Now, it is straightforward to form the covariance matrix and by placing its eigenvectors as columns, we can find matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; and consequently the principal components. The eigenvectors are arranged in such a way that first column is the eigenvector corresponding to largest eigenvector, second column (second eigenvector) corresponds to second largest eigenvalue and so on. Here we have assumed that we will always be able to find all the &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; orthogonal eigenvectors. In fact, we will always be able to find &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; orthogonal eigenvectors as the matrix is symmetric. It can also be shown that the transformed matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is centered and more remarkably, total variance of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is same as total variance of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;. We will prove these two propositions as the proof are short.&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}\)&lt;/span&gt; be a column vector of all ones of size &lt;span class=&#34;math inline&#34;&gt;\((n\times 1)\)&lt;/span&gt;. To prove that columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are centered, just premultiply it by &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T\)&lt;/span&gt; (this finds column sum for each column). So
+&lt;span class=&#34;math display&#34;&gt;\[\textbf{1}^T \textbf{Y} = \textbf{1}^T\textbf{X}\textbf{P}\]&lt;/span&gt;
+But columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; are already centered, so &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T\textbf{X}=\textbf{0}\)&lt;/span&gt;. Thus &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T \textbf{Y}= \textbf{0}\)&lt;/span&gt;. Hence columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are centered.&lt;/p&gt;
+&lt;p&gt;To prove that total variance of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; also remains same, observe that&lt;/p&gt;
+&lt;p&gt;total covariance of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; =
+&lt;span class=&#34;math display&#34;&gt;\[trace(\frac{1}{n-1}\textbf{Y}^{T}\textbf{Y})=\frac{1}{n-1}trace((\textbf{P}^T\textbf{X}^{T}\textbf{X})\textbf{P})=\\\frac{1}{n-1}trace((\textbf{P}\textbf{P}^T)\textbf{X}^{T}\textbf{X})=trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})\]&lt;/span&gt;
+The previous equation uses the fact that trace is commutative(i.e.&lt;span class=&#34;math inline&#34;&gt;\(trace(\textbf{AB})=trace(\textbf{BA})\)&lt;/span&gt;) and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is orthogonal (i.e. &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\textbf{P}^T=\textbf{I}\)&lt;/span&gt;).&lt;/p&gt;
+&lt;div id=&#34;link-between-total-variance-and-eigenvalues&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Link between total variance and eigenvalues&lt;/h3&gt;
+&lt;p&gt;Total variance is sum of eigenvalues of covariance matrix &lt;span class=&#34;math inline&#34;&gt;\((\textbf{S})\)&lt;/span&gt;. We will further discuss this point in &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;variations-in-pca&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Variations in PCA&lt;/h3&gt;
+&lt;p&gt;Sometimes our data matrix contains variables that are measured in different units. So we might have to scale the centered matrix to reduce the effect of variables with large variation. So depending on the matrix on which PCA is performed, it is divided into two types.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Covariance PCA (Data matrix is centered but not scaled)&lt;/li&gt;
+&lt;li&gt;Correlation PCA (Data matrix is centered and scaled)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Examples of these two types can be found in &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;some-common-terminology-associated-with-pca&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Some common terminology associated with PCA&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Factor scores&lt;/strong&gt; corresponding to a principal component: Values of that column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; that corresponds to the desired principal component.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Loading score&lt;/strong&gt;: Values corresponding to a column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. For example,loading scores of variables corresponding to first principal component are the values of the first column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Inertia&lt;/strong&gt;: Square of Frobenius norm of the matrix.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-actually-are-principal-components-computed&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;How actually are principal components computed&lt;/h3&gt;
+&lt;p&gt;The previously stated method of finding eigenvectors of covariance matrix is not computationally efficient. In practice, singular value decomposition (SVD) is used to find the matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. SVD theorem tells that any real matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; can be decomposed into three matrices such that
+&lt;span class=&#34;math display&#34;&gt;\[ \textbf{X} = \textbf{U}\Sigma\textbf{V}^T\]&lt;/span&gt;
+Where, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; is of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;. &lt;span class=&#34;math inline&#34;&gt;\(\textbf{U}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{V}\)&lt;/span&gt; are orthogonal matrices of size &lt;span class=&#34;math inline&#34;&gt;\(n\times n\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(p\times p\)&lt;/span&gt; respectively. &lt;span class=&#34;math inline&#34;&gt;\(\Sigma\)&lt;/span&gt; is a diagonal matrix of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Given the SVD decomposition of a matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;,
+&lt;span class=&#34;math display&#34;&gt;\[\textbf{X}^T\textbf{X}=\textbf{V}\Sigma^2\textbf{V}^T\]&lt;/span&gt;
+This is the eigen-decomposition of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt;. So &lt;span class=&#34;math inline&#34;&gt;\(\textbf{V}\)&lt;/span&gt; is the eigenvector matrix of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt;. For PCA we need eigenvector matrix of covariance matrix. So converting the equation into convenient form, we get
+&lt;span class=&#34;math display&#34;&gt;\[\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}=\textbf{V}(\frac{1}{n-1}\Sigma^2)\textbf{V}^T\]&lt;/span&gt;
+Thus eigenvalues of S are diagonal entries of &lt;span class=&#34;math inline&#34;&gt;\((\frac{1}{n-1}\Sigma^2)\)&lt;/span&gt;. As SVD is computationally efficient, all built-in functions use SVD to find the loading matrix and then use it to find principal components.&lt;/p&gt;
+&lt;p&gt;In the interest of keeping the post at a reasonable length, we will stop our exposition of theory here. Whatever we have discussed is only a fraction of everything. Entire books have been written on PCA. Interested readers who want to pursue further can refer to the references given here and later to the references given in the references. Please send me a note if you find any errors.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_interpretation_part_1.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New York,2002.&lt;/li&gt;
+&lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Data-Driven Machinery Fault Diagnosis</title>
+      <link>/project/personal-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/project/personal-project/</guid>
+      <description>
+
+&lt;p&gt;&lt;center&gt;(&lt;a href=&#34;https://biswajitsahoo1111.github.io/cbm_codes_open/&#34;&gt;Visit this page for an updated list of results&lt;/a&gt;)&lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;introduction-to-the-problem&#34;&gt;Introduction to the problem&lt;/h2&gt;
+
+&lt;p&gt;Condition based maintenance is the process of doing maintenance only when it is required. Adoption of this maintenance strategy leads to significant monetary gains as it precludes periodic maintenance and reduces unplanned downtime. Another term commonly used for condition based maintenance is predictive maintenance. As the name suggests, in this method we predict in advance when to perform maintenance. Maintenance is required, if fault has already occurred or is imminent. This leads us to the problem of fault diagnosis and prognosis.&lt;/p&gt;
+
+&lt;p&gt;In fault diagnosis, fault has already occurred and our aim is to find what type of fault is there and what is its severity. In fault prognosis, our aim is to predict the time of occurrence of fault in future, given its present state. These two problem are central to condition based maintenance. There are many methods to solve these problems. These methods can be broadly divided into two groups:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Model Based Approaches&lt;/li&gt;
+&lt;li&gt;Data-Driven Approaches&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In model based approach, a complete model of the system is formulated and it is then used for fault diagnosis and prognosis. But this method has several limitations. Firstly, it is a difficult task to accurately model a system. Modelling becomes even more challenging with variations in working conditions. Secondly, we have to formulate different models for different tasks. For example, to diagnose bearing fault and gear fault, we have to formulate two different models. Data-driven methods provide a convenient alternative to these problems.&lt;/p&gt;
+
+&lt;p&gt;In data-driven approach, we use operational data of the machine to design algorithms that are then used for fault diagnosis and prognosis. The operational data may be vibration data, thermal imaging data, acoustic emission data, or something else. These techniques are robust to environmental variations. Accuracy obtained by data-driven methods is also at par and sometimes even better than accuracy obtained by model based approaches. Due to these reasons data-driven methods are becoming increasingly popular at diagnosis and prognosis tasks.&lt;/p&gt;
+
+&lt;h2 id=&#34;aim-of-the-project&#34;&gt;Aim of the project&lt;/h2&gt;
+
+&lt;p&gt;In this project we will apply some of the standard machine learning techniques to publicly available data sets and show their results with code. There are not many publicly available data sets in machinery condition monitoring. So we will manage with those that are publicly available. Unlike machine learning community where almost all data and codes are open, in condition monitoring very few things are open, though some people are gradually making codes open. This project is a step towards that direction, even though a tiny one.&lt;/p&gt;
+
+&lt;p&gt;This is an ongoing project and modifications and additions of new techniques will be done over time. Python, R, and MATLAB are popular programming languages that are used for machine learning applications. We will use those for our demonstrations. &lt;strong&gt;This page contains results on fault diagnosis only. Results on fault prognosis will be summarized in a separate webpage.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;results-using-case-western-reserve-university-bearing-data-https-csegroups-case-edu-bearingdatacenter-pages-welcome-case-western-reserve-university-bearing-data-center-website&#34;&gt;Results using &lt;a href=&#34;https://csegroups.case.edu/bearingdatacenter/pages/welcome-case-western-reserve-university-bearing-data-center-website&#34;&gt;Case Western Reserve University Bearing Data&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_multiclass_time.pdf&#34;&gt;SVM on time domain
+features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;96.4%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_wavelet_energy_multiclass_cwru.pdf&#34;&gt;SVM on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Dimensionality_Reduction.ipynb&#34;&gt;Visualizing High Dimensional Data Using Dimensionality Reduction Techniques&lt;/a&gt; (&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Dimensionality_Reduction.ipynb&#34;&gt;Python Code&lt;/a&gt;) (&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/dimensionality_reduction_projection.pdf&#34;&gt;R Code&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/SVM_wavelet_entropy_multiclass_cwru.pdf&#34;&gt;SVM on wavelet packet entropy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.2%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/svm_12k_cwru.pdf&#34;&gt;SVM on time and wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (&lt;strong&gt;Achieves 100% test accuracy in one case&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/multiclass_logistic_regression.pdf&#34;&gt;Multiclass Logistic Regression on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;strong&gt;93.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/multiclass_logistic_regression_12k.pdf&#34;&gt;Multiclass Logistic Regression on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/LDA_48k.pdf&#34;&gt;LDA on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;88.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/LDA_12k.pdf&#34;&gt;LDA on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.5%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/QDA_48k.pdf&#34;&gt;QDA on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;97.7%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/QDA_12k.pdf&#34;&gt;QDA on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.5%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/kNN_48k.pdf&#34;&gt;kNN on wavelet packet energy features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;89%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/kNN_12k.pdf&#34;&gt;kNN on wavelet packet energy features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/decision_tree_48k.pdf&#34;&gt;Decision tree on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;91.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/decision_tree_12k.pdf&#34;&gt;Decision tree on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/bagging_48k.pdf&#34;&gt;Bagging on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;96.8%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/bagging_12k.pdf&#34;&gt;Bagging on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;100%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/boosting_48k.pdf&#34;&gt;Boosting on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.6%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/boosting_12k.pdf&#34;&gt;Boosting on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;99.5%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/random_forest_48k.pdf&#34;&gt;Random forest on wavelet packet features (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/random_forest_12k.pdf&#34;&gt;Random forest on wavelet packet features (12 classes, sampling frequency: 12k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;100%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;enter-deep-learning&#34;&gt;Enter Deep Learning&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Deep_Learning_CWRU_Blog.ipynb&#34;&gt;Fault diagnosis using convolutional neural network (CNN) (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;96.2%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/CWRU_CNN_Wavelet_Git_Final.ipynb&#34;&gt;CNN based fault diagnosis using continuous wavelet transform (CWT) (10 classes, sampling frequency: 48k)&lt;/a&gt; (Overall accuracy: &lt;strong&gt;98.3%&lt;/strong&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;(This list will be updated gradually.)&lt;/p&gt;
+
+&lt;h2 id=&#34;some-other-related-stuff&#34;&gt;Some other related stuff&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.awsar-dst.in/assets/winner_article_2018/30_PhD.pdf&#34;&gt;Fault diagnosis of machines (A non-technical introduction)&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/matlab_intro.pdf&#34;&gt;A quick introduction to MATLAB&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/transient_vibration_and_SRS_plots.pdf&#34;&gt;Transient vibration and shock response spectrum plots in MATLAB&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/hilbert_inst_freq_modulation.pdf&#34;&gt;Simple examples on finding instantaneous frequency using Hilbert transform&lt;/a&gt; (&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/hilbert_inst_freq_modulation.pdf&#34;&gt;MATLAB Code&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Readers who use the processed datasets of this page &lt;strong&gt;must&lt;/strong&gt; cite the original data source as&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;BibTeX citation
+@misc{casewesternbearingdata,
+  url = {https://csegroups.case.edu/bearingdatacenter/home},
+  note = {This data come from Case Western Reserve University Bearing Data Center Website}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For attribution, readers &lt;strong&gt;may&lt;/strong&gt; cite this project as&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;BibTeX citation
+@misc{sahoo2016datadriven,
+  author = {Sahoo, Biswajit},
+  title = {Data-Driven Machinery Fault Diagnosis},
+  url = {https://biswajitsahoo1111.github.io/cbm_codes_open/},
+  year = {2016}
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
