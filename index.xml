@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>BISWAJIT SAHOO</title>
+    <title>Biswajit Sahoo</title>
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    <description>BISWAJIT SAHOO</description>
+    <description>Biswajit Sahoo</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Biswajit Sahoo</copyright><lastBuildDate>Thu, 09 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon.png</url>
-      <title>BISWAJIT SAHOO</title>
+      <title>Biswajit Sahoo</title>
       <link>/</link>
     </image>
     
@@ -2158,7 +2158,7 @@ features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;s
 &lt;pre&gt;&lt;code&gt;BibTeX citation
 @misc{sahoo2016datadriven,
   author = {Sahoo, Biswajit},
-  title = Data-Driven Machinery Fault Diagnosis},
+  title = {Data-Driven Machinery Fault Diagnosis},
   url = {https://biswajitsahoo1111.github.io/cbm_codes_open/},
   year = {2016}
 }

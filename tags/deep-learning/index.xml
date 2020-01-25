@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Deep Learning | BISWAJIT SAHOO</title>
+    <title>Deep Learning | Biswajit Sahoo</title>
     <link>/tags/deep-learning/</link>
       <atom:link href="/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     <description>Deep Learning</description>
@@ -732,7 +732,7 @@ features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;s
 &lt;pre&gt;&lt;code&gt;BibTeX citation
 @misc{sahoo2016datadriven,
   author = {Sahoo, Biswajit},
-  title = Data-Driven Machinery Fault Diagnosis},
+  title = {Data-Driven Machinery Fault Diagnosis},
   url = {https://biswajitsahoo1111.github.io/cbm_codes_open/},
   year = {2016}
 }

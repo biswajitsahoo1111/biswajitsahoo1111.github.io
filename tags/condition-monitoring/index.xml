@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Condition Monitoring | BISWAJIT SAHOO</title>
+    <title>Condition Monitoring | Biswajit Sahoo</title>
     <link>/tags/condition-monitoring/</link>
       <atom:link href="/tags/condition-monitoring/index.xml" rel="self" type="application/rss+xml" />
     <description>Condition Monitoring</description>
@@ -127,7 +127,7 @@ features (10 classes, sampling frequency: 48k)&lt;/a&gt;(Overall accuracy: &lt;s
 &lt;pre&gt;&lt;code&gt;BibTeX citation
 @misc{sahoo2016datadriven,
   author = {Sahoo, Biswajit},
-  title = Data-Driven Machinery Fault Diagnosis},
+  title = {Data-Driven Machinery Fault Diagnosis},
   url = {https://biswajitsahoo1111.github.io/cbm_codes_open/},
   year = {2016}
 }
