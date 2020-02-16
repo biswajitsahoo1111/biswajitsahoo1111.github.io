@@ -354,7 +354,8 @@
 
       <div id="search-box">
         
-        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
         
       </div>
 
@@ -532,6 +533,10 @@
 
     <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
       
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
 
       
 
@@ -646,7 +651,7 @@
 
 <p>In this project we will apply some of the standard machine learning techniques to publicly available data sets and show their results with code. There are not many publicly available data sets in machinery condition monitoring. So we will manage with those that are publicly available. Unlike machine learning community where almost all data and codes are open, in condition monitoring very few things are open, though some people are gradually making codes open. This project is a step towards that direction, even though a tiny one.</p>
 
-<p>This is an ongoing project and modifications and additions of new techniques will be done over time. <strong>Python</strong> and <strong>R</strong> are popular programming languages that are used for machine learning applications. We will use those for our demonstrations. <strong>This page contains results on fault diagnosis only. Results on fault prognosis will be summarized in a separate webpage.</strong></p>
+<p>This is an ongoing project and modifications and additions of new techniques will be done over time. <strong>Python</strong> and <strong>R</strong> are popular programming languages that are used for machine learning applications. We will use those for our demonstrations. <strong>Tensorflow</strong> will be used for deep learning applications. <strong>This page contains results on fault diagnosis only. Results on fault prognosis will be summarized in a separate webpage.</strong></p>
 
 <h2 id="results-using-case-western-reserve-university-bearing-data-https-csegroups-case-edu-bearingdatacenter-pages-welcome-case-western-reserve-university-bearing-data-center-website">Results using <a href="https://csegroups.case.edu/bearingdatacenter/pages/welcome-case-western-reserve-university-bearing-data-center-website">Case Western Reserve University Bearing Data</a></h2>
 
@@ -1031,11 +1036,46 @@ features</a> (10 classes, sampling frequency: 48k) (Overall accuracy: <strong>96
     
 
     
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
 
     
     
 
     
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
 
     
     
@@ -1045,7 +1085,6 @@ features</a> (10 classes, sampling frequency: 48k) (Overall accuracy: <strong>96
 
     
     
-
     
     
     
@@ -1053,12 +1092,12 @@ features</a> (10 classes, sampling frequency: 48k) (Overall accuracy: <strong>96
     
     
     
+      
     
     
     
     
-    
-    <script src="/js/academic.min.c6f9beab6fb83af42b79b98b1b192e24.js"></script>
+    <script src="/js/academic.min.c4716762638572b143da1c828c87dcd8.js"></script>
 
     
 
