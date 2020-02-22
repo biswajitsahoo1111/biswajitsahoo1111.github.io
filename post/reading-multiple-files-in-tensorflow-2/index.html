@@ -599,7 +599,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    13 min read
+    14 min read
   </span>
   
 
@@ -980,6 +980,7 @@ Test accuracy: 0.18</code></pre>
 <p>As expected, model performs terribly. This brings us to the end of the blog. As we had planned in the beginning, we have created random data files, a generator, and trained a model using that generator. The above code can be tweaked slightly to read any type of files other than <code>.csv</code>. And now we can train our model without worrying about the data size. Whether the data size is 10GB or 750GB, our approach will work for both.</p>
 <p>As a final note, I want to stress that, this is not the only approach to do the task. As I have mentioned previously, in <code>Tensorflow</code>, you can do the same thing in several different ways. The approach I have chosen seemed natural to me. I have neither strived for efficiency nor elegance. If readers have any better idea, I would be happy to know of it.</p>
 <p>I hope, this blog will be of help to readers. Please bring any errors or omissions to my notice.</p>
+<p><strong>Update</strong>: If along with reading, one has to perform complex transformations on extracted data (say, doing spectrogram on each segment of data, etc.), the naive approach presented in this blog may turn out to be slow. But there are ways to make these computations faster. The author himself achieved 10x speedup as compared to naive implementation in one application. If you run into this problem and are unable to solve it, contact the author. A blog discussing this speedup technique will be posted later.</p>
 </div>
 </div>
 
