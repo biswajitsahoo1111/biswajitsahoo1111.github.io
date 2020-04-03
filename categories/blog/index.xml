@@ -20,9 +20,21 @@
       <description>
 
 
-&lt;center&gt;
-(&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;Jupyter notebook for this post can be found here&lt;/a&gt;)
-&lt;/center&gt;
+&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
+&lt;td&gt;
+&lt;a target=&#34;_blank&#34; href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
+&lt;img src=&#34;https://www.tensorflow.org/images/colab_logo_32px.png&#34; /&gt;
+Run in Google Colab&lt;/a&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;a target=&#34;_blank&#34; href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
+&lt;img src=&#34;https://www.tensorflow.org/images/GitHub-Mark-32px.png&#34; /&gt;
+View source on GitHub&lt;/a&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;a href=&#34;https://www.dropbox.com/s/o4aevvuqr39kq20/Reading_multiple_files_in_Tensorflow_2.ipynb?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download notebook&lt;/a&gt;
+&lt;/td&gt;
+&lt;/table&gt;
 &lt;p&gt;In this post, we will read multiple &lt;code&gt;.csv&lt;/code&gt; files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 &lt;code&gt;.csv&lt;/code&gt; files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of &lt;code&gt;.csv&lt;/code&gt; files. As the number of files becomes large, we can’t load the whole data into memory. So we have to work with chunks of it. Generators help us do just that conveniently. In this post, we will read multiple files using a custom generator.&lt;/p&gt;
 &lt;p&gt;This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and &lt;code&gt;.csv&lt;/code&gt; files will be saved in it. Subsequently files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following codes. Jupyter notebook of this post can be found &lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;We will use &lt;code&gt;Tensorflow 2&lt;/code&gt; to run our deep learning model. &lt;code&gt;Tensorflow&lt;/code&gt; is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.&lt;/p&gt;

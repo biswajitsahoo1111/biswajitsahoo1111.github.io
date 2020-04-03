@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="(Jupyter notebook for this post can be found here)In this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 .csv files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of .">
+  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 .csv files. These files have been created using random numbers. Each file contains only 1024 numbers in one column.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/reading-multiple-files-in-tensorflow-2/">
@@ -265,7 +265,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo">
   <meta property="og:url" content="/post/reading-multiple-files-in-tensorflow-2/">
   <meta property="og:title" content="Reading multiple files in Tensorflow 2 | Biswajit Sahoo">
-  <meta property="og:description" content="(Jupyter notebook for this post can be found here)In this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 .csv files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of ."><meta property="og:image" content="/img/icon.png">
+  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 .csv files. These files have been created using random numbers. Each file contains only 1024 numbers in one column."><meta property="og:image" content="/img/icon.png">
   <meta property="twitter:image" content="/img/icon.png"><meta property="og:locale" content="en-us">
   
     
@@ -317,7 +317,7 @@
       "url": "img//"
     }
   },
-  "description": "(Jupyter notebook for this post can be found here)\r\rIn this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 .csv files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of ."
+  "description": "Run in Google Colab\r\r\rView source on GitHub\r\r\rDownload notebook\r\r\rIn this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 .csv files. These files have been created using random numbers. Each file contains only 1024 numbers in one column."
 }
 </script>
 
@@ -642,9 +642,21 @@
       
 
 
-<center>
-(<a href="https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb">Jupyter notebook for this post can be found here</a>)
-</center>
+<table class="tfo-notebook-buttons" align="center">
+<td>
+<a target="_blank" href="https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb">
+<img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+Run in Google Colab</a>
+</td>
+<td>
+<a target="_blank" href="https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb">
+<img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
+View source on GitHub</a>
+</td>
+<td>
+<a href="https://www.dropbox.com/s/o4aevvuqr39kq20/Reading_multiple_files_in_Tensorflow_2.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
+</td>
+</table>
 <p>In this post, we will read multiple <code>.csv</code> files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 <code>.csv</code> files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of <code>.csv</code> files. As the number of files becomes large, we can’t load the whole data into memory. So we have to work with chunks of it. Generators help us do just that conveniently. In this post, we will read multiple files using a custom generator.</p>
 <p>This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and <code>.csv</code> files will be saved in it. Subsequently files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following codes. Jupyter notebook of this post can be found <a href="https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb">here</a>.</p>
 <p>We will use <code>Tensorflow 2</code> to run our deep learning model. <code>Tensorflow</code> is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.</p>
