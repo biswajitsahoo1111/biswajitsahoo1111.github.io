@@ -23,7 +23,7 @@
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Whether this method is efficient or not is contestable. Efficiency of a pipeline depends on many factors. How efficiently data are loaded? What is the computer architecture on which computations are being done? Is GPU available? And the list goes on. So readers might get different performance results when they run this method on their own system. The system on which we ran this notebook has 44 CPU cores. &lt;code&gt;Tensorflow&lt;/code&gt; version is 2.2.0 and it is &lt;code&gt;XLA&lt;/code&gt; enabled. We did not use any GPU. We achieved 20% improvement over naive method. For one personal application, involving moderate size data (3-4 GB), I achieved 10x performance improvement. So I hope that this method can be applied for other applications as well. Please note that for some weird reason, the speedup technique doesn’t work in &lt;code&gt;Google Colab&lt;/code&gt;. But it works in GPU enabled personal systems, that I have checked.&lt;/p&gt;
 &lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
 &lt;td&gt;
-&lt;a target=&#34;_blank&#34; href=&#34;https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Efficiently_reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
+&lt;a href=&#34;https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Efficiently_reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
 &lt;img src=&#34;https://www.tensorflow.org/images/GitHub-Mark-32px.png&#34; /&gt;
 View source on GitHub&lt;/a&gt;
 &lt;/td&gt;
@@ -635,12 +635,12 @@ array([[0.13783312, 0.06810743, 0.18828638, 0.4399181 , 0.16585506],
 
 &lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
 &lt;td&gt;
-&lt;a target=&#34;_self&#34; href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
+&lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
 &lt;img src=&#34;https://www.tensorflow.org/images/colab_logo_32px.png&#34; /&gt;
 Run in Google Colab&lt;/a&gt;
 &lt;/td&gt;
 &lt;td&gt;
-&lt;a target=&#34;_self&#34; href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
+&lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
 &lt;img src=&#34;https://www.tensorflow.org/images/GitHub-Mark-32px.png&#34; /&gt;
 View source on GitHub&lt;/a&gt;
 &lt;/td&gt;
