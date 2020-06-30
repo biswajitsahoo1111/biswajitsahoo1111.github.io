@@ -879,9 +879,7 @@ validation_file_names = fault_1_val + fault_2_val + fault_3_val + fault_4_val + 
 test_file_names = fault_1_test + fault_2_test + fault_3_test + fault_4_test + fault_5_test
 
 # Shuffle files
-np.random.shuffle(train_file_names)
-np.random.shuffle(validation_file_names)
-np.random.shuffle(test_file_names)</code></pre>
+np.random.shuffle(train_file_names)</code></pre>
 <pre class="python"><code>print(&quot;Number of train_files:&quot; ,len(train_file_names))
 print(&quot;Number of validation_files:&quot; ,len(validation_file_names))
 print(&quot;Number of test_files:&quot; ,len(test_file_names))</code></pre>

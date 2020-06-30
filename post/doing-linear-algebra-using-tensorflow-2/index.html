@@ -1391,8 +1391,10 @@ print(&quot;Rank of A = &quot;, rank.numpy())</code></pre>
 </div>
 <div id="matrix-inverse" class="section level4">
 <h4>Matrix inverse</h4>
-<p>Computes the matrix inverse if it exists. It uses <span class="math inline">\(LU\)</span> decomposition to calculate inverse. What happens if inverse doesn’t exist? Here is the answer taken directly from <code>tensorflow</code> documentation:
-&gt;If a matrix is not invertible there is no guarantee what the op does. It may detect the condition and raise an exception or it may simply return a garbage result.</p>
+<p>Computes the matrix inverse if it exists. It uses <span class="math inline">\(LU\)</span> decomposition to calculate inverse. What happens if inverse doesn’t exist? Here is the answer taken directly from <code>tensorflow</code> documentation:</p>
+<blockquote>
+<p>… If a matrix is not invertible there is no guarantee what the op does. It may detect the condition and raise an exception or it may simply return a garbage result.</p>
+</blockquote>
 <p>Having read the documentation, we will apply the function to an invertible matrix.</p>
 <pre class="python"><code>A = tf.constant([[2, 2, 3],
                  [4,5,6],
@@ -1881,7 +1883,7 @@ array([[ 3.      ],
 <div id="ordinary-least-squares" class="section level3">
 <h3>Ordinary least squares</h3>
 <p>Both over determined and under determined least squares problem can be solved using the command <code>tf.linalg.lstsq</code>. In the underdetermined case, the output is the least norm solution. Least squares problem can be written as
-<span class="math display">\[arg\min_{x}\|Ax-b\|_2\]</span>
+<span class="math display">\[arg\min_{x}\|Ax-b\|_2^2\]</span>
 That is, we try to find an <span class="math inline">\(x\)</span> such that the residual error is as small as possible.
 For example, we will solve following two problems.
 <span class="math display">\[\begin{pmatrix}
@@ -1937,7 +1939,7 @@ array([[-0.04100358],
 <div id="regularized-least-squares" class="section level3">
 <h3>Regularized least squares</h3>
 <p>Only <span class="math inline">\(l_2\)</span> regularization is supported. The following regularized problem is solved.
-<span class="math display">\[arg\min_{x}\|Ax-b\|_2 + \lambda \|x\|_2^2\]</span></p>
+<span class="math display">\[arg\min_{x}\|Ax-b\|_2^2 + \lambda \|x\|_2^2\]</span></p>
 <p>Here, <span class="math inline">\(\lambda\)</span> is a hyperparameter. Usually several values of <span class="math inline">\(\lambda\)</span> are tried over a logarithmic scale before choosing the best one.</p>
 <pre class="python"><code>x_over_reg = tf.linalg.lstsq(A_over, b_over, l2_regularizer= 2.0)
 x_over_reg.numpy()</code></pre>
@@ -1959,7 +1961,7 @@ array([[-0.04763567],
 <div id="norm" class="section level3">
 <h3>Norm</h3>
 <p>Norm can be defined for vectors as well as matrices. <span class="math inline">\(p\)</span> norm of vector is defined as
-<span class="math display">\[\|x\|_p = (\Sigma_{i=1}^{n}x_i^p)^\frac{1}{p}\]</span></p>
+<span class="math display">\[\|x\|_p = (\Sigma_{i=1}^{n}|x_i|^p)^\frac{1}{p}\]</span></p>
 <p>Matrix is norm is defined as
 <span class="math display">\[\|A\|_p= \max_{x\neq 0}\frac{\|Ax\|_p}{\|x\|_p}\]</span></p>
 <p><code>Tensorflow</code> supports all the usual vector and matrix norms that are used in practice. Using only <code>tensorflow</code> we can calculate all norms except <code>infinity</code> norm. To calculate <code>infinity</code> norm we have to use <code>ord = np.inf</code>.</p>

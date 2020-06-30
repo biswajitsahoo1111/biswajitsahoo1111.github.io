@@ -257,9 +257,7 @@ validation_file_names = fault_1_val + fault_2_val + fault_3_val + fault_4_val + 
 test_file_names = fault_1_test + fault_2_test + fault_3_test + fault_4_test + fault_5_test
 
 # Shuffle files
-np.random.shuffle(train_file_names)
-np.random.shuffle(validation_file_names)
-np.random.shuffle(test_file_names)&lt;/code&gt;&lt;/pre&gt;
+np.random.shuffle(train_file_names)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(&amp;quot;Number of train_files:&amp;quot; ,len(train_file_names))
 print(&amp;quot;Number of validation_files:&amp;quot; ,len(validation_file_names))
 print(&amp;quot;Number of test_files:&amp;quot; ,len(test_file_names))&lt;/code&gt;&lt;/pre&gt;
@@ -1382,8 +1380,10 @@ print(&amp;quot;Rank of A = &amp;quot;, rank.numpy())&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;matrix-inverse&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;Matrix inverse&lt;/h4&gt;
-&lt;p&gt;Computes the matrix inverse if it exists. It uses &lt;span class=&#34;math inline&#34;&gt;\(LU\)&lt;/span&gt; decomposition to calculate inverse. What happens if inverse doesn’t exist? Here is the answer taken directly from &lt;code&gt;tensorflow&lt;/code&gt; documentation:
-&amp;gt;If a matrix is not invertible there is no guarantee what the op does. It may detect the condition and raise an exception or it may simply return a garbage result.&lt;/p&gt;
+&lt;p&gt;Computes the matrix inverse if it exists. It uses &lt;span class=&#34;math inline&#34;&gt;\(LU\)&lt;/span&gt; decomposition to calculate inverse. What happens if inverse doesn’t exist? Here is the answer taken directly from &lt;code&gt;tensorflow&lt;/code&gt; documentation:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;… If a matrix is not invertible there is no guarantee what the op does. It may detect the condition and raise an exception or it may simply return a garbage result.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Having read the documentation, we will apply the function to an invertible matrix.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;A = tf.constant([[2, 2, 3],
                  [4,5,6],
@@ -1872,7 +1872,7 @@ array([[ 3.      ],
 &lt;div id=&#34;ordinary-least-squares&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Ordinary least squares&lt;/h3&gt;
 &lt;p&gt;Both over determined and under determined least squares problem can be solved using the command &lt;code&gt;tf.linalg.lstsq&lt;/code&gt;. In the underdetermined case, the output is the least norm solution. Least squares problem can be written as
-&lt;span class=&#34;math display&#34;&gt;\[arg\min_{x}\|Ax-b\|_2\]&lt;/span&gt;
+&lt;span class=&#34;math display&#34;&gt;\[arg\min_{x}\|Ax-b\|_2^2\]&lt;/span&gt;
 That is, we try to find an &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; such that the residual error is as small as possible.
 For example, we will solve following two problems.
 &lt;span class=&#34;math display&#34;&gt;\[\begin{pmatrix}
@@ -1928,7 +1928,7 @@ array([[-0.04100358],
 &lt;div id=&#34;regularized-least-squares&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Regularized least squares&lt;/h3&gt;
 &lt;p&gt;Only &lt;span class=&#34;math inline&#34;&gt;\(l_2\)&lt;/span&gt; regularization is supported. The following regularized problem is solved.
-&lt;span class=&#34;math display&#34;&gt;\[arg\min_{x}\|Ax-b\|_2 + \lambda \|x\|_2^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;span class=&#34;math display&#34;&gt;\[arg\min_{x}\|Ax-b\|_2^2 + \lambda \|x\|_2^2\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Here, &lt;span class=&#34;math inline&#34;&gt;\(\lambda\)&lt;/span&gt; is a hyperparameter. Usually several values of &lt;span class=&#34;math inline&#34;&gt;\(\lambda\)&lt;/span&gt; are tried over a logarithmic scale before choosing the best one.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;x_over_reg = tf.linalg.lstsq(A_over, b_over, l2_regularizer= 2.0)
 x_over_reg.numpy()&lt;/code&gt;&lt;/pre&gt;
@@ -1950,7 +1950,7 @@ array([[-0.04763567],
 &lt;div id=&#34;norm&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Norm&lt;/h3&gt;
 &lt;p&gt;Norm can be defined for vectors as well as matrices. &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; norm of vector is defined as
-&lt;span class=&#34;math display&#34;&gt;\[\|x\|_p = (\Sigma_{i=1}^{n}x_i^p)^\frac{1}{p}\]&lt;/span&gt;&lt;/p&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\|x\|_p = (\Sigma_{i=1}^{n}|x_i|^p)^\frac{1}{p}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Matrix is norm is defined as
 &lt;span class=&#34;math display&#34;&gt;\[\|A\|_p= \max_{x\neq 0}\frac{\|Ax\|_p}{\|x\|_p}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Tensorflow&lt;/code&gt; supports all the usual vector and matrix norms that are used in practice. Using only &lt;code&gt;tensorflow&lt;/code&gt; we can calculate all norms except &lt;code&gt;infinity&lt;/code&gt; norm. To calculate &lt;code&gt;infinity&lt;/code&gt; norm we have to use &lt;code&gt;ord = np.inf&lt;/code&gt;.&lt;/p&gt;
@@ -4890,7 +4890,7 @@ Thus eigenvalues of S are diagonal entries of &lt;span class=&#34;math inline&#3
 
 &lt;h2 id=&#34;introduction-to-the-problem&#34;&gt;Introduction to the problem&lt;/h2&gt;
 
-&lt;p&gt;Condition based maintenance is the process of doing maintenance only when it is required. Adoption of this maintenance strategy leads to significant monetary gains as it precludes periodic maintenance and reduces unplanned downtime. Another term commonly used for condition based maintenance is predictive maintenance. As the name suggests, in this method we predict in advance when to perform maintenance. Maintenance is required, if fault has already occurred or is imminent. This leads us to the problem of fault diagnosis and prognosis.&lt;/p&gt;
+&lt;p&gt;Condition based maintenance (CBM) is the process of doing maintenance only when it is required. Adoption of this maintenance strategy leads to significant monetary gains as it precludes periodic maintenance and reduces unplanned downtime. Another term commonly used for condition based maintenance is predictive maintenance. As the name suggests, in this method we predict in advance when to perform maintenance. Maintenance is required, if fault has already occurred or is imminent. This leads us to the problem of fault diagnosis and prognosis.&lt;/p&gt;
 
 &lt;p&gt;In fault diagnosis, fault has already occurred and our aim is to find what type of fault is there and what is its severity. In fault prognosis, our aim is to predict the time of occurrence of fault in future, given its present state. These two problem are central to condition based maintenance. There are many methods to solve these problems. These methods can be broadly divided into two groups:&lt;/p&gt;
 
