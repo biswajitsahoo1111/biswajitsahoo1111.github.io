@@ -3461,7 +3461,7 @@ for i in range(10):
 
 
 &lt;blockquote&gt;
-&lt;p&gt;This story was originally written for &lt;a href=&#34;https://www.awsar-dst.in/&#34;&gt;“Augmented Writing Skills for Articulating Research (AWSAR)”&lt;/a&gt; award 2018. It is written in a non-technical way so as to be accessible to as many people as possible irrespective of their educational background. The story also featured in the top 100 list of stories for the award. Full list of awardees and their stories can be found &lt;a href=&#34;https://www.awsar-dst.in/awsar_awarded_articles_2018&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This story was originally written for &lt;a href=&#34;https://www.awsar-dst.in/&#34;&gt;“Augmented Writing Skills for Articulating Research (AWSAR)”&lt;/a&gt; award 2018. It is written in a non-technical way so as to be accessible to as many people as possible irrespective of their educational background. The story also featured in the top 100 list of stories for the award. Full list of awardees and their stories can be found &lt;a href=&#34;https://www.awsar-dst.in/assets/uploads/2020/AWSAR%201.0%20book.pdf&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div id=&#34;prelude&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Prelude&lt;/h2&gt;
@@ -3485,7 +3485,7 @@ for i in range(10):
 &lt;p&gt;Apart from data-driven methods there also exists another class of techniques that go by the broad name of model-based methods. In model-based methods, we formulate a full mathematical model of the machine and then try to find out how the response of the model changes if a fault is introduced and using this fact, try to find the nature of fault for a new problem. Though model-based techniques are important in their own right, in some cases it becomes very difficult to find an accurate model of the system. In contrast, data-driven methods are more robust against external noise and flexible, meaning we can perform different analysis using the same data and obtain different insights. Another advantage of using data-driven methods is that the whole process of fault diagnosis can easily be automated.&lt;/p&gt;
 &lt;p&gt;In this article, we have only considered the field of fault diagnosis. In fault diagnosis, faults are already present and we wish to either detect them or segregate them depending on fault type. But there exists another branch that deals with ways to predict the time of occurrence of fault in future, given the present state. Basically, they determine the remaining useful life of the machine. This sub-branch is called fault prognosis which is also an active area of research.&lt;/p&gt;
 &lt;p&gt;Given the advancement of research and scope for automation, it may be possible, in not so distant future, to get updates on your phone about possible malfunction of a part of your car while driving your car or while enjoying a ride in a self-driving car, maybe!!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.awsar-dst.in/assets/winner_article_2018/30_PhD.pdf&#34;&gt;Published story can be found at this link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.awsar-dst.in/assets/uploads/2020/AWSAR%201.0%20book.pdf&#34;&gt;Published story can be found at this link&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
