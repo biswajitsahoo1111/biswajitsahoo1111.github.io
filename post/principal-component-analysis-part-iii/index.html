@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="(Python codes for this post can be found here)In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).">
+  <meta name="description" content="Run Python codes in Google ColabDownload Python codesDownload R codes (R Markdown)In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/principal-component-analysis-part-iii/">
@@ -265,7 +265,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo">
   <meta property="og:url" content="/post/principal-component-analysis-part-iii/">
   <meta property="og:title" content="Principal Component Analysis - Part III | Biswajit Sahoo">
-  <meta property="og:description" content="(Python codes for this post can be found here)In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised)."><meta property="og:image" content="/img/icon.png">
+  <meta property="og:description" content="Run Python codes in Google ColabDownload Python codesDownload R codes (R Markdown)In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised)."><meta property="og:image" content="/img/icon.png">
   <meta property="twitter:image" content="/img/icon.png"><meta property="og:locale" content="en-us">
   
     
@@ -317,7 +317,7 @@
       "url": "img//"
     }
   },
-  "description": "(Python codes for this post can be found here)\r\rIn this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised)."
+  "description": "Run Python codes in Google Colab\r\rDownload Python codes\r\rDownload R codes (R Markdown)\r\r\rIn this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘Principal component analysis’ and is authored by Herve Abdi and Lynne J. Williams. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised)."
 }
 </script>
 
@@ -642,9 +642,19 @@
       
 
 
-<center>
-(<a href="https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/PCA_Abdi_in_python.ipynb">Python codes for this post can be found here</a>)
-</center>
+<table class="tfo-notebook-buttons" align="center">
+<td align="center">
+<a href="https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/PCA_Abdi_in_python.ipynb">
+<img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+Run Python codes in Google Colab</a>
+</td>
+<td align="center">
+<a href="https://www.dropbox.com/s/gn415uh3quou3a8/PCA_Abdi_in_python.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download Python codes</a>
+</td>
+<td align="center">
+<a href="https://www.dropbox.com/s/tp56l6v7upa1apf/PCA_blog_Biswajit_Sahoo_part_3.Rmd?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download R codes (R Markdown)</a>
+</td>
+</table>
 <p>In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘<a href="https://personal.utdallas.edu/~herve/abdi-awPCA2010.pdf">Principal component analysis</a>’ and is authored by <a href="https://personal.utdallas.edu/~herve/">Herve Abdi</a> and <a href="https://ljwilliams.github.io/">Lynne J. Williams</a>. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).</p>
 <p>This post is Part-III of a three part series on PCA. Other parts of the series can be found at the links below.</p>
 <ul>
@@ -1308,7 +1318,7 @@ RESS</code></pre>
 <pre><code>[1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00</code></pre>
 <p>We will not calculate the value of PRESS in this post as it requires us to consider random models. We will not pursue that here.</p>
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.0 (2020-04-24)
+<pre><code>R version 4.0.2 (2020-06-22)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 7 x64 (build 7601) Service Pack 1
 
@@ -1330,13 +1340,13 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.4.6     knitr_1.28       magrittr_1.5     tidyselect_1.0.0
  [5] munsell_0.5.0    colorspace_1.4-1 R6_2.4.1         rlang_0.4.5     
- [9] dplyr_0.8.5      stringr_1.4.0    tools_4.0.0      grid_4.0.0      
+ [9] dplyr_0.8.5      stringr_1.4.0    tools_4.0.2      grid_4.0.2      
 [13] gtable_0.3.0     xfun_0.13        withr_2.2.0      htmltools_0.4.0 
 [17] ellipsis_0.3.0   assertthat_0.2.1 yaml_2.2.1       digest_0.6.25   
-[21] tibble_3.0.1     lifecycle_0.2.0  crayon_1.3.4     bookdown_0.18   
+[21] tibble_3.0.1     lifecycle_0.2.0  crayon_1.3.4     bookdown_0.19   
 [25] farver_2.0.3     purrr_0.3.4      vctrs_0.2.4      glue_1.4.0      
 [29] evaluate_0.14    rmarkdown_2.1    blogdown_0.18    labeling_0.3    
-[33] stringi_1.4.6    compiler_4.0.0   pillar_1.4.3     scales_1.1.0    
+[33] stringi_1.4.6    compiler_4.0.2   pillar_1.4.3     scales_1.1.0    
 [37] pkgconfig_2.0.3 </code></pre>
 <p>Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to <a href="https://biswajitsahoo1111.github.io/">the author’s</a> email.</p>
 <p><a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_3.Rmd">R Markdown file for this post</a></p>
