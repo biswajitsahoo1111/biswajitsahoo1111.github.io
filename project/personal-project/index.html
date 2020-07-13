@@ -630,7 +630,17 @@
     <div class="article-style">
       
 
-<p><center> (<a href="https://biswajitsahoo1111.github.io/cbm_codes_open/">Visit this Github Page to download all codes and preprocessed data</a>)</center></p>
+<table class="tfo-notebook-buttons" align="center">
+  <td align="center">
+    <a href="https://biswajitsahoo1111.github.io/cbm_codes_open/"><img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />View GitHub Page</a>
+  </td>
+  <td align="center">
+    <a href="https://github.com/biswajitsahoo1111/cbm_codes_open"><img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />View source on GitHub</a>
+  </td>
+  <td align="center">
+    <a href="https://codeload.github.com/biswajitsahoo1111/cbm_codes_open/zip/master"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download all codes (.zip)</a>
+  </td>
+</table>
 
 <h2 id="introduction-to-the-problem">Introduction to the problem</h2>
 
@@ -643,7 +653,7 @@
 <li>Data-Driven Approaches</li>
 </ul>
 
-<p>In model based approach, a complete model of the system is formulated and it is then used for fault diagnosis and prognosis. But this method has several limitations. Firstly, it is a difficult task to accurately model a system. Modelling becomes even more challenging with variations in working conditions. Secondly, we have to formulate different models for different tasks. For example, to diagnose bearing fault and gear fault, we have to formulate two different models. Data-driven methods provide a convenient alternative to these problems.</p>
+<p>In model based approach, a complete model of the system is formulated and it is then used for fault diagnosis and prognosis. But this method has several limitations. Firstly, it is a difficult task to accurately model a system. Modeling becomes even more challenging with variations in working conditions. Secondly, we have to formulate different models for different tasks. For example, to diagnose bearing fault and gear fault, we have to formulate two different models. Data-driven methods provide a convenient alternative to these problems.</p>
 
 <p>In data-driven approach, we use operational data of the machine to design algorithms that are then used for fault diagnosis and prognosis. The operational data may be vibration data, thermal imaging data, acoustic emission data, or something else. These techniques are robust to environmental variations. Accuracy obtained by data-driven methods is also at par and sometimes even better than accuracy obtained by model based approaches. Due to these reasons data-driven methods are becoming increasingly popular at diagnosis and prognosis tasks.</p>
 
@@ -705,6 +715,10 @@ features</a> (10 classes, sampling frequency: 48k) (Overall accuracy: <strong>96
 </ol>
 
 <h2 id="enter-deep-learning">Enter Deep Learning</h2>
+
+<hr />
+
+<p>In this section, we will show results of fault diagnosis task using deep learning on the same Case Western Reserve University bearing dataset. Due to the nondeterministic nature of operations used in deep learning and dependence of libraries like <code>Tensorflow</code> on computer architecture, readers might obtain slightly different results than those in the notebooks. As a more reliable measure, we report average results of ten iterations. Our models are small enough to permit us to run those that many times in a reasonable amount of time. For reproducibility of our results, we also share the saved models of each notebook. All saved models can be found at <a href="https://github.com/biswajitsahoo1111/cbm_codes_open/tree/master/notebooks/saved_models">this link</a>. A notebook describing the steps to use the saved models can be found <a href="https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Using_saved_models_tensorflow.ipynb">here</a>.</p>
 
 <ol>
 <li><p><a href="https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Deep_Learning_CWRU_Blog.ipynb">Fault diagnosis using convolutional neural network (CNN)</a> (10 classes, sampling frequency: 48k) (Overall accuracy: <strong>96.2%</strong>)</p></li>
