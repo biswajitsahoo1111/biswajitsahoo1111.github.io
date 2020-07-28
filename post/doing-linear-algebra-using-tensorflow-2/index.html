@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will explore the ways of doing linear algebra only using tensorflow. We will only import tensorflow and nothing else. As we will see, we can do all the common linear algebra operations without using any other library. This post is very long as it covers almost all the functions that are there in the linear algebra library tf.">
+  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will explore ways of doing linear algebra only using tensorflow. We will only import tensorflow and nothing else. As we will see, we can do all the common linear algebra operations without using any other library. This post is very long as it covers almost all the functions that are there in the linear algebra library tf.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/doing-linear-algebra-using-tensorflow-2/">
@@ -265,7 +265,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo">
   <meta property="og:url" content="/post/doing-linear-algebra-using-tensorflow-2/">
   <meta property="og:title" content="Doing Linear Algebra using Tensorflow 2 | Biswajit Sahoo">
-  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will explore the ways of doing linear algebra only using tensorflow. We will only import tensorflow and nothing else. As we will see, we can do all the common linear algebra operations without using any other library. This post is very long as it covers almost all the functions that are there in the linear algebra library tf."><meta property="og:image" content="/img/icon.png">
+  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will explore ways of doing linear algebra only using tensorflow. We will only import tensorflow and nothing else. As we will see, we can do all the common linear algebra operations without using any other library. This post is very long as it covers almost all the functions that are there in the linear algebra library tf."><meta property="og:image" content="/img/icon.png">
   <meta property="twitter:image" content="/img/icon.png"><meta property="og:locale" content="en-us">
   
     
@@ -317,7 +317,7 @@
       "url": "img//"
     }
   },
-  "description": "Run in Google Colab\r\r\rView source on GitHub\r\r\rDownload notebook\r\r\rIn this post, we will explore the ways of doing linear algebra only using tensorflow. We will only import tensorflow and nothing else. As we will see, we can do all the common linear algebra operations without using any other library. This post is very long as it covers almost all the functions that are there in the linear algebra library tf."
+  "description": "Run in Google Colab\r\r\rView source on GitHub\r\r\rDownload notebook\r\r\rIn this post, we will explore ways of doing linear algebra only using tensorflow. We will only import tensorflow and nothing else. As we will see, we can do all the common linear algebra operations without using any other library. This post is very long as it covers almost all the functions that are there in the linear algebra library tf."
 }
 </script>
 
@@ -599,7 +599,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    49 min read
+    56 min read
   </span>
   
 
@@ -657,7 +657,7 @@ View source on GitHub</a>
 <a href="https://www.dropbox.com/s/vtp81fo71uo9ctn/Doing_Linear_Algebra_using_Tensorflow_2.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
 </td>
 </table>
-<p>In this post, we will explore the ways of doing linear algebra <strong>only</strong> using <code>tensorflow</code>. We will only import <code>tensorflow</code> and nothing else. As we will see, we can do all the common linear algebra operations without using any other library. This post is very long as it covers almost all the functions that are there in the linear algebra library <code>tf.linalg</code>. But this is not a copy of <code>tensorflow</code> documentation. Rather, the <code>tensorflow</code> documentation is a super set of what has been discussed here. This post also assumes that readers have a working knowledge of linear algebra. Most of the times, we will give examples to illustrate a function without going into the underlying theory. Interested readers should use the contents to browse relevant sections of their interest.</p>
+<p>In this post, we will explore ways of doing linear algebra <strong>only</strong> using <code>tensorflow</code>. We will only import <code>tensorflow</code> and nothing else. As we will see, we can do all the common linear algebra operations without using any other library. This post is very long as it covers almost all the functions that are there in the linear algebra library <code>tf.linalg</code>. But this is not a copy of <code>tensorflow</code> documentation. Rather, the <code>tensorflow</code> documentation is a super set of what has been discussed here. This post also assumes that readers have a working knowledge of linear algebra. Most of the times, we will give examples to illustrate a function without going into the underlying theory. Interested readers should use the contents to browse relevant sections of their interest.</p>
 <ul>
 <li><a href="#basics">Basics</a>
 <ul>
@@ -725,7 +725,12 @@ View source on GitHub</a>
 <ul>
 <li><a href="#using_lu_decomposition">Using LU decomposition</a></li>
 <li><a href="#using_cholesky_decomposition">Using Cholesky decomposition</a></li>
+</ul></li>
+<li><a href="#solving_structured_linear_systems">Solving structured linear systems</a>
+<ul>
+<li><a href="#solving_triangular_systems">Solving triangular systems</a></li>
 <li><a href="#solving_tri-diagonal_systems">Solving tri-diagonal systems</a></li>
+<li><a href="#solving_banded_triangular_systems">Solving banded triangular systems</a></li>
 </ul></li>
 <li><a href="#solving_least_squares_problems">Solving least squares problems</a>
 <ul>
@@ -738,7 +743,7 @@ View source on GitHub</a>
 <li><a href="#normalizing_a_tensor">Normalizing a tensor</a></li>
 <li><a href="#global_norm">Global norm</a></li>
 <li><a href="#cross_product_of_vectors">Cross product of vectors</a></li>
-<li><a href="#matrix_square_root">Matrix_square_root</a></li>
+<li><a href="#matrix_square_root">Matrix square root</a></li>
 <li><a href="#matrix_exponential">Matrix exponential</a></li>
 <li><a href="#matrix_logarithm">Matrix logarithm</a></li>
 <li><a href="#log-determinant_of_a_matrix">Log-determinant of a matrix</a></li>
@@ -777,7 +782,7 @@ View source on GitHub</a>
 </ul>
 <pre class="python"><code>import tensorflow as tf
 print(tf.__version__)</code></pre>
-<pre><code>2.2.0</code></pre>
+<pre><code>2.3.0</code></pre>
 <p>One thing we have to keep in mind is that while accessing a function, we have to always append the function by <code>tf.linalg</code>. It is possible to remove the <code>tf</code> part by importing the <code>linalg</code> library from <code>tensorflow</code>. But even then we have to append every function by <code>linalg</code>. In this post, we will always use <code>tf.linalg</code> followed by function name. This amounts to little more typing. But we will do this to remind ourselves that we are using <code>linalg</code> library of <code>tensorflow</code>. This might seem little awkward to seasoned users of <code>MATLAB</code> or <code>Julia</code> where you just need to type the function name to use it without having to write the library name all the time. Except that, linear algebra in <code>tensorflow</code> seems quite natural.</p>
 <p><strong>Note</strong>: In this post, we will show some of the ways in which we can handle matrix operations in <code>Tensorflow</code>. We will mainly use 1D or 2D arrays in our examples. But matrix operations in Tensorflow are not limited to 2D arrays. In fact, the operations can be done on multidimensional arrays. If an array has more than 2 dimensions, the matrix operation is done on the <strong>last two</strong> dimensions and the same operation is carried across other dimensions. For example, if our array has a shape of (3,5,5), it can be thought of as 3 matrices each of shape (5,5). When we call a matrix function on this array, the matrix function is applied to all 3 matrices of shape (5,5). This is also true for higher dimensional arrays.</p>
 <p><a id="basics"></a></p>
@@ -922,21 +927,21 @@ print(&quot;Imaginary part:&quot;)
 print(imag_part)</code></pre>
 <pre><code>Real part:
 tf.Tensor(
-[[4.0592647 2.7457805]
- [4.5665903 2.4078012]
- [2.9457803 3.0998607]], shape=(3, 2), dtype=float32)
+[[2.0458713 4.314379 ]
+ [4.2078624 2.956036 ]
+ [3.7432299 1.0335522]], shape=(3, 2), dtype=float32)
 
 Imaginary part:
 tf.Tensor(
-[[4.0819793 1.4122672]
- [3.3663173 1.0939579]
- [2.2030935 1.1165142]], shape=(3, 2), dtype=float32)</code></pre>
+[[3.8836174 4.620237 ]
+ [2.296022  1.8005514]
+ [1.6300111 1.2105217]], shape=(3, 2), dtype=float32)</code></pre>
 <pre class="python"><code>complex_mat = tf.dtypes.complex(real = real_part, imag = imag_part)
 print(complex_mat)</code></pre>
 <pre><code>tf.Tensor(
-[[4.0592647+4.0819793j 2.7457805+1.4122672j]
- [4.5665903+3.3663173j 2.4078012+1.0939579j]
- [2.9457803+2.2030935j 3.0998607+1.1165142j]], shape=(3, 2), dtype=complex64)</code></pre>
+[[2.0458713+3.8836174j 4.314379 +4.620237j ]
+ [4.2078624+2.296022j  2.956036 +1.8005514j]
+ [3.7432299+1.6300111j 1.0335522+1.2105217j]], shape=(3, 2), dtype=complex64)</code></pre>
 <p>There is a simpler way to create a complex matrix.</p>
 <pre class="python"><code>complex_mat_2 = tf.constant([1+2j, 2+3j , 3+4j, 4+5j, 5+6j, 6+7j], shape = (2,3))
 complex_mat_2</code></pre>
@@ -1102,6 +1107,21 @@ array([[1., 0., 0., 0., 0.],
        [0., 7., 3., 0., 0.],
        [0., 0., 8., 4., 0.],
        [0., 0., 0., 9., 5.]], dtype=float32)&gt;</code></pre>
+</div>
+<div id="note-on-alignment-strategy" class="section level4">
+<h4>Note on alignment strategy</h4>
+<p>Functions like <code>tf.linalg.diag</code> and <code>tf.linalg.set_diag</code> and several others to be seen later, take an argument called <code>align</code> among other things. Though up to this point we have used default parameters for <code>align</code>, we believe, a note is warranted at this point. There are four different alignment strategies in tensorflow. Those are:</p>
+<ul>
+<li><code>LEFT_LEFT</code>: Superdiagonals are <code>appended at right</code> and subdiagonals are <code>appended at right</code>.</li>
+<li><code>LEFT_RIGHT</code>: Superdiagonals are <code>appended at right</code> and subdiagonals are <code>appended at left</code>.</li>
+<li><code>RIGHT_LEFT</code>: Superdiagonals are <code>appended at left</code> and subdiagonals are <code>appended at right</code>.</li>
+<li><code>RIGHT_RIGHT</code>: Superdiagonals are <code>appended at left</code> and subdiagonals are <code>appended at left</code>.</li>
+</ul>
+<p>One way to remember the above rules is that if something is aligned to left, it is appended at right. And in <code>LEFT_RIGHT</code>, first word corresponds to superdiagonals and second word corresponds to subdiagonals.</p>
+</div>
+<div id="why-do-we-need-an-alignment-strategy" class="section level4">
+<h4>Why do we need an alignment strategy?</h4>
+<p>Both superdiagonals and subdiagonals have less number of entries than the main diagonal. If we extract (for some reason) the subdiagonals (or superdiagonals) of a matrix along with the main diagonal, the resulting array will have different lengths. These type of arrays are called <code>ragged array</code>s. Though <code>tensorflow</code> can handle <code>ragged array</code>s, the results of linear algebra library are always uniform arrays (i.e., all the arrays have same number of entries). So while extracting subdiagonals (or superdiagonals), we have to append it either at the left or at right to make it of the same length as the main diagonal. This leads to the question of where the arrays should be appended. <code>Tensorflow</code> leaves that option to the readers. Depending on where we append the subdiagonals and superdiagonals, there are four alignment strategies as mentioned below.</p>
 <p>In the next section, we will see a way to create tri-diagonal matrix using <code>tf.linalg.set_diag</code>.</p>
 <p><a id = "tri-diagonal_matrix"></a></p>
 </div>
@@ -1115,7 +1135,10 @@ array([[ 2, -1,  0,  0,  0],
        [ 0, -1,  2, -1,  0],
        [ 0,  0, -1,  2, -1],
        [ 0,  0,  0, -1,  2]], dtype=int32)&gt;</code></pre>
-<p>Using <code>tf.linalg.set_diag</code>. While setting more that one diagonals using <code>set_diag</code>, if <code>k = (-2,3)</code>, we have to have 6 diagonals (2 sub-diagonals, 1 main diagonal, and 3 super-diagonals). First three rows of the input diagonals will correspond to super-diagonals and have to be appended at the right by zeros. Fourth row corresponds to main diagonal. Last two rows correspond to sub-diagonals and have to be appended at the left by zeros. This type of appending works when <code>align="LEFT_RIGHT"</code>. We chose this alignment strategy as it is consistent with tri-diagonal matrix convention, to be discussed in later sections.</p>
+</div>
+<div id="tri-digonal-matrix-using-tf.linalg.set_diag" class="section level4">
+<h4>Tri-digonal matrix using <code>tf.linalg.set_diag</code></h4>
+<p>While setting more that one diagonals using <code>set_diag</code>, say <code>k = (-2,3)</code>, we have to have 6 diagonals (2 sub-diagonals, 1 main diagonal, and 3 super-diagonals). First three rows of the input diagonals will correspond to super-diagonals and have to be appended at the right by zeros (according to alignment strategy of <code>"LEFT_RIGHT"</code>). Fourth row corresponds to main diagonal. Last two rows correspond to sub-diagonals and have to be appended at the left by zeros (according to alignment strategy of <code>"LEFT_RIGHT"</code>). We could have chosen any other alignment strategy and modified our input accordingly. Using this rule, now we will create a tri-diagonal matrix.</p>
 <pre class="python"><code>diags = tf.constant([[-1,-1,-1,-1, 0],
                      [ 2, 2, 2, 2, 2],
                      [ 0,-1,-1,-1,-1]], dtype = tf.float32)
@@ -1241,7 +1264,7 @@ array([[0.78733766, 2.5200539 , 0.9812998 , 5.141082  , 1.9184761 ],
 <p>Sparse matrices are within <code>tf.sparse</code> library. There are several functions specifically designed for sparse matrices. Full list of function in <code>tf.sparse</code> library can be found at <a href="https://www.tensorflow.org/api_docs/python/tf/sparse">this link</a>. In this section, we will see how sparse matrices are created. The first argument is set of indices (rows and columns), second argument is the values at those indices. Third argument is the <code>dense_shape</code> of the sparse matrix.</p>
 <pre class="python"><code>sparse_mat = tf.sparse.SparseTensor([[0,1],[1,3],[3,2]], [-5, -10, 7], dense_shape= (5,5))
 sparse_mat</code></pre>
-<pre><code>&lt;tensorflow.python.framework.sparse_tensor.SparseTensor at 0x7fdc6168d110&gt;</code></pre>
+<pre><code>&lt;tensorflow.python.framework.sparse_tensor.SparseTensor at 0x7fc7506a7280&gt;</code></pre>
 <p>To see the actual matrix, we have to convert the sparse matrix to a dense matrix. This is achieved using <code>to_dense</code> function.</p>
 <pre class="python"><code>tf.sparse.to_dense(sparse_mat)</code></pre>
 <pre><code>&lt;tf.Tensor: shape=(5, 5), dtype=int32, numpy=
@@ -1312,8 +1335,8 @@ mat_1.numpy()</code></pre>
 </div>
 <div id="multiplying-two-tri-diagonal-matrices" class="section level4">
 <h4>Multiplying two tri-diagonal matrices</h4>
-<p>If matrices have some sparse structure, usual matrix multiplication is not an efficient method for those type of matrices. Special algorithms are there that exploit the sparsity of the matrices.</p>
-<p>One such sparse matrix is tri-diagonal matrix. It has nonzero entries only on its super-diagonal, main diagonal, and sub-diagonal. To multiply a tri-diagonal matrix with another matrix, we can use <code>tf.linalg.tridiagonal_matmul</code> function.</p>
+<p>If matrices have sparse structure, usual matrix multiplication is not an efficient method for those type of matrices. Special algorithms are there that exploit the sparsity of the matrices.</p>
+<p>One such sparse matrix is tri-diagonal matrix. It has nonzero entries only on its super-diagonal, main diagonal, and sub-diagonal. To multiply a tri-diagonal matrix with another matrix, we can use <code>tf.linalg.tridiagonal_matmul</code> function. Its first argument is the diagonals of tri-diagonal matrix and second argument is the matrix with which the tri-diagonal matrix needs to be multiplied.</p>
 <pre class="python"><code>diagonals = tf.constant([[-1,-1,-1,-1,0],
                          [ 2, 2, 2, 2, 2],
                          [ 0,-1,-1,-1,-1.]])
@@ -1338,7 +1361,9 @@ array([[ 0.,  3.,  3.],
        [-1.,  1.,  0.],
        [ 8.,  6.,  8.],
        [-3.,  2., -1.]], dtype=float32)&gt;</code></pre>
-<p>How to multiply two tri-diagonal matrices?</p>
+</div>
+<div id="how-to-multiply-two-tri-diagonal-matrices" class="section level4">
+<h4>How to multiply two tri-diagonal matrices?</h4>
 <p>In this case, we have to convert the right tri-diagonal matrix into a full matrix and then multiply it with the left one using only the diagonals of left tri-diagonal matrix. For example, we will multiply the previous tri-diagonal matrix with itself.</p>
 <pre class="python"><code>tf.linalg.tridiagonal_matmul(diagonals, rhs = tridiag_mat)</code></pre>
 <pre><code>&lt;tf.Tensor: shape=(5, 5), dtype=float32, numpy=
@@ -1393,7 +1418,7 @@ print(&quot;Rank of A = &quot;, rank.numpy())</code></pre>
 <h4>Matrix inverse</h4>
 <p>Computes the matrix inverse if it exists. It uses <span class="math inline">\(LU\)</span> decomposition to calculate inverse. What happens if inverse doesn’t exist? Here is the answer taken directly from <code>tensorflow</code> documentation:</p>
 <blockquote>
-<p>… If a matrix is not invertible there is no guarantee what the op does. It may detect the condition and raise an exception or it may simply return a garbage result.</p>
+<p>[…] If a matrix is not invertible there is no guarantee what the op does. It may detect the condition and raise an exception or it may simply return a garbage result. […]</p>
 </blockquote>
 <p>Having read the documentation, we will apply the function to an invertible matrix.</p>
 <pre class="python"><code>A = tf.constant([[2, 2, 3],
@@ -1427,24 +1452,24 @@ array([[ 1.5999998e+00, -3.9999992e-01, -6.0000008e-01],
 <pre class="python"><code>mat = tf.random.uniform(shape = (5,5), minval = 1, maxval = 20, dtype = tf.int32)
 mat</code></pre>
 <pre><code>&lt;tf.Tensor: shape=(5, 5), dtype=int32, numpy=
-array([[ 1, 15, 19,  1,  1],
-       [ 8,  5, 17, 14, 16],
-       [12, 13, 12, 16, 19],
-       [ 6,  8,  3,  5, 17],
-       [12,  8,  3,  5,  8]], dtype=int32)&gt;</code></pre>
+array([[16, 18, 14,  6,  8],
+       [17,  4,  1, 13, 11],
+       [ 1,  6,  2,  9, 15],
+       [ 9,  8, 15, 14,  5],
+       [15, 18,  3, 10, 11]], dtype=int32)&gt;</code></pre>
 <pre class="python"><code>tf.linalg.diag_part(mat).numpy()</code></pre>
-<pre><code>array([ 1,  5, 12,  5,  8], dtype=int32)</code></pre>
+<pre><code>array([16,  4,  2, 14, 11], dtype=int32)</code></pre>
 <pre class="python"><code>tf.linalg.tensor_diag_part(mat).numpy()</code></pre>
-<pre><code>array([ 1,  5, 12,  5,  8], dtype=int32)</code></pre>
+<pre><code>array([16,  4,  2, 14, 11], dtype=int32)</code></pre>
 <pre class="python"><code>tf.linalg.diag_part(mat, k = (-1,0)).numpy()</code></pre>
-<pre><code>array([[ 1,  5, 12,  5,  8],
-       [ 8, 13,  3,  5,  0]], dtype=int32)</code></pre>
+<pre><code>array([[16,  4,  2, 14, 11],
+       [17,  6, 15, 10,  0]], dtype=int32)</code></pre>
 <pre class="python"><code>tf.linalg.diag_part(mat, k = [-2,1])  # 2 subdiagonals, main diagonal, and 1 super diagonal</code></pre>
 <pre><code>&lt;tf.Tensor: shape=(4, 5), dtype=int32, numpy=
-array([[ 0, 15, 17, 16, 17],
-       [ 1,  5, 12,  5,  8],
-       [ 8, 13,  3,  5,  0],
-       [12,  8,  3,  0,  0]], dtype=int32)&gt;</code></pre>
+array([[ 0, 18,  1,  9,  5],
+       [16,  4,  2, 14, 11],
+       [17,  6, 15, 10,  0],
+       [ 1,  8,  3,  0,  0]], dtype=int32)&gt;</code></pre>
 <p><a id = "extract_band_part_of_a_matrix"></a></p>
 </div>
 <div id="extract-band-part-of-a-matrix" class="section level4">
@@ -1466,7 +1491,7 @@ array([[ 0.,  1.,  0.,  0.,  0.],
        [10., 11., 12., 13.,  0.],
        [ 0., 16., 17., 18., 19.],
        [ 0.,  0., 22., 23., 24.]], dtype=float32)&gt;</code></pre>
-<pre class="python"><code>tf.linalg.band_part(matrix, num_lower = -1, num_upper = 0)  # Lower traiangular part</code></pre>
+<pre class="python"><code>tf.linalg.band_part(matrix, num_lower = -1, num_upper = 0)  # Lower triangular part</code></pre>
 <pre><code>&lt;tf.Tensor: shape=(5, 5), dtype=float32, numpy=
 array([[ 0.,  0.,  0.,  0.,  0.],
        [ 5.,  6.,  0.,  0.,  0.],
@@ -1712,12 +1737,14 @@ Eigenvectors:
 <p>Results are accurate up to 5 decimal digits.</p>
 <pre class="python"><code>tf.linalg.eigvalsh(A).numpy()    # Just eigenvalues</code></pre>
 <pre><code>array([1.       , 1.5857866, 4.4142137], dtype=float32)</code></pre>
-<p>What happens if you pass a nonsymmetric matrix to <code>eigh</code> by mistake?</p>
+<div id="what-happens-if-you-pass-a-nonsymmetric-matrix-to-eigh-by-mistake" class="section level4">
+<h4>What happens if you pass a nonsymmetric matrix to <code>eigh</code> by mistake?</h4>
 <p>Well, while using <code>eigh</code>, <code>tensorflow</code> assumes the matrix to be symmetric. <code>Tensorflow</code> doesn’t check whether the matrix is symmetric or not. It just takes the lower triangular part, assumes that the upper triangular part is same because of symmetry and performs the computations. So be prepared to get a wrong result!</p>
 <p><a id = "eigen-analysis_of_other_matrices"></a></p>
 </div>
-<div id="eigen-analysis-of-other-matrices" class="section level3">
-<h3>Eigen-analysis of other matrices</h3>
+</div>
+<div id="eigen-analysis-of-non-hermitian-matrices" class="section level3">
+<h3>Eigen-analysis of non-Hermitian matrices</h3>
 <pre class="python"><code>A = tf.constant([[1,-5,3],
                  [2,4,-7],
                  [3,9,-2.]])
@@ -1739,15 +1766,17 @@ Eigenvectors:
 <pre class="python"><code>tf.linalg.eigvals(A).numpy()</code></pre>
 <pre><code>array([2.7560833 -7.9942424e-08j, 0.12195918-7.5705280e+00j,
        0.12195931+7.5705280e+00j], dtype=complex64)</code></pre>
-<p>What happens when you pass a symmetric matrix to <code>eig</code>?</p>
+<div id="what-happens-when-you-pass-a-symmetric-matrix-to-eig" class="section level4">
+<h4>What happens when you pass a symmetric matrix to <code>eig</code>?</h4>
 <p>Nothing! We will still get the correct answer. <code>Tensorflow</code> will use more operations to compute results when it could have been done using less computations.</p>
 <p><a id = "solving_linear_systems"></a></p>
 </div>
 </div>
+</div>
 <div id="solving-linear-systems" class="section level2">
 <h2>Solving linear systems</h2>
-<p>A linear system can be written as <span class="math display">\[ Ax = b\]</span>
-In general, <span class="math inline">\(A\)</span> can be square or rectangular. Right hand side <span class="math inline">\(b\)</span> is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same <span class="math inline">\(A\)</span>, the RHS can be replaced by a matrix whose columns are different RHS vectors.</p>
+<p>A linear system is written as <span class="math display">\[ Ax = b\]</span></p>
+<p>In general, <span class="math inline">\(A\)</span> can be square or rectangular. Right hand side <span class="math inline">\(b\)</span> is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same <span class="math inline">\(A\)</span>, the RHS can be replaced by a matrix whose columns are different RHS vectors.</p>
 <p>Depending on the structure of <span class="math inline">\(A\)</span> (whether triangular, or tri-diagonal, or positive definite), suitable algorithm is chosen to solve the linear system. <code>Tensorflow</code> has a function <code>tf.linalg.solve</code> to solve linear systems. But this function doesn’t take into account the special structure of <span class="math inline">\(A\)</span>.</p>
 <pre class="python"><code>A = tf.constant([[1,1,1],
                  [1,5,5],
@@ -1777,7 +1806,7 @@ For example, solve:
                  [1,5,5],
                  [1,5,13]], dtype = tf.float32)
 b = tf.constant([3,11,20], shape = (3,1), dtype = tf.float32)
-lu, p = tf.linalg.lu(A)   # Factoriztion result of LU
+lu, p = tf.linalg.lu(A)   # Factorization result of LU
 x_sol_lu = tf.linalg.lu_solve(lu,p,b)
 x_sol_lu</code></pre>
 <pre><code>&lt;tf.Tensor: shape=(3, 1), dtype=float32, numpy=
@@ -1837,12 +1866,46 @@ array([[1.0000001],
 array([[ 3.      ],
        [11.      ],
        [19.999998]], dtype=float32)&gt;</code></pre>
-<p><a id = "solving_tri-diagonal_systems"></a></p>
+<p><a id = "solving_structured_linear_systems"></a></p>
 </div>
+</div>
+<div id="solving-structured-linear-systems" class="section level2">
+<h2>Solving structured linear systems</h2>
+<p>If coefficient matrix of a linear system has some kind of structure (triangular, banded, tridiagonal, etc.), it can be efficiently solved using far fewer computations than required by dense <span class="math inline">\(LU\)</span> decomposition. Special solvers exist that exploit the structure of the coefficient matrix thus reducing flop count considerably for large structured systems. Linear algebra library of <code>Tensorflow</code> implements three such specialized solvers: <code>Triangular solver</code>, <code>Tridiagonal solver</code>, and <code>Banded triangular solver</code>.</p>
+<p>Structured solvers have immensely useful as in many practical applications resulting coefficient matrix has some kind of structure. This is especially true in mechanical applications, such as finite element modeling, computational heat transfer, etc. In finite element modeling, a body is divided into several elements and each element has certain number of nodes. A node is connected to only a few neighboring nodes. So interaction of a node is limited to only those neighboring nodes. This results in banded systems. Other types of structured matrices are also common in applications.</p>
+<p><a id = "solving_triangular_systems"></a></p>
+</div>
+<div id="solving-triangular-systems" class="section level2">
+<h2>Solving triangular systems</h2>
+<p>We have already used triangular solvers in the section on <a href="#using_lu_decomposition">LU decomposition</a>. For completeness, we will again describe it in this section. <code>tf.linalg.triangular_solve</code> solves both <code>lower triangular</code> and <code>upper triangular</code> systems. Following examples demonstrate that.</p>
+<pre class="python"><code>lower_triangular_mat = tf.constant([[1,0,0],
+                                    [2,3,0],
+                                    [4,5,6]], dtype = tf.float32)
+rhs = tf.constant([[7],[8],[9]], dtype = tf.float32)
+res_lower_triangular = tf.linalg.triangular_solve(matrix = lower_triangular_mat, rhs = rhs, lower = True)
+res_lower_triangular</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 1), dtype=float32, numpy=
+array([[ 7. ],
+       [-2. ],
+       [-1.5]], dtype=float32)&gt;</code></pre>
+<p>We can use the same solver to solve upper triangular system also. This is done by setting <code>adjoint = True</code> along with <code>lower = True</code>. <code>lower = True</code> extracts the lower triangular part of the coefficient matrix and <code>adjoint = True</code> solves the triangular system by transposing the extracted lower triangular part. For real matrices adjoint is same as transpose. By setting the arguments as above, essentially we solve the upper triangular system.</p>
+<pre class="python"><code>res_upper_triangular = tf.linalg.triangular_solve(matrix = lower_triangular_mat, rhs = rhs, lower = True, adjoint = True)
+res_upper_triangular</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 1), dtype=float32, numpy=
+array([[0.6666665 ],
+       [0.16666667],
+       [1.5       ]], dtype=float32)&gt;</code></pre>
+<p>We can verity the above result by multiplying the transpose of the lower triangular matrix by <code>res_upper_triangular</code>. This indeed gives us the right hand side <span class="math inline">\(([7,8,9]^T)\)</span>.</p>
+<pre class="python"><code>tf.matmul(lower_triangular_mat, res_upper_triangular, transpose_a=True)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 1), dtype=float32, numpy=
+array([[7.],
+       [8.],
+       [9.]], dtype=float32)&gt;</code></pre>
+<p><a id = "solving_tri-diagonal_systems"></a></p>
 <div id="solving-tri-diagonal-systems" class="section level3">
 <h3>Solving tri-diagonal systems</h3>
-<p>If matrix <span class="math inline">\(A\)</span> is tri-diagonal, <code>tf.linalg.tridiagonal_solve</code> can be used to solve the linear system efficiently. For example, we will solve the following tri-diagonal system.
-<span class="math display">\[\begin{pmatrix}
+<p>If matrix <span class="math inline">\(A\)</span> is tri-diagonal, <code>tf.linalg.tridiagonal_solve</code> can be used to solve the linear system efficiently. For example, we will solve the following tri-diagonal system.</p>
+<p><span class="math display">\[\begin{pmatrix}
 2 &amp; -1 &amp; 0 &amp;0 &amp; 0\\
 -1 &amp; 2 &amp; -1 &amp; 0 &amp; 0\\
 0 &amp; -1 &amp; 2&amp; -1&amp; 0\\
@@ -1874,6 +1937,112 @@ array([[ 3.      ],
        [-4.999999],
        [ 7.      ],
        [ 9.      ]], dtype=float32)&gt;</code></pre>
+<p><a id = "solving_banded_triangular_systems"></a></p>
+</div>
+<div id="solving-banded-triangular-systems" class="section level3">
+<h3>Solving banded triangular systems</h3>
+<p>Solving an <span class="math inline">\((n \times n)\)</span> full upper triangular (or lower triangular) system uses <span class="math inline">\(n^2\)</span> flops (including addition/subtraction and multiplication/division). But if the upper triangular (or lower triangular) system is banded with, say, <span class="math inline">\(k\)</span> bands (including main diagonal), the system can be solved in <span class="math inline">\(\approx(2k-1)n\)</span> flops. If <span class="math inline">\(k\)</span> is not very large, banded triangular systems can be solved at a fraction of computational cost as compared to dense triangular systems.</p>
+<p>However, please keep in mind that flop count is not the only criteria that determines the computational time of a system. For very very large systems, communication time between different parts of computer can be significant as compared to processing required number of flops for that system.</p>
+<p>We can solve both <code>banded lower triangular</code> and <code>banded upper triangular</code> systems. To illustrate this we will use the following example.</p>
+<p><span class="math display">\[\begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+6 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 7 &amp; 3 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 8 &amp; 4 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 9 &amp; 5
+\end{pmatrix}x=
+\begin{pmatrix}
+3\\
+4\\
+-5\\
+7\\
+9\end{pmatrix}\]</span></p>
+<p>As the matrix is banded, we need not create the full dense matrix. Instead, we can only pass the band part to the solver. Subdiagonals (or superdiagonals) contain less number of entries than main diagonal. While passing the band part to <code>tensorflow</code>, these subdiagonals (or superdiagonals) have to be appended either at left or right to make it of the same length as main diagonal. Whether the subdiagonals or superdiagonals will be appended at the left or right, is decided by the alignment strategy. There are four types of <code>alignment strategies</code> used in <code>tensorflow</code>. Those are:</p>
+<ul>
+<li><code>LEFT_LEFT</code>: Superdiagonals are <code>appended at right</code> and subdiagonals are <code>appended at right</code>.</li>
+<li><code>LEFT_RIGHT</code>: Superdiagonals are <code>appended at right</code> and subdiagonals are <code>appended at left</code>.</li>
+<li><code>RIGHT_LEFT</code>: Superdiagonals are <code>appended at left</code> and subdiagonals are <code>appended at right</code>.</li>
+<li><code>RIGHT_RIGHT</code>: Superdiagonals are <code>appended at left</code> and subdiagonals are <code>appended at left</code>.</li>
+</ul>
+<p>One way to remember the above rules is that if something is aligned to left, it is appended at right. And in <code>LEFT_RIGHT</code>, first word corresponds to superdiagonals and second word corresponds to subdiagonal. For <code>tf.linalg.banded_triangular_solve</code>, <code>tensorflow</code> assumes that input band part has <code>LEFT_RIGHT</code> alignment. Band part inputs to this function can be modified accordingly. Above problem can be solved as follows.</p>
+<pre class="python"><code>bands = tf.constant([[1,2,3,4,5],
+                     [0,6,7,8,9]], dtype = tf.float32)  # Because of LEFT_RIGHT alignment as we have a subdiagonal here
+rhs = tf.constant([[3],
+                   [4],
+                   [-5],
+                   [7],
+                   [9]], dtype = tf.float32)
+banded_lower_triangular_sol = tf.linalg.banded_triangular_solve(bands = bands, rhs = rhs, lower = True)
+banded_lower_triangular_sol</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(5, 1), dtype=float32, numpy=
+array([[  3.      ],
+       [ -7.      ],
+       [ 14.666667],
+       [-27.583334],
+       [ 51.45    ]], dtype=float32)&gt;</code></pre>
+<p>We can verify the above solution by multiplying the dense banded lower triangular matrix by the solution. This should give us the RHS.</p>
+<pre class="python"><code>dense_banded_lower_triangular_mat = tf.linalg.set_diag(tf.zeros(shape = (5,5)), diagonal = bands,
+                                                       k = (-1,0), align = &quot;LEFT_RIGHT&quot;)
+dense_banded_lower_triangular_mat</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(5, 5), dtype=float32, numpy=
+array([[1., 0., 0., 0., 0.],
+       [6., 2., 0., 0., 0.],
+       [0., 7., 3., 0., 0.],
+       [0., 0., 8., 4., 0.],
+       [0., 0., 0., 9., 5.]], dtype=float32)&gt;</code></pre>
+<pre class="python"><code>tf.matmul(dense_banded_lower_triangular_mat, banded_lower_triangular_sol)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(5, 1), dtype=float32, numpy=
+array([[ 3.],
+       [ 4.],
+       [-5.],
+       [ 7.],
+       [ 9.]], dtype=float32)&gt;</code></pre>
+<p>Similarly we can solve banded upper triangular matrix. For illustration, we will use the transpose of the above coefficient matrix. We will use the same right hand side vector.</p>
+<p><span class="math display">\[\begin{pmatrix}
+1 &amp; 6 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 2 &amp; 7 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 3 &amp; 8 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 4 &amp; 9\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 5
+\end{pmatrix}x=
+\begin{pmatrix}
+3\\
+4\\
+-5\\
+7\\
+9\end{pmatrix}\]</span></p>
+<pre class="python"><code>bands = tf.constant([[6,7,8,9,0],
+                     [1,2,3,4,5]], dtype = tf.float32)  # Because of LEFT_RIGHT alignment as we have a superdiagonal here
+rhs = tf.constant([[3],
+                   [4],
+                   [-5],
+                   [7],
+                   [9]], dtype = tf.float32)
+banded_upper_triangular_sol = tf.linalg.banded_triangular_solve(bands = bands, rhs = rhs, lower = False)
+banded_upper_triangular_sol</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(5, 1), dtype=float32, numpy=
+array([[ 84.79998  ],
+       [-13.63333  ],
+       [  4.4666657],
+       [ -2.2999997],
+       [  1.8      ]], dtype=float32)&gt;</code></pre>
+<p>Now we will verify the solution.</p>
+<pre class="python"><code>dense_banded_upper_triangular_mat = tf.linalg.set_diag(tf.zeros(shape = (5,5)), diagonal = bands,
+                                                       k = (0,1), align = &quot;LEFT_RIGHT&quot;)
+dense_banded_upper_triangular_mat</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(5, 5), dtype=float32, numpy=
+array([[1., 6., 0., 0., 0.],
+       [0., 2., 7., 0., 0.],
+       [0., 0., 3., 8., 0.],
+       [0., 0., 0., 4., 9.],
+       [0., 0., 0., 0., 5.]], dtype=float32)&gt;</code></pre>
+<pre class="python"><code>tf.matmul(dense_banded_upper_triangular_mat, banded_upper_triangular_sol)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(5, 1), dtype=float32, numpy=
+array([[ 3.],
+       [ 4.],
+       [-5.],
+       [ 7.],
+       [ 9.]], dtype=float32)&gt;</code></pre>
 <p><a id = "solving_least_squares_problems"></a></p>
 </div>
 </div>
@@ -1882,11 +2051,11 @@ array([[ 3.      ],
 <p><a id = "ordinary_least_squares"></a></p>
 <div id="ordinary-least-squares" class="section level3">
 <h3>Ordinary least squares</h3>
-<p>Both over determined and under determined least squares problem can be solved using the command <code>tf.linalg.lstsq</code>. In the underdetermined case, the output is the least norm solution. Least squares problem can be written as
-<span class="math display">\[arg\min_{x}\|Ax-b\|_2^2\]</span>
-That is, we try to find an <span class="math inline">\(x\)</span> such that the residual error is as small as possible.
-For example, we will solve following two problems.
-<span class="math display">\[\begin{pmatrix}
+<p>Both over determined and under determined least squares problem can be solved using the command <code>tf.linalg.lstsq</code>. In the underdetermined case, the output is the least norm solution. Least squares problem can be written as</p>
+<p><span class="math display">\[arg\min_{x}\|Ax-b\|_2^2\]</span></p>
+<p>That is, we try to find an <span class="math inline">\(x\)</span> such that the residual error is as small as possible.
+For example, we will solve following two problems.</p>
+<p><span class="math display">\[\begin{pmatrix}
 1 &amp; 2\\
 2 &amp; 0.5\\
 3 &amp; 1\\
@@ -1938,8 +2107,8 @@ array([[-0.04100358],
 </div>
 <div id="regularized-least-squares" class="section level3">
 <h3>Regularized least squares</h3>
-<p>Only <span class="math inline">\(l_2\)</span> regularization is supported. The following regularized problem is solved.
-<span class="math display">\[arg\min_{x}\|Ax-b\|_2^2 + \lambda \|x\|_2^2\]</span></p>
+<p>Only <span class="math inline">\(l_2\)</span> regularization is supported. The following regularized problem is solved.</p>
+<p><span class="math display">\[arg\min_{x}\|Ax-b\|_2^2 + \lambda \|x\|_2^2\]</span></p>
 <p>Here, <span class="math inline">\(\lambda\)</span> is a hyperparameter. Usually several values of <span class="math inline">\(\lambda\)</span> are tried over a logarithmic scale before choosing the best one.</p>
 <pre class="python"><code>x_over_reg = tf.linalg.lstsq(A_over, b_over, l2_regularizer= 2.0)
 x_over_reg.numpy()</code></pre>
@@ -1977,7 +2146,7 @@ array([[-0.04763567],
                  [0,3,2,8.]])
 mat_norm_2 = tf.linalg.norm(A, ord = 2, axis = [0,1])
 print(&quot;2 norm of matrix A = &quot;, mat_norm_2.numpy())</code></pre>
-<pre><code>WARNING:tensorflow:From /home/biswajit/anaconda3/envs/tf_cpu_22/lib/python3.7/site-packages/tensorflow/python/ops/linalg_ops.py:721: setdiff1d (from tensorflow.python.ops.array_ops) is deprecated and will be removed after 2018-11-30.
+<pre><code>WARNING:tensorflow:From /home/biswajit/anaconda3/envs/tf_cpu_23/lib/python3.8/site-packages/tensorflow/python/ops/linalg_ops.py:735: setdiff1d (from tensorflow.python.ops.array_ops) is deprecated and will be removed after 2018-11-30.
 Instructions for updating:
 This op will be removed after the deprecation date. Please switch to tf.sets.difference().
 2 norm of matrix A =  15.294547</code></pre>
@@ -2074,8 +2243,8 @@ tf.linalg.global_norm([a,b]).numpy()</code></pre>
 </div>
 <div id="cross-product-of-vectors" class="section level3">
 <h3>Cross product of vectors</h3>
-<p>It is defined for 3-element vectors. For two vectors <span class="math inline">\(a = (a_1, a_2, a_3)^T\)</span>, and <span class="math inline">\(b = (b_1, b_2, b_3)^T\)</span>, cross product is defined as the determinant of following matrix
-<span class="math display">\[\begin{pmatrix}
+<p>It is defined for 3-element vectors. For two vectors <span class="math inline">\(a = (a_1, a_2, a_3)^T\)</span>, and <span class="math inline">\(b = (b_1, b_2, b_3)^T\)</span>, cross product is defined as the determinant of following matrix</p>
+<p><span class="math display">\[\begin{pmatrix}
 i &amp; j &amp; k\\
 a_1 &amp; a_2 &amp; a_3\\
 b_1 &amp; b_2 &amp; b_3
@@ -2090,11 +2259,11 @@ tf.linalg.cross(a,b).numpy()</code></pre>
 <pre class="python"><code>c = tf.random.normal(shape = (5,3))
 d = tf.random.normal(shape = (5,3))
 tf.linalg.cross(c,d).numpy()</code></pre>
-<pre><code>array([[ 1.2073451 ,  0.64969957, -0.02847651],
-       [-0.4979881 ,  1.3546165 , -0.591327  ],
-       [-0.11196035,  2.9687622 ,  1.8474071 ],
-       [-0.13938189, -3.3894374 , -2.557374  ],
-       [-0.00778121, -3.5212047 , -3.4708867 ]], dtype=float32)</code></pre>
+<pre><code>array([[-2.4290583 ,  2.690366  , -1.3060343 ],
+       [-1.3197372 , -0.7371121 ,  1.6123989 ],
+       [ 0.46207523, -0.02007629,  1.5651023 ],
+       [ 0.28067064,  0.47374007,  0.7798566 ],
+       [ 1.3022119 , -0.8419477 ,  0.0253216 ]], dtype=float32)</code></pre>
 <p>First row of output is the cross product of first rows of <span class="math inline">\(c\)</span> and <span class="math inline">\(d\)</span>. Similarly for other rows.</p>
 <p><a id = "matrix_square_root"></a></p>
 </div>
@@ -2119,8 +2288,8 @@ array([[4.9999986, 2.0000007, 3.0000038],
 </div>
 <div id="matrix-exponential" class="section level3">
 <h3>Matrix exponential</h3>
-<p>Exponential of a matrix <span class="math inline">\(A\)</span> is defined as
-<span class="math display">\[ e^A = \sum_{n=0}^\infty \frac{A^n}{n!}\]</span></p>
+<p>Exponential of a matrix <span class="math inline">\(A\)</span> is defined as</p>
+<p><span class="math display">\[ e^A = \sum_{n=0}^\infty \frac{A^n}{n!}\]</span></p>
 <p>In practice, the sum is not taken to infinity. Rather, approximations are used to compute matrix exponential. <code>Tensorflow</code> implementation is based on <a href="https://epubs.siam.org/doi/10.1137/04061101X">this paper</a>.</p>
 <p>When the matrix has a full set of independent eigenvectors, the formula can be simplified to
 <span class="math display">\[e^A = Se^{\Lambda}S^{-1}\]</span></p>
@@ -2154,9 +2323,11 @@ array([[4.999999 +0.j, 1.9999989+0.j, 2.9999986+0.j],
 </div>
 <div id="log-determinant-of-a-matrix" class="section level3">
 <h3>Log-determinant of a matrix</h3>
-<p>Computes the natural logarithm of the determinant of a matrix. There are two functions in <code>tensorflow</code> to calculate this.
-* If matrix is symmetric positive definite, use <code>tf.linalg.logdet</code> (Uses Cholesky decomposition)
-* For other matrices, use <code>tf.linalg.slogdet</code> (Uses <span class="math inline">\(LU\)</span> decomposition)</p>
+<p>Computes the natural logarithm of the determinant of a matrix. There are two functions in <code>tensorflow</code> to calculate this.</p>
+<ul>
+<li>If matrix is symmetric positive definite, use <code>tf.linalg.logdet</code> (Uses Cholesky decomposition)</li>
+<li>For other matrices, use <code>tf.linalg.slogdet</code> (Uses <span class="math inline">\(LU\)</span> decomposition)</li>
+</ul>
 <p><code>slogdet</code> computes the sign of the determinant as well as the log of the absolute value of the determinant.</p>
 <pre class="python"><code>mat = tf.constant([[5,2,3],
                    [2,9,2],
@@ -2179,9 +2350,10 @@ Log of absolute value of determinant =  4.0943446</code></pre>
 </div>
 <div id="pseudo-inverse-of-a-matrix" class="section level3">
 <h3>Pseudo inverse of a matrix</h3>
-<p>While matrix inverse is defined only for square matrices, pseudo inverse is defined for matrices of any shape. It is also defined for singular matrices. Pseudo inverse can also be used to solve ordinary least squares problem. For the problem <span class="math display">\[arg\min_{x}\|Ax-b\|_2\]</span>
-the approximate least squares solution can be written as
-<span class="math display">\[x_{ls} = A^{\dagger}b\]</span></p>
+<p>While matrix inverse is defined only for square matrices, pseudo inverse is defined for matrices of any shape. It is also defined for singular matrices. Pseudo inverse can also be used to solve ordinary least squares problem. For the problem</p>
+<p><span class="math display">\[arg\min_{x}\|Ax-b\|_2^2\]</span></p>
+<p>the approximate least squares solution can be written as</p>
+<p><span class="math display">\[x_{ls} = A^{\dagger}b\]</span></p>
 <p>Where, <span class="math inline">\(A^{\dagger}\)</span> is the pseudo inverse of <span class="math inline">\(A\)</span>.</p>
 <pre class="python"><code>tf.linalg.pinv(tf.constant([[2,0,0],[0,3,0],[5,0,0.]]))</code></pre>
 <pre><code>&lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
@@ -2226,12 +2398,12 @@ array([[-0.04100376],
                                                            [2,3,5],
                                                            [7,8,9.]]))
 operator</code></pre>
-<pre><code>&lt;tensorflow.python.ops.linalg.linear_operator_full_matrix.LinearOperatorFullMatrix at 0x7fdc6dadfd90&gt;</code></pre>
+<pre><code>&lt;tensorflow.python.ops.linalg.linear_operator_full_matrix.LinearOperatorFullMatrix at 0x7fc6e8795160&gt;</code></pre>
 <p>We get only the memory location. No result is shown. To see the actual matrix we have to call the method <code>to_dense</code> on this operator. There are many methods that can be called on an operator. For the full list, refer the documentation.</p>
 <p>Before seeing the result, we will apply adjoint operator to our old operator and apply <code>to_dense</code> to the adjoint operator. If everything works well, we should see the transpose of the matrix as result.</p>
 <pre class="python"><code>adj_operator = tf.linalg.LinearOperatorAdjoint(operator)
 adj_operator</code></pre>
-<pre><code>WARNING:tensorflow:From /home/biswajit/anaconda3/envs/tf_cpu_22/lib/python3.7/site-packages/tensorflow/python/ops/linalg/linear_operator_adjoint.py:145: LinearOperator.graph_parents (from tensorflow.python.ops.linalg.linear_operator) is deprecated and will be removed in a future version.
+<pre><code>WARNING:tensorflow:From /home/biswajit/anaconda3/envs/tf_cpu_23/lib/python3.8/site-packages/tensorflow/python/ops/linalg/linear_operator_adjoint.py:145: LinearOperator.graph_parents (from tensorflow.python.ops.linalg.linear_operator) is deprecated and will be removed in a future version.
 Instructions for updating:
 Do not call `graph_parents`.
 
@@ -2239,7 +2411,7 @@ Do not call `graph_parents`.
 
 
 
-&lt;tensorflow.python.ops.linalg.linear_operator_adjoint.LinearOperatorAdjoint at 0x7fdc61140cd0&gt;</code></pre>
+&lt;tensorflow.python.ops.linalg.linear_operator_adjoint.LinearOperatorAdjoint at 0x7fc6e878b400&gt;</code></pre>
 <p>Again no result. At this point we want to see the result. So we will apply <code>to_dense</code> method to adj_operator.</p>
 <pre class="python"><code>adj_operator.to_dense()</code></pre>
 <pre><code>&lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
@@ -2265,9 +2437,9 @@ array([[1., 2., 3.],
 <li>trace</li>
 <li>inverse</li>
 <li>solve (Solve linear system using operator)</li>
-<li>adjoint
-and many others.</li>
+<li>adjoint</li>
 </ul>
+<p>and many others.</p>
 <pre class="python"><code>operator.to_dense()</code></pre>
 <pre><code>&lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
 array([[1., 2., 3.],
@@ -2370,18 +2542,18 @@ array([[ 1.,  2.,  3.,  0.,  0.],
 </div>
 <div id="householder-matrix" class="section level4">
 <h4>Householder matrix</h4>
-<p>Householder matrix can be used to triangularize a matrix using orthogonal matrices (the process is called orthogonal triangularization). But we will not pursue that point here. We will only show the method using only a column vector. Given a vector <span class="math inline">\(v = [1, 4, 7]^T\)</span>, Householder transform can transform the vector into <span class="math inline">\(v = \|v\|_2[1,0,0]^T\)</span>. It is achieved by multiplying the vector <span class="math inline">\(v\)</span> by an orthogonal Householder matrix <span class="math inline">\(H\)</span>.
-<span class="math display">\[H\begin{pmatrix}
+<p>Householder matrix can be used to triangularize a matrix using orthogonal matrices (the process is called orthogonal triangularization). But we will not pursue that point here. We will only show the method using only a column vector. Given a vector <span class="math inline">\(v = [1, 4, 7]^T\)</span>, Householder transform can transform the vector into <span class="math inline">\(v = \|v\|_2[1,0,0]^T\)</span>. It is achieved by multiplying the vector <span class="math inline">\(v\)</span> by an orthogonal Householder matrix <span class="math inline">\(H\)</span>.</p>
+<p><span class="math display">\[H\begin{pmatrix}
 v_1\\
 v_2\\
 v_3\end{pmatrix}=\|v\|_2\begin{pmatrix}
 1\\
 0\\
-0\end{pmatrix}\]</span>
-This process can be repeated with other columns of a matrix to transform it into an upper triangular one. For more details, have a look at the references.</p>
+0\end{pmatrix}\]</span></p>
+<p>This process can be repeated with other columns of a matrix to transform it into an upper triangular one. For more details, have a look at the references.</p>
 <pre class="python"><code>first_column_of_operator_1 = operator_1.to_dense()[:,0]
 norm = tf.linalg.norm(first_column_of_operator_1)
-vec = first_column_of_operator_1 - norm*tf.linalg.eye(3)[:,0]    # Whether to take positive or neagtive sign? See references.
+vec = first_column_of_operator_1 - norm*tf.linalg.eye(3)[:,0]    # Whether to take positive or negative sign? See references.
 householder = tf.linalg.LinearOperatorHouseholder(reflection_axis = vec)
 householder.matmul(tf.reshape(first_column_of_operator_1, shape = (3,1))).numpy()</code></pre>
 <pre><code>array([[8.1240387e+00],
@@ -2524,9 +2696,9 @@ array([[0., 0., 0., 0., 0.],
 <p><a id = "low-rank_update"></a></p>
 <div id="low-rank-update" class="section level4">
 <h4>Low-rank update</h4>
-<p>When a low rank matrix is added to a given matrix, the resulting matrix is called a low-rank update of the original matrix. Let’s suppose our original matrix was <span class="math inline">\(A\)</span> and we add a rank 1 update to it. The resulting matrix is <span class="math inline">\(B\)</span>. So
-<span class="math display">\[B = A + uv^T\]</span>
-Where, <span class="math inline">\(u\)</span>, and <span class="math inline">\(v\)</span> are column vectors. It should be noted that low-rank matrix update doesn’t always increase the rank of the original matrix. For example, if rank of <span class="math inline">\(A\)</span> was 2, updating it with a rank 1 matrix will not always make its rank 3. Here is an example.</p>
+<p>When a low rank matrix is added to a given matrix, the resulting matrix is called a low-rank update of the original matrix. Let’s suppose our original matrix was <span class="math inline">\(A\)</span> and we add a rank 1 update to it. The resulting matrix is <span class="math inline">\(B\)</span>. So</p>
+<p><span class="math display">\[B = A + uv^T\]</span></p>
+<p>Where, <span class="math inline">\(u\)</span>, and <span class="math inline">\(v\)</span> are column vectors. It should be noted that low-rank matrix update doesn’t always increase the rank of the original matrix. For example, if rank of <span class="math inline">\(A\)</span> was 2, updating it with a rank 1 matrix will not always make its rank 3. Here is an example.</p>
 <pre class="python"><code>A = tf.constant([[1,2,3],
                  [2,4,6],
                  [3,4,5]], dtype = tf.float32)
@@ -2623,6 +2795,7 @@ array([[  0.,   7.,  13.],
 <li>Datta, Biswa Nath. Numerical linear algebra and applications. Vol. 116. Siam, 2010.</li>
 <li>(The Book) Golub, Gene H., and Charles F. Van Loan. Matrix computations. Vol. 3. JHU press, 2012.</li>
 </ol>
+<p>Last updated: 29 July, 2020.</p>
 </div>
 
     </div>
