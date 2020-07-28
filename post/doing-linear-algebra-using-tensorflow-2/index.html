@@ -719,7 +719,7 @@ View source on GitHub</a>
 <li><a href="#eigenvalues_and_eigenvectors">Eigenvalues and eigenvectors</a>
 <ul>
 <li><a href="#eigen-analysis_of_hermitian_matrices">Eigen-analysis of Hermitian matrices</a></li>
-<li><a href="#eigen-analysis_of_other_matrices">Eigen-analysis of other matrices</a></li>
+<li><a href="#eigen-analysis_of_non-Hermitian_matrices">Eigen-analysis of non-Hermitian matrices</a></li>
 </ul></li>
 <li><a href="#solving_linear_systems">Solving linear systems</a>
 <ul>
@@ -1740,7 +1740,7 @@ Eigenvectors:
 <div id="what-happens-if-you-pass-a-nonsymmetric-matrix-to-eigh-by-mistake" class="section level4">
 <h4>What happens if you pass a nonsymmetric matrix to <code>eigh</code> by mistake?</h4>
 <p>Well, while using <code>eigh</code>, <code>tensorflow</code> assumes the matrix to be symmetric. <code>Tensorflow</code> doesn’t check whether the matrix is symmetric or not. It just takes the lower triangular part, assumes that the upper triangular part is same because of symmetry and performs the computations. So be prepared to get a wrong result!</p>
-<p><a id = "eigen-analysis_of_other_matrices"></a></p>
+<p><a id = "eigen-analysis_of_non-Hermitian_matrices"></a></p>
 </div>
 </div>
 <div id="eigen-analysis-of-non-hermitian-matrices" class="section level3">

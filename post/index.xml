@@ -708,7 +708,7 @@ View source on GitHub&lt;/a&gt;
 &lt;li&gt;&lt;a href=&#34;#eigenvalues_and_eigenvectors&#34;&gt;Eigenvalues and eigenvectors&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#eigen-analysis_of_hermitian_matrices&#34;&gt;Eigen-analysis of Hermitian matrices&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#eigen-analysis_of_other_matrices&#34;&gt;Eigen-analysis of other matrices&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#eigen-analysis_of_non-Hermitian_matrices&#34;&gt;Eigen-analysis of non-Hermitian matrices&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#solving_linear_systems&#34;&gt;Solving linear systems&lt;/a&gt;
 &lt;ul&gt;
@@ -1729,7 +1729,7 @@ Eigenvectors:
 &lt;div id=&#34;what-happens-if-you-pass-a-nonsymmetric-matrix-to-eigh-by-mistake&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;What happens if you pass a nonsymmetric matrix to &lt;code&gt;eigh&lt;/code&gt; by mistake?&lt;/h4&gt;
 &lt;p&gt;Well, while using &lt;code&gt;eigh&lt;/code&gt;, &lt;code&gt;tensorflow&lt;/code&gt; assumes the matrix to be symmetric. &lt;code&gt;Tensorflow&lt;/code&gt; doesn’t check whether the matrix is symmetric or not. It just takes the lower triangular part, assumes that the upper triangular part is same because of symmetry and performs the computations. So be prepared to get a wrong result!&lt;/p&gt;
-&lt;p&gt;&lt;a id = &#34;eigen-analysis_of_other_matrices&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id = &#34;eigen-analysis_of_non-Hermitian_matrices&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;eigen-analysis-of-non-hermitian-matrices&#34; class=&#34;section level3&#34;&gt;
