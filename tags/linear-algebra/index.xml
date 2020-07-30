@@ -99,7 +99,7 @@ View source on GitHub&lt;/a&gt;
 &lt;li&gt;&lt;a href=&#34;#eigen-analysis_of_hermitian_matrices&#34;&gt;Eigen-analysis of Hermitian matrices&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#eigen-analysis_of_non-Hermitian_matrices&#34;&gt;Eigen-analysis of non-Hermitian matrices&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#solving_linear_systems&#34;&gt;Solving linear systems&lt;/a&gt;
+&lt;li&gt;&lt;a href=&#34;#solving_dense_linear_systems&#34;&gt;Solving dense linear systems&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#using_lu_decomposition&#34;&gt;Using LU decomposition&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#using_cholesky_decomposition&#34;&gt;Using Cholesky decomposition&lt;/a&gt;&lt;/li&gt;
@@ -305,21 +305,21 @@ print(&amp;quot;Imaginary part:&amp;quot;)
 print(imag_part)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;Real part:
 tf.Tensor(
-[[2.0458713 4.314379 ]
- [4.2078624 2.956036 ]
- [3.7432299 1.0335522]], shape=(3, 2), dtype=float32)
+[[3.8433075 4.279177 ]
+ [2.409762  1.238677 ]
+ [2.4724636 1.6782365]], shape=(3, 2), dtype=float32)
 
 Imaginary part:
 tf.Tensor(
-[[3.8836174 4.620237 ]
- [2.296022  1.8005514]
- [1.6300111 1.2105217]], shape=(3, 2), dtype=float32)&lt;/code&gt;&lt;/pre&gt;
+[[2.90653   4.282353 ]
+ [1.0855489 1.4715123]
+ [1.3954673 4.987824 ]], shape=(3, 2), dtype=float32)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;complex_mat = tf.dtypes.complex(real = real_part, imag = imag_part)
 print(complex_mat)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;tf.Tensor(
-[[2.0458713+3.8836174j 4.314379 +4.620237j ]
- [4.2078624+2.296022j  2.956036 +1.8005514j]
- [3.7432299+1.6300111j 1.0335522+1.2105217j]], shape=(3, 2), dtype=complex64)&lt;/code&gt;&lt;/pre&gt;
+[[3.8433075+2.90653j   4.279177 +4.282353j ]
+ [2.409762 +1.0855489j 1.238677 +1.4715123j]
+ [2.4724636+1.3954673j 1.6782365+4.987824j ]], shape=(3, 2), dtype=complex64)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;There is a simpler way to create a complex matrix.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;complex_mat_2 = tf.constant([1+2j, 2+3j , 3+4j, 4+5j, 5+6j, 6+7j], shape = (2,3))
 complex_mat_2&lt;/code&gt;&lt;/pre&gt;
@@ -488,7 +488,7 @@ array([[1., 0., 0., 0., 0.],
 &lt;/div&gt;
 &lt;div id=&#34;note-on-alignment-strategy&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;Note on alignment strategy&lt;/h4&gt;
-&lt;p&gt;Functions like &lt;code&gt;tf.linalg.diag&lt;/code&gt; and &lt;code&gt;tf.linalg.set_diag&lt;/code&gt; and several others to be seen later, take an argument called &lt;code&gt;align&lt;/code&gt; among other things. Though up to this point we have used default parameters for &lt;code&gt;align&lt;/code&gt;, we believe, a note is warranted at this point. There are four different alignment strategies in tensorflow. Those are:&lt;/p&gt;
+&lt;p&gt;Functions like &lt;code&gt;tf.linalg.diag&lt;/code&gt; and &lt;code&gt;tf.linalg.set_diag&lt;/code&gt; and several others to be seen later, take an argument called &lt;code&gt;align&lt;/code&gt; among other things. Though up to this point we have used default parameters of &lt;code&gt;align&lt;/code&gt;, we believe, a note is warranted at this point. There are four different alignment strategies in tensorflow. Those are:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;LEFT_LEFT&lt;/code&gt;: Superdiagonals are &lt;code&gt;appended at right&lt;/code&gt; and subdiagonals are &lt;code&gt;appended at right&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;LEFT_RIGHT&lt;/code&gt;: Superdiagonals are &lt;code&gt;appended at right&lt;/code&gt; and subdiagonals are &lt;code&gt;appended at left&lt;/code&gt;.&lt;/li&gt;
@@ -642,7 +642,7 @@ array([[0.78733766, 2.5200539 , 0.9812998 , 5.141082  , 1.9184761 ],
 &lt;p&gt;Sparse matrices are within &lt;code&gt;tf.sparse&lt;/code&gt; library. There are several functions specifically designed for sparse matrices. Full list of function in &lt;code&gt;tf.sparse&lt;/code&gt; library can be found at &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/sparse&#34;&gt;this link&lt;/a&gt;. In this section, we will see how sparse matrices are created. The first argument is set of indices (rows and columns), second argument is the values at those indices. Third argument is the &lt;code&gt;dense_shape&lt;/code&gt; of the sparse matrix.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;sparse_mat = tf.sparse.SparseTensor([[0,1],[1,3],[3,2]], [-5, -10, 7], dense_shape= (5,5))
 sparse_mat&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;tensorflow.python.framework.sparse_tensor.SparseTensor at 0x7fc7506a7280&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;tensorflow.python.framework.sparse_tensor.SparseTensor at 0x7f8f505203a0&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To see the actual matrix, we have to convert the sparse matrix to a dense matrix. This is achieved using &lt;code&gt;to_dense&lt;/code&gt; function.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;tf.sparse.to_dense(sparse_mat)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(5, 5), dtype=int32, numpy=
@@ -813,7 +813,12 @@ print(A_inv)&lt;/code&gt;&lt;/pre&gt;
 array([[ 9.9999970e-01,  1.1920929e-07, -1.1920929e-07],
        [-5.9604645e-07,  1.0000002e+00,  0.0000000e+00],
        [-2.3841858e-07,  0.0000000e+00,  1.0000000e+00]], dtype=float32)&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If &lt;span class=&#34;math inline&#34;&gt;\(LU\)&lt;/span&gt; decomposition result is already available from some prior computation, it can be used to compute the inverse using command &lt;code&gt;tf.linalg.lu_matrix_inverse&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;inverse-using-lu-factors&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Inverse using &lt;span class=&#34;math inline&#34;&gt;\(LU\)&lt;/span&gt; factors&lt;/h4&gt;
+&lt;p&gt;If &lt;span class=&#34;math inline&#34;&gt;\(LU\)&lt;/span&gt; decomposition result is already available from some prior computation, it can be used to compute the inverse using command &lt;code&gt;tf.linalg.lu_matrix_inverse&lt;/code&gt;. This command basically solves the following system:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[AX=I \Leftrightarrow LUX=I\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;As &lt;span class=&#34;math inline&#34;&gt;\(L\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(U\)&lt;/span&gt; are lower and upper triangular respectively, two triangular systems can be solved to obtain &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; which is nothing but &lt;span class=&#34;math inline&#34;&gt;\(A^{-1}\)&lt;/span&gt;. The triangular systems are &lt;span class=&#34;math inline&#34;&gt;\(LY = I\)&lt;/span&gt; (this gives &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; as result) and &lt;span class=&#34;math inline&#34;&gt;\(UX=Y\)&lt;/span&gt; (this gives &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;, i.e., &lt;span class=&#34;math inline&#34;&gt;\(A^{-1}\)&lt;/span&gt; as result). Here, the right hand side has more than one column in both the triangular systems. We will see how to solve those triangular systems at a &lt;a href=&#34;#solving_triangular_systems&#34;&gt;later section&lt;/a&gt;. For the time being, we will just compute the inverse using the built-in command.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;lu, p = tf.linalg.lu(A)
 A_inv_by_lu = tf.linalg.lu_matrix_inverse(lu,p)
 A_inv_by_lu&lt;/code&gt;&lt;/pre&gt;
@@ -830,24 +835,24 @@ array([[ 1.5999998e+00, -3.9999992e-01, -6.0000008e-01],
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;mat = tf.random.uniform(shape = (5,5), minval = 1, maxval = 20, dtype = tf.int32)
 mat&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(5, 5), dtype=int32, numpy=
-array([[16, 18, 14,  6,  8],
-       [17,  4,  1, 13, 11],
-       [ 1,  6,  2,  9, 15],
-       [ 9,  8, 15, 14,  5],
-       [15, 18,  3, 10, 11]], dtype=int32)&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+array([[10, 11,  3, 18,  6],
+       [18,  1, 16, 14, 12],
+       [ 4, 18, 12, 17,  1],
+       [12,  7,  5,  3,  7],
+       [ 9, 16, 11, 14,  8]], dtype=int32)&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;tf.linalg.diag_part(mat).numpy()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;array([16,  4,  2, 14, 11], dtype=int32)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;array([10,  1, 12,  3,  8], dtype=int32)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;tf.linalg.tensor_diag_part(mat).numpy()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;array([16,  4,  2, 14, 11], dtype=int32)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;array([10,  1, 12,  3,  8], dtype=int32)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;tf.linalg.diag_part(mat, k = (-1,0)).numpy()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;array([[16,  4,  2, 14, 11],
-       [17,  6, 15, 10,  0]], dtype=int32)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;array([[10,  1, 12,  3,  8],
+       [18, 18,  5, 14,  0]], dtype=int32)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;tf.linalg.diag_part(mat, k = [-2,1])  # 2 subdiagonals, main diagonal, and 1 super diagonal&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(4, 5), dtype=int32, numpy=
-array([[ 0, 18,  1,  9,  5],
-       [16,  4,  2, 14, 11],
-       [17,  6, 15, 10,  0],
-       [ 1,  8,  3,  0,  0]], dtype=int32)&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+array([[ 0, 11, 16, 17,  7],
+       [10,  1, 12,  3,  8],
+       [18, 18,  5, 14,  0],
+       [ 4,  7, 11,  0,  0]], dtype=int32)&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;extract_band_part_of_a_matrix&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;extract-band-part-of-a-matrix&#34; class=&#34;section level4&#34;&gt;
@@ -964,6 +969,7 @@ array([[  1.       ,   4.0000005,   7.       ,   8.       ],
 &lt;p&gt;It is defined for symmetric positive definite matrices. If A is a symmetric positive definite matrix, its Cholesky decomposition can be written as:
 &lt;span class=&#34;math display&#34;&gt;\[ A = LL^T\]&lt;/span&gt;
 Where, &lt;span class=&#34;math inline&#34;&gt;\(L\)&lt;/span&gt; is a lower triangular matrix.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Cholesky decomposition is used as a test for positive definiteness of a matrix. If Cholesky decomposition succeeds, the matrix is positive definite, otherwise it is not. Another widely reported test for positive definiteness is to check the signs of all eigenvalues of the matrix. If all the eigenvalues are positive, the matrix is positive definite. But this method requires computation of all eigenvalues which is computationally nontrivial. Therefore, Cholesky decomposition is the preferred method to test for positive definiteness. If the matrix is not positive definite, Cholesky decomposition will stop at an intermediate step. On the other hand, if it succeeds, along with verifying positive definiteness of the matrix, we will get the Cholesky factor as a byproduct. Cholesky factor can then be used to solve linear systems as we will see later.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;A = tf.constant([[1,1,1],
                  [1,5,5],
                  [1,5,14]], dtype = tf.float32)
@@ -1147,14 +1153,14 @@ Eigenvectors:
 &lt;div id=&#34;what-happens-when-you-pass-a-symmetric-matrix-to-eig&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;What happens when you pass a symmetric matrix to &lt;code&gt;eig&lt;/code&gt;?&lt;/h4&gt;
 &lt;p&gt;Nothing! We will still get the correct answer. &lt;code&gt;Tensorflow&lt;/code&gt; will use more operations to compute results when it could have been done using less computations.&lt;/p&gt;
-&lt;p&gt;&lt;a id = &#34;solving_linear_systems&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id = &#34;solving_dense_linear_systems&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;solving-linear-systems&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Solving linear systems&lt;/h2&gt;
-&lt;p&gt;A linear system is written as &lt;span class=&#34;math display&#34;&gt;\[ Ax = b\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;In general, &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; can be square or rectangular. Right hand side &lt;span class=&#34;math inline&#34;&gt;\(b\)&lt;/span&gt; is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;, the RHS can be replaced by a matrix whose columns are different RHS vectors.&lt;/p&gt;
+&lt;div id=&#34;solving-dense-linear-systems&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Solving dense linear systems&lt;/h2&gt;
+&lt;p&gt;A linear system is (usually) written as &lt;span class=&#34;math display&#34;&gt;\[ Ax = b\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In general, &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; can be square or rectangular. In our case, it is dense, i.e., most of its entries are nonzero. Right hand side &lt;span class=&#34;math inline&#34;&gt;\(b\)&lt;/span&gt; is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;, the RHS can be replaced by a matrix whose columns are different RHS vectors.&lt;/p&gt;
 &lt;p&gt;Depending on the structure of &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; (whether triangular, or tri-diagonal, or positive definite), suitable algorithm is chosen to solve the linear system. &lt;code&gt;Tensorflow&lt;/code&gt; has a function &lt;code&gt;tf.linalg.solve&lt;/code&gt; to solve linear systems. But this function doesn’t take into account the special structure of &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;A = tf.constant([[1,1,1],
                  [1,5,5],
@@ -1210,7 +1216,7 @@ array([[1.   ],
 &lt;/div&gt;
 &lt;div id=&#34;using-cholesky-decomposition&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Using Cholesky decomposition&lt;/h3&gt;
-&lt;p&gt;If &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; is positive definite, Cholesky decomposition is an efficient method for solving the linear system. For positive definite &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;, Cholesky decomposition requires fewer computations that &lt;span class=&#34;math inline&#34;&gt;\(LU\)&lt;/span&gt; decomposition. This is because it exploits the symmetry of the matrix &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;. Once the Cholesky factor &lt;span class=&#34;math inline&#34;&gt;\(L\)&lt;/span&gt; is found, we solve the linear system by solving two triangular systems. Solving triangular systems only requires &lt;span class=&#34;math inline&#34;&gt;\(O(n^2)\)&lt;/span&gt; operations.
+&lt;p&gt;If &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; is positive definite, Cholesky decomposition is an efficient method for solving the linear system. For positive definite &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;, Cholesky decomposition requires fewer computations than &lt;span class=&#34;math inline&#34;&gt;\(LU\)&lt;/span&gt; decomposition. This is because it exploits the symmetry of the matrix &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;. Once the Cholesky factor &lt;span class=&#34;math inline&#34;&gt;\(L\)&lt;/span&gt; is found, we solve the linear system by solving two triangular systems. Solving triangular systems only requires &lt;span class=&#34;math inline&#34;&gt;\(O(n^2)\)&lt;/span&gt; operations.
 &lt;span class=&#34;math display&#34;&gt;\[ LL^Tx = b\]&lt;/span&gt;
 Two triangular systems are:
 &lt;span class=&#34;math display&#34;&gt;\[ Ly = b\]&lt;/span&gt;
@@ -1637,11 +1643,11 @@ tf.linalg.cross(a,b).numpy()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;c = tf.random.normal(shape = (5,3))
 d = tf.random.normal(shape = (5,3))
 tf.linalg.cross(c,d).numpy()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;array([[-2.4290583 ,  2.690366  , -1.3060343 ],
-       [-1.3197372 , -0.7371121 ,  1.6123989 ],
-       [ 0.46207523, -0.02007629,  1.5651023 ],
-       [ 0.28067064,  0.47374007,  0.7798566 ],
-       [ 1.3022119 , -0.8419477 ,  0.0253216 ]], dtype=float32)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;array([[-0.8989703 , -0.89722276,  0.05096105],
+       [-0.44832098, -0.32573706, -0.11998086],
+       [ 0.7280822 ,  0.19632304,  0.8862282 ],
+       [ 0.0998309 ,  0.48842978, -0.03491247],
+       [ 1.0497653 , -1.5643073 ,  0.5671499 ]], dtype=float32)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;First row of output is the cross product of first rows of &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(d\)&lt;/span&gt;. Similarly for other rows.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;matrix_square_root&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -1776,7 +1782,7 @@ array([[-0.04100376],
                                                            [2,3,5],
                                                            [7,8,9.]]))
 operator&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;tensorflow.python.ops.linalg.linear_operator_full_matrix.LinearOperatorFullMatrix at 0x7fc6e8795160&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;tensorflow.python.ops.linalg.linear_operator_full_matrix.LinearOperatorFullMatrix at 0x7f8f501e7580&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We get only the memory location. No result is shown. To see the actual matrix we have to call the method &lt;code&gt;to_dense&lt;/code&gt; on this operator. There are many methods that can be called on an operator. For the full list, refer the documentation.&lt;/p&gt;
 &lt;p&gt;Before seeing the result, we will apply adjoint operator to our old operator and apply &lt;code&gt;to_dense&lt;/code&gt; to the adjoint operator. If everything works well, we should see the transpose of the matrix as result.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;adj_operator = tf.linalg.LinearOperatorAdjoint(operator)
@@ -1789,7 +1795,7 @@ Do not call `graph_parents`.
 
 
 
-&amp;lt;tensorflow.python.ops.linalg.linear_operator_adjoint.LinearOperatorAdjoint at 0x7fc6e878b400&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&amp;lt;tensorflow.python.ops.linalg.linear_operator_adjoint.LinearOperatorAdjoint at 0x7f8f501e71f0&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Again no result. At this point we want to see the result. So we will apply &lt;code&gt;to_dense&lt;/code&gt; method to adj_operator.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;adj_operator.to_dense()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
@@ -2173,7 +2179,7 @@ array([[  0.,   7.,  13.],
 &lt;li&gt;Datta, Biswa Nath. Numerical linear algebra and applications. Vol. 116. Siam, 2010.&lt;/li&gt;
 &lt;li&gt;(The Book) Golub, Gene H., and Charles F. Van Loan. Matrix computations. Vol. 3. JHU press, 2012.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Last updated: 29 July, 2020.&lt;/p&gt;
+&lt;p&gt;Last updated: 30 July, 2020.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
