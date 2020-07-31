@@ -2819,7 +2819,7 @@ View source on GitHub&lt;/a&gt;
 &lt;/td&gt;
 &lt;/table&gt;
 &lt;p&gt;In this post, we will read multiple &lt;code&gt;.csv&lt;/code&gt; files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 &lt;code&gt;.csv&lt;/code&gt; files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of &lt;code&gt;.csv&lt;/code&gt; files. As the number of files becomes large, we can’t load the whole data into memory. So we have to work with chunks of it. Generators help us do just that conveniently. In this post, we will read multiple files using a custom generator.&lt;/p&gt;
-&lt;p&gt;This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and &lt;code&gt;.csv&lt;/code&gt; files will be saved in it. Subsequently files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following codes. Jupyter notebook of this post can be found &lt;a href=&#34;https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and &lt;code&gt;.csv&lt;/code&gt; files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following code cells.&lt;/p&gt;
 &lt;p&gt;We will use &lt;code&gt;Tensorflow 2&lt;/code&gt; to run our deep learning model. &lt;code&gt;Tensorflow&lt;/code&gt; is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.&lt;/p&gt;
 &lt;div id=&#34;outline&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Outline:&lt;/h2&gt;
@@ -2831,10 +2831,12 @@ View source on GitHub&lt;/a&gt;
 &lt;/div&gt;
 &lt;div id=&#34;create-500-.csv-files-of-random-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;1. Create 500 &lt;code&gt;.csv&lt;/code&gt; files of random data&lt;/h2&gt;
-&lt;p&gt;As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.
-* Each &lt;code&gt;.csv&lt;/code&gt; file will have one column of data with 1024 entries.
-* Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
-category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.&lt;/p&gt;
+&lt;p&gt;As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Each &lt;code&gt;.csv&lt;/code&gt; file will have one column of data with 1024 entries.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
+category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
 import os
 import glob

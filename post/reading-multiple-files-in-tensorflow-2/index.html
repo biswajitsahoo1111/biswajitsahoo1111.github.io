@@ -658,7 +658,7 @@ View source on GitHub</a>
 </td>
 </table>
 <p>In this post, we will read multiple <code>.csv</code> files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 <code>.csv</code> files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of <code>.csv</code> files. As the number of files becomes large, we can’t load the whole data into memory. So we have to work with chunks of it. Generators help us do just that conveniently. In this post, we will read multiple files using a custom generator.</p>
-<p>This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and <code>.csv</code> files will be saved in it. Subsequently files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following codes. Jupyter notebook of this post can be found <a href="https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb">here</a>.</p>
+<p>This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and <code>.csv</code> files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following code cells.</p>
 <p>We will use <code>Tensorflow 2</code> to run our deep learning model. <code>Tensorflow</code> is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.</p>
 <div id="outline" class="section level2">
 <h2>Outline:</h2>
@@ -670,10 +670,12 @@ View source on GitHub</a>
 </div>
 <div id="create-500-.csv-files-of-random-data" class="section level2">
 <h2>1. Create 500 <code>.csv</code> files of random data</h2>
-<p>As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.
-* Each <code>.csv</code> file will have one column of data with 1024 entries.
-* Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
-category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.</p>
+<p>As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.</p>
+<ul>
+<li><p>Each <code>.csv</code> file will have one column of data with 1024 entries.</p></li>
+<li><p>Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
+category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.</p></li>
+</ul>
 <pre class="python"><code>import numpy as np
 import os
 import glob
