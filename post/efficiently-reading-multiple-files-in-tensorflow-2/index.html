@@ -642,7 +642,7 @@
       
 
 
-<p><strong>Note</strong>: Whether this method is efficient or not is contestable. Efficiency of a pipeline depends on many factors. How efficiently data are loaded? What is the computer architecture on which computations are being done? Is GPU available? And the list goes on. So readers might get different performance results when they run this method on their own system. The system on which we ran this notebook has 44 CPU cores. <code>Tensorflow</code> version is 2.2.0 and it is <code>XLA</code> enabled. We did not use any GPU. We achieved 20% improvement over naive method. For one personal application, involving moderate size data (3-4 GB), I achieved 10x performance improvement. So I hope that this method can be applied for other applications as well. Please note that for some weird reason, the speedup technique doesn’t work in <code>Google Colab</code>. But it works in GPU enabled personal systems, that I have checked.</p>
+<p><strong>Note</strong>: Whether this method is efficient or not is contestable. Efficiency of a pipeline depends on many factors. How efficiently data are loaded? What is the computer architecture on which computations are being done? Is GPU available? And the list goes on. So readers might get different performance results when they run this method on their own system. The system on which we ran this notebook has 44 CPU cores. <code>Tensorflow</code> version is 2.2.0 and it is <code>XLA</code> enabled. We did not use any GPU. We achieved 20% improvement over naive method. For one personal application, involving moderate size data (3-4 GB), I achieved 10x performance improvement. So I hope that this method can be useful for other applications as well. Please note that for some weird reason, the speedup technique doesn’t work in <code>Google Colab</code>. But it works in GPU enabled personal systems, that I have checked.</p>
 <table class="tfo-notebook-buttons" align="left">
 <td>
 <a href="https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Efficiently_reading_multiple_files_in_Tensorflow_2.ipynb">
@@ -653,7 +653,7 @@ View source on GitHub</a>
 <a href="https://www.dropbox.com/s/0naikdujqvzosh4/Efficiently_reading_multiple_files_in_Tensorflow_2.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
 </td>
 </table>
-<p>This post is a sequel to <a href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/">an older post</a>. In the previous post, we discussed ways in which we can read multiple files in <code>Tensorflow 2</code>. If our aim is only to read files without doing any transformation on data, that method might work well for most applications. But if we need to make complex transformations on data before training our deep learning algorithm, the old method might turn out to be slow. In this post, we will describe a way in which we can speedup that process. The transformations that we will consider are <code>spectrogram</code> and normalizing (converting each value to a standard normal value). We have chosen these transformations just to illustrate the point. Readers can use any transformation (or no transformation) of their choice. More details regarding improving data performance can be found in this <a href="https://www.tensorflow.org/guide/data_performance">tensorflow guide</a>.</p>
+<p>This post is a sequel to <a href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/">an older post</a>. In the previous post, we discussed ways in which we can read multiple files in <code>Tensorflow 2</code>. If our aim is only to read files without doing any transformation on data, that method might work well for most applications. But if we need to make complex transformations on data before training our deep learning algorithm, the old method might turn out to be slow. In this post, we will describe a way in which we can speedup that process. The transformations that we will consider are <code>spectrogram</code> and normalization (converting each value to a standard normal value). We have chosen these transformations just to illustrate the point. Readers can use any other transformation (or no transformation) of their choice. More details regarding improving data performance can be found in this <a href="https://www.tensorflow.org/guide/data_performance">tensorflow guide</a>.</p>
 <p>As this post is a sequel, we expect readers to be familiar with the old post. We will not elaborate on points that have already been discussed. Rather, we will focus on <a href="#speedup">section 4</a> which is the main topic of this post.</p>
 <div id="outline" class="section level2">
 <h2>Outline:</h2>
@@ -668,10 +668,12 @@ View source on GitHub</a>
 </div>
 <div id="create-500-.csv-files-of-random-data" class="section level2">
 <h2>1. Create 500 <code>.csv</code> files of random data</h2>
-<p>As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.
-* Each <code>.csv</code> file will have one column of data with 1024 entries.
-* Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
-category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.</p>
+<p>As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.</p>
+<ul>
+<li><p>Each <code>.csv</code> file will have one column of data with 1024 entries.</p></li>
+<li><p>Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
+category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.</p></li>
+</ul>
 <pre class="python"><code>import numpy as np
 import os
 import glob
@@ -846,7 +848,7 @@ for folder_name in fault_folders:
        &#39;./random_data/Fault_1/Fault_1_008.csv&#39;,
        &#39;./random_data/Fault_1/Fault_1_009.csv&#39;,
        &#39;./random_data/Fault_1/Fault_1_010.csv&#39;], dtype=&#39;&lt;U37&#39;)</code></pre>
-<pre class="python"><code>np.sort(glob.glob(&quot;./random_data/Fault_3/*&quot;))[:10] # Showing first 10 files of Falut_3 folder</code></pre>
+<pre class="python"><code>np.sort(glob.glob(&quot;./random_data/Fault_3/*&quot;))[:10] # Showing first 10 files of Fault_3 folder</code></pre>
 <pre><code>array([&#39;./random_data/Fault_3/Fault_3_001.csv&#39;,
        &#39;./random_data/Fault_3/Fault_3_002.csv&#39;,
        &#39;./random_data/Fault_3/Fault_3_003.csv&#39;,
