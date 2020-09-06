@@ -24,13 +24,13 @@
 &lt;td align=&#34;center&#34;&gt;
 &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/PCA_Abdi_in_python.ipynb&#34;&gt;
 &lt;img src=&#34;https://www.tensorflow.org/images/colab_logo_32px.png&#34; /&gt;
-Run Python codes in Google Colab&lt;/a&gt;
+Run Python code in Google Colab&lt;/a&gt;
 &lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;
-&lt;a href=&#34;https://www.dropbox.com/s/gn415uh3quou3a8/PCA_Abdi_in_python.ipynb?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download Python codes&lt;/a&gt;
+&lt;a href=&#34;https://www.dropbox.com/s/gn415uh3quou3a8/PCA_Abdi_in_python.ipynb?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download Python code&lt;/a&gt;
 &lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;
-&lt;a href=&#34;https://www.dropbox.com/s/tp56l6v7upa1apf/PCA_blog_Biswajit_Sahoo_part_3.Rmd?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download R codes (R Markdown)&lt;/a&gt;
+&lt;a href=&#34;https://www.dropbox.com/s/tp56l6v7upa1apf/PCA_blog_Biswajit_Sahoo_part_3.Rmd?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download R code (R Markdown)&lt;/a&gt;
 &lt;/td&gt;
 &lt;/table&gt;
 &lt;p&gt;In this post, we will reproduce the results of a popular paper on PCA. The paper is titled ‘&lt;a href=&#34;https://personal.utdallas.edu/~herve/abdi-awPCA2010.pdf&#34;&gt;Principal component analysis&lt;/a&gt;’ and is authored by &lt;a href=&#34;https://personal.utdallas.edu/~herve/&#34;&gt;Herve Abdi&lt;/a&gt; and &lt;a href=&#34;https://ljwilliams.github.io/&#34;&gt;Lynne J. Williams&lt;/a&gt;. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).&lt;/p&gt;
@@ -726,8 +726,7 @@ loaded via a namespace (and not attached):
 [29] evaluate_0.14    rmarkdown_2.1    blogdown_0.18    labeling_0.3    
 [33] stringi_1.4.6    compiler_4.0.2   pillar_1.4.3     scales_1.1.0    
 [37] pkgconfig_2.0.3 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to &lt;a href=&#34;https://biswajitsahoo1111.github.io/&#34;&gt;the author’s&lt;/a&gt; email.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_3.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to &lt;a href=&#34;https://biswajitsahoo1111.github.io/&#34;&gt;author’s&lt;/a&gt; email.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;reference&#34; class=&#34;section level2&#34;&gt;
