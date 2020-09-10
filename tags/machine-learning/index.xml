@@ -169,7 +169,7 @@ import re            # To match regular expression for extracting labels&lt;/cod
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;num = 0
 for data, labels in generated_data:
     print(data.shape, labels.shape)
-    print(labels, &amp;quot;&amp;lt;--Labels&amp;quot;)  # Just to see the lables
+    print(labels, &amp;quot;&amp;lt;--Labels&amp;quot;)  # Just to see the labels
     print()
     num = num + 1
     if num &amp;gt; 5: break&lt;/code&gt;&lt;/pre&gt;
@@ -313,7 +313,7 @@ for folder_name in fault_folders:
  &amp;#39;./random_data/Fault_1/Fault_1_008.csv&amp;#39;,
  &amp;#39;./random_data/Fault_1/Fault_1_009.csv&amp;#39;,
  &amp;#39;./random_data/Fault_1/Fault_1_010.csv&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;glob.glob(&amp;quot;./random_data/Fault_3/*&amp;quot;)[:10] # Showing first 10 files of Falut_3 folder&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;glob.glob(&amp;quot;./random_data/Fault_3/*&amp;quot;)[:10] # Showing first 10 files of Fault_3 folder&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;[&amp;#39;./random_data/Fault_3/Fault_3_001.csv&amp;#39;,
  &amp;#39;./random_data/Fault_3/Fault_3_002.csv&amp;#39;,
  &amp;#39;./random_data/Fault_3/Fault_3_003.csv&amp;#39;,
@@ -450,9 +450,9 @@ Test accuracy: 0.15000000596046448&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;how-to-make-predictions&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;How to make predictions?&lt;/h2&gt;
-&lt;p&gt;Until now, we have evaluated our model on a kept out test set. For our test set, both data and labels were known. So we evaluated its performance. But often times, for test set, we don’t have access to true labels. Rather we have to make predictions on the data available. This is the case in online competitions where we have to submit our predictions on a test set for which don’t know the labels. We will call this set (without any labels) the prediction set. This naming convention is arbitray but we will stick with it.&lt;/p&gt;
+&lt;p&gt;Until now, we have evaluated our model on a kept out test set. For our test set, both data and labels were known. So we evaluated its performance. But often times, for test set, we don’t have access to true labels. Rather, we have to make predictions on the data available. This is the case in online competitions where we have to submit our predictions on a test set for which we don’t know the labels. We will call this set (without any labels) the prediction set. This naming convention is arbitrary but we will stick with it.&lt;/p&gt;
 &lt;p&gt;If the whole of our prediction set fits into memory, we can just call &lt;code&gt;model.predict()&lt;/code&gt; on this data and then use &lt;code&gt;np.argmax()&lt;/code&gt; to obtain predicted class labels. Otherwise, we can read files in prediction set in chunks, make predictions on the chunks and finally append our result.&lt;/p&gt;
-&lt;p&gt;Yet another pedantic way of doing this is to write a generator to read files from the prediciton set in chunks and make predictions on it. We will show how this approach works. As we don’t have a prediction set yet, we will first create some files and save it to the prediction set.&lt;/p&gt;
+&lt;p&gt;Yet another pedantic way of doing this is to write a generator to read files from the prediction set in chunks and make predictions on it. We will show how this approach works. As we don’t have a prediction set yet, we will first create some files and save it to the prediction set.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;def create_prediction_set(num_files = 20):
     os.mkdir(&amp;quot;./random_data/prediction_set&amp;quot;)
     for i in range(num_files):
