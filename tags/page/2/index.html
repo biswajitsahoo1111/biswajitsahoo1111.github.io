@@ -21,14 +21,14 @@
   
   
 
-  <meta name="author" content="Nelson Bighetti">
+  <meta name="author" content="Biswajit Sahoo">
 
   
   
   
     
   
-  <meta name="description" content="Professor of Artificial Intelligence">
+  <meta name="description" content="PhD Student">
 
   
   <link rel="alternate" hreflang="en-us" href="/tags/">
@@ -205,16 +205,52 @@
 
 
 
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153208457-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-153208457-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
   
 
 
   
-  <link rel="alternate" href="/tags/index.xml" type="application/rss+xml" title="BISWAJIT SAHOO">
+  <link rel="alternate" href="/tags/index.xml" type="application/rss+xml" title="Biswajit Sahoo">
   
 
   <link rel="manifest" href="/index.webmanifest">
-  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
-  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+  <link rel="icon" type="image/png" href="/images/icon_huffc8dce834b4c0aec33122a3663a38ac_177939_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huffc8dce834b4c0aec33122a3663a38ac_177939_192x192_fill_lanczos_center_2.png">
 
   <link rel="canonical" href="/tags/">
 
@@ -224,35 +260,34 @@
   
   
     
-    
   
   
-  <meta property="twitter:card" content="summary">
+  <meta property="twitter:card" content="summary_large_image">
   
-  <meta property="og:site_name" content="BISWAJIT SAHOO">
+  <meta property="og:site_name" content="Biswajit Sahoo">
   <meta property="og:url" content="/tags/">
-  <meta property="og:title" content="Tags | BISWAJIT SAHOO">
-  <meta property="og:description" content="Professor of Artificial Intelligence"><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
-  <meta property="twitter:image" content="img/map[gravatar:%!s(bool=false) shape:circle]"><meta property="og:locale" content="en-us">
+  <meta property="og:title" content="Tags | Biswajit Sahoo">
+  <meta property="og:description" content="PhD Student"><meta property="og:image" content="/img/icon.png">
+  <meta property="twitter:image" content="/img/icon.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-01-09T00:00:00&#43;00:00">
+    <meta property="og:updated_time" content="2020-05-17T00:00:00&#43;00:00">
   
-
-  
-
-
-
-
-  
-
 
   
 
 
 
 
+  
 
-  <title>Tags | BISWAJIT SAHOO</title>
+
+  
+
+
+
+
+
+  <title>Tags | Biswajit Sahoo</title>
 
 </head>
 
@@ -273,7 +308,8 @@
 
       <div id="search-box">
         
-        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
         
       </div>
 
@@ -302,7 +338,7 @@
 
     
     <div class="d-none d-lg-inline-flex">
-      <a class="navbar-brand" href="/">BISWAJIT SAHOO</a>
+      <a class="navbar-brand" href="/">Biswajit Sahoo</a>
     </div>
     
 
@@ -315,7 +351,7 @@
 
     
     <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
-      <a class="navbar-brand" href="/">BISWAJIT SAHOO</a>
+      <a class="navbar-brand" href="/">Biswajit Sahoo</a>
     </div>
     
 
@@ -451,6 +487,10 @@
 
     <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
       
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
 
       
 
@@ -501,7 +541,17 @@
     
     
     <div>
-      <h2><a href="/tags/demo/" >Demo</a></h2>
+      <h2><a href="/tags/remaining-useful-life/" >Remaining Useful Life</a></h2>
+      <div class="article-style">
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div>
+      <h2><a href="/tags/rul-prediction/" >RUL Prediction</a></h2>
       <div class="article-style">
         
       </div>
@@ -554,11 +604,46 @@
     
 
     
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
 
     
     
 
     
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
 
     
     
@@ -568,7 +653,6 @@
 
     
     
-
     
     
     
@@ -576,12 +660,12 @@
     
     
     
+      
     
     
     
     
-    
-    <script src="/js/academic.min.c6f9beab6fb83af42b79b98b1b192e24.js"></script>
+    <script src="/js/academic.min.c4716762638572b143da1c828c87dcd8.js"></script>
 
     
 
@@ -595,23 +679,13 @@
   <div class="container">
     <footer class="site-footer">
   
-  <p class="powered-by">
-    
-      <a href="/privacy/">Privacy Policy</a>
-    
-    
-       &middot; 
-      <a href="/terms/">Terms</a>
-    
-  </p>
-  
 
   <p class="powered-by">
-    © 2020 Biswajit Sahoo &middot; 
+    &copy; 2020 Biswajit Sahoo &middot; 
 
-    Powered by the
-    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+    Powered by <a href="https://bookdown.org/yihui/blogdown/" rel="noopener">blogdown</a>       and the
+    <a href="https://sourcethemes.com/academic/" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" rel="noopener">Hugo</a>.
 
     
     <span class="float-right" aria-hidden="true">
