@@ -4,17 +4,37 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-05-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/blog/</loc>
-    <lastmod>2020-05-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-05-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-12-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/pytorch/</loc>
+    <lastmod>2020-12-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/reading-multiple-csv-files-in-pytorch/</loc>
+    <lastmod>2020-12-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-12-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -24,16 +44,6 @@
   
   <url>
     <loc>/post/efficiently-reading-multiple-files-in-tensorflow-2/</loc>
-    <lastmod>2020-05-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2020-05-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-05-17T00:00:00+00:00</lastmod>
   </url>
   
