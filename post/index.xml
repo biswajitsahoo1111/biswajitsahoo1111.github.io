@@ -5,12 +5,493 @@
     <link>https://biswajitsahoo1111.github.io/post/</link>
       <atom:link href="https://biswajitsahoo1111.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Biswajit Sahoo</copyright><lastBuildDate>Sat, 19 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Biswajit Sahoo</copyright><lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://biswajitsahoo1111.github.io/img/icon.png</url>
       <title>Posts</title>
       <link>https://biswajitsahoo1111.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>Reading multiple files in Tensorflow 2 using Sequence</title>
+      <link>https://biswajitsahoo1111.github.io/post/2020-12-26-reading-multiple-files-in-tensorflow-2-using-sequence/</link>
+      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
+      <guid>https://biswajitsahoo1111.github.io/post/2020-12-26-reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
+      <description>
+
+
+&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
+&lt;td&gt;
+&lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb&#34;&gt;
+&lt;img src=&#34;https://www.tensorflow.org/images/colab_logo_32px.png&#34; /&gt;
+Run in Google Colab&lt;/a&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;a href=&#34;https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb&#34;&gt;
+&lt;img src=&#34;https://www.tensorflow.org/images/GitHub-Mark-32px.png&#34; /&gt;
+View source on GitHub&lt;/a&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;a href=&#34;https://www.dropbox.com/s/weog8ubsu9qcugv/Reading_mulitple_files_using_tensorflow_sequence.ipynb?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download notebook&lt;/a&gt;
+&lt;/td&gt;
+&lt;/table&gt;
+&lt;p&gt;In this post, we will read multiple csv files using &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence&#34;&gt;Tensroflow Sequence&lt;/a&gt;. In an &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/&#34;&gt;earlier post&lt;/a&gt; we had demonstrated the procedure for reading multiple csv files using a custom generator. Though generators are convenient for handling chunks of data from a large dataset, they have limited portability and scalability (&lt;a href=&#34;https://www.tensorflow.org/guide/data#consuming_python_generators&#34;&gt;see the caution here&lt;/a&gt;). Therefore, Tensorflow prefers &lt;code&gt;Sequence&lt;/code&gt; over generators.&lt;/p&gt;
+&lt;p&gt;Sequence is similar to &lt;code&gt;Tensorflow Dataset&lt;/code&gt; but provides flexibility for batched data preparation in a custom manner. &lt;code&gt;Tensorflow Dataset&lt;/code&gt; provides a wide range of functionalities to handle different data types. But for some specific applications we might have to make some custom modifications for which built-in methods are not available in &lt;code&gt;tensorflow dataset&lt;/code&gt;. In that case, we can use &lt;code&gt;Sequence&lt;/code&gt; to create our own dataset equivalent. In this post, we will show how to use sequence to read multiple csv files. The method we will discuss is general enough to work for other file formats (such as .txt, .npz, etc.) as well. We will demonstrate the procedure using 500 .csv files. But the method can be easily extended to huge datasets involving thousands of csv files.&lt;/p&gt;
+&lt;p&gt;This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and .csv files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following code cells. We will use &lt;code&gt;Tensorflow 2&lt;/code&gt; to run our deep learning model. Tensorflow is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.&lt;/p&gt;
+&lt;div id=&#34;outline&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Outline:&lt;/h2&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Create 500 “.csv” files and save it in the folder “random_data” in current directory.&lt;/li&gt;
+&lt;li&gt;Write a sequence object that reads data from the folder in chunks and preprocesses it.&lt;/li&gt;
+&lt;li&gt;Feed the chunks of data to a CNN model and train it for several epochs.&lt;/li&gt;
+&lt;li&gt;Make prediction on new data for which labels are not known.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;create-500-.csv-files-of-random-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;1. Create 500 .csv files of random data&lt;/h2&gt;
+&lt;p&gt;As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. The dataset that we will create is a contrived one. But readers can modify the approach slightly to cater to their need. Following is the process that we will follow.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Each .csv file will have one column of data with 1024 entries.&lt;/li&gt;
+&lt;li&gt;Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1” category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …,“Fault_1_100.csv”. Similarly for other classes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np
+import os
+import glob
+np.random.seed(1111)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First create a function that will generate random files.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;def create_random_csv_files(fault_classes, number_of_files_in_each_class):
+    os.mkdir(&amp;quot;./random_data/&amp;quot;)  # Make a directory to save created files.
+    for fault_class in fault_classes:
+        for i in range(number_of_files_in_each_class):
+            data = np.random.rand(1024,)
+            file_name = &amp;quot;./random_data/&amp;quot; + eval(&amp;quot;fault_class&amp;quot;) + &amp;quot;_&amp;quot; + &amp;quot;{0:03}&amp;quot;.format(i+1) + &amp;quot;.csv&amp;quot; # This creates file_name
+            np.savetxt(eval(&amp;quot;file_name&amp;quot;), data, delimiter = &amp;quot;,&amp;quot;, header = &amp;quot;V1&amp;quot;, comments = &amp;quot;&amp;quot;)
+        print(str(eval(&amp;quot;number_of_files_in_each_class&amp;quot;)) + &amp;quot; &amp;quot; + eval(&amp;quot;fault_class&amp;quot;) + &amp;quot; files&amp;quot;  + &amp;quot; created.&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now use the function to create 100 files each for five fault types.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;create_random_csv_files([&amp;quot;Fault_1&amp;quot;, &amp;quot;Fault_2&amp;quot;, &amp;quot;Fault_3&amp;quot;, &amp;quot;Fault_4&amp;quot;, &amp;quot;Fault_5&amp;quot;], number_of_files_in_each_class = 100)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;100 Fault_1 files created.
+100 Fault_2 files created.
+100 Fault_3 files created.
+100 Fault_4 files created.
+100 Fault_5 files created.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;files = glob.glob(&amp;quot;./random_data/*&amp;quot;)
+print(&amp;quot;Total number of files: &amp;quot;, len(files))
+print(&amp;quot;Showing first 10 files...&amp;quot;)
+files[:10]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Total number of files:  500
+Showing first 10 files...
+
+[&amp;#39;./random_data\\Fault_1_001.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_002.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_003.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_004.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_005.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_006.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_007.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_008.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_009.csv&amp;#39;,
+ &amp;#39;./random_data\\Fault_1_010.csv&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To extract labels from file name, extract the part of the file name that corresponds to fault type.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(files[0])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;./random_data\Fault_1_001.csv&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(files[0][14:21])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Fault_1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that data have been created, we will go to the next step. That is, create a custom &lt;code&gt;Sequence&lt;/code&gt; object, preprocess the time series like data into a matrix like shape such that a 2-D CNN can ingest it. We reshape the data in that way to just illustrate the point. Readers should use their own preprocessing steps.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;write-a-custom-sequence-object&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;2. Write a custom Sequence object&lt;/h2&gt;
+&lt;p&gt;According to &lt;code&gt;Tensorflow&lt;/code&gt; &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence&#34;&gt;documentation&lt;/a&gt;, every Sequence must implement following two methods:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;__getitem__&lt;/code&gt; method: Iterates over the dataset chunk by chunk. It must return a complete batch.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__len__&lt;/code&gt; method: Returns the length of the Sequence (total number of batches that we can extract from the full dataset).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As we create a custom sequence object, we have complete control over the arguments we want to pass it. The following sequence object takes a list of file names as first argument. The second argument is batch_size. batch_size determines how many files we will process at one go. As we will be solving a classification problem, we have to assign labels to each raw data. We will use following labels for convenience.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;center&#34;&gt;Class&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Label&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;Fault_1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;Fault_2&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;Fault_3&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;Fault_4&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;Fault_5&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
+import re    # To match regular expression for extracting labels&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import tensorflow as tf
+print(&amp;quot;Tensorflow version: &amp;quot;, tf.__version__)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Tensorflow version:  2.4.0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;class CustomSequence(tf.keras.utils.Sequence):  # It inherits from `tf.keras.utils.Sequence` class
+  def __init__(self, filenames, batch_size):  # Two input arguments to the class.
+        self.filenames= filenames
+        self.batch_size = batch_size
+
+  def __len__(self):
+        return int(np.ceil(len(self.filenames) / float(self.batch_size)))
+
+  def __getitem__(self, idx):  # idx is index that runs from 0 to length of sequence
+        batch_x = self.filenames[idx * self.batch_size:(idx + 1) * self.batch_size] # Select a chunk of file names
+        data = []
+        labels = []
+        label_classes = [&amp;quot;Fault_1&amp;quot;, &amp;quot;Fault_2&amp;quot;, &amp;quot;Fault_3&amp;quot;, &amp;quot;Fault_4&amp;quot;, &amp;quot;Fault_5&amp;quot;]
+
+        for file in batch_x:   # In this loop read the files in the chunk that was selected previously
+            temp = pd.read_csv(open(file,&amp;#39;r&amp;#39;)) # Change this line to read any other type of file
+            data.append(temp.values.reshape(32,32,1)) # Convert column data to matrix like data with one channel
+            pattern = &amp;quot;^&amp;quot; + eval(&amp;quot;file[14:21]&amp;quot;)      # Pattern extracted from file_name
+            for j in range(len(label_classes)):
+                if re.match(pattern, label_classes[j]): # Pattern is matched against different label_classes
+                    labels.append(j)  
+        data = np.asarray(data).reshape(-1,32,32,1)
+        labels = np.asarray(labels)
+        return data, labels&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To read any other file format, inside the &lt;code&gt;__getitem__&lt;/code&gt; method change the line that reads files. This will enable us to read different file formats, be it &lt;code&gt;.txt&lt;/code&gt; or &lt;code&gt;.npz&lt;/code&gt; or any other. Preprocessing of data, different from what we have done in this blog, can be done within the &lt;code&gt;__getitem__&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;Now we will check whether the dataset works as intended or not. We will set batch_size to 10. This means that files in chunks of 10 will be read and processed. The list of files from which 10 are chosen can be an ordered file list or shuffled list. In case, the files are not shuffled, use np.random.shuffle(file_list) to shuffle files.&lt;/p&gt;
+&lt;p&gt;In the demonstration, we will read files from an ordered list. This will help us check any errors in the code.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;sequence = CustomSequence(filenames = files, batch_size = 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Check the length of the sequence.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;sequence.__len__()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;50&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another way to check the length of the sequence.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;len(list(sequence))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;50&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The sequence is not an infinite loop. Let’s check again. This is yet another way to check the length of the sequence.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;counter = 0
+for _,_ in sequence:
+    counter = counter + 1
+print(counter)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;50&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;for num, (data, labels) in enumerate(sequence):
+    print(data.shape, labels.shape)
+    print(labels)
+    if num &amp;gt; 5: break&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Run the above cell multiple times to observe different labels. Label 1 appears only when all the files corresponding to “Fault_1” have been read. There are 100 files for “Fault_1” and we have set batch_size to 10. In the above cell we are iterating over the generator only 6 times. When number of iterations become greater than 10, we see label 1 and subsequently other labels. This will happen only if our initial file list is not shuffled. If the original list is shuffled, we will get random labels.&lt;/p&gt;
+&lt;p&gt;We can pass this sequence directly to &lt;code&gt;model.fit()&lt;/code&gt; to train our deep learning model. Now that sequence works fine, we will use it to train a simple deep learning model. The focus of this post is not on the model itself. So we will use a simplest model. If readers want a different model, they can do so by just replacing our model with theirs.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;feed-the-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;3. Feed the chunks of data to a CNN model and train it for several epochs&lt;/h2&gt;
+&lt;p&gt;But before we build the model and train it, we will first move our files to different folders depending on their fault type. We do so as it will be convenient later to create a training, validation, and test set, keeping the balanced nature of the dataset intact.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import shutil&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Create five different folders one each for a given fault type.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;fault_folders = [&amp;quot;Fault_1&amp;quot;, &amp;quot;Fault_2&amp;quot;, &amp;quot;Fault_3&amp;quot;, &amp;quot;Fault_4&amp;quot;, &amp;quot;Fault_5&amp;quot;]
+for folder_name in fault_folders:
+    os.mkdir(os.path.join(&amp;quot;./random_data&amp;quot;, folder_name))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Move files into those folders.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;for file in files:
+    pattern = &amp;quot;^&amp;quot; + eval(&amp;quot;file[14:21]&amp;quot;)
+    for j in range(len(fault_folders)):
+        if re.match(pattern, fault_folders[j]):
+            dest = os.path.join(&amp;quot;./random_data/&amp;quot;,eval(&amp;quot;fault_folders[j]&amp;quot;))
+            shutil.move(file, dest)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;glob.glob(&amp;quot;./random_data/*&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[&amp;#39;./random_data\\Fault_1&amp;#39;,
+ &amp;#39;./random_data\\Fault_2&amp;#39;,
+ &amp;#39;./random_data\\Fault_3&amp;#39;,
+ &amp;#39;./random_data\\Fault_4&amp;#39;,
+ &amp;#39;./random_data\\Fault_5&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;glob.glob(&amp;quot;./random_data/Fault_1/*&amp;quot;)[:10] # Showing first 10 files of Fault_1 folder&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[&amp;#39;./random_data/Fault_1\\Fault_1_001.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_1\\Fault_1_002.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_1\\Fault_1_003.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_1\\Fault_1_004.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_1\\Fault_1_005.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_1\\Fault_1_006.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_1\\Fault_1_007.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_1\\Fault_1_008.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_1\\Fault_1_009.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_1\\Fault_1_010.csv&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;glob.glob(&amp;quot;./random_data/Fault_3/*&amp;quot;)[:10] # Showing first 10 files of Fault_3 folder&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[&amp;#39;./random_data/Fault_3\\Fault_3_001.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_3\\Fault_3_002.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_3\\Fault_3_003.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_3\\Fault_3_004.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_3\\Fault_3_005.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_3\\Fault_3_006.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_3\\Fault_3_007.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_3\\Fault_3_008.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_3\\Fault_3_009.csv&amp;#39;,
+ &amp;#39;./random_data/Fault_3\\Fault_3_010.csv&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Prepare the data for training set, validation set, and test_set. For each fault type, we will keep 70 files for training, 10 files for validation and 20 files for testing.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;fault_1_files = glob.glob(&amp;quot;./random_data/Fault_1/*&amp;quot;)
+fault_2_files = glob.glob(&amp;quot;./random_data/Fault_2/*&amp;quot;)
+fault_3_files = glob.glob(&amp;quot;./random_data/Fault_3/*&amp;quot;)
+fault_4_files = glob.glob(&amp;quot;./random_data/Fault_4/*&amp;quot;)
+fault_5_files = glob.glob(&amp;quot;./random_data/Fault_5/*&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from sklearn.model_selection import train_test_split&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;fault_1_train, fault_1_test = train_test_split(fault_1_files, test_size = 20, random_state = 5)
+fault_2_train, fault_2_test = train_test_split(fault_2_files, test_size = 20, random_state = 54)
+fault_3_train, fault_3_test = train_test_split(fault_3_files, test_size = 20, random_state = 543)
+fault_4_train, fault_4_test = train_test_split(fault_4_files, test_size = 20, random_state = 5432)
+fault_5_train, fault_5_test = train_test_split(fault_5_files, test_size = 20, random_state = 54321)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;fault_1_train, fault_1_val = train_test_split(fault_1_train, test_size = 10, random_state = 1)
+fault_2_train, fault_2_val = train_test_split(fault_2_train, test_size = 10, random_state = 12)
+fault_3_train, fault_3_val = train_test_split(fault_3_train, test_size = 10, random_state = 123)
+fault_4_train, fault_4_val = train_test_split(fault_4_train, test_size = 10, random_state = 1234)
+fault_5_train, fault_5_val = train_test_split(fault_5_train, test_size = 10, random_state = 12345)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;train_file_names = fault_1_train + fault_2_train + fault_3_train + fault_4_train + fault_5_train
+validation_file_names = fault_1_val + fault_2_val + fault_3_val + fault_4_val + fault_5_val
+test_file_names = fault_1_test + fault_2_test + fault_3_test + fault_4_test + fault_5_test
+
+# Shuffle training files (We don&amp;#39;t need to shuffle validation and test data)
+np.random.shuffle(train_file_names)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(&amp;quot;Number of train_files:&amp;quot; ,len(train_file_names))
+print(&amp;quot;Number of validation_files:&amp;quot; ,len(validation_file_names))
+print(&amp;quot;Number of test_files:&amp;quot; ,len(test_file_names))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Number of train_files: 350
+Number of validation_files: 50
+Number of test_files: 100&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Create sequences for training, validation, and test set.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;batch_size = 10
+train_sequence = CustomSequence(filenames = train_file_names, batch_size = batch_size)
+val_sequence = CustomSequence(filenames = validation_file_names, batch_size = batch_size)
+test_sequence = CustomSequence(filenames = test_file_names, batch_size = batch_size)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from tensorflow.keras import layers
+model = tf.keras.Sequential([
+    layers.Conv2D(16, 3, activation = &amp;quot;relu&amp;quot;, input_shape = (32,32,1)),
+    layers.MaxPool2D(2),
+    layers.Conv2D(32, 3, activation = &amp;quot;relu&amp;quot;),
+    layers.MaxPool2D(2),
+    layers.Flatten(),
+    layers.Dense(16, activation = &amp;quot;relu&amp;quot;),
+    layers.Dense(5, activation = &amp;quot;softmax&amp;quot;)
+])
+model.summary()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Model: &amp;quot;sequential&amp;quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 30, 30, 16)        160       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 15, 15, 16)        0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 13, 13, 32)        4640      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 6, 6, 32)          0         
+_________________________________________________________________
+flatten (Flatten)            (None, 1152)              0         
+_________________________________________________________________
+dense (Dense)                (None, 16)                18448     
+_________________________________________________________________
+dense_1 (Dense)              (None, 5)                 85        
+=================================================================
+Total params: 23,333
+Trainable params: 23,333
+Non-trainable params: 0
+_________________________________________________________________&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Compile the model.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;model.compile(loss = &amp;quot;sparse_categorical_crossentropy&amp;quot;, optimizer = &amp;quot;adam&amp;quot;, metrics = [&amp;quot;accuracy&amp;quot;])&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Fit the model using sequence.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;model.fit(train_sequence, validation_data = val_sequence, epochs = 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Epoch 1/10
+35/35 [==============================] - 2s 38ms/step - loss: 1.6305 - accuracy: 0.1788 - val_loss: 1.6095 - val_accuracy: 0.1800
+Epoch 2/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6086 - accuracy: 0.2212 - val_loss: 1.6093 - val_accuracy: 0.2200
+Epoch 3/10
+35/35 [==============================] - 1s 16ms/step - loss: 1.6089 - accuracy: 0.2057 - val_loss: 1.6094 - val_accuracy: 0.2200
+Epoch 4/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6092 - accuracy: 0.1987 - val_loss: 1.6100 - val_accuracy: 0.2000
+Epoch 5/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6105 - accuracy: 0.1173 - val_loss: 1.6095 - val_accuracy: 0.2000
+Epoch 6/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6069 - accuracy: 0.2062 - val_loss: 1.6098 - val_accuracy: 0.2000
+Epoch 7/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6070 - accuracy: 0.2332 - val_loss: 1.6097 - val_accuracy: 0.2200
+Epoch 8/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6067 - accuracy: 0.2255 - val_loss: 1.6100 - val_accuracy: 0.2200
+Epoch 9/10
+35/35 [==============================] - 1s 19ms/step - loss: 1.6044 - accuracy: 0.2510 - val_loss: 1.6090 - val_accuracy: 0.2400
+Epoch 10/10
+35/35 [==============================] - 1s 20ms/step - loss: 1.5998 - accuracy: 0.3180 - val_loss: 1.6094 - val_accuracy: 0.2400
+
+
+
+
+
+&amp;lt;tensorflow.python.keras.callbacks.History at 0x24f86841b80&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;test_loss, test_accuracy = model.evaluate(test_sequence, steps = 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;10/10 [==============================] - 0s 14ms/step - loss: 1.6097 - accuracy: 0.2000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(&amp;quot;Test loss: &amp;quot;, test_loss)
+print(&amp;quot;Test accuracy:&amp;quot;, test_accuracy)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Test loss:  1.609706997871399
+Test accuracy: 0.20000000298023224&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As expected, model performs terribly.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-make-predictions&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;4. How to make predictions?&lt;/h2&gt;
+&lt;p&gt;Until now, we have evaluated our model on a kept out test set. For our test set, both data and labels were known. So we evaluated its performance. But oftentimes, for test set, we don’t have access to true labels. Rather, we have to make predictions on the data available. This is the case in online competitions where we have to submit our predictions on a test set for which we don’t know the labels. We will call this set (without any labels) the prediction set. This naming convention is arbitrary but we will stick with it.&lt;/p&gt;
+&lt;p&gt;If the whole of our prediction set fits into memory, we can just make prediction on this data by calling &lt;code&gt;model.evaluate()&lt;/code&gt; and then use np.argmax() to obtain predicted class labels. Otherwise, we can read files in prediction set in chunks, make predictions on the chunks and finally append our result.&lt;/p&gt;
+&lt;p&gt;Yet another pedantic way of doing this is to write a separate &lt;code&gt;Sequence&lt;/code&gt; to read files from the prediction set in chunks and make predictions on it. We will show how this approach works. As we don’t have a prediction set yet, we will first create some files and save it to the prediction set.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;def create_prediction_set(num_files = 20):
+    os.mkdir(&amp;quot;./random_data/prediction_set&amp;quot;)
+    for i in range(num_files):
+        data = np.random.randn(1024,)
+        file_name = &amp;quot;./random_data/prediction_set/&amp;quot;  + &amp;quot;file_&amp;quot; + &amp;quot;{0:03}&amp;quot;.format(i+1) + &amp;quot;.csv&amp;quot; # This creates file_name
+        np.savetxt(eval(&amp;quot;file_name&amp;quot;), data, delimiter = &amp;quot;,&amp;quot;, header = &amp;quot;V1&amp;quot;, comments = &amp;quot;&amp;quot;)
+    print(str(eval(&amp;quot;num_files&amp;quot;)) + &amp;quot; &amp;quot;+ &amp;quot; files created in prediction set.&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Create some files for prediction set.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;create_prediction_set(num_files = 55)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;55  files created in prediction set.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;prediction_files = glob.glob(&amp;quot;./random_data/prediction_set/*&amp;quot;)
+print(&amp;quot;Total number of files: &amp;quot;, len(prediction_files))
+print(&amp;quot;Showing first 10 files...&amp;quot;)
+prediction_files[:10]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Total number of files:  55
+Showing first 10 files...
+
+[&amp;#39;./random_data/prediction_set\\file_001.csv&amp;#39;,
+ &amp;#39;./random_data/prediction_set\\file_002.csv&amp;#39;,
+ &amp;#39;./random_data/prediction_set\\file_003.csv&amp;#39;,
+ &amp;#39;./random_data/prediction_set\\file_004.csv&amp;#39;,
+ &amp;#39;./random_data/prediction_set\\file_005.csv&amp;#39;,
+ &amp;#39;./random_data/prediction_set\\file_006.csv&amp;#39;,
+ &amp;#39;./random_data/prediction_set\\file_007.csv&amp;#39;,
+ &amp;#39;./random_data/prediction_set\\file_008.csv&amp;#39;,
+ &amp;#39;./random_data/prediction_set\\file_009.csv&amp;#39;,
+ &amp;#39;./random_data/prediction_set\\file_010.csv&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The prediction sequence will be slightly different from our previous custom dataset class. We only need to return data in this case.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;class PredictionSequence(tf.keras.utils.Sequence):
+  def __init__(self, filenames, batch_size):
+        self.filenames= filenames
+        self.batch_size = batch_size
+  def __len__(self):
+        return int(np.ceil(len(self.filenames) / float(self.batch_size)))
+  def __getitem__(self, idx):
+        batch_x = self.filenames[idx * self.batch_size:(idx + 1) * self.batch_size]
+        data = []
+        labels = []
+        label_classes = [&amp;quot;Fault_1&amp;quot;, &amp;quot;Fault_2&amp;quot;, &amp;quot;Fault_3&amp;quot;, &amp;quot;Fault_4&amp;quot;, &amp;quot;Fault_5&amp;quot;]
+        for file in batch_x:
+            temp = pd.read_csv(open(file,&amp;#39;r&amp;#39;)) 
+            data.append(temp.values.reshape(32,32,1)) 
+        data = np.asarray(data).reshape(-1,32,32,1)
+        return data&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Check whether the generator sequence works or not. First we will check its length.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;prediction_seq = PredictionSequence(filenames = prediction_files, batch_size=10)
+print(prediction_seq.__len__())&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;for data in prediction_seq:
+    print(data.shape)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;(10, 32, 32, 1)
+(10, 32, 32, 1)
+(10, 32, 32, 1)
+(10, 32, 32, 1)
+(10, 32, 32, 1)
+(5, 32, 32, 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;predictions = model.predict(prediction_seq)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(&amp;quot;Shape of prediction array: &amp;quot;, predictions.shape)
+predictions&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Shape of prediction array:  (55, 5)
+
+
+
+
+
+array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
+       [0.17025462, 0.23611873, 0.21584883, 0.15583281, 0.22194503],
+       [0.16997598, 0.23636353, 0.2160589 , 0.15556051, 0.22204101],
+       [0.17808239, 0.23929793, 0.20060928, 0.15217312, 0.22983731],
+       [0.16749388, 0.24041025, 0.21612632, 0.15114665, 0.22482291],
+       [0.16648369, 0.24155213, 0.21663304, 0.14991023, 0.22542089],
+       [0.16956756, 0.24306948, 0.21019061, 0.14832966, 0.2288426 ],
+       [0.16461462, 0.23314428, 0.22771336, 0.15880677, 0.21572094],
+       [0.16099085, 0.24614859, 0.22101355, 0.14492905, 0.22691788],
+       [0.16029194, 0.23579895, 0.2323411 , 0.15559815, 0.21596995],
+       [0.15644614, 0.24322459, 0.23156258, 0.14755438, 0.22121225],
+       [0.16045825, 0.23727809, 0.23065342, 0.1540593 , 0.2175509 ],
+       [0.18453611, 0.2363899 , 0.19367108, 0.1549771 , 0.23042585],
+       [0.16539477, 0.23163731, 0.22783667, 0.16050129, 0.21463   ],
+       [0.16019677, 0.2387398 , 0.22967993, 0.15250796, 0.21887548],
+       [0.164585  , 0.241522  , 0.2197408 , 0.14987943, 0.22427279],
+       [0.1423634 , 0.2492775 , 0.25001773, 0.13962528, 0.21871613],
+       [0.1685916 , 0.23507524, 0.21948369, 0.15692794, 0.21992151],
+       [0.1899035 , 0.23893598, 0.18335396, 0.15139207, 0.23641457],
+       [0.16065492, 0.2413149 , 0.2264044 , 0.14987133, 0.22175437],
+       [0.17529766, 0.24322936, 0.20103565, 0.14799424, 0.23244311],
+       [0.16809338, 0.24051304, 0.2150641 , 0.15104856, 0.22528093],
+       [0.17161693, 0.23075785, 0.21867743, 0.16179037, 0.21715748],
+       [0.16884513, 0.23852658, 0.21579023, 0.15319362, 0.22364433],
+       [0.17458686, 0.2428582 , 0.20250764, 0.14843197, 0.23161522],
+       [0.1646341 , 0.2297526 , 0.23079726, 0.16249931, 0.21231675],
+       [0.15729222, 0.23233345, 0.24062563, 0.15889668, 0.210852  ],
+       [0.14776482, 0.23704691, 0.2526417 , 0.15245639, 0.21009028],
+       [0.16680573, 0.23577859, 0.22168827, 0.15609236, 0.21963505],
+       [0.17260087, 0.24030833, 0.20811835, 0.15126604, 0.22770639],
+       [0.13550763, 0.24409433, 0.26797664, 0.1427981 , 0.20962337],
+       [0.15663186, 0.23662733, 0.23769669, 0.15432158, 0.21472257],
+       [0.1549199 , 0.23210286, 0.24487424, 0.15878738, 0.20931558],
+       [0.1547824 , 0.24484529, 0.23276137, 0.14575545, 0.22185549],
+       [0.1587394 , 0.23657197, 0.23419838, 0.15462619, 0.21586415],
+       [0.16478752, 0.24151964, 0.21941346, 0.14988995, 0.22438939],
+       [0.16816008, 0.23736185, 0.21800458, 0.15443383, 0.22203967],
+       [0.16076393, 0.24149327, 0.22604792, 0.14969479, 0.22200012],
+       [0.17530249, 0.23095778, 0.21273129, 0.16161412, 0.21939443],
+       [0.15688972, 0.2358581 , 0.23799387, 0.15515216, 0.21410616],
+       [0.16600947, 0.23382592, 0.22481105, 0.15816282, 0.21719065],
+       [0.14932008, 0.24364983, 0.24340245, 0.14621353, 0.21741422],
+       [0.17864552, 0.22986974, 0.20857714, 0.16281399, 0.22009356],
+       [0.1659024 , 0.22970615, 0.2287755 , 0.1626553 , 0.21296065],
+       [0.17181188, 0.24148299, 0.2082077 , 0.15000671, 0.22849073],
+       [0.17638905, 0.23389527, 0.20834343, 0.15828574, 0.22308654],
+       [0.15240492, 0.24294852, 0.23874305, 0.14735675, 0.21854681],
+       [0.18557529, 0.2407352 , 0.18793964, 0.14989276, 0.23585702],
+       [0.13773988, 0.2396555 , 0.2682667 , 0.14754502, 0.20679286],
+       [0.15072912, 0.24018031, 0.2443891 , 0.1498653 , 0.21483612],
+       [0.15102535, 0.24379413, 0.24028388, 0.14632827, 0.2185683 ],
+       [0.17316325, 0.23940398, 0.20811678, 0.1522415 , 0.22707452],
+       [0.14266515, 0.24046816, 0.25842705, 0.14801402, 0.21042569],
+       [0.16398384, 0.23465969, 0.22732665, 0.1571278 , 0.21690205],
+       [0.16170275, 0.23673837, 0.22910713, 0.15473619, 0.2177155 ]],
+      dtype=float32)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs of prediction are 5 dimensional vector. This is so because we have used 5 neurons in the output layer and our activation function is softmax. The 5 dimensional output vector for an input add to 1. So it can be interpreted as probability. Thus we should classify the input to a class, for which prediction probability is maximum. To get the class corresponding to maximum probability, we can use np.argmax() command.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;np.argmax(predictions, axis = 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1,
+       1, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1,
+       1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1], dtype=int64)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Remember that our data are randomly generated. So we should not be surprised by this result.&lt;/p&gt;
+&lt;p&gt;This brings us to the end of the blog. As we had planned in the beginning, we have created random data files, a custom sequence, trained a model using that sequence, and made predictions on new data. The above code can be tweaked slightly to read any type of files other than .csv. And now we can train our model without worrying about the data size. Whether the data size is 10GB or 750GB, our approach will work for both.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;is-this-method-efficient-will-it-work-at-a-reasobable-speed-if-we-have-many-complex-preprocessing-steps-to-do-before-training-the-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Is this method efficient? Will it work at a reasobable speed if we have many complex preprocessing steps to do before training the model?&lt;/h2&gt;
+&lt;p&gt;In this blog, we have mentioned nothing about the ways to speed up the data loading process. Tensorflow prefers sequences over generators as sequences are a safer way to do multiprocessing (&lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence&#34;&gt;see this&lt;/a&gt;). Sequences can be passed to &lt;code&gt;model.fit()&lt;/code&gt; along with parameters like &lt;code&gt;max_queue_size&lt;/code&gt;, &lt;code&gt;workers&lt;/code&gt;, and &lt;code&gt;use_multiprocessing&lt;/code&gt; (&lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/keras/Model#fit&#34;&gt;see this&lt;/a&gt;). To efficiently load data, we have to choose suitable values for &lt;code&gt;max_queue_size&lt;/code&gt;, &lt;code&gt;workers&lt;/code&gt;, and &lt;code&gt;use_multiprocessing&lt;/code&gt;. The next obvious question is: How do we choose suitable values for the parameters for our particular system architecture? The best approach, that this author can suggest, is to try different values and choose the ones that work best for your system architecture. Even when we are using complex preprocessing steps, suitable choice of above parameters will, hopefully, speedup our training process.&lt;/p&gt;
+&lt;p&gt;As a final note, I want to stress that, this is not the only approach to do the task. As I have mentioned previously, in &lt;code&gt;Tensorflow&lt;/code&gt;, you can do the same thing in several different ways. The approach I have chosen seemed natural to me. I have neither strived for efficiency nor elegance. If readers have any better idea, I would be happy to know of it.&lt;/p&gt;
+&lt;p&gt;I hope, this blog will be of help to readers. Please bring any errors or omissions to my notice.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Reading multiple csv files in PyTorch</title>
