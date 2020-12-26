@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PyTorch | Biswajit Sahoo</title>
-    <link>/tags/pytorch/</link>
-      <atom:link href="/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/tags/pytorch/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
     <description>PyTorch</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Biswajit Sahoo</copyright><lastBuildDate>Sat, 19 Dec 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon.png</url>
+      <url>https://biswajitsahoo1111.github.io/img/icon.png</url>
       <title>PyTorch</title>
-      <link>/tags/pytorch/</link>
+      <link>https://biswajitsahoo1111.github.io/tags/pytorch/</link>
     </image>
     
     <item>
       <title>Reading multiple csv files in PyTorch</title>
-      <link>/post/reading-multiple-csv-files-in-pytorch/</link>
+      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/</link>
       <pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>/post/reading-multiple-csv-files-in-pytorch/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/</guid>
       <description>
 
 
@@ -44,7 +44,7 @@ View source on GitHub&lt;/a&gt;
 &lt;li&gt;&lt;a href=&#34;#sec_1&#34;&gt;Create 500 “.csv” files and save it in the folder “random_data” in current working directory.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#sec_2&#34;&gt;Create a custom dataloader.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#sec_3&#34;&gt;Feed the chunks of data to a CNN model and train it for several epochs.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#sec_4&#34;&gt;Make prediction on new data for which labels are not knownn.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sec_4&#34;&gt;Make prediction on new data for which labels are not known.&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;a id=&#34;sec_1&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -215,7 +215,7 @@ tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;feed-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;3. Feed chunks of data to a CNN model and train it for several epochs&lt;/h2&gt;
-&lt;p&gt;But before we build the model and train it, we will first move our files to different folders depending on their fault type. We do so as it will be convenient for later to create a training, validation, and test set from the data.&lt;/p&gt;
+&lt;p&gt;But before we build the model and train it, we will first move our files to different folders depending on their fault type. We do so as it will be convenient later to create a training, validation, and test set from the data.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import shutil&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Create five different folders one each for a given fault type.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;fault_folders = [&amp;quot;Fault_1&amp;quot;, &amp;quot;Fault_2&amp;quot;, &amp;quot;Fault_3&amp;quot;, &amp;quot;Fault_4&amp;quot;, &amp;quot;Fault_5&amp;quot;]

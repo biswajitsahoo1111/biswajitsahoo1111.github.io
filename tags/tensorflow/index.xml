@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tensorflow | Biswajit Sahoo</title>
-    <link>/tags/tensorflow/</link>
-      <atom:link href="/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/tags/tensorflow/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
     <description>Tensorflow</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Biswajit Sahoo</copyright><lastBuildDate>Sun, 17 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon.png</url>
+      <url>https://biswajitsahoo1111.github.io/img/icon.png</url>
       <title>Tensorflow</title>
-      <link>/tags/tensorflow/</link>
+      <link>https://biswajitsahoo1111.github.io/tags/tensorflow/</link>
     </image>
     
     <item>
       <title>Efficiently reading multiple files in Tensorflow 2</title>
-      <link>/post/efficiently-reading-multiple-files-in-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/efficiently-reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/</guid>
       <description>
 
 
@@ -627,9 +627,9 @@ array([[0.13783312, 0.06810743, 0.18828638, 0.4399181 , 0.16585506],
     
     <item>
       <title>Doing Linear Algebra using Tensorflow 2</title>
-      <link>/post/doing-linear-algebra-using-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/</link>
       <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/doing-linear-algebra-using-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/</guid>
       <description>
 
 
@@ -2799,9 +2799,9 @@ array([[  0.,   7.,  13.],
     
     <item>
       <title>Reading multiple files in Tensorflow 2</title>
-      <link>/post/reading-multiple-files-in-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/post/reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/</guid>
       <description>
 
 

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog | Biswajit Sahoo</title>
-    <link>/categories/blog/</link>
-      <atom:link href="/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/categories/blog/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     <description>Blog</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Biswajit Sahoo</copyright><lastBuildDate>Sat, 19 Dec 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon.png</url>
+      <url>https://biswajitsahoo1111.github.io/img/icon.png</url>
       <title>Blog</title>
-      <link>/categories/blog/</link>
+      <link>https://biswajitsahoo1111.github.io/categories/blog/</link>
     </image>
     
     <item>
       <title>Reading multiple csv files in PyTorch</title>
-      <link>/post/reading-multiple-csv-files-in-pytorch/</link>
+      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/</link>
       <pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>/post/reading-multiple-csv-files-in-pytorch/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/</guid>
       <description>
 
 
@@ -44,7 +44,7 @@ View source on GitHub&lt;/a&gt;
 &lt;li&gt;&lt;a href=&#34;#sec_1&#34;&gt;Create 500 “.csv” files and save it in the folder “random_data” in current working directory.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#sec_2&#34;&gt;Create a custom dataloader.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#sec_3&#34;&gt;Feed the chunks of data to a CNN model and train it for several epochs.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#sec_4&#34;&gt;Make prediction on new data for which labels are not knownn.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sec_4&#34;&gt;Make prediction on new data for which labels are not known.&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;a id=&#34;sec_1&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -215,7 +215,7 @@ tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;feed-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;3. Feed chunks of data to a CNN model and train it for several epochs&lt;/h2&gt;
-&lt;p&gt;But before we build the model and train it, we will first move our files to different folders depending on their fault type. We do so as it will be convenient for later to create a training, validation, and test set from the data.&lt;/p&gt;
+&lt;p&gt;But before we build the model and train it, we will first move our files to different folders depending on their fault type. We do so as it will be convenient later to create a training, validation, and test set from the data.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import shutil&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Create five different folders one each for a given fault type.&lt;/p&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;fault_folders = [&amp;quot;Fault_1&amp;quot;, &amp;quot;Fault_2&amp;quot;, &amp;quot;Fault_3&amp;quot;, &amp;quot;Fault_4&amp;quot;, &amp;quot;Fault_5&amp;quot;]
@@ -547,9 +547,9 @@ preds&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Efficiently reading multiple files in Tensorflow 2</title>
-      <link>/post/efficiently-reading-multiple-files-in-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/efficiently-reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/</guid>
       <description>
 
 
@@ -1160,9 +1160,9 @@ array([[0.13783312, 0.06810743, 0.18828638, 0.4399181 , 0.16585506],
     
     <item>
       <title>Doing Linear Algebra using Tensorflow 2</title>
-      <link>/post/doing-linear-algebra-using-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/</link>
       <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>/post/doing-linear-algebra-using-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/</guid>
       <description>
 
 
@@ -3332,9 +3332,9 @@ array([[  0.,   7.,  13.],
     
     <item>
       <title>Reading multiple files in Tensorflow 2</title>
-      <link>/post/reading-multiple-files-in-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/post/reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/</guid>
       <description>
 
 
@@ -3916,9 +3916,9 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
     
     <item>
       <title>Using Python Generators</title>
-      <link>/post/using-python-generators/</link>
+      <link>https://biswajitsahoo1111.github.io/post/using-python-generators/</link>
       <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
-      <guid>/post/using-python-generators/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/using-python-generators/</guid>
       <description>
 
 
@@ -4170,9 +4170,9 @@ for i in range(10):
     
     <item>
       <title>Fault Diagnosis of Machines</title>
-      <link>/post/fault-diagnosis-of-machines/</link>
+      <link>https://biswajitsahoo1111.github.io/post/fault-diagnosis-of-machines/</link>
       <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>/post/fault-diagnosis-of-machines/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/fault-diagnosis-of-machines/</guid>
       <description>
 
 
@@ -4208,9 +4208,9 @@ for i in range(10):
     
     <item>
       <title>Revisiting Systems of Linear Equations</title>
-      <link>/post/revisiting-systems-of-linear-equations/</link>
+      <link>https://biswajitsahoo1111.github.io/post/revisiting-systems-of-linear-equations/</link>
       <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>/post/revisiting-systems-of-linear-equations/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/revisiting-systems-of-linear-equations/</guid>
       <description>
 
 
@@ -4430,9 +4430,9 @@ is a vector of size &lt;span class=&#34;math inline&#34;&gt;\((m\times 1)\)&lt;/
     
     <item>
       <title>Principal Component Analysis - Part III</title>
-      <link>/post/principal-component-analysis-part-iii/</link>
+      <link>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>/post/principal-component-analysis-part-iii/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/</guid>
       <description>
 
 
@@ -4625,7 +4625,7 @@ p = ggplot(words,aes(x = Lines_in_dict,y = Word_length,label = Words))+
   geom_hline(yintercept = 6)+geom_vline(xintercept = 8)+
   labs(x = &amp;quot;Lines in dictionary&amp;quot;,y = &amp;quot;Word length&amp;quot;)
 print(p)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Show directions of PCs
 # Note that intercept argument in geom_abline considers the line to be at the origin. In our case the data are mean shifted.
 # So we have to adjust the intercept taking new origin into consideration. These adjustments have been made below.
@@ -4637,7 +4637,7 @@ slope2 = pca_words_cov$rotation[1,2]/pca_words_cov$rotation[2,2] # Slope of seco
 intercept2 = 6 - slope2*8
 p+geom_abline(slope = slope1,intercept = intercept1,linetype = &amp;quot;dashed&amp;quot;,size = 1.2,col = &amp;quot;red&amp;quot;)+
   geom_abline(slope = slope2,intercept = intercept2,linetype = &amp;quot;dashed&amp;quot;,size = 1.2,col = &amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-2.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-2.png&#34; width=&#34;672&#34; /&gt;
 In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;rotated-pcs&#34; class=&#34;section level3&#34;&gt;
@@ -4646,7 +4646,7 @@ In the above figure red dashed line is the 1st principal component (PC) and blue
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(as.data.frame(pca_words_cov$x),aes(-pca_words_cov$x[,1],pca_words_cov$x[,2],label = words$Words))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;with-supplementary-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;With supplementary data&lt;/h3&gt;
@@ -4779,7 +4779,7 @@ variable_plot_original = circle + geom_point(data = cor_score,  aes(cor_score[,1
   geom_text_repel(aes(cor_score[,1],cor_score[,2],
                       label = c(&amp;quot;Length of words&amp;quot;,&amp;quot;Number of lines in Dict.&amp;quot;))) 
 print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;plotting-supplementary-variables&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Plotting supplementary variables&lt;/h3&gt;
@@ -4788,7 +4788,7 @@ print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
              aes(corr_score_supp[,1],corr_score_supp[,2]))+
   geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
                       label = c(&amp;quot;Frequency&amp;quot;,&amp;quot;Number of entries&amp;quot;))) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative principal component results in negative correlation scores. Hence, our plot flips about y-axis.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;example-2-wine-example&#34; class=&#34;section level2&#34;&gt;
@@ -4816,7 +4816,7 @@ wine&lt;/code&gt;&lt;/pre&gt;
 ggplot(as.data.frame(pca_wine_cor$x),aes(x = pca_wine_cor$x[,1],y =  pca_wine_cor$x[,2], label = paste0(&amp;quot;wine &amp;quot;,1:5)))+
   geom_point()+geom_text_repel()+ geom_vline(xintercept = 0)+ geom_hline(yintercept = 0)+
   xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigenvector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;factor-scores-along-1st-and-2nd-pc&#34; class=&#34;section level3&#34;&gt;
@@ -4878,7 +4878,7 @@ circle +
              aes(corr_score_wine[,1],corr_score_wine[,2]))+
   geom_text_repel(aes(corr_score_wine[,1],corr_score_wine[,2],
                       label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-33-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-33-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;varimax-rotation&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Varimax rotation&lt;/h3&gt;
@@ -4931,7 +4931,7 @@ ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[
                                                       label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&amp;quot;Loading score along PC1&amp;quot;)+ylab(&amp;quot;Loading score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;plot-of-loading-scores-after-rotation&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Plot of loading scores after rotation&lt;/h3&gt;
@@ -4942,7 +4942,7 @@ ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
     xlab(&amp;quot;Loading score along PC1 after rotation&amp;quot;)+
     ylab(&amp;quot;Loading score along PC2 after rotation&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-39-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-39-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;example-3&#34; class=&#34;section level2&#34;&gt;
@@ -5066,7 +5066,7 @@ circle + geom_point(data = as.data.frame(corr_score_food),
   geom_text_repel(data = as.data.frame(corr_score_food), 
                   aes(x = corr_score_food[,1],y = corr_score_food[,2],
                       label = c(&amp;quot;Bread&amp;quot;,&amp;quot;Vegetables&amp;quot;,&amp;quot;Fruit&amp;quot;,&amp;quot;Meat&amp;quot;,&amp;quot;Poultry&amp;quot;,&amp;quot;Milk&amp;quot;,&amp;quot;Wine&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-47-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-47-1.png&#34; width=&#34;672&#34; /&gt;
 Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;eigenvalues&#34; class=&#34;section level3&#34;&gt;
@@ -5157,9 +5157,9 @@ loaded via a namespace (and not attached):
     
     <item>
       <title>Principal Component Analysis - Part II</title>
-      <link>/post/principal-component-analysis-part-ii/</link>
+      <link>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/</link>
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>/post/principal-component-analysis-part-ii/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/</guid>
       <description>
 
 
@@ -5519,9 +5519,9 @@ round(eigen_food_cor$values,2)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Principal Component Analysis - Part I</title>
-      <link>/post/principal-component-analysis-part-i/</link>
+      <link>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>/post/principal-component-analysis-part-i/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/</guid>
       <description>
 
 

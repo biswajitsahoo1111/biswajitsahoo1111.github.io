@@ -31,7 +31,7 @@
   <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn many engineering applications data are usually stored in CSV (Comma Separated Values) files. In big data applications, it’s not uncommon to obtain thousands of csv files. As the number of files increases, at some point, we can no longer load the whole dataset into computer’s memory. In deep learning applications it is increasingly common to come across datasets that don’t fit in the computer’s memory.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/reading-multiple-csv-files-in-pytorch/">
+  <link rel="alternate" hreflang="en-us" href="https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/">
 
   
 
@@ -250,7 +250,7 @@
   <link rel="icon" type="image/png" href="/images/icon_huffc8dce834b4c0aec33122a3663a38ac_177939_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_huffc8dce834b4c0aec33122a3663a38ac_177939_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/post/reading-multiple-csv-files-in-pytorch/">
+  <link rel="canonical" href="https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/">
 
   
   
@@ -263,10 +263,10 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Biswajit Sahoo">
-  <meta property="og:url" content="/post/reading-multiple-csv-files-in-pytorch/">
+  <meta property="og:url" content="https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/">
   <meta property="og:title" content="Reading multiple csv files in PyTorch | Biswajit Sahoo">
-  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn many engineering applications data are usually stored in CSV (Comma Separated Values) files. In big data applications, it’s not uncommon to obtain thousands of csv files. As the number of files increases, at some point, we can no longer load the whole dataset into computer’s memory. In deep learning applications it is increasingly common to come across datasets that don’t fit in the computer’s memory."><meta property="og:image" content="/img/icon.png">
-  <meta property="twitter:image" content="/img/icon.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn many engineering applications data are usually stored in CSV (Comma Separated Values) files. In big data applications, it’s not uncommon to obtain thousands of csv files. As the number of files increases, at some point, we can no longer load the whole dataset into computer’s memory. In deep learning applications it is increasingly common to come across datasets that don’t fit in the computer’s memory."><meta property="og:image" content="https://biswajitsahoo1111.github.io/img/icon.png">
+  <meta property="twitter:image" content="https://biswajitsahoo1111.github.io/img/icon.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2020-12-19T00:00:00&#43;00:00">
@@ -297,7 +297,7 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "/post/reading-multiple-csv-files-in-pytorch/"
+    "@id": "https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/"
   },
   "headline": "Reading multiple csv files in PyTorch",
   
@@ -314,7 +314,7 @@
     "name": "Biswajit Sahoo",
     "logo": {
       "@type": "ImageObject",
-      "url": "img//"
+      "url": "img/https://biswajitsahoo1111.github.io/"
     }
   },
   "description": "Run in Google Colab\r\r\rView source on GitHub\r\r\rDownload notebook\r\r\rIn many engineering applications data are usually stored in CSV (Comma Separated Values) files. In big data applications, it’s not uncommon to obtain thousands of csv files. As the number of files increases, at some point, we can no longer load the whole dataset into computer’s memory. In deep learning applications it is increasingly common to come across datasets that don’t fit in the computer’s memory."
@@ -541,6 +541,10 @@
       
 
       
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
 
       
 
@@ -666,7 +670,7 @@ View source on GitHub</a>
 <li><a href="#sec_1">Create 500 “.csv” files and save it in the folder “random_data” in current working directory.</a></li>
 <li><a href="#sec_2">Create a custom dataloader.</a></li>
 <li><a href="#sec_3">Feed the chunks of data to a CNN model and train it for several epochs.</a></li>
-<li><a href="#sec_4">Make prediction on new data for which labels are not knownn.</a></li>
+<li><a href="#sec_4">Make prediction on new data for which labels are not known.</a></li>
 </ol>
 <p><a id="sec_1"></a></p>
 </div>
@@ -837,7 +841,7 @@ tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre>
 </div>
 <div id="feed-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs" class="section level2">
 <h2>3. Feed chunks of data to a CNN model and train it for several epochs</h2>
-<p>But before we build the model and train it, we will first move our files to different folders depending on their fault type. We do so as it will be convenient for later to create a training, validation, and test set from the data.</p>
+<p>But before we build the model and train it, we will first move our files to different folders depending on their fault type. We do so as it will be convenient later to create a training, validation, and test set from the data.</p>
 <pre class="python"><code>import shutil</code></pre>
 <p>Create five different folders one each for a given fault type.</p>
 <pre class="python"><code>fault_folders = [&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;]
@@ -1175,6 +1179,10 @@ preds</code></pre>
   
   <a class="badge badge-light" href="/tags/pytorch/">PyTorch</a>
   
+  <a class="badge badge-light" href="/tags/machine-learning/">Machine Learning</a>
+  
+  <a class="badge badge-light" href="/tags/deep-learning/">Deep Learning</a>
+  
 </div>
 
 
@@ -1190,7 +1198,7 @@ preds</code></pre>
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/reading-multiple-csv-files-in-pytorch/&amp;text=Reading%20multiple%20csv%20files%20in%20PyTorch" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/&amp;text=Reading%20multiple%20csv%20files%20in%20PyTorch" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1203,7 +1211,7 @@ preds</code></pre>
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/reading-multiple-csv-files-in-pytorch/&amp;t=Reading%20multiple%20csv%20files%20in%20PyTorch" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/&amp;t=Reading%20multiple%20csv%20files%20in%20PyTorch" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1216,7 +1224,7 @@ preds</code></pre>
       
       
       <li>
-        <a href="mailto:?subject=Reading%20multiple%20csv%20files%20in%20PyTorch&amp;body=/post/reading-multiple-csv-files-in-pytorch/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Reading%20multiple%20csv%20files%20in%20PyTorch&amp;body=https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1229,7 +1237,7 @@ preds</code></pre>
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/reading-multiple-csv-files-in-pytorch/&amp;title=Reading%20multiple%20csv%20files%20in%20PyTorch" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/&amp;title=Reading%20multiple%20csv%20files%20in%20PyTorch" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1242,7 +1250,7 @@ preds</code></pre>
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Reading%20multiple%20csv%20files%20in%20PyTorch%20/post/reading-multiple-csv-files-in-pytorch/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Reading%20multiple%20csv%20files%20in%20PyTorch%20https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1255,7 +1263,7 @@ preds</code></pre>
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/reading-multiple-csv-files-in-pytorch/&amp;title=Reading%20multiple%20csv%20files%20in%20PyTorch" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/&amp;title=Reading%20multiple%20csv%20files%20in%20PyTorch" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1295,7 +1303,7 @@ preds</code></pre>
     
 
     <div class="media-body">
-      <h5 class="card-title"><a href="/">Biswajit Sahoo</a></h5>
+      <h5 class="card-title"><a href="https://biswajitsahoo1111.github.io/">Biswajit Sahoo</a></h5>
       <h6 class="card-subtitle">PhD Student</h6>
       <p class="card-text">My research interests include Machine Learning, Deep Learning, and Machinery Condition Monitoring.</p>
       <ul class="network-icon" aria-hidden="true">
@@ -1397,6 +1405,23 @@ preds</code></pre>
 
 
   
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/reading-multiple-files-in-tensorflow-2/">Reading multiple files in Tensorflow 2</a></li>
+      
+      <li><a href="/project/rul_codes_open/">Data-Driven Remaining Useful Life (RUL) Prediction</a></li>
+      
+      <li><a href="/project/cbm_codes_open/">Data-Driven Machinery Fault Diagnosis</a></li>
+      
+      <li><a href="/post/efficiently-reading-multiple-files-in-tensorflow-2/">Efficiently reading multiple files in Tensorflow 2</a></li>
+      
+      <li><a href="/post/using-python-generators/">Using Python Generators</a></li>
+      
+    </ul>
+  </div>
   
 
 

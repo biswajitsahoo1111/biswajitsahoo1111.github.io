@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Remaining Useful Life | Biswajit Sahoo</title>
-    <link>/tags/remaining-useful-life/</link>
-      <atom:link href="/tags/remaining-useful-life/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/tags/remaining-useful-life/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/tags/remaining-useful-life/index.xml" rel="self" type="application/rss+xml" />
     <description>Remaining Useful Life</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Biswajit Sahoo</copyright><lastBuildDate>Tue, 01 May 2018 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon.png</url>
+      <url>https://biswajitsahoo1111.github.io/img/icon.png</url>
       <title>Remaining Useful Life</title>
-      <link>/tags/remaining-useful-life/</link>
+      <link>https://biswajitsahoo1111.github.io/tags/remaining-useful-life/</link>
     </image>
     
     <item>
       <title>Data-Driven Remaining Useful Life (RUL) Prediction</title>
-      <link>/project/rul_codes_open/</link>
+      <link>https://biswajitsahoo1111.github.io/project/rul_codes_open/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      <guid>/project/rul_codes_open/</guid>
+      <guid>https://biswajitsahoo1111.github.io/project/rul_codes_open/</guid>
       <description>
 
 &lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
