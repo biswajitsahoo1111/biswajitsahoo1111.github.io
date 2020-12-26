@@ -14,9 +14,9 @@
     
     <item>
       <title>Reading multiple files in Tensorflow 2 using Sequence</title>
-      <link>https://biswajitsahoo1111.github.io/post/2020-12-26-reading-multiple-files-in-tensorflow-2-using-sequence/</link>
+      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/</link>
       <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/2020-12-26-reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
       <description>
 
 
@@ -41,11 +41,12 @@ View source on GitHub&lt;/a&gt;
 &lt;div id=&#34;outline&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Outline:&lt;/h2&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Create 500 “.csv” files and save it in the folder “random_data” in current directory.&lt;/li&gt;
-&lt;li&gt;Write a sequence object that reads data from the folder in chunks and preprocesses it.&lt;/li&gt;
-&lt;li&gt;Feed the chunks of data to a CNN model and train it for several epochs.&lt;/li&gt;
-&lt;li&gt;Make prediction on new data for which labels are not known.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sec_1&#34;&gt;Create 500 “.csv” files and save it in the folder “random_data” in current directory.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sec_2&#34;&gt;Write a sequence object that reads data from the folder in chunks and preprocesses it.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sec_3&#34;&gt;Feed the chunks of data to a CNN model and train it for several epochs.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sec_4&#34;&gt;Make prediction on new data for which labels are not known.&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;a id=&#34;sec_1&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;create-500-.csv-files-of-random-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;1. Create 500 .csv files of random data&lt;/h2&gt;
@@ -97,6 +98,7 @@ Showing first 10 files...
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(files[0][14:21])&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;Fault_1&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now that data have been created, we will go to the next step. That is, create a custom &lt;code&gt;Sequence&lt;/code&gt; object, preprocess the time series like data into a matrix like shape such that a 2-D CNN can ingest it. We reshape the data in that way to just illustrate the point. Readers should use their own preprocessing steps.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;sec_2&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;write-a-custom-sequence-object&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;2. Write a custom Sequence object&lt;/h2&gt;
@@ -201,6 +203,7 @@ print(counter)&lt;/code&gt;&lt;/pre&gt;
 [0 0 0 0 0 0 0 0 0 0]&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Run the above cell multiple times to observe different labels. Label 1 appears only when all the files corresponding to “Fault_1” have been read. There are 100 files for “Fault_1” and we have set batch_size to 10. In the above cell we are iterating over the generator only 6 times. When number of iterations become greater than 10, we see label 1 and subsequently other labels. This will happen only if our initial file list is not shuffled. If the original list is shuffled, we will get random labels.&lt;/p&gt;
 &lt;p&gt;We can pass this sequence directly to &lt;code&gt;model.fit()&lt;/code&gt; to train our deep learning model. Now that sequence works fine, we will use it to train a simple deep learning model. The focus of this post is not on the model itself. So we will use a simplest model. If readers want a different model, they can do so by just replacing our model with theirs.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;sec_3&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;feed-the-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;3. Feed the chunks of data to a CNN model and train it for several epochs&lt;/h2&gt;
@@ -349,6 +352,7 @@ print(&amp;quot;Test accuracy:&amp;quot;, test_accuracy)&lt;/code&gt;&lt;/pre&gt
 &lt;pre&gt;&lt;code&gt;Test loss:  1.609706997871399
 Test accuracy: 0.20000000298023224&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;As expected, model performs terribly.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;sec_4&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;how-to-make-predictions&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;4. How to make predictions?&lt;/h2&gt;
