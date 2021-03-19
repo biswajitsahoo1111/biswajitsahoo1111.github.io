@@ -54,6 +54,10 @@
 &lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_5_Multi-head_attention.ipynb&#34;&gt;10.5. Multi-Head Attention&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_6_Self-attention_and_positional_encoding.ipynb&#34;&gt;10.6. Self-Attention and Positional Encoding&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_7_Transformer.ipynb&#34;&gt;10.7. Transformer&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;additional-sections&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Additional sections:&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/additional_sections/9_7_Sequence_to_Sequence_Learning.ipynb&#34;&gt;9.7. Sequence to Sequence Learning&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
 &lt;div id=&#34;how-to-run-these-code&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;How to run these code:&lt;/h3&gt;
 &lt;p&gt;The best way (in our opinion) is to either clone the repo (or download the zipped repo) and then run each notebook from the cloned (or extracted) folder. All the notebooks will run without any issue.&lt;/p&gt;
