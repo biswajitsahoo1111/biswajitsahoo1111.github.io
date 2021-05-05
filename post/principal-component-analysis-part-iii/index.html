@@ -647,6 +647,7 @@
 
     <div class="article-style">
       
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <table class="tfo-notebook-buttons" align="center">
@@ -838,7 +839,7 @@ p = ggplot(words,aes(x = Lines_in_dict,y = Word_length,label = Words))+
   geom_hline(yintercept = 6)+geom_vline(xintercept = 8)+
   labs(x = &quot;Lines in dictionary&quot;,y = &quot;Word length&quot;)
 print(p)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code># Show directions of PCs
 # Note that intercept argument in geom_abline considers the line to be at the origin. In our case the data are mean shifted.
 # So we have to adjust the intercept taking new origin into consideration. These adjustments have been made below.
@@ -850,7 +851,7 @@ slope2 = pca_words_cov$rotation[1,2]/pca_words_cov$rotation[2,2] # Slope of seco
 intercept2 = 6 - slope2*8
 p+geom_abline(slope = slope1,intercept = intercept1,linetype = &quot;dashed&quot;,size = 1.2,col = &quot;red&quot;)+
   geom_abline(slope = slope2,intercept = intercept2,linetype = &quot;dashed&quot;,size = 1.2,col = &quot;blue&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-2.png" width="672" />
+<p><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-2.png" width="672" />
 In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.</p>
 </div>
 <div id="rotated-pcs" class="section level3">
@@ -859,7 +860,7 @@ In the above figure red dashed line is the 1st principal component (PC) and blue
 <pre class="r"><code>ggplot(as.data.frame(pca_words_cov$x),aes(-pca_words_cov$x[,1],pca_words_cov$x[,2],label = words$Words))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&quot;Factor score along PC1&quot;)+ylab(&quot;Factor score along PC2&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="with-supplementary-data" class="section level3">
 <h3>With supplementary data</h3>
@@ -992,7 +993,7 @@ variable_plot_original = circle + geom_point(data = cor_score,  aes(cor_score[,1
   geom_text_repel(aes(cor_score[,1],cor_score[,2],
                       label = c(&quot;Length of words&quot;,&quot;Number of lines in Dict.&quot;))) 
 print(variable_plot_original)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 <div id="plotting-supplementary-variables" class="section level3">
 <h3>Plotting supplementary variables</h3>
@@ -1001,7 +1002,7 @@ print(variable_plot_original)</code></pre>
              aes(corr_score_supp[,1],corr_score_supp[,2]))+
   geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
                       label = c(&quot;Frequency&quot;,&quot;Number of entries&quot;))) </code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative principal component results in negative correlation scores. Hence, our plot flips about y-axis.</p>
 </div>
 <div id="example-2-wine-example" class="section level2">
@@ -1029,7 +1030,7 @@ wine</code></pre>
 ggplot(as.data.frame(pca_wine_cor$x),aes(x = pca_wine_cor$x[,1],y =  pca_wine_cor$x[,2], label = paste0(&quot;wine &quot;,1:5)))+
   geom_point()+geom_text_repel()+ geom_vline(xintercept = 0)+ geom_hline(yintercept = 0)+
   xlab(&quot;Factor score along PC1&quot;)+ylab(&quot;Factor score along PC2&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigenvector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.</p>
 </div>
 <div id="factor-scores-along-1st-and-2nd-pc" class="section level3">
@@ -1091,7 +1092,7 @@ circle +
              aes(corr_score_wine[,1],corr_score_wine[,2]))+
   geom_text_repel(aes(corr_score_wine[,1],corr_score_wine[,2],
                       label = c(&quot;Hedonic&quot;,&quot;For Meat&quot;,&quot;For dessert&quot;,&quot;Price&quot;,&quot;Sugar&quot;,&quot;Alcohol&quot;,&quot;Acidity&quot;)))</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 </div>
 <div id="varimax-rotation" class="section level3">
 <h3>Varimax rotation</h3>
@@ -1144,7 +1145,7 @@ ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[
                                                       label = c(&quot;Hedonic&quot;,&quot;For Meat&quot;,&quot;For dessert&quot;,&quot;Price&quot;,&quot;Sugar&quot;,&quot;Alcohol&quot;,&quot;Acidity&quot;)))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&quot;Loading score along PC1&quot;)+ylab(&quot;Loading score along PC2&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 <div id="plot-of-loading-scores-after-rotation" class="section level3">
 <h3>Plot of loading scores after rotation</h3>
@@ -1155,7 +1156,7 @@ ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
     xlab(&quot;Loading score along PC1 after rotation&quot;)+
     ylab(&quot;Loading score along PC2 after rotation&quot;)</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 </div>
 <div id="example-3" class="section level2">
@@ -1279,7 +1280,7 @@ circle + geom_point(data = as.data.frame(corr_score_food),
   geom_text_repel(data = as.data.frame(corr_score_food), 
                   aes(x = corr_score_food[,1],y = corr_score_food[,2],
                       label = c(&quot;Bread&quot;,&quot;Vegetables&quot;,&quot;Fruit&quot;,&quot;Meat&quot;,&quot;Poultry&quot;,&quot;Milk&quot;,&quot;Wine&quot;)))</code></pre>
-<p><img src="/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-47-1.png" width="672" />
+<p><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-47-1.png" width="672" />
 Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).</p>
 </div>
 <div id="eigenvalues" class="section level3">
@@ -1325,35 +1326,33 @@ RESS</code></pre>
 <pre><code>[1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00</code></pre>
 <p>We will not calculate the value of PRESS in this post as it requires us to consider random models. We will not pursue that here.</p>
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.2 (2020-06-22)
+<pre><code>R version 4.0.5 (2021-03-31)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 7 x64 (build 7601) Service Pack 1
+Running under: Windows 10 x64 (build 19042)
 
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=English_United Kingdom.1252 
-[2] LC_CTYPE=English_United Kingdom.1252   
-[3] LC_MONETARY=English_United Kingdom.1252
-[4] LC_NUMERIC=C                           
-[5] LC_TIME=English_United Kingdom.1252    
+[1] LC_COLLATE=English_India.1252  LC_CTYPE=English_India.1252   
+[3] LC_MONETARY=English_India.1252 LC_NUMERIC=C                  
+[5] LC_TIME=English_India.1252    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] ggrepel_0.8.2 ggplot2_3.3.0
+[1] ggrepel_0.9.0 ggplot2_3.3.2
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.4.6     knitr_1.28       magrittr_1.5     tidyselect_1.0.0
- [5] munsell_0.5.0    colorspace_1.4-1 R6_2.4.1         rlang_0.4.5     
- [9] dplyr_0.8.5      stringr_1.4.0    tools_4.0.2      grid_4.0.2      
-[13] gtable_0.3.0     xfun_0.13        withr_2.2.0      htmltools_0.4.0 
-[17] ellipsis_0.3.0   assertthat_0.2.1 yaml_2.2.1       digest_0.6.25   
-[21] tibble_3.0.1     lifecycle_0.2.0  crayon_1.3.4     bookdown_0.19   
-[25] farver_2.0.3     purrr_0.3.4      vctrs_0.2.4      glue_1.4.0      
-[29] evaluate_0.14    rmarkdown_2.1    blogdown_0.18    labeling_0.3    
-[33] stringi_1.4.6    compiler_4.0.2   pillar_1.4.3     scales_1.1.0    
+ [1] Rcpp_1.0.5       knitr_1.30       magrittr_2.0.1   tidyselect_1.1.0
+ [5] munsell_0.5.0    colorspace_2.0-0 R6_2.5.0         rlang_0.4.9     
+ [9] dplyr_1.0.2      stringr_1.4.0    tools_4.0.5      grid_4.0.5      
+[13] gtable_0.3.0     xfun_0.22        withr_2.3.0      htmltools_0.5.0 
+[17] ellipsis_0.3.1   yaml_2.2.1       digest_0.6.27    tibble_3.0.4    
+[21] lifecycle_0.2.0  crayon_1.3.4     bookdown_0.21    farver_2.0.3    
+[25] purrr_0.3.4      vctrs_0.3.6      glue_1.4.2       evaluate_0.14   
+[29] rmarkdown_2.7    blogdown_1.3     labeling_0.4.2   stringi_1.5.3   
+[33] compiler_4.0.5   pillar_1.4.7     generics_0.1.0   scales_1.1.1    
 [37] pkgconfig_2.0.3 </code></pre>
 <p>Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to <a href="https://biswajitsahoo1111.github.io/">author’s</a> email.</p>
 </div>
@@ -1379,6 +1378,8 @@ loaded via a namespace (and not attached):
   <a class="badge badge-light" href="/tags/machine-learning/">Machine Learning</a>
   
   <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/python/">Python</a>
   
 </div>
 

@@ -739,6 +739,7 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
       <pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate>
       <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/</guid>
       <description>
+&lt;script src=&#34;https://biswajitsahoo1111.github.io/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
@@ -1854,6 +1855,7 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
       <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/</guid>
       <description>
+&lt;script src=&#34;https://biswajitsahoo1111.github.io/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
@@ -2045,7 +2047,7 @@ p = ggplot(words,aes(x = Lines_in_dict,y = Word_length,label = Words))+
   geom_hline(yintercept = 6)+geom_vline(xintercept = 8)+
   labs(x = &amp;quot;Lines in dictionary&amp;quot;,y = &amp;quot;Word length&amp;quot;)
 print(p)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Show directions of PCs
 # Note that intercept argument in geom_abline considers the line to be at the origin. In our case the data are mean shifted.
 # So we have to adjust the intercept taking new origin into consideration. These adjustments have been made below.
@@ -2057,7 +2059,7 @@ slope2 = pca_words_cov$rotation[1,2]/pca_words_cov$rotation[2,2] # Slope of seco
 intercept2 = 6 - slope2*8
 p+geom_abline(slope = slope1,intercept = intercept1,linetype = &amp;quot;dashed&amp;quot;,size = 1.2,col = &amp;quot;red&amp;quot;)+
   geom_abline(slope = slope2,intercept = intercept2,linetype = &amp;quot;dashed&amp;quot;,size = 1.2,col = &amp;quot;blue&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-2.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-2.png&#34; width=&#34;672&#34; /&gt;
 In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;rotated-pcs&#34; class=&#34;section level3&#34;&gt;
@@ -2066,7 +2068,7 @@ In the above figure red dashed line is the 1st principal component (PC) and blue
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(as.data.frame(pca_words_cov$x),aes(-pca_words_cov$x[,1],pca_words_cov$x[,2],label = words$Words))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;with-supplementary-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;With supplementary data&lt;/h3&gt;
@@ -2199,7 +2201,7 @@ variable_plot_original = circle + geom_point(data = cor_score,  aes(cor_score[,1
   geom_text_repel(aes(cor_score[,1],cor_score[,2],
                       label = c(&amp;quot;Length of words&amp;quot;,&amp;quot;Number of lines in Dict.&amp;quot;))) 
 print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;plotting-supplementary-variables&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Plotting supplementary variables&lt;/h3&gt;
@@ -2208,7 +2210,7 @@ print(variable_plot_original)&lt;/code&gt;&lt;/pre&gt;
              aes(corr_score_supp[,1],corr_score_supp[,2]))+
   geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
                       label = c(&amp;quot;Frequency&amp;quot;,&amp;quot;Number of entries&amp;quot;))) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative principal component results in negative correlation scores. Hence, our plot flips about y-axis.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;example-2-wine-example&#34; class=&#34;section level2&#34;&gt;
@@ -2236,7 +2238,7 @@ wine&lt;/code&gt;&lt;/pre&gt;
 ggplot(as.data.frame(pca_wine_cor$x),aes(x = pca_wine_cor$x[,1],y =  pca_wine_cor$x[,2], label = paste0(&amp;quot;wine &amp;quot;,1:5)))+
   geom_point()+geom_text_repel()+ geom_vline(xintercept = 0)+ geom_hline(yintercept = 0)+
   xlab(&amp;quot;Factor score along PC1&amp;quot;)+ylab(&amp;quot;Factor score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigenvector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;factor-scores-along-1st-and-2nd-pc&#34; class=&#34;section level3&#34;&gt;
@@ -2298,7 +2300,7 @@ circle +
              aes(corr_score_wine[,1],corr_score_wine[,2]))+
   geom_text_repel(aes(corr_score_wine[,1],corr_score_wine[,2],
                       label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-33-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-33-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;varimax-rotation&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Varimax rotation&lt;/h3&gt;
@@ -2351,7 +2353,7 @@ ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[
                                                       label = c(&amp;quot;Hedonic&amp;quot;,&amp;quot;For Meat&amp;quot;,&amp;quot;For dessert&amp;quot;,&amp;quot;Price&amp;quot;,&amp;quot;Sugar&amp;quot;,&amp;quot;Alcohol&amp;quot;,&amp;quot;Acidity&amp;quot;)))+
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
   xlab(&amp;quot;Loading score along PC1&amp;quot;)+ylab(&amp;quot;Loading score along PC2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;plot-of-loading-scores-after-rotation&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Plot of loading scores after rotation&lt;/h3&gt;
@@ -2362,7 +2364,7 @@ ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[
   geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
     xlab(&amp;quot;Loading score along PC1 after rotation&amp;quot;)+
     ylab(&amp;quot;Loading score along PC2 after rotation&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-39-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-39-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;example-3&#34; class=&#34;section level2&#34;&gt;
@@ -2486,7 +2488,7 @@ circle + geom_point(data = as.data.frame(corr_score_food),
   geom_text_repel(data = as.data.frame(corr_score_food), 
                   aes(x = corr_score_food[,1],y = corr_score_food[,2],
                       label = c(&amp;quot;Bread&amp;quot;,&amp;quot;Vegetables&amp;quot;,&amp;quot;Fruit&amp;quot;,&amp;quot;Meat&amp;quot;,&amp;quot;Poultry&amp;quot;,&amp;quot;Milk&amp;quot;,&amp;quot;Wine&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/2019-02-03-principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-47-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-47-1.png&#34; width=&#34;672&#34; /&gt;
 Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;eigenvalues&#34; class=&#34;section level3&#34;&gt;
@@ -2532,35 +2534,33 @@ RESS&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;[1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We will not calculate the value of PRESS in this post as it requires us to consider random models. We will not pursue that here.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sessionInfo()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;R version 4.0.2 (2020-06-22)
+&lt;pre&gt;&lt;code&gt;R version 4.0.5 (2021-03-31)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 7 x64 (build 7601) Service Pack 1
+Running under: Windows 10 x64 (build 19042)
 
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=English_United Kingdom.1252 
-[2] LC_CTYPE=English_United Kingdom.1252   
-[3] LC_MONETARY=English_United Kingdom.1252
-[4] LC_NUMERIC=C                           
-[5] LC_TIME=English_United Kingdom.1252    
+[1] LC_COLLATE=English_India.1252  LC_CTYPE=English_India.1252   
+[3] LC_MONETARY=English_India.1252 LC_NUMERIC=C                  
+[5] LC_TIME=English_India.1252    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] ggrepel_0.8.2 ggplot2_3.3.0
+[1] ggrepel_0.9.0 ggplot2_3.3.2
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.4.6     knitr_1.28       magrittr_1.5     tidyselect_1.0.0
- [5] munsell_0.5.0    colorspace_1.4-1 R6_2.4.1         rlang_0.4.5     
- [9] dplyr_0.8.5      stringr_1.4.0    tools_4.0.2      grid_4.0.2      
-[13] gtable_0.3.0     xfun_0.13        withr_2.2.0      htmltools_0.4.0 
-[17] ellipsis_0.3.0   assertthat_0.2.1 yaml_2.2.1       digest_0.6.25   
-[21] tibble_3.0.1     lifecycle_0.2.0  crayon_1.3.4     bookdown_0.19   
-[25] farver_2.0.3     purrr_0.3.4      vctrs_0.2.4      glue_1.4.0      
-[29] evaluate_0.14    rmarkdown_2.1    blogdown_0.18    labeling_0.3    
-[33] stringi_1.4.6    compiler_4.0.2   pillar_1.4.3     scales_1.1.0    
+ [1] Rcpp_1.0.5       knitr_1.30       magrittr_2.0.1   tidyselect_1.1.0
+ [5] munsell_0.5.0    colorspace_2.0-0 R6_2.5.0         rlang_0.4.9     
+ [9] dplyr_1.0.2      stringr_1.4.0    tools_4.0.5      grid_4.0.5      
+[13] gtable_0.3.0     xfun_0.22        withr_2.3.0      htmltools_0.5.0 
+[17] ellipsis_0.3.1   yaml_2.2.1       digest_0.6.27    tibble_3.0.4    
+[21] lifecycle_0.2.0  crayon_1.3.4     bookdown_0.21    farver_2.0.3    
+[25] purrr_0.3.4      vctrs_0.3.6      glue_1.4.2       evaluate_0.14   
+[29] rmarkdown_2.7    blogdown_1.3     labeling_0.4.2   stringi_1.5.3   
+[33] compiler_4.0.5   pillar_1.4.7     generics_0.1.0   scales_1.1.1    
 [37] pkgconfig_2.0.3 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to &lt;a href=&#34;https://biswajitsahoo1111.github.io/&#34;&gt;author’s&lt;/a&gt; email.&lt;/p&gt;
 &lt;/div&gt;
@@ -2581,15 +2581,32 @@ loaded via a namespace (and not attached):
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
       <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/</guid>
       <description>
+&lt;script src=&#34;https://biswajitsahoo1111.github.io/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
+&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;
+&lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Principal_Component_Analysis_Part_II.ipynb&#34;&gt;
+&lt;img src=&#34;https://www.tensorflow.org/images/colab_logo_32px.png&#34; /&gt;
+Run Python code in Google Colab&lt;/a&gt;
+&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;
+&lt;a href=&#34;https://www.dropbox.com/s/zkftnkv31neuxgq/Principal_Component_Analysis_Part_II.ipynb?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download Python code&lt;/a&gt;
+&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;
+&lt;a href=&#34;https://www.dropbox.com/s/7bzat96tt6r9iks/Principal_component_analysis_part_II.Rmd?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download R code (R Markdown)&lt;/a&gt;
+&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;
+&lt;a href=&#34;https://www.dropbox.com/s/u9gbbviswkfgmsj/pca_part_2_MATLAB_code.pdf?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download MATLAB code&lt;/a&gt;
+&lt;/td&gt;
+&lt;/table&gt;
 &lt;p&gt;This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III: Reproducing results of a published paper on PCA&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;In this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.&lt;/p&gt;
-&lt;p&gt;This post is written in R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;MATLAB codes&lt;/a&gt; for the same can be obtained from this &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This post is written in R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;MATLAB code&lt;/a&gt; for the same can be obtained from this &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result. As the dataset is pretty small, one way to load the data into R is to create a dataframe in R using the values in the paper. Another way is to first create a csv file and then read the file into R/MATLAB. We have used the later approach.&lt;/p&gt;
 &lt;div id=&#34;load-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Load Data&lt;/h3&gt;
@@ -2924,7 +2941,6 @@ round((scale_food %*% eigen_food_cor$vectors)[,1:4],2)&lt;/code&gt;&lt;/pre&gt;
 round(eigen_food_cor$values,2)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I hope this post would help clear some of the confusions that a beginner might have while encountering PCA for the first time. Please send me a note if you find any errors.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_2.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level2&#34;&gt;
@@ -2943,81 +2959,271 @@ round(eigen_food_cor$values,2)&lt;/code&gt;&lt;/pre&gt;
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
       <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/</guid>
       <description>
+&lt;script src=&#34;https://biswajitsahoo1111.github.io/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
-&lt;p&gt;In this post, we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. The applications of PCA and its variants are ubiquitous. Thus, a through understanding of PCA is considered essential to start one’s journey into machine learning. In this and subsequent posts, we will first discuss relevant theory of PCA. Then we will implement PCA from scratch without using any built-in function. This will give us an idea as to what happens under the hood when a built-in function is called in any software environment. Simultaneously, we will also show how to use built-in commands to obtain results. Finally, we will reproduce the results of a popular paper on PCA. Including all this in a single post will make it very very long. Therefore, the post has been divided into three parts. Readers totally familiar with PCA should read none and leave this page immediately to save their precious time. Other readers, who have a passing knowledge of PCA and want to see different implementations, should pick and choose material from different parts as per their need. Absolute beginners should start with Part-I and work their way through gradually. Beginners are also encouraged to explore the references at the end of this post for further information. Here is the outline of different parts:&lt;/p&gt;
+&lt;p&gt;In this post, we will discuss about Principal Component Analysis (PCA),
+one of the most popular dimensionality reduction techniques used in
+machine learning. Applications of PCA and its variants are ubiquitous.
+Thus, a through understanding of PCA is considered essential to start
+one’s journey into machine learning. In this and subsequent posts, we
+will first briefly discuss relevant theory of PCA. Then we will
+implement PCA from scratch without using any built-in function. This
+will give us an idea as to what happens under the hood when a built-in
+function is called in any software environment. Simultaneously, we will
+also show how to use built-in commands to obtain results. Finally, we
+will reproduce the results of a popular paper on PCA. Including all this
+in a single post will make it very very long. Therefore, the post has
+been divided into three parts. Readers totally familiar with PCA should
+read none and leave this page immediately to save their precious time.
+Other readers, who have a passing knowledge of PCA and want to see
+different implementations, should pick and choose material from
+different parts as per their need. Absolute beginners should start with
+Part-I and work their way through gradually. Beginners are also
+encouraged to explore the references at the end of this post for further
+information. Here is the outline of different parts:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II: PCA Implementation with and without using built-in functions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III: Reproducing results of a published paper on PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34;&gt;Part-I: Basic Theory of
+PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II: PCA Implementation with and without using built-in
+functions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III: Reproducing results of a published paper on
+PCA&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;For &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;, both MATLAB and R codes are available to reproduce all the results. &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III&lt;/a&gt; contains both R and Python codes to reproduce results of the paper. In this post, we will discuss only the theory behind PCA.&lt;/p&gt;
+&lt;p&gt;For
+&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;,
+Python, R, and MATLAB code are available to reproduce all the results.
+&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34;&gt;Part-III&lt;/a&gt;
+contains both R and Python code to reproduce results of the paper. In
+this post, we will discuss the theory behind PCA in brief.&lt;/p&gt;
 &lt;div id=&#34;principal-component-analysis&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Principal Component Analysis&lt;/h1&gt;
 &lt;div id=&#34;theory&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Theory:&lt;/h2&gt;
-&lt;p&gt;Given a data matrix, we apply PCA to transform it in a way such that the transformed data reveals maximum information. So we have to first get the data on which we want to perform PCA. The usual convention in storing data is to place variables as columns and different observations as rows (Data frames in R follow this convention by default). For example, let’s suppose we are collecting data about daily weather for a year. Our variables of interest may include maximum temperature in a day, minimum temperature, humidity, max. wind speed, etc. For every day, we have to collect observations for each of these variables. In vector form, our data point for one day will contain number of observations equal to the number of variables under study and this becomes one row of our data matrix. Assuming that we are observing 10 variables everyday, our data matrix for one year (assuming it’s not a leap year) will contain 365 rows and 10 columns. Once data matrix is obtained, further analysis is done on this data matrix to obtain important hidden information regarding the data. We will use notations from matrix theory to simplify our analysis.&lt;/p&gt;
-&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; be the data matrix of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is the number of data points and &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; is the number of variables. We can assume without any loss of generality that data is centered, meaning its column means are zero. This only shifts the data towards the origin without changing their relative orientation. So if originally not centered, it is first centered before doing PCA. From now onward we will assume that data is always centered.&lt;/p&gt;
-&lt;p&gt;Variance of a variable (a column)in &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; is equal to sum of squares of entries (because the column is centered) of that column divided by (n - 1) (to make it unbiased). So sum of variance of all variables is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times sum of squares of all elements of the matrix . Readers who are familiar with matrix norms would instantly recognize that total variance is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt; of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;. Frobenius norm is nothing but square root of sum of squares of all elements of a matrix.
+&lt;p&gt;Given a data matrix, we apply PCA to transform it in a way such that the
+transformed data reveals maximum information. So we have to first get
+the data on which we want to perform PCA. The usual convention in
+storing data is to place variables as columns and different observations
+as rows (Data frames in R follow this convention by default). For
+example, let’s suppose we are collecting data about daily weather for a
+year. Our variables of interest may include maximum temperature in a
+day, minimum temperature, humidity, max. wind speed, etc. Everyday we
+collect observations for each of these variables. In vector form, our
+data point for one day will contain number of observations equal to the
+number of variables under study and this becomes one row of our data
+matrix. Assuming that we are observing 10 variables everyday, our data
+matrix for one year (assuming it’s not a leap year) will contain 365
+rows and 10 columns. Once data matrix is obtained, further analysis is
+done on this data matrix to obtain important hidden information
+regarding the data. We will use notations from matrix theory to simplify
+our analysis.&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; be the data matrix of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is
+the number of data points and &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; is the number of variables. We can
+assume without any loss of generality that data is centered, meaning its
+column means are zero. This only shifts the data towards the origin
+without changing their relative orientation. So if originally not
+centered, it is first centered before doing PCA. From now onward we will
+assume that data matrix is always centered.&lt;/p&gt;
+&lt;p&gt;Variance of a variable (a column) in &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; is equal to sum of
+squares of entries (because the column is centered) of that column
+divided by (n - 1) (to make it unbiased). So sum of variance of all
+variables is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times sum of squares of all elements of
+the matrix . Readers who are familiar with matrix norms would instantly
+recognize that total variance is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times the square of
+&lt;strong&gt;Frobenius norm&lt;/strong&gt; of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;. Frobenius norm is nothing but square
+root of sum of squares of all elements of a matrix.
 &lt;span class=&#34;math display&#34;&gt;\[ \|\textbf{X}\|_{F} = (\sum_{i,j}{x_{ij}^2})^{\frac{1}{2}}=trace(\textbf{X}^T\textbf{X})=trace(\textbf{X}\textbf{X}^T)\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Using this definition, total variance before transformation =
-&lt;span class=&#34;math display&#34;&gt;\[\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})=\frac{1}{n-1}\|\textbf{X}\|_{F}^2\]&lt;/span&gt;
-Where trace of a matrix is sum of its diagonal entries and &lt;span class=&#34;math inline&#34;&gt;\(\|\textbf{X}\|_{F}^2\)&lt;/span&gt; is the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;The aim of PCA is to transform the data in such a way that along first principal direction, variance of transformed data is maximum. It subsequently finds second principal direction orthogonal to the first one in such a way that it explains maximum of the remaining variance among all possible direction in the orthogonal subspace.&lt;/p&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})=\frac{1}{n-1}\|\textbf{X}\|_{F}^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where, trace of a matrix is the sum of its diagonal entries and
+&lt;span class=&#34;math inline&#34;&gt;\(\|\textbf{X}\|_{F}^2\)&lt;/span&gt; is the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The aim of PCA is to transform the data in such a way that along first
+principal direction, variance of transformed data is maximum. It
+subsequently finds second principal direction orthogonal to the first
+one in such a way that it explains maximum of the remaining variance
+among all possible direction in the orthogonal subspace.&lt;/p&gt;
 &lt;p&gt;In matrix form the transformation can be written as
 &lt;span class=&#34;math display&#34;&gt;\[\textbf{Y}_{n\times p}=\textbf{X}_{n\times p}\textbf{P}_{p\times p}\]&lt;/span&gt;
-Where &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is the transformed data matrix. The columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are called principal components and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is usually called loading matrix. Our aim is to find matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. Once we find &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; we can then find &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; just by a matrix multiplication. Though we will not go into to proof here, it can be easily proved (see references), that matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is the eigenvector matrix of the covariance matrix. Let’s first define covariance matrix.&lt;/p&gt;
-&lt;p&gt;Given a data matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;(centered), its covariance matrix &lt;span class=&#34;math inline&#34;&gt;\((\textbf{S})\)&lt;/span&gt; is defined as
+Where &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is the transformed data matrix. The columns of
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are called principal components and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is usually
+called loading matrix. Our aim is to find matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. Once we
+find &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; we can then find &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; just by a matrix
+multiplication. We will show in the next section that matrix
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is the eigenvector matrix of the covariance matrix. Before
+that, let’s first define the covariance matrix.&lt;/p&gt;
+&lt;p&gt;Given a data matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;(centered), its covariance matrix
+&lt;span class=&#34;math inline&#34;&gt;\((\textbf{S})\)&lt;/span&gt; is defined as
 &lt;span class=&#34;math display&#34;&gt;\[\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}\]&lt;/span&gt;
-As principal directions are orthogonal, we will also require &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; to be an orthogonal matrix.&lt;/p&gt;
-&lt;p&gt;Now, it is straightforward to form the covariance matrix and by placing its eigenvectors as columns, we can find matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; and consequently the principal components. The eigenvectors are arranged in such a way that first column is the eigenvector corresponding to largest eigenvector, second column (second eigenvector) corresponds to second largest eigenvalue and so on. Here we have assumed that we will always be able to find all the &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; orthogonal eigenvectors. In fact, we will always be able to find &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; orthogonal eigenvectors as the matrix is symmetric. It can also be shown that the transformed matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is centered and more remarkably, total variance of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is same as total variance of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;. We will prove these two propositions as the proof are short.&lt;/p&gt;
-&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}\)&lt;/span&gt; be a column vector of all ones of size &lt;span class=&#34;math inline&#34;&gt;\((n\times 1)\)&lt;/span&gt;. To prove that columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are centered, just premultiply it by &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T\)&lt;/span&gt; (this finds column sum for each column). So
-&lt;span class=&#34;math display&#34;&gt;\[\textbf{1}^T \textbf{Y} = \textbf{1}^T\textbf{X}\textbf{P}\]&lt;/span&gt;
-But columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; are already centered, so &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T\textbf{X}=\textbf{0}\)&lt;/span&gt;. Thus &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T \textbf{Y}= \textbf{0}\)&lt;/span&gt;. Hence columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are centered.&lt;/p&gt;
-&lt;p&gt;To prove that total variance of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; also remains same, observe that&lt;/p&gt;
+Now we will show how to compute the loading vectors (columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;) and consequently the principal components (columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt;) from the given centered data matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;div id=&#34;sketch-of-the-proof&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Sketch of the Proof&lt;/h3&gt;
+&lt;p&gt;We call it a sketch because we will not be giving the full proof.
+Rather, we will give the proof only for the first principal component
+and then give a commentary as to how it can be extended for other
+principal components.&lt;/p&gt;
+&lt;p&gt;The first principal component is the result obtained by transforming
+original data matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}_{n\times p}\)&lt;/span&gt; in such a way that
+variance of data along first principal component is the highest. The
+transformation is a linear transformation that is obtained by taking
+linear combination of the columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}_{n\times p}\)&lt;/span&gt;. The
+coefficients of the linear combination are called loading scores
+corresponding to original variables of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}_{n\times p}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Assuming &lt;span class=&#34;math inline&#34;&gt;\(\boldsymbol{\alpha}_{p\times 1} = [\alpha_1, \alpha_2, ..., \alpha_p]^T\)&lt;/span&gt;,
+where &lt;span class=&#34;math inline&#34;&gt;\(\alpha_1\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\alpha_2\)&lt;/span&gt;, … , &lt;span class=&#34;math inline&#34;&gt;\(\alpha_p\)&lt;/span&gt; are scalars, to be the
+loading vector (we don’t know, as of now, from where to get
+&lt;span class=&#34;math inline&#34;&gt;\(\alpha_{p \times 1}\)&lt;/span&gt;. We will find that out shortly.), first principal
+component is obtained by the the product
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}_{n\times p}\boldsymbol{\alpha}_{p\times 1}\)&lt;/span&gt;. This product can be written
+as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\textbf{X}_{n\times p}\boldsymbol{\alpha}_{p\times 1} = \alpha_1 \textbf{X}_{[:,1]} +\alpha_2 \textbf{X}_{[:,2]} + ...  + \alpha_p \textbf{X}_{[:,p]} 
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}_{[:,1]}\)&lt;/span&gt; is the first column of
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}_{n\times p}\)&lt;/span&gt;. Similarly for other columns. The above
+equation makes it clear as to why first principal component is a linear
+combination of variables of original data matrix. In the original data
+matrix, each column corresponds to a variable.&lt;/p&gt;
+&lt;p&gt;Variance of first principal component is given by
+&lt;span class=&#34;math inline&#34;&gt;\(\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}\)&lt;/span&gt; (As the columns are already
+centered. We have also ignored the factor &lt;span class=&#34;math inline&#34;&gt;\((\frac{1}{n-1})\)&lt;/span&gt; as it is
+just a scaling factor.). Now our goal is to find an &lt;span class=&#34;math inline&#34;&gt;\(\boldsymbol{\alpha}_{p\times 1}\)&lt;/span&gt;
+that maximizes &lt;span class=&#34;math inline&#34;&gt;\(\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}\)&lt;/span&gt;. As
+&lt;span class=&#34;math inline&#34;&gt;\(\boldsymbol{\alpha}_{p\times 1}\)&lt;/span&gt; is arbitrary, we can choose its entries in such a
+way that variance increases as much as we please. So to get any
+meaningful solution, we have to apply some constraints on
+&lt;span class=&#34;math inline&#34;&gt;\(\boldsymbol{\alpha}_{p\times 1}\)&lt;/span&gt;. The conventional condition is
+&lt;span class=&#34;math inline&#34;&gt;\(\|\boldsymbol{\alpha}_{p\times 1}\|^2 = 1\)&lt;/span&gt;. The optimization problem becomes
+&lt;span class=&#34;math display&#34;&gt;\[ maximize \ \ \   \boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}\]&lt;/span&gt;
+&lt;span class=&#34;math display&#34;&gt;\[s.t. \|\boldsymbol{\alpha}\|^2 = 1\]&lt;/span&gt; Using Lagrange multipliers, this problem can
+be written as
+&lt;span class=&#34;math display&#34;&gt;\[maximize \ \ \  \mathcal{L}(\boldsymbol{\alpha}, \lambda)=\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha} + \lambda (1 - \boldsymbol{\alpha}^T\boldsymbol{\alpha})\]&lt;/span&gt;
+Taking gradient of &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{L}(\boldsymbol{\alpha}, \lambda)\)&lt;/span&gt; with respect to
+&lt;span class=&#34;math inline&#34;&gt;\(\boldsymbol{\alpha}\)&lt;/span&gt; we get, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\boldsymbol{\alpha} = \lambda \boldsymbol{\alpha}\)&lt;/span&gt;. So
+&lt;span class=&#34;math inline&#34;&gt;\(\boldsymbol{\alpha}\)&lt;/span&gt; is the eigenvector of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt;. It turns out
+that for first principal component, &lt;span class=&#34;math inline&#34;&gt;\(\boldsymbol{\alpha}\)&lt;/span&gt; is the eigenvector
+corresponding to the largest eigenvalue.&lt;/p&gt;
+&lt;p&gt;Loading vector for second principal component is computed with the added condition that second loading vector is orthogonal to the first one. With little bit of more work it can be shown that loading vectors for successive principal components are obtained from eigenvectors corresponding to eigenvalues in decreasing order. More details can be found in reference [1].&lt;/p&gt;
+&lt;p&gt;Now, it is straightforward to first form the covariance matrix and by
+placing its eigenvectors as columns, we can find matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; and
+consequently the principal components. The eigenvectors are arranged in
+such a way that first column is the eigenvector corresponding to largest
+eigenvector, second column (second eigenvector) corresponds to second
+largest eigenvalue and so on. Here we have assumed that we will always
+be able to find all the &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; orthogonal eigenvectors. In fact, we will
+always be able to find &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; orthogonal eigenvectors as the matrix is
+symmetric. It can also be shown that the transformed matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt;
+is centered and more remarkably, total variance of columns of
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; is same as total variance of columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;. We
+will prove these two propositions as the proofs are short.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;properties-of-pca-transformation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Properties of PCA Transformation&lt;/h3&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Principal components are centered.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;: Let &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}\)&lt;/span&gt; be a column vector of all ones of size
+&lt;span class=&#34;math inline&#34;&gt;\((n\times 1)\)&lt;/span&gt;. To prove that columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are centered,
+just premultiply it by &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T\)&lt;/span&gt; (this finds column sum for
+each column). So
+&lt;span class=&#34;math display&#34;&gt;\[\textbf{1}^T \textbf{Y} = \textbf{1}^T\textbf{X}\textbf{P}\]&lt;/span&gt; But
+columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; are already centered, so
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T\textbf{X}=\textbf{0}\)&lt;/span&gt;. Thus
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}^T \textbf{Y}= \textbf{0}\)&lt;/span&gt;. Hence columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt;
+are centered.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Sum of variance of principal components is equal to sum of variance
+of variables before transformation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;: To prove that total variance of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; also remains
+same, observe that&lt;/p&gt;
 &lt;p&gt;total covariance of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; =
 &lt;span class=&#34;math display&#34;&gt;\[trace(\frac{1}{n-1}\textbf{Y}^{T}\textbf{Y})=\frac{1}{n-1}trace((\textbf{P}^T\textbf{X}^{T}\textbf{X})\textbf{P})=\\\frac{1}{n-1}trace((\textbf{P}\textbf{P}^T)\textbf{X}^{T}\textbf{X})=trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})\]&lt;/span&gt;
-The previous equation uses the fact that trace is commutative(i.e.&lt;span class=&#34;math inline&#34;&gt;\(trace(\textbf{AB})=trace(\textbf{BA})\)&lt;/span&gt;) and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is orthogonal (i.e. &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\textbf{P}^T=\textbf{I}\)&lt;/span&gt;).&lt;/p&gt;
+The previous equation uses the fact that trace is
+commutative(i.e.&lt;span class=&#34;math inline&#34;&gt;\(trace(\textbf{AB})=trace(\textbf{BA})\)&lt;/span&gt;) and
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is orthogonal (i.e.
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\textbf{P}^T=\textbf{I}\)&lt;/span&gt;).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Principal components are orthogonal.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;: To prove the above claim, it is sufficient to show that
+the matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}^T\textbf{Y}\)&lt;/span&gt; is diagonal. Remember that columns of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; are principal components. So if we can somehow show &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}^T\textbf{Y}\)&lt;/span&gt; to be diagonal, it would automatically mean that principal components are orthogonal.
+We know, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y} = \textbf{X}\textbf{P}\)&lt;/span&gt;. So &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}^T\textbf{Y} = \textbf{P}^T\textbf{X}^T\textbf{X}\textbf{P}\)&lt;/span&gt;. From sketch of the proof, we know that &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is orthogonal as we have required successive loading vectors to be orthogonal to previous ones. We also know that &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is the eigenvector matrix of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt;. So from &lt;a href=&#34;https://mathworld.wolfram.com/EigenDecompositionTheorem.html&#34;&gt;Eigen Decomposition Theorem&lt;/a&gt;, it follows that &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}^T(\textbf{X}^T\textbf{X})\textbf{P}\)&lt;/span&gt; is diagonal as &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is the eigenvector matrix of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is orthogonal (so &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}^{-1} = \textbf{P}^T\)&lt;/span&gt;).&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
 &lt;div id=&#34;link-between-total-variance-and-eigenvalues&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Link between total variance and eigenvalues&lt;/h3&gt;
-&lt;p&gt;Total variance is sum of eigenvalues of covariance matrix &lt;span class=&#34;math inline&#34;&gt;\((\textbf{S})\)&lt;/span&gt;. We will further discuss this point in &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Total variance is sum of eigenvalues of covariance matrix
+&lt;span class=&#34;math inline&#34;&gt;\((\textbf{S})\)&lt;/span&gt;. This follows from the fact that &lt;span style=&#34;color: hotpink&#34;&gt;&lt;em&gt;trace of a matrix is sum of its eigenvalues&lt;/em&gt;&lt;/span&gt;. Total variance of original data matrix is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n-1}trace(\textbf{X}^T\textbf{X}) =trace(\frac{1}{n-1}\textbf{X}^T\textbf{X}) = trace(\textbf{S})\)&lt;/span&gt;. We will show these calculations using a publicly available dataset in
+&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;variations-in-pca&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Variations in PCA&lt;/h3&gt;
-&lt;p&gt;Sometimes our data matrix contains variables that are measured in different units. So we might have to scale the centered matrix to reduce the effect of variables with large variation. So depending on the matrix on which PCA is performed, it is divided into two types.&lt;/p&gt;
+&lt;div id=&#34;variations-of-pca&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Variations of PCA&lt;/h3&gt;
+&lt;p&gt;Sometimes our data matrix contains variables that are measured in
+different units. So we might have to scale the centered matrix to reduce
+the effect of variables with large variation. So depending on the matrix
+on which PCA is performed, it is divided into two types.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Covariance PCA (Data matrix is centered but not scaled)&lt;/li&gt;
+&lt;li&gt;Covariance PCA (Data matrix is centered but &lt;strong&gt;not&lt;/strong&gt; scaled)&lt;/li&gt;
 &lt;li&gt;Correlation PCA (Data matrix is centered and scaled)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Examples of these two types can be found in &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Examples of these two types can be found in
+&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34;&gt;Part-II&lt;/a&gt;.
+Please note that the above two variations are just two among many
+variations. There are &lt;strong&gt;Sparse PCA&lt;/strong&gt;, &lt;strong&gt;Kernel PCA&lt;/strong&gt;, &lt;strong&gt;Robust PCA&lt;/strong&gt;,
+&lt;strong&gt;Non-negative PCA&lt;/strong&gt; and many others. We have mentioned the two that are
+most widely used.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;some-common-terminology-associated-with-pca&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Some common terminology associated with PCA&lt;/h3&gt;
+&lt;div id=&#34;some-common-terminologies-associated-with-pca&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Some common terminologies associated with PCA&lt;/h3&gt;
+&lt;p&gt;In literature, there is no standard terminology for different terms in
+PCA. Different people use different (often contradictory) terminology
+thus confusing newcomers. Therefore, it is better to stick to one set of
+terminologies and notations and use those consistently. We will stick to
+the terminology used in reference [2].&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Factor scores&lt;/strong&gt; corresponding to a principal component: Values of that column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; that corresponds to the desired principal component.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Loading score&lt;/strong&gt;: Values corresponding to a column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. For example,loading scores of variables corresponding to first principal component are the values of the first column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Factor scores&lt;/strong&gt; corresponding to a principal component: Values of
+that column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; that corresponds to the desired
+principal component.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Loading score&lt;/strong&gt;: Values corresponding to a column of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;.
+For example,loading scores of variables corresponding to first
+principal component are the values of the first column of
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Inertia&lt;/strong&gt;: Square of Frobenius norm of the matrix.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;how-actually-are-principal-components-computed&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;How actually are principal components computed&lt;/h3&gt;
-&lt;p&gt;The previously stated method of finding eigenvectors of covariance matrix is not computationally efficient. In practice, singular value decomposition (SVD) is used to find the matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. SVD theorem tells that any real matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; can be decomposed into three matrices such that
-&lt;span class=&#34;math display&#34;&gt;\[ \textbf{X} = \textbf{U}\Sigma\textbf{V}^T\]&lt;/span&gt;
-Where, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; is of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;. &lt;span class=&#34;math inline&#34;&gt;\(\textbf{U}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\textbf{V}\)&lt;/span&gt; are orthogonal matrices of size &lt;span class=&#34;math inline&#34;&gt;\(n\times n\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(p\times p\)&lt;/span&gt; respectively. &lt;span class=&#34;math inline&#34;&gt;\(\Sigma\)&lt;/span&gt; is a diagonal matrix of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;.&lt;/p&gt;
+&lt;h3&gt;How actually are principal components computed?&lt;/h3&gt;
+&lt;p&gt;The previously stated method of finding eigenvectors of covariance
+matrix is not computationally efficient. In practice, singular value
+decomposition (SVD) is used to compute the matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt;. SVD
+theorem tells that any real matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; can be decomposed into
+three matrices such that &lt;span class=&#34;math display&#34;&gt;\[ \textbf{X} = \textbf{U}\Sigma\textbf{V}^T\]&lt;/span&gt;
+Where, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt; is of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;. &lt;span class=&#34;math inline&#34;&gt;\(\textbf{U}\)&lt;/span&gt; and
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{V}\)&lt;/span&gt; are orthogonal matrices of size &lt;span class=&#34;math inline&#34;&gt;\(n\times n\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(p\times p\)&lt;/span&gt;
+respectively. &lt;span class=&#34;math inline&#34;&gt;\(\Sigma\)&lt;/span&gt; is a diagonal matrix of size &lt;span class=&#34;math inline&#34;&gt;\(n\times p\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;Given the SVD decomposition of a matrix &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;,
-&lt;span class=&#34;math display&#34;&gt;\[\textbf{X}^T\textbf{X}=\textbf{V}\Sigma^2\textbf{V}^T\]&lt;/span&gt;
-This is the eigen-decomposition of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt;. So &lt;span class=&#34;math inline&#34;&gt;\(\textbf{V}\)&lt;/span&gt; is the eigenvector matrix of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt;. For PCA we need eigenvector matrix of covariance matrix. So converting the equation into convenient form, we get
+&lt;span class=&#34;math display&#34;&gt;\[\textbf{X}^T\textbf{X}=\textbf{V}\Sigma^2\textbf{V}^T\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;This is the eigen-decomposition of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt;. So
+&lt;span class=&#34;math inline&#34;&gt;\(\textbf{V}\)&lt;/span&gt; is the eigenvector matrix of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}^T\textbf{X}\)&lt;/span&gt;. For
+PCA we need eigenvector matrix of covariance matrix. So converting the
+equation into convenient form, we get
 &lt;span class=&#34;math display&#34;&gt;\[\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}=\textbf{V}(\frac{1}{n-1}\Sigma^2)\textbf{V}^T\]&lt;/span&gt;
-Thus eigenvalues of S are diagonal entries of &lt;span class=&#34;math inline&#34;&gt;\((\frac{1}{n-1}\Sigma^2)\)&lt;/span&gt;. As SVD is computationally efficient, all built-in functions use SVD to find the loading matrix and then use it to find principal components.&lt;/p&gt;
-&lt;p&gt;In the interest of keeping the post at a reasonable length, we will stop our exposition of theory here. Whatever we have discussed is only a fraction of everything. Entire books have been written on PCA. Interested readers who want to pursue further can refer to the references given here and later to the references given in the references. Please send me a note if you find any errors.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_interpretation_part_1.Rmd&#34;&gt;R Markdown file for this post&lt;/a&gt;&lt;/p&gt;
+Thus eigenvalues of S are diagonal entries of &lt;span class=&#34;math inline&#34;&gt;\((\frac{1}{n-1}\Sigma^2)\)&lt;/span&gt;.
+As SVD is computationally efficient, all built-in functions use SVD to
+compute the loading matrix and then use the loading matrix to find
+principal components.&lt;/p&gt;
+&lt;p&gt;In the interest of keeping the post at a reasonable length, we will stop
+our exposition of theory here. Whatever we have discussed is only a
+fraction of everything. Entire books have been written on PCA.
+Interested readers who want to pursue this further can refer the
+references of this post as a starting point. Readers are encouraged to
+bring any errors or omissions to my notice.&lt;/p&gt;
+&lt;p&gt;Last modified: May 5, 2021&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;References&lt;/h2&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New York,2002.&lt;/li&gt;
-&lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
+&lt;li&gt;I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New
+York,2002.&lt;/li&gt;
+&lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis.
+Wiley interdisciplinary reviews: computational statistics, 2(4),
+433-459.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;

@@ -28,8 +28,8 @@
   
     
   
-  <meta name="description" content="This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
-Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions.">
+  <meta name="description" content="Run Python code in Google ColabDownload Python codeDownload R code (R Markdown)Download MATLAB codeThis post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
+Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">
@@ -269,8 +269,8 @@
   <meta property="og:site_name" content="Biswajit Sahoo">
   <meta property="og:url" content="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">
   <meta property="og:title" content="Principal Component Analysis - Part II | Biswajit Sahoo">
-  <meta property="og:description" content="This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
-Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions."><meta property="og:image" content="https://biswajitsahoo1111.github.io/img/icon.png">
+  <meta property="og:description" content="Run Python code in Google ColabDownload Python codeDownload R code (R Markdown)Download MATLAB codeThis post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.
+Part-I: Basic Theory of PCAPart-III: Reproducing results of a published paper on PCAIn this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands."><meta property="og:image" content="https://biswajitsahoo1111.github.io/img/icon.png">
   <meta property="twitter:image" content="https://biswajitsahoo1111.github.io/img/icon.png"><meta property="og:locale" content="en-us">
   
     
@@ -322,7 +322,7 @@
       "url": "img/https://biswajitsahoo1111.github.io/"
     }
   },
-  "description": "This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.\n\rPart-I: Basic Theory of PCA\rPart-III: Reproducing results of a published paper on PCA\r\rIn this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions."
+  "description": "Run Python code in Google Colab\r\rDownload Python code\r\rDownload R code (R Markdown)\r\rDownload MATLAB code\r\r\rThis post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.\n\rPart-I: Basic Theory of PCA\rPart-III: Reproducing results of a published paper on PCA\r\rIn this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands."
 }
 </script>
 
@@ -649,15 +649,32 @@
 
     <div class="article-style">
       
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
+<table class="tfo-notebook-buttons" align="center">
+<td align="center">
+<a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Principal_Component_Analysis_Part_II.ipynb">
+<img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+Run Python code in Google Colab</a>
+</td>
+<td align="center">
+<a href="https://www.dropbox.com/s/zkftnkv31neuxgq/Principal_Component_Analysis_Part_II.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download Python code</a>
+</td>
+<td align="center">
+<a href="https://www.dropbox.com/s/7bzat96tt6r9iks/Principal_component_analysis_part_II.Rmd?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download R code (R Markdown)</a>
+</td>
+<td align="center">
+<a href="https://www.dropbox.com/s/u9gbbviswkfgmsj/pca_part_2_MATLAB_code.pdf?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download MATLAB code</a>
+</td>
+</table>
 <p>This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.</p>
 <ul>
 <li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I: Basic Theory of PCA</a></li>
 <li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/">Part-III: Reproducing results of a published paper on PCA</a></li>
 </ul>
 <p>In this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.</p>
-<p>This post is written in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB codes</a> for the same can be obtained from this <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">link</a>.</p>
+<p>This post is written in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">MATLAB code</a> for the same can be obtained from this <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf">link</a>.</p>
 <p>We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result. As the dataset is pretty small, one way to load the data into R is to create a dataframe in R using the values in the paper. Another way is to first create a csv file and then read the file into R/MATLAB. We have used the later approach.</p>
 <div id="load-data" class="section level3">
 <h3>Load Data</h3>
@@ -992,7 +1009,6 @@ round((scale_food %*% eigen_food_cor$vectors)[,1:4],2)</code></pre>
 round(eigen_food_cor$values,2)</code></pre>
 <pre><code>[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00</code></pre>
 <p>I hope this post would help clear some of the confusions that a beginner might have while encountering PCA for the first time. Please send me a note if you find any errors.</p>
-<p><a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_2.Rmd">R Markdown file for this post</a></p>
 </div>
 </div>
 <div id="references" class="section level2">
@@ -1016,6 +1032,8 @@ round(eigen_food_cor$values,2)</code></pre>
   <a class="badge badge-light" href="/tags/machine-learning/">Machine Learning</a>
   
   <a class="badge badge-light" href="/tags/r/">R</a>
+  
+  <a class="badge badge-light" href="/tags/python/">Python</a>
   
   <a class="badge badge-light" href="/tags/matlab/">MATLAB</a>
   

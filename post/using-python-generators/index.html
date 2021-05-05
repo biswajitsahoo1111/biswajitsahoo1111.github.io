@@ -647,6 +647,7 @@
 
     <div class="article-style">
       
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <center>
@@ -662,37 +663,37 @@
 data = np.random.randint(100,150, size = (10,2,2))
 labels = np.random.permutation(10)
 print(data)</code></pre>
-<pre><code>[[[102 146]
-  [141 125]]
+<pre><code>[[[144 102]
+  [117 107]]
 
- [[120 128]
-  [114 119]]
+ [[124 111]
+  [130 103]]
 
- [[143 110]
-  [132 148]]
+ [[122 117]
+  [117 139]]
 
- [[133 105]
-  [126 140]]
+ [[140 145]
+  [131 140]]
 
- [[116 108]
-  [125 103]]
+ [[145 144]
+  [121 117]]
 
- [[121 125]
-  [102 107]]
+ [[116 107]
+  [149 109]]
 
- [[146 126]
-  [130 138]]
+ [[125 136]
+  [147 122]]
 
- [[136 145]
-  [103 135]]
+ [[102 108]
+  [118 127]]
 
- [[148 100]
-  [128 106]]
+ [[127 135]
+  [119 137]]
 
- [[144 118]
-  [149 143]]]</code></pre>
+ [[106 111]
+  [135 125]]]</code></pre>
 <pre class="python"><code>print(&quot;labels:&quot;, labels)</code></pre>
-<pre><code>labels: [6 2 0 9 5 8 3 7 4 1]</code></pre>
+<pre><code>labels: [6 9 5 4 3 2 8 7 1 0]</code></pre>
 <p>Let’s pretend that the above dataset is huge and we need to extract chunks of it. Now we will write a generator to extract from the above data a batch of two items, two data points and corresponding two labels. In deep learning applications, we want our data to be shuffled between epochs. For the first run, we can shuffle the data itself and from next epoch onwards generator will shuffle it for us. And the generator must run indefinitely.</p>
 <pre class="python"><code>def my_gen(data, labels, batch_size = 2):
     i = 0
@@ -715,74 +716,74 @@ for i in range(10):
     print(X,y)
     print(X.shape, y.shape)
     print(&quot;=========================&quot;)</code></pre>
-<pre><code>[[[102 146]
-  [141 125]]
+<pre><code>[[[144 102]
+  [117 107]]
 
- [[120 128]
-  [114 119]]] [6 2]
+ [[124 111]
+  [130 103]]] [6 9]
 (2, 2, 2) (2,)
 =========================
-[[[143 110]
-  [132 148]]
+[[[122 117]
+  [117 139]]
 
- [[133 105]
-  [126 140]]] [0 9]
+ [[140 145]
+  [131 140]]] [5 4]
 (2, 2, 2) (2,)
 =========================
-[[[116 108]
-  [125 103]]
+[[[145 144]
+  [121 117]]
 
- [[121 125]
-  [102 107]]] [5 8]
+ [[116 107]
+  [149 109]]] [3 2]
 (2, 2, 2) (2,)
 =========================
-[[[146 126]
-  [130 138]]
+[[[125 136]
+  [147 122]]
 
- [[136 145]
-  [103 135]]] [3 7]
+ [[102 108]
+  [118 127]]] [8 7]
 (2, 2, 2) (2,)
 =========================
-[[[148 100]
-  [128 106]]
+[[[127 135]
+  [119 137]]
 
- [[144 118]
-  [149 143]]] [4 1]
+ [[106 111]
+  [135 125]]] [1 0]
 (2, 2, 2) (2,)
 =========================
-[[[120 128]
-  [114 119]]
+[[[140 145]
+  [131 140]]
 
- [[133 105]
-  [126 140]]] [2 9]
+ [[145 144]
+  [121 117]]] [4 3]
 (2, 2, 2) (2,)
 =========================
-[[[116 108]
-  [125 103]]
+[[[125 136]
+  [147 122]]
 
- [[146 126]
-  [130 138]]] [5 3]
+ [[122 117]
+  [117 139]]] [8 5]
 (2, 2, 2) (2,)
 =========================
-[[[136 145]
-  [103 135]]
+[[[116 107]
+  [149 109]]
 
- [[148 100]
-  [128 106]]] [7 4]
+ [[124 111]
+  [130 103]]] [2 9]
 (2, 2, 2) (2,)
 =========================
-[[[143 110]
-  [132 148]]
+[[[106 111]
+  [135 125]]
 
- [[121 125]
-  [102 107]]] [0 8]
+ [[127 135]
+  [119 137]]] [0 1]
 (2, 2, 2) (2,)
 =========================
-[[[102 146]
-  [141 125]]
+[[[144 102]
+  [117 107]]
 
- [[144 118]
-  [149 143]]] [6 1]
+ [[102 108]
+  [118 127]]] [6 7]
 (2, 2, 2) (2,)
 =========================</code></pre>
 <p>In the above generator code, we manually shuffled the data between epochs. But in keras we can use Sequence class to do this for us automatically. The added advantage of using this class is that we can use multiprocessing capabilities. So the new generator code becomes:</p>
@@ -819,74 +820,74 @@ for i in range(10):
     print(dat,labs)
     print(dat.shape, labs.shape)
     print(&quot;===========================&quot;)</code></pre>
-<pre><code>[[[102 146]
-  [141 125]]
+<pre><code>[[[144 102]
+  [117 107]]
 
- [[120 128]
-  [114 119]]] [6 2]
+ [[124 111]
+  [130 103]]] [6 9]
 (2, 2, 2) (2,)
 ===========================
-[[[143 110]
-  [132 148]]
+[[[122 117]
+  [117 139]]
 
- [[133 105]
-  [126 140]]] [0 9]
+ [[140 145]
+  [131 140]]] [5 4]
 (2, 2, 2) (2,)
 ===========================
-[[[116 108]
-  [125 103]]
+[[[145 144]
+  [121 117]]
 
- [[121 125]
-  [102 107]]] [5 8]
+ [[116 107]
+  [149 109]]] [3 2]
 (2, 2, 2) (2,)
 ===========================
-[[[146 126]
-  [130 138]]
+[[[125 136]
+  [147 122]]
 
- [[136 145]
-  [103 135]]] [3 7]
+ [[102 108]
+  [118 127]]] [8 7]
 (2, 2, 2) (2,)
 ===========================
-[[[148 100]
-  [128 106]]
+[[[127 135]
+  [119 137]]
 
- [[144 118]
-  [149 143]]] [4 1]
+ [[106 111]
+  [135 125]]] [1 0]
 (2, 2, 2) (2,)
 ===========================
-[[[143 110]
-  [132 148]]
+[[[140 145]
+  [131 140]]
 
- [[136 145]
-  [103 135]]] [0 7]
+ [[106 111]
+  [135 125]]] [4 0]
 (2, 2, 2) (2,)
 ===========================
-[[[102 146]
-  [141 125]]
+[[[122 117]
+  [117 139]]
 
- [[148 100]
-  [128 106]]] [6 4]
+ [[124 111]
+  [130 103]]] [5 9]
 (2, 2, 2) (2,)
 ===========================
-[[[133 105]
-  [126 140]]
+[[[145 144]
+  [121 117]]
 
- [[144 118]
-  [149 143]]] [9 1]
+ [[125 136]
+  [147 122]]] [3 8]
 (2, 2, 2) (2,)
 ===========================
-[[[146 126]
-  [130 138]]
+[[[127 135]
+  [119 137]]
 
- [[116 108]
-  [125 103]]] [3 5]
+ [[116 107]
+  [149 109]]] [1 2]
 (2, 2, 2) (2,)
 ===========================
-[[[120 128]
-  [114 119]]
+[[[144 102]
+  [117 107]]
 
- [[121 125]
-  [102 107]]] [2 8]
+ [[102 108]
+  [118 127]]] [6 7]
 (2, 2, 2) (2,)
 ===========================</code></pre>
 <p>We have also used generators to train MNIST example. The code can be found <a href="https://gist.github.com/biswajitsahoo1111/33cea59f24de6c19d1a513b42d28674d">here</a>. The example might seem bit stretched as we don’t need generators for small data sets like MNIST. The aim of the example is just to show different implementation using generators.</p>
@@ -1131,6 +1132,12 @@ for i in range(10):
   <div class="article-widget content-widget-hr">
     <h3>Related</h3>
     <ul>
+      
+      <li><a href="/post/principal-component-analysis-part-iii/">Principal Component Analysis - Part III</a></li>
+      
+      <li><a href="/post/principal-component-analysis-part-ii/">Principal Component Analysis - Part II</a></li>
+      
+      <li><a href="/post/principal-component-analysis-part-i/">Principal Component Analysis - Part I</a></li>
       
       <li><a href="/project/rul_codes_open/">Data-Driven Remaining Useful Life (RUL) Prediction</a></li>
       
