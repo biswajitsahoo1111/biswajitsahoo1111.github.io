@@ -1531,9 +1531,9 @@ the matrix . Readers who are familiar with matrix norms would instantly
 recognize that total variance is &lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{n - 1}\)&lt;/span&gt; times the square of
 &lt;strong&gt;Frobenius norm&lt;/strong&gt; of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{X}\)&lt;/span&gt;. Frobenius norm is nothing but square
 root of sum of squares of all elements of a matrix.
-&lt;span class=&#34;math display&#34;&gt;\[ \|\textbf{X}\|_{F} = (\sum_{i,j}{x_{ij}^2})^{\frac{1}{2}}=trace(\textbf{X}^T\textbf{X})=trace(\textbf{X}\textbf{X}^T)\]&lt;/span&gt;&lt;/p&gt;
+&lt;span class=&#34;math display&#34;&gt;\[ \|\textbf{X}\|_{F} = (\sum_{i,j}{x_{ij}^2})^{\frac{1}{2}}=\sqrt{trace(\textbf{X}^T\textbf{X}})=\sqrt{trace(\textbf{X}\textbf{X}^T})\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Using this definition, total variance before transformation =
-&lt;span class=&#34;math display&#34;&gt;\[\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})=\frac{1}{n-1}\|\textbf{X}\|_{F}^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=\frac{1}{n-1}trace(\textbf{X}^T\textbf{X}) = trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})=\frac{1}{n-1}\|\textbf{X}\|_{F}^2\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Where, trace of a matrix is the sum of its diagonal entries and
 &lt;span class=&#34;math inline&#34;&gt;\(\|\textbf{X}\|_{F}^2\)&lt;/span&gt; is the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The aim of PCA is to transform the data in such a way that along first
