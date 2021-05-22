@@ -697,7 +697,7 @@ RESS&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;[1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We will not calculate the value of PRESS in this post as it requires us to consider random models. We will not pursue that here.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sessionInfo()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;R version 4.0.5 (2021-03-31)
+&lt;pre&gt;&lt;code&gt;R version 4.1.0 (2021-05-18)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 10 x64 (build 19042)
 
@@ -712,19 +712,18 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] ggrepel_0.9.0 ggplot2_3.3.2
+[1] ggrepel_0.9.1 ggplot2_3.3.3
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5       knitr_1.30       magrittr_2.0.1   tidyselect_1.1.0
- [5] munsell_0.5.0    colorspace_2.0-0 R6_2.5.0         rlang_0.4.9     
- [9] dplyr_1.0.2      stringr_1.4.0    tools_4.0.5      grid_4.0.5      
-[13] gtable_0.3.0     xfun_0.22        withr_2.3.0      htmltools_0.5.0 
-[17] ellipsis_0.3.1   yaml_2.2.1       digest_0.6.27    tibble_3.0.4    
-[21] lifecycle_0.2.0  crayon_1.3.4     bookdown_0.21    farver_2.0.3    
-[25] purrr_0.3.4      vctrs_0.3.6      glue_1.4.2       evaluate_0.14   
-[29] rmarkdown_2.7    blogdown_1.3     labeling_0.4.2   stringi_1.5.3   
-[33] compiler_4.0.5   pillar_1.4.7     generics_0.1.0   scales_1.1.1    
-[37] pkgconfig_2.0.3 &lt;/code&gt;&lt;/pre&gt;
+ [1] Rcpp_1.0.6        knitr_1.33        magrittr_2.0.1    munsell_0.5.0    
+ [5] colorspace_2.0-1  R6_2.5.0          rlang_0.4.11      fansi_0.4.2      
+ [9] highr_0.9         stringr_1.4.0     tools_4.1.0       grid_4.1.0       
+[13] gtable_0.3.0      xfun_0.23         utf8_1.2.1        withr_2.4.2      
+[17] htmltools_0.5.1.1 ellipsis_0.3.2    yaml_2.2.1        digest_0.6.27    
+[21] tibble_3.1.2      lifecycle_1.0.0   crayon_1.4.1      bookdown_0.22    
+[25] farver_2.1.0      vctrs_0.3.8       glue_1.4.2        evaluate_0.14    
+[29] rmarkdown_2.8     blogdown_1.3      labeling_0.4.2    stringi_1.6.2    
+[33] compiler_4.1.0    pillar_1.6.1      scales_1.1.1      pkgconfig_2.0.3  &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to &lt;a href=&#34;https://biswajitsahoo1111.github.io/&#34;&gt;author’s&lt;/a&gt; email.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1197,7 +1196,9 @@ recognize that total variance is &lt;span class=&#34;math inline&#34;&gt;\(\frac
 root of sum of squares of all elements of a matrix.
 &lt;span class=&#34;math display&#34;&gt;\[ \|\textbf{X}\|_{F} = (\sum_{i,j}{x_{ij}^2})^{\frac{1}{2}}=\sqrt{trace(\textbf{X}^T\textbf{X}})=\sqrt{trace(\textbf{X}\textbf{X}^T})\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Using this definition, total variance before transformation =
-&lt;span class=&#34;math display&#34;&gt;\[\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=\frac{1}{n-1}trace(\textbf{X}^T\textbf{X}) = trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})=\frac{1}{n-1}\|\textbf{X}\|_{F}^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\begin{aligned}\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=\frac{1}{n-1}trace(\textbf{X}^T\textbf{X}) 
+&amp;amp;= trace(\frac{1}{n-1}\textbf{X}^T\textbf{X}) \\ 
+&amp;amp;= \frac{1}{n-1}\|\textbf{X}\|_{F}^2\end{aligned}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Where, trace of a matrix is the sum of its diagonal entries and
 &lt;span class=&#34;math inline&#34;&gt;\(\|\textbf{X}\|_{F}^2\)&lt;/span&gt; is the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The aim of PCA is to transform the data in such a way that along first
@@ -1296,8 +1297,9 @@ are centered.&lt;/p&gt;&lt;/li&gt;
 of variables before transformation.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;: To prove that total variance of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; also remains
 same, observe that&lt;/p&gt;
-&lt;p&gt;total covariance of &lt;span class=&#34;math inline&#34;&gt;\(\textbf{Y}\)&lt;/span&gt; =
-&lt;span class=&#34;math display&#34;&gt;\[trace(\frac{1}{n-1}\textbf{Y}^{T}\textbf{Y})=\frac{1}{n-1}trace((\textbf{P}^T\textbf{X}^{T}\textbf{X})\textbf{P})=\\\frac{1}{n-1}trace((\textbf{P}\textbf{P}^T)\textbf{X}^{T}\textbf{X})=trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})\]&lt;/span&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{aligned} \mbox{total covariance of} \ \  \textbf{Y} &amp;amp;=
+trace(\frac{1}{n-1}\textbf{Y}^{T}\textbf{Y}) \\ &amp;amp;=\frac{1}{n-1}trace((\textbf{P}^T\textbf{X}^{T}\textbf{X})\textbf{P}) \\ &amp;amp;=\frac{1}{n-1}trace((\textbf{P}\textbf{P}^T)\textbf{X}^{T}\textbf{X}) \\ 
+&amp;amp;= trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})\end{aligned}\]&lt;/span&gt;
 The previous equation uses the fact that trace is
 commutative(i.e.&lt;span class=&#34;math inline&#34;&gt;\(trace(\textbf{AB})=trace(\textbf{BA})\)&lt;/span&gt;) and
 &lt;span class=&#34;math inline&#34;&gt;\(\textbf{P}\)&lt;/span&gt; is orthogonal (i.e.
