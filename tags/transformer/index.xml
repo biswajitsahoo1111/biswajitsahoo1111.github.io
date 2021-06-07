@@ -46,6 +46,7 @@
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
+&lt;p&gt;&lt;span style=&#34;color: purple;&#34;&gt;&lt;strong&gt;This code has been merged with D2L book. See PR: &lt;a href=&#34;https://github.com/d2l-ai/d2l-en/pull/1756&#34;&gt;1756&lt;/a&gt;, &lt;a href=&#34;https://github.com/d2l-ai/d2l-en/pull/1768&#34;&gt;1768&lt;/a&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;This post contains &lt;code&gt;Tensorflow 2&lt;/code&gt; code for Attention Mechanisms chapter of &lt;a href=&#34;http://d2l.ai/&#34;&gt;Dive into Deep Learning (D2L)&lt;/a&gt; book. The chapter has 7 sections and code for each section can be found at the following links. We have given only code implementations. For theory, readers should refer the book.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_1_Visualization_of_attention.ipynb&#34;&gt;10.1. Attention Cues&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_2_Attention_based_regression.ipynb&#34;&gt;10.2. Attention Pooling: Nadaraya-Watson Kernel Regression&lt;/a&gt;&lt;/p&gt;
@@ -57,6 +58,10 @@
 &lt;div id=&#34;additional-sections&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Additional sections:&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/additional_sections/9_7_Sequence_to_Sequence_Learning.ipynb&#34;&gt;9.7. Sequence to Sequence Learning&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;additional-chapters&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Additional Chapters:&lt;/h3&gt;
+&lt;p&gt;Chapter 17: &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Generative_Adversarial_Networks_in_TF&#34;&gt;Generative Adversarial Networks&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;how-to-run-these-code&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;How to run these code:&lt;/h3&gt;
