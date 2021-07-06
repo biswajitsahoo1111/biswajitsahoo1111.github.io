@@ -826,7 +826,35 @@
 </tbody>
 </table>
 
-<p><strong>Note:</strong>Attention based RUL prediction code will be updated soon. We will share the notebooks as well as saved weights so that readers can reproduce our results.</p>
+<h2 id="attention-based-rul-prediction">Attention Based RUL Prediction</h2>
+
+<hr />
+
+<p>What is attention? We recommend <a href="https://d2l.ai/chapter_attention-mechanisms/index.html">Chapter 10</a> of <a href="https://d2l.ai/index.html">this book</a> for more details. We provide notebooks that implement GRU based additive attention for RUL prediction. For reproducibility of our results, we share trained weights. All trained weights can be found <a href="https://github.com/biswajitsahoo1111/rul_codes_open/tree/master/notebooks/cmapss_notebooks/attention_based_RUL/saved_weights">here</a>. We also provide <a href="https://github.com/biswajitsahoo1111/rul_codes_open/tree/master/notebooks/cmapss_notebooks/attention_based_RUL">separate notebooks</a> describing steps to use trained weights to reproduce exact results as obtained by us.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Method</th>
+<th align="center">FD001</th>
+<th align="center">FD002</th>
+<th align="center">FD003</th>
+<th align="center">FD004</th>
+<th align="center">Degradation Model</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">GRU + Additive Attention</td>
+<td align="center"><a href="https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD001_additive_attention_early_rul_125_GRU_based_final.ipynb">14.21</a></td>
+<td align="center"><a href="https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD002_additive_attention_early_rul_150_GRU_based_final.ipynb">27.99</a></td>
+<td align="center"><a href="https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD003_additive_attention_early_rul_125_GRU_based_final.ipynb">14.64</a></td>
+<td align="center"><a href="https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD004_additive_attention_early_rul_150_GRU_based_final.ipynb">26.77</a></td>
+<td align="center">Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))</td>
+</tr>
+</tbody>
+</table>
 
 <p>(This table will be updated gradually.)</p>
 
