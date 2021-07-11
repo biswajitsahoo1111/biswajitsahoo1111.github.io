@@ -3337,6 +3337,15 @@ Wiley interdisciplinary reviews: computational statistics, 2(4),
 &lt;/tr&gt;
 
 &lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Support Vector Regression (SVR)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_SVR_early_rul_125.ipynb&#34;&gt;18.28&lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_SVR_early_rul_150.ipynb&#34;&gt;30.50&lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_SVR_early_rul_125.ipynb&#34;&gt;21.37&lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_SVR_early_rul_150.ipynb&#34;&gt;34.11&lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
 &lt;td align=&#34;center&#34;&gt;Gradient Boosting&lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_xgboost_linear_degradation_model.ipynb&#34;&gt;33.24&lt;/a&gt;&lt;sup&gt;* &lt;/sup&gt;&lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_xgboost_linear_degradation_model.ipynb&#34;&gt;29.88&lt;/a&gt;&lt;/td&gt;
