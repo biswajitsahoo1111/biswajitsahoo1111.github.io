@@ -869,8 +869,8 @@ print(&amp;quot;PyTorch Version: &amp;quot;, torch.__version__)&lt;/code&gt;&lt;
 &lt;pre&gt;&lt;code&gt;PyTorch Version:  1.7.1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;class CustomDataset(Dataset):
   def __init__(self, filenames, batch_size):
-    # `filenames` is a list of strings the contains all file names.
-    # `batch_size` is the determines the number of files that we want to read in a chunk.
+    # `filenames` is a list of strings that contains all file names.
+    # `batch_size` determines the number of files that we want to read in a chunk.
         self.filenames= filenames
         self.batch_size = batch_size
   def __len__(self):
@@ -3017,16 +3017,13 @@ Test Accuracy: 0.9922000169754028&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;These notebooks are for educational purposes only. Our experiments are relatively small scale and can be run in a reasonable amount of time in a notebook. I personally love the interactive nature of jupyter notebooks. We can see what we are doing. So the answer to the above question is: personal choice. I also don&amp;rsquo;t intend to deploy these, at least for the time being, in a production environment. Readers who wish to build deployment ready systems should bear in mind that they have to do many other things than just run an algorithm in a jupyter notebook.&lt;/p&gt;
 
 &lt;p&gt;For attribution, cite this project as&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;BibTeX citation
 @misc{sahoo2018datadrivenrul,
   author = {Sahoo, Biswajit},
   title = {Data-Driven Remaining Useful Life (RUL) Prediction},
   url = {https://biswajitsahoo1111.github.io/rul_codes_open/},
   year = {2018}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
+}&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Readers should cite original datasets separately.&lt;/p&gt;
 </description>
     </item>
@@ -3180,16 +3177,13 @@ features&lt;/a&gt; (10 classes, sampling frequency: 48k) (Overall accuracy: &lt;
 &lt;p&gt;These notebooks are for educational purposes only. Our experiments are relatively small scale and can be run in a reasonable amount of time in a notebook. I personally love the interactive nature of jupyter notebooks. We can see what we are doing. So the answer to the above question is: personal choice. I also don&amp;rsquo;t intend to deploy these, at least for the time being, in a production environment. Readers who wish to build deployment ready systems should bear in mind that they have to do many other things than just run an algorithm in a jupyter notebook.&lt;/p&gt;
 
 &lt;p&gt;For attribution, cite this project as&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;BibTeX citation
 @misc{sahoo2016datadriven,
   author = {Sahoo, Biswajit},
   title = {Data-Driven Machinery Fault Diagnosis},
   url = {https://biswajitsahoo1111.github.io/cbm_codes_open/},
   year = {2016}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
+}&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Readers should cite original datasets separately.&lt;/p&gt;
 </description>
     </item>

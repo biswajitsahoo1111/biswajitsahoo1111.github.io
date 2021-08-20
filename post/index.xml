@@ -869,8 +869,8 @@ print(&amp;quot;PyTorch Version: &amp;quot;, torch.__version__)&lt;/code&gt;&lt;
 &lt;pre&gt;&lt;code&gt;PyTorch Version:  1.7.1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;python&#34;&gt;&lt;code&gt;class CustomDataset(Dataset):
   def __init__(self, filenames, batch_size):
-    # `filenames` is a list of strings the contains all file names.
-    # `batch_size` is the determines the number of files that we want to read in a chunk.
+    # `filenames` is a list of strings that contains all file names.
+    # `batch_size` determines the number of files that we want to read in a chunk.
         self.filenames= filenames
         self.batch_size = batch_size
   def __len__(self):
