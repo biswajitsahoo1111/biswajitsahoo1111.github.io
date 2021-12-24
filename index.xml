@@ -6774,10 +6774,10 @@ Wiley interdisciplinary reviews: computational statistics, 2(4),
 &lt;tr&gt;
 &lt;td align=&#34;center&#34;&gt;1D CNN&lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_1D_CNN_piecewise_linear_degradation_model.ipynb&#34;&gt;15.84&lt;/a&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_1D_CNN_piecewise_linear_degradation_model.ipynb&#34;&gt;30.38&lt;/a&gt;&lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_1D_CNN_piecewise_linear_degradation_model.ipynb&#34;&gt;15.78&lt;/a&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Piecewise Linear (Early RUL = 125)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_1D_CNN_piecewise_linear_degradation_model.ipynb&#34;&gt;32.35&lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
