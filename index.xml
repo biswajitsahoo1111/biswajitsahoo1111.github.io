@@ -6765,10 +6765,10 @@ Wiley interdisciplinary reviews: computational statistics, 2(4),
 &lt;tr&gt;
 &lt;td align=&#34;center&#34;&gt;LSTM&lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_LSTM_piecewise_linear_degradation_model.ipynb&#34;&gt;15.16&lt;/a&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_LSTM_piecewise_linear_degradation_model.ipynb&#34;&gt;27.57&lt;/a&gt;&lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_LSTM_piecewise_linear_degradation_model.ipynb&#34;&gt;15.54&lt;/a&gt;&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;-&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Piecewise Linear (Early RUL = 125)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_LSTM_piecewise_linear_degradation_model.ipynb&#34;&gt;28.21&lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
@@ -6835,8 +6835,7 @@ Wiley interdisciplinary reviews: computational statistics, 2(4),
 &lt;p&gt;These notebooks are for educational purposes only. Our experiments are relatively small scale and can be run in a reasonable amount of time in a notebook. I personally love the interactive nature of jupyter notebooks. We can see what we are doing. So the answer to the above question is: personal choice. I also don&amp;rsquo;t intend to deploy these, at least for the time being, in a production environment. Readers who wish to build deployment ready systems should bear in mind that they have to do many other things than just run an algorithm in a jupyter notebook.&lt;/p&gt;
 
 &lt;p&gt;For attribution, cite this project as&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;BibTeX citation
-@misc{sahoo2018datadrivenrul,
+&lt;pre&gt;&lt;code&gt;@misc{sahoo2018datadrivenrul,
   author = {Sahoo, Biswajit},
   title = {Data-Driven Remaining Useful Life (RUL) Prediction},
   url = {https://biswajitsahoo1111.github.io/rul_codes_open/},
@@ -6995,8 +6994,7 @@ features&lt;/a&gt; (10 classes, sampling frequency: 48k) (Overall accuracy: &lt;
 &lt;p&gt;These notebooks are for educational purposes only. Our experiments are relatively small scale and can be run in a reasonable amount of time in a notebook. I personally love the interactive nature of jupyter notebooks. We can see what we are doing. So the answer to the above question is: personal choice. I also don&amp;rsquo;t intend to deploy these, at least for the time being, in a production environment. Readers who wish to build deployment ready systems should bear in mind that they have to do many other things than just run an algorithm in a jupyter notebook.&lt;/p&gt;
 
 &lt;p&gt;For attribution, cite this project as&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;BibTeX citation
-@misc{sahoo2016datadriven,
+&lt;pre&gt;&lt;code&gt;@misc{sahoo2016datadriven,
   author = {Sahoo, Biswajit},
   title = {Data-Driven Machinery Fault Diagnosis},
   url = {https://biswajitsahoo1111.github.io/cbm_codes_open/},
