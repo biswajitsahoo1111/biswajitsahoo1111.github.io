@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Optimization | Biswajit Sahoo</title>
+    <link>https://biswajitsahoo1111.github.io/category/optimization/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/category/optimization/index.xml" rel="self" type="application/rss+xml" />
+    <description>Optimization</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Biswajit Sahoo</copyright><lastBuildDate>Sat, 14 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png</url>
+      <title>Optimization</title>
+      <link>https://biswajitsahoo1111.github.io/category/optimization/</link>
+    </image>
+    
+    <item>
+      <title>Machine Learning, Regression, and Optimization</title>
+      <link>https://biswajitsahoo1111.github.io/publication/ml_regression_optimization/</link>
+      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://biswajitsahoo1111.github.io/publication/ml_regression_optimization/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,12 +5,20 @@
     <link>https://biswajitsahoo1111.github.io/tag/pca/</link>
       <atom:link href="https://biswajitsahoo1111.github.io/tag/pca/index.xml" rel="self" type="application/rss+xml" />
     <description>PCA</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Biswajit Sahoo</copyright><lastBuildDate>Tue, 05 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Biswajit Sahoo</copyright><lastBuildDate>Thu, 20 Aug 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png</url>
       <title>PCA</title>
       <link>https://biswajitsahoo1111.github.io/tag/pca/</link>
     </image>
+    
+    <item>
+      <title>Feature Subset Selection Using Sparse Principal Component Analysis and Multiclass Fault Classification Using Selected Features</title>
+      <link>https://biswajitsahoo1111.github.io/publication/spca_fault_diagnosis/</link>
+      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://biswajitsahoo1111.github.io/publication/spca_fault_diagnosis/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Principal Component Analysis - Part III</title>
