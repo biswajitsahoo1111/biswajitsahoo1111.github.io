@@ -60,7 +60,7 @@
   
     
   
-  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will read multiple csv files using Tensroflow Sequence." />
+  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will read multiple csv files using Tensroflow Sequence. In an earlier post we had demonstrated the procedure for reading multiple csv files using a custom generator." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/" />
@@ -343,7 +343,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo" />
   <meta property="og:url" content="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/" />
   <meta property="og:title" content="Reading multiple files in Tensorflow 2 using Sequence | Biswajit Sahoo" />
-  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will read multiple csv files using Tensroflow Sequence." /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will read multiple csv files using Tensroflow Sequence. In an earlier post we had demonstrated the procedure for reading multiple csv files using a custom generator." /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -396,7 +396,7 @@
       "url": "https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "Run in Google Colab\r\r\rView source on GitHub\r\r\rDownload notebook\r\r\rIn this post, we will read multiple csv files using Tensroflow Sequence."
+  "description": "Run in Google Colab\rView source on GitHub\rDownload notebook\rIn this post, we will read multiple csv files using Tensroflow Sequence. In an earlier post we had demonstrated the procedure for reading multiple csv files using a custom generator."
 }
 </script>
 
@@ -416,7 +416,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="416d72acfb5b3843af5ce0a8a16179ba" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="570ca23fc0ca8dd18966831b078702d2" >
 
   
   
@@ -427,7 +427,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.8f76bdc9e086322ed5147724ebba3d06.js"></script>
+  <script src="/js/wowchemy-init.min.7e85d6cfe81caeb57cc49452f9b55e03.js"></script>
 
   
 
@@ -837,93 +837,88 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-<script src="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/index.en_files/header-attrs/header-attrs.js"></script>
-
-
-<table class="tfo-notebook-buttons" align="left">
-<td>
-<a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb">
-<img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
-Run in Google Colab</a>
-</td>
-<td>
-<a href="https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb">
-<img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
-View source on GitHub</a>
-</td>
-<td>
-<a href="https://www.dropbox.com/s/weog8ubsu9qcugv/Reading_mulitple_files_using_tensorflow_sequence.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
-</td>
+      <table class="tfo-notebook-buttons" align="left">
+  <td>
+    <a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb">
+    <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+    Run in Google Colab</a>
+  </td>
+  <td>
+    <a href="https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb">
+    <img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
+    View source on GitHub</a>
+  </td>
+  <td>
+    <a href="https://www.dropbox.com/s/weog8ubsu9qcugv/Reading_mulitple_files_using_tensorflow_sequence.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
+  </td>
 </table>
-<p>In this post, we will read multiple csv files using <a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence">Tensroflow Sequence</a>. In an <a href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/">earlier post</a> we had demonstrated the procedure for reading multiple csv files using a custom generator. Though generators are convenient for handling chunks of data from a large dataset, they have limited portability and scalability (<a href="https://www.tensorflow.org/guide/data#consuming_python_generators">see the caution here</a>). Therefore, Tensorflow prefers <code>Sequence</code> over generators.</p>
+<p>In this post, we will read multiple csv files using <a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence" target="_blank" rel="noopener">Tensroflow Sequence</a>. In an <a href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/" target="_blank" rel="noopener">earlier post</a> we had demonstrated the procedure for reading multiple csv files using a custom generator. Though generators are convenient for handling chunks of data from a large dataset, they have limited portability and scalability (<a href="https://www.tensorflow.org/guide/data#consuming_python_generators" target="_blank" rel="noopener">see the caution here</a>). Therefore, Tensorflow prefers <code>Sequence</code> over generators.</p>
 <p>Sequence is similar to <code>Tensorflow Dataset</code> but provides flexibility for batched data preparation in a custom manner. <code>Tensorflow Dataset</code> provides a wide range of functionalities to handle different data types. But for some specific applications we might have to make some custom modifications for which built-in methods are not available in <code>tensorflow dataset</code>. In that case, we can use <code>Sequence</code> to create our own dataset equivalent. In this post, we will show how to use sequence to read multiple csv files. The method we will discuss is general enough to work for other file formats (such as .txt, .npz, etc.) as well. We will demonstrate the procedure using 500 .csv files. But the method can be easily extended to huge datasets involving thousands of csv files.</p>
-<p>This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and .csv files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following code cells. We will use <code>Tensorflow 2</code> to run our deep learning model. Tensorflow is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.</p>
-<div id="outline" class="section level2">
-<h2>Outline:</h2>
-<ol style="list-style-type: decimal">
-<li><a href="#sec_1">Create 500 “.csv” files and save it in the folder “random_data” in current directory.</a></li>
+<p>This post is self-sufficient in the sense that readers don&rsquo;t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named &ldquo;random_data&rdquo; will be created in current working directory and .csv files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn&rsquo;t have an old folder named &ldquo;random_data&rdquo;. Then run the following code cells. We will use <code>Tensorflow 2</code> to run our deep learning model. Tensorflow is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.</p>
+<h2 id="outline">Outline:</h2>
+<ol>
+<li><a href="#sec_1">Create 500 &ldquo;.csv&rdquo; files and save it in the folder &ldquo;random_data&rdquo; in current directory.</a></li>
 <li><a href="#sec_2">Write a sequence object that reads data from the folder in chunks and preprocesses it.</a></li>
 <li><a href="#sec_3">Feed the chunks of data to a CNN model and train it for several epochs.</a></li>
 <li><a href="#sec_4">Make prediction on new data for which labels are not known.</a></li>
 </ol>
 <p><a id="sec_1"></a></p>
-</div>
-<div id="create-500-.csv-files-of-random-data" class="section level2">
-<h2>1. Create 500 .csv files of random data</h2>
+<h2 id="1-create-500-csv-files-of-random-data">1. Create 500 .csv files of random data</h2>
 <p>As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. The dataset that we will create is a contrived one. But readers can modify the approach slightly to cater to their need. Following is the process that we will follow.</p>
 <ul>
 <li>Each .csv file will have one column of data with 1024 entries.</li>
-<li>Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1” category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …,“Fault_1_100.csv”. Similarly for other classes.</li>
+<li>Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in &ldquo;Fault_1&rdquo; category will have names as &ldquo;Fault_1_001.csv&rdquo;, &ldquo;Fault_1_002.csv&rdquo;, &ldquo;Fault_1_003.csv&rdquo;, &hellip;,&ldquo;Fault_1_100.csv&rdquo;. Similarly for other classes.</li>
 </ul>
-<pre class="python"><code>import numpy as np
-import os
-import glob
-np.random.seed(1111)</code></pre>
-<p>First create a function that will generate random files.</p>
-<pre class="python"><code>def create_random_csv_files(fault_classes, number_of_files_in_each_class):
-    os.mkdir(&quot;./random_data/&quot;)  # Make a directory to save created files.
-    for fault_class in fault_classes:
-        for i in range(number_of_files_in_each_class):
-            data = np.random.rand(1024,)
-            file_name = &quot;./random_data/&quot; + eval(&quot;fault_class&quot;) + &quot;_&quot; + &quot;{0:03}&quot;.format(i+1) + &quot;.csv&quot; # This creates file_name
-            np.savetxt(eval(&quot;file_name&quot;), data, delimiter = &quot;,&quot;, header = &quot;V1&quot;, comments = &quot;&quot;)
-        print(str(eval(&quot;number_of_files_in_each_class&quot;)) + &quot; &quot; + eval(&quot;fault_class&quot;) + &quot; files&quot;  + &quot; created.&quot;)</code></pre>
-<p>Now use the function to create 100 files each for five fault types.</p>
-<pre class="python"><code>create_random_csv_files([&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;], number_of_files_in_each_class = 100)</code></pre>
-<pre><code>100 Fault_1 files created.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> glob
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">1111</span>)
+</span></span></code></pre></div><p>First create a function that will generate random files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_random_csv_files</span>(fault_classes, number_of_files_in_each_class):
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>mkdir(<span style="color:#e6db74">&#34;./random_data/&#34;</span>)  <span style="color:#75715e"># Make a directory to save created files.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> fault_class <span style="color:#f92672">in</span> fault_classes:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(number_of_files_in_each_class):
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">1024</span>,)
+</span></span><span style="display:flex;"><span>            file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./random_data/&#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;fault_class&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{0:03}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.csv&#34;</span> <span style="color:#75715e"># This creates file_name</span>
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>savetxt(eval(<span style="color:#e6db74">&#34;file_name&#34;</span>), data, delimiter <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span>, header <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;V1&#34;</span>, comments <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>        print(str(eval(<span style="color:#e6db74">&#34;number_of_files_in_each_class&#34;</span>)) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;fault_class&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; files&#34;</span>  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; created.&#34;</span>)
+</span></span></code></pre></div><p>Now use the function to create 100 files each for five fault types.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>create_random_csv_files([<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>], number_of_files_in_each_class <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)
+</span></span></code></pre></div><pre><code>100 Fault_1 files created.
 100 Fault_2 files created.
 100 Fault_3 files created.
 100 Fault_4 files created.
-100 Fault_5 files created.</code></pre>
-<pre class="python"><code>files = glob.glob(&quot;./random_data/*&quot;)
-print(&quot;Total number of files: &quot;, len(files))
-print(&quot;Showing first 10 files...&quot;)
-files[:10]</code></pre>
-<pre><code>Total number of files:  500
+100 Fault_5 files created.
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/*&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Total number of files: &#34;</span>, len(files))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Showing first 10 files...&#34;</span>)
+</span></span><span style="display:flex;"><span>files[:<span style="color:#ae81ff">10</span>]
+</span></span></code></pre></div><pre><code>Total number of files:  500
 Showing first 10 files...
 
-[&#39;./random_data\\Fault_1_001.csv&#39;,
- &#39;./random_data\\Fault_1_002.csv&#39;,
- &#39;./random_data\\Fault_1_003.csv&#39;,
- &#39;./random_data\\Fault_1_004.csv&#39;,
- &#39;./random_data\\Fault_1_005.csv&#39;,
- &#39;./random_data\\Fault_1_006.csv&#39;,
- &#39;./random_data\\Fault_1_007.csv&#39;,
- &#39;./random_data\\Fault_1_008.csv&#39;,
- &#39;./random_data\\Fault_1_009.csv&#39;,
- &#39;./random_data\\Fault_1_010.csv&#39;]</code></pre>
+['./random_data\\Fault_1_001.csv',
+ './random_data\\Fault_1_002.csv',
+ './random_data\\Fault_1_003.csv',
+ './random_data\\Fault_1_004.csv',
+ './random_data\\Fault_1_005.csv',
+ './random_data\\Fault_1_006.csv',
+ './random_data\\Fault_1_007.csv',
+ './random_data\\Fault_1_008.csv',
+ './random_data\\Fault_1_009.csv',
+ './random_data\\Fault_1_010.csv']
+</code></pre>
 <p>To extract labels from file name, extract the part of the file name that corresponds to fault type.</p>
-<pre class="python"><code>print(files[0])</code></pre>
-<pre><code>./random_data\Fault_1_001.csv</code></pre>
-<pre class="python"><code>print(files[0][14:21])</code></pre>
-<pre><code>Fault_1</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(files[<span style="color:#ae81ff">0</span>])
+</span></span></code></pre></div><pre><code>./random_data\Fault_1_001.csv
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(files[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">14</span>:<span style="color:#ae81ff">21</span>])
+</span></span></code></pre></div><pre><code>Fault_1
+</code></pre>
 <p>Now that data have been created, we will go to the next step. That is, create a custom <code>Sequence</code> object, preprocess the time series like data into a matrix like shape such that a 2-D CNN can ingest it. We reshape the data in that way to just illustrate the point. Readers should use their own preprocessing steps.</p>
 <p><a id="sec_2"></a></p>
-</div>
-<div id="write-a-custom-sequence-object" class="section level2">
-<h2>2. Write a custom Sequence object</h2>
-<p>According to <code>Tensorflow</code> <a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence">documentation</a>, every Sequence must implement following two methods:</p>
+<h2 id="2-write-a-custom-sequence-object">2. Write a custom Sequence object</h2>
+<p>According to <code>Tensorflow</code> <a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence" target="_blank" rel="noopener">documentation</a>, every Sequence must implement following two methods:</p>
 <ul>
 <li><code>__getitem__</code> method: Iterates over the dataset chunk by chunk. It must return a complete batch.</li>
 <li><code>__len__</code> method: Returns the length of the Sequence (total number of batches that we can extract from the full dataset).</li>
@@ -931,84 +926,88 @@ Showing first 10 files...
 <p>As we create a custom sequence object, we have complete control over the arguments we want to pass it. The following sequence object takes a list of file names as first argument. The second argument is batch_size. batch_size determines how many files we will process at one go. As we will be solving a classification problem, we have to assign labels to each raw data. We will use following labels for convenience.</p>
 <table>
 <thead>
-<tr class="header">
-<th align="center">Class</th>
-<th align="center">Label</th>
+<tr>
+<th style="text-align:center">Class</th>
+<th style="text-align:center">Label</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="center">Fault_1</td>
-<td align="center">0</td>
+<tr>
+<td style="text-align:center">Fault_1</td>
+<td style="text-align:center">0</td>
 </tr>
-<tr class="even">
-<td align="center">Fault_2</td>
-<td align="center">1</td>
+<tr>
+<td style="text-align:center">Fault_2</td>
+<td style="text-align:center">1</td>
 </tr>
-<tr class="odd">
-<td align="center">Fault_3</td>
-<td align="center">2</td>
+<tr>
+<td style="text-align:center">Fault_3</td>
+<td style="text-align:center">2</td>
 </tr>
-<tr class="even">
-<td align="center">Fault_4</td>
-<td align="center">3</td>
+<tr>
+<td style="text-align:center">Fault_4</td>
+<td style="text-align:center">3</td>
 </tr>
-<tr class="odd">
-<td align="center">Fault_5</td>
-<td align="center">4</td>
+<tr>
+<td style="text-align:center">Fault_5</td>
+<td style="text-align:center">4</td>
 </tr>
 </tbody>
 </table>
-<pre class="python"><code>import pandas as pd
-import re    # To match regular expression for extracting labels</code></pre>
-<pre class="python"><code>import tensorflow as tf
-print(&quot;Tensorflow version: &quot;, tf.__version__)</code></pre>
-<pre><code>Tensorflow version:  2.4.0</code></pre>
-<pre class="python"><code>class CustomSequence(tf.keras.utils.Sequence):  # It inherits from `tf.keras.utils.Sequence` class
-  def __init__(self, filenames, batch_size):  # Two input arguments to the class.
-        self.filenames= filenames
-        self.batch_size = batch_size
-
-  def __len__(self):
-        return int(np.ceil(len(self.filenames) / float(self.batch_size)))
-
-  def __getitem__(self, idx):  # idx is index that runs from 0 to length of sequence
-        batch_x = self.filenames[idx * self.batch_size:(idx + 1) * self.batch_size] # Select a chunk of file names
-        data = []
-        labels = []
-        label_classes = [&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;]
-
-        for file in batch_x:   # In this loop read the files in the chunk that was selected previously
-            temp = pd.read_csv(open(file,&#39;r&#39;)) # Change this line to read any other type of file
-            data.append(temp.values.reshape(32,32,1)) # Convert column data to matrix like data with one channel
-            pattern = &quot;^&quot; + eval(&quot;file[14:21]&quot;)      # Pattern extracted from file_name
-            for j in range(len(label_classes)):
-                if re.match(pattern, label_classes[j]): # Pattern is matched against different label_classes
-                    labels.append(j)  
-        data = np.asarray(data).reshape(-1,32,32,1)
-        labels = np.asarray(labels)
-        return data, labels</code></pre>
-<p>To read any other file format, inside the <code>__getitem__</code> method change the line that reads files. This will enable us to read different file formats, be it <code>.txt</code> or <code>.npz</code> or any other. Preprocessing of data, different from what we have done in this blog, can be done within the <code>__getitem__</code> method.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> re    <span style="color:#75715e"># To match regular expression for extracting labels</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Tensorflow version: &#34;</span>, tf<span style="color:#f92672">.</span>__version__)
+</span></span></code></pre></div><pre><code>Tensorflow version:  2.4.0
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomSequence</span>(tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>Sequence):  <span style="color:#75715e"># It inherits from `tf.keras.utils.Sequence` class</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __init__(self, filenames, batch_size):  <span style="color:#75715e"># Two input arguments to the class.</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>filenames<span style="color:#f92672">=</span> filenames
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>batch_size <span style="color:#f92672">=</span> batch_size
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __len__(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> int(np<span style="color:#f92672">.</span>ceil(len(self<span style="color:#f92672">.</span>filenames) <span style="color:#f92672">/</span> float(self<span style="color:#f92672">.</span>batch_size)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __getitem__(self, idx):  <span style="color:#75715e"># idx is index that runs from 0 to length of sequence</span>
+</span></span><span style="display:flex;"><span>        batch_x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>filenames[idx <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>batch_size:(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>batch_size] <span style="color:#75715e"># Select a chunk of file names</span>
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        labels <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        label_classes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> batch_x:   <span style="color:#75715e"># In this loop read the files in the chunk that was selected previously</span>
+</span></span><span style="display:flex;"><span>            temp <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(open(file,<span style="color:#e6db74">&#39;r&#39;</span>)) <span style="color:#75715e"># Change this line to read any other type of file</span>
+</span></span><span style="display:flex;"><span>            data<span style="color:#f92672">.</span>append(temp<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#75715e"># Convert column data to matrix like data with one channel</span>
+</span></span><span style="display:flex;"><span>            pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;^&#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;file[14:21]&#34;</span>)      <span style="color:#75715e"># Pattern extracted from file_name</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(len(label_classes)):
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(pattern, label_classes[j]): <span style="color:#75715e"># Pattern is matched against different label_classes</span>
+</span></span><span style="display:flex;"><span>                    labels<span style="color:#f92672">.</span>append(j)  
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(data)<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        labels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(labels)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> data, labels
+</span></span></code></pre></div><p>To read any other file format, inside the <code>__getitem__</code> method change the line that reads files. This will enable us to read different file formats, be it <code>.txt</code> or <code>.npz</code> or any other. Preprocessing of data, different from what we have done in this blog, can be done within the <code>__getitem__</code> method.</p>
 <p>Now we will check whether the dataset works as intended or not. We will set batch_size to 10. This means that files in chunks of 10 will be read and processed. The list of files from which 10 are chosen can be an ordered file list or shuffled list. In case, the files are not shuffled, use np.random.shuffle(file_list) to shuffle files.</p>
 <p>In the demonstration, we will read files from an ordered list. This will help us check any errors in the code.</p>
-<pre class="python"><code>sequence = CustomSequence(filenames = files, batch_size = 10)</code></pre>
-<p>Check the length of the sequence.</p>
-<pre class="python"><code>sequence.__len__()</code></pre>
-<pre><code>50</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sequence <span style="color:#f92672">=</span> CustomSequence(filenames <span style="color:#f92672">=</span> files, batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><p>Check the length of the sequence.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sequence<span style="color:#f92672">.</span>__len__()
+</span></span></code></pre></div><pre><code>50
+</code></pre>
 <p>Another way to check the length of the sequence.</p>
-<pre class="python"><code>len(list(sequence))</code></pre>
-<pre><code>50</code></pre>
-<p>The sequence is not an infinite loop. Let’s check again. This is yet another way to check the length of the sequence.</p>
-<pre class="python"><code>counter = 0
-for _,_ in sequence:
-    counter = counter + 1
-print(counter)</code></pre>
-<pre><code>50</code></pre>
-<pre class="python"><code>for num, (data, labels) in enumerate(sequence):
-    print(data.shape, labels.shape)
-    print(labels)
-    if num &gt; 5: break</code></pre>
-<pre><code>(10, 32, 32, 1) (10,)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>len(list(sequence))
+</span></span></code></pre></div><pre><code>50
+</code></pre>
+<p>The sequence is not an infinite loop. Let&rsquo;s check again. This is yet another way to check the length of the sequence.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> _,_ <span style="color:#f92672">in</span> sequence:
+</span></span><span style="display:flex;"><span>    counter <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>print(counter)
+</span></span></code></pre></div><pre><code>50
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> num, (data, labels) <span style="color:#f92672">in</span> enumerate(sequence):
+</span></span><span style="display:flex;"><span>    print(data<span style="color:#f92672">.</span>shape, labels<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>    print(labels)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>: <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><pre><code>(10, 32, 32, 1) (10,)
 [0 0 0 0 0 0 0 0 0 0]
 (10, 32, 32, 1) (10,)
 [0 0 0 0 0 0 0 0 0 0]
@@ -1021,100 +1020,103 @@ print(counter)</code></pre>
 (10, 32, 32, 1) (10,)
 [0 0 0 0 0 0 0 0 0 0]
 (10, 32, 32, 1) (10,)
-[0 0 0 0 0 0 0 0 0 0]</code></pre>
-<p>Run the above cell multiple times to observe different labels. Label 1 appears only when all the files corresponding to “Fault_1” have been read. There are 100 files for “Fault_1” and we have set batch_size to 10. In the above cell we are iterating over the generator only 6 times. When number of iterations become greater than 10, we see label 1 and subsequently other labels. This will happen only if our initial file list is not shuffled. If the original list is shuffled, we will get random labels.</p>
+[0 0 0 0 0 0 0 0 0 0]
+</code></pre>
+<p>Run the above cell multiple times to observe different labels. Label 1 appears only when all the files corresponding to &ldquo;Fault_1&rdquo; have been read. There are 100 files for &ldquo;Fault_1&rdquo; and we have set batch_size to 10. In the above cell we are iterating over the generator only 6 times. When number of iterations become greater than 10, we see label 1 and subsequently other labels. This will happen only if our initial file list is not shuffled. If the original list is shuffled, we will get random labels.</p>
 <p>We can pass this sequence directly to <code>model.fit()</code> to train our deep learning model. Now that sequence works fine, we will use it to train a simple deep learning model. The focus of this post is not on the model itself. So we will use a simplest model. If readers want a different model, they can do so by just replacing our model with theirs.</p>
 <p><a id="sec_3"></a></p>
-</div>
-<div id="feed-the-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs" class="section level2">
-<h2>3. Feed the chunks of data to a CNN model and train it for several epochs</h2>
+<h2 id="3-feed-the-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs">3. Feed the chunks of data to a CNN model and train it for several epochs</h2>
 <p>But before we build the model and train it, we will first move our files to different folders depending on their fault type. We do so as it will be convenient later to create a training, validation, and test set, keeping the balanced nature of the dataset intact.</p>
-<pre class="python"><code>import shutil</code></pre>
-<p>Create five different folders one each for a given fault type.</p>
-<pre class="python"><code>fault_folders = [&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;]
-for folder_name in fault_folders:
-    os.mkdir(os.path.join(&quot;./random_data&quot;, folder_name))</code></pre>
-<p>Move files into those folders.</p>
-<pre class="python"><code>for file in files:
-    pattern = &quot;^&quot; + eval(&quot;file[14:21]&quot;)
-    for j in range(len(fault_folders)):
-        if re.match(pattern, fault_folders[j]):
-            dest = os.path.join(&quot;./random_data/&quot;,eval(&quot;fault_folders[j]&quot;))
-            shutil.move(file, dest)</code></pre>
-<pre class="python"><code>glob.glob(&quot;./random_data/*&quot;)</code></pre>
-<pre><code>[&#39;./random_data\\Fault_1&#39;,
- &#39;./random_data\\Fault_2&#39;,
- &#39;./random_data\\Fault_3&#39;,
- &#39;./random_data\\Fault_4&#39;,
- &#39;./random_data\\Fault_5&#39;]</code></pre>
-<pre class="python"><code>glob.glob(&quot;./random_data/Fault_1/*&quot;)[:10] # Showing first 10 files of Fault_1 folder</code></pre>
-<pre><code>[&#39;./random_data/Fault_1\\Fault_1_001.csv&#39;,
- &#39;./random_data/Fault_1\\Fault_1_002.csv&#39;,
- &#39;./random_data/Fault_1\\Fault_1_003.csv&#39;,
- &#39;./random_data/Fault_1\\Fault_1_004.csv&#39;,
- &#39;./random_data/Fault_1\\Fault_1_005.csv&#39;,
- &#39;./random_data/Fault_1\\Fault_1_006.csv&#39;,
- &#39;./random_data/Fault_1\\Fault_1_007.csv&#39;,
- &#39;./random_data/Fault_1\\Fault_1_008.csv&#39;,
- &#39;./random_data/Fault_1\\Fault_1_009.csv&#39;,
- &#39;./random_data/Fault_1\\Fault_1_010.csv&#39;]</code></pre>
-<pre class="python"><code>glob.glob(&quot;./random_data/Fault_3/*&quot;)[:10] # Showing first 10 files of Fault_3 folder</code></pre>
-<pre><code>[&#39;./random_data/Fault_3\\Fault_3_001.csv&#39;,
- &#39;./random_data/Fault_3\\Fault_3_002.csv&#39;,
- &#39;./random_data/Fault_3\\Fault_3_003.csv&#39;,
- &#39;./random_data/Fault_3\\Fault_3_004.csv&#39;,
- &#39;./random_data/Fault_3\\Fault_3_005.csv&#39;,
- &#39;./random_data/Fault_3\\Fault_3_006.csv&#39;,
- &#39;./random_data/Fault_3\\Fault_3_007.csv&#39;,
- &#39;./random_data/Fault_3\\Fault_3_008.csv&#39;,
- &#39;./random_data/Fault_3\\Fault_3_009.csv&#39;,
- &#39;./random_data/Fault_3\\Fault_3_010.csv&#39;]</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> shutil
+</span></span></code></pre></div><p>Create five different folders one each for a given fault type.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_folders <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> folder_name <span style="color:#f92672">in</span> fault_folders:
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>mkdir(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;./random_data&#34;</span>, folder_name))
+</span></span></code></pre></div><p>Move files into those folders.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> files:
+</span></span><span style="display:flex;"><span>    pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;^&#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;file[14:21]&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(len(fault_folders)):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(pattern, fault_folders[j]):
+</span></span><span style="display:flex;"><span>            dest <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;./random_data/&#34;</span>,eval(<span style="color:#e6db74">&#34;fault_folders[j]&#34;</span>))
+</span></span><span style="display:flex;"><span>            shutil<span style="color:#f92672">.</span>move(file, dest)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/*&#34;</span>)
+</span></span></code></pre></div><pre><code>['./random_data\\Fault_1',
+ './random_data\\Fault_2',
+ './random_data\\Fault_3',
+ './random_data\\Fault_4',
+ './random_data\\Fault_5']
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_1/*&#34;</span>)[:<span style="color:#ae81ff">10</span>] <span style="color:#75715e"># Showing first 10 files of Fault_1 folder</span>
+</span></span></code></pre></div><pre><code>['./random_data/Fault_1\\Fault_1_001.csv',
+ './random_data/Fault_1\\Fault_1_002.csv',
+ './random_data/Fault_1\\Fault_1_003.csv',
+ './random_data/Fault_1\\Fault_1_004.csv',
+ './random_data/Fault_1\\Fault_1_005.csv',
+ './random_data/Fault_1\\Fault_1_006.csv',
+ './random_data/Fault_1\\Fault_1_007.csv',
+ './random_data/Fault_1\\Fault_1_008.csv',
+ './random_data/Fault_1\\Fault_1_009.csv',
+ './random_data/Fault_1\\Fault_1_010.csv']
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_3/*&#34;</span>)[:<span style="color:#ae81ff">10</span>] <span style="color:#75715e"># Showing first 10 files of Fault_3 folder</span>
+</span></span></code></pre></div><pre><code>['./random_data/Fault_3\\Fault_3_001.csv',
+ './random_data/Fault_3\\Fault_3_002.csv',
+ './random_data/Fault_3\\Fault_3_003.csv',
+ './random_data/Fault_3\\Fault_3_004.csv',
+ './random_data/Fault_3\\Fault_3_005.csv',
+ './random_data/Fault_3\\Fault_3_006.csv',
+ './random_data/Fault_3\\Fault_3_007.csv',
+ './random_data/Fault_3\\Fault_3_008.csv',
+ './random_data/Fault_3\\Fault_3_009.csv',
+ './random_data/Fault_3\\Fault_3_010.csv']
+</code></pre>
 <p>Prepare the data for training set, validation set, and test_set. For each fault type, we will keep 70 files for training, 10 files for validation and 20 files for testing.</p>
-<pre class="python"><code>fault_1_files = glob.glob(&quot;./random_data/Fault_1/*&quot;)
-fault_2_files = glob.glob(&quot;./random_data/Fault_2/*&quot;)
-fault_3_files = glob.glob(&quot;./random_data/Fault_3/*&quot;)
-fault_4_files = glob.glob(&quot;./random_data/Fault_4/*&quot;)
-fault_5_files = glob.glob(&quot;./random_data/Fault_5/*&quot;)</code></pre>
-<pre class="python"><code>from sklearn.model_selection import train_test_split</code></pre>
-<pre class="python"><code>fault_1_train, fault_1_test = train_test_split(fault_1_files, test_size = 20, random_state = 5)
-fault_2_train, fault_2_test = train_test_split(fault_2_files, test_size = 20, random_state = 54)
-fault_3_train, fault_3_test = train_test_split(fault_3_files, test_size = 20, random_state = 543)
-fault_4_train, fault_4_test = train_test_split(fault_4_files, test_size = 20, random_state = 5432)
-fault_5_train, fault_5_test = train_test_split(fault_5_files, test_size = 20, random_state = 54321)</code></pre>
-<pre class="python"><code>fault_1_train, fault_1_val = train_test_split(fault_1_train, test_size = 10, random_state = 1)
-fault_2_train, fault_2_val = train_test_split(fault_2_train, test_size = 10, random_state = 12)
-fault_3_train, fault_3_val = train_test_split(fault_3_train, test_size = 10, random_state = 123)
-fault_4_train, fault_4_val = train_test_split(fault_4_train, test_size = 10, random_state = 1234)
-fault_5_train, fault_5_val = train_test_split(fault_5_train, test_size = 10, random_state = 12345)</code></pre>
-<pre class="python"><code>train_file_names = fault_1_train + fault_2_train + fault_3_train + fault_4_train + fault_5_train
-validation_file_names = fault_1_val + fault_2_val + fault_3_val + fault_4_val + fault_5_val
-test_file_names = fault_1_test + fault_2_test + fault_3_test + fault_4_test + fault_5_test
-
-# Shuffle training files (We don&#39;t need to shuffle validation and test data)
-np.random.shuffle(train_file_names)</code></pre>
-<pre class="python"><code>print(&quot;Number of train_files:&quot; ,len(train_file_names))
-print(&quot;Number of validation_files:&quot; ,len(validation_file_names))
-print(&quot;Number of test_files:&quot; ,len(test_file_names))</code></pre>
-<pre><code>Number of train_files: 350
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_1_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_1/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_2_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_2/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_3_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_3/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_4_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_4/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_5_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_5/*&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_1_train, fault_1_test <span style="color:#f92672">=</span> train_test_split(fault_1_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>fault_2_train, fault_2_test <span style="color:#f92672">=</span> train_test_split(fault_2_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">54</span>)
+</span></span><span style="display:flex;"><span>fault_3_train, fault_3_test <span style="color:#f92672">=</span> train_test_split(fault_3_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">543</span>)
+</span></span><span style="display:flex;"><span>fault_4_train, fault_4_test <span style="color:#f92672">=</span> train_test_split(fault_4_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">5432</span>)
+</span></span><span style="display:flex;"><span>fault_5_train, fault_5_test <span style="color:#f92672">=</span> train_test_split(fault_5_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">54321</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_1_train, fault_1_val <span style="color:#f92672">=</span> train_test_split(fault_1_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>fault_2_train, fault_2_val <span style="color:#f92672">=</span> train_test_split(fault_2_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>fault_3_train, fault_3_val <span style="color:#f92672">=</span> train_test_split(fault_3_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>fault_4_train, fault_4_val <span style="color:#f92672">=</span> train_test_split(fault_4_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">1234</span>)
+</span></span><span style="display:flex;"><span>fault_5_train, fault_5_val <span style="color:#f92672">=</span> train_test_split(fault_5_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">12345</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>train_file_names <span style="color:#f92672">=</span> fault_1_train <span style="color:#f92672">+</span> fault_2_train <span style="color:#f92672">+</span> fault_3_train <span style="color:#f92672">+</span> fault_4_train <span style="color:#f92672">+</span> fault_5_train
+</span></span><span style="display:flex;"><span>validation_file_names <span style="color:#f92672">=</span> fault_1_val <span style="color:#f92672">+</span> fault_2_val <span style="color:#f92672">+</span> fault_3_val <span style="color:#f92672">+</span> fault_4_val <span style="color:#f92672">+</span> fault_5_val
+</span></span><span style="display:flex;"><span>test_file_names <span style="color:#f92672">=</span> fault_1_test <span style="color:#f92672">+</span> fault_2_test <span style="color:#f92672">+</span> fault_3_test <span style="color:#f92672">+</span> fault_4_test <span style="color:#f92672">+</span> fault_5_test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Shuffle training files (We don&#39;t need to shuffle validation and test data)</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>shuffle(train_file_names)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Number of train_files:&#34;</span> ,len(train_file_names))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Number of validation_files:&#34;</span> ,len(validation_file_names))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Number of test_files:&#34;</span> ,len(test_file_names))
+</span></span></code></pre></div><pre><code>Number of train_files: 350
 Number of validation_files: 50
-Number of test_files: 100</code></pre>
+Number of test_files: 100
+</code></pre>
 <p>Create sequences for training, validation, and test set.</p>
-<pre class="python"><code>batch_size = 10
-train_sequence = CustomSequence(filenames = train_file_names, batch_size = batch_size)
-val_sequence = CustomSequence(filenames = validation_file_names, batch_size = batch_size)
-test_sequence = CustomSequence(filenames = test_file_names, batch_size = batch_size)</code></pre>
-<pre class="python"><code>from tensorflow.keras import layers
-model = tf.keras.Sequential([
-    layers.Conv2D(16, 3, activation = &quot;relu&quot;, input_shape = (32,32,1)),
-    layers.MaxPool2D(2),
-    layers.Conv2D(32, 3, activation = &quot;relu&quot;),
-    layers.MaxPool2D(2),
-    layers.Flatten(),
-    layers.Dense(16, activation = &quot;relu&quot;),
-    layers.Dense(5, activation = &quot;softmax&quot;)
-])
-model.summary()</code></pre>
-<pre><code>Model: &quot;sequential&quot;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>train_sequence <span style="color:#f92672">=</span> CustomSequence(filenames <span style="color:#f92672">=</span> train_file_names, batch_size <span style="color:#f92672">=</span> batch_size)
+</span></span><span style="display:flex;"><span>val_sequence <span style="color:#f92672">=</span> CustomSequence(filenames <span style="color:#f92672">=</span> validation_file_names, batch_size <span style="color:#f92672">=</span> batch_size)
+</span></span><span style="display:flex;"><span>test_sequence <span style="color:#f92672">=</span> CustomSequence(filenames <span style="color:#f92672">=</span> test_file_names, batch_size <span style="color:#f92672">=</span> batch_size)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras <span style="color:#f92672">import</span> layers
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>Sequential([
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>Conv2D(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">3</span>, activation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;relu&#34;</span>, input_shape <span style="color:#f92672">=</span> (<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>MaxPool2D(<span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>Conv2D(<span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">3</span>, activation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;relu&#34;</span>),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>MaxPool2D(<span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>Flatten(),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">16</span>, activation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;relu&#34;</span>),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">5</span>, activation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;softmax&#34;</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>summary()
+</span></span></code></pre></div><pre><code>Model: &quot;sequential&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
@@ -1135,12 +1137,13 @@ dense_1 (Dense)              (None, 5)                 85
 Total params: 23,333
 Trainable params: 23,333
 Non-trainable params: 0
-_________________________________________________________________</code></pre>
+_________________________________________________________________
+</code></pre>
 <p>Compile the model.</p>
-<pre class="python"><code>model.compile(loss = &quot;sparse_categorical_crossentropy&quot;, optimizer = &quot;adam&quot;, metrics = [&quot;accuracy&quot;])</code></pre>
-<p>Fit the model using sequence.</p>
-<pre class="python"><code>model.fit(train_sequence, validation_data = val_sequence, epochs = 10)</code></pre>
-<pre><code>Epoch 1/10
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(loss <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;sparse_categorical_crossentropy&#34;</span>, optimizer <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;adam&#34;</span>, metrics <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;accuracy&#34;</span>])
+</span></span></code></pre></div><p>Fit the model using sequence.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(train_sequence, validation_data <span style="color:#f92672">=</span> val_sequence, epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><pre><code>Epoch 1/10
 35/35 [==============================] - 2s 38ms/step - loss: 1.6305 - accuracy: 0.1788 - val_loss: 1.6095 - val_accuracy: 0.1800
 Epoch 2/10
 35/35 [==============================] - 1s 17ms/step - loss: 1.6086 - accuracy: 0.2212 - val_loss: 1.6093 - val_accuracy: 0.2200
@@ -1165,81 +1168,86 @@ Epoch 10/10
 
 
 
-&lt;tensorflow.python.keras.callbacks.History at 0x24f86841b80&gt;</code></pre>
-<pre class="python"><code>test_loss, test_accuracy = model.evaluate(test_sequence, steps = 10)</code></pre>
-<pre><code>10/10 [==============================] - 0s 14ms/step - loss: 1.6097 - accuracy: 0.2000</code></pre>
-<pre class="python"><code>print(&quot;Test loss: &quot;, test_loss)
-print(&quot;Test accuracy:&quot;, test_accuracy)</code></pre>
-<pre><code>Test loss:  1.609706997871399
-Test accuracy: 0.20000000298023224</code></pre>
+&lt;tensorflow.python.keras.callbacks.History at 0x24f86841b80&gt;
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>test_loss, test_accuracy <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>evaluate(test_sequence, steps <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><pre><code>10/10 [==============================] - 0s 14ms/step - loss: 1.6097 - accuracy: 0.2000
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Test loss: &#34;</span>, test_loss)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Test accuracy:&#34;</span>, test_accuracy)
+</span></span></code></pre></div><pre><code>Test loss:  1.609706997871399
+Test accuracy: 0.20000000298023224
+</code></pre>
 <p>As expected, model performs terribly.</p>
 <p><a id="sec_4"></a></p>
-</div>
-<div id="how-to-make-predictions" class="section level2">
-<h2>4. How to make predictions?</h2>
-<p>Until now, we have evaluated our model on a kept out test set. For our test set, both data and labels were known. So we evaluated its performance. But oftentimes, for test set, we don’t have access to true labels. Rather, we have to make predictions on the data available. This is the case in online competitions where we have to submit our predictions on a test set for which we don’t know the labels. We will call this set (without any labels) the prediction set. This naming convention is arbitrary but we will stick with it.</p>
+<h2 id="4-how-to-make-predictions">4. How to make predictions?</h2>
+<p>Until now, we have evaluated our model on a kept out test set. For our test set, both data and labels were known. So we evaluated its performance. But oftentimes, for test set, we don&rsquo;t have access to true labels. Rather, we have to make predictions on the data available. This is the case in online competitions where we have to submit our predictions on a test set for which we don&rsquo;t know the labels. We will call this set (without any labels) the prediction set. This naming convention is arbitrary but we will stick with it.</p>
 <p>If the whole of our prediction set fits into memory, we can just make prediction on this data by calling <code>model.evaluate()</code> and then use np.argmax() to obtain predicted class labels. Otherwise, we can read files in prediction set in chunks, make predictions on the chunks and finally append our result.</p>
-<p>Yet another pedantic way of doing this is to write a separate <code>Sequence</code> to read files from the prediction set in chunks and make predictions on it. We will show how this approach works. As we don’t have a prediction set yet, we will first create some files and save it to the prediction set.</p>
-<pre class="python"><code>def create_prediction_set(num_files = 20):
-    os.mkdir(&quot;./random_data/prediction_set&quot;)
-    for i in range(num_files):
-        data = np.random.randn(1024,)
-        file_name = &quot;./random_data/prediction_set/&quot;  + &quot;file_&quot; + &quot;{0:03}&quot;.format(i+1) + &quot;.csv&quot; # This creates file_name
-        np.savetxt(eval(&quot;file_name&quot;), data, delimiter = &quot;,&quot;, header = &quot;V1&quot;, comments = &quot;&quot;)
-    print(str(eval(&quot;num_files&quot;)) + &quot; &quot;+ &quot; files created in prediction set.&quot;)</code></pre>
-<p>Create some files for prediction set.</p>
-<pre class="python"><code>create_prediction_set(num_files = 55)</code></pre>
-<pre><code>55  files created in prediction set.</code></pre>
-<pre class="python"><code>prediction_files = glob.glob(&quot;./random_data/prediction_set/*&quot;)
-print(&quot;Total number of files: &quot;, len(prediction_files))
-print(&quot;Showing first 10 files...&quot;)
-prediction_files[:10]</code></pre>
-<pre><code>Total number of files:  55
+<p>Yet another pedantic way of doing this is to write a separate <code>Sequence</code> to read files from the prediction set in chunks and make predictions on it. We will show how this approach works. As we don&rsquo;t have a prediction set yet, we will first create some files and save it to the prediction set.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_prediction_set</span>(num_files <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>mkdir(<span style="color:#e6db74">&#34;./random_data/prediction_set&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num_files):
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">1024</span>,)
+</span></span><span style="display:flex;"><span>        file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./random_data/prediction_set/&#34;</span>  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;file_&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{0:03}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.csv&#34;</span> <span style="color:#75715e"># This creates file_name</span>
+</span></span><span style="display:flex;"><span>        np<span style="color:#f92672">.</span>savetxt(eval(<span style="color:#e6db74">&#34;file_name&#34;</span>), data, delimiter <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span>, header <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;V1&#34;</span>, comments <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(str(eval(<span style="color:#e6db74">&#34;num_files&#34;</span>)) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; files created in prediction set.&#34;</span>)
+</span></span></code></pre></div><p>Create some files for prediction set.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>create_prediction_set(num_files <span style="color:#f92672">=</span> <span style="color:#ae81ff">55</span>)
+</span></span></code></pre></div><pre><code>55  files created in prediction set.
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prediction_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/prediction_set/*&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Total number of files: &#34;</span>, len(prediction_files))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Showing first 10 files...&#34;</span>)
+</span></span><span style="display:flex;"><span>prediction_files[:<span style="color:#ae81ff">10</span>]
+</span></span></code></pre></div><pre><code>Total number of files:  55
 Showing first 10 files...
 
-[&#39;./random_data/prediction_set\\file_001.csv&#39;,
- &#39;./random_data/prediction_set\\file_002.csv&#39;,
- &#39;./random_data/prediction_set\\file_003.csv&#39;,
- &#39;./random_data/prediction_set\\file_004.csv&#39;,
- &#39;./random_data/prediction_set\\file_005.csv&#39;,
- &#39;./random_data/prediction_set\\file_006.csv&#39;,
- &#39;./random_data/prediction_set\\file_007.csv&#39;,
- &#39;./random_data/prediction_set\\file_008.csv&#39;,
- &#39;./random_data/prediction_set\\file_009.csv&#39;,
- &#39;./random_data/prediction_set\\file_010.csv&#39;]</code></pre>
+['./random_data/prediction_set\\file_001.csv',
+ './random_data/prediction_set\\file_002.csv',
+ './random_data/prediction_set\\file_003.csv',
+ './random_data/prediction_set\\file_004.csv',
+ './random_data/prediction_set\\file_005.csv',
+ './random_data/prediction_set\\file_006.csv',
+ './random_data/prediction_set\\file_007.csv',
+ './random_data/prediction_set\\file_008.csv',
+ './random_data/prediction_set\\file_009.csv',
+ './random_data/prediction_set\\file_010.csv']
+</code></pre>
 <p>The prediction sequence will be slightly different from our previous custom dataset class. We only need to return data in this case.</p>
-<pre class="python"><code>class PredictionSequence(tf.keras.utils.Sequence):
-  def __init__(self, filenames, batch_size):
-        self.filenames= filenames
-        self.batch_size = batch_size
-  def __len__(self):
-        return int(np.ceil(len(self.filenames) / float(self.batch_size)))
-  def __getitem__(self, idx):
-        batch_x = self.filenames[idx * self.batch_size:(idx + 1) * self.batch_size]
-        data = []
-        labels = []
-        label_classes = [&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;]
-        for file in batch_x:
-            temp = pd.read_csv(open(file,&#39;r&#39;)) 
-            data.append(temp.values.reshape(32,32,1)) 
-        data = np.asarray(data).reshape(-1,32,32,1)
-        return data</code></pre>
-<p>Check whether the generator sequence works or not. First we will check its length.</p>
-<pre class="python"><code>prediction_seq = PredictionSequence(filenames = prediction_files, batch_size=10)
-print(prediction_seq.__len__())</code></pre>
-<pre><code>6</code></pre>
-<pre class="python"><code>for data in prediction_seq:
-    print(data.shape)</code></pre>
-<pre><code>(10, 32, 32, 1)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PredictionSequence</span>(tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>Sequence):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __init__(self, filenames, batch_size):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>filenames<span style="color:#f92672">=</span> filenames
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>batch_size <span style="color:#f92672">=</span> batch_size
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __len__(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> int(np<span style="color:#f92672">.</span>ceil(len(self<span style="color:#f92672">.</span>filenames) <span style="color:#f92672">/</span> float(self<span style="color:#f92672">.</span>batch_size)))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __getitem__(self, idx):
+</span></span><span style="display:flex;"><span>        batch_x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>filenames[idx <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>batch_size:(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>batch_size]
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        labels <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        label_classes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> batch_x:
+</span></span><span style="display:flex;"><span>            temp <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(open(file,<span style="color:#e6db74">&#39;r&#39;</span>)) 
+</span></span><span style="display:flex;"><span>            data<span style="color:#f92672">.</span>append(temp<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)) 
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(data)<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> data
+</span></span></code></pre></div><p>Check whether the generator sequence works or not. First we will check its length.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prediction_seq <span style="color:#f92672">=</span> PredictionSequence(filenames <span style="color:#f92672">=</span> prediction_files, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>print(prediction_seq<span style="color:#f92672">.</span>__len__())
+</span></span></code></pre></div><pre><code>6
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> data <span style="color:#f92672">in</span> prediction_seq:
+</span></span><span style="display:flex;"><span>    print(data<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><pre><code>(10, 32, 32, 1)
 (10, 32, 32, 1)
 (10, 32, 32, 1)
 (10, 32, 32, 1)
 (10, 32, 32, 1)
-(5, 32, 32, 1)</code></pre>
-<pre class="python"><code>predictions = model.predict(prediction_seq)</code></pre>
-<pre class="python"><code>print(&quot;Shape of prediction array: &quot;, predictions.shape)
-predictions</code></pre>
-<pre><code>Shape of prediction array:  (55, 5)
+(5, 32, 32, 1)
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>predictions <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(prediction_seq)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Shape of prediction array: &#34;</span>, predictions<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>predictions
+</span></span></code></pre></div><pre><code>Shape of prediction array:  (55, 5)
 
 array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
        [0.17025462, 0.23611873, 0.21584883, 0.15583281, 0.22194503],
@@ -1296,21 +1304,20 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
        [0.14266515, 0.24046816, 0.25842705, 0.14801402, 0.21042569],
        [0.16398384, 0.23465969, 0.22732665, 0.1571278 , 0.21690205],
        [0.16170275, 0.23673837, 0.22910713, 0.15473619, 0.2177155 ]],
-      dtype=float32)</code></pre>
+      dtype=float32)
+</code></pre>
 <p>Outputs of prediction are 5 dimensional vector. This is so because we have used 5 neurons in the output layer and our activation function is softmax. The 5 dimensional output vector for an input add to 1. So it can be interpreted as probability. Thus we should classify the input to a class, for which prediction probability is maximum. To get the class corresponding to maximum probability, we can use np.argmax() command.</p>
-<pre class="python"><code>np.argmax(predictions, axis = 1)</code></pre>
-<pre><code>array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>argmax(predictions, axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><pre><code>array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1,
        1, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1,
-       1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1], dtype=int64)</code></pre>
+       1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1], dtype=int64)
+</code></pre>
 <p>Remember that our data are randomly generated. So we should not be surprised by this result.</p>
 <p>This brings us to the end of the blog. As we had planned in the beginning, we have created random data files, a custom sequence, trained a model using that sequence, and made predictions on new data. The above code can be tweaked slightly to read any type of files other than .csv. And now we can train our model without worrying about the data size. Whether the data size is 10GB or 750GB, our approach will work for both.</p>
-</div>
-<div id="is-this-method-efficient-will-it-work-at-a-reasobable-speed-if-we-have-many-complex-preprocessing-steps-to-do-before-training-the-model" class="section level2">
-<h2>Is this method efficient? Will it work at a reasobable speed if we have many complex preprocessing steps to do before training the model?</h2>
-<p>In this blog, we have mentioned nothing about the ways to speed up the data loading process. Tensorflow prefers sequences over generators as sequences are a safer way to do multiprocessing (<a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence">see this</a>). Sequences can be passed to <code>model.fit()</code> along with parameters like <code>max_queue_size</code>, <code>workers</code>, and <code>use_multiprocessing</code> (<a href="https://www.tensorflow.org/api_docs/python/tf/keras/Model#fit">see this</a>). To efficiently load data, we have to choose suitable values for <code>max_queue_size</code>, <code>workers</code>, and <code>use_multiprocessing</code>. The next obvious question is: How do we choose suitable values for the parameters for our particular system architecture? The best approach, that this author can suggest, is to try different values and choose the ones that work best for your system architecture. Even when we are using complex preprocessing steps, suitable choice of above parameters will, hopefully, speedup our training process.</p>
+<h2 id="is-this-method-efficient-will-it-work-at-a-reasobable-speed-if-we-have-many-complex-preprocessing-steps-to-do-before-training-the-model">Is this method efficient? Will it work at a reasobable speed if we have many complex preprocessing steps to do before training the model?</h2>
+<p>In this blog, we have mentioned nothing about the ways to speed up the data loading process. Tensorflow prefers sequences over generators as sequences are a safer way to do multiprocessing (<a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence" target="_blank" rel="noopener">see this</a>). Sequences can be passed to <code>model.fit()</code> along with parameters like <code>max_queue_size</code>, <code>workers</code>, and <code>use_multiprocessing</code> (<a href="https://www.tensorflow.org/api_docs/python/tf/keras/Model#fit" target="_blank" rel="noopener">see this</a>). To efficiently load data, we have to choose suitable values for <code>max_queue_size</code>, <code>workers</code>, and <code>use_multiprocessing</code>. The next obvious question is: How do we choose suitable values for the parameters for our particular system architecture? The best approach, that this author can suggest, is to try different values and choose the ones that work best for your system architecture. Even when we are using complex preprocessing steps, suitable choice of above parameters will, hopefully, speedup our training process.</p>
 <p>As a final note, I want to stress that, this is not the only approach to do the task. As I have mentioned previously, in <code>Tensorflow</code>, you can do the same thing in several different ways. The approach I have chosen seemed natural to me. I have neither strived for efficiency nor elegance. If readers have any better idea, I would be happy to know of it.</p>
 <p>I hope, this blog will be of help to readers. Please bring any errors or omissions to my notice.</p>
-</div>
 
     </div>
 
@@ -1503,23 +1510,6 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
     
     
     
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://twitter.com/biswajitsahoo11" target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-  
-    
-    
-    
     
     
     
@@ -1674,7 +1664,7 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
       
 
     
-    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
 
     
     
@@ -1760,7 +1750,7 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
       
     
     
-    <script src="/en/js/wowchemy.min.247fd8f54253895301106e3006f53f38.js"></script>
+    <script src="/en/js/wowchemy.min.e14897cafececa7181d21d62540ef117.js"></script>
 
     
 

@@ -416,7 +416,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="9c0ffacff5acf60c78af4bb9028f3cad" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="2eed71b1c99e71fbf7dc60f2a0b38cb6" >
 
   
   
@@ -427,7 +427,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.8f76bdc9e086322ed5147724ebba3d06.js"></script>
+  <script src="/js/wowchemy-init.min.7e85d6cfe81caeb57cc49452f9b55e03.js"></script>
 
   
 
@@ -837,219 +837,233 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
-
-
-<p>Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable. Then the final solution is obtained by back substituting the obtained value of the variable into remaining equations. This method, in mathematical jargon, is called Gaussian elimination and back substitution.</p>
-<p>It turns out (surprisingly) that linear systems form the basis of many interesting engineering applications. Ultimately the problem boils down to solution (or approximate solution) of a system of linear equations. So a thorough understanding of linear systems is essential to appreciate the applications. In this post we will outline all possible cases of finding solutions to linear systems and briefly outline two most important applications.</p>
+      <p>Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable. Then the final solution is obtained by back substituting the obtained value of the variable into remaining equations. This method, in mathematical jargon, is called Gaussian elimination and back substitution.</p>
+<p>It turns out (surprisingly) that linear systems form the basis of many interesting engineering applications. Ultimately the problem boils down to solution (or approximate solution) of a system of linear equations. So a thorough understanding of linear systems is essential to appreciate the applications. In this post we will outline all possible cases of finding solutions to  linear systems and briefly outline two most important applications.</p>
 <p>We will use matrix notation to represent the equations succinctly. It also gives us better insight into their solution. Using matrix notation the system can be represented as
-<span class="math display">\[\textbf{Ax}=\textbf{b}\]</span>
-Where <span class="math inline">\(\textbf{A}\)</span> is the matrix of coefficients of size <span class="math inline">\((m\times n)\)</span>, <span class="math inline">\(\textbf{x}\)</span> is a vector of variables of size <span class="math inline">\((n\times 1)\)</span>, and <span class="math inline">\(\textbf{b}\)</span>
-is a vector of size <span class="math inline">\((m\times 1)\)</span> representing constant right hand sides. Note that <span class="math inline">\(\textbf{b}\)</span> can be a vector of all zeros, i.e., <span class="math inline">\(\textbf{b} = \textbf{0}\)</span> or it can be any arbitrary vector with some nonzero values, i.e.,<span class="math inline">\(\textbf{b}\neq \textbf{0}\)</span>. The solution(s) of linear systems depend to a large extent on what the right hand side is as we will see shortly.</p>
-<p>Apart from notation, we need two other concepts from matrix theory. One is of rank and other is the range space (or column space) of a matrix. Rank <span class="math inline">\((Rank(\textbf{A}))\)</span> of a matrix (say, <span class="math inline">\(\textbf{A}\)</span>) is defined as number of independent rows or columns of a matrix. It is a well known result in matrix theory that row rank (number of independent rows) is equal to column rank (number of independent columns) and <span class="math inline">\(Rank(\textbf{A})\leq min(m,n)\)</span>.</p>
-<p>Range space <span class="math inline">\((\mathcal{R}(A))\)</span>(in short, Range) of a matrix is the vector space of all possible linear combinations of columns of the matrix. As we take all possible linear combination of columns, it is also known as column space. Readers who are slightly more familiar with linear algebra may know that Range is the span of columns of <span class="math inline">\(\textbf{A}\)</span>. Zero vector <span class="math inline">\((\textbf{0})\)</span> is <strong>always</strong> in the range of <span class="math inline">\(\textbf{A}\)</span> because if we take linear combination of columns of <span class="math inline">\(\textbf{A}\)</span> with all coefficients as 0’s, we get zero vector. Hence <span class="math inline">\(\textbf{b}=0 \in \mathcal{R}(\textbf{A})\)</span> is always true.</p>
-<p>Let’s now discuss different cases separately and their solutions. We will assume that our system of equations has real entries.</p>
+<code>$$\textbf{Ax}=\textbf{b}$$</code>
+Where <code>\(\textbf{A}\)</code> is the matrix of coefficients of size <code>\((m\times n)\)</code>, <code>\(\textbf{x}\)</code> is a vector of variables of size <code>\((n\times 1)\)</code>, and <code>\(\textbf{b}\)</code>
+is a vector of size <code>\((m\times 1)\)</code> representing constant right hand sides. Note that <code>\(\textbf{b}\)</code> can be a vector of all zeros, i.e., <code>\(\textbf{b} = \textbf{0}\)</code> or it can be any arbitrary vector with some nonzero values, i.e.,$\textbf{b}\neq \textbf{0}$. The solution(s) of linear systems depend to a large extent on what the right hand side is as we will see shortly.</p>
+<p>Apart from notation, we need two other concepts from matrix theory. One is of rank and other is the range space (or column space) of a matrix. Rank <code>\((Rank(\textbf{A}))\)</code> of a matrix (say, <code>\(\textbf{A}\)</code>) is defined as number of independent rows or columns of a matrix. It is a well known result in matrix theory that row rank (number of independent rows) is equal to column rank (number of independent columns) and <code>\(Rank(\textbf{A})\leq min(m,n)\)</code>.</p>
+<p>Range space <code>\((\mathcal{R}(A))\)</code>(in short, Range) of a matrix is the vector space of all possible linear combinations of columns of the matrix. As we take all possible linear combination of columns, it is also known as column space. Readers who are slightly more familiar with linear algebra may know that Range is the span of columns of <code>\(\textbf{A}\)</code>. Zero vector <code>\((\textbf{0})\)</code> is <strong>always</strong> in the range of <code>\(\textbf{A}\)</code> because if we take linear combination of columns of <code>\(\textbf{A}\)</code> with all coefficients as 0&rsquo;s, we get zero vector. Hence <code>\(\textbf{b}=0 \in \mathcal{R}(\textbf{A})\)</code> is always true.</p>
+<p>Let&rsquo;s now discuss different cases separately and their solutions. We will assume that our system of equations has real entries.</p>
 <ul>
-<li><p>Case - I: <span class="math inline">\((m = n)\)</span></p>
+<li>
+<p>Case - I: <code>\((m = n)\)</code></p>
 <ul>
-<li><p><span class="math inline">\(Rank(\textbf{A}) = m\)</span></p>
+<li>
+<p><code>\(Rank(\textbf{A}) = m\)</code></p>
 <ul>
-<li><span class="math inline">\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</span> : Unique solution (for any <span class="math inline">\(\textbf{b}\)</span>). For example,<span class="math display">\[ \begin{equation}
-  \begin{bmatrix}
-  1 &amp; 2 &amp; 3 \\
-  2 &amp; 4 &amp; 8 \\
-  3 &amp; 5 &amp; 7 \\
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_1 \\
-  x_2 \\
-  x_3
-  \end{bmatrix}
-  = 
-  \begin{bmatrix}
-  3 \\
-  5 \\
-  7
-  \end{bmatrix}
-  \end{equation}\]</span> This system has unique solution.</li>
-<li><span class="math inline">\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</span> : Impossible (This case will never happen because <span class="math inline">\(Rank(\textbf{A})=m\)</span>)</li>
-</ul></li>
-<li><p><span class="math inline">\(Rank(\textbf{A}) &lt; m\)</span></p>
+<li><code>\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</code> : Unique solution (for any <code>\(\textbf{b}\)</code>). For example,$$ \begin{equation}
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 \
+2 &amp; 4 &amp; 8 \
+3 &amp; 5 &amp; 7 \
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \
+x_2 \
+x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+3 \
+5 \
+7
+\end{bmatrix}
+\end{equation}$$ This system has unique solution.</li>
+<li><code>\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</code> : Impossible (This case will never happen because <code>\(Rank(\textbf{A})=m\)</code>)</li>
+</ul>
+</li>
+<li>
+<p><code>\(Rank(\textbf{A}) &lt; m\)</code></p>
 <ul>
-<li><span class="math inline">\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</span> : Infinitely many solutions. For example,<span class="math display">\[ \begin{equation}
-  \begin{bmatrix}
-  1 &amp; 2 &amp; 3 \\
-  2 &amp; 4 &amp; 6 \\
-  3 &amp; 5 &amp; 7 \\
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_1 \\
-  x_2 \\
-  x_3
-  \end{bmatrix}
-  = 
-  \begin{bmatrix}
-  3 \\
-  6 \\
-  8
-  \end{bmatrix}
-  \end{equation}\]</span> This system has infinitely many solutions.</li>
-<li><span class="math inline">\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</span> : No solution. For example,<span class="math display">\[ \begin{equation}
-  \begin{bmatrix}
-  1 &amp; 2 &amp; 3 \\
-  2 &amp; 4 &amp; 6 \\
-  3 &amp; 5 &amp; 7 \\
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_1 \\
-  x_2 \\
-  x_3
-  \end{bmatrix}
-  = 
-  \begin{bmatrix}
-  1 \\
-  5 \\
-  7
-  \end{bmatrix}
-  \end{equation}\]</span> This system has no solution.</li>
-</ul></li>
-</ul></li>
-<li><p>Case - II: <span class="math inline">\((m &gt; n)\)</span></p>
+<li><code>\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</code> : Infinitely many solutions. For example,$$ \begin{equation}
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 \
+2 &amp; 4 &amp; 6 \
+3 &amp; 5 &amp; 7 \
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \
+x_2 \
+x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+3 \
+6 \
+8
+\end{bmatrix}
+\end{equation}$$ This system has infinitely many solutions.</li>
+<li><code>\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</code> : No solution. For example,$$ \begin{equation}
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 \
+2 &amp; 4 &amp; 6 \
+3 &amp; 5 &amp; 7 \
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \
+x_2 \
+x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 \
+5 \
+7
+\end{bmatrix}
+\end{equation}$$ This system has no solution.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Case - II: <code>\((m &gt; n)\)</code></p>
 <ul>
-<li><p><span class="math inline">\(Rank(\textbf{A}) = n\)</span></p>
+<li>
+<p><code>\(Rank(\textbf{A}) = n\)</code></p>
 <ul>
-<li><span class="math inline">\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</span> : Unique solution. For example,<span class="math display">\[ \begin{equation}
-  \begin{bmatrix}
-  1 &amp; 2 \\
-  2 &amp; 7 \\
-  3 &amp; 8 \\
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_1 \\
-  x_2 
-  \end{bmatrix}
-  = 
-  \begin{bmatrix}
-  3 \\
-  9 \\
-  11
-  \end{bmatrix}
-  \end{equation}\]</span> This system has unique solution.</li>
-<li><span class="math inline">\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</span> : No solution. For example,<span class="math display">\[ \begin{equation}
-  \begin{bmatrix}
-  1 &amp; 2 \\
-  2 &amp; 7 \\
-  3 &amp; 8 \\
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_1 \\
-  x_2 
-  \end{bmatrix}
-  = 
-  \begin{bmatrix}
-  3 \\
-  9 \\
-  11
-  \end{bmatrix}
-  \end{equation}\]</span> This system has no solution. But this case is immensely useful from application point of view. Sometimes it is not desirable to obtain the exact solution. Rather an approximate solution suffices for all practical purposes. Finding an approximate solution to an overdetermined system leads to the famous <a href="https://en.wikipedia.org/wiki/Least_squares">Least Squares</a> problem.</li>
-</ul></li>
-<li><p><span class="math inline">\(Rank(\textbf{A}) &lt; n\)</span></p>
+<li><code>\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</code> : Unique solution. For example,$$ \begin{equation}
+\begin{bmatrix}
+1 &amp; 2 \
+2 &amp; 7 \
+3 &amp; 8 \
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \
+x_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+3 \
+9 \
+11
+\end{bmatrix}
+\end{equation}$$ This system has unique solution.</li>
+<li><code>\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</code> : No solution. For example,$$ \begin{equation}
+\begin{bmatrix}
+1 &amp; 2 \
+2 &amp; 7 \
+3 &amp; 8 \
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \
+x_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+3 \
+9 \
+11
+\end{bmatrix}
+\end{equation}$$ This system has no solution. But this case is immensely useful from application point of view. Sometimes it is not desirable to obtain the exact solution. Rather an approximate solution suffices for all practical purposes. Finding an approximate solution to an overdetermined system leads to the famous <a href="https://en.wikipedia.org/wiki/Least_squares" target="_blank" rel="noopener">Least Squares</a> problem.</li>
+</ul>
+</li>
+<li>
+<p><code>\(Rank(\textbf{A}) &lt; n\)</code></p>
 <ul>
-<li><span class="math inline">\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</span> : Infinitely many solutions. For example,<span class="math display">\[ \begin{equation}
-  \begin{bmatrix}
-  1 &amp; 2 \\
-  2 &amp; 4 \\
-  3 &amp; 6 \\
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_1 \\
-  x_2 
-  \end{bmatrix}
-  = 
-  \begin{bmatrix}
-  3 \\
-  6 \\
-  9
-  \end{bmatrix}
-  \end{equation}\]</span> It has infinitely many solutions.</li>
-<li><span class="math inline">\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</span> : No solution. For example,<span class="math display">\[ \begin{equation}
-  \begin{bmatrix}
-  1 &amp; 2 \\
-  2 &amp; 4 \\
-  3 &amp; 6 \\
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_1 \\
-  x_2 
-  \end{bmatrix}
-  = 
-  \begin{bmatrix}
-  3 \\
-  6 \\
-  8
-  \end{bmatrix}
-  \end{equation}\]</span> This system has no solution.</li>
-</ul></li>
-</ul></li>
-<li><p>Case - III: <span class="math inline">\((m &lt; n)\)</span></p>
+<li><code>\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</code> : Infinitely many solutions. For example,$$ \begin{equation}
+\begin{bmatrix}
+1 &amp; 2 \
+2 &amp; 4 \
+3 &amp; 6 \
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \
+x_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+3 \
+6 \
+9
+\end{bmatrix}
+\end{equation}$$ It has infinitely many solutions.</li>
+<li><code>\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</code> : No solution. For example,$$ \begin{equation}
+\begin{bmatrix}
+1 &amp; 2 \
+2 &amp; 4 \
+3 &amp; 6 \
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \
+x_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+3 \
+6 \
+8
+\end{bmatrix}
+\end{equation}$$ This system has no solution.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Case - III: <code>\((m &lt; n)\)</code></p>
 <ul>
-<li><p><span class="math inline">\(Rank(\textbf{A}) = m\)</span> :</p>
+<li>
+<p><code>\(Rank(\textbf{A}) = m\)</code> :</p>
 <ul>
-<li><span class="math inline">\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</span> : Infinitely many solutions. For example, <span class="math display">\[ \begin{equation}
-  \begin{bmatrix}
-  1 &amp; 2 &amp; 3 \\
-  2 &amp; 4 &amp; 5 
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_1 \\
-  x_2 \\
-  x_3
-  \end{bmatrix}
-  = 
-  \begin{bmatrix}
-  2 \\
-  3 
-  \end{bmatrix}
-  \end{equation}\]</span> This system has infinitely many solutions. This case is also used in many applications. As there are infinitely many solutions, a natural choice is to choose the best solution. The qualifier ‘best’ determines what application we have in our mind. If we seek minimum <span class="math inline">\((l_2)\)</span> norm, we get the so called minimum energy solution, a concept used in signal processing. Yet another concern is to seek for the sparsest solution (a solution with only a few nonzero entries and all other entries being zero). This idea is used in <a href="https://en.wikipedia.org/wiki/Compressed_sensing">Compressed Sensing</a>, an active research area with many interesting applications.</li>
-<li><span class="math inline">\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</span> : Impossible. This case will never happen since <span class="math inline">\(Rank(\textbf{A})=m\)</span>.</li>
-</ul></li>
-<li><p><span class="math inline">\(Rank(\textbf{A}) &lt; m\)</span></p>
+<li><code>\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</code> : Infinitely many solutions. For example, $$ \begin{equation}
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 \
+2 &amp; 4 &amp; 5
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \
+x_2 \
+x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+2 \
+3
+\end{bmatrix}
+\end{equation}$$ This system has infinitely many solutions. This case is also used in many applications. As there are infinitely many solutions, a natural choice is to choose the best solution. The qualifier &lsquo;best&rsquo; determines what application we have in our mind. If we seek minimum <code>\((l_2)\)</code> norm, we get the so called minimum energy solution, a concept used in signal processing. Yet another concern is to seek for the sparsest solution (a solution with only a few nonzero entries and all other entries being zero). This idea is used in <a href="https://en.wikipedia.org/wiki/Compressed_sensing" target="_blank" rel="noopener">Compressed Sensing</a>, an active research area with many interesting applications.</li>
+<li><code>\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</code> : Impossible. This case will never happen since <code>\(Rank(\textbf{A})=m\)</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>\(Rank(\textbf{A}) &lt; m\)</code></p>
 <ul>
-<li><span class="math inline">\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</span> : Infinitely many solutions. For example, <span class="math display">\[ \begin{equation}
-  \begin{bmatrix}
-  1 &amp; 2 &amp; 3 \\
-  2 &amp; 4 &amp; 6 
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_1 \\
-  x_2 \\
-  x_3
-  \end{bmatrix}
-  = 
-  \begin{bmatrix}
-  4 \\
-  8 
-  \end{bmatrix}
-  \end{equation}\]</span> This system has infinitely many solutions.</li>
-<li><span class="math inline">\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</span> : No solution. For example, <span class="math display">\[ \begin{equation}
-  \begin{bmatrix}
-  1 &amp; 2 &amp; 3 \\
-  2 &amp; 4 &amp; 6 
-  \end{bmatrix}
-  \begin{bmatrix}
-  x_1 \\
-  x_2 \\
-  x_3
-  \end{bmatrix}
-  = 
-  \begin{bmatrix}
-  1 \\
-  5 
-  \end{bmatrix}
-  \end{equation}\]</span> This system has no solution.</li>
-</ul></li>
-</ul></li>
+<li><code>\(\textbf{b} \in \mathcal{R}(\textbf{A})\)</code> : Infinitely many solutions. For example, $$ \begin{equation}
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 \
+2 &amp; 4 &amp; 6
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \
+x_2 \
+x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+4 \
+8
+\end{bmatrix}
+\end{equation}$$ This system has infinitely many solutions.</li>
+<li><code>\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)</code> : No solution. For example, $$ \begin{equation}
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 \
+2 &amp; 4 &amp; 6
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \
+x_2 \
+x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 \
+5
+\end{bmatrix}
+\end{equation}$$ This system has no solution.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p>Hope this post gives a clear overview of linear systems of equations. Interested reader may explore further applications. Comments and clarifications are welcome.</p>
 
@@ -1240,23 +1254,6 @@ is a vector of size <span class="math inline">\((m\times 1)\)</span> representin
     
     
     
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://twitter.com/biswajitsahoo11" target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-  
-    
-    
-    
     
     
     
@@ -1403,7 +1400,7 @@ is a vector of size <span class="math inline">\((m\times 1)\)</span> representin
       
 
     
-    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
 
     
     
@@ -1489,7 +1486,7 @@ is a vector of size <span class="math inline">\((m\times 1)\)</span> representin
       
     
     
-    <script src="/en/js/wowchemy.min.247fd8f54253895301106e3006f53f38.js"></script>
+    <script src="/en/js/wowchemy.min.e14897cafececa7181d21d62540ef117.js"></script>
 
     
 

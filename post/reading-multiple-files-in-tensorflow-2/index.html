@@ -60,7 +60,7 @@
   
     
   
-  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will read multiple .csv files into Tensorflow using generators." />
+  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/" />
@@ -343,7 +343,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo" />
   <meta property="og:url" content="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/" />
   <meta property="og:title" content="Reading multiple files in Tensorflow 2 | Biswajit Sahoo" />
-  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will read multiple .csv files into Tensorflow using generators." /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well." /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -396,7 +396,7 @@
       "url": "https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "Run in Google Colab\r\r\rView source on GitHub\r\r\rDownload notebook\r\r\rIn this post, we will read multiple .csv files into Tensorflow using generators."
+  "description": "Run in Google Colab\rView source on GitHub\rDownload notebook\rIn this post, we will read multiple .csv files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well."
 }
 </script>
 
@@ -416,7 +416,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="ef874e3055dd24f7c7184dc0a2ed01cc" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="f6cb2a0214f65f9ebfe8a57fc2b3d4c8" >
 
   
   
@@ -427,7 +427,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.8f76bdc9e086322ed5147724ebba3d06.js"></script>
+  <script src="/js/wowchemy-init.min.7e85d6cfe81caeb57cc49452f9b55e03.js"></script>
 
   
 
@@ -837,164 +837,163 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
-
-
-<table class="tfo-notebook-buttons" align="center">
-<td>
-<a href="https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb">
-<img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
-Run in Google Colab</a>
-</td>
-<td>
-<a href="https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb">
-<img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
-View source on GitHub</a>
-</td>
-<td>
-<a href="https://www.dropbox.com/s/o4aevvuqr39kq20/Reading_multiple_files_in_Tensorflow_2.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
-</td>
+      <table class="tfo-notebook-buttons" align="center">
+  <td>
+    <a href="https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb">
+    <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+    Run in Google Colab</a>
+  </td>
+  <td>
+    <a href="https://github.com/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb">
+    <img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
+    View source on GitHub</a>
+  </td>
+  <td>
+    <a href="https://www.dropbox.com/s/o4aevvuqr39kq20/Reading_multiple_files_in_Tensorflow_2.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
+  </td>
 </table>
-<p>In this post, we will read multiple <code>.csv</code> files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 <code>.csv</code> files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of <code>.csv</code> files. As the number of files becomes large, we can’t load the whole data into memory. So we have to work with chunks of it. Generators help us do just that conveniently. In this post, we will read multiple files using a custom generator.</p>
-<p>This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and <code>.csv</code> files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following code cells.</p>
+<p>In this post, we will read multiple <code>.csv</code> files into Tensorflow using generators. But the method we will discuss is general enough to work for other file formats as well. We will demonstrate the procedure using 500 <code>.csv</code> files. These files have been created using random numbers. Each file contains only 1024 numbers in one column. This method can easily be extended to huge datasets involving thousands of <code>.csv</code> files. As the number of files becomes large, we can&rsquo;t load the whole data into memory. So we have to work with chunks of it. Generators help us do just that conveniently. In this post, we will read multiple files using a custom generator.</p>
+<p>This post is self-sufficient in the sense that readers don&rsquo;t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named &ldquo;random_data&rdquo; will be created in current working directory and <code>.csv</code> files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn&rsquo;t have an old folder named &ldquo;random_data&rdquo;. Then run the following code cells.</p>
 <p>We will use <code>Tensorflow 2</code> to run our deep learning model. <code>Tensorflow</code> is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.</p>
-<div id="outline" class="section level2">
-<h2>Outline:</h2>
-<ol style="list-style-type: decimal">
-<li>Create 500 <code>".csv"</code> files and save it in the folder “random_data” in current directory.</li>
+<h2 id="outline">Outline:</h2>
+<ol>
+<li>Create 500 <code>&quot;.csv&quot;</code> files and save it in the folder &ldquo;random_data&rdquo; in current directory.</li>
 <li>Write a generator that reads data from the folder in chunks and preprocesses it.</li>
 <li>Feed the chunks of data to a CNN model and train it for several epochs.</li>
 </ol>
-</div>
-<div id="create-500-.csv-files-of-random-data" class="section level2">
-<h2>1. Create 500 <code>.csv</code> files of random data</h2>
+<h2 id="1-create-500-csv-files-of-random-data">1. Create 500 <code>.csv</code> files of random data</h2>
 <p>As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. Following is the process that we will follow.</p>
 <ul>
-<li><p>Each <code>.csv</code> file will have one column of data with 1024 entries.</p></li>
-<li><p>Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1”
-category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.</p></li>
+<li>
+<p>Each <code>.csv</code> file will have one column of data with 1024 entries.</p>
+</li>
+<li>
+<p>Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in &ldquo;Fault_1&rdquo;
+category will have names as &ldquo;Fault_1_001.csv&rdquo;, &ldquo;Fault_1_002.csv&rdquo;, &ldquo;Fault_1_003.csv&rdquo;, &hellip;, &ldquo;Fault_1_100.csv&rdquo;. Similarly for other classes.</p>
+</li>
 </ul>
-<pre class="python"><code>import numpy as np
-import os
-import glob
-np.random.seed(1111)</code></pre>
-<p>First create a function that will generate random files.</p>
-<pre class="python"><code>def create_random_csv_files(fault_classes, number_of_files_in_each_class):
-    os.mkdir(&quot;./random_data/&quot;)  # Make a directory to save created files.
-    for fault_class in fault_classes:
-        for i in range(number_of_files_in_each_class):
-            data = np.random.rand(1024,)
-            file_name = &quot;./random_data/&quot; + eval(&quot;fault_class&quot;) + &quot;_&quot; + &quot;{0:03}&quot;.format(i+1) + &quot;.csv&quot; # This creates file_name
-            np.savetxt(eval(&quot;file_name&quot;), data, delimiter = &quot;,&quot;, header = &quot;V1&quot;, comments = &quot;&quot;)
-        print(str(eval(&quot;number_of_files_in_each_class&quot;)) + &quot; &quot; + eval(&quot;fault_class&quot;) + &quot; files&quot;  + &quot; created.&quot;)</code></pre>
-<p>Now use the function to create 100 files each for five fault types.</p>
-<pre class="python"><code>create_random_csv_files([&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;], number_of_files_in_each_class = 100)</code></pre>
-<pre><code>100 Fault_1 files created.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> glob
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">1111</span>)
+</span></span></code></pre></div><p>First create a function that will generate random files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_random_csv_files</span>(fault_classes, number_of_files_in_each_class):
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>mkdir(<span style="color:#e6db74">&#34;./random_data/&#34;</span>)  <span style="color:#75715e"># Make a directory to save created files.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> fault_class <span style="color:#f92672">in</span> fault_classes:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(number_of_files_in_each_class):
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">1024</span>,)
+</span></span><span style="display:flex;"><span>            file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./random_data/&#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;fault_class&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{0:03}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.csv&#34;</span> <span style="color:#75715e"># This creates file_name</span>
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>savetxt(eval(<span style="color:#e6db74">&#34;file_name&#34;</span>), data, delimiter <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span>, header <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;V1&#34;</span>, comments <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>        print(str(eval(<span style="color:#e6db74">&#34;number_of_files_in_each_class&#34;</span>)) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;fault_class&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; files&#34;</span>  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; created.&#34;</span>)
+</span></span></code></pre></div><p>Now use the function to create 100 files each for five fault types.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>create_random_csv_files([<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>], number_of_files_in_each_class <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)
+</span></span></code></pre></div><pre><code>100 Fault_1 files created.
 100 Fault_2 files created.
 100 Fault_3 files created.
 100 Fault_4 files created.
-100 Fault_5 files created.</code></pre>
-<pre class="python"><code>files = glob.glob(&quot;./random_data/*&quot;)
-print(&quot;Total number of files: &quot;, len(files))
-print(&quot;Showing first 10 files...&quot;)
-files[:10]</code></pre>
-<pre><code>Total number of files:  500
+100 Fault_5 files created.
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/*&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Total number of files: &#34;</span>, len(files))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Showing first 10 files...&#34;</span>)
+</span></span><span style="display:flex;"><span>files[:<span style="color:#ae81ff">10</span>]
+</span></span></code></pre></div><pre><code>Total number of files:  500
 Showing first 10 files...
 
 
 
 
 
-[&#39;./random_data/Fault_1_001.csv&#39;,
- &#39;./random_data/Fault_1_002.csv&#39;,
- &#39;./random_data/Fault_1_003.csv&#39;,
- &#39;./random_data/Fault_1_004.csv&#39;,
- &#39;./random_data/Fault_1_005.csv&#39;,
- &#39;./random_data/Fault_1_006.csv&#39;,
- &#39;./random_data/Fault_1_007.csv&#39;,
- &#39;./random_data/Fault_1_008.csv&#39;,
- &#39;./random_data/Fault_1_009.csv&#39;,
- &#39;./random_data/Fault_1_010.csv&#39;]</code></pre>
+['./random_data/Fault_1_001.csv',
+ './random_data/Fault_1_002.csv',
+ './random_data/Fault_1_003.csv',
+ './random_data/Fault_1_004.csv',
+ './random_data/Fault_1_005.csv',
+ './random_data/Fault_1_006.csv',
+ './random_data/Fault_1_007.csv',
+ './random_data/Fault_1_008.csv',
+ './random_data/Fault_1_009.csv',
+ './random_data/Fault_1_010.csv']
+</code></pre>
 <p>To extract labels from file name, extract the part of the file name that corresponds to fault type.</p>
-<pre class="python"><code>print(files[0])</code></pre>
-<pre><code>./random_data/Fault_1_001.csv</code></pre>
-<pre class="python"><code>print(files[0][14:21])</code></pre>
-<pre><code>Fault_1</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(files[<span style="color:#ae81ff">0</span>])
+</span></span></code></pre></div><pre><code>./random_data/Fault_1_001.csv
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(files[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">14</span>:<span style="color:#ae81ff">21</span>])
+</span></span></code></pre></div><pre><code>Fault_1
+</code></pre>
 <p>Now that data have been created, we will go to the next step. That is, define a generator, preprocess the time series like data into a matrix like shape such that a 2-D CNN can ingest it.</p>
-</div>
-<div id="write-a-generator-that-reads-data-in-chunks-and-preprocesses-it" class="section level2">
-<h2>2. Write a generator that reads data in chunks and preprocesses it</h2>
+<h2 id="2-write-a-generator-that-reads-data-in-chunks-and-preprocesses-it">2. Write a generator that reads data in chunks and preprocesses it</h2>
 <p>Generator are similar to functions with one important difference. While functions produce all their outputs at once, generators produce their outputs one by one and that too when asked. <code>yield</code> keyword converts a function into a generator. Generators can run for a fixed number of times or indefinitely depending on the loop structure used inside it. For our application, we will use a generator that runs indefinitely.</p>
 <p>The following generator takes a list of file names as first argument. The second argument is <code>batch_size</code>. <code>batch_size</code> determines how many files we will process at one go. This is determined by how much memory do we have. If all data can be loaded into memory, there is no need for generators. In case our data size is huge, we can process chunks of it.</p>
 <p>As we will be solving a classification problem, we have to assign labels to each raw data. We will use following labels for convenience.</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>Class</th>
 <th>Label</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Fault_1</td>
 <td>0</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Fault_2</td>
 <td>1</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Fault_3</td>
 <td>2</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Fault_4</td>
 <td>3</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Fault_5</td>
 <td>4</td>
 </tr>
 </tbody>
 </table>
 <p>The generator will <code>yield</code> both data and labels.</p>
-<pre class="python"><code>import pandas as pd
-import re            # To match regular expression for extracting labels</code></pre>
-<pre class="python"><code>def data_generator(file_list, batch_size = 20):
-    i = 0
-    while True:
-        if i*batch_size &gt;= len(file_list):  # This loop is used to run the generator indefinitely.
-            i = 0
-            np.random.shuffle(file_list)
-        else:
-            file_chunk = file_list[i*batch_size:(i+1)*batch_size] 
-            data = []
-            labels = []
-            label_classes = [&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;]
-            for file in file_chunk:
-                temp = pd.read_csv(open(file,&#39;r&#39;)) # Change this line to read any other type of file
-                data.append(temp.values.reshape(32,32,1)) # Convert column data to matrix like data with one channel
-                pattern = &quot;^&quot; + eval(&quot;file[14:21]&quot;)      # Pattern extracted from file_name
-                for j in range(len(label_classes)):
-                    if re.match(pattern, label_classes[j]): # Pattern is matched against different label_classes
-                        labels.append(j)  
-            data = np.asarray(data).reshape(-1,32,32,1)
-            labels = np.asarray(labels)
-            yield data, labels
-            i = i + 1</code></pre>
-<p>To read any other file format, inside the generator change the line that reads files. This will enable us to read different file formats, be it <code>.txt</code> or <code>.npz</code> or any other. Preprocessing of data, different from what we have done in this blog, can be done within the generator loop.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> re            <span style="color:#75715e"># To match regular expression for extracting labels</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">data_generator</span>(file_list, batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i<span style="color:#f92672">*</span>batch_size <span style="color:#f92672">&gt;=</span> len(file_list):  <span style="color:#75715e"># This loop is used to run the generator indefinitely.</span>
+</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>shuffle(file_list)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            file_chunk <span style="color:#f92672">=</span> file_list[i<span style="color:#f92672">*</span>batch_size:(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>batch_size] 
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>            labels <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>            label_classes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> file_chunk:
+</span></span><span style="display:flex;"><span>                temp <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(open(file,<span style="color:#e6db74">&#39;r&#39;</span>)) <span style="color:#75715e"># Change this line to read any other type of file</span>
+</span></span><span style="display:flex;"><span>                data<span style="color:#f92672">.</span>append(temp<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#75715e"># Convert column data to matrix like data with one channel</span>
+</span></span><span style="display:flex;"><span>                pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;^&#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;file[14:21]&#34;</span>)      <span style="color:#75715e"># Pattern extracted from file_name</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(len(label_classes)):
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(pattern, label_classes[j]): <span style="color:#75715e"># Pattern is matched against different label_classes</span>
+</span></span><span style="display:flex;"><span>                        labels<span style="color:#f92672">.</span>append(j)  
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(data)<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            labels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(labels)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> data, labels
+</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>To read any other file format, inside the generator change the line that reads files. This will enable us to read different file formats, be it <code>.txt</code> or <code>.npz</code> or any other. Preprocessing of data, different from what we have done in this blog, can be done within the generator loop.</p>
 <p>Now we will check whether the generator works as intended or not. We will set <code>batch_size</code> to 10. This means that files in chunks of 10 will be read and processed. The list of files from which 10 are chosen can be an ordered file list or shuffled list. In case, the files are not shuffled, use <code>np.random.shuffle(file_list)</code> to shuffle files.</p>
 <p>In the demonstration, we will read files from an ordered list. This will help us check any errors in the code.</p>
-<pre class="python"><code>generated_data = data_generator(files, batch_size = 10)</code></pre>
-<pre class="python"><code>num = 0
-for data, labels in generated_data:
-    print(data.shape, labels.shape)
-    print(labels, &quot;&lt;--Labels&quot;)  # Just to see the labels
-    print()
-    num = num + 1
-    if num &gt; 5: break</code></pre>
-<pre><code>(10, 32, 32, 1) (10,)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>generated_data <span style="color:#f92672">=</span> data_generator(files, batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> data, labels <span style="color:#f92672">in</span> generated_data:
+</span></span><span style="display:flex;"><span>    print(data<span style="color:#f92672">.</span>shape, labels<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>    print(labels, <span style="color:#e6db74">&#34;&lt;--Labels&#34;</span>)  <span style="color:#75715e"># Just to see the labels</span>
+</span></span><span style="display:flex;"><span>    print()
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">=</span> num <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>: <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><pre><code>(10, 32, 32, 1) (10,)
 [0 0 0 0 0 0 0 0 0 0] &lt;--Labels
 
 (10, 32, 32, 1) (10,)
@@ -1010,45 +1009,47 @@ for data, labels in generated_data:
 [0 0 0 0 0 0 0 0 0 0] &lt;--Labels
 
 (10, 32, 32, 1) (10,)
-[0 0 0 0 0 0 0 0 0 0] &lt;--Labels</code></pre>
-<p>Run the above cell multiple times to observe different labels. Label 1 appears only when all the files corresponding to “Fault_1” have been read. There are 100 files for “Fault_1” and we have set batch_size to 10. In the above cell we are iterating over the generator only 6 times. When number of iterations become greater than 10, we see label 1 and subsequently other labels. This will happen only if our initial file list is not shuffled. If the original list is shuffled, we will get random labels.</p>
+[0 0 0 0 0 0 0 0 0 0] &lt;--Labels
+</code></pre>
+<p>Run the above cell multiple times to observe different labels. Label 1 appears only when all the files corresponding to &ldquo;Fault_1&rdquo; have been read. There are 100 files for &ldquo;Fault_1&rdquo; and we have set batch_size to 10. In the above cell we are iterating over the generator only 6 times. When number of iterations become greater than 10, we see label 1 and subsequently other labels. This will happen only if our initial file list is not shuffled. If the original list is shuffled, we will get random labels.</p>
 <p>Now we will create a <code>tensorflow dataset</code> using the generator. <code>Tensorflow</code> datasets can conveniently be used to train <code>tensorflow</code> models.</p>
-<p>A <code>tensorflow dataset</code> can be created form numpy arrays or from generators.Here, we will create it using a generator. Use of the previously created generator as it is in <code>tensorflow datasets</code> doesn’t work (Readers can verify this). This happens because of the inability of regular expression to compare a “string” with a “byte string”. “byte strings” are generated by default in tensorflow. As a way around, we will make modifications to the earlier generator and use it with tensorflow datasets. Note that we will only modified three lines. Modified lines are accompanied by commented texts beside it.</p>
-<pre class="python"><code>import tensorflow as tf
-print(tf.__version__)</code></pre>
-<pre><code>2.2.0</code></pre>
-<pre class="python"><code>def tf_data_generator(file_list, batch_size = 20):
-    i = 0
-    while True:
-        if i*batch_size &gt;= len(file_list):  
-            i = 0
-            np.random.shuffle(file_list)
-        else:
-            file_chunk = file_list[i*batch_size:(i+1)*batch_size] 
-            data = []
-            labels = []
-            label_classes = tf.constant([&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;]) # This line has changed.
-            for file in file_chunk:
-                temp = pd.read_csv(open(file,&#39;r&#39;))
-                data.append(temp.values.reshape(32,32,1)) 
-                pattern = tf.constant(eval(&quot;file[14:21]&quot;))  # This line has changed
-                for j in range(len(label_classes)):
-                    if re.match(pattern.numpy(), label_classes[j].numpy()):  # This line has changed.
-                        labels.append(j)
-            data = np.asarray(data).reshape(-1,32,32,1)
-            labels = np.asarray(labels)
-            yield data, labels
-            i = i + 1</code></pre>
-<p>Test whether modified generator works or not.</p>
-<pre class="python"><code>check_data = tf_data_generator(files, batch_size = 10)</code></pre>
-<pre class="python"><code>num = 0
-for data, labels in check_data:
-    print(data.shape, labels.shape)
-    print(labels, &quot;&lt;--Labels&quot;)
-    print()
-    num = num + 1
-    if num &gt; 5: break</code></pre>
-<pre><code>(10, 32, 32, 1) (10,)
+<p>A <code>tensorflow dataset</code> can be created form numpy arrays or from generators.Here, we will create it using a generator. Use of the previously created generator as it is in <code>tensorflow datasets</code> doesn&rsquo;t work (Readers can verify this). This happens because of the inability of regular expression to compare a &ldquo;string&rdquo; with a &ldquo;byte string&rdquo;. &ldquo;byte strings&rdquo; are generated by default in tensorflow. As a way around, we will make modifications to the earlier generator and use it with tensorflow datasets. Note that we will only modified three lines. Modified lines are accompanied by commented texts beside it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span>print(tf<span style="color:#f92672">.</span>__version__)
+</span></span></code></pre></div><pre><code>2.2.0
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tf_data_generator</span>(file_list, batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i<span style="color:#f92672">*</span>batch_size <span style="color:#f92672">&gt;=</span> len(file_list):  
+</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>shuffle(file_list)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            file_chunk <span style="color:#f92672">=</span> file_list[i<span style="color:#f92672">*</span>batch_size:(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>batch_size] 
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>            labels <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>            label_classes <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant([<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>]) <span style="color:#75715e"># This line has changed.</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> file_chunk:
+</span></span><span style="display:flex;"><span>                temp <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(open(file,<span style="color:#e6db74">&#39;r&#39;</span>))
+</span></span><span style="display:flex;"><span>                data<span style="color:#f92672">.</span>append(temp<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)) 
+</span></span><span style="display:flex;"><span>                pattern <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant(eval(<span style="color:#e6db74">&#34;file[14:21]&#34;</span>))  <span style="color:#75715e"># This line has changed</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(len(label_classes)):
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(pattern<span style="color:#f92672">.</span>numpy(), label_classes[j]<span style="color:#f92672">.</span>numpy()):  <span style="color:#75715e"># This line has changed.</span>
+</span></span><span style="display:flex;"><span>                        labels<span style="color:#f92672">.</span>append(j)
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(data)<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            labels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(labels)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> data, labels
+</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>Test whether modified generator works or not.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>check_data <span style="color:#f92672">=</span> tf_data_generator(files, batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> data, labels <span style="color:#f92672">in</span> check_data:
+</span></span><span style="display:flex;"><span>    print(data<span style="color:#f92672">.</span>shape, labels<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>    print(labels, <span style="color:#e6db74">&#34;&lt;--Labels&#34;</span>)
+</span></span><span style="display:flex;"><span>    print()
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">=</span> num <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>: <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><pre><code>(10, 32, 32, 1) (10,)
 [0 0 0 0 0 0 0 0 0 0] &lt;--Labels
 
 (10, 32, 32, 1) (10,)
@@ -1064,20 +1065,21 @@ for data, labels in check_data:
 [0 0 0 0 0 0 0 0 0 0] &lt;--Labels
 
 (10, 32, 32, 1) (10,)
-[0 0 0 0 0 0 0 0 0 0] &lt;--Labels</code></pre>
+[0 0 0 0 0 0 0 0 0 0] &lt;--Labels
+</code></pre>
 <p>Note that the new generator created by using a few <code>tensorflow</code> commands works just fine as our previous generator. This new generator can now be integrated with a <code>tensorflow dataset</code>.</p>
-<pre class="python"><code>batch_size = 15
-dataset = tf.data.Dataset.from_generator(tf_data_generator,args= [files, batch_size],output_types = (tf.float32, tf.float32),
-                                                output_shapes = ((None,32,32,1),(None,)))</code></pre>
-<p>Check whether <code>dataset</code> works or not.</p>
-<pre class="python"><code>num = 0
-for data, labels in dataset:
-    print(data.shape, labels.shape)
-    print(labels)
-    print()
-    num = num + 1
-    if num &gt; 7: break</code></pre>
-<pre><code>(15, 32, 32, 1) (15,)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_generator(tf_data_generator,args<span style="color:#f92672">=</span> [files, batch_size],output_types <span style="color:#f92672">=</span> (tf<span style="color:#f92672">.</span>float32, tf<span style="color:#f92672">.</span>float32),
+</span></span><span style="display:flex;"><span>                                                output_shapes <span style="color:#f92672">=</span> ((<span style="color:#66d9ef">None</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>),(<span style="color:#66d9ef">None</span>,)))
+</span></span></code></pre></div><p>Check whether <code>dataset</code> works or not.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> data, labels <span style="color:#f92672">in</span> dataset:
+</span></span><span style="display:flex;"><span>    print(data<span style="color:#f92672">.</span>shape, labels<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>    print(labels)
+</span></span><span style="display:flex;"><span>    print()
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">=</span> num <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">7</span>: <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><pre><code>(15, 32, 32, 1) (15,)
 tf.Tensor([0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.], shape=(15,), dtype=float32)
 
 (15, 32, 32, 1) (15,)
@@ -1099,106 +1101,109 @@ tf.Tensor([0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.], shape=(15,), dtype=flo
 tf.Tensor([0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 1.], shape=(15,), dtype=float32)
 
 (15, 32, 32, 1) (15,)
-tf.Tensor([1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.], shape=(15,), dtype=float32)</code></pre>
-<p>This also works fine. Now, we will train a full CNN model using the generator. As is done in every model, we will first shuffle data files. Split the files into train, validation, and test set. Using the <code>tf_data_generator</code> create three tensorflow datasets corresponding to train, validation, and test data respectively. Finally, we will create a simple CNN model. Train it using train dataset, see its performance on validation dataset, and obtain prediction using test dataset. Keep in mind that our aim is not to improve performance of the model. As the data are random, don’t expect to see good performance. The aim is only to create a pipeline.</p>
-</div>
-<div id="building-data-pipeline-and-training-cnn-model" class="section level2">
-<h2>3. Building data pipeline and training CNN model</h2>
+tf.Tensor([1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.], shape=(15,), dtype=float32)
+</code></pre>
+<p>This also works fine. Now, we will train a full CNN model using the generator. As is done in every model, we will first shuffle data files. Split the files into train, validation, and test set. Using the <code>tf_data_generator</code> create three tensorflow datasets corresponding to train, validation, and test data respectively. Finally, we will create a simple CNN model. Train it using train dataset, see its performance on validation dataset, and obtain prediction using test dataset. Keep in mind that our aim is not to improve performance of the model. As the data are random, don&rsquo;t expect to see good performance. The aim is only to create a pipeline.</p>
+<h2 id="3-building-data-pipeline-and-training-cnn-model">3. Building data pipeline and training CNN model</h2>
 <p>Before building the data pipeline, we will first move files corresponding to each fault class into different folders. This will make it convenient to split data into training, validation, and test set, keeping the balanced nature of the dataset intact.</p>
-<pre class="python"><code>import shutil</code></pre>
-<p>Create five different folders.</p>
-<pre class="python"><code>fault_folders = [&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;]
-for folder_name in fault_folders:
-    os.mkdir(os.path.join(&quot;./random_data&quot;, folder_name))</code></pre>
-<p>Move files into those folders.</p>
-<pre class="python"><code>for file in files:
-    pattern = &quot;^&quot; + eval(&quot;file[14:21]&quot;)
-    for j in range(len(fault_folders)):
-        if re.match(pattern, fault_folders[j]):
-            dest = os.path.join(&quot;./random_data/&quot;,eval(&quot;fault_folders[j]&quot;))
-            shutil.move(file, dest)</code></pre>
-<pre class="python"><code>glob.glob(&quot;./random_data/*&quot;)</code></pre>
-<pre><code>[&#39;./random_data/Fault_1&#39;,
- &#39;./random_data/Fault_2&#39;,
- &#39;./random_data/Fault_3&#39;,
- &#39;./random_data/Fault_4&#39;,
- &#39;./random_data/Fault_5&#39;]</code></pre>
-<pre class="python"><code>glob.glob(&quot;./random_data/Fault_1/*&quot;)[:10] # Showing first 10 files of Fault_1 folder</code></pre>
-<pre><code>[&#39;./random_data/Fault_1/Fault_1_001.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_002.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_003.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_004.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_005.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_006.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_007.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_008.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_009.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_010.csv&#39;]</code></pre>
-<pre class="python"><code>glob.glob(&quot;./random_data/Fault_3/*&quot;)[:10] # Showing first 10 files of Fault_3 folder</code></pre>
-<pre><code>[&#39;./random_data/Fault_3/Fault_3_001.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_002.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_003.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_004.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_005.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_006.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_007.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_008.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_009.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_010.csv&#39;]</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> shutil
+</span></span></code></pre></div><p>Create five different folders.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_folders <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> folder_name <span style="color:#f92672">in</span> fault_folders:
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>mkdir(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;./random_data&#34;</span>, folder_name))
+</span></span></code></pre></div><p>Move files into those folders.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> files:
+</span></span><span style="display:flex;"><span>    pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;^&#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;file[14:21]&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(len(fault_folders)):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(pattern, fault_folders[j]):
+</span></span><span style="display:flex;"><span>            dest <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;./random_data/&#34;</span>,eval(<span style="color:#e6db74">&#34;fault_folders[j]&#34;</span>))
+</span></span><span style="display:flex;"><span>            shutil<span style="color:#f92672">.</span>move(file, dest)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/*&#34;</span>)
+</span></span></code></pre></div><pre><code>['./random_data/Fault_1',
+ './random_data/Fault_2',
+ './random_data/Fault_3',
+ './random_data/Fault_4',
+ './random_data/Fault_5']
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_1/*&#34;</span>)[:<span style="color:#ae81ff">10</span>] <span style="color:#75715e"># Showing first 10 files of Fault_1 folder</span>
+</span></span></code></pre></div><pre><code>['./random_data/Fault_1/Fault_1_001.csv',
+ './random_data/Fault_1/Fault_1_002.csv',
+ './random_data/Fault_1/Fault_1_003.csv',
+ './random_data/Fault_1/Fault_1_004.csv',
+ './random_data/Fault_1/Fault_1_005.csv',
+ './random_data/Fault_1/Fault_1_006.csv',
+ './random_data/Fault_1/Fault_1_007.csv',
+ './random_data/Fault_1/Fault_1_008.csv',
+ './random_data/Fault_1/Fault_1_009.csv',
+ './random_data/Fault_1/Fault_1_010.csv']
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_3/*&#34;</span>)[:<span style="color:#ae81ff">10</span>] <span style="color:#75715e"># Showing first 10 files of Fault_3 folder</span>
+</span></span></code></pre></div><pre><code>['./random_data/Fault_3/Fault_3_001.csv',
+ './random_data/Fault_3/Fault_3_002.csv',
+ './random_data/Fault_3/Fault_3_003.csv',
+ './random_data/Fault_3/Fault_3_004.csv',
+ './random_data/Fault_3/Fault_3_005.csv',
+ './random_data/Fault_3/Fault_3_006.csv',
+ './random_data/Fault_3/Fault_3_007.csv',
+ './random_data/Fault_3/Fault_3_008.csv',
+ './random_data/Fault_3/Fault_3_009.csv',
+ './random_data/Fault_3/Fault_3_010.csv']
+</code></pre>
 <p>Prepare that data for training set, validation set, and test_set. For each fault type, we will keep 70 files for training, 10 files for validation and 20 files for testing.</p>
-<pre class="python"><code>fault_1_files = glob.glob(&quot;./random_data/Fault_1/*&quot;)
-fault_2_files = glob.glob(&quot;./random_data/Fault_2/*&quot;)
-fault_3_files = glob.glob(&quot;./random_data/Fault_3/*&quot;)
-fault_4_files = glob.glob(&quot;./random_data/Fault_4/*&quot;)
-fault_5_files = glob.glob(&quot;./random_data/Fault_5/*&quot;)</code></pre>
-<pre class="python"><code>from sklearn.model_selection import train_test_split</code></pre>
-<pre class="python"><code>fault_1_train, fault_1_test = train_test_split(fault_1_files, test_size = 20, random_state = 5)
-fault_2_train, fault_2_test = train_test_split(fault_2_files, test_size = 20, random_state = 54)
-fault_3_train, fault_3_test = train_test_split(fault_3_files, test_size = 20, random_state = 543)
-fault_4_train, fault_4_test = train_test_split(fault_4_files, test_size = 20, random_state = 5432)
-fault_5_train, fault_5_test = train_test_split(fault_5_files, test_size = 20, random_state = 54321)</code></pre>
-<pre class="python"><code>fault_1_train, fault_1_val = train_test_split(fault_1_train, test_size = 10, random_state = 1)
-fault_2_train, fault_2_val = train_test_split(fault_2_train, test_size = 10, random_state = 12)
-fault_3_train, fault_3_val = train_test_split(fault_3_train, test_size = 10, random_state = 123)
-fault_4_train, fault_4_val = train_test_split(fault_4_train, test_size = 10, random_state = 1234)
-fault_5_train, fault_5_val = train_test_split(fault_5_train, test_size = 10, random_state = 12345)</code></pre>
-<pre class="python"><code>train_file_names = fault_1_train + fault_2_train + fault_3_train + fault_4_train + fault_5_train
-validation_file_names = fault_1_val + fault_2_val + fault_3_val + fault_4_val + fault_5_val
-test_file_names = fault_1_test + fault_2_test + fault_3_test + fault_4_test + fault_5_test
-
-# Shuffle data (We don&#39;t need to shuffle validation and test data)
-np.random.shuffle(train_file_names)</code></pre>
-<pre class="python"><code>print(&quot;Number of train_files:&quot; ,len(train_file_names))
-print(&quot;Number of validation_files:&quot; ,len(validation_file_names))
-print(&quot;Number of test_files:&quot; ,len(test_file_names))</code></pre>
-<pre><code>Number of train_files: 350
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_1_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_1/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_2_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_2/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_3_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_3/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_4_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_4/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_5_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_5/*&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_1_train, fault_1_test <span style="color:#f92672">=</span> train_test_split(fault_1_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>fault_2_train, fault_2_test <span style="color:#f92672">=</span> train_test_split(fault_2_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">54</span>)
+</span></span><span style="display:flex;"><span>fault_3_train, fault_3_test <span style="color:#f92672">=</span> train_test_split(fault_3_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">543</span>)
+</span></span><span style="display:flex;"><span>fault_4_train, fault_4_test <span style="color:#f92672">=</span> train_test_split(fault_4_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">5432</span>)
+</span></span><span style="display:flex;"><span>fault_5_train, fault_5_test <span style="color:#f92672">=</span> train_test_split(fault_5_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">54321</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_1_train, fault_1_val <span style="color:#f92672">=</span> train_test_split(fault_1_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>fault_2_train, fault_2_val <span style="color:#f92672">=</span> train_test_split(fault_2_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>fault_3_train, fault_3_val <span style="color:#f92672">=</span> train_test_split(fault_3_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>fault_4_train, fault_4_val <span style="color:#f92672">=</span> train_test_split(fault_4_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">1234</span>)
+</span></span><span style="display:flex;"><span>fault_5_train, fault_5_val <span style="color:#f92672">=</span> train_test_split(fault_5_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">12345</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>train_file_names <span style="color:#f92672">=</span> fault_1_train <span style="color:#f92672">+</span> fault_2_train <span style="color:#f92672">+</span> fault_3_train <span style="color:#f92672">+</span> fault_4_train <span style="color:#f92672">+</span> fault_5_train
+</span></span><span style="display:flex;"><span>validation_file_names <span style="color:#f92672">=</span> fault_1_val <span style="color:#f92672">+</span> fault_2_val <span style="color:#f92672">+</span> fault_3_val <span style="color:#f92672">+</span> fault_4_val <span style="color:#f92672">+</span> fault_5_val
+</span></span><span style="display:flex;"><span>test_file_names <span style="color:#f92672">=</span> fault_1_test <span style="color:#f92672">+</span> fault_2_test <span style="color:#f92672">+</span> fault_3_test <span style="color:#f92672">+</span> fault_4_test <span style="color:#f92672">+</span> fault_5_test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Shuffle data (We don&#39;t need to shuffle validation and test data)</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>shuffle(train_file_names)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Number of train_files:&#34;</span> ,len(train_file_names))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Number of validation_files:&#34;</span> ,len(validation_file_names))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Number of test_files:&#34;</span> ,len(test_file_names))
+</span></span></code></pre></div><pre><code>Number of train_files: 350
 Number of validation_files: 50
-Number of test_files: 100</code></pre>
-<pre class="python"><code>batch_size = 10
-train_dataset = tf.data.Dataset.from_generator(tf_data_generator, args = [train_file_names, batch_size], 
-                                              output_shapes = ((None,32,32,1),(None,)),
-                                              output_types = (tf.float32, tf.float32))
-
-validation_dataset = tf.data.Dataset.from_generator(tf_data_generator, args = [validation_file_names, batch_size],
-                                                   output_shapes = ((None,32,32,1),(None,)),
-                                                   output_types = (tf.float32, tf.float32))
-
-test_dataset = tf.data.Dataset.from_generator(tf_data_generator, args = [test_file_names, batch_size],
-                                             output_shapes = ((None,32,32,1),(None,)),
-                                             output_types = (tf.float32, tf.float32))</code></pre>
-<p>Now create the model.</p>
-<pre class="python"><code>from tensorflow.keras import layers</code></pre>
-<pre class="python"><code>model = tf.keras.Sequential([
-    layers.Conv2D(16, 3, activation = &quot;relu&quot;, input_shape = (32,32,1)),
-    layers.MaxPool2D(2),
-    layers.Conv2D(32, 3, activation = &quot;relu&quot;),
-    layers.MaxPool2D(2),
-    layers.Flatten(),
-    layers.Dense(16, activation = &quot;relu&quot;),
-    layers.Dense(5, activation = &quot;softmax&quot;)
-])
-model.summary()</code></pre>
-<pre><code>Model: &quot;sequential&quot;
+Number of test_files: 100
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>train_dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_generator(tf_data_generator, args <span style="color:#f92672">=</span> [train_file_names, batch_size], 
+</span></span><span style="display:flex;"><span>                                              output_shapes <span style="color:#f92672">=</span> ((<span style="color:#66d9ef">None</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>),(<span style="color:#66d9ef">None</span>,)),
+</span></span><span style="display:flex;"><span>                                              output_types <span style="color:#f92672">=</span> (tf<span style="color:#f92672">.</span>float32, tf<span style="color:#f92672">.</span>float32))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>validation_dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_generator(tf_data_generator, args <span style="color:#f92672">=</span> [validation_file_names, batch_size],
+</span></span><span style="display:flex;"><span>                                                   output_shapes <span style="color:#f92672">=</span> ((<span style="color:#66d9ef">None</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>),(<span style="color:#66d9ef">None</span>,)),
+</span></span><span style="display:flex;"><span>                                                   output_types <span style="color:#f92672">=</span> (tf<span style="color:#f92672">.</span>float32, tf<span style="color:#f92672">.</span>float32))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>test_dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_generator(tf_data_generator, args <span style="color:#f92672">=</span> [test_file_names, batch_size],
+</span></span><span style="display:flex;"><span>                                             output_shapes <span style="color:#f92672">=</span> ((<span style="color:#66d9ef">None</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>),(<span style="color:#66d9ef">None</span>,)),
+</span></span><span style="display:flex;"><span>                                             output_types <span style="color:#f92672">=</span> (tf<span style="color:#f92672">.</span>float32, tf<span style="color:#f92672">.</span>float32))
+</span></span></code></pre></div><p>Now create the model.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras <span style="color:#f92672">import</span> layers
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>Sequential([
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>Conv2D(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">3</span>, activation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;relu&#34;</span>, input_shape <span style="color:#f92672">=</span> (<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>MaxPool2D(<span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>Conv2D(<span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">3</span>, activation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;relu&#34;</span>),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>MaxPool2D(<span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>Flatten(),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">16</span>, activation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;relu&#34;</span>),
+</span></span><span style="display:flex;"><span>    layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">5</span>, activation <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;softmax&#34;</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>summary()
+</span></span></code></pre></div><pre><code>Model: &quot;sequential&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
@@ -1219,23 +1224,25 @@ dense_1 (Dense)              (None, 5)                 85
 Total params: 23,333
 Trainable params: 23,333
 Non-trainable params: 0
-_________________________________________________________________</code></pre>
+_________________________________________________________________
+</code></pre>
 <p>Compile the model.</p>
-<pre class="python"><code>model.compile(loss = &quot;sparse_categorical_crossentropy&quot;, optimizer = &quot;adam&quot;, metrics = [&quot;accuracy&quot;])</code></pre>
-<p>Before we fit the model, we have to do one important calculation. Remember that our generators are infinite loops. So if no stopping criteria is given, it will run indefinitely. But we want our model to run for, say, 10 epochs. So our generator should loop over the data files just 10 times and no more. This is achieved by setting the arguments <code>steps_per_epoch</code> and <code>validation_steps</code> to desired numbers in <code>model.fit()</code>. Similarly while evaluating model, we need to set the argument <code>steps</code> to a desired number in <code>model.evaluate()</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(loss <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;sparse_categorical_crossentropy&#34;</span>, optimizer <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;adam&#34;</span>, metrics <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;accuracy&#34;</span>])
+</span></span></code></pre></div><p>Before we fit the model, we have to do one important calculation. Remember that our generators are infinite loops. So if no stopping criteria is given, it will run indefinitely. But we want our model to run for, say, 10 epochs. So our generator should loop over the data files just 10 times and no more. This is achieved by setting the arguments <code>steps_per_epoch</code> and <code>validation_steps</code> to desired numbers in <code>model.fit()</code>. Similarly while evaluating model, we need to set the argument <code>steps</code> to a desired number in <code>model.evaluate()</code>.</p>
 <p>There are 350 files in training set. Batch_size is 10. So if the generator runs 35 times, it will correspond to one epoch. Therefor, we should set <code>steps_per_epoch</code> to 35. Similarly, <code>validation_steps = 5</code> and in <code>model.evaluate()</code>, <code>steps = 10</code>.</p>
-<pre class="python"><code>steps_per_epoch = np.int(np.ceil(len(train_file_names)/batch_size))
-validation_steps = np.int(np.ceil(len(validation_file_names)/batch_size))
-steps = np.int(np.ceil(len(test_file_names)/batch_size))
-print(&quot;steps_per_epoch = &quot;, steps_per_epoch)
-print(&quot;validation_steps = &quot;, validation_steps)
-print(&quot;steps = &quot;, steps)</code></pre>
-<pre><code>steps_per_epoch =  35
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>steps_per_epoch <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>int(np<span style="color:#f92672">.</span>ceil(len(train_file_names)<span style="color:#f92672">/</span>batch_size))
+</span></span><span style="display:flex;"><span>validation_steps <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>int(np<span style="color:#f92672">.</span>ceil(len(validation_file_names)<span style="color:#f92672">/</span>batch_size))
+</span></span><span style="display:flex;"><span>steps <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>int(np<span style="color:#f92672">.</span>ceil(len(test_file_names)<span style="color:#f92672">/</span>batch_size))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;steps_per_epoch = &#34;</span>, steps_per_epoch)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;validation_steps = &#34;</span>, validation_steps)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;steps = &#34;</span>, steps)
+</span></span></code></pre></div><pre><code>steps_per_epoch =  35
 validation_steps =  5
-steps =  10</code></pre>
-<pre class="python"><code>model.fit(train_dataset, validation_data = validation_dataset, steps_per_epoch = steps_per_epoch,
-         validation_steps = validation_steps, epochs = 10)</code></pre>
-<pre><code>Epoch 1/10
+steps =  10
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(train_dataset, validation_data <span style="color:#f92672">=</span> validation_dataset, steps_per_epoch <span style="color:#f92672">=</span> steps_per_epoch,
+</span></span><span style="display:flex;"><span>         validation_steps <span style="color:#f92672">=</span> validation_steps, epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><pre><code>Epoch 1/10
 35/35 [==============================] - 1s 40ms/step - loss: 1.6268 - accuracy: 0.2029 - val_loss: 1.6111 - val_accuracy: 0.2000
 Epoch 2/10
 35/35 [==============================] - 1s 36ms/step - loss: 1.6101 - accuracy: 0.2114 - val_loss: 1.6079 - val_accuracy: 0.2600
@@ -1260,87 +1267,91 @@ Epoch 10/10
 
 
 
-&lt;tensorflow.python.keras.callbacks.History at 0x7fcab40f6150&gt;</code></pre>
-<pre class="python"><code>test_loss, test_accuracy = model.evaluate(test_dataset, steps = 10)</code></pre>
-<pre><code>10/10 [==============================] - 0s 25ms/step - loss: 1.6974 - accuracy: 0.1500</code></pre>
-<pre class="python"><code>print(&quot;Test loss: &quot;, test_loss)
-print(&quot;Test accuracy:&quot;, test_accuracy)</code></pre>
-<pre><code>Test loss:  1.6973648071289062
-Test accuracy: 0.15000000596046448</code></pre>
+&lt;tensorflow.python.keras.callbacks.History at 0x7fcab40f6150&gt;
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>test_loss, test_accuracy <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>evaluate(test_dataset, steps <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><pre><code>10/10 [==============================] - 0s 25ms/step - loss: 1.6974 - accuracy: 0.1500
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Test loss: &#34;</span>, test_loss)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Test accuracy:&#34;</span>, test_accuracy)
+</span></span></code></pre></div><pre><code>Test loss:  1.6973648071289062
+Test accuracy: 0.15000000596046448
+</code></pre>
 <p>As expected, model performs terribly.</p>
-</div>
-<div id="how-to-make-predictions" class="section level2">
-<h2>How to make predictions?</h2>
-<p>Until now, we have evaluated our model on a kept out test set. For our test set, both data and labels were known. So we evaluated its performance. But often times, for test set, we don’t have access to true labels. Rather, we have to make predictions on the data available. This is the case in online competitions where we have to submit our predictions on a test set for which we don’t know the labels. We will call this set (without any labels) the prediction set. This naming convention is arbitrary but we will stick with it.</p>
+<h2 id="how-to-make-predictions">How to make predictions?</h2>
+<p>Until now, we have evaluated our model on a kept out test set. For our test set, both data and labels were known. So we evaluated its performance. But often times, for test set, we don&rsquo;t have access to true labels. Rather, we have to make predictions on the data available. This is the case in online competitions where we have to submit our predictions on a test set for which we don&rsquo;t know the labels. We will call this set (without any labels) the prediction set. This naming convention is arbitrary but we will stick with it.</p>
 <p>If the whole of our prediction set fits into memory, we can just call <code>model.predict()</code> on this data and then use <code>np.argmax()</code> to obtain predicted class labels. Otherwise, we can read files in prediction set in chunks, make predictions on the chunks and finally append our result.</p>
-<p>Yet another pedantic way of doing this is to write a generator to read files from the prediction set in chunks and make predictions on it. We will show how this approach works. As we don’t have a prediction set yet, we will first create some files and save it to the prediction set.</p>
-<pre class="python"><code>def create_prediction_set(num_files = 20):
-    os.mkdir(&quot;./random_data/prediction_set&quot;)
-    for i in range(num_files):
-        data = np.random.randn(1024,)
-        file_name = &quot;./random_data/prediction_set/&quot;  + &quot;file_&quot; + &quot;{0:03}&quot;.format(i+1) + &quot;.csv&quot; # This creates file_name
-        np.savetxt(eval(&quot;file_name&quot;), data, delimiter = &quot;,&quot;, header = &quot;V1&quot;, comments = &quot;&quot;)
-    print(str(eval(&quot;num_files&quot;)) + &quot; &quot;+ &quot; files created in prediction set.&quot;)</code></pre>
-<p>Create some files for prediction set.</p>
-<pre class="python"><code>create_prediction_set(num_files = 55)</code></pre>
-<pre><code>55  files created in prediction set.</code></pre>
-<pre class="python"><code>prediction_files = glob.glob(&quot;./random_data/prediction_set/*&quot;)
-print(&quot;Total number of files: &quot;, len(prediction_files))
-print(&quot;Showing first 10 files...&quot;)
-prediction_files[:10]</code></pre>
-<pre><code>Total number of files:  55
+<p>Yet another pedantic way of doing this is to write a generator to read files from the prediction set in chunks and make predictions on it. We will show how this approach works. As we don&rsquo;t have a prediction set yet, we will first create some files and save it to the prediction set.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_prediction_set</span>(num_files <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>mkdir(<span style="color:#e6db74">&#34;./random_data/prediction_set&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num_files):
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">1024</span>,)
+</span></span><span style="display:flex;"><span>        file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./random_data/prediction_set/&#34;</span>  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;file_&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{0:03}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.csv&#34;</span> <span style="color:#75715e"># This creates file_name</span>
+</span></span><span style="display:flex;"><span>        np<span style="color:#f92672">.</span>savetxt(eval(<span style="color:#e6db74">&#34;file_name&#34;</span>), data, delimiter <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span>, header <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;V1&#34;</span>, comments <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(str(eval(<span style="color:#e6db74">&#34;num_files&#34;</span>)) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; files created in prediction set.&#34;</span>)
+</span></span></code></pre></div><p>Create some files for prediction set.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>create_prediction_set(num_files <span style="color:#f92672">=</span> <span style="color:#ae81ff">55</span>)
+</span></span></code></pre></div><pre><code>55  files created in prediction set.
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prediction_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/prediction_set/*&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Total number of files: &#34;</span>, len(prediction_files))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Showing first 10 files...&#34;</span>)
+</span></span><span style="display:flex;"><span>prediction_files[:<span style="color:#ae81ff">10</span>]
+</span></span></code></pre></div><pre><code>Total number of files:  55
 Showing first 10 files...
 
 
 
 
 
-[&#39;./random_data/prediction_set/file_001.csv&#39;,
- &#39;./random_data/prediction_set/file_002.csv&#39;,
- &#39;./random_data/prediction_set/file_003.csv&#39;,
- &#39;./random_data/prediction_set/file_004.csv&#39;,
- &#39;./random_data/prediction_set/file_005.csv&#39;,
- &#39;./random_data/prediction_set/file_006.csv&#39;,
- &#39;./random_data/prediction_set/file_007.csv&#39;,
- &#39;./random_data/prediction_set/file_008.csv&#39;,
- &#39;./random_data/prediction_set/file_009.csv&#39;,
- &#39;./random_data/prediction_set/file_010.csv&#39;]</code></pre>
-<p>Now, we will create a generator to read these files in chunks. This generator will be slightly different from our previous generator. Firstly, we don’t want the generator to run indefinitely. Secondly, we don’t have any labels. So this generator should only <code>yield</code> data. This is how we achieve that.</p>
-<pre class="python"><code>def generator_for_prediction(file_list, batch_size = 20):
-    i = 0
-    while i &lt;= (len(file_list)/batch_size):
-        if i == np.floor(len(file_list)/batch_size):
-            file_chunk = file_list[i*batch_size:len(file_list)]
-            if len(file_chunk)==0:
-                break
-        else:
-            file_chunk = file_list[i*batch_size:(i+1)*batch_size] 
-        data = []
-        for file in file_chunk:
-            temp = pd.read_csv(open(file,&#39;r&#39;))
-            data.append(temp.values.reshape(32,32,1)) 
-        data = np.asarray(data).reshape(-1,32,32,1)
-        yield data
-        i = i + 1</code></pre>
-<p>Check whether the generator works or not.</p>
-<pre class="python"><code>pred_gen = generator_for_prediction(prediction_files,  batch_size = 10)
-for data in pred_gen:
-    print(data.shape)</code></pre>
-<pre><code>(10, 32, 32, 1)
+['./random_data/prediction_set/file_001.csv',
+ './random_data/prediction_set/file_002.csv',
+ './random_data/prediction_set/file_003.csv',
+ './random_data/prediction_set/file_004.csv',
+ './random_data/prediction_set/file_005.csv',
+ './random_data/prediction_set/file_006.csv',
+ './random_data/prediction_set/file_007.csv',
+ './random_data/prediction_set/file_008.csv',
+ './random_data/prediction_set/file_009.csv',
+ './random_data/prediction_set/file_010.csv']
+</code></pre>
+<p>Now, we will create a generator to read these files in chunks. This generator will be slightly different from our previous generator. Firstly, we don&rsquo;t want the generator to run indefinitely. Secondly, we don&rsquo;t have any labels. So this generator should only <code>yield</code> data. This is how we achieve that.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generator_for_prediction</span>(file_list, batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;=</span> (len(file_list)<span style="color:#f92672">/</span>batch_size):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> np<span style="color:#f92672">.</span>floor(len(file_list)<span style="color:#f92672">/</span>batch_size):
+</span></span><span style="display:flex;"><span>            file_chunk <span style="color:#f92672">=</span> file_list[i<span style="color:#f92672">*</span>batch_size:len(file_list)]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> len(file_chunk)<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            file_chunk <span style="color:#f92672">=</span> file_list[i<span style="color:#f92672">*</span>batch_size:(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>batch_size] 
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> file_chunk:
+</span></span><span style="display:flex;"><span>            temp <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(open(file,<span style="color:#e6db74">&#39;r&#39;</span>))
+</span></span><span style="display:flex;"><span>            data<span style="color:#f92672">.</span>append(temp<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)) 
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(data)<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> data
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>Check whether the generator works or not.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pred_gen <span style="color:#f92672">=</span> generator_for_prediction(prediction_files,  batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> data <span style="color:#f92672">in</span> pred_gen:
+</span></span><span style="display:flex;"><span>    print(data<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><pre><code>(10, 32, 32, 1)
 (10, 32, 32, 1)
 (10, 32, 32, 1)
 (10, 32, 32, 1)
 (10, 32, 32, 1)
-(5, 32, 32, 1)</code></pre>
+(5, 32, 32, 1)
+</code></pre>
 <p>Create a <code>tensorflow dataset</code>.</p>
-<pre class="python"><code>batch_size = 10
-prediction_dataset = tf.data.Dataset.from_generator(generator_for_prediction,args=[prediction_files, batch_size],
-                                                 output_shapes=(None,32,32,1), output_types=(tf.float32))</code></pre>
-<pre class="python"><code>steps = np.int(np.ceil(len(prediction_files)/batch_size))
-predictions = model.predict(prediction_dataset,steps = steps)</code></pre>
-<pre class="python"><code>print(&quot;Shape of prediction array: &quot;, predictions.shape)
-predictions</code></pre>
-<pre><code>Shape of prediction array:  (55, 5)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>prediction_dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_generator(generator_for_prediction,args<span style="color:#f92672">=</span>[prediction_files, batch_size],
+</span></span><span style="display:flex;"><span>                                                 output_shapes<span style="color:#f92672">=</span>(<span style="color:#66d9ef">None</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>), output_types<span style="color:#f92672">=</span>(tf<span style="color:#f92672">.</span>float32))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>steps <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>int(np<span style="color:#f92672">.</span>ceil(len(prediction_files)<span style="color:#f92672">/</span>batch_size))
+</span></span><span style="display:flex;"><span>predictions <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(prediction_dataset,steps <span style="color:#f92672">=</span> steps)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Shape of prediction array: &#34;</span>, predictions<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>predictions
+</span></span></code></pre></div><pre><code>Shape of prediction array:  (55, 5)
 
 array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
        [0.16730548, 0.20139892, 0.32996896, 0.16305783, 0.13826886],
@@ -1397,20 +1408,21 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
        [0.3060696 , 0.03565398, 0.33453086, 0.12989788, 0.19384763],
        [0.1417291 , 0.40642622, 0.20021752, 0.22896914, 0.02265806],
        [0.10395318, 0.20624556, 0.46823606, 0.12000521, 0.10156006]],
-      dtype=float32)</code></pre>
+      dtype=float32)
+</code></pre>
 <p>Outputs of prediction are 5 dimensional vector. This is so because we have used 5 neurons in the output layer and our activation function is softmax. The 5 dimensional output vector for an input add to 1. So it can be interpreted as probability. Thus we should classify the input to a class, for which prediction probability is maximum. To get the class corresponding to maximum probability, we can use <code>np.argmax()</code> command.</p>
-<pre class="python"><code>np.argmax(predictions, axis = 1)</code></pre>
-<pre><code>array([1, 2, 2, 1, 2, 1, 3, 1, 2, 0, 1, 2, 2, 1, 0, 1, 0, 2, 1, 2, 3, 2,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>np<span style="color:#f92672">.</span>argmax(predictions, axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><pre><code>array([1, 2, 2, 1, 2, 1, 3, 1, 2, 0, 1, 2, 2, 1, 0, 1, 0, 2, 1, 2, 3, 2,
        2, 2, 3, 2, 3, 2, 1, 0, 1, 2, 2, 2, 0, 2, 1, 1, 2, 1, 1, 2, 4, 3,
-       2, 2, 3, 0, 2, 3, 2, 2, 2, 1, 2])</code></pre>
+       2, 2, 3, 0, 2, 3, 2, 2, 2, 1, 2])
+</code></pre>
 <p>The data are randomly generated. So we should not be surprised by this result. Also note that the for each new data, softmax outputs are close to each other. This means that the network is not very sure about the classification result.</p>
 <p>This brings us to the end of the blog. As we had planned in the beginning, we have created random data files, a generator, and trained a model using that generator. The above code can be tweaked slightly to read any type of files other than <code>.csv</code>. And now we can train our model without worrying about the data size. Whether the data size is 10GB or 750GB, our approach will work for both.</p>
 <p>As a final note, I want to stress that, this is not the only approach to do the task. As I have mentioned previously, in <code>Tensorflow</code>, you can do the same thing in several different ways. The approach I have chosen seemed natural to me. I have neither strived for efficiency nor elegance. If readers have any better idea, I would be happy to know of it.</p>
 <p>I hope, this blog will be of help to readers. Please bring any errors or omissions to my notice.</p>
-<p><strong>Update 1</strong>: While generators are convenient for handling chunks of data from a large dataset, they have limited portability and scalability. Therefore, in Tensorflow Sequences are preferred instead of generators. <a href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/">See this blog</a> for a complete workflow for reading multiple files using Sequence.</p>
-<p><strong>Update 2</strong>: If along with reading, one has to perform complex transformations on extracted data (say, doing spectrogram on each segment of data, etc.), the naive approach presented in this blog may turn out to be slow. But there are ways to make these computations faster. One such speedup technique can be found at <a href="https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/">this blog</a>.</p>
+<p><strong>Update 1</strong>: While generators are convenient for handling chunks of data from a large dataset, they have limited portability and scalability. Therefore, in Tensorflow Sequences are preferred instead of generators. <a href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/" target="_blank" rel="noopener">See this blog</a> for a complete workflow for reading multiple files using Sequence.</p>
+<p><strong>Update 2</strong>: If along with reading, one has to perform complex transformations on extracted data (say, doing spectrogram on each segment of data, etc.), the naive approach presented in this blog may turn out to be slow. But there are ways to make these computations faster. One such speedup technique can be found at <a href="https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/" target="_blank" rel="noopener">this blog</a>.</p>
 <p>Last modified: 27th April, 2020.</p>
-</div>
 
     </div>
 
@@ -1603,23 +1615,6 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
     
     
     
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://twitter.com/biswajitsahoo11" target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-  
-    
-    
-    
     
     
     
@@ -1774,7 +1769,7 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
       
 
     
-    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
 
     
     
@@ -1860,7 +1855,7 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
       
     
     
-    <script src="/en/js/wowchemy.min.247fd8f54253895301106e3006f53f38.js"></script>
+    <script src="/en/js/wowchemy.min.e14897cafececa7181d21d62540ef117.js"></script>
 
     
 

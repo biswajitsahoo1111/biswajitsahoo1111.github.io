@@ -17,57 +17,45 @@
       <link>https://biswajitsahoo1111.github.io/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
       <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
       <guid>https://biswajitsahoo1111.github.io/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
-      <description>
-&lt;script src=&#34;https://biswajitsahoo1111.github.io/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/index.en_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-
-
-&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;
-&lt;iframe src=&#34;https://ghbtns.com/github-btn.html?user=biswajitsahoo1111&amp;amp;repo=D2L_Attention_Mechanisms_in_TF&amp;amp;type=star&amp;amp;count=true&amp;amp;size=large&#34; frameborder=&#34;0&#34; scrolling=&#34;0&#34; width=&#34;170&#34; height=&#34;30&#34; title=&#34;GitHub&#34;&gt;
-&lt;/iframe&gt;
-&lt;/td&gt;
-&lt;!-----
+      <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
+  &lt;tr&gt;
+  &lt;td align=&#34;left&#34;&gt;
+    &lt;iframe src=&#34;https://ghbtns.com/github-btn.html?user=biswajitsahoo1111&amp;repo=D2L_Attention_Mechanisms_in_TF&amp;type=star&amp;count=true&amp;size=large&#34; frameborder=&#34;0&#34; scrolling=&#34;0&#34; width=&#34;170&#34; height=&#34;30&#34; title=&#34;GitHub&#34;&gt;&lt;/iframe&gt;
+  &lt;/td&gt;
+  &lt;!-----
   &lt;td align=&#34;left&#34; rowspan=&#34;2&#34;&gt;
     &lt;a href=&#34;https://biswajitsahoo1111.github.io/rul_codes_open/&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/GitHub-Mark-32px.png&#34; /&gt;View GitHub Page&lt;/a&gt;
   &lt;/td&gt;
   -----&gt;
-&lt;td align=&#34;left&#34; rowspan=&#34;2&#34;&gt;
-&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/GitHub-Mark-32px.png&#34; /&gt;View source on GitHub&lt;/a&gt;
-&lt;/td&gt;
-&lt;td align=&#34;left&#34; rowspan=&#34;2&#34;&gt;
-&lt;a href=&#34;https://codeload.github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/zip/master&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download code (.zip)&lt;/a&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;right&#34;&gt;
-&lt;iframe src=&#34;https://ghbtns.com/github-btn.html?user=biswajitsahoo1111&amp;amp;repo=D2L_Attention_Mechanisms_in_TF&amp;amp;type=fork&amp;amp;count=true&amp;amp;size=small&#34; frameborder=&#34;0&#34; scrolling=&#34;0&#34; width=&#34;170&#34; height=&#34;30&#34; title=&#34;GitHub&#34; margin-left=&#34;auto&#34; margin-right=&#34;auto&#34;&gt;
-&lt;/iframe&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
+  &lt;td align=&#34;left&#34; rowspan=&#34;2&#34;&gt;
+    &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/GitHub-Mark-32px.png&#34; /&gt;View source on GitHub&lt;/a&gt;
+  &lt;/td&gt;
+  &lt;td align=&#34;left&#34; rowspan=&#34;2&#34;&gt;
+    &lt;a href=&#34;https://codeload.github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/zip/master&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download code (.zip)&lt;/a&gt;
+  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td align=&#34;right&#34;&gt;  
+    &lt;iframe src=&#34;https://ghbtns.com/github-btn.html?user=biswajitsahoo1111&amp;repo=D2L_Attention_Mechanisms_in_TF&amp;type=fork&amp;count=true&amp;size=small&#34; frameborder=&#34;0&#34; scrolling=&#34;0&#34; width=&#34;170&#34; height=&#34;30&#34; title=&#34;GitHub&#34; margin-left=&#34;auto&#34; margin-right=&#34;auto&#34;&gt;&lt;/iframe&gt;
+  &lt;/td&gt;
+  &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;span style=&#34;color: purple;&#34;&gt;&lt;strong&gt;This code has been merged with D2L book. See PR: &lt;a href=&#34;https://github.com/d2l-ai/d2l-en/pull/1756&#34;&gt;1756&lt;/a&gt;, &lt;a href=&#34;https://github.com/d2l-ai/d2l-en/pull/1768&#34;&gt;1768&lt;/a&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;This post contains &lt;code&gt;Tensorflow 2&lt;/code&gt; code for Attention Mechanisms chapter of &lt;a href=&#34;http://d2l.ai/&#34;&gt;Dive into Deep Learning (D2L)&lt;/a&gt; book. The chapter has 7 sections and code for each section can be found at the following links. We have given only code implementations. For theory, readers should refer the book.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_1_Visualization_of_attention.ipynb&#34;&gt;10.1. Attention Cues&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_2_Attention_based_regression.ipynb&#34;&gt;10.2. Attention Pooling: Nadaraya-Watson Kernel Regression&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_3_Attention_scoring_functions.ipynb&#34;&gt;10.3. Attention Scoring Functions&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_4_Bahdanau_attention.ipynb&#34;&gt;10.4. Bahdanau Attention&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_5_Multi-head_attention.ipynb&#34;&gt;10.5. Multi-Head Attention&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_6_Self-attention_and_positional_encoding.ipynb&#34;&gt;10.6. Self-Attention and Positional Encoding&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_7_Transformer.ipynb&#34;&gt;10.7. Transformer&lt;/a&gt;&lt;/p&gt;
-&lt;div id=&#34;additional-sections&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Additional sections:&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/additional_sections/9_7_Sequence_to_Sequence_Learning.ipynb&#34;&gt;9.7. Sequence to Sequence Learning&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;additional-chapters&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Additional Chapters:&lt;/h3&gt;
-&lt;p&gt;Chapter 17: &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Generative_Adversarial_Networks_in_TF&#34;&gt;Generative Adversarial Networks&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;how-to-run-these-code&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;How to run these code:&lt;/h3&gt;
+&lt;p&gt;&lt;span style=&#34;color: purple;&#34;&gt;&lt;strong&gt;This code has been merged with D2L book. See PR: &lt;a href=&#34;https://github.com/d2l-ai/d2l-en/pull/1756&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;1756&lt;/a&gt;, &lt;a href=&#34;https://github.com/d2l-ai/d2l-en/pull/1768&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;1768&lt;/a&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;This post contains &lt;code&gt;Tensorflow 2&lt;/code&gt; code for Attention Mechanisms chapter of &lt;a href=&#34;http://d2l.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Dive into Deep Learning (D2L)&lt;/a&gt; book. The chapter has 7 sections and code for each section can be found at the following links. We have given only code implementations. For theory, readers should refer the book.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_1_Visualization_of_attention.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.1. Attention Cues&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_2_Attention_based_regression.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.2. Attention Pooling: Nadaraya-Watson Kernel Regression&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_3_Attention_scoring_functions.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.3. Attention Scoring Functions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_4_Bahdanau_attention.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.4. Bahdanau Attention&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_5_Multi-head_attention.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.5. Multi-Head Attention&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_6_Self-attention_and_positional_encoding.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.6. Self-Attention and Positional Encoding&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_7_Transformer.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.7. Transformer&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;additional-sections&#34;&gt;Additional sections:&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/additional_sections/9_7_Sequence_to_Sequence_Learning.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;9.7. Sequence to Sequence Learning&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;additional-chapters&#34;&gt;Additional Chapters:&lt;/h3&gt;
+&lt;p&gt;Chapter 17: &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Generative_Adversarial_Networks_in_TF&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Generative Adversarial Networks&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;how-to-run-these-code&#34;&gt;How to run these code:&lt;/h3&gt;
 &lt;p&gt;The best way (in our opinion) is to either clone the repo (or download the zipped repo) and then run each notebook from the cloned (or extracted) folder. All the notebooks will run without any issue.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: We claim no originality for the code. Credit goes to the authors of this excellent &lt;a href=&#34;http://d2l.ai/&#34;&gt;book&lt;/a&gt;. However, all errors and omissions are my own and readers are encouraged to bring it to my notice. Finally, no TF code was available (to the best of my knowledge) for &lt;code&gt;Attention Mechanisms&lt;/code&gt; chapter when &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF&#34;&gt;this repo&lt;/a&gt; was first made public.&lt;/p&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: We claim no originality for the code. Credit goes to the authors of this excellent &lt;a href=&#34;http://d2l.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;book&lt;/a&gt;. However, all errors and omissions are my own and readers are encouraged to bring it to my notice. Finally, no TF code was available (to the best of my knowledge) for &lt;code&gt;Attention Mechanisms&lt;/code&gt; chapter when &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this repo&lt;/a&gt; was first made public.&lt;/p&gt;
 </description>
     </item>
     

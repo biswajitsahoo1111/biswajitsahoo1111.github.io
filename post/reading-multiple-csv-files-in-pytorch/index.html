@@ -60,7 +60,7 @@
   
     
   
-  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn many engineering applications data are usually stored in CSV (Comma Separated Values) files." />
+  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn many engineering applications data are usually stored in CSV (Comma Separated Values) files. In big data applications, it&rsquo;s not uncommon to obtain thousands of csv files." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/" />
@@ -343,7 +343,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo" />
   <meta property="og:url" content="https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/" />
   <meta property="og:title" content="Reading multiple csv files in PyTorch | Biswajit Sahoo" />
-  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn many engineering applications data are usually stored in CSV (Comma Separated Values) files." /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn many engineering applications data are usually stored in CSV (Comma Separated Values) files. In big data applications, it&rsquo;s not uncommon to obtain thousands of csv files." /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -396,7 +396,7 @@
       "url": "https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "Run in Google Colab\r\r\rView source on GitHub\r\r\rDownload notebook\r\r\rIn many engineering applications data are usually stored in CSV (Comma Separated Values) files."
+  "description": "Run in Google Colab\rView source on GitHub\rDownload notebook\rIn many engineering applications data are usually stored in CSV (Comma Separated Values) files. In big data applications, it\u0026rsquo;s not uncommon to obtain thousands of csv files."
 }
 </script>
 
@@ -416,7 +416,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="cd90469125a5e4dc30c0870034ca2c05" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="317cdbe11ea0497b683f831f9c6531c1" >
 
   
   
@@ -427,7 +427,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.8f76bdc9e086322ed5147724ebba3d06.js"></script>
+  <script src="/js/wowchemy-init.min.7e85d6cfe81caeb57cc49452f9b55e03.js"></script>
 
   
 
@@ -837,172 +837,169 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
-
-
-<table class="tfo-notebook-buttons" align="left">
-<td>
-<a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_multiple_csv_files_in_PyTorch.ipynb">
-<img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
-Run in Google Colab</a>
-</td>
-<td>
-<a href="https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Reading_multiple_csv_files_in_PyTorch.ipynb">
-<img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
-View source on GitHub</a>
-</td>
-<td>
-<a href="https://www.dropbox.com/s/qxz8zmctpopulck/Reading_multiple_csv_files_in_PyTorch.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
-</td>
+      <table class="tfo-notebook-buttons" align="left">
+  <td>
+    <a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_multiple_csv_files_in_PyTorch.ipynb">
+    <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+    Run in Google Colab</a>
+  </td>
+  <td>
+    <a href="https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Reading_multiple_csv_files_in_PyTorch.ipynb">
+    <img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
+    View source on GitHub</a>
+  </td>
+  <td>
+    <a href="https://www.dropbox.com/s/qxz8zmctpopulck/Reading_multiple_csv_files_in_PyTorch.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
+  </td>
 </table>
-<p>In many engineering applications data are usually stored in CSV (Comma Separated Values) files. In big data applications, it’s not uncommon to obtain thousands of csv files. As the number of files increases, at some point, we can no longer load the whole dataset into computer’s memory. In deep learning applications it is increasingly common to come across datasets that don’t fit in the computer’s memory. In that case, we have to devise a way so as to be able to read chunks of data at a time so that the model can be trained using the whole dataset.</p>
+<p>In many engineering applications data are usually stored in CSV (Comma Separated Values) files. In big data applications, it&rsquo;s not uncommon to obtain thousands of csv files. As the number of files increases, at some point, we can no longer load the whole dataset into computer&rsquo;s memory. In deep learning applications it is increasingly common to come across datasets that don&rsquo;t fit in the computer&rsquo;s memory. In that case, we have to devise a way so as to be able to read chunks of data at a time so that the model can be trained using the whole dataset.</p>
 <p>There are many ways to achieve this objective. In this post, we will adopt an approach that allows us to read csv files in chunks and preprocess those files in whatever way we like. Then we can pass the processed data to train any deep learning model. Though we will use csv files in this post, the method is general enough to work for other file formats (such as .txt, .npz, etc.) as well. We will demonstrate the procedure using 500 csv files. But the method can be easily extended to huge datasets involving thousands of csv files.</p>
 <p>This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and .csv files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following code cells. We will use PyTorch to run our deep learning model. For efficiency in data loading, we will use PyTorch dataloaders.</p>
-<div id="outline" class="section level2">
-<h2>Outline:</h2>
-<ol style="list-style-type: decimal">
-<li><a href="#sec_1">Create 500 “.csv” files and save it in the folder “random_data” in current working directory.</a></li>
+<h2 id="outline">Outline:</h2>
+<ol>
+<li><a href="#sec_1">Create 500 &ldquo;.csv&rdquo; files and save it in the folder “random_data” in current working directory.</a></li>
 <li><a href="#sec_2">Create a custom dataloader.</a></li>
 <li><a href="#sec_3">Feed the chunks of data to a CNN model and train it for several epochs.</a></li>
 <li><a href="#sec_4">Make prediction on new data for which labels are not known.</a></li>
 </ol>
 <p><a id="sec_1"></a></p>
-</div>
-<div id="create-500-.csv-files-of-random-data" class="section level2">
-<h2>1. Create 500 .csv files of random data</h2>
+<h2 id="1-create-500-csv-files-of-random-data">1. Create 500 .csv files of random data</h2>
 <p>As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. The dataset that we will create is a contrived one. But readers can modify the approach slightly to cater to their need. Following is the process that we will follow.</p>
 <ul>
 <li>Each .csv file will have one column of data with 1024 entries.</li>
-<li>Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in “Fault_1” category will have names as “Fault_1_001.csv”, “Fault_1_002.csv”, “Fault_1_003.csv”, …, “Fault_1_100.csv”. Similarly for other classes.</li>
+<li>Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in &ldquo;Fault_1&rdquo; category will have names as &ldquo;Fault_1_001.csv&rdquo;, &ldquo;Fault_1_002.csv&rdquo;, &ldquo;Fault_1_003.csv&rdquo;, &hellip;, &ldquo;Fault_1_100.csv&rdquo;. Similarly for other classes.</li>
 </ul>
-<pre class="python"><code>import numpy as np
-import os
-import glob
-np.random.seed(1111)</code></pre>
-<p>First create a function that will generate random files.</p>
-<pre class="python"><code>def create_random_csv_files(fault_classes, number_of_files_in_each_class):
-    os.mkdir(&quot;./random_data/&quot;)  # Make a directory to save created files.
-    for fault_class in fault_classes:
-        for i in range(number_of_files_in_each_class):
-            data = np.random.rand(1024,)
-            file_name = &quot;./random_data/&quot; + eval(&quot;fault_class&quot;) + &quot;_&quot; + &quot;{0:03}&quot;.format(i+1) + &quot;.csv&quot; # This creates file_name
-            np.savetxt(eval(&quot;file_name&quot;), data, delimiter = &quot;,&quot;, header = &quot;V1&quot;, comments = &quot;&quot;)
-        print(str(eval(&quot;number_of_files_in_each_class&quot;)) + &quot; &quot; + eval(&quot;fault_class&quot;) + &quot; files&quot;  + &quot; created.&quot;)</code></pre>
-<p>Now use the function to create 100 files each for five fault types.</p>
-<pre class="python"><code>create_random_csv_files([&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;], number_of_files_in_each_class = 100)</code></pre>
-<pre><code>100 Fault_1 files created.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> glob
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">1111</span>)
+</span></span></code></pre></div><p>First create a function that will generate random files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_random_csv_files</span>(fault_classes, number_of_files_in_each_class):
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>mkdir(<span style="color:#e6db74">&#34;./random_data/&#34;</span>)  <span style="color:#75715e"># Make a directory to save created files.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> fault_class <span style="color:#f92672">in</span> fault_classes:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(number_of_files_in_each_class):
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">1024</span>,)
+</span></span><span style="display:flex;"><span>            file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./random_data/&#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;fault_class&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{0:03}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.csv&#34;</span> <span style="color:#75715e"># This creates file_name</span>
+</span></span><span style="display:flex;"><span>            np<span style="color:#f92672">.</span>savetxt(eval(<span style="color:#e6db74">&#34;file_name&#34;</span>), data, delimiter <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span>, header <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;V1&#34;</span>, comments <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>        print(str(eval(<span style="color:#e6db74">&#34;number_of_files_in_each_class&#34;</span>)) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;fault_class&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; files&#34;</span>  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; created.&#34;</span>)
+</span></span></code></pre></div><p>Now use the function to create 100 files each for five fault types.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>create_random_csv_files([<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>], number_of_files_in_each_class <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>)
+</span></span></code></pre></div><pre><code>100 Fault_1 files created.
 100 Fault_2 files created.
 100 Fault_3 files created.
 100 Fault_4 files created.
-100 Fault_5 files created.</code></pre>
-<pre class="python"><code>files = glob.glob(&quot;./random_data/*&quot;)
-print(&quot;Total number of files: &quot;, len(files))
-print(&quot;Showing first 10 files...&quot;)
-files[:10]</code></pre>
-<pre><code>Total number of files:  500
+100 Fault_5 files created.
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/*&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Total number of files: &#34;</span>, len(files))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Showing first 10 files...&#34;</span>)
+</span></span><span style="display:flex;"><span>files[:<span style="color:#ae81ff">10</span>]
+</span></span></code></pre></div><pre><code>Total number of files:  500
 Showing first 10 files...
 
-[&#39;./random_data/Fault_1_001.csv&#39;,
- &#39;./random_data/Fault_1_002.csv&#39;,
- &#39;./random_data/Fault_1_003.csv&#39;,
- &#39;./random_data/Fault_1_004.csv&#39;,
- &#39;./random_data/Fault_1_005.csv&#39;,
- &#39;./random_data/Fault_1_006.csv&#39;,
- &#39;./random_data/Fault_1_007.csv&#39;,
- &#39;./random_data/Fault_1_008.csv&#39;,
- &#39;./random_data/Fault_1_009.csv&#39;,
- &#39;./random_data/Fault_1_010.csv&#39;]</code></pre>
+['./random_data/Fault_1_001.csv',
+ './random_data/Fault_1_002.csv',
+ './random_data/Fault_1_003.csv',
+ './random_data/Fault_1_004.csv',
+ './random_data/Fault_1_005.csv',
+ './random_data/Fault_1_006.csv',
+ './random_data/Fault_1_007.csv',
+ './random_data/Fault_1_008.csv',
+ './random_data/Fault_1_009.csv',
+ './random_data/Fault_1_010.csv']
+</code></pre>
 <p>To extract labels from file name, extract the part of the file name that corresponds to fault type.</p>
-<pre class="python"><code>print(files[0])</code></pre>
-<pre><code>./random_data/Fault_1_001.csv</code></pre>
-<pre class="python"><code>print(files[0][14:21])</code></pre>
-<pre><code>Fault_1</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(files[<span style="color:#ae81ff">0</span>])
+</span></span></code></pre></div><pre><code>./random_data/Fault_1_001.csv
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(files[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">14</span>:<span style="color:#ae81ff">21</span>])
+</span></span></code></pre></div><pre><code>Fault_1
+</code></pre>
 <p>Now that data have been created, we will go to the next step. That is, create a custom dataloader, preprocess the time series like data into a matrix like shape such that a 2-D CNN can ingest it. We reshape the data in that way to just illustrate the point. Readers should use their own preprocessing steps.</p>
 <p><a id="sec_2"></a></p>
-</div>
-<div id="write-a-custom-dataloader" class="section level2">
-<h2>2. Write a custom dataloader</h2>
+<h2 id="2-write-a-custom-dataloader">2. Write a custom dataloader</h2>
 <p>We have to first create a <code>Dataset</code> class. Then we can pass the dataset to the dataloader. Every dataset class must implement the <code>__len__</code> method that determines the length of the dataset and <code>__getitem__</code> method that iterates over the dataset item by item. In our case, item would mean the processed version of a chunk of data.</p>
 <p>The following dataset class takes a list of file names as first argument. The second argument is batch_size. batch_size determines how many files we will process at one go. As we will be solving a classification problem, we have to assign labels to each raw data. We will use following labels for convenience.</p>
 <table>
 <thead>
-<tr class="header">
-<th align="center">Class</th>
-<th align="center">Label</th>
+<tr>
+<th style="text-align:center">Class</th>
+<th style="text-align:center">Label</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="center">Fault_1</td>
-<td align="center">0</td>
+<tr>
+<td style="text-align:center">Fault_1</td>
+<td style="text-align:center">0</td>
 </tr>
-<tr class="even">
-<td align="center">Fault_2</td>
-<td align="center">1</td>
+<tr>
+<td style="text-align:center">Fault_2</td>
+<td style="text-align:center">1</td>
 </tr>
-<tr class="odd">
-<td align="center">Fault_3</td>
-<td align="center">2</td>
+<tr>
+<td style="text-align:center">Fault_3</td>
+<td style="text-align:center">2</td>
 </tr>
-<tr class="even">
-<td align="center">Fault_4</td>
-<td align="center">3</td>
+<tr>
+<td style="text-align:center">Fault_4</td>
+<td style="text-align:center">3</td>
 </tr>
-<tr class="odd">
-<td align="center">Fault_5</td>
-<td align="center">4</td>
+<tr>
+<td style="text-align:center">Fault_5</td>
+<td style="text-align:center">4</td>
 </tr>
 </tbody>
 </table>
-<pre class="python"><code>import pandas as pd
-import re   
-import torch
-from torch.utils.data import Dataset
-print(&quot;PyTorch Version: &quot;, torch.__version__)</code></pre>
-<pre><code>PyTorch Version:  1.7.1</code></pre>
-<pre class="python"><code>class CustomDataset(Dataset):
-  def __init__(self, filenames, batch_size):
-    # `filenames` is a list of strings that contains all file names.
-    # `batch_size` determines the number of files that we want to read in a chunk.
-        self.filenames= filenames
-        self.batch_size = batch_size
-  def __len__(self):
-        return int(np.ceil(len(self.filenames) / float(self.batch_size)))   # Number of chunks.
-  def __getitem__(self, idx): #idx means index of the chunk.
-    # In this method, we do all the preprocessing.
-    # First read data from files in a chunk. Preprocess it. Extract labels. Then return data and labels.
-        batch_x = self.filenames[idx * self.batch_size:(idx + 1) * self.batch_size]   # This extracts one batch of file names from the list `filenames`.
-        data = []
-        labels = []
-        label_classes = [&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;]
-        for file in batch_x:
-            temp = pd.read_csv(open(file,&#39;r&#39;)) # Change this line to read any other type of file
-            data.append(temp.values.reshape(32,32,1)) # Convert column data to matrix like data with one channel
-            pattern = &quot;^&quot; + eval(&quot;file[14:21]&quot;)      # Pattern extracted from file_name
-            for j in range(len(label_classes)):
-                if re.match(pattern, label_classes[j]): # Pattern is matched against different label_classes
-                    labels.append(j)  
-        data = np.asarray(data).reshape(-1,1,32,32) # Because of Pytorch&#39;s channel first convention
-        labels = np.asarray(labels)
-
-        # The following condition is actually needed in Pytorch. Otherwise, for our particular example, the iterator will be an infinite loop.
-        # Readers can verify this by removing this condition.
-        if idx == self.__len__():  
-          raise IndexError
-
-        return data, labels</code></pre>
-<p>To read any other file format, inside the <code>__getitem__</code> method change the line that reads files. This will enable us to read different file formats, be it <code>.txt</code> or <code>.npz</code> or any other. Preprocessing of data, different from what we have done in this blog, can be done within the <code>__getitem__</code> method.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> re   
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> torch.utils.data <span style="color:#f92672">import</span> Dataset
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;PyTorch Version: &#34;</span>, torch<span style="color:#f92672">.</span>__version__)
+</span></span></code></pre></div><pre><code>PyTorch Version:  1.7.1
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span>(Dataset):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __init__(self, filenames, batch_size):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># `filenames` is a list of strings that contains all file names.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># `batch_size` determines the number of files that we want to read in a chunk.</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>filenames<span style="color:#f92672">=</span> filenames
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>batch_size <span style="color:#f92672">=</span> batch_size
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __len__(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> int(np<span style="color:#f92672">.</span>ceil(len(self<span style="color:#f92672">.</span>filenames) <span style="color:#f92672">/</span> float(self<span style="color:#f92672">.</span>batch_size)))   <span style="color:#75715e"># Number of chunks.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __getitem__(self, idx): <span style="color:#75715e">#idx means index of the chunk.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># In this method, we do all the preprocessing.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># First read data from files in a chunk. Preprocess it. Extract labels. Then return data and labels.</span>
+</span></span><span style="display:flex;"><span>        batch_x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>filenames[idx <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>batch_size:(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>batch_size]   <span style="color:#75715e"># This extracts one batch of file names from the list `filenames`.</span>
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        labels <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        label_classes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> batch_x:
+</span></span><span style="display:flex;"><span>            temp <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(open(file,<span style="color:#e6db74">&#39;r&#39;</span>)) <span style="color:#75715e"># Change this line to read any other type of file</span>
+</span></span><span style="display:flex;"><span>            data<span style="color:#f92672">.</span>append(temp<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#75715e"># Convert column data to matrix like data with one channel</span>
+</span></span><span style="display:flex;"><span>            pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;^&#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;file[14:21]&#34;</span>)      <span style="color:#75715e"># Pattern extracted from file_name</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(len(label_classes)):
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(pattern, label_classes[j]): <span style="color:#75715e"># Pattern is matched against different label_classes</span>
+</span></span><span style="display:flex;"><span>                    labels<span style="color:#f92672">.</span>append(j)  
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(data)<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>) <span style="color:#75715e"># Because of Pytorch&#39;s channel first convention</span>
+</span></span><span style="display:flex;"><span>        labels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(labels)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># The following condition is actually needed in Pytorch. Otherwise, for our particular example, the iterator will be an infinite loop.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Readers can verify this by removing this condition.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> idx <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>__len__():  
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">IndexError</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> data, labels
+</span></span></code></pre></div><p>To read any other file format, inside the <code>__getitem__</code> method change the line that reads files. This will enable us to read different file formats, be it <code>.txt</code> or <code>.npz</code> or any other. Preprocessing of data, different from what we have done in this blog, can be done within the <code>__getitem__</code> method.</p>
 <p>Now we will check whether the dataset works as intended or not. We will set batch_size to 10. This means that files in chunks of 10 will be read and processed. The list of files from which 10 are chosen can be an ordered file list or shuffled list. In case, the files are not shuffled, use np.random.shuffle(file_list) to shuffle files.</p>
 <p>In the demonstration, we will read files from an ordered list. This will help us check any errors in the code.</p>
-<pre class="python"><code>check_dataset = CustomDataset(filenames = files, batch_size = 10)</code></pre>
-<pre class="python"><code>check_dataset.__len__()</code></pre>
-<pre><code>50</code></pre>
-<pre class="python"><code>for i, (data, labels) in enumerate(check_dataset):
-  print(data.shape, labels.shape)
-  print(labels)
-  if i == 5: break</code></pre>
-<pre><code>(10, 1, 32, 32) (10,)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>check_dataset <span style="color:#f92672">=</span> CustomDataset(filenames <span style="color:#f92672">=</span> files, batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>check_dataset<span style="color:#f92672">.</span>__len__()
+</span></span></code></pre></div><pre><code>50
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, (data, labels) <span style="color:#f92672">in</span> enumerate(check_dataset):
+</span></span><span style="display:flex;"><span>  print(data<span style="color:#f92672">.</span>shape, labels<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>  print(labels)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span>: <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><pre><code>(10, 1, 32, 32) (10,)
 [0 0 0 0 0 0 0 0 0 0]
 (10, 1, 32, 32) (10,)
 [0 0 0 0 0 0 0 0 0 0]
@@ -1013,128 +1010,132 @@ print(&quot;PyTorch Version: &quot;, torch.__version__)</code></pre>
 (10, 1, 32, 32) (10,)
 [0 0 0 0 0 0 0 0 0 0]
 (10, 1, 32, 32) (10,)
-[0 0 0 0 0 0 0 0 0 0]</code></pre>
+[0 0 0 0 0 0 0 0 0 0]
+</code></pre>
 <p>Run the above cell multiple times to observe different labels. Label 1 appears only when all the files corresponding to “Fault_1” have been read. There are 100 files for “Fault_1” and we have set batch_size to 10. In the above cell we are iterating over the generator only 6 times. When number of iterations become greater than 10, we see label 1 and subsequently other labels. This will happen only if our initial file list is not shuffled. If the original list is shuffled, we will get random labels.</p>
-<p>To train a deep learning model, we need to create a data loader from the dataset. Dataloaders offer multi-worker, multi-processing capabilities without requiring us to right codes for that. So let’s first create a dataloader from the dataset.</p>
-<pre class="python"><code>from torch.utils.data import DataLoader</code></pre>
-<pre class="python"><code>dataloader = DataLoader(check_dataset,batch_size = None, shuffle = True) # Here we select batch size to be None as we have already batched our data in dataset.</code></pre>
-<p>Check whether dataloader works on not.</p>
-<pre class="python"><code>for i, (data,labels) in enumerate(dataloader):
-    print(data.shape, labels.shape)
-    print(labels)  # Just to see the labels.
-    if i == 3: break</code></pre>
-<pre><code>torch.Size([10, 1, 32, 32]) torch.Size([10])
+<p>To train a deep learning model, we need to create a data loader from the dataset. Dataloaders offer multi-worker, multi-processing capabilities without requiring us to right codes for that. So let&rsquo;s first create a dataloader from the dataset.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> torch.utils.data <span style="color:#f92672">import</span> DataLoader
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataloader <span style="color:#f92672">=</span> DataLoader(check_dataset,batch_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>, shuffle <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>) <span style="color:#75715e"># Here we select batch size to be None as we have already batched our data in dataset.</span>
+</span></span></code></pre></div><p>Check whether dataloader works on not.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, (data,labels) <span style="color:#f92672">in</span> enumerate(dataloader):
+</span></span><span style="display:flex;"><span>    print(data<span style="color:#f92672">.</span>shape, labels<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>    print(labels)  <span style="color:#75715e"># Just to see the labels.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>: <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><pre><code>torch.Size([10, 1, 32, 32]) torch.Size([10])
 tensor([4, 4, 4, 4, 4, 4, 4, 4, 4, 4])
 torch.Size([10, 1, 32, 32]) torch.Size([10])
 tensor([2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
 torch.Size([10, 1, 32, 32]) torch.Size([10])
 tensor([3, 3, 3, 3, 3, 3, 3, 3, 3, 3])
 torch.Size([10, 1, 32, 32]) torch.Size([10])
-tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre>
+tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+</code></pre>
 <p>Now that dataloader works, we will use it to train a simple deep learning model. The focus of this post is not on the model itself. So we will use a simplest model. If readers want a different model, they can do so by just replacing our model with theirs.</p>
 <p><a id="sec_3"></a></p>
-</div>
-<div id="feed-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs" class="section level2">
-<h2>3. Feed chunks of data to a CNN model and train it for several epochs</h2>
+<h2 id="3-feed-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs">3. Feed chunks of data to a CNN model and train it for several epochs</h2>
 <p>But before we build the model and train it, we will first move our files to different folders depending on their fault type. We do so as it will be convenient later to create a training, validation, and test set from the data.</p>
-<pre class="python"><code>import shutil</code></pre>
-<p>Create five different folders one each for a given fault type.</p>
-<pre class="python"><code>fault_folders = [&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;]
-for folder_name in fault_folders:
-    os.mkdir(os.path.join(&quot;./random_data&quot;, folder_name))</code></pre>
-<p>Move files into those folders.</p>
-<pre class="python"><code>for file in files:
-    pattern = &quot;^&quot; + eval(&quot;file[14:21]&quot;)
-    for j in range(len(fault_folders)):
-        if re.match(pattern, fault_folders[j]):
-            dest = os.path.join(&quot;./random_data/&quot;,eval(&quot;fault_folders[j]&quot;))
-            shutil.move(file, dest)</code></pre>
-<pre class="python"><code>glob.glob(&quot;./random_data/*&quot;)</code></pre>
-<pre><code>[&#39;./random_data/Fault_1&#39;,
- &#39;./random_data/Fault_2&#39;,
- &#39;./random_data/Fault_3&#39;,
- &#39;./random_data/Fault_4&#39;,
- &#39;./random_data/Fault_5&#39;]</code></pre>
-<pre class="python"><code>glob.glob(&quot;./random_data/Fault_1/*&quot;)[:10] # Showing first 10 files of Fault_1 folder</code></pre>
-<pre><code>[&#39;./random_data/Fault_1/Fault_1_001.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_002.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_003.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_004.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_005.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_006.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_007.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_008.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_009.csv&#39;,
- &#39;./random_data/Fault_1/Fault_1_010.csv&#39;]</code></pre>
-<pre class="python"><code>glob.glob(&quot;./random_data/Fault_3/*&quot;)[:10] # Showing first 10 files of Fault_3 folder</code></pre>
-<pre><code>[&#39;./random_data/Fault_3/Fault_3_001.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_002.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_003.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_004.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_005.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_006.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_007.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_008.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_009.csv&#39;,
- &#39;./random_data/Fault_3/Fault_3_010.csv&#39;]</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> shutil
+</span></span></code></pre></div><p>Create five different folders one each for a given fault type.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_folders <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> folder_name <span style="color:#f92672">in</span> fault_folders:
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>mkdir(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;./random_data&#34;</span>, folder_name))
+</span></span></code></pre></div><p>Move files into those folders.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> files:
+</span></span><span style="display:flex;"><span>    pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;^&#34;</span> <span style="color:#f92672">+</span> eval(<span style="color:#e6db74">&#34;file[14:21]&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(len(fault_folders)):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(pattern, fault_folders[j]):
+</span></span><span style="display:flex;"><span>            dest <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;./random_data/&#34;</span>,eval(<span style="color:#e6db74">&#34;fault_folders[j]&#34;</span>))
+</span></span><span style="display:flex;"><span>            shutil<span style="color:#f92672">.</span>move(file, dest)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/*&#34;</span>)
+</span></span></code></pre></div><pre><code>['./random_data/Fault_1',
+ './random_data/Fault_2',
+ './random_data/Fault_3',
+ './random_data/Fault_4',
+ './random_data/Fault_5']
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_1/*&#34;</span>)[:<span style="color:#ae81ff">10</span>] <span style="color:#75715e"># Showing first 10 files of Fault_1 folder</span>
+</span></span></code></pre></div><pre><code>['./random_data/Fault_1/Fault_1_001.csv',
+ './random_data/Fault_1/Fault_1_002.csv',
+ './random_data/Fault_1/Fault_1_003.csv',
+ './random_data/Fault_1/Fault_1_004.csv',
+ './random_data/Fault_1/Fault_1_005.csv',
+ './random_data/Fault_1/Fault_1_006.csv',
+ './random_data/Fault_1/Fault_1_007.csv',
+ './random_data/Fault_1/Fault_1_008.csv',
+ './random_data/Fault_1/Fault_1_009.csv',
+ './random_data/Fault_1/Fault_1_010.csv']
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_3/*&#34;</span>)[:<span style="color:#ae81ff">10</span>] <span style="color:#75715e"># Showing first 10 files of Fault_3 folder</span>
+</span></span></code></pre></div><pre><code>['./random_data/Fault_3/Fault_3_001.csv',
+ './random_data/Fault_3/Fault_3_002.csv',
+ './random_data/Fault_3/Fault_3_003.csv',
+ './random_data/Fault_3/Fault_3_004.csv',
+ './random_data/Fault_3/Fault_3_005.csv',
+ './random_data/Fault_3/Fault_3_006.csv',
+ './random_data/Fault_3/Fault_3_007.csv',
+ './random_data/Fault_3/Fault_3_008.csv',
+ './random_data/Fault_3/Fault_3_009.csv',
+ './random_data/Fault_3/Fault_3_010.csv']
+</code></pre>
 <p>Prepare the data for training set, validation set, and test_set. For each fault type, we will keep 70 files for training, 10 files for validation and 20 files for testing.</p>
-<pre class="python"><code>fault_1_files = glob.glob(&quot;./random_data/Fault_1/*&quot;)
-fault_2_files = glob.glob(&quot;./random_data/Fault_2/*&quot;)
-fault_3_files = glob.glob(&quot;./random_data/Fault_3/*&quot;)
-fault_4_files = glob.glob(&quot;./random_data/Fault_4/*&quot;)
-fault_5_files = glob.glob(&quot;./random_data/Fault_5/*&quot;)</code></pre>
-<pre class="python"><code>from sklearn.model_selection import train_test_split</code></pre>
-<pre class="python"><code>fault_1_train, fault_1_test = train_test_split(fault_1_files, test_size = 20, random_state = 5)
-fault_2_train, fault_2_test = train_test_split(fault_2_files, test_size = 20, random_state = 54)
-fault_3_train, fault_3_test = train_test_split(fault_3_files, test_size = 20, random_state = 543)
-fault_4_train, fault_4_test = train_test_split(fault_4_files, test_size = 20, random_state = 5432)
-fault_5_train, fault_5_test = train_test_split(fault_5_files, test_size = 20, random_state = 54321)</code></pre>
-<pre class="python"><code>fault_1_train, fault_1_val = train_test_split(fault_1_train, test_size = 10, random_state = 1)
-fault_2_train, fault_2_val = train_test_split(fault_2_train, test_size = 10, random_state = 12)
-fault_3_train, fault_3_val = train_test_split(fault_3_train, test_size = 10, random_state = 123)
-fault_4_train, fault_4_val = train_test_split(fault_4_train, test_size = 10, random_state = 1234)
-fault_5_train, fault_5_val = train_test_split(fault_5_train, test_size = 10, random_state = 12345)</code></pre>
-<pre class="python"><code>train_file_names = fault_1_train + fault_2_train + fault_3_train + fault_4_train + fault_5_train
-validation_file_names = fault_1_val + fault_2_val + fault_3_val + fault_4_val + fault_5_val
-test_file_names = fault_1_test + fault_2_test + fault_3_test + fault_4_test + fault_5_test
-
-# Shuffle training files (We don&#39;t need to shuffle validation and test data)
-np.random.shuffle(train_file_names)</code></pre>
-<pre class="python"><code>print(&quot;Number of train_files:&quot; ,len(train_file_names))
-print(&quot;Number of validation_files:&quot; ,len(validation_file_names))
-print(&quot;Number of test_files:&quot; ,len(test_file_names))</code></pre>
-<pre><code>Number of train_files: 350
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_1_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_1/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_2_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_2/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_3_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_3/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_4_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_4/*&#34;</span>)
+</span></span><span style="display:flex;"><span>fault_5_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/Fault_5/*&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_1_train, fault_1_test <span style="color:#f92672">=</span> train_test_split(fault_1_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>fault_2_train, fault_2_test <span style="color:#f92672">=</span> train_test_split(fault_2_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">54</span>)
+</span></span><span style="display:flex;"><span>fault_3_train, fault_3_test <span style="color:#f92672">=</span> train_test_split(fault_3_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">543</span>)
+</span></span><span style="display:flex;"><span>fault_4_train, fault_4_test <span style="color:#f92672">=</span> train_test_split(fault_4_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">5432</span>)
+</span></span><span style="display:flex;"><span>fault_5_train, fault_5_test <span style="color:#f92672">=</span> train_test_split(fault_5_files, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">54321</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fault_1_train, fault_1_val <span style="color:#f92672">=</span> train_test_split(fault_1_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>fault_2_train, fault_2_val <span style="color:#f92672">=</span> train_test_split(fault_2_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>fault_3_train, fault_3_val <span style="color:#f92672">=</span> train_test_split(fault_3_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">123</span>)
+</span></span><span style="display:flex;"><span>fault_4_train, fault_4_val <span style="color:#f92672">=</span> train_test_split(fault_4_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">1234</span>)
+</span></span><span style="display:flex;"><span>fault_5_train, fault_5_val <span style="color:#f92672">=</span> train_test_split(fault_5_train, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, random_state <span style="color:#f92672">=</span> <span style="color:#ae81ff">12345</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>train_file_names <span style="color:#f92672">=</span> fault_1_train <span style="color:#f92672">+</span> fault_2_train <span style="color:#f92672">+</span> fault_3_train <span style="color:#f92672">+</span> fault_4_train <span style="color:#f92672">+</span> fault_5_train
+</span></span><span style="display:flex;"><span>validation_file_names <span style="color:#f92672">=</span> fault_1_val <span style="color:#f92672">+</span> fault_2_val <span style="color:#f92672">+</span> fault_3_val <span style="color:#f92672">+</span> fault_4_val <span style="color:#f92672">+</span> fault_5_val
+</span></span><span style="display:flex;"><span>test_file_names <span style="color:#f92672">=</span> fault_1_test <span style="color:#f92672">+</span> fault_2_test <span style="color:#f92672">+</span> fault_3_test <span style="color:#f92672">+</span> fault_4_test <span style="color:#f92672">+</span> fault_5_test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Shuffle training files (We don&#39;t need to shuffle validation and test data)</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>shuffle(train_file_names)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Number of train_files:&#34;</span> ,len(train_file_names))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Number of validation_files:&#34;</span> ,len(validation_file_names))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Number of test_files:&#34;</span> ,len(test_file_names))
+</span></span></code></pre></div><pre><code>Number of train_files: 350
 Number of validation_files: 50
-Number of test_files: 100</code></pre>
+Number of test_files: 100
+</code></pre>
 <p>Create the datasets and dataloaders for training, validation, and test set.</p>
-<pre class="python"><code>batch_size = 10
-train_dataset = CustomDataset(filenames = train_file_names, batch_size = batch_size)
-val_dataset = CustomDataset(filenames = validation_file_names, batch_size = batch_size)
-test_dataset = CustomDataset(filenames = test_file_names, batch_size = batch_size)
-
-train_dataloader = DataLoader(train_dataset, batch_size = None, shuffle = True)
-val_dataloader = DataLoader(val_dataset, batch_size = None)  # Shuffle is False by default.
-test_dataloader = DataLoader(test_dataset, batch_size = None)</code></pre>
-<p>Now create the model. We will build one of the simplest models. Readers are free to choose a different model of their choice. If <code>torchsummary</code> is not installed, use <code>pip install torchsummary</code> to install it.</p>
-<pre class="python"><code>from torch.nn import Sequential, Conv2d, MaxPool2d, Flatten, Linear, ReLU, Softmax
-from torchsummary import summary</code></pre>
-<pre class="python"><code>dev = torch.device(&quot;cuda&quot;) if torch.cuda.is_available() else torch.device(&quot;cpu&quot;)</code></pre>
-<pre class="python"><code>model = Sequential(
-        Conv2d(in_channels = 1, out_channels = 16, kernel_size = 3),
-        ReLU(),
-        MaxPool2d(2),
-        Conv2d(16,32,3),
-        ReLU(),
-        MaxPool2d(2),
-        Flatten(),
-        Linear(in_features = 1152, out_features=16),
-        ReLU(),
-        Linear(16, 5),
-        Softmax(dim = 1)
-)
-model.to(dev)
-summary(model,input_size = (1,32,32), device = dev.type)</code></pre>
-<pre><code>----------------------------------------------------------------
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>train_dataset <span style="color:#f92672">=</span> CustomDataset(filenames <span style="color:#f92672">=</span> train_file_names, batch_size <span style="color:#f92672">=</span> batch_size)
+</span></span><span style="display:flex;"><span>val_dataset <span style="color:#f92672">=</span> CustomDataset(filenames <span style="color:#f92672">=</span> validation_file_names, batch_size <span style="color:#f92672">=</span> batch_size)
+</span></span><span style="display:flex;"><span>test_dataset <span style="color:#f92672">=</span> CustomDataset(filenames <span style="color:#f92672">=</span> test_file_names, batch_size <span style="color:#f92672">=</span> batch_size)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>train_dataloader <span style="color:#f92672">=</span> DataLoader(train_dataset, batch_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>, shuffle <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>val_dataloader <span style="color:#f92672">=</span> DataLoader(val_dataset, batch_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>)  <span style="color:#75715e"># Shuffle is False by default.</span>
+</span></span><span style="display:flex;"><span>test_dataloader <span style="color:#f92672">=</span> DataLoader(test_dataset, batch_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>)
+</span></span></code></pre></div><p>Now create the model. We will build one of the simplest models. Readers are free to choose a different model of their choice. If <code>torchsummary</code> is not installed, use <code>pip install torchsummary</code> to install it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> torch.nn <span style="color:#f92672">import</span> Sequential, Conv2d, MaxPool2d, Flatten, Linear, ReLU, Softmax
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> torchsummary <span style="color:#f92672">import</span> summary
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dev <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>device(<span style="color:#e6db74">&#34;cuda&#34;</span>) <span style="color:#66d9ef">if</span> torch<span style="color:#f92672">.</span>cuda<span style="color:#f92672">.</span>is_available() <span style="color:#66d9ef">else</span> torch<span style="color:#f92672">.</span>device(<span style="color:#e6db74">&#34;cpu&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential(
+</span></span><span style="display:flex;"><span>        Conv2d(in_channels <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, out_channels <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>, kernel_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>        ReLU(),
+</span></span><span style="display:flex;"><span>        MaxPool2d(<span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>        Conv2d(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>        ReLU(),
+</span></span><span style="display:flex;"><span>        MaxPool2d(<span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>        Flatten(),
+</span></span><span style="display:flex;"><span>        Linear(in_features <span style="color:#f92672">=</span> <span style="color:#ae81ff">1152</span>, out_features<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>),
+</span></span><span style="display:flex;"><span>        ReLU(),
+</span></span><span style="display:flex;"><span>        Linear(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">5</span>),
+</span></span><span style="display:flex;"><span>        Softmax(dim <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>to(dev)
+</span></span><span style="display:flex;"><span>summary(model,input_size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>), device <span style="color:#f92672">=</span> dev<span style="color:#f92672">.</span>type)
+</span></span></code></pre></div><pre><code>----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
             Conv2d-1           [-1, 16, 30, 30]             160
@@ -1157,45 +1158,46 @@ Input size (MB): 0.00
 Forward/backward pass size (MB): 0.35
 Params size (MB): 0.09
 Estimated Total Size (MB): 0.44
-----------------------------------------------------------------</code></pre>
-<pre class="python"><code>criterion = torch.nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters())</code></pre>
-<pre class="python"><code>model = model.float()   # We will make all model parameters floats.
-epochs = 10
-for epoch in range(epochs):
-    running_loss_train = 0.0
-    running_loss_val = 0.0
-    correct_train = 0.0
-    correct_val = 0.0
-    num_labels_train = 0.0
-    num_labels_val = 0.0
-
-    # Training loop
-    for inputs, labels in train_dataloader:
-        inputs, labels = inputs.to(dev), labels.type(torch.LongTensor).to(dev) # PyTorch expects categorical targets as LongTensor.
-        optimizer.zero_grad()
-        outputs = model(inputs.float())
-        loss = criterion(outputs, labels)
-        loss.backward()
-        optimizer.step()
-        running_loss_train = running_loss_train + loss.item()
-        correct_train = correct_train + (torch.argmax(outputs,dim = 1) == labels).float().sum()
-        num_labels_train = num_labels_train + len(labels)
-
-    # Validation loop
-    for inputs, labels in val_dataloader:
-        inputs, labels = inputs.to(dev), labels.type(torch.LongTensor).to(dev) # PyTorch expects categorical targets as LongTensor.
-        outputs = model(inputs.float())
-        loss = criterion(outputs, labels)
-        running_loss_val = running_loss_val + loss.item()
-        correct_val = correct_val + (torch.argmax(outputs, dim = 1) == labels).float().sum()
-        num_labels_val = num_labels_val + len(labels)
-
-    train_accuracy = correct_train/num_labels_train
-    val_accuracy = correct_val/num_labels_val
-    print(&quot;Epoch:{}, Train_loss: {:.4f}, Train_accuracy: {:.4f}, Val_loss: {:.4f}, Val_accuracy: {:.4f}&quot;.\
-        format(epoch, running_loss_train/len(train_dataloader), train_accuracy, running_loss_val/len(val_dataloader), val_accuracy))</code></pre>
-<pre><code>Epoch:0, Train_loss: 1.6112, Train_accuracy: 0.2000, Val_loss: 1.6096, Val_accuracy: 0.2000
+----------------------------------------------------------------
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>criterion <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>CrossEntropyLoss()
+</span></span><span style="display:flex;"><span>optimizer <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>optim<span style="color:#f92672">.</span>Adam(model<span style="color:#f92672">.</span>parameters())
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>float()   <span style="color:#75715e"># We will make all model parameters floats.</span>
+</span></span><span style="display:flex;"><span>epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(epochs):
+</span></span><span style="display:flex;"><span>    running_loss_train <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>    running_loss_val <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>    correct_train <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>    correct_val <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>    num_labels_train <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>    num_labels_val <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Training loop</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> inputs, labels <span style="color:#f92672">in</span> train_dataloader:
+</span></span><span style="display:flex;"><span>        inputs, labels <span style="color:#f92672">=</span> inputs<span style="color:#f92672">.</span>to(dev), labels<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>LongTensor)<span style="color:#f92672">.</span>to(dev) <span style="color:#75715e"># PyTorch expects categorical targets as LongTensor.</span>
+</span></span><span style="display:flex;"><span>        optimizer<span style="color:#f92672">.</span>zero_grad()
+</span></span><span style="display:flex;"><span>        outputs <span style="color:#f92672">=</span> model(inputs<span style="color:#f92672">.</span>float())
+</span></span><span style="display:flex;"><span>        loss <span style="color:#f92672">=</span> criterion(outputs, labels)
+</span></span><span style="display:flex;"><span>        loss<span style="color:#f92672">.</span>backward()
+</span></span><span style="display:flex;"><span>        optimizer<span style="color:#f92672">.</span>step()
+</span></span><span style="display:flex;"><span>        running_loss_train <span style="color:#f92672">=</span> running_loss_train <span style="color:#f92672">+</span> loss<span style="color:#f92672">.</span>item()
+</span></span><span style="display:flex;"><span>        correct_train <span style="color:#f92672">=</span> correct_train <span style="color:#f92672">+</span> (torch<span style="color:#f92672">.</span>argmax(outputs,dim <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> labels)<span style="color:#f92672">.</span>float()<span style="color:#f92672">.</span>sum()
+</span></span><span style="display:flex;"><span>        num_labels_train <span style="color:#f92672">=</span> num_labels_train <span style="color:#f92672">+</span> len(labels)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Validation loop</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> inputs, labels <span style="color:#f92672">in</span> val_dataloader:
+</span></span><span style="display:flex;"><span>        inputs, labels <span style="color:#f92672">=</span> inputs<span style="color:#f92672">.</span>to(dev), labels<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>LongTensor)<span style="color:#f92672">.</span>to(dev) <span style="color:#75715e"># PyTorch expects categorical targets as LongTensor.</span>
+</span></span><span style="display:flex;"><span>        outputs <span style="color:#f92672">=</span> model(inputs<span style="color:#f92672">.</span>float())
+</span></span><span style="display:flex;"><span>        loss <span style="color:#f92672">=</span> criterion(outputs, labels)
+</span></span><span style="display:flex;"><span>        running_loss_val <span style="color:#f92672">=</span> running_loss_val <span style="color:#f92672">+</span> loss<span style="color:#f92672">.</span>item()
+</span></span><span style="display:flex;"><span>        correct_val <span style="color:#f92672">=</span> correct_val <span style="color:#f92672">+</span> (torch<span style="color:#f92672">.</span>argmax(outputs, dim <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> labels)<span style="color:#f92672">.</span>float()<span style="color:#f92672">.</span>sum()
+</span></span><span style="display:flex;"><span>        num_labels_val <span style="color:#f92672">=</span> num_labels_val <span style="color:#f92672">+</span> len(labels)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    train_accuracy <span style="color:#f92672">=</span> correct_train<span style="color:#f92672">/</span>num_labels_train
+</span></span><span style="display:flex;"><span>    val_accuracy <span style="color:#f92672">=</span> correct_val<span style="color:#f92672">/</span>num_labels_val
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Epoch:</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, Train_loss: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">, Train_accuracy: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">, Val_loss: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">, Val_accuracy: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>\
+</span></span><span style="display:flex;"><span>        format(epoch, running_loss_train<span style="color:#f92672">/</span>len(train_dataloader), train_accuracy, running_loss_val<span style="color:#f92672">/</span>len(val_dataloader), val_accuracy))
+</span></span></code></pre></div><pre><code>Epoch:0, Train_loss: 1.6112, Train_accuracy: 0.2000, Val_loss: 1.6096, Val_accuracy: 0.2000
 Epoch:1, Train_loss: 1.6096, Train_accuracy: 0.2000, Val_loss: 1.6097, Val_accuracy: 0.2000
 Epoch:2, Train_loss: 1.6095, Train_accuracy: 0.2000, Val_loss: 1.6096, Val_accuracy: 0.2000
 Epoch:3, Train_loss: 1.6090, Train_accuracy: 0.2000, Val_loss: 1.6097, Val_accuracy: 0.2000
@@ -1204,98 +1206,101 @@ Epoch:5, Train_loss: 1.6075, Train_accuracy: 0.2000, Val_loss: 1.6099, Val_accur
 Epoch:6, Train_loss: 1.6084, Train_accuracy: 0.2057, Val_loss: 1.6096, Val_accuracy: 0.2000
 Epoch:7, Train_loss: 1.6045, Train_accuracy: 0.2000, Val_loss: 1.6101, Val_accuracy: 0.2000
 Epoch:8, Train_loss: 1.6051, Train_accuracy: 0.2000, Val_loss: 1.6100, Val_accuracy: 0.2000
-Epoch:9, Train_loss: 1.6001, Train_accuracy: 0.2057, Val_loss: 1.6126, Val_accuracy: 0.2200</code></pre>
-<p>Before we make any comments on training accuracy and validation accuracy, we should keep in mind that our original dataset contains only random numbers. So it would be better if we don’t interpret the results here.</p>
+Epoch:9, Train_loss: 1.6001, Train_accuracy: 0.2057, Val_loss: 1.6126, Val_accuracy: 0.2200
+</code></pre>
+<p>Before we make any comments on training accuracy and validation accuracy, we should keep in mind that our original dataset contains only random numbers. So it would be better if we don&rsquo;t interpret the results here.</p>
 <p>Compute test score.</p>
-<pre class="python"><code>running_loss_test = 0.0
-correct_test = 0.0
-num_labels_test = 0.0
-for inputs, labels in test_dataloader:
-    inputs, labels = inputs.to(dev), labels.type(torch.LongTensor).to(dev) # Pytorch expects categorical targets as LongTensor.
-    outputs = model(inputs.float())
-    loss = criterion(outputs.to(dev), labels.to(dev))
-    running_loss_test = running_loss_test + loss.item()
-    correct_test = correct_test + (torch.argmax(outputs, dim = 1) == labels).float().sum()
-    num_labels_test = num_labels_test + len(labels)
-
-test_accuracy = correct_test/num_labels_test
-print(&quot;Test_loss: {:.4f}, Test_accuracy: {:.4f}&quot;.format(running_loss_test/len(test_dataloader), test_accuracy))</code></pre>
-<pre><code>Test_loss: 1.6130, Test_accuracy: 0.2100</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>running_loss_test <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>correct_test <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>num_labels_test <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> inputs, labels <span style="color:#f92672">in</span> test_dataloader:
+</span></span><span style="display:flex;"><span>    inputs, labels <span style="color:#f92672">=</span> inputs<span style="color:#f92672">.</span>to(dev), labels<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>LongTensor)<span style="color:#f92672">.</span>to(dev) <span style="color:#75715e"># Pytorch expects categorical targets as LongTensor.</span>
+</span></span><span style="display:flex;"><span>    outputs <span style="color:#f92672">=</span> model(inputs<span style="color:#f92672">.</span>float())
+</span></span><span style="display:flex;"><span>    loss <span style="color:#f92672">=</span> criterion(outputs<span style="color:#f92672">.</span>to(dev), labels<span style="color:#f92672">.</span>to(dev))
+</span></span><span style="display:flex;"><span>    running_loss_test <span style="color:#f92672">=</span> running_loss_test <span style="color:#f92672">+</span> loss<span style="color:#f92672">.</span>item()
+</span></span><span style="display:flex;"><span>    correct_test <span style="color:#f92672">=</span> correct_test <span style="color:#f92672">+</span> (torch<span style="color:#f92672">.</span>argmax(outputs, dim <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> labels)<span style="color:#f92672">.</span>float()<span style="color:#f92672">.</span>sum()
+</span></span><span style="display:flex;"><span>    num_labels_test <span style="color:#f92672">=</span> num_labels_test <span style="color:#f92672">+</span> len(labels)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>test_accuracy <span style="color:#f92672">=</span> correct_test<span style="color:#f92672">/</span>num_labels_test
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Test_loss: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">, Test_accuracy: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(running_loss_test<span style="color:#f92672">/</span>len(test_dataloader), test_accuracy))
+</span></span></code></pre></div><pre><code>Test_loss: 1.6130, Test_accuracy: 0.2100
+</code></pre>
 <p><a id="sec_4"></a></p>
-</div>
-<div id="how-to-make-predictions" class="section level2">
-<h2>4. How to make predictions?</h2>
+<h2 id="4-how-to-make-predictions">4. How to make predictions?</h2>
 <p>Until now, we have evaluated our model on a kept out test set. For our test set, both data and labels were known. So we evaluated its performance. But oftentimes, for test set, we don’t have access to true labels. Rather, we have to make predictions on the data available. This is the case in online competitions where we have to submit our predictions on a test set for which we don’t know the labels. We will call this set (without any labels) the prediction set. This naming convention is arbitrary but we will stick with it.</p>
 <p>If the whole of our prediction set fits into memory, we can just make prediction on this data and then use <code>np.argmax()</code> or <code>torch.argmax()</code> to obtain predicted class labels. Otherwise, we can read files in prediction set in chunks, make predictions on the chunks and finally append our result.</p>
 <p>Yet another pedantic way of doing this is to write a separate dataset to read files from the prediction set in chunks and make predictions on it. We will show how this approach works. As we don’t have a prediction set yet, we will first create some files and save it to the prediction set.</p>
-<pre class="python"><code>def create_prediction_set(num_files = 20):
-    os.mkdir(&quot;./random_data/prediction_set&quot;)
-    for i in range(num_files):
-        data = np.random.randn(1024,)
-        file_name = &quot;./random_data/prediction_set/&quot;  + &quot;file_&quot; + &quot;{0:03}&quot;.format(i+1) + &quot;.csv&quot; # This creates file_name
-        np.savetxt(eval(&quot;file_name&quot;), data, delimiter = &quot;,&quot;, header = &quot;V1&quot;, comments = &quot;&quot;)
-    print(str(eval(&quot;num_files&quot;)) + &quot; &quot;+ &quot; files created in prediction set.&quot;)</code></pre>
-<p>Create some files for prediction set.</p>
-<pre class="python"><code>create_prediction_set(num_files = 55)</code></pre>
-<pre><code>55  files created in prediction set.</code></pre>
-<pre class="python"><code>prediction_files = glob.glob(&quot;./random_data/prediction_set/*&quot;)
-print(&quot;Total number of files: &quot;, len(prediction_files))
-print(&quot;Showing first 10 files...&quot;)
-prediction_files[:10]</code></pre>
-<pre><code>Total number of files:  55
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_prediction_set</span>(num_files <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>):
+</span></span><span style="display:flex;"><span>    os<span style="color:#f92672">.</span>mkdir(<span style="color:#e6db74">&#34;./random_data/prediction_set&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num_files):
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">1024</span>,)
+</span></span><span style="display:flex;"><span>        file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./random_data/prediction_set/&#34;</span>  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;file_&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{0:03}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.csv&#34;</span> <span style="color:#75715e"># This creates file_name</span>
+</span></span><span style="display:flex;"><span>        np<span style="color:#f92672">.</span>savetxt(eval(<span style="color:#e6db74">&#34;file_name&#34;</span>), data, delimiter <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span>, header <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;V1&#34;</span>, comments <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(str(eval(<span style="color:#e6db74">&#34;num_files&#34;</span>)) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; files created in prediction set.&#34;</span>)
+</span></span></code></pre></div><p>Create some files for prediction set.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>create_prediction_set(num_files <span style="color:#f92672">=</span> <span style="color:#ae81ff">55</span>)
+</span></span></code></pre></div><pre><code>55  files created in prediction set.
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prediction_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;./random_data/prediction_set/*&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Total number of files: &#34;</span>, len(prediction_files))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Showing first 10 files...&#34;</span>)
+</span></span><span style="display:flex;"><span>prediction_files[:<span style="color:#ae81ff">10</span>]
+</span></span></code></pre></div><pre><code>Total number of files:  55
 Showing first 10 files...
 
-[&#39;./random_data/prediction_set/file_001.csv&#39;,
- &#39;./random_data/prediction_set/file_002.csv&#39;,
- &#39;./random_data/prediction_set/file_003.csv&#39;,
- &#39;./random_data/prediction_set/file_004.csv&#39;,
- &#39;./random_data/prediction_set/file_005.csv&#39;,
- &#39;./random_data/prediction_set/file_006.csv&#39;,
- &#39;./random_data/prediction_set/file_007.csv&#39;,
- &#39;./random_data/prediction_set/file_008.csv&#39;,
- &#39;./random_data/prediction_set/file_009.csv&#39;,
- &#39;./random_data/prediction_set/file_010.csv&#39;]</code></pre>
+['./random_data/prediction_set/file_001.csv',
+ './random_data/prediction_set/file_002.csv',
+ './random_data/prediction_set/file_003.csv',
+ './random_data/prediction_set/file_004.csv',
+ './random_data/prediction_set/file_005.csv',
+ './random_data/prediction_set/file_006.csv',
+ './random_data/prediction_set/file_007.csv',
+ './random_data/prediction_set/file_008.csv',
+ './random_data/prediction_set/file_009.csv',
+ './random_data/prediction_set/file_010.csv']
+</code></pre>
 <p>The prediction dataset will be slightly different from our previous custom dataset class. We only need to return data in this case.</p>
-<pre class="python"><code>class PredictionDataset(Dataset):
-  def __init__(self, filenames, batch_size):
-        self.filenames= filenames
-        self.batch_size = batch_size
-  def __len__(self):
-        return int(np.ceil(len(self.filenames) / float(self.batch_size)))
-  def __getitem__(self, idx):
-        batch_x = self.filenames[idx * self.batch_size:(idx + 1) * self.batch_size]
-        data = []
-        labels = []
-        label_classes = [&quot;Fault_1&quot;, &quot;Fault_2&quot;, &quot;Fault_3&quot;, &quot;Fault_4&quot;, &quot;Fault_5&quot;]
-        for file in batch_x:
-            temp = pd.read_csv(open(file,&#39;r&#39;)) 
-            data.append(temp.values.reshape(32,32,1)) 
-        data = np.asarray(data).reshape(-1,1,32,32) 
-        
-        
-        if idx == self.__len__():  
-          raise IndexError
-
-        return data</code></pre>
-<p>Check whether the dataset and dataloader work or not.</p>
-<pre class="python"><code>prediction_dataset = PredictionDataset(prediction_files, batch_size = 10)
-prediction_dataloader = DataLoader(prediction_dataset,batch_size = None, shuffle = False)</code></pre>
-<pre class="python"><code>for data in prediction_dataloader:
-    print(data.shape)</code></pre>
-<pre><code>torch.Size([10, 1, 32, 32])
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PredictionDataset</span>(Dataset):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __init__(self, filenames, batch_size):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>filenames<span style="color:#f92672">=</span> filenames
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>batch_size <span style="color:#f92672">=</span> batch_size
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __len__(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> int(np<span style="color:#f92672">.</span>ceil(len(self<span style="color:#f92672">.</span>filenames) <span style="color:#f92672">/</span> float(self<span style="color:#f92672">.</span>batch_size)))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __getitem__(self, idx):
+</span></span><span style="display:flex;"><span>        batch_x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>filenames[idx <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>batch_size:(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>batch_size]
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        labels <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        label_classes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Fault_1&#34;</span>, <span style="color:#e6db74">&#34;Fault_2&#34;</span>, <span style="color:#e6db74">&#34;Fault_3&#34;</span>, <span style="color:#e6db74">&#34;Fault_4&#34;</span>, <span style="color:#e6db74">&#34;Fault_5&#34;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> batch_x:
+</span></span><span style="display:flex;"><span>            temp <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(open(file,<span style="color:#e6db74">&#39;r&#39;</span>)) 
+</span></span><span style="display:flex;"><span>            data<span style="color:#f92672">.</span>append(temp<span style="color:#f92672">.</span>values<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">1</span>)) 
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>asarray(data)<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">32</span>,<span style="color:#ae81ff">32</span>) 
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> idx <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>__len__():  
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">IndexError</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> data
+</span></span></code></pre></div><p>Check whether the dataset and dataloader work or not.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>prediction_dataset <span style="color:#f92672">=</span> PredictionDataset(prediction_files, batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>prediction_dataloader <span style="color:#f92672">=</span> DataLoader(prediction_dataset,batch_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>, shuffle <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> data <span style="color:#f92672">in</span> prediction_dataloader:
+</span></span><span style="display:flex;"><span>    print(data<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><pre><code>torch.Size([10, 1, 32, 32])
 torch.Size([10, 1, 32, 32])
 torch.Size([10, 1, 32, 32])
 torch.Size([10, 1, 32, 32])
 torch.Size([10, 1, 32, 32])
-torch.Size([5, 1, 32, 32])</code></pre>
+torch.Size([5, 1, 32, 32])
+</code></pre>
 <p>Make predictions.</p>
-<pre class="python"><code>preds = []
-for data in prediction_dataloader:
-    data = data.to(dev)
-    preds.append(model(data.float()))
-preds = torch.cat(preds)
-preds</code></pre>
-<pre><code>tensor([[0.3369, 0.0306, 0.2113, 0.3813, 0.0399],
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>preds <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> data <span style="color:#f92672">in</span> prediction_dataloader:
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>to(dev)
+</span></span><span style="display:flex;"><span>    preds<span style="color:#f92672">.</span>append(model(data<span style="color:#f92672">.</span>float()))
+</span></span><span style="display:flex;"><span>preds <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>cat(preds)
+</span></span><span style="display:flex;"><span>preds
+</span></span></code></pre></div><pre><code>tensor([[0.3369, 0.0306, 0.2113, 0.3813, 0.0399],
         [0.3747, 0.0238, 0.2525, 0.3083, 0.0407],
         [0.3462, 0.0353, 0.2434, 0.3220, 0.0531],
         [0.3387, 0.0365, 0.2338, 0.3394, 0.0516],
@@ -1349,20 +1354,21 @@ preds</code></pre>
         [0.3370, 0.0325, 0.2324, 0.3520, 0.0461],
         [0.3694, 0.0259, 0.2063, 0.3626, 0.0358],
         [0.3308, 0.0414, 0.2087, 0.3674, 0.0517],
-        [0.3410, 0.0344, 0.2436, 0.3302, 0.0508]], device=&#39;cuda:0&#39;,
-       grad_fn=&lt;CatBackward&gt;)</code></pre>
+        [0.3410, 0.0344, 0.2436, 0.3302, 0.0508]], device='cuda:0',
+       grad_fn=&lt;CatBackward&gt;)
+</code></pre>
 <p>Outputs of prediction are 5 dimensional vector. This is so because we have used 5 neurons in the output layer and our activation function is softmax. The 5 dimensional output vector for an input add to 1. So it can be interpreted as probability. Thus we should classify the input to a class, for which prediction probability is maximum. To get the class corresponding to maximum probability, we can use <code>np.argmax()</code> or <code>torch.argmax()</code> command.</p>
-<pre class="python"><code>torch.argmax(preds, dim = 1)</code></pre>
-<pre><code>tensor([3, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 3, 0, 3, 3, 3, 0,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>torch<span style="color:#f92672">.</span>argmax(preds, dim <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><pre><code>tensor([3, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 3, 0, 3, 3, 3, 0,
         0, 3, 3, 0, 0, 0, 3, 3, 3, 0, 3, 3, 3, 3, 0, 3, 0, 3, 0, 3, 0, 0, 3, 0,
-        3, 0, 0, 3, 0, 3, 0], device=&#39;cuda:0&#39;)</code></pre>
+        3, 0, 0, 3, 0, 3, 0], device='cuda:0')
+</code></pre>
 <p>Remember that our data are randomly generated. So we should not be surprised by this result.</p>
 <p>This brings us to the end of the blog. As we had planned in the beginning, we have created random data files, a custom dataloader, trained a model using that dataloader, and made predictions on new data. The above code can be tweaked slightly to read any type of files other than .csv. And now we can train our model without worrying about the data size. Whether the data size is 10GB or 750GB, our approach will work for both.</p>
 <p>Also note that we have not used the multi-worker and multi-processing capabilities of dataloader. To further speedup the dataloading process, readers should take advantage of the multiprocessing capabilities of dataloader. The best way to choose optimum multiprocessing and multi-worker parameters is to try a few ones and see which set of parameters work best for the system under consideration.</p>
 <p>As a final note, please keep in mind that the approach we have discussed in only one of many different ways in which we can read multiple files. I have chosen this approach as it seemed natural to me. I have neither strived for efficiency nor elegance. If readers have any better idea, I would be happy to know of it.</p>
 <p>I hope this blog would be of help to reader. Please bring any errors or omissions to my notice.</p>
 <p><strong>Disclaimer</strong>: It is very likely that this blog might not have used some of the best practices of PyTorch. This is because the author has a superficial knowledge of PyTorch and is not aware of its best practices. The author (un)fortunately prefers <code>Tensorflow</code>.</p>
-</div>
 
     </div>
 
@@ -1555,23 +1561,6 @@ preds</code></pre>
     
     
     
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://twitter.com/biswajitsahoo11" target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-  
-    
-    
-    
     
     
     
@@ -1726,7 +1715,7 @@ preds</code></pre>
       
 
     
-    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
 
     
     
@@ -1812,7 +1801,7 @@ preds</code></pre>
       
     
     
-    <script src="/en/js/wowchemy.min.247fd8f54253895301106e3006f53f38.js"></script>
+    <script src="/en/js/wowchemy.min.e14897cafececa7181d21d62540ef117.js"></script>
 
     
 

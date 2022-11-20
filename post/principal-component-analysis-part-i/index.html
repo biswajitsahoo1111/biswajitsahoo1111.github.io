@@ -60,7 +60,7 @@
   
     
   
-  <meta name="description" content="In this post, we will discuss about Principal Component Analysis (PCA),one of the most popular dimensionality reduction techniques used inmachine learning. Applications of PCA and its variants are ubiquitous." />
+  <meta name="description" content="In this post, we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. Applications of PCA and its variants are ubiquitous." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/" />
@@ -343,7 +343,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo" />
   <meta property="og:url" content="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/" />
   <meta property="og:title" content="Principal Component Analysis - Part I | Biswajit Sahoo" />
-  <meta property="og:description" content="In this post, we will discuss about Principal Component Analysis (PCA),one of the most popular dimensionality reduction techniques used inmachine learning. Applications of PCA and its variants are ubiquitous." /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:description" content="In this post, we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. Applications of PCA and its variants are ubiquitous." /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -396,7 +396,7 @@
       "url": "https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "In this post, we will discuss about Principal Component Analysis (PCA),\rone of the most popular dimensionality reduction techniques used in\rmachine learning. Applications of PCA and its variants are ubiquitous."
+  "description": "In this post, we will discuss about Principal Component Analysis (PCA), one of the most popular dimensionality reduction techniques used in machine learning. Applications of PCA and its variants are ubiquitous."
 }
 </script>
 
@@ -416,7 +416,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="e55d5e5aff1a836024ccd0020892b48d" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="527b8c4f3fdf046d69095bce30a5e477" >
 
   
   
@@ -427,7 +427,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.8f76bdc9e086322ed5147724ebba3d06.js"></script>
+  <script src="/js/wowchemy-init.min.7e85d6cfe81caeb57cc49452f9b55e03.js"></script>
 
   
 
@@ -837,15 +837,11 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
-
-
-<p>In this post, we will discuss about Principal Component Analysis (PCA),
+      <p>In this post, we will discuss about Principal Component Analysis (PCA),
 one of the most popular dimensionality reduction techniques used in
 machine learning. Applications of PCA and its variants are ubiquitous.
 Thus, a through understanding of PCA is considered essential to start
-one’s journey into machine learning. In this and subsequent posts, we
+one&rsquo;s journey into machine learning. In this and subsequent posts, we
 will first briefly discuss relevant theory of PCA. Then we will
 implement PCA from scratch without using any built-in function. This
 will give us an idea as to what happens under the hood when a built-in
@@ -862,179 +858,170 @@ Part-I and work their way through gradually. Beginners are also
 encouraged to explore the references at the end of this post for further
 information. Here is the outline of different parts:</p>
 <ul>
-<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/">Part-I: Basic Theory of
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/" target="_blank" rel="noopener">Part-I: Basic Theory of
 PCA</a></li>
-<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II: PCA Implementation with and without using built-in
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II: PCA Implementation with and without using built-in
 functions</a></li>
-<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/">Part-III: Reproducing results of a published paper on
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/" target="_blank" rel="noopener">Part-III: Reproducing results of a published paper on
 PCA</a></li>
 </ul>
 <p>For
-<a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>,
+<a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II</a>,
 Python, R, and MATLAB code are available to reproduce all the results.
-<a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/">Part-III</a>
+<a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/" target="_blank" rel="noopener">Part-III</a>
 contains both R and Python code to reproduce results of the paper. In
 this post, we will discuss the theory behind PCA in brief.</p>
-<div id="principal-component-analysis" class="section level1">
-<h1>Principal Component Analysis</h1>
-<div id="theory" class="section level2">
-<h2>Theory:</h2>
+<h1 id="principal-component-analysis">Principal Component Analysis</h1>
+<h2 id="theory">Theory:</h2>
 <p>Given a data matrix, we apply PCA to transform it in a way such that the
 transformed data reveals maximum information. So we have to first get
 the data on which we want to perform PCA. The usual convention in
 storing data is to place variables as columns and different observations
 as rows (Data frames in R follow this convention by default). For
-example, let’s suppose we are collecting data about daily weather for a
+example, let&rsquo;s suppose we are collecting data about daily weather for a
 year. Our variables of interest may include maximum temperature in a
 day, minimum temperature, humidity, max. wind speed, etc. Everyday we
 collect observations for each of these variables. In vector form, our
 data point for one day will contain number of observations equal to the
 number of variables under study and this becomes one row of our data
 matrix. Assuming that we are observing 10 variables everyday, our data
-matrix for one year (assuming it’s not a leap year) will contain 365
+matrix for one year (assuming it&rsquo;s not a leap year) will contain 365
 rows and 10 columns. Once data matrix is obtained, further analysis is
 done on this data matrix to obtain important hidden information
 regarding the data. We will use notations from matrix theory to simplify
 our analysis.</p>
-<p>Let <span class="math inline">\(\textbf{X}\)</span> be the data matrix of size <span class="math inline">\(n\times p\)</span>, where <span class="math inline">\(n\)</span> is
-the number of data points and <span class="math inline">\(p\)</span> is the number of variables. We can
+<p>Let <code>\(\textbf{X}\)</code> be the data matrix of size <code>\(n\times p\)</code>, where <code>\(n\)</code> is
+the number of data points and <code>\(p\)</code> is the number of variables. We can
 assume without any loss of generality that data is centered, meaning its
 column means are zero. This only shifts the data towards the origin
 without changing their relative orientation. So if originally not
 centered, it is first centered before doing PCA. From now onward we will
 assume that data matrix is always centered.</p>
-<p>Variance of a variable (a column) in <span class="math inline">\(\textbf{X}\)</span> is equal to sum of
+<p>Variance of a variable (a column) in <code>\(\textbf{X}\)</code> is equal to sum of
 squares of entries (because the column is centered) of that column
 divided by (n - 1) (to make it unbiased). So sum of variance of all
-variables is <span class="math inline">\(\frac{1}{n - 1}\)</span> times sum of squares of all elements of
+variables is <code>\(\frac{1}{n - 1}\)</code> times sum of squares of all elements of
 the matrix . Readers who are familiar with matrix norms would instantly
-recognize that total variance is <span class="math inline">\(\frac{1}{n - 1}\)</span> times the square of
-<strong>Frobenius norm</strong> of <span class="math inline">\(\textbf{X}\)</span>. Frobenius norm is nothing but square
+recognize that total variance is <code>\(\frac{1}{n - 1}\)</code> times the square of
+<strong>Frobenius norm</strong> of <code>\(\textbf{X}\)</code>. Frobenius norm is nothing but square
 root of sum of squares of all elements of a matrix.
-<span class="math display">\[ \|\textbf{X}\|_{F} = (\sum_{i,j}{x_{ij}^2})^{\frac{1}{2}}=\sqrt{trace(\textbf{X}^T\textbf{X}})=\sqrt{trace(\textbf{X}\textbf{X}^T})\]</span></p>
+$$ |\textbf{X}|<em>{F} = (\sum</em>{i,j}{x_{ij}^2})^{\frac{1}{2}}=\sqrt{trace(\textbf{X}^T\textbf{X}})=\sqrt{trace(\textbf{X}\textbf{X}^T})$$</p>
 <p>Using this definition, total variance before transformation =
-<span class="math display">\[\begin{aligned}\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=\frac{1}{n-1}trace(\textbf{X}^T\textbf{X}) 
-&amp;= trace(\frac{1}{n-1}\textbf{X}^T\textbf{X}) \\ 
-&amp;= \frac{1}{n-1}\|\textbf{X}\|_{F}^2\end{aligned}\]</span></p>
+<code>$$\begin{aligned}\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=\frac{1}{n-1}trace(\textbf{X}^T\textbf{X})  &amp;= trace(\frac{1}{n-1}\textbf{X}^T\textbf{X}) \\  &amp;= \frac{1}{n-1}\|\textbf{X}\|_{F}^2\end{aligned}$$</code></p>
 <p>Where, trace of a matrix is the sum of its diagonal entries and
-<span class="math inline">\(\|\textbf{X}\|_{F}^2\)</span> is the square of <strong>Frobenius norm</strong>.</p>
+<code>\(\|\textbf{X}\|_{F}^2\)</code> is the square of <strong>Frobenius norm</strong>.</p>
 <p>The aim of PCA is to transform the data in such a way that along first
 principal direction, variance of transformed data is maximum. It
 subsequently finds second principal direction orthogonal to the first
 one in such a way that it explains maximum of the remaining variance
 among all possible direction in the orthogonal subspace.</p>
 <p>In matrix form the transformation can be written as
-<span class="math display">\[\textbf{Y}_{n\times p}=\textbf{X}_{n\times p}\textbf{P}_{p\times p}\]</span>
-Where <span class="math inline">\(\textbf{Y}\)</span> is the transformed data matrix. The columns of
-<span class="math inline">\(\textbf{Y}\)</span> are called principal components and <span class="math inline">\(\textbf{P}\)</span> is usually
-called loading matrix. Our aim is to find matrix <span class="math inline">\(\textbf{P}\)</span>. Once we
-find <span class="math inline">\(\textbf{P}\)</span> we can then find <span class="math inline">\(\textbf{Y}\)</span> just by a matrix
+<code>$$\textbf{Y}_{n\times p}=\textbf{X}_{n\times p}\textbf{P}_{p\times p}$$</code>
+Where <code>\(\textbf{Y}\)</code> is the transformed data matrix. The columns of
+<code>\(\textbf{Y}\)</code> are called principal components and <code>\(\textbf{P}\)</code> is usually
+called loading matrix. Our aim is to find matrix <code>\(\textbf{P}\)</code>. Once we
+find <code>\(\textbf{P}\)</code> we can then find <code>\(\textbf{Y}\)</code> just by a matrix
 multiplication. We will show in the next section that matrix
-<span class="math inline">\(\textbf{P}\)</span> is the eigenvector matrix of the covariance matrix. Before
-that, let’s first define the covariance matrix.</p>
-<p>Given a data matrix <span class="math inline">\(\textbf{X}\)</span>(centered), its covariance matrix
-<span class="math inline">\((\textbf{S})\)</span> is defined as
-<span class="math display">\[\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}\]</span>
-Now we will show how to compute the loading vectors (columns of <span class="math inline">\(\textbf{P}\)</span>) and consequently the principal components (columns of <span class="math inline">\(\textbf{Y}\)</span>) from the given centered data matrix <span class="math inline">\(\textbf{X}\)</span>.</p>
-<div id="sketch-of-the-proof" class="section level3">
-<h3>Sketch of the Proof</h3>
+<code>\(\textbf{P}\)</code> is the eigenvector matrix of the covariance matrix. Before
+that, let&rsquo;s first define the covariance matrix.</p>
+<p>Given a data matrix <code>\(\textbf{X}\)</code>(centered), its covariance matrix
+<code>\((\textbf{S})\)</code> is defined as
+<code>$$\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}$$</code>
+Now we will show how to compute the loading vectors (columns of <code>\(\textbf{P}\)</code>) and consequently the principal components (columns of <code>\(\textbf{Y}\)</code>) from the given centered data matrix <code>\(\textbf{X}\)</code>.</p>
+<h3 id="sketch-of-the-proof">Sketch of the Proof</h3>
 <p>We call it a sketch because we will not be giving the full proof.
 Rather, we will give the proof only for the first principal component
 and then give a commentary as to how it can be extended for other
 principal components.</p>
 <p>The first principal component is the result obtained by transforming
-original data matrix <span class="math inline">\(\textbf{X}_{n\times p}\)</span> in such a way that
+original data matrix <code>\(\textbf{X}_{n\times p}\)</code> in such a way that
 variance of data along first principal component is the highest. The
 transformation is a linear transformation that is obtained by taking
-linear combination of the columns of <span class="math inline">\(\textbf{X}_{n\times p}\)</span>. The
+linear combination of the columns of <code>\(\textbf{X}_{n\times p}\)</code>. The
 coefficients of the linear combination are called loading scores
-corresponding to original variables of <span class="math inline">\(\textbf{X}_{n\times p}\)</span>.</p>
-<p>Assuming <span class="math inline">\(\boldsymbol{\alpha}_{p\times 1} = [\alpha_1, \alpha_2, ..., \alpha_p]^T\)</span>,
-where <span class="math inline">\(\alpha_1\)</span>, <span class="math inline">\(\alpha_2\)</span>, … , <span class="math inline">\(\alpha_p\)</span> are scalars, to be the
-loading vector (we don’t know, as of now, from where to get
-<span class="math inline">\(\alpha_{p \times 1}\)</span>. We will find that out shortly.), first principal
+corresponding to original variables of <code>\(\textbf{X}_{n\times p}\)</code>.</p>
+<p>Assuming <code>\(\boldsymbol{\alpha}_{p\times 1} = [\alpha_1, \alpha_2, ..., \alpha_p]^T\)</code>,
+where <code>\(\alpha_1\)</code>, <code>\(\alpha_2\)</code>, &hellip; , <code>\(\alpha_p\)</code> are scalars, to be the
+loading vector (we don&rsquo;t know, as of now, from where to get
+<code>\(\alpha_{p \times 1}\)</code>. We will find that out shortly.), first principal
 component is obtained by the the product
-<span class="math inline">\(\textbf{X}_{n\times p}\boldsymbol{\alpha}_{p\times 1}\)</span>. This product can be written
+<code>\(\textbf{X}_{n\times p}\boldsymbol{\alpha}_{p\times 1}\)</code>. This product can be written
 as</p>
-<p><span class="math display">\[
-\textbf{X}_{n\times p}\boldsymbol{\alpha}_{p\times 1} = \alpha_1 \textbf{X}_{[:,1]} +\alpha_2 \textbf{X}_{[:,2]} + ...  + \alpha_p \textbf{X}_{[:,p]} 
-\]</span></p>
-<p>Where, <span class="math inline">\(\textbf{X}_{[:,1]}\)</span> is the first column of
-<span class="math inline">\(\textbf{X}_{n\times p}\)</span>. Similarly for other columns. The above
+<p>$$
+\textbf{X}<em>{n\times p}\boldsymbol{\alpha}</em>{p\times 1} = \alpha_1 \textbf{X}<em>{[:,1]} +\alpha_2 \textbf{X}</em>{[:,2]} + &hellip;  + \alpha_p \textbf{X}_{[:,p]}
+$$</p>
+<p>Where, <code>\(\textbf{X}_{[:,1]}\)</code> is the first column of
+<code>\(\textbf{X}_{n\times p}\)</code>. Similarly for other columns. The above
 equation makes it clear as to why first principal component is a linear
 combination of variables of original data matrix. In the original data
 matrix, each column corresponds to a variable.</p>
 <p>Variance of first principal component is given by
-<span class="math inline">\(\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}\)</span> (As the columns are already
-centered. We have also ignored the factor <span class="math inline">\((\frac{1}{n-1})\)</span> as it is
-just a scaling factor.). Now our goal is to find an <span class="math inline">\(\boldsymbol{\alpha}_{p\times 1}\)</span>
-that maximizes <span class="math inline">\(\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}\)</span>. As
-<span class="math inline">\(\boldsymbol{\alpha}_{p\times 1}\)</span> is arbitrary, we can choose its entries in such a
+<code>\(\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}\)</code> (As the columns are already
+centered. We have also ignored the factor <code>\((\frac{1}{n-1})\)</code> as it is
+just a scaling factor.). Now our goal is to find an <code>\(\boldsymbol{\alpha}_{p\times 1}\)</code>
+that maximizes <code>\(\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}\)</code>. As
+<code>\(\boldsymbol{\alpha}_{p\times 1}\)</code> is arbitrary, we can choose its entries in such a
 way that variance increases as much as we please. So to get any
 meaningful solution, we have to apply some constraints on
-<span class="math inline">\(\boldsymbol{\alpha}_{p\times 1}\)</span>. The conventional condition is
-<span class="math inline">\(\|\boldsymbol{\alpha}_{p\times 1}\|^2 = 1\)</span>. The optimization problem becomes
-<span class="math display">\[ maximize \ \ \   \boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}\]</span>
-<span class="math display">\[s.t. \|\boldsymbol{\alpha}\|^2 = 1\]</span> Using Lagrange multipliers, this problem can
+<code>\(\boldsymbol{\alpha}_{p\times 1}\)</code>. The conventional condition is
+<code>\(\|\boldsymbol{\alpha}_{p\times 1}\|^2 = 1\)</code>. The optimization problem becomes
+$$ maximize \ \ \   \boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}$$
+<code>$$s.t. \|\boldsymbol{\alpha}\|^2 = 1$$</code> Using Lagrange multipliers, this problem can
 be written as
-<span class="math display">\[maximize \ \ \  \mathcal{L}(\boldsymbol{\alpha}, \lambda)=\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha} + \lambda (1 - \boldsymbol{\alpha}^T\boldsymbol{\alpha})\]</span>
-Taking gradient of <span class="math inline">\(\mathcal{L}(\boldsymbol{\alpha}, \lambda)\)</span> with respect to
-<span class="math inline">\(\boldsymbol{\alpha}\)</span> we get, <span class="math inline">\(\textbf{X}^T\textbf{X}\boldsymbol{\alpha} = \lambda \boldsymbol{\alpha}\)</span>. So
-<span class="math inline">\(\boldsymbol{\alpha}\)</span> is the eigenvector of <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span>. It turns out
-that for first principal component, <span class="math inline">\(\boldsymbol{\alpha}\)</span> is the eigenvector
+<code>$$maximize \ \ \  \mathcal{L}(\boldsymbol{\alpha}, \lambda)=\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha} + \lambda (1 - \boldsymbol{\alpha}^T\boldsymbol{\alpha})$$</code>
+Taking gradient of <code>\(\mathcal{L}(\boldsymbol{\alpha}, \lambda)\)</code> with respect to
+<code>\(\boldsymbol{\alpha}\)</code> we get, <code>\(\textbf{X}^T\textbf{X}\boldsymbol{\alpha} = \lambda \boldsymbol{\alpha}\)</code>. So
+<code>\(\boldsymbol{\alpha}\)</code> is the eigenvector of <code>\(\textbf{X}^T\textbf{X}\)</code>. It turns out
+that for first principal component, <code>\(\boldsymbol{\alpha}\)</code> is the eigenvector
 corresponding to the largest eigenvalue.</p>
 <p>Loading vector for second principal component is computed with the added condition that second loading vector is orthogonal to the first one. With little bit of more work it can be shown that loading vectors for successive principal components are obtained from eigenvectors corresponding to eigenvalues in decreasing order. More details can be found in reference [1].</p>
 <p>Now, it is straightforward to first form the covariance matrix and by
-placing its eigenvectors as columns, we can find matrix <span class="math inline">\(\textbf{P}\)</span> and
+placing its eigenvectors as columns, we can find matrix <code>\(\textbf{P}\)</code> and
 consequently the principal components. The eigenvectors are arranged in
 such a way that first column is the eigenvector corresponding to largest
 eigenvector, second column (second eigenvector) corresponds to second
 largest eigenvalue and so on. Here we have assumed that we will always
-be able to find all the <span class="math inline">\(p\)</span> orthogonal eigenvectors. In fact, we will
-always be able to find <span class="math inline">\(p\)</span> orthogonal eigenvectors as the matrix is
-symmetric. It can also be shown that the transformed matrix <span class="math inline">\(\textbf{Y}\)</span>
+be able to find all the <code>\(p\)</code> orthogonal eigenvectors. In fact, we will
+always be able to find <code>\(p\)</code> orthogonal eigenvectors as the matrix is
+symmetric. It can also be shown that the transformed matrix <code>\(\textbf{Y}\)</code>
 is centered and more remarkably, total variance of columns of
-<span class="math inline">\(\textbf{Y}\)</span> is same as total variance of columns of <span class="math inline">\(\textbf{X}\)</span>. We
+<code>\(\textbf{Y}\)</code> is same as total variance of columns of <code>\(\textbf{X}\)</code>. We
 will prove these two propositions as the proofs are short.</p>
-</div>
-<div id="properties-of-pca-transformation" class="section level3">
-<h3>Properties of PCA Transformation</h3>
-<ol style="list-style-type: decimal">
-<li><p>Principal components are centered.</p>
-<p><strong>Proof</strong>: Let <span class="math inline">\(\textbf{1}\)</span> be a column vector of all ones of size
-<span class="math inline">\((n\times 1)\)</span>. To prove that columns of <span class="math inline">\(\textbf{Y}\)</span> are centered,
-just premultiply it by <span class="math inline">\(\textbf{1}^T\)</span> (this finds column sum for
+<h3 id="properties-of-pca-transformation">Properties of PCA Transformation</h3>
+<ol>
+<li>
+<p>Principal components are centered.</p>
+<p><strong>Proof</strong>: Let <code>\(\textbf{1}\)</code> be a column vector of all ones of size
+<code>\((n\times 1)\)</code>. To prove that columns of <code>\(\textbf{Y}\)</code> are centered,
+just premultiply it by <code>\(\textbf{1}^T\)</code> (this finds column sum for
 each column). So
-<span class="math display">\[\textbf{1}^T \textbf{Y} = \textbf{1}^T\textbf{X}\textbf{P}\]</span> But
-columns of <span class="math inline">\(\textbf{X}\)</span> are already centered, so
-<span class="math inline">\(\textbf{1}^T\textbf{X}=\textbf{0}\)</span>. Thus
-<span class="math inline">\(\textbf{1}^T \textbf{Y}= \textbf{0}\)</span>. Hence columns of <span class="math inline">\(\textbf{Y}\)</span>
-are centered.</p></li>
-<li><p>Sum of variance of principal components is equal to sum of variance
+<code>$$\textbf{1}^T \textbf{Y} = \textbf{1}^T\textbf{X}\textbf{P}$$</code> But
+columns of <code>\(\textbf{X}\)</code> are already centered, so
+<code>\(\textbf{1}^T\textbf{X}=\textbf{0}\)</code>. Thus
+<code>\(\textbf{1}^T \textbf{Y}= \textbf{0}\)</code>. Hence columns of <code>\(\textbf{Y}\)</code>
+are centered.</p>
+</li>
+<li>
+<p>Sum of variance of principal components is equal to sum of variance
 of variables before transformation.</p>
-<p><strong>Proof</strong>: To prove that total variance of <span class="math inline">\(\textbf{Y}\)</span> also remains
+<p><strong>Proof</strong>: To prove that total variance of <code>\(\textbf{Y}\)</code> also remains
 same, observe that</p>
-<p><span class="math display">\[\begin{aligned} \mbox{total covariance of} \ \  \textbf{Y} &amp;=
-trace(\frac{1}{n-1}\textbf{Y}^{T}\textbf{Y}) \\ &amp;=\frac{1}{n-1}trace((\textbf{P}^T\textbf{X}^{T}\textbf{X})\textbf{P}) \\ &amp;=\frac{1}{n-1}trace((\textbf{P}\textbf{P}^T)\textbf{X}^{T}\textbf{X}) \\ 
-&amp;= trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})\end{aligned}\]</span>
-The previous equation uses the fact that trace is
-commutative(i.e.<span class="math inline">\(trace(\textbf{AB})=trace(\textbf{BA})\)</span>) and
-<span class="math inline">\(\textbf{P}\)</span> is orthogonal (i.e.
-<span class="math inline">\(\textbf{P}\textbf{P}^T=\textbf{I}\)</span>).</p></li>
-<li><p>Principal components are orthogonal.</p>
+<p>$$\begin{aligned} \mbox{total covariance of} \ \  \textbf{Y} &amp;=
+trace(\frac{1}{n-1}\textbf{Y}^{T}\textbf{Y}) \ &amp;=\frac{1}{n-1}trace((\textbf{P}^T\textbf{X}^{T}\textbf{X})\textbf{P}) \ &amp;=\frac{1}{n-1}trace((\textbf{P}\textbf{P}^T)\textbf{X}^{T}\textbf{X}) \
+&amp;= trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})\end{aligned}$$<code> The previous equation uses the fact that trace is commutative(i.e.$trace(\textbf{AB})=trace(\textbf{BA})$) and </code>(\textbf{P})<code>is orthogonal (i.e.</code>(\textbf{P}\textbf{P}^T=\textbf{I})`).</p>
+</li>
+<li>
+<p>Principal components are orthogonal.</p>
 <p><strong>Proof</strong>: To prove the above claim, it is sufficient to show that
-the matrix <span class="math inline">\(\textbf{Y}^T\textbf{Y}\)</span> is diagonal. Remember that columns of <span class="math inline">\(\textbf{Y}\)</span> are principal components. So if we can somehow show <span class="math inline">\(\textbf{Y}^T\textbf{Y}\)</span> to be diagonal, it would automatically mean that principal components are orthogonal.
-We know, <span class="math inline">\(\textbf{Y} = \textbf{X}\textbf{P}\)</span>. So <span class="math inline">\(\textbf{Y}^T\textbf{Y} = \textbf{P}^T\textbf{X}^T\textbf{X}\textbf{P}\)</span>. From sketch of the proof, we know that <span class="math inline">\(\textbf{P}\)</span> is orthogonal as we have required successive loading vectors to be orthogonal to previous ones. We also know that <span class="math inline">\(\textbf{P}\)</span> is the eigenvector matrix of <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span>. So from <a href="https://mathworld.wolfram.com/EigenDecompositionTheorem.html">Eigen Decomposition Theorem</a>, it follows that <span class="math inline">\(\textbf{P}^T(\textbf{X}^T\textbf{X})\textbf{P}\)</span> is diagonal as <span class="math inline">\(\textbf{P}\)</span> is the eigenvector matrix of <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span> and <span class="math inline">\(\textbf{P}\)</span> is orthogonal (so <span class="math inline">\(\textbf{P}^{-1} = \textbf{P}^T\)</span>).</p></li>
+the matrix <code>\(\textbf{Y}^T\textbf{Y}\)</code> is diagonal. Remember that columns of <code>\(\textbf{Y}\)</code> are principal components. So if we can somehow show <code>\(\textbf{Y}^T\textbf{Y}\)</code> to be diagonal, it would automatically mean that principal components are orthogonal.
+We know, <code>\(\textbf{Y} = \textbf{X}\textbf{P}\)</code>. So <code>\(\textbf{Y}^T\textbf{Y} = \textbf{P}^T\textbf{X}^T\textbf{X}\textbf{P}\)</code>. From sketch of the proof, we know that <code>\(\textbf{P}\)</code> is orthogonal as we have required successive loading vectors to be orthogonal to previous ones. We also know that <code>\(\textbf{P}\)</code> is the eigenvector matrix of <code>\(\textbf{X}^T\textbf{X}\)</code>. So from <a href="https://mathworld.wolfram.com/EigenDecompositionTheorem.html" target="_blank" rel="noopener">Eigen Decomposition Theorem</a>, it follows that <code>\(\textbf{P}^T(\textbf{X}^T\textbf{X})\textbf{P}\)</code> is diagonal as <code>\(\textbf{P}\)</code> is the eigenvector matrix of <code>\(\textbf{X}^T\textbf{X}\)</code> and <code>\(\textbf{P}\)</code> is orthogonal (so <code>\(\textbf{P}^{-1} = \textbf{P}^T\)</code>).</p>
+</li>
 </ol>
-</div>
-<div id="link-between-total-variance-and-eigenvalues" class="section level3">
-<h3>Link between total variance and eigenvalues</h3>
+<h3 id="link-between-total-variance-and-eigenvalues">Link between total variance and eigenvalues</h3>
 <p>Total variance is sum of eigenvalues of covariance matrix
-<span class="math inline">\((\textbf{S})\)</span>. This follows from the fact that <span style="color: hotpink"><em>trace of a matrix is sum of its eigenvalues</em></span>. Total variance of original data matrix is <span class="math inline">\(\frac{1}{n-1}trace(\textbf{X}^T\textbf{X}) =trace(\frac{1}{n-1}\textbf{X}^T\textbf{X}) = trace(\textbf{S})\)</span>. We will show these calculations using a publicly available dataset in
-<a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>.</p>
-</div>
-<div id="variations-of-pca" class="section level3">
-<h3>Variations of PCA</h3>
+<code>\((\textbf{S})\)</code>. This follows from the fact that <span style="color: hotpink"><em>trace of a matrix is sum of its eigenvalues</em></span>. Total variance of original data matrix is <code>\(\frac{1}{n-1}trace(\textbf{X}^T\textbf{X}) =trace(\frac{1}{n-1}\textbf{X}^T\textbf{X}) = trace(\textbf{S})\)</code>. We will show these calculations using a publicly available dataset in
+<a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II</a>.</p>
+<h3 id="variations-of-pca">Variations of PCA</h3>
 <p>Sometimes our data matrix contains variables that are measured in
 different units. So we might have to scale the centered matrix to reduce
 the effect of variables with large variation. So depending on the matrix
@@ -1044,48 +1031,50 @@ on which PCA is performed, it is divided into two types.</p>
 <li>Correlation PCA (Data matrix is centered and scaled)</li>
 </ul>
 <p>Examples of these two types can be found in
-<a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/">Part-II</a>.
+<a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II</a>.
 Please note that the above two variations are just two among many
 variations. There are <strong>Sparse PCA</strong>, <strong>Kernel PCA</strong>, <strong>Robust PCA</strong>,
 <strong>Non-negative PCA</strong> and many others. We have mentioned the two that are
 most widely used.</p>
-</div>
-<div id="some-common-terminologies-associated-with-pca" class="section level3">
-<h3>Some common terminologies associated with PCA</h3>
+<h3 id="some-common-terminologies-associated-with-pca">Some common terminologies associated with PCA</h3>
 <p>In literature, there is no standard terminology for different terms in
 PCA. Different people use different (often contradictory) terminology
 thus confusing newcomers. Therefore, it is better to stick to one set of
 terminologies and notations and use those consistently. We will stick to
 the terminology used in reference [2].</p>
 <ul>
-<li><p><strong>Factor scores</strong> corresponding to a principal component: Values of
-that column of <span class="math inline">\(\textbf{Y}\)</span> that corresponds to the desired
-principal component.</p></li>
-<li><p><strong>Loading score</strong>: Values corresponding to a column of <span class="math inline">\(\textbf{P}\)</span>.
+<li>
+<p><strong>Factor scores</strong> corresponding to a principal component: Values of
+that column of <code>\(\textbf{Y}\)</code> that corresponds to the desired
+principal component.</p>
+</li>
+<li>
+<p><strong>Loading score</strong>: Values corresponding to a column of <code>\(\textbf{P}\)</code>.
 For example,loading scores of variables corresponding to first
 principal component are the values of the first column of
-<span class="math inline">\(\textbf{P}\)</span>.</p></li>
-<li><p><strong>Inertia</strong>: Square of Frobenius norm of the matrix.</p></li>
+<code>\(\textbf{P}\)</code>.</p>
+</li>
+<li>
+<p><strong>Inertia</strong>: Square of Frobenius norm of the matrix.</p>
+</li>
 </ul>
-</div>
-<div id="how-actually-are-principal-components-computed" class="section level3">
-<h3>How actually are principal components computed?</h3>
+<h3 id="how-actually-are-principal-components-computed">How actually are principal components computed?</h3>
 <p>The previously stated method of finding eigenvectors of covariance
 matrix is not computationally efficient. In practice, singular value
-decomposition (SVD) is used to compute the matrix <span class="math inline">\(\textbf{P}\)</span>. SVD
-theorem tells that any real matrix <span class="math inline">\(\textbf{X}\)</span> can be decomposed into
-three matrices such that <span class="math display">\[ \textbf{X} = \textbf{U}\Sigma\textbf{V}^T\]</span>
-Where, <span class="math inline">\(\textbf{X}\)</span> is of size <span class="math inline">\(n\times p\)</span>. <span class="math inline">\(\textbf{U}\)</span> and
-<span class="math inline">\(\textbf{V}\)</span> are orthogonal matrices of size <span class="math inline">\(n\times n\)</span> and <span class="math inline">\(p\times p\)</span>
-respectively. <span class="math inline">\(\Sigma\)</span> is a diagonal matrix of size <span class="math inline">\(n\times p\)</span>.</p>
-<p>Given the SVD decomposition of a matrix <span class="math inline">\(\textbf{X}\)</span>,
-<span class="math display">\[\textbf{X}^T\textbf{X}=\textbf{V}\Sigma^2\textbf{V}^T\]</span></p>
-<p>This is the eigen-decomposition of <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span>. So
-<span class="math inline">\(\textbf{V}\)</span> is the eigenvector matrix of <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span>. For
+decomposition (SVD) is used to compute the matrix <code>\(\textbf{P}\)</code>. SVD
+theorem tells that any real matrix <code>\(\textbf{X}\)</code> can be decomposed into
+three matrices such that $$ \textbf{X} = \textbf{U}\Sigma\textbf{V}^T$$
+Where, <code>\(\textbf{X}\)</code> is of size <code>\(n\times p\)</code>. <code>\(\textbf{U}\)</code> and
+<code>\(\textbf{V}\)</code> are orthogonal matrices of size <code>\(n\times n\)</code> and <code>\(p\times p\)</code>
+respectively. <code>\(\Sigma\)</code> is a diagonal matrix of size <code>\(n\times p\)</code>.</p>
+<p>Given the SVD decomposition of a matrix <code>\(\textbf{X}\)</code>,
+<code>$$\textbf{X}^T\textbf{X}=\textbf{V}\Sigma^2\textbf{V}^T$$</code></p>
+<p>This is the eigen-decomposition of <code>\(\textbf{X}^T\textbf{X}\)</code>. So
+<code>\(\textbf{V}\)</code> is the eigenvector matrix of <code>\(\textbf{X}^T\textbf{X}\)</code>. For
 PCA we need eigenvector matrix of covariance matrix. So converting the
 equation into convenient form, we get
-<span class="math display">\[\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}=\textbf{V}(\frac{1}{n-1}\Sigma^2)\textbf{V}^T\]</span>
-Thus eigenvalues of S are diagonal entries of <span class="math inline">\((\frac{1}{n-1}\Sigma^2)\)</span>.
+<code>$$\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}=\textbf{V}(\frac{1}{n-1}\Sigma^2)\textbf{V}^T$$</code>
+Thus eigenvalues of S are diagonal entries of <code>\((\frac{1}{n-1}\Sigma^2)\)</code>.
 As SVD is computationally efficient, all built-in functions use SVD to
 compute the loading matrix and then use the loading matrix to find
 principal components.</p>
@@ -1096,19 +1085,14 @@ Interested readers who want to pursue this further can refer the
 references of this post as a starting point. Readers are encouraged to
 bring any errors or omissions to my notice.</p>
 <p>Last modified: May 5, 2021</p>
-</div>
-</div>
-<div id="references" class="section level2">
-<h2>References</h2>
-<ol style="list-style-type: decimal">
+<h2 id="references">References</h2>
+<ol>
 <li>I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New
 York,2002.</li>
 <li>Abdi, H., &amp; Williams, L. J. (2010). Principal component analysis.
 Wiley interdisciplinary reviews: computational statistics, 2(4),
 433-459.</li>
 </ol>
-</div>
-</div>
 
     </div>
 
@@ -1303,23 +1287,6 @@ Wiley interdisciplinary reviews: computational statistics, 2(4),
     
     
     
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://twitter.com/biswajitsahoo11" target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-  
-    
-    
-    
     
     
     
@@ -1474,7 +1441,7 @@ Wiley interdisciplinary reviews: computational statistics, 2(4),
       
 
     
-    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
 
     
     
@@ -1560,7 +1527,7 @@ Wiley interdisciplinary reviews: computational statistics, 2(4),
       
     
     
-    <script src="/en/js/wowchemy.min.247fd8f54253895301106e3006f53f38.js"></script>
+    <script src="/en/js/wowchemy.min.e14897cafececa7181d21d62540ef117.js"></script>
 
     
 

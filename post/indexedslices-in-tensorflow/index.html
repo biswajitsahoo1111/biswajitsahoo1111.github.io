@@ -60,7 +60,7 @@
   
     
   
-  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will discuss about IndexedSlices class of Tensorflow. We will try to answer the following questions in this blog:" />
+  <meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will discuss about IndexedSlices class of Tensorflow. We will try to answer the following questions in this blog:" />
 
   
   <link rel="alternate" hreflang="en-us" href="https://biswajitsahoo1111.github.io/post/indexedslices-in-tensorflow/" />
@@ -343,7 +343,7 @@
   <meta property="og:site_name" content="Biswajit Sahoo" />
   <meta property="og:url" content="https://biswajitsahoo1111.github.io/post/indexedslices-in-tensorflow/" />
   <meta property="og:title" content="IndexedSlices in Tensorflow | Biswajit Sahoo" />
-  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will discuss about IndexedSlices class of Tensorflow. We will try to answer the following questions in this blog:" /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" />
+  <meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will discuss about IndexedSlices class of Tensorflow. We will try to answer the following questions in this blog:" /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" />
     <meta property="twitter:image" content="https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -396,7 +396,7 @@
       "url": "https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "Run in Google Colab\r\r\rView source on GitHub\r\r\rDownload notebook\r\r\rIn this post, we will discuss about IndexedSlices class of Tensorflow. We will try to answer the following questions in this blog:"
+  "description": "Run in Google Colab\rView source on GitHub\rDownload notebook\rIn this post, we will discuss about IndexedSlices class of Tensorflow. We will try to answer the following questions in this blog:"
 }
 </script>
 
@@ -416,7 +416,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="7709c4e15d7c155934faa3699bcfb6cc" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="db7e409524df4597789ef6cac4946536" >
 
   
   
@@ -427,7 +427,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.8f76bdc9e086322ed5147724ebba3d06.js"></script>
+  <script src="/js/wowchemy-init.min.7e85d6cfe81caeb57cc49452f9b55e03.js"></script>
 
   
 
@@ -837,24 +837,20 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-<script src="https://biswajitsahoo1111.github.io/post/indexedslices-in-tensorflow/index.en_files/header-attrs/header-attrs.js"></script>
-
-
-<table class="tfo-notebook-buttons" align="left">
-<td>
-<a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Tensorflow_IndexedSlices.ipynb">
-<img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
-Run in Google Colab</a>
-</td>
-<td>
-<a href="https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Tensorflow_IndexedSlices.ipynb">
-<img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
-View source on GitHub</a>
-</td>
-<td>
-<a href="https://www.dropbox.com/s/paze6mubda9bvv4/Tensorflow_IndexedSlices.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
-</td>
+      <table class="tfo-notebook-buttons" align="left">
+  <td>
+    <a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Tensorflow_IndexedSlices.ipynb">
+    <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+    Run in Google Colab</a>
+  </td>
+  <td>
+    <a href="https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Tensorflow_IndexedSlices.ipynb">
+    <img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
+    View source on GitHub</a>
+  </td>
+  <td>
+    <a href="https://www.dropbox.com/s/paze6mubda9bvv4/Tensorflow_IndexedSlices.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
+  </td>
 </table>
 <p>In this post, we will discuss about <code>IndexedSlices</code> class of <code>Tensorflow</code>. We will try to answer the following questions in this blog:</p>
 <ul>
@@ -863,25 +859,23 @@ View source on GitHub</a>
 <li><a href="#q3">How to convert from IndexedSlices to tensors?</a></li>
 </ul>
 <p><a id = "q1"></a></p>
-<div id="what-are-indexedslices" class="section level2">
-<h2>What are <code>IndexedSlices</code>?</h2>
-<p>According to <a href="https://www.tensorflow.org/api_docs/python/tf/IndexedSlices"><code>Tensorflow</code> documentation</a>, <code>IndexedSlices</code> are sparse representation of a set of tensor slices at a given index. At an high level it appears to be some kind of sparse representation. Let’s try to understand it with examples.</p>
+<h2 id="what-are-indexedslices">What are <code>IndexedSlices</code>?</h2>
+<p>According to <a href="https://www.tensorflow.org/api_docs/python/tf/IndexedSlices" target="_blank" rel="noopener"><code>Tensorflow</code> documentation</a>, <code>IndexedSlices</code> are sparse representation of a set of tensor slices at a given index. At an high level it appears to be some kind of sparse representation. Let&rsquo;s try to understand it with examples.</p>
 <p><a id = "q2"></a></p>
-</div>
-<div id="where-do-we-get-it" class="section level2">
-<h2>Where do we get it?</h2>
+<h2 id="where-do-we-get-it">Where do we get it?</h2>
 <p>We get <code>IndexedSlices</code> while taking gradients of an <code>Embedding</code> layer. Embedding matrices can be huge (depending on vocabulary size). But each batch only contains a small fraction of tokens. So while computing the gradient of loss with respect to embedding layer, in each pass we have to only consider the corresponding token embeedings of the present batch. Naturally a sparse tensor seems to be a better option to record those gradients. <code>Tensorflow</code> does that using <code>IndexedSlices</code>. We will show that below using a contrived example.</p>
-<pre class="python"><code>import tensorflow as tf
-print(&quot;Tensorflow version: &quot;, tf.__version__)</code></pre>
-<pre><code>Tensorflow version:  2.4.0</code></pre>
-<pre class="python"><code>model = tf.keras.models.Sequential([
-    # Vocab size: 10, Embedding dimension: 4, Input_shape size: (batch_size, num_words). As usual, batch_size is omitted.
-    tf.keras.layers.Embedding(10, 4, input_shape = (5,)),
-    tf.keras.layers.Flatten(), 
-    tf.keras.layers.Dense(1)
-])
-model.summary()</code></pre>
-<pre><code>Model: &quot;sequential&quot;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Tensorflow version: &#34;</span>, tf<span style="color:#f92672">.</span>__version__)
+</span></span></code></pre></div><pre><code>Tensorflow version:  2.4.0
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>Sequential([
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Vocab size: 10, Embedding dimension: 4, Input_shape size: (batch_size, num_words). As usual, batch_size is omitted.</span>
+</span></span><span style="display:flex;"><span>    tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Embedding(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">4</span>, input_shape <span style="color:#f92672">=</span> (<span style="color:#ae81ff">5</span>,)),
+</span></span><span style="display:flex;"><span>    tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Flatten(), 
+</span></span><span style="display:flex;"><span>    tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>summary()
+</span></span></code></pre></div><pre><code>Model: &quot;sequential&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
@@ -894,12 +888,14 @@ dense (Dense)                (None, 1)                 21
 Total params: 61
 Trainable params: 61
 Non-trainable params: 0
-_________________________________________________________________</code></pre>
-<pre class="python"><code>data = tf.random.uniform(shape = (1, 5), minval = 0, maxval = 10, dtype = tf.int32) # Batch size is 1.
-data</code></pre>
-<pre><code>&lt;tf.Tensor: shape=(1, 5), dtype=int32, numpy=array([[6, 1, 1, 4, 8]])&gt;</code></pre>
-<pre class="python"><code>model.variables  # Is a list of 3 tensors. 1 from Embedding layer and 2 from Dense layer (Kernel and bias)</code></pre>
-<pre><code>[&lt;tf.Variable &#39;embedding/embeddings:0&#39; shape=(10, 4) dtype=float32, numpy=
+_________________________________________________________________
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>data <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>uniform(shape <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>), minval <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, maxval <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, dtype <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>int32) <span style="color:#75715e"># Batch size is 1.</span>
+</span></span><span style="display:flex;"><span>data
+</span></span></code></pre></div><pre><code>&lt;tf.Tensor: shape=(1, 5), dtype=int32, numpy=array([[6, 1, 1, 4, 8]])&gt;
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>variables  <span style="color:#75715e"># Is a list of 3 tensors. 1 from Embedding layer and 2 from Dense layer (Kernel and bias)</span>
+</span></span></code></pre></div><pre><code>[&lt;tf.Variable 'embedding/embeddings:0' shape=(10, 4) dtype=float32, numpy=
  array([[ 4.10897247e-02, -2.48962641e-03,  1.26880072e-02,
           3.39310430e-02],
         [ 3.28579657e-02,  3.90318781e-03,  2.81411521e-02,
@@ -920,7 +916,7 @@ data</code></pre>
           4.47194651e-03],
         [-3.57637033e-02,  4.28059734e-02, -2.59280205e-05,
           4.09286283e-02]], dtype=float32)&gt;,
- &lt;tf.Variable &#39;dense/kernel:0&#39; shape=(20, 1) dtype=float32, numpy=
+ &lt;tf.Variable 'dense/kernel:0' shape=(20, 1) dtype=float32, numpy=
  array([[ 0.42870212],
         [ 0.04779923],
         [ 0.4126016 ],
@@ -941,29 +937,33 @@ data</code></pre>
         [-0.13330323],
         [-0.23972857],
         [ 0.23718971]], dtype=float32)&gt;,
- &lt;tf.Variable &#39;dense/bias:0&#39; shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;]</code></pre>
-<pre class="python"><code>optimizer = tf.keras.optimizers.SGD(learning_rate = 0.1)
-loss_object = tf.keras.losses.MeanSquaredError()
-target = tf.constant([2.5], shape = (1,1))
-for _ in range(2):   # Let&#39;s run gradient descent for two batches of the same input data. (It&#39;s a contrived examples)
-    with tf.GradientTape() as tape:
-        output = model(data) # Output has shape: (batch_size, 1). Here batch_size is 1. So output shape is (1,1)
-        loss_value = loss_object(target, output)  # Calculating some random loss.
-    grads = tape.gradient(loss_value, model.trainable_variables)
-
-    # Gradient descent step
-    optimizer.apply_gradients(zip(grads, model.trainable_variables))</code></pre>
-<pre class="python"><code>len(grads)</code></pre>
-<pre><code>3</code></pre>
-<pre class="python"><code>grads[0]</code></pre>
-<pre><code>&lt;tensorflow.python.framework.indexed_slices.IndexedSlices at 0x16c04d4a970&gt;</code></pre>
-<pre class="python"><code>print(grads[0])</code></pre>
-<pre><code>IndexedSlices(indices=tf.Tensor([6 1 1 4 8], shape=(5,), dtype=int32), values=tf.Tensor(
+ &lt;tf.Variable 'dense/bias:0' shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;]
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>optimizer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>SGD(learning_rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>loss_object <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>losses<span style="color:#f92672">.</span>MeanSquaredError()
+</span></span><span style="display:flex;"><span>target <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>constant([<span style="color:#ae81ff">2.5</span>], shape <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>):   <span style="color:#75715e"># Let&#39;s run gradient descent for two batches of the same input data. (It&#39;s a contrived examples)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+</span></span><span style="display:flex;"><span>        output <span style="color:#f92672">=</span> model(data) <span style="color:#75715e"># Output has shape: (batch_size, 1). Here batch_size is 1. So output shape is (1,1)</span>
+</span></span><span style="display:flex;"><span>        loss_value <span style="color:#f92672">=</span> loss_object(target, output)  <span style="color:#75715e"># Calculating some random loss.</span>
+</span></span><span style="display:flex;"><span>    grads <span style="color:#f92672">=</span> tape<span style="color:#f92672">.</span>gradient(loss_value, model<span style="color:#f92672">.</span>trainable_variables)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Gradient descent step</span>
+</span></span><span style="display:flex;"><span>    optimizer<span style="color:#f92672">.</span>apply_gradients(zip(grads, model<span style="color:#f92672">.</span>trainable_variables))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>len(grads)
+</span></span></code></pre></div><pre><code>3
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>grads[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><pre><code>&lt;tensorflow.python.framework.indexed_slices.IndexedSlices at 0x16c04d4a970&gt;
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(grads[<span style="color:#ae81ff">0</span>])
+</span></span></code></pre></div><pre><code>IndexedSlices(indices=tf.Tensor([6 1 1 4 8], shape=(5,), dtype=int32), values=tf.Tensor(
 [[-0.9495101  -0.14344962 -0.91739434  0.25398374]
  [ 0.69607455  1.0615798   0.5085497  -0.7338184 ]
  [ 1.1639317   0.24842012 -1.2103697   0.12384857]
  [-0.25895947  0.2856651   0.47968888  0.01028775]
- [-0.28760925  0.28005898  0.56933826 -0.5540699 ]], shape=(5, 4), dtype=float32), dense_shape=tf.Tensor([10  4], shape=(2,), dtype=int32))</code></pre>
+ [-0.28760925  0.28005898  0.56933826 -0.5540699 ]], shape=(5, 4), dtype=float32), dense_shape=tf.Tensor([10  4], shape=(2,), dtype=int32))
+</code></pre>
 <p>An <code>IndexedSlices</code> object has 3 main entries.</p>
 <ul>
 <li>indices</li>
@@ -971,15 +971,12 @@ for _ in range(2):   # Let&#39;s run gradient descent for two batches of the sam
 <li>dense_shape</li>
 </ul>
 <p><a id = "q3"></a></p>
-</div>
-<div id="how-to-convert-indexedslices-to-tensors" class="section level2">
-<h2>How to convert <code>IndexedSlices</code> to <code>Tensors</code>?</h2>
-<p>Before we do the conversion, let’s answer a relevant question: Why do we have to do the conversion from <code>IndexedSlices</code> to tensors given that <code>Tensorflow</code> can do a gradient descent step automatically through the <code>IndexedSlices</code>? In the last section, we could run 2 gradient descent steps without worrying about <code>IndexedSlices</code>.</p>
+<h2 id="how-to-convert-indexedslices-to-tensors">How to convert <code>IndexedSlices</code> to <code>Tensors</code>?</h2>
+<p>Before we do the conversion, let&rsquo;s answer a relevant question: Why do we have to do the conversion from <code>IndexedSlices</code> to tensors given that <code>Tensorflow</code> can do a gradient descent step automatically through the <code>IndexedSlices</code>? In the last section, we could run 2 gradient descent steps without worrying about <code>IndexedSlices</code>.</p>
 <p>But the problem occurs if we want to do some processing on gradient values. One such processing is <code>gradient clipping</code>. In <code>gradient clipping</code>, if sum of norm of gradients exceed a given value, gradients are rescaled to decrease their magnitude. Therefore, to do any gradient clipping, we have to access the gradient tensors. This is precisely where we would like to convert IndexedSlices to tensors. Having an embedding layer is common in deep learning models and applying gradient clipping to gradient values is also a common practice. We will show two approaches to do the conversion.</p>
-<div id="easiest-approach" class="section level3">
-<h3>Easiest approach</h3>
-<pre class="python"><code>tf.convert_to_tensor(grads[0])</code></pre>
-<pre><code>&lt;tf.Tensor: shape=(10, 4), dtype=float32, numpy=
+<h3 id="easiest-approach">Easiest approach</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>convert_to_tensor(grads[<span style="color:#ae81ff">0</span>])
+</span></span></code></pre></div><pre><code>&lt;tf.Tensor: shape=(10, 4), dtype=float32, numpy=
 array([[ 0.        ,  0.        ,  0.        ,  0.        ],
        [ 1.8600063 ,  1.31      , -0.70182   , -0.60996985],
        [ 0.        ,  0.        ,  0.        ,  0.        ],
@@ -990,16 +987,15 @@ array([[ 0.        ,  0.        ,  0.        ,  0.        ],
        [ 0.        ,  0.        ,  0.        ,  0.        ],
        [-0.28760925,  0.28005898,  0.56933826, -0.5540699 ],
        [ 0.        ,  0.        ,  0.        ,  0.        ]],
-      dtype=float32)&gt;</code></pre>
-</div>
-<div id="what-did-just-happen-in-the-last-step" class="section level3">
-<h3>What did just happen in the last step?</h3>
+      dtype=float32)&gt;
+</code></pre>
+<h3 id="what-did-just-happen-in-the-last-step">What did just happen in the last step?</h3>
 <p>Though the last approach is a single line elegant solution, it hides many things. How actually is the conversion done? The code below shows the steps in which we can manually do the conversion.</p>
-<pre class="python"><code>check_grad = tf.zeros_like(model.variables[0]).numpy()   # Create a dense tensor of all zeros
-for i, ind in enumerate(grads[0].indices):
-    check_grad[ind] = check_grad[ind] + grads[0].values[i]
-check_grad</code></pre>
-<pre><code>array([[ 0.        ,  0.        ,  0.        ,  0.        ],
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>check_grad <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>zeros_like(model<span style="color:#f92672">.</span>variables[<span style="color:#ae81ff">0</span>])<span style="color:#f92672">.</span>numpy()   <span style="color:#75715e"># Create a dense tensor of all zeros</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, ind <span style="color:#f92672">in</span> enumerate(grads[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>indices):
+</span></span><span style="display:flex;"><span>    check_grad[ind] <span style="color:#f92672">=</span> check_grad[ind] <span style="color:#f92672">+</span> grads[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>values[i]
+</span></span><span style="display:flex;"><span>check_grad
+</span></span></code></pre></div><pre><code>array([[ 0.        ,  0.        ,  0.        ,  0.        ],
        [ 1.8600063 ,  1.31      , -0.70182   , -0.60996985],
        [ 0.        ,  0.        ,  0.        ,  0.        ],
        [ 0.        ,  0.        ,  0.        ,  0.        ],
@@ -1009,11 +1005,10 @@ check_grad</code></pre>
        [ 0.        ,  0.        ,  0.        ,  0.        ],
        [-0.28760925,  0.28005898,  0.56933826, -0.5540699 ],
        [ 0.        ,  0.        ,  0.        ,  0.        ]],
-      dtype=float32)</code></pre>
+      dtype=float32)
+</code></pre>
 <p>This brings us to the end of this blog. I hope this blog has demystified a few things about <code>IndexedSlices</code>.</p>
-<p><strong>Motivation for this post</strong>: While writing TF 2 code for <a href="https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF">Attention Mechanisms chapter of D2L book</a>, the author encountered an error involving <code>IndexedSlices</code>. After spending a good deal of time hopelessly trying to figure out what’s going on, the author finally found that the error was occurring because of an user defined gradient clipping function that didn’t handle <code>IndexedSlices</code> properly. The model involved embedding layers as it was dealing with machine translation task. Therefore, I thought of writing this blog with the hope that it would be of help to readers who are struggling to figure out what <code>IndexedSlices</code> are.</p>
-</div>
-</div>
+<p><strong>Motivation for this post</strong>: While writing TF 2 code for <a href="https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF" target="_blank" rel="noopener">Attention Mechanisms chapter of D2L book</a>, the author encountered an error involving <code>IndexedSlices</code>. After spending a good deal of time hopelessly trying to figure out what&rsquo;s going on, the author finally found that the error was occurring because of an user defined gradient clipping function that didn&rsquo;t handle <code>IndexedSlices</code> properly. The model involved embedding layers as it was dealing with machine translation task. Therefore, I thought of writing this blog with the hope that it would be of help to readers who are struggling to figure out what <code>IndexedSlices</code> are.</p>
 
     </div>
 
@@ -1208,23 +1203,6 @@ check_grad</code></pre>
     
     
     
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://twitter.com/biswajitsahoo11" target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-  
-    
-    
-    
     
     
     
@@ -1379,7 +1357,7 @@ check_grad</code></pre>
       
 
     
-    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
 
     
     
@@ -1465,7 +1443,7 @@ check_grad</code></pre>
       
     
     
-    <script src="/en/js/wowchemy.min.247fd8f54253895301106e3006f53f38.js"></script>
+    <script src="/en/js/wowchemy.min.e14897cafececa7181d21d62540ef117.js"></script>
 
     
 

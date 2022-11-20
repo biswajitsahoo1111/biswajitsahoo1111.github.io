@@ -183,7 +183,7 @@
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;p&gt;For attribution, cite this project as&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;@misc{Sahoo_Data-Driven_Remaining_Useful_2020,
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@misc{Sahoo_Data-Driven_Remaining_Useful_2020,
 author = {Sahoo, Biswajit},
 doi = {10.5281/zenodo.5890595},
 month = {9},
@@ -191,8 +191,7 @@ title = {Data-Driven Remaining Useful Life (RUL) Prediction},
 url = {https://biswajitsahoo1111.github.io/rul_codes_open/},
 year = {2020}
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Readers should cite original datasets separately.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Readers should cite original datasets separately.&lt;/p&gt;
 </description>
     </item>
     
@@ -346,7 +345,7 @@ features&lt;/a&gt; (10 classes, sampling frequency: 48k) (Overall accuracy: &lt;
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;p&gt;For attribution, cite this project as&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;@misc{Sahoo_Data-Driven_Machinery_Fault_2019,
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@misc{Sahoo_Data-Driven_Machinery_Fault_2019,
 author = {Sahoo, Biswajit},
 doi = {10.5281/zenodo.5890575},
 month = {4},
@@ -354,8 +353,7 @@ title = {Data-Driven Machinery Fault Diagnosis},
 url = {https://biswajitsahoo1111.github.io/cbm_codes_open/},
 year = {2019}
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Readers should cite original datasets separately.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Readers should cite original datasets separately.&lt;/p&gt;
 </description>
     </item>
     
