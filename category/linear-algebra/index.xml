@@ -5,7 +5,7 @@
     <link>https://biswajitsahoo1111.github.io/category/linear-algebra/</link>
       <atom:link href="https://biswajitsahoo1111.github.io/category/linear-algebra/index.xml" rel="self" type="application/rss+xml" />
     <description>Linear Algebra</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Biswajit Sahoo</copyright><lastBuildDate>Thu, 14 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2023 Biswajit Sahoo</copyright><lastBuildDate>Thu, 14 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://biswajitsahoo1111.github.io/media/icon_hu9aa3fb3801987e3e09a10d02b6e0c908_114644_512x512_fill_lanczos_center_3.png</url>
       <title>Linear Algebra</title>
@@ -675,7 +675,7 @@ array([[  0,  -5,   0,   0,   0],
 &lt;p&gt;To multiply two vectors, or two matrices, or a matrix with a vector in a linear algebra sense, we have to use &lt;code&gt;linalg.matmul&lt;/code&gt; function. Using &lt;code&gt;*&lt;/code&gt; operator in python does element wise multiplication with broadcasting wherever possible. So to multiply two matrices, we have to call &lt;code&gt;linalg.matmul&lt;/code&gt; function. Inputs to &lt;code&gt;linalg.matmul&lt;/code&gt; function are matrices. Therefore, while multiplying two arrays, we have to first convert them into vectors and then multiply. Also note that &lt;code&gt;linalg.matmul&lt;/code&gt; is same as &lt;code&gt;tf.matmul&lt;/code&gt;. Both are aliases.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;multiplying_two_column_vectors&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;multiplying-two-column-vectors&#34;&gt;Multiplying two column vectors&lt;/h4&gt;
-&lt;p&gt;Vectors in &lt;code&gt;tensorflow&lt;/code&gt; have only 1 shape parameter, where as a column vector (a matrix with one column) has two shape parameters. For example, a vector &lt;code&gt;\([1,2,3]\)&lt;/code&gt; has shape &lt;code&gt;\((3,)\)&lt;/code&gt;, but the column vector &lt;code&gt;\([1,2,3]^T\)&lt;/code&gt; has shape &lt;code&gt;\((3,1)\)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Vectors in &lt;code&gt;tensorflow&lt;/code&gt; have only 1 shape parameter, where as a column vector (a matrix with one column) has two shape parameters. For example, a vector $[1,2,3]$ has shape $(3,)$, but the column vector $[1,2,3]^T$ has shape $(3,1)$.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;inner_product&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h5 id=&#34;inner-product&#34;&gt;Inner product&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vector_1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([&lt;span style=&#34;color:#ae81ff&#34;&gt;1.&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2.&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3.&lt;/span&gt;], shape &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
@@ -801,7 +801,7 @@ array([[ 5., -4.,  1.,  0.,  0.],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;matrix_inverse&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;matrix-inverse&#34;&gt;Matrix inverse&lt;/h4&gt;
-&lt;p&gt;Computes the matrix inverse if it exists. It uses &lt;code&gt;\(LU\)&lt;/code&gt; decomposition to calculate inverse. What happens if inverse doesn&amp;rsquo;t exist? Here is the answer taken directly from &lt;code&gt;tensorflow&lt;/code&gt; documentation:&lt;/p&gt;
+&lt;p&gt;Computes the matrix inverse if it exists. It uses $LU$ decomposition to calculate inverse. What happens if inverse doesn&amp;rsquo;t exist? Here is the answer taken directly from &lt;code&gt;tensorflow&lt;/code&gt; documentation:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;[&amp;hellip;] If a matrix is not invertible there is no guarantee what the op does. It may detect the condition and raise an exception or it may simply return a garbage result. [&amp;hellip;]&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -822,10 +822,10 @@ array([[ 9.9999970e-01,  1.1920929e-07, -1.1920929e-07],
        [-5.9604645e-07,  1.0000002e+00,  0.0000000e+00],
        [-2.3841858e-07,  0.0000000e+00,  1.0000000e+00]], dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;inverse-using-lu-factors&#34;&gt;Inverse using &lt;code&gt;\(LU\)&lt;/code&gt; factors&lt;/h4&gt;
-&lt;p&gt;If &lt;code&gt;\(LU\)&lt;/code&gt; decomposition result is already available from some prior computation, it can be used to compute the inverse using command &lt;code&gt;tf.linalg.lu_matrix_inverse&lt;/code&gt;. This command basically solves the following system:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$AX=I \Leftrightarrow LUX=I$$&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;As &lt;code&gt;\(L\)&lt;/code&gt; and &lt;code&gt;\(U\)&lt;/code&gt; are lower and upper triangular respectively, two triangular systems can be solved to obtain &lt;code&gt;\(X\)&lt;/code&gt; which is nothing but &lt;code&gt;\(A^{-1}\)&lt;/code&gt;. The triangular systems are &lt;code&gt;\(LY = I\)&lt;/code&gt; (this gives &lt;code&gt;\(Y\)&lt;/code&gt; as result) and &lt;code&gt;\(UX=Y\)&lt;/code&gt; (this gives &lt;code&gt;\(X\)&lt;/code&gt;, i.e., &lt;code&gt;\(A^{-1}\)&lt;/code&gt; as result). Here, the right hand side has more than one column in both the triangular systems. We will see how to solve those triangular systems at a &lt;a href=&#34;#solving_triangular_systems&#34;&gt;later section&lt;/a&gt;. For the time being, we will just compute the inverse using the built-in command.&lt;/p&gt;
+&lt;h4 id=&#34;inverse-using-lu-factors&#34;&gt;Inverse using $LU$ factors&lt;/h4&gt;
+&lt;p&gt;If $LU$ decomposition result is already available from some prior computation, it can be used to compute the inverse using command &lt;code&gt;tf.linalg.lu_matrix_inverse&lt;/code&gt;. This command basically solves the following system:&lt;/p&gt;
+&lt;p&gt;$$AX=I \Leftrightarrow LUX=I$$&lt;/p&gt;
+&lt;p&gt;As $L$ and $U$ are lower and upper triangular respectively, two triangular systems can be solved to obtain $X$ which is nothing but $A^{-1}$. The triangular systems are $LY = I$ (this gives $Y$ as result) and $UX=Y$ (this gives $X$, i.e., $A^{-1}$ as result). Here, the right hand side has more than one column in both the triangular systems. We will see how to solve those triangular systems at a &lt;a href=&#34;#solving_triangular_systems&#34;&gt;later section&lt;/a&gt;. For the time being, we will just compute the inverse using the built-in command.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lu, p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lu(A)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A_inv_by_lu &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lu_matrix_inverse(lu,p)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A_inv_by_lu
@@ -898,10 +898,10 @@ array([[ 0.,  0.,  0.,  0.,  0.],
 &lt;p&gt;Some of the most common and widely used matrix factorizations are available in &lt;code&gt;Tensorflow&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;lu&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;lu&#34;&gt;LU&lt;/h3&gt;
-&lt;p&gt;Matrix &lt;code&gt;\(A\)&lt;/code&gt; is factorized into a unit lower triangular matrix &lt;code&gt;\(L\)&lt;/code&gt; and an upper triangular matrix &lt;code&gt;\(U\)&lt;/code&gt;, such that &lt;code&gt;$$A=LU$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Matrix $A$ is factorized into a unit lower triangular matrix $L$ and an upper triangular matrix $U$, such that $$A=LU$$&lt;/p&gt;
 &lt;p&gt;To reduce round-off errors, partial pivoting is used. In partial pivoting, the following factorization is done.
-&lt;code&gt;$$PA = LU$$&lt;/code&gt;
-Where, &lt;code&gt;\(P\)&lt;/code&gt; is called the permutation matrix.&lt;/p&gt;
+$$PA = LU$$
+Where, $P$ is called the permutation matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                [&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;21&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;],
@@ -922,7 +922,7 @@ tf.Tensor(
 P = 
 tf.Tensor([1 2 0 3], shape=(4,), dtype=int32)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;What does the above result mean? Well, both &lt;code&gt;\(L\)&lt;/code&gt;, and &lt;code&gt;\(U\)&lt;/code&gt; matrices have been merged into one. And &lt;code&gt;\(P\)&lt;/code&gt; contains permutation indices. In practice, we don&amp;rsquo;t have to reconstruct individual matrices &lt;code&gt;\(L\)&lt;/code&gt;,$U$, and &lt;code&gt;\(P\)&lt;/code&gt;, because &lt;code&gt;tensorflow&lt;/code&gt; has built-in functions for further analysis that uses the result of &lt;code&gt;tf.linalg.lu&lt;/code&gt; as given above. For the sake of demonstration, we will show how to reconstruct those matrices from above result. To reconstruct &lt;code&gt;\(P\)&lt;/code&gt;, we will use a linear operator that is discussed next. After constructing the matrices &lt;code&gt;\(A\)&lt;/code&gt; will be &lt;code&gt;$$A = P^TLU$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;What does the above result mean? Well, both $L$, and $U$ matrices have been merged into one. And $P$ contains permutation indices. In practice, we don&amp;rsquo;t have to reconstruct individual matrices $L$,$U$, and $P$, because &lt;code&gt;tensorflow&lt;/code&gt; has built-in functions for further analysis that uses the result of &lt;code&gt;tf.linalg.lu&lt;/code&gt; as given above. For the sake of demonstration, we will show how to reconstruct those matrices from above result. To reconstruct $P$, we will use a linear operator that is discussed next. After constructing the matrices $A$ will be $$A = P^TLU$$&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;L &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;band_part(lu,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;diag(tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;diag_part(lu)) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;diag(tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ones(shape &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lu&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;],))
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;U &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;band_part(lu, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;permu_operator &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;LinearOperatorPermutation(p)
@@ -964,7 +964,7 @@ array([[  1.       ,   4.0000005,   7.       ,   8.       ],
        [  0.       ,  18.       ,   6.       ,   3.999998 ]],
       dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We can easily reconstruct our original matrix from &lt;code&gt;\(LU\)&lt;/code&gt; factors using the function &lt;code&gt;tf.linalg.lu_reconstruct&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We can easily reconstruct our original matrix from $LU$ factors using the function &lt;code&gt;tf.linalg.lu_reconstruct&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lu_reconstruct(lu,p)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(4, 4), dtype=float32, numpy=
 array([[  1.       ,   4.0000005,   7.       ,   8.       ],
@@ -977,7 +977,7 @@ array([[  1.       ,   4.0000005,   7.       ,   8.       ],
 &lt;h3 id=&#34;cholesky&#34;&gt;Cholesky&lt;/h3&gt;
 &lt;p&gt;It is defined for symmetric positive definite matrices. If A is a symmetric positive definite matrix, its Cholesky decomposition can be written as:
 $$ A = LL^T$$
-Where, &lt;code&gt;\(L\)&lt;/code&gt; is a lower triangular matrix.&lt;/p&gt;
+Where, $L$ is a lower triangular matrix.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Cholesky decomposition is used as a test for positive definiteness of a matrix. If Cholesky decomposition succeeds, the matrix is positive definite, otherwise it is not. Another widely reported test for positive definiteness is to check the signs of all eigenvalues of the matrix. If all the eigenvalues are positive, the matrix is positive definite. But this method requires computation of all eigenvalues which is computationally nontrivial. Therefore, Cholesky decomposition is the preferred method to test for positive definiteness. If the matrix is not positive definite, Cholesky decomposition will stop at an intermediate step. On the other hand, if it succeeds, along with verifying positive definiteness of the matrix, we will get the Cholesky factor as a byproduct. Cholesky factor can then be used to solve linear systems as we will see later.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;],
@@ -997,7 +997,7 @@ array([[ 1.,  1.,  1.],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;qr&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;qr&#34;&gt;QR&lt;/h3&gt;
-&lt;p&gt;Given a matrix &lt;code&gt;\(A\)&lt;/code&gt;, &lt;code&gt;\(QR\)&lt;/code&gt; decomposition decomposes the matrix into an orthogonal matrix &lt;code&gt;\(Q\)&lt;/code&gt; and an upper triangular matrix &lt;code&gt;\(R\)&lt;/code&gt; such that product of &lt;code&gt;\(Q\)&lt;/code&gt; and &lt;code&gt;\(R\)&lt;/code&gt; gives back &lt;code&gt;\(A\)&lt;/code&gt;. Columns of &lt;code&gt;\(Q\)&lt;/code&gt; are an orthogonal basis for the column space of &lt;code&gt;\(A\)&lt;/code&gt; (also known as range of &lt;code&gt;\(A\)&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Given a matrix $A$, $QR$ decomposition decomposes the matrix into an orthogonal matrix $Q$ and an upper triangular matrix $R$ such that product of $Q$ and $R$ gives back $A$. Columns of $Q$ are an orthogonal basis for the column space of $A$ (also known as range of $A$).&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5.&lt;/span&gt;]])
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Q,R &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;qr(A)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Q:&amp;#34;&lt;/span&gt;)
@@ -1017,7 +1017,7 @@ tf.Tensor(
 [[-5.477226  -4.7469287]
  [ 0.         2.7778888]], shape=(2, 2), dtype=float32)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We can also get full &lt;code&gt;\(Q\)&lt;/code&gt; and &lt;code&gt;\(R\)&lt;/code&gt; matrices by setting &lt;code&gt;full_matrices = True&lt;/code&gt; in the argument.&lt;/p&gt;
+&lt;p&gt;We can also get full $Q$ and $R$ matrices by setting &lt;code&gt;full_matrices = True&lt;/code&gt; in the argument.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Q_full, R_full &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;qr(A, full_matrices &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Q full:&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(Q_full)
@@ -1040,9 +1040,9 @@ tf.Tensor(
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;svd&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;svd&#34;&gt;SVD&lt;/h3&gt;
-&lt;p&gt;Singular value decomposition (SVD) of a matrix &lt;code&gt;\(A\in R^{m\times n}\)&lt;/code&gt; is defined as
-&lt;code&gt;$$A = U\Sigma V^T$$&lt;/code&gt;
-Where, &lt;code&gt;\(U\in R^{m\times m}\)&lt;/code&gt; and &lt;code&gt;\(V\in R^{n\times n}\)&lt;/code&gt; are orthogonal matrices, commonly known as left and right singular vectors respectively. &lt;code&gt;\(\Sigma \in R^{m\times n}\)&lt;/code&gt; is a diagonal matrix.&lt;/p&gt;
+&lt;p&gt;Singular value decomposition (SVD) of a matrix $A\in R^{m\times n}$ is defined as
+$$A = U\Sigma V^T$$
+Where, $U\in R^{m\times m}$ and $V\in R^{n\times n}$ are orthogonal matrices, commonly known as left and right singular vectors respectively. $\Sigma \in R^{m\times n}$ is a diagonal matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                   [&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                   [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;],
@@ -1164,8 +1164,8 @@ Eigenvectors:
 &lt;p&gt;&lt;a id = &#34;solving_dense_linear_systems&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;solving-dense-linear-systems&#34;&gt;Solving dense linear systems&lt;/h2&gt;
 &lt;p&gt;A linear system is (usually) written as $$ Ax = b$$&lt;/p&gt;
-&lt;p&gt;In general, &lt;code&gt;\(A\)&lt;/code&gt; can be square or rectangular. In our case, it is dense, i.e., most of its entries are nonzero. Right hand side &lt;code&gt;\(b\)&lt;/code&gt; is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same &lt;code&gt;\(A\)&lt;/code&gt;, the RHS can be replaced by a matrix whose columns are different RHS vectors.&lt;/p&gt;
-&lt;p&gt;Depending on the structure of &lt;code&gt;\(A\)&lt;/code&gt; (whether triangular, or tri-diagonal, or positive definite), suitable algorithm is chosen to solve the linear system. &lt;code&gt;Tensorflow&lt;/code&gt; has a function &lt;code&gt;tf.linalg.solve&lt;/code&gt; to solve linear systems. But this function doesn&amp;rsquo;t take into account the special structure of &lt;code&gt;\(A\)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In general, $A$ can be square or rectangular. In our case, it is dense, i.e., most of its entries are nonzero. Right hand side $b$ is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same $A$, the RHS can be replaced by a matrix whose columns are different RHS vectors.&lt;/p&gt;
+&lt;p&gt;Depending on the structure of $A$ (whether triangular, or tri-diagonal, or positive definite), suitable algorithm is chosen to solve the linear system. &lt;code&gt;Tensorflow&lt;/code&gt; has a function &lt;code&gt;tf.linalg.solve&lt;/code&gt; to solve linear systems. But this function doesn&amp;rsquo;t take into account the special structure of $A$.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;]], dtype &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;float32)
@@ -1178,9 +1178,21 @@ array([[1.   ],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;using_lu_decomposition&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;using-lu-decomposition&#34;&gt;Using LU decomposition&lt;/h3&gt;
-&lt;p&gt;If &lt;code&gt;\(LU\)&lt;/code&gt; decomposition factors of &lt;code&gt;\(A\)&lt;/code&gt; are known, those can be used to solve the linear system.
+&lt;p&gt;If $LU$ decomposition factors of $A$ are known, those can be used to solve the linear system.
 For example, solve:
-&lt;code&gt;$$\begin{pmatrix} 1 &amp;amp; 1 &amp;amp; 1\\ 1 &amp;amp; 5 &amp;amp; 5\\ 1 &amp;amp; 5 &amp;amp; 13 \end{pmatrix} x=  \begin{pmatrix} 3\\ 11\\ 20\\ \end{pmatrix}$$&lt;/code&gt;&lt;/p&gt;
+
+$$\begin{pmatrix}
+  1 &amp; 1 &amp; 1\\
+  1 &amp; 5 &amp; 5\\
+  1 &amp; 5 &amp; 13
+ \end{pmatrix} x= 
+ \begin{pmatrix}
+ 3\\
+ 11\\
+ 20\\
+ \end{pmatrix}$$
+ 
+&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;]], dtype &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;float32)
@@ -1199,8 +1211,8 @@ array([[ 3.],
        [11.],
        [20.]], dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Once we have obtained factors &lt;code&gt;\(L\)&lt;/code&gt; and &lt;code&gt;\(U\)&lt;/code&gt;, we can use &lt;code&gt;tf.linalg.triangular_solve&lt;/code&gt; to solve the linear system by solving following two triangular system. &lt;code&gt;$$Ly = b$$&lt;/code&gt;
-and &lt;code&gt;$$Ux = y$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Once we have obtained factors $L$ and $U$, we can use &lt;code&gt;tf.linalg.triangular_solve&lt;/code&gt; to solve the linear system by solving following two triangular system. $$Ly = b$$
+and $$Ux = y$$&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;L &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;band_part(lu,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;diag(tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;diag_part(lu)) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;diag(tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ones(shape &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lu&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shape[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;],))
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;triangular_solve(L,b)    &lt;span style=&#34;color:#75715e&#34;&gt;# Solves Ly = b&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;triangular_solve(lu,y, lower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;)  &lt;span style=&#34;color:#75715e&#34;&gt;# Solves Ux = y&lt;/span&gt;
@@ -1212,15 +1224,27 @@ array([[1.   ],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;using_cholesky_decomposition&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;using-cholesky-decomposition&#34;&gt;Using Cholesky decomposition&lt;/h3&gt;
-&lt;p&gt;If &lt;code&gt;\(A\)&lt;/code&gt; is positive definite, Cholesky decomposition is an efficient method for solving the linear system. For positive definite &lt;code&gt;\(A\)&lt;/code&gt;, Cholesky decomposition requires fewer computations than &lt;code&gt;\(LU\)&lt;/code&gt; decomposition. This is because it exploits the symmetry of the matrix &lt;code&gt;\(A\)&lt;/code&gt;. Once the Cholesky factor &lt;code&gt;\(L\)&lt;/code&gt; is found, we solve the linear system by solving two triangular systems. Solving triangular systems only requires &lt;code&gt;\(O(n^2)\)&lt;/code&gt; operations.
+&lt;p&gt;If $A$ is positive definite, Cholesky decomposition is an efficient method for solving the linear system. For positive definite $A$, Cholesky decomposition requires fewer computations than $LU$ decomposition. This is because it exploits the symmetry of the matrix $A$. Once the Cholesky factor $L$ is found, we solve the linear system by solving two triangular systems. Solving triangular systems only requires $O(n^2)$ operations.
 $$ LL^Tx = b$$
 Two triangular systems are:
 $$ Ly = b$$
-This gives us &lt;code&gt;\(y\)&lt;/code&gt;. Using &lt;code&gt;\(y\)&lt;/code&gt; we solve for &lt;code&gt;\(x\)&lt;/code&gt; using the following equation.
-&lt;code&gt;$$L^Tx = y$$&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;In &lt;code&gt;tensorflow&lt;/code&gt;, we solve the system using &lt;code&gt;tf.linalg.cholesky_solve&lt;/code&gt;. It takes cholesky factor &lt;code&gt;\((L)\)&lt;/code&gt; and right hand side &lt;code&gt;\(b\)&lt;/code&gt; as input.&lt;/p&gt;
+This gives us $y$. Using $y$ we solve for $x$ using the following equation.
+$$L^Tx = y$$&lt;/p&gt;
+&lt;p&gt;In &lt;code&gt;tensorflow&lt;/code&gt;, we solve the system using &lt;code&gt;tf.linalg.cholesky_solve&lt;/code&gt;. It takes cholesky factor $(L)$ and right hand side $b$ as input.&lt;/p&gt;
 &lt;p&gt;For example, solve:
-&lt;code&gt;$$\begin{pmatrix} 1 &amp;amp; 1 &amp;amp; 1\\ 1 &amp;amp; 5 &amp;amp; 5\\ 1 &amp;amp; 5 &amp;amp; 13 \end{pmatrix} x=  \begin{pmatrix} 3\\ 11\\ 20\\ \end{pmatrix}$$&lt;/code&gt;&lt;/p&gt;
+
+$$\begin{pmatrix}
+  1 &amp; 1 &amp; 1\\
+  1 &amp; 5 &amp; 5\\
+  1 &amp; 5 &amp; 13
+ \end{pmatrix} x= 
+ \begin{pmatrix}
+ 3\\
+ 11\\
+ 20\\
+ \end{pmatrix}$$
+ 
+&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;]], dtype &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;float32)
@@ -1241,7 +1265,7 @@ array([[ 3.      ],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;solving_structured_linear_systems&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;solving-structured-linear-systems&#34;&gt;Solving structured linear systems&lt;/h2&gt;
-&lt;p&gt;If coefficient matrix of a linear system has some kind of structure (triangular, banded, tridiagonal, etc.), it can be efficiently solved using far fewer computations than required by dense &lt;code&gt;\(LU\)&lt;/code&gt; decomposition. Special solvers exist that exploit the structure of the coefficient matrix thus reducing flop count considerably for large structured systems. Linear algebra library of &lt;code&gt;Tensorflow&lt;/code&gt; implements three such specialized solvers: &lt;code&gt;Triangular solver&lt;/code&gt;, &lt;code&gt;Tridiagonal solver&lt;/code&gt;, and &lt;code&gt;Banded triangular solver&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If coefficient matrix of a linear system has some kind of structure (triangular, banded, tridiagonal, etc.), it can be efficiently solved using far fewer computations than required by dense $LU$ decomposition. Special solvers exist that exploit the structure of the coefficient matrix thus reducing flop count considerably for large structured systems. Linear algebra library of &lt;code&gt;Tensorflow&lt;/code&gt; implements three such specialized solvers: &lt;code&gt;Triangular solver&lt;/code&gt;, &lt;code&gt;Tridiagonal solver&lt;/code&gt;, and &lt;code&gt;Banded triangular solver&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Structured solvers have immensely useful as in many practical applications resulting coefficient matrix has some kind of structure. This is especially true in mechanical applications, such as finite element modeling, computational heat transfer, etc. In finite element modeling, a body is divided into several elements and each element has certain number of nodes. A node is connected to only a few neighboring nodes. So interaction of a node is limited to only those neighboring nodes. This results in banded systems. Other types of structured matrices are also common in applications.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;solving_triangular_systems&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;solving-triangular-systems&#34;&gt;Solving triangular systems&lt;/h2&gt;
@@ -1265,7 +1289,7 @@ array([[0.6666665 ],
        [0.16666667],
        [1.5       ]], dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We can verity the above result by multiplying the transpose of the lower triangular matrix by &lt;code&gt;res_upper_triangular&lt;/code&gt;. This indeed gives us the right hand side &lt;code&gt;\(([7,8,9]^T)\)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We can verity the above result by multiplying the transpose of the lower triangular matrix by &lt;code&gt;res_upper_triangular&lt;/code&gt;. This indeed gives us the right hand side $([7,8,9]^T)$.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matmul(lower_triangular_mat, res_upper_triangular, transpose_a&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(3, 1), dtype=float32, numpy=
 array([[7.],
@@ -1274,8 +1298,23 @@ array([[7.],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;solving_tri-diagonal_systems&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;solving-tri-diagonal-systems&#34;&gt;Solving tri-diagonal systems&lt;/h3&gt;
-&lt;p&gt;If matrix &lt;code&gt;\(A\)&lt;/code&gt; is tri-diagonal, &lt;code&gt;tf.linalg.tridiagonal_solve&lt;/code&gt; can be used to solve the linear system efficiently. For example, we will solve the following tri-diagonal system.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$\begin{pmatrix} 2 &amp;amp; -1 &amp;amp; 0 &amp;amp;0 &amp;amp; 0\\ -1 &amp;amp; 2 &amp;amp; -1 &amp;amp; 0 &amp;amp; 0\\ 0 &amp;amp; -1 &amp;amp; 2&amp;amp; -1&amp;amp; 0\\ 0 &amp;amp; 0 &amp;amp; -1 &amp;amp; 2 &amp;amp; -1\\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; -1 &amp;amp; 2 \end{pmatrix}x= \begin{pmatrix} 3\\ 4\\ -5\\ 7\\ 9\end{pmatrix}$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If matrix $A$ is tri-diagonal, &lt;code&gt;tf.linalg.tridiagonal_solve&lt;/code&gt; can be used to solve the linear system efficiently. For example, we will solve the following tri-diagonal system.
+
+$$\begin{pmatrix}
+2 &amp; -1 &amp; 0 &amp;0 &amp; 0\\
+-1 &amp; 2 &amp; -1 &amp; 0 &amp; 0\\
+0 &amp; -1 &amp; 2&amp; -1&amp; 0\\
+0 &amp; 0 &amp; -1 &amp; 2 &amp; -1\\
+0 &amp; 0 &amp; 0 &amp; -1 &amp; 2
+\end{pmatrix}x=
+\begin{pmatrix}
+3\\
+4\\
+-5\\
+7\\
+9\end{pmatrix}$$
+
+&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;diags &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     [ &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     [ &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]], dtype &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;float32)
@@ -1299,10 +1338,25 @@ array([[ 3.      ],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;solving_banded_triangular_systems&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;solving-banded-triangular-systems&#34;&gt;Solving banded triangular systems&lt;/h3&gt;
-&lt;p&gt;Solving an &lt;code&gt;\((n \times n)\)&lt;/code&gt; full upper triangular (or lower triangular) system uses &lt;code&gt;\(n^2\)&lt;/code&gt; flops (including addition/subtraction and multiplication/division). But if the upper triangular (or lower triangular) system is banded with, say, &lt;code&gt;\(k\)&lt;/code&gt; bands (including main diagonal), the system can be solved in &lt;code&gt;\(\approx(2k-1)n\)&lt;/code&gt; flops. If &lt;code&gt;\(k\)&lt;/code&gt; is not very large, banded triangular systems can be solved at a fraction of computational cost as compared to dense triangular systems.&lt;/p&gt;
+&lt;p&gt;Solving an $(n \times n)$ full upper triangular (or lower triangular) system uses $n^2$ flops (including addition/subtraction and multiplication/division). But if the upper triangular (or lower triangular) system is banded with, say, $k$ bands (including main diagonal), the system can be solved in $\approx(2k-1)n$ flops. If $k$ is not very large, banded triangular systems can be solved at a fraction of computational cost as compared to dense triangular systems.&lt;/p&gt;
 &lt;p&gt;However, please keep in mind that flop count is not the only criteria that determines the computational time of a system. For very very large systems, communication time between different parts of computer can be significant as compared to processing required number of flops for that system.&lt;/p&gt;
-&lt;p&gt;We can solve both &lt;code&gt;banded lower triangular&lt;/code&gt; and &lt;code&gt;banded upper triangular&lt;/code&gt; systems. To illustrate this we will use the following example.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$\begin{pmatrix} 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0\\ 6 &amp;amp; 2 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0\\ 0 &amp;amp; 7 &amp;amp; 3 &amp;amp; 0 &amp;amp; 0\\ 0 &amp;amp; 0 &amp;amp; 8 &amp;amp; 4 &amp;amp; 0\\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 9 &amp;amp; 5 \end{pmatrix}x= \begin{pmatrix} 3\\ 4\\ -5\\ 7\\ 9\end{pmatrix}$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;We can solve both &lt;code&gt;banded lower triangular&lt;/code&gt; and &lt;code&gt;banded upper triangular&lt;/code&gt; systems. To illustrate this we will use the following example.
+
+$$\begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+6 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 7 &amp; 3 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 8 &amp; 4 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 9 &amp; 5
+\end{pmatrix}x=
+\begin{pmatrix}
+3\\
+4\\
+-5\\
+7\\
+9\end{pmatrix}$$
+
+&lt;/p&gt;
 &lt;p&gt;As the matrix is banded, we need not create the full dense matrix. Instead, we can only pass the band part to the solver. Subdiagonals (or superdiagonals) contain less number of entries than main diagonal. While passing the band part to &lt;code&gt;tensorflow&lt;/code&gt;, these subdiagonals (or superdiagonals) have to be appended either at left or right to make it of the same length as main diagonal. Whether the subdiagonals or superdiagonals will be appended at the left or right, is decided by the alignment strategy. There are four types of &lt;code&gt;alignment strategies&lt;/code&gt; used in &lt;code&gt;tensorflow&lt;/code&gt;. Those are:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;LEFT_LEFT&lt;/code&gt;: Superdiagonals are &lt;code&gt;appended at right&lt;/code&gt; and subdiagonals are &lt;code&gt;appended at right&lt;/code&gt;.&lt;/li&gt;
@@ -1346,8 +1400,23 @@ array([[ 3.],
        [ 7.],
        [ 9.]], dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Similarly we can solve banded upper triangular matrix. For illustration, we will use the transpose of the above coefficient matrix. We will use the same right hand side vector.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$\begin{pmatrix} 1 &amp;amp; 6 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0\\ 0 &amp;amp; 2 &amp;amp; 7 &amp;amp; 0 &amp;amp; 0\\ 0 &amp;amp; 0 &amp;amp; 3 &amp;amp; 8 &amp;amp; 0\\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 4 &amp;amp; 9\\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 5 \end{pmatrix}x= \begin{pmatrix} 3\\ 4\\ -5\\ 7\\ 9\end{pmatrix}$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Similarly we can solve banded upper triangular matrix. For illustration, we will use the transpose of the above coefficient matrix. We will use the same right hand side vector.
+
+$$\begin{pmatrix}
+1 &amp; 6 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 2 &amp; 7 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 3 &amp; 8 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 4 &amp; 9\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 5
+\end{pmatrix}x=
+\begin{pmatrix}
+3\\
+4\\
+-5\\
+7\\
+9\end{pmatrix}$$
+
+&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bands &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;]], dtype &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;float32)  &lt;span style=&#34;color:#75715e&#34;&gt;# Because of LEFT_RIGHT alignment as we have a superdiagonal here&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rhs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;],
@@ -1388,11 +1457,35 @@ array([[ 3.],
 &lt;p&gt;&lt;a id = &#34;ordinary_least_squares&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;ordinary-least-squares&#34;&gt;Ordinary least squares&lt;/h3&gt;
 &lt;p&gt;Both over determined and under determined least squares problem can be solved using the command &lt;code&gt;tf.linalg.lstsq&lt;/code&gt;. In the underdetermined case, the output is the least norm solution. Least squares problem can be written as&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$arg\min_{x}\|Ax-b\|_2^2$$&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;That is, we try to find an &lt;code&gt;\(x\)&lt;/code&gt; such that the residual error is as small as possible.
-For example, we will solve following two problems.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$\begin{pmatrix} 1 &amp;amp; 2\\ 2 &amp;amp; 0.5\\ 3 &amp;amp; 1\\ 4 &amp;amp; 5\\ \end{pmatrix}x_{over}= \begin{pmatrix} 3\\ 4\\ 5\\ 6\\ \end{pmatrix}$$&lt;/code&gt;
-&lt;code&gt;$$\begin{pmatrix} 3 &amp;amp; 1 &amp;amp; 2 &amp;amp; 5\\ 7 &amp;amp; 9 &amp;amp; 1 &amp;amp; 4 \end{pmatrix}x_{under}= \begin{pmatrix} 7.2\\ -5.8\\ \end{pmatrix}$$&lt;/code&gt;&lt;/p&gt;
+
+$$\underset{x}{\mathrm{argmin}}{\lVert{Ax-b}\rVert}_2^2$$
+
+
+&lt;p&gt;That is, we try to find an $x$ such that the residual error is as small as possible.
+For example, we will solve following two problems.
+
+$$\begin{pmatrix}
+1 &amp; 2\\
+2 &amp; 0.5\\
+3 &amp; 1\\
+4 &amp; 5\\
+\end{pmatrix}x_{over}=
+\begin{pmatrix}
+3\\
+4\\
+5\\
+6\\
+\end{pmatrix}$$
+$$\begin{pmatrix}
+3 &amp; 1 &amp; 2 &amp; 5\\
+7 &amp; 9 &amp; 1 &amp; 4
+\end{pmatrix}x_{under}=
+\begin{pmatrix}
+7.2\\
+-5.8\\
+\end{pmatrix}$$
+
+&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A_over &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5.&lt;/span&gt;]])
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A_under &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4.&lt;/span&gt;]])
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b_over &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6.&lt;/span&gt;], shape &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
@@ -1403,7 +1496,7 @@ For example, we will solve following two problems.&lt;/p&gt;
 array([[ 1.704103  ],
        [-0.04319588]], dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Though it is not advisable, for this simple case, we will directly apply normal equation to get the solution.&lt;/p&gt;
+&lt;p&gt;Though it is not advisable, for this simple case, we will directly apply normal equation to get the solution ($(A^TA)^{-1}A^Tb$).&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matmul(tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;inv(tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matmul(A_over,A_over, transpose_a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)), tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matmul(A_over,b_over, transpose_a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;))
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(2, 1), dtype=float32, numpy=
 array([[ 1.704104  ],
@@ -1417,7 +1510,7 @@ array([[-0.04100358],
        [ 0.699703  ],
        [ 1.4518324 ]], dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We will computer the least norm solution for underdetermined case using the closed form solution. However, it should be remembered that it is not advisable to do so in practice for large systems.&lt;/p&gt;
+&lt;p&gt;We will computer the least norm solution for underdetermined case using the closed form solution ($A^T(AA^T)^{-1}b$). However, it should be remembered that it is not advisable to do so in practice for large systems. The closed form solution can be obtained by applying Lagrange multipliers.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matmul(A_under,tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matmul(tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;inv(tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matmul(A_under, A_under, transpose_b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)), b_under), transpose_a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(4, 1), dtype=float32, numpy=
 array([[-0.04100358],
@@ -1427,9 +1520,9 @@ array([[-0.04100358],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;regularized_least_squares&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;regularized-least-squares&#34;&gt;Regularized least squares&lt;/h3&gt;
-&lt;p&gt;Only &lt;code&gt;\(l_2\)&lt;/code&gt; regularization is supported. The following regularized problem is solved.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$arg\min_{x}\|Ax-b\|_2^2 + \lambda \|x\|_2^2$$&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Here, &lt;code&gt;\(\lambda\)&lt;/code&gt; is a hyperparameter. Usually several values of &lt;code&gt;\(\lambda\)&lt;/code&gt; are tried over a logarithmic scale before choosing the best one.&lt;/p&gt;
+&lt;p&gt;Only $l_2$ regularization is supported. The following regularized problem is solved.&lt;/p&gt;
+&lt;p&gt;$$\underset{x}{\mathrm{argmin}}{\lVert{Ax-b}\rVert}_2^2 + \lambda {\lVert{x}\rVert}_2^2$$&lt;/p&gt;
+&lt;p&gt;Here, $\lambda$ is a hyperparameter. Usually several values of $\lambda$ are tried over a logarithmic scale before choosing the best one.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x_over_reg &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lstsq(A_over, b_over, l2_regularizer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2.0&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x_over_reg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;numpy()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;array([[1.3890449 ],
@@ -1447,10 +1540,16 @@ array([[-0.04763567],
 &lt;h2 id=&#34;some-specialized-operations&#34;&gt;Some specialized operations&lt;/h2&gt;
 &lt;p&gt;&lt;a id = &#34;norm&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;norm&#34;&gt;Norm&lt;/h3&gt;
-&lt;p&gt;Norm can be defined for vectors as well as matrices. &lt;code&gt;\(p\)&lt;/code&gt; norm of vector is defined as
-&lt;code&gt;$$\|x\|_p = (\Sigma_{i=1}^{n}|x_i|^p)^\frac{1}{p}$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Norm can be defined for vectors as well as matrices. $p$ norm of vector is defined as
+
+$${\lVert{x}\rVert}_p = (\Sigma_{i=1}^{n}|x_i|^p)^\frac{1}{p}$$
+
+&lt;/p&gt;
 &lt;p&gt;Matrix is norm is defined as
-&lt;code&gt;$$\|A\|_p= \max_{x\neq 0}\frac{\|Ax\|_p}{\|x\|_p}$$&lt;/code&gt;&lt;/p&gt;
+
+$${\lVert{A}\rVert}_p= \max_{x\neq 0}\frac{{\lVert{Ax}\rVert}_p}{{\lVert{x}\rVert}_p}$$
+
+&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Tensorflow&lt;/code&gt; supports all the usual vector and matrix norms that are used in practice. Using only &lt;code&gt;tensorflow&lt;/code&gt; we can calculate all norms except &lt;code&gt;infinity&lt;/code&gt; norm. To calculate &lt;code&gt;infinity&lt;/code&gt; norm we have to use &lt;code&gt;ord = np.inf&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;norm(tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3.&lt;/span&gt;]), ord &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;euclidean&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;numpy()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;3.7416575
@@ -1571,15 +1670,22 @@ array([[0.11322771, 0.9058217 , 0.22645542, 0.33968312],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;cross_product_of_vectors&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;cross-product-of-vectors&#34;&gt;Cross product of vectors&lt;/h3&gt;
-&lt;p&gt;It is defined for 3-element vectors. For two vectors &lt;code&gt;\(a = (a_1, a_2, a_3)^T\)&lt;/code&gt;, and &lt;code&gt;\(b = (b_1, b_2, b_3)^T\)&lt;/code&gt;, cross product is defined as the determinant of following matrix&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$\begin{pmatrix} i &amp;amp; j &amp;amp; k\\ a_1 &amp;amp; a_2 &amp;amp; a_3\\ b_1 &amp;amp; b_2 &amp;amp; b_3 \end{pmatrix}$$&lt;/code&gt;
-Where &lt;code&gt;\(i, j\)&lt;/code&gt;, and &lt;code&gt;\(k\)&lt;/code&gt; are unit direction vectors along three perpendicular right handed system.&lt;/p&gt;
+&lt;p&gt;It is defined for 3-element vectors. For two vectors $a = (a_1, a_2, a_3)^T$, and $b = (b_1, b_2, b_3)^T$, cross product is defined as the determinant of following matrix
+
+$$\begin{pmatrix}
+i &amp; j &amp; k\\
+a_1 &amp; a_2 &amp; a_3\\
+b_1 &amp; b_2 &amp; b_3
+\end{pmatrix}$$
+
+
+Where $i, j$, and $k$ are unit direction vectors along three perpendicular right handed system.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;])
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;])
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cross(a,b)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;numpy()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;array([-1,  2, -1], dtype=int32)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;First element in the output corresponds to the value along &lt;code&gt;\(i\)&lt;/code&gt;th direction. Similarly for other outputs.&lt;/p&gt;
+&lt;p&gt;First element in the output corresponds to the value along $i$th direction. Similarly for other outputs.&lt;/p&gt;
 &lt;p&gt;It is also possible to calculate cross product of more that one pair of vectors simultaneously.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;normal(shape &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;))
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;d &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;normal(shape &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;))
@@ -1590,7 +1696,7 @@ Where &lt;code&gt;\(i, j\)&lt;/code&gt;, and &lt;code&gt;\(k\)&lt;/code&gt; are 
        [ 0.0998309 ,  0.48842978, -0.03491247],
        [ 1.0497653 , -1.5643073 ,  0.5671499 ]], dtype=float32)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;First row of output is the cross product of first rows of &lt;code&gt;\(c\)&lt;/code&gt; and &lt;code&gt;\(d\)&lt;/code&gt;. Similarly for other rows.&lt;/p&gt;
+&lt;p&gt;First row of output is the cross product of first rows of $c$ and $d$. Similarly for other rows.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;matrix_square_root&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;matrix-square-root&#34;&gt;Matrix square root&lt;/h3&gt;
 &lt;p&gt;Square root of a matrix is defined for invertible matrices whose real eigenvalues are positive.&lt;/p&gt;
@@ -1612,12 +1718,12 @@ array([[4.9999986, 2.0000007, 3.0000038],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;matrix_exponential&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;matrix-exponential&#34;&gt;Matrix exponential&lt;/h3&gt;
-&lt;p&gt;Exponential of a matrix &lt;code&gt;\(A\)&lt;/code&gt; is defined as&lt;/p&gt;
+&lt;p&gt;Exponential of a matrix $A$ is defined as&lt;/p&gt;
 &lt;p&gt;$$ e^A = \sum_{n=0}^\infty \frac{A^n}{n!}$$&lt;/p&gt;
 &lt;p&gt;In practice, the sum is not taken to infinity. Rather, approximations are used to compute matrix exponential. &lt;code&gt;Tensorflow&lt;/code&gt; implementation is based on &lt;a href=&#34;https://epubs.siam.org/doi/10.1137/04061101X&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this paper&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;When the matrix has a full set of independent eigenvectors, the formula can be simplified to
-&lt;code&gt;$$e^A = Se^{\Lambda}S^{-1}$$&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;where, &lt;code&gt;\(S\)&lt;/code&gt; is the eigenvector matrix and &lt;code&gt;\(e^\Lambda\)&lt;/code&gt; is a diagonal matrix whose diagonal entries are exponentials of eigenvalues of the matrix &lt;code&gt;\(A\)&lt;/code&gt;.&lt;/p&gt;
+$$e^A = Se^{\Lambda}S^{-1}$$&lt;/p&gt;
+&lt;p&gt;where, $S$ is the eigenvector matrix and $e^\Lambda$ is a diagonal matrix whose diagonal entries are exponentials of eigenvalues of the matrix $A$.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0.&lt;/span&gt;]])
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;expm(A)
@@ -1649,7 +1755,7 @@ array([[4.999999 +0.j, 1.9999989+0.j, 2.9999986+0.j],
 &lt;p&gt;Computes the natural logarithm of the determinant of a matrix. There are two functions in &lt;code&gt;tensorflow &lt;/code&gt; to calculate this.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;If matrix is symmetric positive definite, use &lt;code&gt;tf.linalg.logdet&lt;/code&gt; (Uses Cholesky decomposition)&lt;/li&gt;
-&lt;li&gt;For other matrices, use &lt;code&gt;tf.linalg.slogdet&lt;/code&gt; (Uses &lt;code&gt;\(LU\)&lt;/code&gt; decomposition)&lt;/li&gt;
+&lt;li&gt;For other matrices, use &lt;code&gt;tf.linalg.slogdet&lt;/code&gt; (Uses $LU$ decomposition)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;slogdet&lt;/code&gt; computes the sign of the determinant as well as the log of the absolute value of the determinant.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mat &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;],
@@ -1676,10 +1782,10 @@ Log of absolute value of determinant =  4.0943446
 &lt;p&gt;&lt;a id = &#34;pseudo_inverse_of_a_matrix&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;pseudo-inverse-of-a-matrix&#34;&gt;Pseudo inverse of a matrix&lt;/h3&gt;
 &lt;p&gt;While matrix inverse is defined only for square matrices, pseudo inverse is defined for matrices of any shape. It is also defined for singular matrices. Pseudo inverse can also be used to solve ordinary least squares problem. For the problem&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$arg\min_{x}\|Ax-b\|_2^2$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;$$\underset{x}{\mathrm{argmin}}{\lVert {Ax-b} \rVert}_2^2$$&lt;/p&gt;
 &lt;p&gt;the approximate least squares solution can be written as&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$x_{ls} = A^{\dagger}b$$&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Where, &lt;code&gt;\(A^{\dagger}\)&lt;/code&gt; is the pseudo inverse of &lt;code&gt;\(A\)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;$$x_{ls} = A^{\dagger}b$$&lt;/p&gt;
+&lt;p&gt;Where, $A^{\dagger}$ is the pseudo inverse of $A$.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pinv(tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;],[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0.&lt;/span&gt;]]))
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
 array([[0.06896552, 0.        , 0.17241378],
@@ -1873,8 +1979,17 @@ array([[ 1.,  2.,  3.,  0.,  0.],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;householder_matrix&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;householder-matrix&#34;&gt;Householder matrix&lt;/h4&gt;
-&lt;p&gt;Householder matrix can be used to triangularize a matrix using orthogonal matrices (the process is called orthogonal triangularization). But we will not pursue that point here. We will only show the method using only a column vector. Given a vector &lt;code&gt;\(v = [1, 4, 7]^T\)&lt;/code&gt;, Householder transform can transform the vector into &lt;code&gt;\(v = \|v\|_2[1,0,0]^T\)&lt;/code&gt;. It is achieved by multiplying the vector &lt;code&gt;\(v\)&lt;/code&gt; by an orthogonal Householder matrix &lt;code&gt;\(H\)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$H\begin{pmatrix} v_1\\ v_2\\ v_3\end{pmatrix}=\|v\|_2\begin{pmatrix} 1\\ 0\\ 0\end{pmatrix}$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Householder matrix can be used to triangularize a matrix using orthogonal matrices (the process is called orthogonal triangularization). But we will not pursue that point here. We will only show the method using only a column vector. Given a vector $v = [1, 4, 7]^T$, Householder transform can transform the vector into $v = {\lVert{v}\rVert}_2[1,0,0]^T$. It is achieved by multiplying the vector $v$ by an orthogonal Householder matrix $H$.
+
+$$H\begin{pmatrix}
+v_1\\
+v_2\\
+v_3\end{pmatrix}={\lVert{v}\rVert}_2\begin{pmatrix}
+1\\
+0\\
+0\end{pmatrix}$$
+
+&lt;/p&gt;
 &lt;p&gt;This process can be repeated with other columns of a matrix to transform it into an upper triangular one. For more details, have a look at the references.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;first_column_of_operator_1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; operator_1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_dense()[:,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;norm &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linalg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;norm(first_column_of_operator_1)
@@ -2012,9 +2127,9 @@ array([[0., 0., 0., 0., 0.],
 &lt;h3 id=&#34;matrix-operations-using-operators&#34;&gt;Matrix operations using operators&lt;/h3&gt;
 &lt;p&gt;&lt;a id = &#34;low-rank_update&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;low-rank-update&#34;&gt;Low-rank update&lt;/h4&gt;
-&lt;p&gt;When a low rank matrix is added to a given matrix, the resulting matrix is called a low-rank update of the original matrix. Let&amp;rsquo;s suppose our original matrix was &lt;code&gt;\(A\)&lt;/code&gt; and we add a rank 1 update to it. The resulting matrix is &lt;code&gt;\(B\)&lt;/code&gt;. So&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$$B = A + uv^T$$&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Where, &lt;code&gt;\(u\)&lt;/code&gt;, and &lt;code&gt;\(v\)&lt;/code&gt; are column vectors. It should be noted that low-rank matrix update doesn&amp;rsquo;t always increase the rank of the original matrix. For example, if rank of &lt;code&gt;\(A\)&lt;/code&gt; was 2, updating it with a rank 1 matrix will not always  make its rank 3. Here is an example.&lt;/p&gt;
+&lt;p&gt;When a low rank matrix is added to a given matrix, the resulting matrix is called a low-rank update of the original matrix. Let&amp;rsquo;s suppose our original matrix was $A$ and we add a rank 1 update to it. The resulting matrix is $B$. So&lt;/p&gt;
+&lt;p&gt;$$B = A + uv^T$$&lt;/p&gt;
+&lt;p&gt;Where, $u$, and $v$ are column vectors. It should be noted that low-rank matrix update doesn&amp;rsquo;t always increase the rank of the original matrix. For example, if rank of $A$ was 2, updating it with a rank 1 matrix will not always  make its rank 3. Here is an example.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;constant([[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;]], dtype &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tf&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;float32)
@@ -2033,8 +2148,8 @@ Rank of B =  2
 &lt;p&gt;&lt;strong&gt;Why is it useful?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;It turns out that this low rank update appears in many applications. One of the applications is in least squares. Imagine that you have solved the least squares problem using the available data. And now you get some new data. The problem is to get the new least squares fit. Well, you can start form scratch by including the new data to your old data and then fit the model on the whole data. But this is a wasteful approach. A better alternative is to use the new data to modify your old fit. If you do some mathematics, you will arrive at matrix update equation. We will not do the math here. Interested readers can check references.&lt;/p&gt;
 &lt;p&gt;Computations can be much faster if we use low-rank matrix update equation. In tensorflow it is done using &lt;code&gt;tf.linalg.OperatorLowRankUpdate&lt;/code&gt; operator. Though the operator can handle more than rank 1 update, we will use it only for rank 1 update.&lt;/p&gt;
-&lt;p&gt;As an example, let&amp;rsquo;s suppose we want to compute the inverse of &lt;code&gt;\(B\)&lt;/code&gt;. We can do so by modifying the inverse of &lt;code&gt;\(A\)&lt;/code&gt; that we have previously computed. The result is the famous Sherman–Morrison-Woodbury formula.
-&lt;code&gt;$$B^{-1} = (A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;As an example, let&amp;rsquo;s suppose we want to compute the inverse of $B$. We can do so by modifying the inverse of $A$ that we have previously computed. The result is the famous Sherman–Morrison-Woodbury formula.
+$$B^{-1} = (A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$$&lt;/p&gt;
 &lt;p&gt;Provided that the denominator is not equal to zero. Note that denominator is a scalar for rank 1 update. This equation show that we can compute new inverse from the old inverse by using matrix-vector and vector-vector multiplications.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;operator&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_dense()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
@@ -2122,226 +2237,276 @@ array([[  0.,   7.,  13.],
       <description>&lt;p&gt;Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable. Then the final solution is obtained by back substituting the obtained value of the variable into remaining equations. This method, in mathematical jargon, is called Gaussian elimination and back substitution.&lt;/p&gt;
 &lt;p&gt;It turns out (surprisingly) that linear systems form the basis of many interesting engineering applications. Ultimately the problem boils down to solution (or approximate solution) of a system of linear equations. So a thorough understanding of linear systems is essential to appreciate the applications. In this post we will outline all possible cases of finding solutions to  linear systems and briefly outline two most important applications.&lt;/p&gt;
 &lt;p&gt;We will use matrix notation to represent the equations succinctly. It also gives us better insight into their solution. Using matrix notation the system can be represented as
-&lt;code&gt;$$\textbf{Ax}=\textbf{b}$$&lt;/code&gt;
-Where &lt;code&gt;\(\textbf{A}\)&lt;/code&gt; is the matrix of coefficients of size &lt;code&gt;\((m\times n)\)&lt;/code&gt;, &lt;code&gt;\(\textbf{x}\)&lt;/code&gt; is a vector of variables of size &lt;code&gt;\((n\times 1)\)&lt;/code&gt;, and &lt;code&gt;\(\textbf{b}\)&lt;/code&gt;
-is a vector of size &lt;code&gt;\((m\times 1)\)&lt;/code&gt; representing constant right hand sides. Note that &lt;code&gt;\(\textbf{b}\)&lt;/code&gt; can be a vector of all zeros, i.e., &lt;code&gt;\(\textbf{b} = \textbf{0}\)&lt;/code&gt; or it can be any arbitrary vector with some nonzero values, i.e.,$\textbf{b}\neq \textbf{0}$. The solution(s) of linear systems depend to a large extent on what the right hand side is as we will see shortly.&lt;/p&gt;
-&lt;p&gt;Apart from notation, we need two other concepts from matrix theory. One is of rank and other is the range space (or column space) of a matrix. Rank &lt;code&gt;\((Rank(\textbf{A}))\)&lt;/code&gt; of a matrix (say, &lt;code&gt;\(\textbf{A}\)&lt;/code&gt;) is defined as number of independent rows or columns of a matrix. It is a well known result in matrix theory that row rank (number of independent rows) is equal to column rank (number of independent columns) and &lt;code&gt;\(Rank(\textbf{A})\leq min(m,n)\)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Range space &lt;code&gt;\((\mathcal{R}(A))\)&lt;/code&gt;(in short, Range) of a matrix is the vector space of all possible linear combinations of columns of the matrix. As we take all possible linear combination of columns, it is also known as column space. Readers who are slightly more familiar with linear algebra may know that Range is the span of columns of &lt;code&gt;\(\textbf{A}\)&lt;/code&gt;. Zero vector &lt;code&gt;\((\textbf{0})\)&lt;/code&gt; is &lt;strong&gt;always&lt;/strong&gt; in the range of &lt;code&gt;\(\textbf{A}\)&lt;/code&gt; because if we take linear combination of columns of &lt;code&gt;\(\textbf{A}\)&lt;/code&gt; with all coefficients as 0&amp;rsquo;s, we get zero vector. Hence &lt;code&gt;\(\textbf{b}=0 \in \mathcal{R}(\textbf{A})\)&lt;/code&gt; is always true.&lt;/p&gt;
+$$\textbf{Ax}=\textbf{b}$$
+Where $\textbf{A}$ is the matrix of coefficients of size $(m\times n)$, $\textbf{x}$ is a vector of variables of size $(n\times 1)$, and $\textbf{b}$
+is a vector of size $(m\times 1)$ representing constant right hand sides. Note that $\textbf{b}$ can be a vector of all zeros, i.e., $\textbf{b} = \textbf{0}$ or it can be any arbitrary vector with some nonzero values, i.e.,$\textbf{b}\neq \textbf{0}$. The solution(s) of linear systems depend to a large extent on what the right hand side is as we will see shortly.&lt;/p&gt;
+&lt;p&gt;Apart from notation, we need two other concepts from matrix theory. One is of rank and other is the range space (or column space) of a matrix. Rank $(Rank(\textbf{A}))$ of a matrix (say, $\textbf{A}$) is defined as number of independent rows or columns of a matrix. It is a well known result in matrix theory that row rank (number of independent rows) is equal to column rank (number of independent columns) and $Rank(\textbf{A})\leq min(m,n)$.&lt;/p&gt;
+&lt;p&gt;Range space $(\mathcal{R}(A))$(in short, Range) of a matrix is the vector space of all possible linear combinations of columns of the matrix. As we take all possible linear combination of columns, it is also known as column space. Readers who are slightly more familiar with linear algebra may know that Range is the span of columns of $\textbf{A}$. Zero vector $(\textbf{0})$ is &lt;strong&gt;always&lt;/strong&gt; in the range of $\textbf{A}$ because if we take linear combination of columns of $\textbf{A}$ with all coefficients as 0&amp;rsquo;s, we get zero vector. Hence $\textbf{b}=0 \in \mathcal{R}(\textbf{A})$ is always true.&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s now discuss different cases separately and their solutions. We will assume that our system of equations has real entries.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Case - I: &lt;code&gt;\((m = n)\)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Case - I: $(m = n)$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;\(Rank(\textbf{A}) = m\)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;$Rank(\textbf{A}) = m$&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : Unique solution (for any &lt;code&gt;\(\textbf{b}\)&lt;/code&gt;). For example,$$ \begin{equation}
-\begin{bmatrix}
-1 &amp;amp; 2 &amp;amp; 3 \
-2 &amp;amp; 4 &amp;amp; 8 \
-3 &amp;amp; 5 &amp;amp; 7 \
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \
-x_2 \
-x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-3 \
-5 \
-7
-\end{bmatrix}
-\end{equation}$$ This system has unique solution.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : Impossible (This case will never happen because &lt;code&gt;\(Rank(\textbf{A})=m\)&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Unique solution (for any $\textbf{b}$). For example,
+
+        $$ \begin{equation}
+        \begin{bmatrix}
+        1 &amp; 2 &amp; 3 \\
+        2 &amp; 4 &amp; 8 \\
+        3 &amp; 5 &amp; 7 \\
+        \end{bmatrix}
+        \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        x_3
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+        3 \\
+        5 \\
+        7
+        \end{bmatrix}
+        \end{equation}$$
+        
+
+This system has unique solution.&lt;/li&gt;
+&lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : Impossible (This case will never happen because $Rank(\textbf{A})=m$)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;\(Rank(\textbf{A}) &amp;lt; m\)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;$Rank(\textbf{A}) &amp;lt; m$&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : Infinitely many solutions. For example,$$ \begin{equation}
-\begin{bmatrix}
-1 &amp;amp; 2 &amp;amp; 3 \
-2 &amp;amp; 4 &amp;amp; 6 \
-3 &amp;amp; 5 &amp;amp; 7 \
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \
-x_2 \
-x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-3 \
-6 \
-8
-\end{bmatrix}
-\end{equation}$$ This system has infinitely many solutions.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : No solution. For example,$$ \begin{equation}
-\begin{bmatrix}
-1 &amp;amp; 2 &amp;amp; 3 \
-2 &amp;amp; 4 &amp;amp; 6 \
-3 &amp;amp; 5 &amp;amp; 7 \
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \
-x_2 \
-x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-1 \
-5 \
-7
-\end{bmatrix}
-\end{equation}$$ This system has no solution.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Case - II: &lt;code&gt;\((m &amp;gt; n)\)&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;\(Rank(\textbf{A}) = n\)&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : Unique solution. For example,$$ \begin{equation}
-\begin{bmatrix}
-1 &amp;amp; 2 \
-2 &amp;amp; 7 \
-3 &amp;amp; 8 \
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \
-x_2
-\end{bmatrix}
-=
-\begin{bmatrix}
-3 \
-9 \
-11
-\end{bmatrix}
-\end{equation}$$ This system has unique solution.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : No solution. For example,$$ \begin{equation}
-\begin{bmatrix}
-1 &amp;amp; 2 \
-2 &amp;amp; 7 \
-3 &amp;amp; 8 \
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \
-x_2
-\end{bmatrix}
-=
-\begin{bmatrix}
-3 \
-9 \
-11
-\end{bmatrix}
-\end{equation}$$ This system has no solution. But this case is immensely useful from application point of view. Sometimes it is not desirable to obtain the exact solution. Rather an approximate solution suffices for all practical purposes. Finding an approximate solution to an overdetermined system leads to the famous &lt;a href=&#34;https://en.wikipedia.org/wiki/Least_squares&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Least Squares&lt;/a&gt; problem.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;\(Rank(\textbf{A}) &amp;lt; n\)&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : Infinitely many solutions. For example,$$ \begin{equation}
-\begin{bmatrix}
-1 &amp;amp; 2 \
-2 &amp;amp; 4 \
-3 &amp;amp; 6 \
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \
-x_2
-\end{bmatrix}
-=
-\begin{bmatrix}
-3 \
-6 \
-9
-\end{bmatrix}
-\end{equation}$$ It has infinitely many solutions.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : No solution. For example,$$ \begin{equation}
-\begin{bmatrix}
-1 &amp;amp; 2 \
-2 &amp;amp; 4 \
-3 &amp;amp; 6 \
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \
-x_2
-\end{bmatrix}
-=
-\begin{bmatrix}
-3 \
-6 \
-8
-\end{bmatrix}
-\end{equation}$$ This system has no solution.&lt;/li&gt;
+&lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Infinitely many solutions. For example,
+
+        $$ \begin{equation}
+        \begin{bmatrix}
+        1 &amp; 2 &amp; 3 \\
+        2 &amp; 4 &amp; 6 \\
+        3 &amp; 5 &amp; 7 \\
+        \end{bmatrix}
+        \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        x_3
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+        3 \\
+        6 \\
+        8
+        \end{bmatrix}
+        \end{equation}$$
+        
+
+This system has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : No solution. For example,$$
+
+        \begin{equation}
+        \begin{bmatrix}
+        1 &amp; 2 &amp; 3 \\
+        2 &amp; 4 &amp; 6 \\
+        3 &amp; 5 &amp; 7 \\
+        \end{bmatrix}
+        \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        x_3
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+        1 \\
+        5 \\
+        7
+        \end{bmatrix}
+        \end{equation}$$
+        
+
+This system has no solution.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Case - III: &lt;code&gt;\((m &amp;lt; n)\)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Case - II: $(m &amp;gt; n)$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;\(Rank(\textbf{A}) = m\)&lt;/code&gt; :&lt;/p&gt;
+&lt;p&gt;$Rank(\textbf{A}) = n$&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : Infinitely many solutions. For example, $$ \begin{equation}
-\begin{bmatrix}
-1 &amp;amp; 2 &amp;amp; 3 \
-2 &amp;amp; 4 &amp;amp; 5
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \
-x_2 \
-x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-2 \
-3
-\end{bmatrix}
-\end{equation}$$ This system has infinitely many solutions. This case is also used in many applications. As there are infinitely many solutions, a natural choice is to choose the best solution. The qualifier &amp;lsquo;best&amp;rsquo; determines what application we have in our mind. If we seek minimum &lt;code&gt;\((l_2)\)&lt;/code&gt; norm, we get the so called minimum energy solution, a concept used in signal processing. Yet another concern is to seek for the sparsest solution (a solution with only a few nonzero entries and all other entries being zero). This idea is used in &lt;a href=&#34;https://en.wikipedia.org/wiki/Compressed_sensing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Compressed Sensing&lt;/a&gt;, an active research area with many interesting applications.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : Impossible. This case will never happen since &lt;code&gt;\(Rank(\textbf{A})=m\)&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Unique solution. For example,$$
+
+        \begin{equation}
+        \begin{bmatrix}
+        1 &amp; 2 \\
+        2 &amp; 7 \\
+        3 &amp; 8 \\
+        \end{bmatrix}
+        \begin{bmatrix}
+        x_1 \\
+        x_2 
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+        3 \\
+        9 \\
+        11
+        \end{bmatrix}
+        \end{equation}$$
+        
+
+This system has unique solution.&lt;/li&gt;
+&lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : No solution. For example,$$
+
+        \begin{equation}
+        \begin{bmatrix}
+        1 &amp; 2 \\
+        2 &amp; 7 \\
+        3 &amp; 8 \\
+        \end{bmatrix}
+        \begin{bmatrix}
+        x_1 \\
+        x_2 
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+        3 \\
+        9 \\
+        11
+        \end{bmatrix}
+        \end{equation}$$
+        
+
+This system has no solution. But this case is immensely useful from application point of view. Sometimes it is not desirable to obtain the exact solution. Rather an approximate solution suffices for all practical purposes. Finding an approximate solution to an overdetermined system leads to the famous &lt;a href=&#34;https://en.wikipedia.org/wiki/Least_squares&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Least Squares&lt;/a&gt; problem.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;\(Rank(\textbf{A}) &amp;lt; m\)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;$Rank(\textbf{A}) &amp;lt; n$&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : Infinitely many solutions. For example, $$ \begin{equation}
-\begin{bmatrix}
-1 &amp;amp; 2 &amp;amp; 3 \
-2 &amp;amp; 4 &amp;amp; 6
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \
-x_2 \
-x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-4 \
-8
-\end{bmatrix}
-\end{equation}$$ This system has infinitely many solutions.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;\(\textbf{b} \not\in \mathcal{R}(\textbf{A})\)&lt;/code&gt; : No solution. For example, $$ \begin{equation}
-\begin{bmatrix}
-1 &amp;amp; 2 &amp;amp; 3 \
-2 &amp;amp; 4 &amp;amp; 6
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \
-x_2 \
-x_3
-\end{bmatrix}
-=
-\begin{bmatrix}
-1 \
-5
-\end{bmatrix}
-\end{equation}$$ This system has no solution.&lt;/li&gt;
+&lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Infinitely many solutions. For example,
+
+        $$ \begin{equation}
+        \begin{bmatrix}
+        1 &amp; 2 \\
+        2 &amp; 4 \\
+        3 &amp; 6 \\
+        \end{bmatrix}
+        \begin{bmatrix}
+        x_1 \\
+        x_2 
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+        3 \\
+        6 \\
+        9
+        \end{bmatrix}
+        \end{equation}$$
+        
+
+It has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : No solution. For example,$$
+
+        \begin{equation}
+        \begin{bmatrix}
+        1 &amp; 2 \\
+        2 &amp; 4 \\
+        3 &amp; 6 \\
+        \end{bmatrix}
+        \begin{bmatrix}
+        x_1 \\
+        x_2 
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+        3 \\
+        6 \\
+        8
+        \end{bmatrix}
+        \end{equation}$$
+        
+
+This system has no solution.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Case - III: $(m &amp;lt; n)$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;$Rank(\textbf{A}) = m$ :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Infinitely many solutions. For example,
+
+        $$ \begin{equation}
+        \begin{bmatrix}
+        1 &amp; 2 &amp; 3 \\
+        2 &amp; 4 &amp; 5 
+        \end{bmatrix}
+        \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        x_3
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+        2 \\
+        3 
+        \end{bmatrix}
+        \end{equation}$$
+        
+
+This system has infinitely many solutions. This case is also used in many applications. As there are infinitely many solutions, a natural choice is to choose the best solution. The qualifier &amp;lsquo;best&amp;rsquo; determines what application we have in our mind. If we seek minimum $(l_2)$ norm, we get the so called minimum energy solution, a concept used in signal processing. Yet another concern is to seek for the sparsest solution (a solution with only a few nonzero entries and all other entries being zero). This idea is used in &lt;a href=&#34;https://en.wikipedia.org/wiki/Compressed_sensing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Compressed Sensing&lt;/a&gt;, an active research area with many interesting applications.&lt;/li&gt;
+&lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : Impossible. This case will never happen since $Rank(\textbf{A})=m$.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$Rank(\textbf{A}) &amp;lt; m$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Infinitely many solutions. For example,
+
+        $$ \begin{equation}
+        \begin{bmatrix}
+        1 &amp; 2 &amp; 3 \\
+        2 &amp; 4 &amp; 6 
+        \end{bmatrix}
+        \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        x_3
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+        4 \\
+        8 
+        \end{bmatrix}
+        \end{equation}$$
+        
+
+This system has infinitely many solutions.&lt;/li&gt;
+&lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : No solution. For example, $$
+
+        \begin{equation}
+        \begin{bmatrix}
+        1 &amp; 2 &amp; 3 \\
+        2 &amp; 4 &amp; 6 
+        \end{bmatrix}
+        \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        x_3
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+        1 \\
+        5 
+        \end{bmatrix}
+        \end{equation}$$
+        
+
+This system has no solution.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;

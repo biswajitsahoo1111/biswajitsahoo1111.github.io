@@ -833,7 +833,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    17 min read
+    11 min read
   </span>
   
 
@@ -864,6 +864,8 @@
 
 
 
+
+
   <div class="article-container">
 
     <div class="article-style">
@@ -890,592 +892,251 @@
 <h3 id="structure-of-the-paper">Structure of the paper</h3>
 <p>Along with basic theory, the paper contains three examples on PCA, one example on correspondence analysis, and one example on multiple factor analysis. We will only focus on PCA examples in this post.</p>
 <p>To run following R codes seamlessly, readers have to load following packages. If these packages have not been installed previously, use <code>install.packages(&quot;package_name&quot;)</code> to install those.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggplot2)
-</span></span></code></pre></div><pre tabindex="0"><code>Warning: package &#39;ggplot2&#39; was built under R version 4.2.2
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(ggrepel)
-</span></span></code></pre></div><pre tabindex="0"><code>Warning: package &#39;ggrepel&#39; was built under R version 4.2.2
+<pre tabindex="0"><code>knitr::opts_chunk$set(comment = NA)
+</code></pre><pre tabindex="0"><code>library(ggplot2)
+library(ggrepel)
 </code></pre><h3 id="how-to-get-data">How to get data</h3>
 <p>Data for the examples have been taken from the paper [1]. The datasets are pretty small. So one way to read the data is to create a dataframe itself in R using the values given in paper. Otherwise, the values can first be stored in a csv file and then read into R. To make this post self-sufficient, we will adopt the former approach.</p>
 <p><strong>Note</strong>: Throughout this article, additional comments have been made beside code segments. It would be a good idea to read those commented lines along with the codes.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Table 1</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a dataframe</span>
-</span></span><span style="display:flex;"><span>Words <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Bag&#34;</span>, <span style="color:#e6db74">&#34;Across&#34;</span>, <span style="color:#e6db74">&#34;On&#34;</span>, <span style="color:#e6db74">&#34;Insane&#34;</span>, <span style="color:#e6db74">&#34;By&#34;</span>, <span style="color:#e6db74">&#34;Monastery&#34;</span>, <span style="color:#e6db74">&#34;Relief&#34;</span>, <span style="color:#e6db74">&#34;Slope&#34;</span>, <span style="color:#e6db74">&#34;Scoundrel&#34;</span>, <span style="color:#e6db74">&#34;With&#34;</span>, <span style="color:#e6db74">&#34;Neither&#34;</span>, <span style="color:#e6db74">&#34;Pretentious&#34;</span>, <span style="color:#e6db74">&#34;Solid&#34;</span>, <span style="color:#e6db74">&#34;This&#34;</span>, <span style="color:#e6db74">&#34;For&#34;</span>, <span style="color:#e6db74">&#34;Therefore&#34;</span>, <span style="color:#e6db74">&#34;Generality&#34;</span>, <span style="color:#e6db74">&#34;Arise&#34;</span>, <span style="color:#e6db74">&#34;Blot&#34;</span>, <span style="color:#e6db74">&#34;Infectious&#34;</span>)
-</span></span><span style="display:flex;"><span>Word_length <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">10</span>)
-</span></span><span style="display:flex;"><span>Lines_in_dict <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">6</span>)
-</span></span><span style="display:flex;"><span>words <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(Words, Word_length, Lines_in_dict, stringsAsFactors <span style="color:#f92672">=</span> F)
-</span></span><span style="display:flex;"><span>words
-</span></span></code></pre></div><pre tabindex="0"><code>         Words Word_length Lines_in_dict
-1          Bag           3            14
-2       Across           6             7
-3           On           2            11
-4       Insane           6             9
-5           By           2             9
-6    Monastery           9             4
-7       Relief           6             8
-8        Slope           5            11
-9    Scoundrel           9             5
-10        With           4             8
-11     Neither           7             2
-12 Pretentious          11             4
-13       Solid           5            12
-14        This           4             9
-15         For           3             8
-16   Therefore           9             1
-17  Generality          10             4
-18       Arise           5            13
-19        Blot           4            15
-20  Infectious          10             6
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(words_centered <span style="color:#f92672">=</span> <span style="color:#a6e22e">scale</span>(words[,<span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>],scale <span style="color:#f92672">=</span> F)) <span style="color:#75715e"># Centering after reemoving the first column</span>
-</span></span></code></pre></div><pre tabindex="0"><code>      Word_length Lines_in_dict
- [1,]          -3             6
- [2,]           0            -1
- [3,]          -4             3
- [4,]           0             1
- [5,]          -4             1
- [6,]           3            -4
- [7,]           0             0
- [8,]          -1             3
- [9,]           3            -3
-[10,]          -2             0
-[11,]           1            -6
-[12,]           5            -4
-[13,]          -1             4
-[14,]          -2             1
-[15,]          -3             0
-[16,]           3            -7
-[17,]           4            -4
-[18,]          -1             5
-[19,]          -2             7
-[20,]           4            -2
-attr(,&#34;scaled:center&#34;)
-  Word_length Lines_in_dict 
-            6             8 
+<pre tabindex="0"><code># Table 1
+# Create a dataframe
+Words = c(&#34;Bag&#34;, &#34;Across&#34;, &#34;On&#34;, &#34;Insane&#34;, &#34;By&#34;, &#34;Monastery&#34;, &#34;Relief&#34;, &#34;Slope&#34;, &#34;Scoundrel&#34;, &#34;With&#34;, &#34;Neither&#34;, &#34;Pretentious&#34;, &#34;Solid&#34;, &#34;This&#34;, &#34;For&#34;, &#34;Therefore&#34;, &#34;Generality&#34;, &#34;Arise&#34;, &#34;Blot&#34;, &#34;Infectious&#34;)
+Word_length = c(3, 6, 2, 6, 2, 9, 6, 5, 9, 4, 7, 11, 5, 4, 3, 9, 10, 5, 4, 10)
+Lines_in_dict = c(14, 7, 11, 9, 9, 4, 8, 11, 5, 8, 2, 4, 12, 9, 8, 1, 4, 13, 15, 6)
+words = data.frame(Words, Word_length, Lines_in_dict, stringsAsFactors = F)
+words
+(words_centered = scale(words[,2:3],scale = F)) # Centering after reemoving the first column
 </code></pre><h3 id="covariance-pca">Covariance PCA</h3>
 <p>Covariance PCA uses centered data matrix. But data matrix is not scaled. <code>prcomp()</code> centers data by default.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>pca_words_cov <span style="color:#f92672">=</span> <span style="color:#a6e22e">prcomp</span>(words[,<span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>],scale <span style="color:#f92672">=</span> F) <span style="color:#75715e"># cov stands for Covariance PCA</span>
-</span></span><span style="display:flex;"><span>factor_scores_words <span style="color:#f92672">=</span> pca_words_cov<span style="color:#f92672">$</span>x
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(factor_scores_words,<span style="color:#ae81ff">2</span>)
-</span></span></code></pre></div><pre tabindex="0"><code>        PC1   PC2
- [1,] -6.67  0.69
- [2,]  0.84 -0.54
- [3,] -4.68 -1.76
- [4,] -0.84  0.54
- [5,] -2.99 -2.84
- [6,]  4.99  0.38
- [7,]  0.00  0.00
- [8,] -3.07  0.77
- [9,]  4.14  0.92
-[10,] -1.07 -1.69
-[11,]  5.60 -2.38
-[12,]  6.06  2.07
-[13,] -3.91  1.30
-[14,] -1.92 -1.15
-[15,] -1.61 -2.53
-[16,]  7.52 -1.23
-[17,]  5.52  1.23
-[18,] -4.76  1.84
-[19,] -6.98  2.07
-[20,]  3.83  2.30
+<pre tabindex="0"><code>pca_words_cov = prcomp(words[,2:3],scale = F) # cov stands for Covariance PCA
+factor_scores_words = pca_words_cov$x
+round(factor_scores_words,2)
 </code></pre><p>Observer that factor scores for PC1 are negatives of what has been given in the paper. This is not a problem as principal directions are orthogonal.</p>
 <h3 id="principal-directions-are-orthogonal">Principal directions are orthogonal</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#  It can also be checked that both the principal components are orthogonal.</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(factor_scores_words[,<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>factor_scores_words[,<span style="color:#ae81ff">2</span>]) <span style="color:#75715e"># PCs are orthogonal</span>
-</span></span></code></pre></div><pre tabindex="0"><code>[1] -4.773959e-15
+<pre tabindex="0"><code>#  It can also be checked that both the principal components are orthogonal.
+sum(factor_scores_words[,1]*factor_scores_words[,2]) # PCs are orthogonal
 </code></pre><h3 id="contribution-of-each-factor">Contribution of each factor</h3>
 <p>It is defined as square of factor score divided by sum of squares of factor scores in that column.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(factor_scores_words[,<span style="color:#ae81ff">1</span>]^2<span style="color:#f92672">/</span><span style="color:#a6e22e">sum</span>(factor_scores_words[,<span style="color:#ae81ff">1</span>]^2)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">2</span>)
-</span></span></code></pre></div><pre tabindex="0"><code> [1] 11.36  0.18  5.58  0.18  2.28  6.34  0.00  2.40  4.38  0.29  8.00  9.37
-[13]  3.90  0.94  0.66 14.41  7.78  5.77 12.43  3.75
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(factor_scores_words[,<span style="color:#ae81ff">2</span>]^2<span style="color:#f92672">/</span><span style="color:#a6e22e">sum</span>(factor_scores_words[,<span style="color:#ae81ff">2</span>]^2)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">2</span>)
-</span></span></code></pre></div><pre tabindex="0"><code> [1]  0.92  0.55  5.98  0.55 15.49  0.28  0.00  1.13  1.63  5.48 10.87  8.25
-[13]  3.27  2.55 12.32  2.90  2.90  6.52  8.25 10.18
+<pre tabindex="0"><code>round(factor_scores_words[,1]^2/sum(factor_scores_words[,1]^2)*100,2)
+round(factor_scores_words[,2]^2/sum(factor_scores_words[,2]^2)*100,2)
 </code></pre><p>The calculations in above two lines can be done in a single line</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(factor_scores_words^2<span style="color:#f92672">/</span><span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">colSums</span>(factor_scores_words^2),<span style="color:#a6e22e">nrow</span>(words)),ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,byrow <span style="color:#f92672">=</span> T)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">2</span>)
-</span></span></code></pre></div><pre tabindex="0"><code>        PC1   PC2
- [1,] 11.36  0.92
- [2,]  0.18  0.55
- [3,]  5.58  5.98
- [4,]  0.18  0.55
- [5,]  2.28 15.49
- [6,]  6.34  0.28
- [7,]  0.00  0.00
- [8,]  2.40  1.13
- [9,]  4.38  1.63
-[10,]  0.29  5.48
-[11,]  8.00 10.87
-[12,]  9.37  8.25
-[13,]  3.90  3.27
-[14,]  0.94  2.55
-[15,]  0.66 12.32
-[16,] 14.41  2.90
-[17,]  7.78  2.90
-[18,]  5.77  6.52
-[19,] 12.43  8.25
-[20,]  3.75 10.18
+<pre tabindex="0"><code>round(factor_scores_words^2/matrix(rep(colSums(factor_scores_words^2),nrow(words)),ncol = 2,byrow = T)*100,2)
 </code></pre><h3 id="squared-distance-to-center-of-gravity">Squared distance to center of gravity</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(dist <span style="color:#f92672">=</span> <span style="color:#a6e22e">rowSums</span>(factor_scores_words^2))
-</span></span></code></pre></div><pre tabindex="0"><code> [1] 45  1 25  1 17 25  0 10 18  4 37 41 17  5  9 58 32 26 53 20
+<pre tabindex="0"><code>(dist = rowSums(factor_scores_words^2))
 </code></pre><h3 id="squared-cosine-of-observations">Squared cosine of observations</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(sq_cos <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(factor_scores_words^2<span style="color:#f92672">/</span><span style="color:#a6e22e">rowSums</span>(factor_scores_words^2)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>      PC1 PC2
- [1,]  99   1
- [2,]  71  29
- [3,]  88  12
- [4,]  71  29
- [5,]  53  47
- [6,]  99   1
- [7,] NaN NaN
- [8,]  94   6
- [9,]  95   5
-[10,]  29  71
-[11,]  85  15
-[12,]  90  10
-[13,]  90  10
-[14,]  74  26
-[15,]  29  71
-[16,]  97   3
-[17,]  95   5
-[18,]  87  13
-[19,]  92   8
-[20,]  74  26
+<pre tabindex="0"><code>(sq_cos = round(factor_scores_words^2/rowSums(factor_scores_words^2)*100))
 </code></pre><p>Nan&rsquo;s are produced because of division by zero.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Figue 1</span>
-</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> <span style="color:#a6e22e">ggplot</span>(words,<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Lines_in_dict,y <span style="color:#f92672">=</span> Word_length,label <span style="color:#f92672">=</span> Words))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>()<span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_text_repel</span>()<span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_hline</span>(yintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_vline</span>(xintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>)<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">labs</span>(x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Lines in dictionary&#34;</span>,y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Word length&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">print</span>(p)
-</span></span></code></pre></div><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-1.png" width="672" />
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Show directions of PCs</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Note that intercept argument in geom_abline considers the line to be at the origin. In our case the data are mean shifted.</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># So we have to adjust the intercept taking new origin into consideration. These adjustments have been made below.</span>
-</span></span><span style="display:flex;"><span>slope1 <span style="color:#f92672">=</span> pca_words_cov<span style="color:#f92672">$</span>rotation[1,<span style="color:#ae81ff">1</span>]<span style="color:#f92672">/</span>pca_words_cov<span style="color:#f92672">$</span>rotation[2,<span style="color:#ae81ff">1</span>] <span style="color:#75715e"># Slope of first PC</span>
-</span></span><span style="display:flex;"><span>slope2 <span style="color:#f92672">=</span> pca_words_cov<span style="color:#f92672">$</span>rotation[1,<span style="color:#ae81ff">2</span>]<span style="color:#f92672">/</span>pca_words_cov<span style="color:#f92672">$</span>rotation[2,<span style="color:#ae81ff">2</span>] <span style="color:#75715e"># Slope of second PC</span>
-</span></span><span style="display:flex;"><span>(new_origin <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">mean</span>(words<span style="color:#f92672">$</span>Lines_in_dict),<span style="color:#a6e22e">mean</span>(words<span style="color:#f92672">$</span>Word_length)))
-</span></span></code></pre></div><pre tabindex="0"><code>[1] 8 6
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>intercept1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">-</span> slope1<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>
-</span></span><span style="display:flex;"><span>intercept2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">-</span> slope2<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>
-</span></span><span style="display:flex;"><span>p<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_abline</span>(slope <span style="color:#f92672">=</span> slope1,intercept <span style="color:#f92672">=</span> intercept1,linetype <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dashed&#34;</span>,size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.2</span>,col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>)<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_abline</span>(slope <span style="color:#f92672">=</span> slope2,intercept <span style="color:#f92672">=</span> intercept2,linetype <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dashed&#34;</span>,size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.2</span>,col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
-</span></span></code></pre></div><pre tabindex="0"><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.
-</code></pre><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-10-2.png" width="672" />
-In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.
+<pre tabindex="0"><code># Figue 1
+p = ggplot(words,aes(x = Lines_in_dict,y = Word_length,label = Words))+
+  geom_point()+ geom_text_repel()+ 
+  geom_hline(yintercept = 6)+geom_vline(xintercept = 8)+
+  labs(x = &#34;Lines in dictionary&#34;,y = &#34;Word length&#34;)
+print(p)
+# Show directions of PCs
+# Note that intercept argument in geom_abline considers the line to be at the origin. In our case the data are mean shifted.
+# So we have to adjust the intercept taking new origin into consideration. These adjustments have been made below.
+slope1 = pca_words_cov$rotation[1,1]/pca_words_cov$rotation[2,1] # Slope of first PC
+slope2 = pca_words_cov$rotation[1,2]/pca_words_cov$rotation[2,2] # Slope of second PC
+(new_origin = c(mean(words$Lines_in_dict),mean(words$Word_length)))
+intercept1 = 6 - slope1*8
+intercept2 = 6 - slope2*8
+p+geom_abline(slope = slope1,intercept = intercept1,linetype = &#34;dashed&#34;,size = 1.2,col = &#34;red&#34;)+
+  geom_abline(slope = slope2,intercept = intercept2,linetype = &#34;dashed&#34;,size = 1.2,col = &#34;blue&#34;)
+</code></pre><p>In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.</p>
 <h3 id="rotated-pcs">Rotated PCs</h3>
 <p>This figure is obtained by plotting factor scores. Note that we will plot negative of the factor scores of 1st PC to make the figure consistent with the paper.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">as.data.frame</span>(pca_words_cov<span style="color:#f92672">$</span>x),<span style="color:#a6e22e">aes</span>(<span style="color:#f92672">-</span>pca_words_cov<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span>],pca_words_cov<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">2</span>],label <span style="color:#f92672">=</span> words<span style="color:#f92672">$</span>Words))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_text_repel</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_hline</span>(yintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_vline</span>(xintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">xlab</span>(<span style="color:#e6db74">&#34;Factor score along PC1&#34;</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">ylab</span>(<span style="color:#e6db74">&#34;Factor score along PC2&#34;</span>)
-</span></span></code></pre></div><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-<h3 id="with-supplementary-data">With supplementary data</h3>
+<pre tabindex="0"><code>ggplot(as.data.frame(pca_words_cov$x),aes(-pca_words_cov$x[,1],pca_words_cov$x[,2],label = words$Words))+
+  geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  xlab(&#34;Factor score along PC1&#34;)+ylab(&#34;Factor score along PC2&#34;)
+</code></pre><h3 id="with-supplementary-data">With supplementary data</h3>
 <p>Given a supplementary point (a point previously not used in finding principal components),we have to first center the data point. Its factor scores can then be obtained by multiplying it with the loading matrix.</p>
 <h3 id="factor-score-of-the-new-word-sur">Factor score of the new word &lsquo;sur&rsquo;</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>sur <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">12</span>) <span style="color:#75715e"># It has 3 letter and 12 lines of dictionary entry</span>
-</span></span><span style="display:flex;"><span>(sur_centered <span style="color:#f92672">=</span> sur <span style="color:#f92672">-</span> <span style="color:#a6e22e">colMeans</span>(words[,<span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]))
-</span></span></code></pre></div><pre tabindex="0"><code>  Word_length Lines_in_dict 
-           -3             4 
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(factor_scores_sur <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(sur_centered <span style="color:#f92672">%*%</span> pca_words_cov<span style="color:#f92672">$</span>rotation,<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>       PC1   PC2
-[1,] -4.99 -0.38
+<pre tabindex="0"><code>sur = c(3,12) # It has 3 letter and 12 lines of dictionary entry
+(sur_centered = sur - colMeans(words[,2:3]))
+(factor_scores_sur = round(sur_centered %*% pca_words_cov$rotation,2))
 </code></pre><h3 id="eigenvalues-and-variance">Eigenvalues and variance</h3>
 <p>See <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II</a> for details.</p>
 <h3 id="total-variance-before-transformation">Total variance before transformation</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(total_var_before <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">var</span>(words_centered))),<span style="color:#ae81ff">3</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>[1] 23.368
+<pre tabindex="0"><code>(total_var_before = round(sum(diag(var(words_centered))),3))
 </code></pre><h3 id="total-variance-after-transformation">Total variance after transformation</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(total_var_after <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">var</span>(pca_words_cov<span style="color:#f92672">$</span>x))),<span style="color:#ae81ff">3</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>[1] 23.368
+<pre tabindex="0"><code>(total_var_after = round(sum(diag(var(pca_words_cov$x))),3))
 </code></pre><p>Correlation between principal components and original variables
-(In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix <code>\(\textbf{P}\)</code> (see <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/" target="_blank" rel="noopener">Part-I</a>)</p>
+(In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix $\textbf{P}$ (see <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/" target="_blank" rel="noopener">Part-I</a>)</p>
 <p>The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.</p>
 <h3 id="correlation-matrix">Correlation matrix</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Correlation between PCs and original variables</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">cor</span>(pca_words_cov<span style="color:#f92672">$</span>x,words_centered))
-</span></span></code></pre></div><pre tabindex="0"><code>    Word_length Lines_in_dict
-PC1   0.8679026    -0.9741764
-PC2   0.4967344     0.2257884
+<pre tabindex="0"><code># Correlation between PCs and original variables
+(cor(pca_words_cov$x,words_centered))
 </code></pre><p><strong>Note</strong> that the answers for correlation coefficients don&rsquo;t match with that of the paper. Readers who get actual answers as given in paper are encouraged to send me an email using my contact details. However our procedure is correct and it does indeed give the correct answer for supplementary data as described below.</p>
 <h3 id="squared-correlation">Squared correlation</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">cor</span>(pca_words_cov<span style="color:#f92672">$</span>x,words_centered)^2)
-</span></span></code></pre></div><pre tabindex="0"><code>    Word_length Lines_in_dict
-PC1   0.7532549    0.94901961
-PC2   0.2467451    0.05098039
+<pre tabindex="0"><code>(cor(pca_words_cov$x,words_centered)^2)
 </code></pre><p>Sum of correlation coefficients between variables and principal components is 1.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">colSums</span>((<span style="color:#a6e22e">cor</span>(pca_words_cov<span style="color:#f92672">$</span>x,words_centered)^2))
-</span></span></code></pre></div><pre tabindex="0"><code>  Word_length Lines_in_dict 
-            1             1 
+<pre tabindex="0"><code>colSums((cor(pca_words_cov$x,words_centered)^2))
 </code></pre><h3 id="loading-matrix">Loading matrix</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(loading_matrix <span style="color:#f92672">=</span> pca_words_cov<span style="color:#f92672">$</span>rotation)
-</span></span></code></pre></div><pre tabindex="0"><code>                     PC1       PC2
-Word_length    0.5368755 0.8436615
-Lines_in_dict -0.8436615 0.5368755
+<pre tabindex="0"><code>(loading_matrix = pca_words_cov$rotation)
 </code></pre><h3 id="correlation-score-for-supplementary-variables">Correlation score for supplementary variables</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Supplementary variable (Table 4)</span>
-</span></span><span style="display:flex;"><span>Frequency <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">230</span>,<span style="color:#ae81ff">700</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">500</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">700</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">500</span>,<span style="color:#ae81ff">900</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>Num_entries <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>supp_data <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(Frequency,Num_entries) <span style="color:#75715e"># Supplementary data</span>
-</span></span><span style="display:flex;"><span>supp_data
-</span></span></code></pre></div><pre tabindex="0"><code>   Frequency Num_entries
-1          8           6
-2        230           3
-3        700          12
-4          1           2
-5        500           7
-6          1           1
-7          9           1
-8          2           6
-9          1           1
-10       700           5
-11         7           2
-12         1           1
-13         4           5
-14       500           9
-15       900           7
-16         3           1
-17         1           1
-18        10           4
-19         1           4
-20         1           2
+<pre tabindex="0"><code># Supplementary variable (Table 4)
+Frequency = c(8,230,700,1,500,1,9,2,1,700,7,1,4,500,900,3,1,10,1,1)
+Num_entries = c(6,3,12,2,7,1,1,6,1,5,2,1,5,9,7,1,1,4,4,2)
+supp_data = data.frame(Frequency,Num_entries) # Supplementary data
+supp_data
 </code></pre><h3 id="centered-supplementary-data">Centered supplementary data</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>supp_data_cent <span style="color:#f92672">=</span> <span style="color:#a6e22e">scale</span>(supp_data,scale <span style="color:#f92672">=</span> F) <span style="color:#75715e"># Centered supplementary data</span>
-</span></span></code></pre></div><h3 id="correlation-score-for-supplementary-data">Correlation score for supplementary data</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(corr_score_supp <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">cor</span>(pca_words_cov<span style="color:#f92672">$</span>x,supp_data),<span style="color:#ae81ff">4</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>    Frequency Num_entries
-PC1   -0.3012     -0.6999
-PC2   -0.7218     -0.4493
+<pre tabindex="0"><code>supp_data_cent = scale(supp_data,scale = F) # Centered supplementary data
+</code></pre><h3 id="correlation-score-for-supplementary-data">Correlation score for supplementary data</h3>
+<pre tabindex="0"><code>(corr_score_supp = round(cor(pca_words_cov$x,supp_data),4))
 </code></pre><p>Note that correlation score doesn&rsquo;t depend on whether supplementary data is centered or not.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">cor</span>(pca_words_cov<span style="color:#f92672">$</span>x,supp_data_cent),<span style="color:#ae81ff">4</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>    Frequency Num_entries
-PC1   -0.3012     -0.6999
-PC2   -0.7218     -0.4493
+<pre tabindex="0"><code>(round(cor(pca_words_cov$x,supp_data_cent),4))
 </code></pre><h3 id="squared-correlation-1">Squared correlation</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">cor</span>(pca_words_cov<span style="color:#f92672">$</span>x,supp_data_cent)^2,<span style="color:#ae81ff">4</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>    Frequency Num_entries
-PC1    0.0907      0.4899
-PC2    0.5210      0.2019
+<pre tabindex="0"><code>(round(cor(pca_words_cov$x,supp_data_cent)^2,4))
 </code></pre><h3 id="column-sums-of-squared-correlation-for-support-data">Column sums of squared correlation for support data</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">colSums</span>(<span style="color:#a6e22e">cor</span>(pca_words_cov<span style="color:#f92672">$</span>x,supp_data_cent)^2),<span style="color:#ae81ff">4</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>  Frequency Num_entries 
-     0.6118      0.6918 
+<pre tabindex="0"><code>(round(colSums(cor(pca_words_cov$x,supp_data_cent)^2),4))
 </code></pre><h3 id="correlation-circle-plot">Correlation circle plot</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># First plot correlation circle</span>
-</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#66d9ef">pi</span>,length.out <span style="color:#f92672">=</span> <span style="color:#ae81ff">300</span>)
-</span></span><span style="display:flex;"><span>circle <span style="color:#f92672">=</span> <span style="color:#a6e22e">ggplot</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_path</span>(data <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(a <span style="color:#f92672">=</span> <span style="color:#a6e22e">cos</span>(x),b <span style="color:#f92672">=</span> <span style="color:#a6e22e">sin</span>(x)),
-</span></span><span style="display:flex;"><span>                     <span style="color:#a6e22e">aes</span>(<span style="color:#a6e22e">cos</span>(x),<span style="color:#a6e22e">sin</span>(x)),alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.3</span>, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">geom_hline</span>(yintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_vline</span>(xintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">annotate</span>(<span style="color:#e6db74">&#34;text&#34;</span>,x <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1.08</span>,<span style="color:#ae81ff">0.05</span>),y <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.05</span>,<span style="color:#ae81ff">1.08</span>),label <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;PC1&#34;</span>,<span style="color:#e6db74">&#34;PC2&#34;</span>),angle <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">90</span>))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">xlab</span>(<span style="color:#66d9ef">NULL</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">ylab</span>(<span style="color:#66d9ef">NULL</span>)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plotting original variables</span>
-</span></span><span style="display:flex;"><span>cor_score <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.data.frame</span>(<span style="color:#a6e22e">cor</span>(words_centered,pca_words_cov<span style="color:#f92672">$</span>x))
-</span></span><span style="display:flex;"><span>variable_plot_original <span style="color:#f92672">=</span> circle <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_point</span>(data <span style="color:#f92672">=</span> cor_score,  <span style="color:#a6e22e">aes</span>(cor_score[,<span style="color:#ae81ff">1</span>],cor_score[,<span style="color:#ae81ff">2</span>]))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_text_repel</span>(<span style="color:#a6e22e">aes</span>(cor_score[,<span style="color:#ae81ff">1</span>],cor_score[,<span style="color:#ae81ff">2</span>],
-</span></span><span style="display:flex;"><span>                      label <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Length of words&#34;</span>,<span style="color:#e6db74">&#34;Number of lines in Dict.&#34;</span>))) 
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">print</span>(variable_plot_original)
-</span></span></code></pre></div><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-25-1.png" width="672" />
-<h3 id="plotting-supplementary-variables">Plotting supplementary variables</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>variable_plot_original<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>(data <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.data.frame</span>(corr_score_supp),
-</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">aes</span>(corr_score_supp[,<span style="color:#ae81ff">1</span>],corr_score_supp[,<span style="color:#ae81ff">2</span>]))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_text_repel</span>(<span style="color:#a6e22e">aes</span>(corr_score_supp[,<span style="color:#ae81ff">1</span>],corr_score_supp[,<span style="color:#ae81ff">2</span>],
-</span></span><span style="display:flex;"><span>                      label <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Frequency&#34;</span>,<span style="color:#e6db74">&#34;Number of entries&#34;</span>))) 
-</span></span></code></pre></div><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-26-1.png" width="672" />
-<p>Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative principal component results in negative correlation scores. Hence, our plot flips about y-axis.</p>
+<pre tabindex="0"><code># First plot correlation circle
+x = seq(0,2*pi,length.out = 300)
+circle = ggplot() + geom_path(data = data.frame(a = cos(x),b = sin(x)),
+                     aes(cos(x),sin(x)),alpha = 0.3, size = 1.5)+
+            geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  annotate(&#34;text&#34;,x = c(1.08,0.05),y = c(0.05,1.08),label = c(&#34;PC1&#34;,&#34;PC2&#34;),angle = c(0,90))+
+            xlab(NULL)+ylab(NULL)
+# Plotting original variables
+cor_score = as.data.frame(cor(words_centered,pca_words_cov$x))
+variable_plot_original = circle + geom_point(data = cor_score,  aes(cor_score[,1],cor_score[,2]))+
+  geom_text_repel(aes(cor_score[,1],cor_score[,2],
+                      label = c(&#34;Length of words&#34;,&#34;Number of lines in Dict.&#34;))) 
+print(variable_plot_original)
+</code></pre><h3 id="plotting-supplementary-variables">Plotting supplementary variables</h3>
+<pre tabindex="0"><code>variable_plot_original+
+  geom_point(data = as.data.frame(corr_score_supp),
+             aes(corr_score_supp[,1],corr_score_supp[,2]))+
+  geom_text_repel(aes(corr_score_supp[,1],corr_score_supp[,2],
+                      label = c(&#34;Frequency&#34;,&#34;Number of entries&#34;))) 
+</code></pre><p>Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative principal component results in negative correlation scores. Hence, our plot flips about y-axis.</p>
 <h2 id="example-2-wine-example">Example 2 (Wine example)</h2>
 <h3 id="correlation-pca-with-wine-data">Correlation PCA with wine data</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Table 6</span>
-</span></span><span style="display:flex;"><span>wine_type <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#34;wine&#34;</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;_&#34;</span>))
-</span></span><span style="display:flex;"><span>hedonic <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>)
-</span></span><span style="display:flex;"><span>for_meat <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>for_dessert <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">4</span>)
-</span></span><span style="display:flex;"><span>price <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">13</span>)
-</span></span><span style="display:flex;"><span>sugar <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">3</span>)
-</span></span><span style="display:flex;"><span>alcohol <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">10</span>)
-</span></span><span style="display:flex;"><span>acidity <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>)
-</span></span><span style="display:flex;"><span>wine <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(wine_type, hedonic, for_meat, for_dessert, price, sugar, alcohol, acidity, stringsAsFactors <span style="color:#f92672">=</span> F)
-</span></span><span style="display:flex;"><span>wine
-</span></span></code></pre></div><pre tabindex="0"><code>  wine_type hedonic for_meat for_dessert price sugar alcohol acidity
-1    wine_1      14        7           8     7     7      13       7
-2    wine_2      10        7           6     4     3      14       7
-3    wine_3       8        5           5    10     5      12       5
-4    wine_4       2        4           7    16     7      11       3
-5    wine_5       6        2           4    13     3      10       3
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>pca_wine_cor <span style="color:#f92672">=</span> <span style="color:#a6e22e">prcomp</span>(wine[2<span style="color:#f92672">:</span><span style="color:#ae81ff">8</span>],scale <span style="color:#f92672">=</span> T)
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">as.data.frame</span>(pca_wine_cor<span style="color:#f92672">$</span>x),<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> pca_wine_cor<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span>],y <span style="color:#f92672">=</span>  pca_wine_cor<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">2</span>], label <span style="color:#f92672">=</span> <span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;wine &#34;</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>)))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_text_repel</span>()<span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_vline</span>(xintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_hline</span>(yintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">xlab</span>(<span style="color:#e6db74">&#34;Factor score along PC1&#34;</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">ylab</span>(<span style="color:#e6db74">&#34;Factor score along PC2&#34;</span>)
-</span></span></code></pre></div><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-27-1.png" width="672" />
-<p>Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigenvector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.</p>
+<pre tabindex="0"><code># Table 6
+wine_type = c(paste(&#34;wine&#34;, 1:5, sep = &#34;_&#34;))
+hedonic = c(14, 10, 8, 2, 6)
+for_meat = c(7, 7, 5, 4, 2)
+for_dessert = c(8, 6, 5, 7, 4)
+price = c(7, 4, 10, 16, 13)
+sugar = c(7, 3, 5, 7, 3)
+alcohol = c(13, 14, 12, 11, 10)
+acidity = c(7, 7, 5, 3, 3)
+wine = data.frame(wine_type, hedonic, for_meat, for_dessert, price, sugar, alcohol, acidity, stringsAsFactors = F)
+wine
+pca_wine_cor = prcomp(wine[2:8],scale = T)
+ggplot(as.data.frame(pca_wine_cor$x),aes(x = pca_wine_cor$x[,1],y =  pca_wine_cor$x[,2], label = paste0(&#34;wine &#34;,1:5)))+
+  geom_point()+geom_text_repel()+ geom_vline(xintercept = 0)+ geom_hline(yintercept = 0)+
+  xlab(&#34;Factor score along PC1&#34;)+ylab(&#34;Factor score along PC2&#34;)
+</code></pre><p>Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigenvector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.</p>
 <h3 id="factor-scores-along-1st-and-2nd-pc">Factor scores along 1st and 2nd PC</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Table 7</span>
-</span></span><span style="display:flex;"><span>(pca_wine_cor<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>])
-</span></span></code></pre></div><pre tabindex="0"><code>            PC1       PC2
-[1,] -2.3301649  1.095284
-[2,] -2.0842419 -1.223185
-[3,]  0.1673228 -0.370258
-[4,]  1.7842392  1.712563
-[5,]  2.4628448 -1.214405
+<pre tabindex="0"><code># Table 7
+(pca_wine_cor$x[,1:2])
 </code></pre><h3 id="contribution-of-each-observation-to-principal-component">Contribution of each observation to principal component</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(pca_wine_cor<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]^2<span style="color:#f92672">/</span><span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">colSums</span>(pca_wine_cor<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]^2),<span style="color:#a6e22e">nrow</span>(wine)),ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,byrow <span style="color:#f92672">=</span> T)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">2</span>)
-</span></span></code></pre></div><pre tabindex="0"><code>       PC1   PC2
-[1,] 28.50 16.57
-[2,] 22.80 20.66
-[3,]  0.15  1.89
-[4,] 16.71 40.51
-[5,] 31.84 20.37
+<pre tabindex="0"><code>round(pca_wine_cor$x[,1:2]^2/matrix(rep(colSums(pca_wine_cor$x[,1:2]^2),nrow(wine)),ncol = 2,byrow = T)*100,2)
 </code></pre><h3 id="squared-cosine-of-observations-of-first-pc">Squared cosine of observations of first PC</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(sq_cos <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(pca_wine_cor<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]^2<span style="color:#f92672">/</span><span style="color:#a6e22e">rowSums</span>(pca_wine_cor<span style="color:#f92672">$</span>x^2)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>     PC1 PC2
-[1,]  77  17
-[2,]  69  24
-[3,]   7  34
-[4,]  50  46
-[5,]  78  19
+<pre tabindex="0"><code>(sq_cos = round(pca_wine_cor$x[,1:2]^2/rowSums(pca_wine_cor$x^2)*100))
 </code></pre><h3 id="loading-scores-corresponding-to-first-two-principal-components">Loading scores corresponding to first two principal components</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(pca_wine_cor<span style="color:#f92672">$</span>rotation[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>],<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>              PC1   PC2
-hedonic     -0.40 -0.11
-for_meat    -0.45  0.11
-for_dessert -0.26  0.59
-price        0.42  0.31
-sugar       -0.05  0.72
-alcohol     -0.44 -0.06
-acidity     -0.45 -0.09
+<pre tabindex="0"><code>(round(pca_wine_cor$rotation[,1:2],2))
 </code></pre><h3 id="correlation-score-variables-with-first-two-principal-components">Correlation score variables with first two principal components</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(corr_score_wine <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">cor</span>(pca_wine_cor<span style="color:#f92672">$</span>x,wine[,<span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">8</span>])[1<span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>,],<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>    hedonic for_meat for_dessert price sugar alcohol acidity
-PC1   -0.87    -0.97       -0.58  0.91 -0.11   -0.96   -0.99
-PC2   -0.15     0.15        0.79  0.42  0.97   -0.07   -0.12
+<pre tabindex="0"><code>(corr_score_wine = round(cor(pca_wine_cor$x,wine[,2:8])[1:2,],2))
 </code></pre><h3 id="correlation-circle-for-wine-data">Correlation circle for wine data</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Figure 6</span>
-</span></span><span style="display:flex;"><span>corr_score_wine <span style="color:#f92672">=</span> <span style="color:#a6e22e">t</span>(corr_score_wine)
-</span></span><span style="display:flex;"><span>circle <span style="color:#f92672">+</span> 
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>(data <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.data.frame</span>(corr_score_wine),
-</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">aes</span>(corr_score_wine[,<span style="color:#ae81ff">1</span>],corr_score_wine[,<span style="color:#ae81ff">2</span>]))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_text_repel</span>(<span style="color:#a6e22e">aes</span>(corr_score_wine[,<span style="color:#ae81ff">1</span>],corr_score_wine[,<span style="color:#ae81ff">2</span>],
-</span></span><span style="display:flex;"><span>                      label <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Hedonic&#34;</span>,<span style="color:#e6db74">&#34;For Meat&#34;</span>,<span style="color:#e6db74">&#34;For dessert&#34;</span>,<span style="color:#e6db74">&#34;Price&#34;</span>,<span style="color:#e6db74">&#34;Sugar&#34;</span>,<span style="color:#e6db74">&#34;Alcohol&#34;</span>,<span style="color:#e6db74">&#34;Acidity&#34;</span>)))
-</span></span></code></pre></div><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-33-1.png" width="672" />
-<h3 id="varimax-rotation">Varimax rotation</h3>
+<pre tabindex="0"><code># Figure 6
+corr_score_wine = t(corr_score_wine)
+circle + 
+  geom_point(data = as.data.frame(corr_score_wine),
+             aes(corr_score_wine[,1],corr_score_wine[,2]))+
+  geom_text_repel(aes(corr_score_wine[,1],corr_score_wine[,2],
+                      label = c(&#34;Hedonic&#34;,&#34;For Meat&#34;,&#34;For dessert&#34;,&#34;Price&#34;,&#34;Sugar&#34;,&#34;Alcohol&#34;,&#34;Acidity&#34;)))
+</code></pre><h3 id="varimax-rotation">Varimax rotation</h3>
 <p>Rotation is applied to loading matrix such that after rotation principal components are interpretable. By interpretable, we mean, some of the loading scores will have higher values and some other loading scores will have lower values. So it can be said that the variables whose loading scores have higher value, contribute significantly towards principal components as compared to other variables with lesser loading scores. Though rotation works in certain cases, it must be remembered that it is no magic wand for principal component interpretability. One of the popular rotations is Varimax rotation. R has a built-in command to perform varimax rotation.</p>
 <p>Varimax rotation can be performed on the whole loading matrix or on a few components only. In the paper, varimax has been applied to first two principal components.</p>
 <h3 id="loading-scores-of-first-two-principal-components">Loading scores of first two principal components</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(pca_wine_cor<span style="color:#f92672">$</span>rotation[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>],<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>              PC1   PC2
-hedonic     -0.40 -0.11
-for_meat    -0.45  0.11
-for_dessert -0.26  0.59
-price        0.42  0.31
-sugar       -0.05  0.72
-alcohol     -0.44 -0.06
-acidity     -0.45 -0.09
+<pre tabindex="0"><code>(round(pca_wine_cor$rotation[,1:2],2))
 </code></pre><h3 id="varimax-applied-to-first-two-principal-components">Varimax applied to first two principal components</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>rotated_loading_scores <span style="color:#f92672">=</span> <span style="color:#a6e22e">varimax</span>(pca_wine_cor<span style="color:#f92672">$</span>rotation[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>])
-</span></span></code></pre></div><h3 id="loading-scores-after-rotation">Loading scores after rotation</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Table 10</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(rotated_loading_scores<span style="color:#f92672">$</span>loadings[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>],<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>              PC1   PC2
-hedonic     -0.41 -0.02
-for_meat    -0.41  0.21
-for_dessert -0.12  0.63
-price        0.48  0.21
-sugar        0.12  0.72
-alcohol     -0.44  0.05
-acidity     -0.46  0.02
+<pre tabindex="0"><code>rotated_loading_scores = varimax(pca_wine_cor$rotation[,1:2])
+</code></pre><h3 id="loading-scores-after-rotation">Loading scores after rotation</h3>
+<pre tabindex="0"><code># Table 10
+(round(rotated_loading_scores$loadings[,1:2],2))
 </code></pre><p>The same result can also be obtained by multiplying the original loading matrix by the rotation matrix obtained from varimax.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(pca_wine_cor<span style="color:#f92672">$</span>rotation[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">%*%</span> rotated_loading_scores<span style="color:#f92672">$</span>rotmat,<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>             [,1]  [,2]
-hedonic     -0.41 -0.02
-for_meat    -0.41  0.21
-for_dessert -0.12  0.63
-price        0.48  0.21
-sugar        0.12  0.72
-alcohol     -0.44  0.05
-acidity     -0.46  0.02
+<pre tabindex="0"><code>(round(pca_wine_cor$rotation[,1:2] %*% rotated_loading_scores$rotmat,2))
 </code></pre><h3 id="plot-of-loading-scores-before-rotation">Plot of loading scores before rotation</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#Figure 7</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">as.data.frame</span>(pca_wine_cor<span style="color:#f92672">$</span>rotation[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]),<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> pca_wine_cor<span style="color:#f92672">$</span>rotation[,<span style="color:#ae81ff">1</span>],y <span style="color:#f92672">=</span> pca_wine_cor<span style="color:#f92672">$</span>rotation[,<span style="color:#ae81ff">2</span>],
-</span></span><span style="display:flex;"><span>                                                      label <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Hedonic&#34;</span>,<span style="color:#e6db74">&#34;For Meat&#34;</span>,<span style="color:#e6db74">&#34;For dessert&#34;</span>,<span style="color:#e6db74">&#34;Price&#34;</span>,<span style="color:#e6db74">&#34;Sugar&#34;</span>,<span style="color:#e6db74">&#34;Alcohol&#34;</span>,<span style="color:#e6db74">&#34;Acidity&#34;</span>)))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_text_repel</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_hline</span>(yintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_vline</span>(xintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">xlab</span>(<span style="color:#e6db74">&#34;Loading score along PC1&#34;</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">ylab</span>(<span style="color:#e6db74">&#34;Loading score along PC2&#34;</span>)
-</span></span></code></pre></div><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-38-1.png" width="672" />
-<h3 id="plot-of-loading-scores-after-rotation">Plot of loading scores after rotation</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">as.data.frame</span>(rotated_loading_scores<span style="color:#f92672">$</span>loadings[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]),
-</span></span><span style="display:flex;"><span>                     <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> rotated_loading_scores<span style="color:#f92672">$</span>loadings[,<span style="color:#ae81ff">1</span>],
-</span></span><span style="display:flex;"><span>                         y <span style="color:#f92672">=</span> rotated_loading_scores<span style="color:#f92672">$</span>loadings[,<span style="color:#ae81ff">2</span>],
-</span></span><span style="display:flex;"><span>                         label <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Hedonic&#34;</span>,<span style="color:#e6db74">&#34;For Meat&#34;</span>,<span style="color:#e6db74">&#34;For dessert&#34;</span>,<span style="color:#e6db74">&#34;Price&#34;</span>,<span style="color:#e6db74">&#34;Sugar&#34;</span>,<span style="color:#e6db74">&#34;Alcohol&#34;</span>,<span style="color:#e6db74">&#34;Acidity&#34;</span>)))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_point</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_text_repel</span>()<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_hline</span>(yintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_vline</span>(xintercept <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xlab</span>(<span style="color:#e6db74">&#34;Loading score along PC1 after rotation&#34;</span>)<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ylab</span>(<span style="color:#e6db74">&#34;Loading score along PC2 after rotation&#34;</span>)
-</span></span></code></pre></div><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-39-1.png" width="672" />
-<h2 id="example-3">Example 3</h2>
+<pre tabindex="0"><code>#Figure 7
+ggplot(as.data.frame(pca_wine_cor$rotation[,1:2]),aes(x = pca_wine_cor$rotation[,1],y = pca_wine_cor$rotation[,2],
+                                                      label = c(&#34;Hedonic&#34;,&#34;For Meat&#34;,&#34;For dessert&#34;,&#34;Price&#34;,&#34;Sugar&#34;,&#34;Alcohol&#34;,&#34;Acidity&#34;)))+
+  geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+  xlab(&#34;Loading score along PC1&#34;)+ylab(&#34;Loading score along PC2&#34;)
+</code></pre><h3 id="plot-of-loading-scores-after-rotation">Plot of loading scores after rotation</h3>
+<pre tabindex="0"><code>ggplot(as.data.frame(rotated_loading_scores$loadings[,1:2]),
+                     aes(x = rotated_loading_scores$loadings[,1],
+                         y = rotated_loading_scores$loadings[,2],
+                         label = c(&#34;Hedonic&#34;,&#34;For Meat&#34;,&#34;For dessert&#34;,&#34;Price&#34;,&#34;Sugar&#34;,&#34;Alcohol&#34;,&#34;Acidity&#34;)))+
+  geom_point()+geom_text_repel()+geom_hline(yintercept = 0)+geom_vline(xintercept = 0)+
+    xlab(&#34;Loading score along PC1 after rotation&#34;)+
+    ylab(&#34;Loading score along PC2 after rotation&#34;)
+</code></pre><h2 id="example-3">Example 3</h2>
 <h3 id="french-food-example-covariance-pca-example">French food example (Covariance PCA example)</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Table 11 </span>
-</span></span><span style="display:flex;"><span>class <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Blue_collar&#34;</span>, <span style="color:#e6db74">&#34;White_collar&#34;</span>, <span style="color:#e6db74">&#34;Upper_class&#34;</span>), times <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
-</span></span><span style="display:flex;"><span>children <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>), each <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
-</span></span><span style="display:flex;"><span>bread <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">332</span>, <span style="color:#ae81ff">293</span>, <span style="color:#ae81ff">372</span>, <span style="color:#ae81ff">406</span>, <span style="color:#ae81ff">386</span>, <span style="color:#ae81ff">438</span>, <span style="color:#ae81ff">534</span>, <span style="color:#ae81ff">460</span>, <span style="color:#ae81ff">385</span>, <span style="color:#ae81ff">655</span>, <span style="color:#ae81ff">584</span>, <span style="color:#ae81ff">515</span>)
-</span></span><span style="display:flex;"><span>vegetables <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">428</span>, <span style="color:#ae81ff">559</span>, <span style="color:#ae81ff">767</span>, <span style="color:#ae81ff">563</span>, <span style="color:#ae81ff">608</span>, <span style="color:#ae81ff">843</span>, <span style="color:#ae81ff">660</span>, <span style="color:#ae81ff">699</span>, <span style="color:#ae81ff">789</span>, <span style="color:#ae81ff">776</span>, <span style="color:#ae81ff">995</span>, <span style="color:#ae81ff">1097</span>)
-</span></span><span style="display:flex;"><span>fruit <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">354</span>, <span style="color:#ae81ff">388</span>, <span style="color:#ae81ff">562</span>, <span style="color:#ae81ff">341</span>, <span style="color:#ae81ff">396</span>, <span style="color:#ae81ff">689</span>, <span style="color:#ae81ff">367</span>, <span style="color:#ae81ff">484</span>, <span style="color:#ae81ff">621</span>, <span style="color:#ae81ff">423</span>, <span style="color:#ae81ff">548</span>, <span style="color:#ae81ff">887</span>)
-</span></span><span style="display:flex;"><span>meat <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1437</span>, <span style="color:#ae81ff">1527</span>, <span style="color:#ae81ff">1948</span>, <span style="color:#ae81ff">1507</span>, <span style="color:#ae81ff">1501</span>, <span style="color:#ae81ff">2345</span>, <span style="color:#ae81ff">1620</span>, <span style="color:#ae81ff">1856</span>, <span style="color:#ae81ff">2366</span>, <span style="color:#ae81ff">1848</span>, <span style="color:#ae81ff">2056</span>, <span style="color:#ae81ff">2630</span>)
-</span></span><span style="display:flex;"><span>poultry <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">526</span>, <span style="color:#ae81ff">567</span>, <span style="color:#ae81ff">927</span>, <span style="color:#ae81ff">544</span>, <span style="color:#ae81ff">558</span>, <span style="color:#ae81ff">1148</span>, <span style="color:#ae81ff">638</span>, <span style="color:#ae81ff">762</span>, <span style="color:#ae81ff">1149</span>, <span style="color:#ae81ff">759</span>, <span style="color:#ae81ff">893</span>, <span style="color:#ae81ff">1167</span>)
-</span></span><span style="display:flex;"><span>milk <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">247</span>, <span style="color:#ae81ff">239</span>, <span style="color:#ae81ff">235</span>, <span style="color:#ae81ff">324</span>, <span style="color:#ae81ff">319</span>, <span style="color:#ae81ff">243</span>, <span style="color:#ae81ff">414</span>, <span style="color:#ae81ff">400</span>, <span style="color:#ae81ff">304</span>, <span style="color:#ae81ff">495</span>, <span style="color:#ae81ff">518</span>, <span style="color:#ae81ff">561</span>)
-</span></span><span style="display:flex;"><span>wine <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">427</span>, <span style="color:#ae81ff">258</span>, <span style="color:#ae81ff">433</span>, <span style="color:#ae81ff">407</span>, <span style="color:#ae81ff">363</span>, <span style="color:#ae81ff">341</span>, <span style="color:#ae81ff">407</span>, <span style="color:#ae81ff">416</span>, <span style="color:#ae81ff">282</span>, <span style="color:#ae81ff">486</span>, <span style="color:#ae81ff">319</span>, <span style="color:#ae81ff">284</span>)
-</span></span><span style="display:flex;"><span>food <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(class, children, bread, vegetables, fruit, meat, poultry, milk, wine, stringsAsFactors <span style="color:#f92672">=</span> F)
-</span></span><span style="display:flex;"><span>food
-</span></span></code></pre></div><pre tabindex="0"><code>          class children bread vegetables fruit meat poultry milk wine
-1   Blue_collar        2   332        428   354 1437     526  247  427
-2  White_collar        2   293        559   388 1527     567  239  258
-3   Upper_class        2   372        767   562 1948     927  235  433
-4   Blue_collar        3   406        563   341 1507     544  324  407
-5  White_collar        3   386        608   396 1501     558  319  363
-6   Upper_class        3   438        843   689 2345    1148  243  341
-7   Blue_collar        4   534        660   367 1620     638  414  407
-8  White_collar        4   460        699   484 1856     762  400  416
-9   Upper_class        4   385        789   621 2366    1149  304  282
-10  Blue_collar        5   655        776   423 1848     759  495  486
-11 White_collar        5   584        995   548 2056     893  518  319
-12  Upper_class        5   515       1097   887 2630    1167  561  284
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>pca_food_cov <span style="color:#f92672">=</span> <span style="color:#a6e22e">prcomp</span>(food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>],scale <span style="color:#f92672">=</span> F)
-</span></span></code></pre></div><h3 id="factor-scores">Factor scores</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Table 12</span>
-</span></span><span style="display:flex;"><span>(factor_scores_food <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(pca_food_cov<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>],<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>          PC1     PC2
- [1,] -635.05  120.89
- [2,] -488.56  142.33
- [3,]  112.03  139.75
- [4,] -520.01  -12.05
- [5,] -485.94   -1.17
- [6,]  588.17  188.44
- [7,] -333.95 -144.54
- [8,]  -57.51  -42.86
- [9,]  571.32  206.76
-[10,]  -39.38 -264.47
-[11,]  296.04 -235.92
-[12,]  992.83  -97.15
+<pre tabindex="0"><code># Table 11 
+class = rep(c(&#34;Blue_collar&#34;, &#34;White_collar&#34;, &#34;Upper_class&#34;), times = 4)
+children = rep(c(2,3,4,5), each = 3)
+bread = c(332, 293, 372, 406, 386, 438, 534, 460, 385, 655, 584, 515)
+vegetables = c(428, 559, 767, 563, 608, 843, 660, 699, 789, 776, 995, 1097)
+fruit = c(354, 388, 562, 341, 396, 689, 367, 484, 621, 423, 548, 887)
+meat = c(1437, 1527, 1948, 1507, 1501, 2345, 1620, 1856, 2366, 1848, 2056, 2630)
+poultry = c(526, 567, 927, 544, 558, 1148, 638, 762, 1149, 759, 893, 1167)
+milk = c(247, 239, 235, 324, 319, 243, 414, 400, 304, 495, 518, 561)
+wine = c(427, 258, 433, 407, 363, 341, 407, 416, 282, 486, 319, 284)
+food = data.frame(class, children, bread, vegetables, fruit, meat, poultry, milk, wine, stringsAsFactors = F)
+food
+pca_food_cov = prcomp(food[,3:9],scale = F)
+</code></pre><h3 id="factor-scores">Factor scores</h3>
+<pre tabindex="0"><code># Table 12
+(factor_scores_food = round(pca_food_cov$x[,1:2],2))
 </code></pre><h3 id="contribution-of-each-observation-to-principal-component-1">Contribution of each observation to principal component</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(pca_food_cov<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]^2<span style="color:#f92672">/</span><span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">colSums</span>(pca_food_cov<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]^2),<span style="color:#a6e22e">nrow</span>(food)),ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>,byrow <span style="color:#f92672">=</span> T)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">2</span>)
-</span></span></code></pre></div><pre tabindex="0"><code>        PC1   PC2
- [1,] 13.34  5.03
- [2,]  7.90  6.97
- [3,]  0.42  6.72
- [4,]  8.94  0.05
- [5,]  7.81  0.00
- [6,] 11.44 12.22
- [7,]  3.69  7.19
- [8,]  0.11  0.63
- [9,] 10.80 14.71
-[10,]  0.05 24.07
-[11,]  2.90 19.15
-[12,] 32.61  3.25
-</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>dist <span style="color:#f92672">=</span> pca_food_cov<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span>]^2<span style="color:#f92672">+</span>pca_food_cov<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">2</span>]^2
-</span></span></code></pre></div><h3 id="squared-cosine-of-observations-1">Squared cosine of observations</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(sq_cos <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(pca_food_cov<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]^2<span style="color:#f92672">/</span><span style="color:#a6e22e">rowSums</span>(pca_food_cov<span style="color:#f92672">$</span>x^2)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>      PC1 PC2
- [1,]  95   3
- [2,]  86   7
- [3,]  26  40
- [4,] 100   0
- [5,]  98   0
- [6,]  89   9
- [7,]  83  15
- [8,]  40  22
- [9,]  86  11
-[10,]   2  79
-[11,]  57  36
-[12,]  97   1
+<pre tabindex="0"><code>round(pca_food_cov$x[,1:2]^2/matrix(rep(colSums(pca_food_cov$x[,1:2]^2),nrow(food)),ncol = 2,byrow = T)*100,2)
+dist = pca_food_cov$x[,1]^2+pca_food_cov$x[,2]^2
+</code></pre><h3 id="squared-cosine-of-observations-1">Squared cosine of observations</h3>
+<pre tabindex="0"><code>(sq_cos = round(pca_food_cov$x[,1:2]^2/rowSums(pca_food_cov$x^2)*100))
 </code></pre><h3 id="squared-loading-scores">Squared loading scores</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Table 13</span>
-</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(pca_food_cov<span style="color:#f92672">$</span>rotation[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]^2,<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>            PC1  PC2
-bread      0.01 0.33
-vegetables 0.11 0.17
-fruit      0.09 0.01
-meat       0.57 0.01
-poultry    0.22 0.06
-milk       0.01 0.40
-wine       0.00 0.02
+<pre tabindex="0"><code># Table 13
+(round(pca_food_cov$rotation[,1:2]^2,2))
 </code></pre><p><strong>Note</strong> that this table doesn&rsquo;t match with that of the paper. We will stick to our analysis.</p>
 <h3 id="correlation-score">Correlation score</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(corr_score_food <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>((<span style="color:#a6e22e">cor</span>(pca_food_cov<span style="color:#f92672">$</span>x,food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>])[1<span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>,]),<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>    bread vegetables fruit meat poultry  milk  wine
-PC1  0.36       0.91  0.96 1.00    0.98  0.41 -0.43
-PC2 -0.87      -0.35  0.10 0.04    0.16 -0.88 -0.33
+<pre tabindex="0"><code>(corr_score_food = round((cor(pca_food_cov$x,food[,3:9])[1:2,]),2))
 </code></pre><h3 id="squared-correlation-score">Squared correlation score</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>((<span style="color:#a6e22e">cor</span>(pca_food_cov<span style="color:#f92672">$</span>x,food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>])[1<span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>,])^2,<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>    bread vegetables fruit meat poultry milk wine
-PC1  0.13       0.83  0.92    1    0.96 0.17 0.18
-PC2  0.76       0.12  0.01    0    0.03 0.77 0.11
+<pre tabindex="0"><code>(round((cor(pca_food_cov$x,food[,3:9])[1:2,])^2,2))
 </code></pre><h3 id="correlation-circle-for-food-data">Correlation circle for food data</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Figure 9</span>
-</span></span><span style="display:flex;"><span>corr_score_food <span style="color:#f92672">=</span> <span style="color:#a6e22e">t</span>(corr_score_food)
-</span></span><span style="display:flex;"><span>circle <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_point</span>(data <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.data.frame</span>(corr_score_food), 
-</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> corr_score_food[,<span style="color:#ae81ff">1</span>],y <span style="color:#f92672">=</span> corr_score_food[,<span style="color:#ae81ff">2</span>]))<span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">geom_text_repel</span>(data <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.data.frame</span>(corr_score_food), 
-</span></span><span style="display:flex;"><span>                  <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> corr_score_food[,<span style="color:#ae81ff">1</span>],y <span style="color:#f92672">=</span> corr_score_food[,<span style="color:#ae81ff">2</span>],
-</span></span><span style="display:flex;"><span>                      label <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Bread&#34;</span>,<span style="color:#e6db74">&#34;Vegetables&#34;</span>,<span style="color:#e6db74">&#34;Fruit&#34;</span>,<span style="color:#e6db74">&#34;Meat&#34;</span>,<span style="color:#e6db74">&#34;Poultry&#34;</span>,<span style="color:#e6db74">&#34;Milk&#34;</span>,<span style="color:#e6db74">&#34;Wine&#34;</span>)))
-</span></span></code></pre></div><img src="/post/principal-component-analysis-part-iii_files/figure-html/unnamed-chunk-47-1.png" width="672" />
-Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).
+<pre tabindex="0"><code># Figure 9
+corr_score_food = t(corr_score_food)
+circle + geom_point(data = as.data.frame(corr_score_food), 
+                    aes(x = corr_score_food[,1],y = corr_score_food[,2]))+
+  geom_text_repel(data = as.data.frame(corr_score_food), 
+                  aes(x = corr_score_food[,1],y = corr_score_food[,2],
+                      label = c(&#34;Bread&#34;,&#34;Vegetables&#34;,&#34;Fruit&#34;,&#34;Meat&#34;,&#34;Poultry&#34;,&#34;Milk&#34;,&#34;Wine&#34;)))
+</code></pre><p>Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).</p>
 <h3 id="eigenvalues">Eigenvalues</h3>
 <p>Eigenvalues of data covariance matrix is square of singular values of centered data matrix. Hence eigenvalues of data covariance matrix can be obtained as below.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">## Table 14</span>
-</span></span><span style="display:flex;"><span>cent_food <span style="color:#f92672">=</span> food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>]<span style="color:#f92672">-</span><span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">colMeans</span>(food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>]),times <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>),nrow <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>,
-</span></span><span style="display:flex;"><span>                              byrow <span style="color:#f92672">=</span> T)
-</span></span><span style="display:flex;"><span>svd_food <span style="color:#f92672">=</span> <span style="color:#a6e22e">svd</span>(cent_food)
-</span></span><span style="display:flex;"><span>(Eigenvalues <span style="color:#f92672">=</span> (svd_food<span style="color:#f92672">$</span>d)^2)
-</span></span></code></pre></div><pre tabindex="0"><code>[1] 3023141.2354  290575.8390   68795.2333   25298.9496   22992.2474
-[6]    3722.3214     723.9238
-</code></pre><p><strong>Important Note:</strong> These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by <code>\((n-1)\)</code>, where <code>\(n\)</code> is number of data points (in this case <code>\(n = 12\)</code>). If this point is still not clear, refer to <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II</a>.</p>
+<pre tabindex="0"><code>## Table 14
+cent_food = food[,3:9]-matrix(rep(colMeans(food[,3:9]),times = 12),nrow = 12,
+                              byrow = T)
+svd_food = svd(cent_food)
+(Eigenvalues = (svd_food$d)^2)
+</code></pre><p><strong>Important Note:</strong> These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by $(n-1)$, where $n$ is number of data points (in this case $n = 12$). If this point is still not clear, refer to <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II</a>.</p>
 <h3 id="percentage-contribution-of-each-principal-component">Percentage contribution of each principal component</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(Eigenvalues<span style="color:#f92672">/</span><span style="color:#a6e22e">sum</span>(Eigenvalues),<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>[1] 0.88 0.08 0.02 0.01 0.01 0.00 0.00
+<pre tabindex="0"><code>(round(Eigenvalues/sum(Eigenvalues),2))
 </code></pre><h3 id="cumulative-sum-of-eigenvalues">Cumulative sum of eigenvalues</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">cumsum</span>(Eigenvalues),<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>[1] 3023141 3313717 3382512 3407811 3430804 3434526 3435250
+<pre tabindex="0"><code>(round(cumsum(Eigenvalues),2))
 </code></pre><h3 id="cumulative-percentage-contribution">Cumulative percentage contribution</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">cumsum</span>(Eigenvalues)<span style="color:#f92672">/</span><span style="color:#a6e22e">sum</span>(Eigenvalues),<span style="color:#ae81ff">2</span>))
-</span></span></code></pre></div><pre tabindex="0"><code>[1] 0.88 0.96 0.98 0.99 1.00 1.00 1.00
+<pre tabindex="0"><code>(round(cumsum(Eigenvalues)/sum(Eigenvalues),2))
 </code></pre><h3 id="ress-refer-to-the-paper-for-a-description">RESS (Refer to the paper for a description)</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>RESS <span style="color:#f92672">=</span> <span style="color:#a6e22e">array</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">7</span>))
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for </span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">7</span>){
-</span></span><span style="display:flex;"><span>  RESS[i] <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(Eigenvalues)<span style="color:#f92672">-</span><span style="color:#a6e22e">sum</span>(Eigenvalues[1<span style="color:#f92672">:</span>i])
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>RESS
-</span></span></code></pre></div><pre tabindex="0"><code>[1] 412108.5146 121532.6756  52737.4423  27438.4927   4446.2453    723.9238
-[7]      0.0000
+<pre tabindex="0"><code>RESS = array(rep(0,7))
+for (i in 1:7){
+  RESS[i] = sum(Eigenvalues)-sum(Eigenvalues[1:i])
+}
+RESS
 </code></pre><h3 id="ratio-of-ress-and-sum-of-eigenvalues">Ratio of RESS and sum of eigenvalues</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(RESS<span style="color:#f92672">/</span><span style="color:#a6e22e">sum</span>(Eigenvalues),<span style="color:#ae81ff">2</span>)
-</span></span></code></pre></div><pre tabindex="0"><code>[1] 0.12 0.04 0.02 0.01 0.00 0.00 0.00
+<pre tabindex="0"><code>round(RESS/sum(Eigenvalues),2)
 </code></pre><p>We will not calculate the value of PRESS in this post as it requires us to consider random models. We will not pursue that here.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">sessionInfo</span>()
-</span></span></code></pre></div><pre tabindex="0"><code>R version 4.2.1 (2022-06-23 ucrt)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 22621)
-
-Matrix products: default
-
-locale:
-[1] LC_COLLATE=English_United States.utf8 
-[2] LC_CTYPE=English_United States.utf8   
-[3] LC_MONETARY=English_United States.utf8
-[4] LC_NUMERIC=C                          
-[5] LC_TIME=English_United States.utf8    
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-other attached packages:
-[1] ggrepel_0.9.2 ggplot2_3.4.0
-
-loaded via a namespace (and not attached):
- [1] Rcpp_1.0.9       highr_0.9        bslib_0.4.1      compiler_4.2.1  
- [5] pillar_1.8.1     jquerylib_0.1.4  tools_4.2.1      digest_0.6.30   
- [9] jsonlite_1.8.3   evaluate_0.18    lifecycle_1.0.3  tibble_3.1.8    
-[13] gtable_0.3.1     pkgconfig_2.0.3  rlang_1.0.6      cli_3.4.1       
-[17] yaml_2.3.6       blogdown_1.15    xfun_0.35        fastmap_1.1.0   
-[21] withr_2.5.0      stringr_1.4.1    knitr_1.41       sass_0.4.2      
-[25] vctrs_0.5.0      grid_4.2.1       glue_1.6.2       R6_2.5.1        
-[29] fansi_1.0.3      rmarkdown_2.18   bookdown_0.30    farver_2.1.1    
-[33] magrittr_2.0.3   scales_1.2.1     htmltools_0.5.3  colorspace_2.0-3
-[37] labeling_0.4.2   utf8_1.2.2       stringi_1.7.8    munsell_0.5.0   
-[41] cachem_1.0.6    
+<pre tabindex="0"><code>sessionInfo()
 </code></pre><p>Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to <a href="https://biswajitsahoo1111.github.io/" target="_blank" rel="noopener">author&rsquo;s</a> email.</p>
 <h2 id="reference">Reference</h2>
 <ol>
@@ -1779,7 +1440,7 @@ loaded via a namespace (and not attached):
   
   
   <p class="powered-by">
-    © 2022 Biswajit Sahoo &middot; 
+    © 2023 Biswajit Sahoo &middot; 
 
     Powered by <a href="https://www.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i> </a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package and the
     <a href="https://github.com/wowchemy/starter-hugo-academic" target="_blank" rel="noopener">Academic theme</a> for
