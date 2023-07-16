@@ -1,0 +1,1658 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.4.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Biswajit Sahoo" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Run Python code in Google ColabDownload Python codeDownload R code (R Markdown)Download MATLAB codeThis post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.246129d782c938a644fe2d653d8a976f.css" />
+
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153208457-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-153208457-1', {});
+  gtag('set', {'cookie_flags': 'SameSite=None;Secure'});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Biswajit Sahoo" />
+  <meta property="og:url" content="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" />
+  <meta property="og:title" content="Principal Component Analysis - Part II | Biswajit Sahoo" />
+  <meta property="og:description" content="Run Python code in Google ColabDownload Python codeDownload R code (R Markdown)Download MATLAB codeThis post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below." /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2019-02-04T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2019-02-04T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/"
+  },
+  "headline": "Principal Component Analysis - Part II",
+  
+  "datePublished": "2019-02-04T00:00:00Z",
+  "dateModified": "2019-02-04T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Biswajit Sahoo"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Biswajit Sahoo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Run Python code in Google Colab\rDownload Python code\rDownload R code (R Markdown)\rDownload MATLAB code\rThis post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Principal Component Analysis - Part II | Biswajit Sahoo</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="b74fac7d7a46464d7f7b9a97d0212dbe" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.7e85d6cfe81caeb57cc49452f9b55e03.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="header--fixed">
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">Biswajit Sahoo</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">Biswajit Sahoo</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#blog"><span>Blog</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#publications"><span>Publications</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/personal"><span>Personal</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Principal Component Analysis - Part II</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 4, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    11 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/blog/">Blog</a>, <a href="/category/pca/">PCA</a>, <a href="/category/machine-learning/">Machine Learning</a>, <a href="/category/r/">R</a>, <a href="/category/python/">Python</a>, <a href="/category/matlab/">MATLAB</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <table class="tfo-notebook-buttons" align="center">
+  <td align="center">
+    <a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Principal_Component_Analysis_Part_II.ipynb">
+    <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+    Run Python code in Google Colab</a>
+  </td>
+  <td align="center">
+    <a href="https://www.dropbox.com/s/zkftnkv31neuxgq/Principal_Component_Analysis_Part_II.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download Python code</a>
+  </td>
+  <td align="center">
+    <a href="https://www.dropbox.com/s/7bzat96tt6r9iks/Principal_component_analysis_part_II.Rmd?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download R code (R Markdown)</a>
+  </td>
+  <td align="center">
+    <a href="https://www.dropbox.com/s/u9gbbviswkfgmsj/pca_part_2_MATLAB_code.pdf?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download MATLAB code</a>
+  </td>
+</table>
+<p>This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.</p>
+<ul>
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/" target="_blank" rel="noopener">Part-I: Basic Theory of PCA</a></li>
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/" target="_blank" rel="noopener">Part-III: Reproducing results of a published paper on PCA</a></li>
+</ul>
+<p>In this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.</p>
+<p>This post is written in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf" target="_blank" rel="noopener">MATLAB code</a> for the same can be obtained from this <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf" target="_blank" rel="noopener">link</a>.</p>
+<p>We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result. As the dataset is pretty small, one way to load the data into R is to create a dataframe in R using the values in the paper. Another way is to first create a csv file and then read the file into R/MATLAB. We have used the later approach.</p>
+<h3 id="load-data">Load Data</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#Create a dataframe of food data</span>
+</span></span><span style="display:flex;"><span>class <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Blue_collar&#34;</span>, <span style="color:#e6db74">&#34;White_collar&#34;</span>, <span style="color:#e6db74">&#34;Upper_class&#34;</span>), times <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>children <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>), each <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>bread <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">332</span>, <span style="color:#ae81ff">293</span>, <span style="color:#ae81ff">372</span>, <span style="color:#ae81ff">406</span>, <span style="color:#ae81ff">386</span>, <span style="color:#ae81ff">438</span>, <span style="color:#ae81ff">534</span>, <span style="color:#ae81ff">460</span>, <span style="color:#ae81ff">385</span>, <span style="color:#ae81ff">655</span>, <span style="color:#ae81ff">584</span>, <span style="color:#ae81ff">515</span>)
+</span></span><span style="display:flex;"><span>vegetables <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">428</span>, <span style="color:#ae81ff">559</span>, <span style="color:#ae81ff">767</span>, <span style="color:#ae81ff">563</span>, <span style="color:#ae81ff">608</span>, <span style="color:#ae81ff">843</span>, <span style="color:#ae81ff">660</span>, <span style="color:#ae81ff">699</span>, <span style="color:#ae81ff">789</span>, <span style="color:#ae81ff">776</span>, <span style="color:#ae81ff">995</span>, <span style="color:#ae81ff">1097</span>)
+</span></span><span style="display:flex;"><span>fruit <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">354</span>, <span style="color:#ae81ff">388</span>, <span style="color:#ae81ff">562</span>, <span style="color:#ae81ff">341</span>, <span style="color:#ae81ff">396</span>, <span style="color:#ae81ff">689</span>, <span style="color:#ae81ff">367</span>, <span style="color:#ae81ff">484</span>, <span style="color:#ae81ff">621</span>, <span style="color:#ae81ff">423</span>, <span style="color:#ae81ff">548</span>, <span style="color:#ae81ff">887</span>)
+</span></span><span style="display:flex;"><span>meat <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1437</span>, <span style="color:#ae81ff">1527</span>, <span style="color:#ae81ff">1948</span>, <span style="color:#ae81ff">1507</span>, <span style="color:#ae81ff">1501</span>, <span style="color:#ae81ff">2345</span>, <span style="color:#ae81ff">1620</span>, <span style="color:#ae81ff">1856</span>, <span style="color:#ae81ff">2366</span>, <span style="color:#ae81ff">1848</span>, <span style="color:#ae81ff">2056</span>, <span style="color:#ae81ff">2630</span>)
+</span></span><span style="display:flex;"><span>poultry <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">526</span>, <span style="color:#ae81ff">567</span>, <span style="color:#ae81ff">927</span>, <span style="color:#ae81ff">544</span>, <span style="color:#ae81ff">558</span>, <span style="color:#ae81ff">1148</span>, <span style="color:#ae81ff">638</span>, <span style="color:#ae81ff">762</span>, <span style="color:#ae81ff">1149</span>, <span style="color:#ae81ff">759</span>, <span style="color:#ae81ff">893</span>, <span style="color:#ae81ff">1167</span>)
+</span></span><span style="display:flex;"><span>milk <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">247</span>, <span style="color:#ae81ff">239</span>, <span style="color:#ae81ff">235</span>, <span style="color:#ae81ff">324</span>, <span style="color:#ae81ff">319</span>, <span style="color:#ae81ff">243</span>, <span style="color:#ae81ff">414</span>, <span style="color:#ae81ff">400</span>, <span style="color:#ae81ff">304</span>, <span style="color:#ae81ff">495</span>, <span style="color:#ae81ff">518</span>, <span style="color:#ae81ff">561</span>)
+</span></span><span style="display:flex;"><span>wine <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">427</span>, <span style="color:#ae81ff">258</span>, <span style="color:#ae81ff">433</span>, <span style="color:#ae81ff">407</span>, <span style="color:#ae81ff">363</span>, <span style="color:#ae81ff">341</span>, <span style="color:#ae81ff">407</span>, <span style="color:#ae81ff">416</span>, <span style="color:#ae81ff">282</span>, <span style="color:#ae81ff">486</span>, <span style="color:#ae81ff">319</span>, <span style="color:#ae81ff">284</span>)
+</span></span><span style="display:flex;"><span>food <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(class, children, bread, vegetables, fruit, meat, poultry, milk, wine, stringsAsFactors <span style="color:#f92672">=</span> F)
+</span></span><span style="display:flex;"><span>food
+</span></span></code></pre></div><pre tabindex="0"><code>          class children bread vegetables fruit meat poultry milk wine
+1   Blue_collar        2   332        428   354 1437     526  247  427
+2  White_collar        2   293        559   388 1527     567  239  258
+3   Upper_class        2   372        767   562 1948     927  235  433
+4   Blue_collar        3   406        563   341 1507     544  324  407
+5  White_collar        3   386        608   396 1501     558  319  363
+6   Upper_class        3   438        843   689 2345    1148  243  341
+7   Blue_collar        4   534        660   367 1620     638  414  407
+8  White_collar        4   460        699   484 1856     762  400  416
+9   Upper_class        4   385        789   621 2366    1149  304  282
+10  Blue_collar        5   655        776   423 1848     759  495  486
+11 White_collar        5   584        995   548 2056     893  518  319
+12  Upper_class        5   515       1097   887 2630    1167  561  284
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Centerd data matrix</span>
+</span></span><span style="display:flex;"><span>cent_food <span style="color:#f92672">=</span> <span style="color:#a6e22e">scale</span>(food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>],scale <span style="color:#f92672">=</span> F)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Scaled data matrix</span>
+</span></span><span style="display:flex;"><span>scale_food <span style="color:#f92672">=</span> <span style="color:#a6e22e">scale</span>(food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>],scale <span style="color:#f92672">=</span> T)
+</span></span></code></pre></div><h2 id="covariance-pca">Covariance PCA</h2>
+<h3 id="using-built-in-function">Using built-in function</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Using built-in function</span>
+</span></span><span style="display:flex;"><span>pca_food_cov <span style="color:#f92672">=</span> <span style="color:#a6e22e">prcomp</span>(food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>],scale <span style="color:#f92672">=</span> F)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loading scores (we have printed only four columns out of seven)</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(pca_food_cov<span style="color:#f92672">$</span>rotation[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>))
+</span></span></code></pre></div><pre tabindex="0"><code>             PC1   PC2   PC3   PC4
+bread       0.07 -0.58 -0.40  0.11
+vegetables  0.33 -0.41  0.29  0.61
+fruit       0.30  0.10  0.34 -0.40
+meat        0.75  0.11 -0.07 -0.29
+poultry     0.47  0.24 -0.38  0.33
+milk        0.09 -0.63  0.23 -0.41
+wine       -0.06 -0.14 -0.66 -0.31
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Factor score (we have printed only four PCs out of seven)</span>
+</span></span></code></pre></div><p>We have printed only four columns of loading scores out of seven.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(pca_food_cov<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>))
+</span></span></code></pre></div><pre tabindex="0"><code>          PC1     PC2     PC3    PC4
+ [1,] -635.05  120.89  -21.14 -68.97
+ [2,] -488.56  142.33  132.37  34.91
+ [3,]  112.03  139.75  -61.86  44.19
+ [4,] -520.01  -12.05    2.85 -13.70
+ [5,] -485.94   -1.17   65.75  11.51
+ [6,]  588.17  188.44  -71.85  28.56
+ [7,] -333.95 -144.54  -34.94  10.07
+ [8,]  -57.51  -42.86  -26.26 -46.55
+ [9,]  571.32  206.76  -38.45   3.69
+[10,]  -39.38 -264.47 -126.43 -12.74
+[11,]  296.04 -235.92   58.84  87.43
+[12,]  992.83  -97.15  121.13 -78.39
+</code></pre><p>We have printed only four principal components out of seven.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variances using built-in function</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">round</span>(pca_food_cov<span style="color:#f92672">$</span>sdev^2,<span style="color:#ae81ff">2</span>))
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Total variance</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">round</span>(pca_food_cov<span style="color:#f92672">$</span>sdev^2,<span style="color:#ae81ff">2</span>)))
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 312295.4
+</code></pre><h2 id="comparison-of-variance-before-and-after-transformation">Comparison of variance before and after transformation</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Total variance before transformation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">cov</span>(food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>])))
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 312295.4
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Total variance after transformation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">cov</span>(pca_food_cov<span style="color:#f92672">$</span>x)))
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 312295.4
+</code></pre><p>Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variance along variables before transformation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">cov</span>(food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>])),<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>     bread vegetables      fruit       meat    poultry       milk       wine 
+  11480.61   35789.09   27255.45  156618.39   62280.52   13718.75    5152.63 
+</code></pre><p>Note that calculation of variance is unaffected by centering data matrix. So variance of original data matrix as well as centered data matrix is same. Check it for yourself. Now see how PCA transforms these variance.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variance along principal compoennts</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">cov</span>(pca_food_cov<span style="color:#f92672">$</span>x)),<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>      PC1       PC2       PC3       PC4       PC5       PC6       PC7 
+274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81 
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># We can obtain the same result using built-in fucntion</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(pca_food_cov<span style="color:#f92672">$</span>sdev^2,<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81
+</code></pre><h3 id="performing-covariance-pca-manually-using-svd">Performing covariance PCA manually using SVD</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>svd_food_cov <span style="color:#f92672">=</span> <span style="color:#a6e22e">svd</span>(cent_food)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loading scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(svd_food_cov<span style="color:#f92672">$</span>v[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>) <span style="color:#75715e"># We have printed only four columns</span>
+</span></span></code></pre></div><pre tabindex="0"><code>      [,1]  [,2]  [,3]  [,4]
+[1,]  0.07 -0.58 -0.40  0.11
+[2,]  0.33 -0.41  0.29  0.61
+[3,]  0.30  0.10  0.34 -0.40
+[4,]  0.75  0.11 -0.07 -0.29
+[5,]  0.47  0.24 -0.38  0.33
+[6,]  0.09 -0.63  0.23 -0.41
+[7,] -0.06 -0.14 -0.66 -0.31
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Factor scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>((cent_food <span style="color:#f92672">%*%</span> svd_food_cov<span style="color:#f92672">$</span>v)[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>) <span style="color:#75715e"># only 4 columns printed</span>
+</span></span></code></pre></div><pre tabindex="0"><code>         [,1]    [,2]    [,3]   [,4]
+ [1,] -635.05  120.89  -21.14 -68.97
+ [2,] -488.56  142.33  132.37  34.91
+ [3,]  112.03  139.75  -61.86  44.19
+ [4,] -520.01  -12.05    2.85 -13.70
+ [5,] -485.94   -1.17   65.75  11.51
+ [6,]  588.17  188.44  -71.85  28.56
+ [7,] -333.95 -144.54  -34.94  10.07
+ [8,]  -57.51  -42.86  -26.26 -46.55
+ [9,]  571.32  206.76  -38.45   3.69
+[10,]  -39.38 -264.47 -126.43 -12.74
+[11,]  296.04 -235.92   58.84  87.43
+[12,]  992.83  -97.15  121.13 -78.39
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variance of principal components</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(svd_food_cov<span style="color:#f92672">$</span>d^2<span style="color:#f92672">/</span><span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81
+</code></pre><p>Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/" target="_blank" rel="noopener">Part-I</a></p>
+<h3 id="performing-covariance-pca-using-eigen-decomopositionnot-recommended">Performing covariance PCA using Eigen-decomoposition(Not recommended)</h3>
+<p>This procedure is not recommended because forming a covariance matrix is computationally not efficient for large matrices if data matrix contains smaller entries. So doing eigen analysis on covariance matrix may give erroneous results. However, for our example we can use it to obtain results.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>eigen_food_cov <span style="color:#f92672">=</span> <span style="color:#a6e22e">eigen</span>(<span style="color:#a6e22e">cov</span>(cent_food))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loading scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(eigen_food_cov<span style="color:#f92672">$</span>vectors[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>      [,1]  [,2]  [,3]  [,4]
+[1,] -0.07  0.58 -0.40 -0.11
+[2,] -0.33  0.41  0.29 -0.61
+[3,] -0.30 -0.10  0.34  0.40
+[4,] -0.75 -0.11 -0.07  0.29
+[5,] -0.47 -0.24 -0.38 -0.33
+[6,] -0.09  0.63  0.23  0.41
+[7,]  0.06  0.14 -0.66  0.31
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Factor scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>((cent_food <span style="color:#f92672">%*%</span> eigen_food_cov<span style="color:#f92672">$</span>vectors)[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>         [,1]    [,2]    [,3]   [,4]
+ [1,]  635.05 -120.89  -21.14  68.97
+ [2,]  488.56 -142.33  132.37 -34.91
+ [3,] -112.03 -139.75  -61.86 -44.19
+ [4,]  520.01   12.05    2.85  13.70
+ [5,]  485.94    1.17   65.75 -11.51
+ [6,] -588.17 -188.44  -71.85 -28.56
+ [7,]  333.95  144.54  -34.94 -10.07
+ [8,]   57.51   42.86  -26.26  46.55
+ [9,] -571.32 -206.76  -38.45  -3.69
+[10,]   39.38  264.47 -126.43  12.74
+[11,] -296.04  235.92   58.84 -87.43
+[12,] -992.83   97.15  121.13  78.39
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variance along principal components</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(eigen_food_cov<span style="color:#f92672">$</span>values,<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81
+</code></pre><p>Instead of using the &lsquo;cov()&rsquo; command to find the covariance matrix manually and perform its eigen analysis.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>cov_matrix_manual_food <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">11</span>)<span style="color:#f92672">*</span><span style="color:#a6e22e">t</span>(cent_food) <span style="color:#f92672">%*%</span> cent_food
+</span></span><span style="display:flex;"><span>eigen_food_new <span style="color:#f92672">=</span> <span style="color:#a6e22e">eigen</span>(cov_matrix_manual_food)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loading scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(eigen_food_new<span style="color:#f92672">$</span>vectors[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>      [,1]  [,2]  [,3]  [,4]
+[1,] -0.07  0.58 -0.40  0.11
+[2,] -0.33  0.41  0.29  0.61
+[3,] -0.30 -0.10  0.34 -0.40
+[4,] -0.75 -0.11 -0.07 -0.29
+[5,] -0.47 -0.24 -0.38  0.33
+[6,] -0.09  0.63  0.23 -0.41
+[7,]  0.06  0.14 -0.66 -0.31
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variance along principal components</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(eigen_food_new<span style="color:#f92672">$</span>values,<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81
+</code></pre><p>There are also different ways to find total variance of the data matrix. We will explore some of the options.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Total varaiance before transformation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">cov</span>(cent_food)))
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 312295.4
+</code></pre><p>Note that total variance is invariant to translations. So calculating the total variance on raw data will also give the same answer. Check it to convince yourself.</p>
+<h2 id="correlation-pca">Correlation PCA</h2>
+<p>When PCA is performed on a scaled data matrix (each variable is centered as well as variance of each variable is one), it is called correlation PCA. Before discussing correlation PCA we will take some time to see different ways in which we can obtain correlation matrix.</p>
+<h3 id="different-ways-to-obtain-correlation-matrix">Different ways to obtain correlation matrix.</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Using built-in command</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">cor</span>(food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>]),<span style="color:#ae81ff">2</span>)[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>] <span style="color:#75715e"># We have printed only four columns</span>
+</span></span></code></pre></div><pre tabindex="0"><code>           bread vegetables fruit  meat
+bread       1.00       0.59  0.20  0.32
+vegetables  0.59       1.00  0.86  0.88
+fruit       0.20       0.86  1.00  0.96
+meat        0.32       0.88  0.96  1.00
+poultry     0.25       0.83  0.93  0.98
+milk        0.86       0.66  0.33  0.37
+wine        0.30      -0.36 -0.49 -0.44
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># manually</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>((<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">11</span>)<span style="color:#f92672">*</span><span style="color:#a6e22e">t</span>(scale_food) <span style="color:#f92672">%*%</span> scale_food,<span style="color:#ae81ff">2</span>)[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>]
+</span></span></code></pre></div><pre tabindex="0"><code>           bread vegetables fruit  meat
+bread       1.00       0.59  0.20  0.32
+vegetables  0.59       1.00  0.86  0.88
+fruit       0.20       0.86  1.00  0.96
+meat        0.32       0.88  0.96  1.00
+poultry     0.25       0.83  0.93  0.98
+milk        0.86       0.66  0.33  0.37
+wine        0.30      -0.36 -0.49 -0.44
+</code></pre><h2 id="performing-correlation-pca-using-built-in-function">Performing correlation PCA using built-in function</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>pca_food_cor <span style="color:#f92672">=</span> <span style="color:#a6e22e">prcomp</span>(food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>],scale <span style="color:#f92672">=</span> T)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loading scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(pca_food_cor<span style="color:#f92672">$</span>rotation[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>) <span style="color:#75715e"># Printed only four</span>
+</span></span></code></pre></div><pre tabindex="0"><code>             PC1   PC2   PC3   PC4
+bread       0.24 -0.62  0.01 -0.54
+vegetables  0.47 -0.10  0.06 -0.02
+fruit       0.45  0.21 -0.15  0.55
+meat        0.46  0.14 -0.21 -0.05
+poultry     0.44  0.20 -0.36 -0.32
+milk        0.28 -0.52  0.44  0.45
+wine       -0.21 -0.48 -0.78  0.31
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Factor scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(pca_food_cor<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>        PC1   PC2   PC3   PC4
+ [1,] -2.86  0.36 -0.40  0.36
+ [2,] -1.89  1.79  1.31 -0.16
+ [3,] -0.12  0.73 -1.42  0.20
+ [4,] -2.04 -0.32  0.11  0.10
+ [5,] -1.69  0.16  0.51  0.16
+ [6,]  1.69  1.35 -0.99 -0.43
+ [7,] -0.93 -1.37  0.28 -0.26
+ [8,] -0.25 -0.63 -0.27  0.29
+ [9,]  1.60  1.74 -0.10 -0.40
+[10,]  0.22 -2.78 -0.57 -0.25
+[11,]  1.95 -1.13  0.99 -0.32
+[12,]  4.32  0.10  0.57  0.72
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variances along principal componentes</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(pca_food_cor<span style="color:#f92672">$</span>sdev^2,<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Sum of vairances</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(pca_food_cor<span style="color:#f92672">$</span>sdev^2)
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 7
+</code></pre><h2 id="comparison-of-variance-before-and-after-transformation-1">Comparison of variance before and after transformation</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Total variance before transformation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">cov</span>(scale_food)))
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 7
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Total variance after transformation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">cov</span>(pca_food_cor<span style="color:#f92672">$</span>x)))
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 7
+</code></pre><p>Another important observation is to see how variance of each variable before transformation changes into variance of principal components. Note that total variance in this process remains same as seen from above codes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variance along variables before transformation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">cov</span>(scale_food)),<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>     bread vegetables      fruit       meat    poultry       milk       wine 
+         1          1          1          1          1          1          1 
+</code></pre><p>This is obvious as we have scaled the matrix. Now see how PCA transforms these variance.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variance along principal compoennts</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">cov</span>(pca_food_cor<span style="color:#f92672">$</span>x)),<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code> PC1  PC2  PC3  PC4  PC5  PC6  PC7 
+4.33 1.83 0.63 0.13 0.06 0.02 0.00 
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># We can obtain the same result using built-in fucntion</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(pca_food_cor<span style="color:#f92672">$</span>sdev^2,<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00
+</code></pre><h3 id="performing-correlation-pca-manually-using-svd">Performing correlation PCA manually using SVD</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>svd_food_cor <span style="color:#f92672">=</span> <span style="color:#a6e22e">svd</span>(scale_food)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loading scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(svd_food_cor<span style="color:#f92672">$</span>v[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>      [,1]  [,2]  [,3]  [,4]
+[1,]  0.24 -0.62  0.01 -0.54
+[2,]  0.47 -0.10  0.06 -0.02
+[3,]  0.45  0.21 -0.15  0.55
+[4,]  0.46  0.14 -0.21 -0.05
+[5,]  0.44  0.20 -0.36 -0.32
+[6,]  0.28 -0.52  0.44  0.45
+[7,] -0.21 -0.48 -0.78  0.31
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Factor scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>((scale_food <span style="color:#f92672">%*%</span> svd_food_cor<span style="color:#f92672">$</span>v)[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>       [,1]  [,2]  [,3]  [,4]
+ [1,] -2.86  0.36 -0.40  0.36
+ [2,] -1.89  1.79  1.31 -0.16
+ [3,] -0.12  0.73 -1.42  0.20
+ [4,] -2.04 -0.32  0.11  0.10
+ [5,] -1.69  0.16  0.51  0.16
+ [6,]  1.69  1.35 -0.99 -0.43
+ [7,] -0.93 -1.37  0.28 -0.26
+ [8,] -0.25 -0.63 -0.27  0.29
+ [9,]  1.60  1.74 -0.10 -0.40
+[10,]  0.22 -2.78 -0.57 -0.25
+[11,]  1.95 -1.13  0.99 -0.32
+[12,]  4.32  0.10  0.57  0.72
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variance along each principcal component</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(svd_food_cor<span style="color:#f92672">$</span>d^2<span style="color:#f92672">/</span><span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Sum of variances</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sum</span>(svd_food_cor<span style="color:#f92672">$</span>d^2<span style="color:#f92672">/</span><span style="color:#ae81ff">11</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 7
+</code></pre><p>Again we have to divide by 11 to get eigenvalues of correlation matrix. Check the formulation of correlation matrix using scaled data matrix to convince yourself.</p>
+<h3 id="using-eigen-decomposition-not-recommended">Using eigen-decomposition (Not Recommended)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>eigen_food_cor <span style="color:#f92672">=</span> <span style="color:#a6e22e">eigen</span>(<span style="color:#a6e22e">cor</span>(food[,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>]))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loading scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(eigen_food_cor<span style="color:#f92672">$</span>vectors)
+</span></span></code></pre></div><pre tabindex="0"><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+[1,]    0    1    0   -1    0    1    0
+[2,]    0    0    0    0    1    0    0
+[3,]    0    0    0    1    0    1    0
+[4,]    0    0    0    0    0    0   -1
+[5,]    0    0    0    0    0    0    1
+[6,]    0    1    0    0    0    0    0
+[7,]    0    0   -1    0    0    0    0
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Factor scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>((scale_food <span style="color:#f92672">%*%</span> eigen_food_cor<span style="color:#f92672">$</span>vectors)[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>],<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>       [,1]  [,2]  [,3]  [,4]
+ [1,]  2.86 -0.36 -0.40  0.36
+ [2,]  1.89 -1.79  1.31 -0.16
+ [3,]  0.12 -0.73 -1.42  0.20
+ [4,]  2.04  0.32  0.11  0.10
+ [5,]  1.69 -0.16  0.51  0.16
+ [6,] -1.69 -1.35 -0.99 -0.43
+ [7,]  0.93  1.37  0.28 -0.26
+ [8,]  0.25  0.63 -0.27  0.29
+ [9,] -1.60 -1.74 -0.10 -0.40
+[10,] -0.22  2.78 -0.57 -0.25
+[11,] -1.95  1.13  0.99 -0.32
+[12,] -4.32 -0.10  0.57  0.72
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Variances along each principal component</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">round</span>(eigen_food_cor<span style="color:#f92672">$</span>values,<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><pre tabindex="0"><code>[1] 4.33 1.83 0.63 0.13 0.06 0.02 0.00
+</code></pre><p>I hope this post would help clear some of the confusions that a beginner might have while encountering PCA for the first time. Please send me a note if you find any errors.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New York,2002.</li>
+<li>Abdi, H., &amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.</li>
+</ol>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/pca/">PCA</a>
+  
+  <a class="badge badge-light" href="/tag/machine-learning/">Machine Learning</a>
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+  <a class="badge badge-light" href="/tag/python/">Python</a>
+  
+  <a class="badge badge-light" href="/tag/matlab/">MATLAB</a>
+  
+</div>
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&amp;text=Principal%20Component%20Analysis%20-%20Part%20II" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&amp;t=Principal%20Component%20Analysis%20-%20Part%20II" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Principal%20Component%20Analysis%20-%20Part%20II&amp;body=https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&amp;title=Principal%20Component%20Analysis%20-%20Part%20II" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Principal%20Component%20Analysis%20-%20Part%20II%20https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&amp;title=Principal%20Component%20Analysis%20-%20Part%20II" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu3e225c89d6328e00dc57563a3fd76514_183341_270x270_fill_q75_lanczos_center.jpg" alt="Biswajit Sahoo">
+    
+
+    <div class="media-body">
+      <h5 class="card-title">Biswajit Sahoo</h5>
+      <h6 class="card-subtitle">Machine Learning Engineer</h6>
+      <p class="card-text">My research interests include machine learning, deep learning, signal processing and data-driven machinery condition monitoring.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/biswajitsahoo1111" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/biswajitsahoo1111/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.in/citations?hl=en&amp;user=zu2CSBMAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://medium.com/@biswajitsahoo1111" target="_blank" rel="noopener">
+        <i class="fab fa-medium"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/principal-component-analysis-part-iii/">Principal Component Analysis - Part III</a></li>
+      
+      <li><a href="/post/principal-component-analysis-part-i/">Principal Component Analysis - Part I</a></li>
+      
+      <li><a href="/publication/spca_fault_diagnosis/">Feature Subset Selection Using Sparse Principal Component Analysis and Multiclass Fault Classification Using Selected Features</a></li>
+      
+      <li><a href="/post/making-github-traffic-type-plots/">Making Github Traffic Type Plots</a></li>
+      
+      <li><a href="/post/reading-multiple-files-in-tensorflow-2-using-sequence/">Reading multiple files in Tensorflow 2 using Sequence</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+    </div>
+    <div class="col-12 col-lg-10ish article-style">
+    <script src="https://utteranc.es/client.js"
+        repo="biswajitsahoo1111/biswajitsahoo1111.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+    </div>
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+  
+  <p class="powered-by">
+    © 2023 Biswajit Sahoo &middot; 
+
+    Powered by <a href="https://www.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i> </a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package and the
+    <a href="https://github.com/wowchemy/starter-hugo-academic" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.9592335d574f7a97010f99b90ad0f310.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r, python, latex, bash.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.e14897cafececa7181d21d62540ef117.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>
