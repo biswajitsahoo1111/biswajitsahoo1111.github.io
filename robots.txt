@@ -1,3 +1,0 @@
-User-agent: *
-
-Sitemap: https://biswajitsahoo1111.github.io/sitemap.xml
