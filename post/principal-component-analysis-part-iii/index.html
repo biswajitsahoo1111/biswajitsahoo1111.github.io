@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<!-- This site was created with Hugo Blox. https://hugoblox.com -->
+<!-- Last Published: March 17, 2024 --><html lang="en-us" >
+
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Hugo Blox Builder 5.9.7" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.4/css/academicons.min.css" integrity="sha512-IW0nhlW5MgNydsXJO40En2EoCkTTjZhI3yuODrZIc8cQ4h1XcF53PsqDHa09NqnkXuIe0Oiyyj171BqZFwISBw==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.css" />
+
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
+    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  <meta name="author" content="Biswajit Sahoo" />
+
+
+
+
+
+  
+
+<meta name="description" content="Run Python code in Google ColabDownload Python codeDownload R code (R Markdown)In this post, we will reproduce the results of a popular paper on PCA. The paper is titled &lsquo;Principal component analysis&rsquo; and is authored by Herve Abdi and Lynne J." />
+
+
+
+<link rel="alternate" hreflang="en-us" href="http://localhost:1313/post/principal-component-analysis-part-iii/" />
+<link rel="canonical" href="http://localhost:1313/post/principal-component-analysis-part-iii/" />
+
+
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+
+
+<link rel="icon" type="image/png" href="/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_32x32_fill_lanczos_center_3.png" />
+<link rel="apple-touch-icon" type="image/png" href="/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_180x180_fill_lanczos_center_3.png" />
+
+<meta name="theme-color" content="#1565c0" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:image" content="http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png" />
+
+
+
+  
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Biswajit Sahoo" />
+<meta property="og:url" content="http://localhost:1313/post/principal-component-analysis-part-iii/" />
+<meta property="og:title" content="Principal Component Analysis - Part III | Biswajit Sahoo" />
+<meta property="og:description" content="Run Python code in Google ColabDownload Python codeDownload R code (R Markdown)In this post, we will reproduce the results of a popular paper on PCA. The paper is titled &lsquo;Principal component analysis&rsquo; and is authored by Herve Abdi and Lynne J." /><meta property="og:image" content="http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+
+  
+    <meta
+      property="article:published_time"
+      content="2019-02-05T00:00:00&#43;00:00"
+    />
+  
+  
+    <meta property="article:modified_time" content="2019-02-05T00:00:00&#43;00:00">
+  
+
+
+
+
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/post/principal-component-analysis-part-iii/"
+  },
+  "headline": "Principal Component Analysis - Part III",
+  
+  "datePublished": "2019-02-05T00:00:00Z",
+  "dateModified": "2019-02-05T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Biswajit Sahoo"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Biswajit Sahoo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Run Python code in Google Colab\rDownload Python code\rDownload R code (R Markdown)\rIn this post, we will reproduce the results of a popular paper on PCA. The paper is titled \u0026lsquo;Principal component analysis\u0026rsquo; and is authored by Herve Abdi and Lynne J."
+}
+</script>
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+
+
+  
+  <title>Principal Component Analysis - Part III | Biswajit Sahoo</title>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="12a660bf67042e69dfc343d530fa0ac5" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header header--fixed">
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">Biswajit Sahoo</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">Biswajit Sahoo</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#blog"><span>Blog</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#publications"><span>Publications</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/personal"><span>Personal</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Principal Component Analysis - Part III</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 5, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    11 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/blog/">Blog</a>, <a href="/category/pca/">PCA</a>, <a href="/category/machine-learning/">Machine Learning</a>, <a href="/category/r/">R</a>, <a href="/category/python/">Python</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <table class="tfo-notebook-buttons" align="center">
+  <td align="center">
+    <a href="https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/PCA_Abdi_in_python.ipynb">
+    <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+    Run Python code in Google Colab</a>
+  </td>
+  <td align="center">
+    <a href="https://www.dropbox.com/s/gn415uh3quou3a8/PCA_Abdi_in_python.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download Python code</a>
+  </td>
+  <td align="center">
+    <a href="https://www.dropbox.com/s/tp56l6v7upa1apf/PCA_blog_Biswajit_Sahoo_part_3.Rmd?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download R code (R Markdown)</a>
+  </td>
+</table>
+<p>In this post, we will reproduce the results of a popular paper on PCA. The paper is titled &lsquo;<a href="https://personal.utdallas.edu/~herve/abdi-awPCA2010.pdf" target="_blank" rel="noopener">Principal component analysis</a>&rsquo; and is authored by <a href="https://personal.utdallas.edu/~herve/" target="_blank" rel="noopener">Herve Abdi</a> and <a href="https://ljwilliams.github.io/" target="_blank" rel="noopener">Lynne J. Williams</a>. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).</p>
+<p>This post is Part-III of a three part series on PCA. Other parts of the series can be found at the links below.</p>
+<ul>
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/" target="_blank" rel="noopener">Part-I: Basic Theory of PCA</a></li>
+<li><a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II: PCA Implementation with and without using built-in functions</a></li>
+</ul>
+<p>This post contains code snippets in R. Equivalent <a href="https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf" target="_blank" rel="noopener">MATLAB codes</a> can be written using commands of <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II</a>. For figures, the reader has to write his/her own code in MATLAB.</p>
+<h3 id="structure-of-the-paper">Structure of the paper</h3>
+<p>Along with basic theory, the paper contains three examples on PCA, one example on correspondence analysis, and one example on multiple factor analysis. We will only focus on PCA examples in this post.</p>
+<p>To run following R codes seamlessly, readers have to load following packages. If these packages have not been installed previously, use <code>install.packages(&quot;package_name&quot;)</code> to install those.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="nf">set</span><span class="p">(</span><span class="n">comment</span> <span class="o">=</span> <span class="kc">NA</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">library</span><span class="p">(</span><span class="n">ggrepel</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="how-to-get-data">How to get data</h3>
+<p>Data for the examples have been taken from the paper [1]. The datasets are pretty small. So one way to read the data is to create a dataframe itself in R using the values given in paper. Otherwise, the values can first be stored in a csv file and then read into R. To make this post self-sufficient, we will adopt the former approach.</p>
+<p><strong>Note</strong>: Throughout this article, additional comments have been made beside code segments. It would be a good idea to read those commented lines along with the codes.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Table 1</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Create a dataframe</span>
+</span></span><span class="line"><span class="cl"><span class="n">Words</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;Bag&#34;</span><span class="p">,</span> <span class="s">&#34;Across&#34;</span><span class="p">,</span> <span class="s">&#34;On&#34;</span><span class="p">,</span> <span class="s">&#34;Insane&#34;</span><span class="p">,</span> <span class="s">&#34;By&#34;</span><span class="p">,</span> <span class="s">&#34;Monastery&#34;</span><span class="p">,</span> <span class="s">&#34;Relief&#34;</span><span class="p">,</span> <span class="s">&#34;Slope&#34;</span><span class="p">,</span> <span class="s">&#34;Scoundrel&#34;</span><span class="p">,</span> <span class="s">&#34;With&#34;</span><span class="p">,</span> <span class="s">&#34;Neither&#34;</span><span class="p">,</span> <span class="s">&#34;Pretentious&#34;</span><span class="p">,</span> <span class="s">&#34;Solid&#34;</span><span class="p">,</span> <span class="s">&#34;This&#34;</span><span class="p">,</span> <span class="s">&#34;For&#34;</span><span class="p">,</span> <span class="s">&#34;Therefore&#34;</span><span class="p">,</span> <span class="s">&#34;Generality&#34;</span><span class="p">,</span> <span class="s">&#34;Arise&#34;</span><span class="p">,</span> <span class="s">&#34;Blot&#34;</span><span class="p">,</span> <span class="s">&#34;Infectious&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Word_length</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Lines_in_dict</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">14</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">13</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="m">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">words</span> <span class="o">=</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">Words</span><span class="p">,</span> <span class="n">Word_length</span><span class="p">,</span> <span class="n">Lines_in_dict</span><span class="p">,</span> <span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">words
+</span></span></span><span class="line"><span class="cl"><span class="nf"></span><span class="p">(</span><span class="n">words_centered</span> <span class="o">=</span> <span class="nf">scale</span><span class="p">(</span><span class="n">words[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">,</span><span class="n">scale</span> <span class="o">=</span> <span class="bp">F</span><span class="p">))</span> <span class="c1"># Centering after reemoving the first column</span>
+</span></span></code></pre></div><h3 id="covariance-pca">Covariance PCA</h3>
+<p>Covariance PCA uses centered data matrix. But data matrix is not scaled. <code>prcomp()</code> centers data by default.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">pca_words_cov</span> <span class="o">=</span> <span class="nf">prcomp</span><span class="p">(</span><span class="n">words[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">,</span><span class="n">scale</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span> <span class="c1"># cov stands for Covariance PCA</span>
+</span></span><span class="line"><span class="cl"><span class="n">factor_scores_words</span> <span class="o">=</span> <span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="nf">round</span><span class="p">(</span><span class="n">factor_scores_words</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+</span></span></code></pre></div><p>Observer that factor scores for PC1 are negatives of what has been given in the paper. This is not a problem as principal directions are orthogonal.</p>
+<h3 id="principal-directions-are-orthogonal">Principal directions are orthogonal</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#  It can also be checked that both the principal components are orthogonal.</span>
+</span></span><span class="line"><span class="cl"><span class="nf">sum</span><span class="p">(</span><span class="n">factor_scores_words[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="o">*</span><span class="n">factor_scores_words[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">)</span> <span class="c1"># PCs are orthogonal</span>
+</span></span></code></pre></div><h3 id="contribution-of-each-factor">Contribution of each factor</h3>
+<p>It is defined as square of factor score divided by sum of squares of factor scores in that column.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">round</span><span class="p">(</span><span class="n">factor_scores_words[</span><span class="p">,</span><span class="m">1</span><span class="n">]^2</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">factor_scores_words[</span><span class="p">,</span><span class="m">1</span><span class="n">]^2</span><span class="p">)</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">round</span><span class="p">(</span><span class="n">factor_scores_words[</span><span class="p">,</span><span class="m">2</span><span class="n">]^2</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">factor_scores_words[</span><span class="p">,</span><span class="m">2</span><span class="n">]^2</span><span class="p">)</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+</span></span></code></pre></div><p>The calculations in above two lines can be done in a single line</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">round</span><span class="p">(</span><span class="n">factor_scores_words^2</span><span class="o">/</span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="nf">colSums</span><span class="p">(</span><span class="n">factor_scores_words^2</span><span class="p">),</span><span class="nf">nrow</span><span class="p">(</span><span class="n">words</span><span class="p">)),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span><span class="n">byrow</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="squared-distance-to-center-of-gravity">Squared distance to center of gravity</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="n">dist</span> <span class="o">=</span> <span class="nf">rowSums</span><span class="p">(</span><span class="n">factor_scores_words^2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="squared-cosine-of-observations">Squared cosine of observations</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="n">sq_cos</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">factor_scores_words^2</span><span class="o">/</span><span class="nf">rowSums</span><span class="p">(</span><span class="n">factor_scores_words^2</span><span class="p">)</span><span class="o">*</span><span class="m">100</span><span class="p">))</span>
+</span></span></code></pre></div><p>Nan&rsquo;s are produced because of division by zero.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Figue 1</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">words</span><span class="p">,</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">Lines_in_dict</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">Word_length</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="n">Words</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span><span class="o">+</span> <span class="nf">geom_text_repel</span><span class="p">()</span><span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span> <span class="o">=</span> <span class="m">6</span><span class="p">)</span><span class="o">+</span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">8</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&#34;Lines in dictionary&#34;</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="s">&#34;Word length&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Show directions of PCs</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Note that intercept argument in geom_abline considers the line to be at the origin. In our case the data are mean shifted.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># So we have to adjust the intercept taking new origin into consideration. These adjustments have been made below.</span>
+</span></span><span class="line"><span class="cl"><span class="n">slope1</span> <span class="o">=</span> <span class="n">pca_words_cov</span><span class="o">$</span><span class="n">rotation[1</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="o">/</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">rotation[2</span><span class="p">,</span><span class="m">1</span><span class="n">]</span> <span class="c1"># Slope of first PC</span>
+</span></span><span class="line"><span class="cl"><span class="n">slope2</span> <span class="o">=</span> <span class="n">pca_words_cov</span><span class="o">$</span><span class="n">rotation[1</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="o">/</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">rotation[2</span><span class="p">,</span><span class="m">2</span><span class="n">]</span> <span class="c1"># Slope of second PC</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">new_origin</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">words</span><span class="o">$</span><span class="n">Lines_in_dict</span><span class="p">),</span><span class="nf">mean</span><span class="p">(</span><span class="n">words</span><span class="o">$</span><span class="n">Word_length</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="n">intercept1</span> <span class="o">=</span> <span class="m">6</span> <span class="o">-</span> <span class="n">slope1</span><span class="o">*</span><span class="m">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">intercept2</span> <span class="o">=</span> <span class="m">6</span> <span class="o">-</span> <span class="n">slope2</span><span class="o">*</span><span class="m">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">+</span><span class="nf">geom_abline</span><span class="p">(</span><span class="n">slope</span> <span class="o">=</span> <span class="n">slope1</span><span class="p">,</span><span class="n">intercept</span> <span class="o">=</span> <span class="n">intercept1</span><span class="p">,</span><span class="n">linetype</span> <span class="o">=</span> <span class="s">&#34;dashed&#34;</span><span class="p">,</span><span class="n">size</span> <span class="o">=</span> <span class="m">1.2</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="s">&#34;red&#34;</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_abline</span><span class="p">(</span><span class="n">slope</span> <span class="o">=</span> <span class="n">slope2</span><span class="p">,</span><span class="n">intercept</span> <span class="o">=</span> <span class="n">intercept2</span><span class="p">,</span><span class="n">linetype</span> <span class="o">=</span> <span class="s">&#34;dashed&#34;</span><span class="p">,</span><span class="n">size</span> <span class="o">=</span> <span class="m">1.2</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="s">&#34;blue&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>In the above figure red dashed line is the 1st principal component (PC) and blue dashed line is the 2nd PC.</p>
+<h3 id="rotated-pcs">Rotated PCs</h3>
+<p>This figure is obtained by plotting factor scores. Note that we will plot negative of the factor scores of 1st PC to make the figure consistent with the paper.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span><span class="p">),</span><span class="nf">aes</span><span class="p">(</span><span class="o">-</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="n">words</span><span class="o">$</span><span class="n">Words</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span><span class="o">+</span><span class="nf">geom_text_repel</span><span class="p">()</span><span class="o">+</span><span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span><span class="o">+</span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">xlab</span><span class="p">(</span><span class="s">&#34;Factor score along PC1&#34;</span><span class="p">)</span><span class="o">+</span><span class="nf">ylab</span><span class="p">(</span><span class="s">&#34;Factor score along PC2&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="with-supplementary-data">With supplementary data</h3>
+<p>Given a supplementary point (a point previously not used in finding principal components),we have to first center the data point. Its factor scores can then be obtained by multiplying it with the loading matrix.</p>
+<h3 id="factor-score-of-the-new-word-sur">Factor score of the new word &lsquo;sur&rsquo;</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">sur</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">12</span><span class="p">)</span> <span class="c1"># It has 3 letter and 12 lines of dictionary entry</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">sur_centered</span> <span class="o">=</span> <span class="n">sur</span> <span class="o">-</span> <span class="nf">colMeans</span><span class="p">(</span><span class="n">words[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">factor_scores_sur</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">sur_centered</span> <span class="o">%*%</span> <span class="n">pca_words_cov</span><span class="o">$</span><span class="n">rotation</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="eigenvalues-and-variance">Eigenvalues and variance</h3>
+<p>See <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II</a> for details.</p>
+<h3 id="total-variance-before-transformation">Total variance before transformation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="n">total_var_before</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="nf">var</span><span class="p">(</span><span class="n">words_centered</span><span class="p">))),</span><span class="m">3</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="total-variance-after-transformation">Total variance after transformation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="n">total_var_after</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="nf">var</span><span class="p">(</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span><span class="p">))),</span><span class="m">3</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="correlation-between-principal-components-and-original-variables">Correlation between principal components and original variables</h3>
+<p>In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix $\textbf{P}$ (see <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/" target="_blank" rel="noopener">Part-I</a>)</p>
+<p>The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.</p>
+<h3 id="correlation-matrix">Correlation matrix</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Correlation between PCs and original variables</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">cor</span><span class="p">(</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">words_centered</span><span class="p">))</span>
+</span></span></code></pre></div><p><strong>Note</strong> that the answers for correlation coefficients don&rsquo;t match with that of the paper. Readers who get actual answers as given in paper are encouraged to send me an email using my contact details. However our procedure is correct and it does indeed give the correct answer for supplementary data as described below.</p>
+<h3 id="squared-correlation">Squared correlation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">cor</span><span class="p">(</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">words_centered</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span>
+</span></span></code></pre></div><p>Sum of correlation coefficients between variables and principal components is 1.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">colSums</span><span class="p">((</span><span class="nf">cor</span><span class="p">(</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">words_centered</span><span class="p">)</span><span class="n">^2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="loading-matrix">Loading matrix</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="n">loading_matrix</span> <span class="o">=</span> <span class="n">pca_words_cov</span><span class="o">$</span><span class="n">rotation</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="correlation-score-for-supplementary-variables">Correlation score for supplementary variables</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Supplementary variable (Table 4)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Frequency</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">230</span><span class="p">,</span><span class="m">700</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">500</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">9</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">700</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">500</span><span class="p">,</span><span class="m">900</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Num_entries</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">6</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">12</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">9</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">supp_data</span> <span class="o">=</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">Frequency</span><span class="p">,</span><span class="n">Num_entries</span><span class="p">)</span> <span class="c1"># Supplementary data</span>
+</span></span><span class="line"><span class="cl"><span class="n">supp_data</span>
+</span></span></code></pre></div><h3 id="centered-supplementary-data">Centered supplementary data</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">supp_data_cent</span> <span class="o">=</span> <span class="nf">scale</span><span class="p">(</span><span class="n">supp_data</span><span class="p">,</span><span class="n">scale</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span> <span class="c1"># Centered supplementary data</span>
+</span></span></code></pre></div><h3 id="correlation-score-for-supplementary-data">Correlation score for supplementary data</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="n">corr_score_supp</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="nf">cor</span><span class="p">(</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">supp_data</span><span class="p">),</span><span class="m">4</span><span class="p">))</span>
+</span></span></code></pre></div><p>Note that correlation score doesn&rsquo;t depend on whether supplementary data is centered or not.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="nf">cor</span><span class="p">(</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">supp_data_cent</span><span class="p">),</span><span class="m">4</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="squared-correlation-1">Squared correlation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="nf">cor</span><span class="p">(</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">supp_data_cent</span><span class="p">)</span><span class="n">^2</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="column-sums-of-squared-correlation-for-support-data">Column sums of squared correlation for support data</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="nf">colSums</span><span class="p">(</span><span class="nf">cor</span><span class="p">(</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">supp_data_cent</span><span class="p">)</span><span class="n">^2</span><span class="p">),</span><span class="m">4</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="correlation-circle-plot">Correlation circle plot</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># First plot correlation circle</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="o">*</span><span class="kc">pi</span><span class="p">,</span><span class="n">length.out</span> <span class="o">=</span> <span class="m">300</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">circle</span> <span class="o">=</span> <span class="nf">ggplot</span><span class="p">()</span> <span class="o">+</span> <span class="nf">geom_path</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="nf">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">b</span> <span class="o">=</span> <span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">                     <span class="nf">aes</span><span class="p">(</span><span class="nf">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">alpha</span> <span class="o">=</span> <span class="m">0.3</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1.5</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span><span class="o">+</span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">annotate</span><span class="p">(</span><span class="s">&#34;text&#34;</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1.08</span><span class="p">,</span><span class="m">0.05</span><span class="p">),</span><span class="n">y</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.05</span><span class="p">,</span><span class="m">1.08</span><span class="p">),</span><span class="n">label</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;PC1&#34;</span><span class="p">,</span><span class="s">&#34;PC2&#34;</span><span class="p">),</span><span class="n">angle</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">90</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">xlab</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span><span class="o">+</span><span class="nf">ylab</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Plotting original variables</span>
+</span></span><span class="line"><span class="cl"><span class="n">cor_score</span> <span class="o">=</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">cor</span><span class="p">(</span><span class="n">words_centered</span><span class="p">,</span><span class="n">pca_words_cov</span><span class="o">$</span><span class="n">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">variable_plot_original</span> <span class="o">=</span> <span class="n">circle</span> <span class="o">+</span> <span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">cor_score</span><span class="p">,</span>  <span class="nf">aes</span><span class="p">(</span><span class="n">cor_score[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">cor_score[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_text_repel</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">cor_score[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">cor_score[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">label</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;Length of words&#34;</span><span class="p">,</span><span class="s">&#34;Number of lines in Dict.&#34;</span><span class="p">)))</span> 
+</span></span><span class="line"><span class="cl"><span class="nf">print</span><span class="p">(</span><span class="n">variable_plot_original</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="plotting-supplementary-variables">Plotting supplementary variables</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">variable_plot_original</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">corr_score_supp</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">             <span class="nf">aes</span><span class="p">(</span><span class="n">corr_score_supp[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">corr_score_supp[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_text_repel</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">corr_score_supp[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">corr_score_supp[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">label</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;Frequency&#34;</span><span class="p">,</span><span class="s">&#34;Number of entries&#34;</span><span class="p">)))</span> 
+</span></span></code></pre></div><p>Observe that our correlation circle plot is flipped about y-axis (i.e., PC2) when compared to the plot given in paper. This is because our first principal component is negative of the one given in paper. So while computing correlation score, this negative principal component results in negative correlation scores. Hence, our plot flips about y-axis.</p>
+<h2 id="example-2-wine-example">Example 2 (Wine example)</h2>
+<h3 id="correlation-pca-with-wine-data">Correlation PCA with wine data</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Table 6</span>
+</span></span><span class="line"><span class="cl"><span class="n">wine_type</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">&#34;wine&#34;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&#34;_&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">hedonic</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">14</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">for_meat</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">7</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">for_dessert</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="m">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">price</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">7</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">16</span><span class="p">,</span> <span class="m">13</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sugar</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">7</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">alcohol</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">13</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">acidity</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">7</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">wine</span> <span class="o">=</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">wine_type</span><span class="p">,</span> <span class="n">hedonic</span><span class="p">,</span> <span class="n">for_meat</span><span class="p">,</span> <span class="n">for_dessert</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">sugar</span><span class="p">,</span> <span class="n">alcohol</span><span class="p">,</span> <span class="n">acidity</span><span class="p">,</span> <span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">wine</span>
+</span></span><span class="line"><span class="cl"><span class="n">pca_wine_cor</span> <span class="o">=</span> <span class="nf">prcomp</span><span class="p">(</span><span class="n">wine[2</span><span class="o">:</span><span class="m">8</span><span class="n">]</span><span class="p">,</span><span class="n">scale</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">x</span><span class="p">),</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span>  <span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&#34;wine &#34;</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span><span class="o">+</span><span class="nf">geom_text_repel</span><span class="p">()</span><span class="o">+</span> <span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span><span class="o">+</span> <span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">xlab</span><span class="p">(</span><span class="s">&#34;Factor score along PC1&#34;</span><span class="p">)</span><span class="o">+</span><span class="nf">ylab</span><span class="p">(</span><span class="s">&#34;Factor score along PC2&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Again our figure seems upside down than that of the paper. This is a minor discrepancy. Our 2nd eigenvector is negative of the one considered in paper. We can match the plot with that of the paper by just flipping the second principal component but we will not do that here.</p>
+<h3 id="factor-scores-along-1st-and-2nd-pc">Factor scores along 1st and 2nd PC</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Table 7</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="contribution-of-each-observation-to-principal-component">Contribution of each observation to principal component</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">round</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]^2</span><span class="o">/</span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="nf">colSums</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]^2</span><span class="p">),</span><span class="nf">nrow</span><span class="p">(</span><span class="n">wine</span><span class="p">)),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span><span class="n">byrow</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="squared-cosine-of-observations-of-first-pc">Squared cosine of observations of first PC</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="n">sq_cos</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]^2</span><span class="o">/</span><span class="nf">rowSums</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">x^2</span><span class="p">)</span><span class="o">*</span><span class="m">100</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="loading-scores-corresponding-to-first-two-principal-components">Loading scores corresponding to first two principal components</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">rotation[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="correlation-score-variables-with-first-two-principal-components">Correlation score variables with first two principal components</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="n">corr_score_wine</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="nf">cor</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">wine[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">8</span><span class="n">]</span><span class="p">)</span><span class="n">[1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="n">]</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="correlation-circle-for-wine-data">Correlation circle for wine data</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Figure 6</span>
+</span></span><span class="line"><span class="cl"><span class="n">corr_score_wine</span> <span class="o">=</span> <span class="nf">t</span><span class="p">(</span><span class="n">corr_score_wine</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">circle</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">corr_score_wine</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">             <span class="nf">aes</span><span class="p">(</span><span class="n">corr_score_wine[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">corr_score_wine[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_text_repel</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">corr_score_wine[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">corr_score_wine[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">label</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;Hedonic&#34;</span><span class="p">,</span><span class="s">&#34;For Meat&#34;</span><span class="p">,</span><span class="s">&#34;For dessert&#34;</span><span class="p">,</span><span class="s">&#34;Price&#34;</span><span class="p">,</span><span class="s">&#34;Sugar&#34;</span><span class="p">,</span><span class="s">&#34;Alcohol&#34;</span><span class="p">,</span><span class="s">&#34;Acidity&#34;</span><span class="p">)))</span>
+</span></span></code></pre></div><h3 id="varimax-rotation">Varimax rotation</h3>
+<p>Rotation is applied to loading matrix such that after rotation principal components are interpretable. By interpretable, we mean, some of the loading scores will have higher values and some other loading scores will have lower values. So it can be said that the variables whose loading scores have higher value, contribute significantly towards principal components as compared to other variables with lesser loading scores. Though rotation works in certain cases, it must be remembered that it is no magic wand for principal component interpretability. One of the popular rotations is Varimax rotation. R has a built-in command to perform varimax rotation.</p>
+<p>Varimax rotation can be performed on the whole loading matrix or on a few components only. In the paper, varimax has been applied to first two principal components.</p>
+<h3 id="loading-scores-of-first-two-principal-components">Loading scores of first two principal components</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">rotation[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="varimax-applied-to-first-two-principal-components">Varimax applied to first two principal components</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">rotated_loading_scores</span> <span class="o">=</span> <span class="nf">varimax</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">rotation[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="loading-scores-after-rotation">Loading scores after rotation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Table 10</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">rotated_loading_scores</span><span class="o">$</span><span class="n">loadings[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><p>The same result can also be obtained by multiplying the original loading matrix by the rotation matrix obtained from varimax.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">rotation[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]</span> <span class="o">%*%</span> <span class="n">rotated_loading_scores</span><span class="o">$</span><span class="n">rotmat</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="plot-of-loading-scores-before-rotation">Plot of loading scores before rotation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">#Figure 7</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">rotation[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]</span><span class="p">),</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">rotation[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">pca_wine_cor</span><span class="o">$</span><span class="n">rotation[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                      <span class="n">label</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;Hedonic&#34;</span><span class="p">,</span><span class="s">&#34;For Meat&#34;</span><span class="p">,</span><span class="s">&#34;For dessert&#34;</span><span class="p">,</span><span class="s">&#34;Price&#34;</span><span class="p">,</span><span class="s">&#34;Sugar&#34;</span><span class="p">,</span><span class="s">&#34;Alcohol&#34;</span><span class="p">,</span><span class="s">&#34;Acidity&#34;</span><span class="p">)))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span><span class="o">+</span><span class="nf">geom_text_repel</span><span class="p">()</span><span class="o">+</span><span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span><span class="o">+</span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">xlab</span><span class="p">(</span><span class="s">&#34;Loading score along PC1&#34;</span><span class="p">)</span><span class="o">+</span><span class="nf">ylab</span><span class="p">(</span><span class="s">&#34;Loading score along PC2&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="plot-of-loading-scores-after-rotation">Plot of loading scores after rotation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">rotated_loading_scores</span><span class="o">$</span><span class="n">loadings[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                     <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">rotated_loading_scores</span><span class="o">$</span><span class="n">loadings[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                         <span class="n">y</span> <span class="o">=</span> <span class="n">rotated_loading_scores</span><span class="o">$</span><span class="n">loadings[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                         <span class="n">label</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;Hedonic&#34;</span><span class="p">,</span><span class="s">&#34;For Meat&#34;</span><span class="p">,</span><span class="s">&#34;For dessert&#34;</span><span class="p">,</span><span class="s">&#34;Price&#34;</span><span class="p">,</span><span class="s">&#34;Sugar&#34;</span><span class="p">,</span><span class="s">&#34;Alcohol&#34;</span><span class="p">,</span><span class="s">&#34;Acidity&#34;</span><span class="p">)))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_point</span><span class="p">()</span><span class="o">+</span><span class="nf">geom_text_repel</span><span class="p">()</span><span class="o">+</span><span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span><span class="o">+</span><span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">xlab</span><span class="p">(</span><span class="s">&#34;Loading score along PC1 after rotation&#34;</span><span class="p">)</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ylab</span><span class="p">(</span><span class="s">&#34;Loading score along PC2 after rotation&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="example-3">Example 3</h2>
+<h3 id="french-food-example-covariance-pca-example">French food example (Covariance PCA example)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Table 11 </span>
+</span></span><span class="line"><span class="cl"><span class="n">class</span> <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&#34;Blue_collar&#34;</span><span class="p">,</span> <span class="s">&#34;White_collar&#34;</span><span class="p">,</span> <span class="s">&#34;Upper_class&#34;</span><span class="p">),</span> <span class="n">times</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">children</span> <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">),</span> <span class="n">each</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bread</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">332</span><span class="p">,</span> <span class="m">293</span><span class="p">,</span> <span class="m">372</span><span class="p">,</span> <span class="m">406</span><span class="p">,</span> <span class="m">386</span><span class="p">,</span> <span class="m">438</span><span class="p">,</span> <span class="m">534</span><span class="p">,</span> <span class="m">460</span><span class="p">,</span> <span class="m">385</span><span class="p">,</span> <span class="m">655</span><span class="p">,</span> <span class="m">584</span><span class="p">,</span> <span class="m">515</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">vegetables</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">428</span><span class="p">,</span> <span class="m">559</span><span class="p">,</span> <span class="m">767</span><span class="p">,</span> <span class="m">563</span><span class="p">,</span> <span class="m">608</span><span class="p">,</span> <span class="m">843</span><span class="p">,</span> <span class="m">660</span><span class="p">,</span> <span class="m">699</span><span class="p">,</span> <span class="m">789</span><span class="p">,</span> <span class="m">776</span><span class="p">,</span> <span class="m">995</span><span class="p">,</span> <span class="m">1097</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fruit</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">354</span><span class="p">,</span> <span class="m">388</span><span class="p">,</span> <span class="m">562</span><span class="p">,</span> <span class="m">341</span><span class="p">,</span> <span class="m">396</span><span class="p">,</span> <span class="m">689</span><span class="p">,</span> <span class="m">367</span><span class="p">,</span> <span class="m">484</span><span class="p">,</span> <span class="m">621</span><span class="p">,</span> <span class="m">423</span><span class="p">,</span> <span class="m">548</span><span class="p">,</span> <span class="m">887</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">meat</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1437</span><span class="p">,</span> <span class="m">1527</span><span class="p">,</span> <span class="m">1948</span><span class="p">,</span> <span class="m">1507</span><span class="p">,</span> <span class="m">1501</span><span class="p">,</span> <span class="m">2345</span><span class="p">,</span> <span class="m">1620</span><span class="p">,</span> <span class="m">1856</span><span class="p">,</span> <span class="m">2366</span><span class="p">,</span> <span class="m">1848</span><span class="p">,</span> <span class="m">2056</span><span class="p">,</span> <span class="m">2630</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">poultry</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">526</span><span class="p">,</span> <span class="m">567</span><span class="p">,</span> <span class="m">927</span><span class="p">,</span> <span class="m">544</span><span class="p">,</span> <span class="m">558</span><span class="p">,</span> <span class="m">1148</span><span class="p">,</span> <span class="m">638</span><span class="p">,</span> <span class="m">762</span><span class="p">,</span> <span class="m">1149</span><span class="p">,</span> <span class="m">759</span><span class="p">,</span> <span class="m">893</span><span class="p">,</span> <span class="m">1167</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">milk</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">247</span><span class="p">,</span> <span class="m">239</span><span class="p">,</span> <span class="m">235</span><span class="p">,</span> <span class="m">324</span><span class="p">,</span> <span class="m">319</span><span class="p">,</span> <span class="m">243</span><span class="p">,</span> <span class="m">414</span><span class="p">,</span> <span class="m">400</span><span class="p">,</span> <span class="m">304</span><span class="p">,</span> <span class="m">495</span><span class="p">,</span> <span class="m">518</span><span class="p">,</span> <span class="m">561</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">wine</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">427</span><span class="p">,</span> <span class="m">258</span><span class="p">,</span> <span class="m">433</span><span class="p">,</span> <span class="m">407</span><span class="p">,</span> <span class="m">363</span><span class="p">,</span> <span class="m">341</span><span class="p">,</span> <span class="m">407</span><span class="p">,</span> <span class="m">416</span><span class="p">,</span> <span class="m">282</span><span class="p">,</span> <span class="m">486</span><span class="p">,</span> <span class="m">319</span><span class="p">,</span> <span class="m">284</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">food</span> <span class="o">=</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">class</span><span class="p">,</span> <span class="n">children</span><span class="p">,</span> <span class="n">bread</span><span class="p">,</span> <span class="n">vegetables</span><span class="p">,</span> <span class="n">fruit</span><span class="p">,</span> <span class="n">meat</span><span class="p">,</span> <span class="n">poultry</span><span class="p">,</span> <span class="n">milk</span><span class="p">,</span> <span class="n">wine</span><span class="p">,</span> <span class="n">stringsAsFactors</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">food</span>
+</span></span><span class="line"><span class="cl"><span class="n">pca_food_cov</span> <span class="o">=</span> <span class="nf">prcomp</span><span class="p">(</span><span class="n">food[</span><span class="p">,</span><span class="m">3</span><span class="o">:</span><span class="m">9</span><span class="n">]</span><span class="p">,</span><span class="n">scale</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="factor-scores">Factor scores</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Table 12</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">factor_scores_food</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">pca_food_cov</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="contribution-of-each-observation-to-principal-component-1">Contribution of each observation to principal component</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">round</span><span class="p">(</span><span class="n">pca_food_cov</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]^2</span><span class="o">/</span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="nf">colSums</span><span class="p">(</span><span class="n">pca_food_cov</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]^2</span><span class="p">),</span><span class="nf">nrow</span><span class="p">(</span><span class="n">food</span><span class="p">)),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span><span class="n">byrow</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span><span class="o">*</span><span class="m">100</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">dist</span> <span class="o">=</span> <span class="n">pca_food_cov</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="n">]^2</span><span class="o">+</span><span class="n">pca_food_cov</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">2</span><span class="n">]^2</span>
+</span></span></code></pre></div><h3 id="squared-cosine-of-observations-1">Squared cosine of observations</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="n">sq_cos</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="n">pca_food_cov</span><span class="o">$</span><span class="n">x[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]^2</span><span class="o">/</span><span class="nf">rowSums</span><span class="p">(</span><span class="n">pca_food_cov</span><span class="o">$</span><span class="n">x^2</span><span class="p">)</span><span class="o">*</span><span class="m">100</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="squared-loading-scores">Squared loading scores</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Table 13</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">pca_food_cov</span><span class="o">$</span><span class="n">rotation[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="n">]^2</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><p><strong>Note</strong> that this table doesn&rsquo;t match with that of the paper. We will stick to our analysis.</p>
+<h3 id="correlation-score">Correlation score</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="n">corr_score_food</span> <span class="o">=</span> <span class="nf">round</span><span class="p">((</span><span class="nf">cor</span><span class="p">(</span><span class="n">pca_food_cov</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">food[</span><span class="p">,</span><span class="m">3</span><span class="o">:</span><span class="m">9</span><span class="n">]</span><span class="p">)</span><span class="n">[1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="n">]</span><span class="p">),</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="squared-correlation-score">Squared correlation score</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">((</span><span class="nf">cor</span><span class="p">(</span><span class="n">pca_food_cov</span><span class="o">$</span><span class="n">x</span><span class="p">,</span><span class="n">food[</span><span class="p">,</span><span class="m">3</span><span class="o">:</span><span class="m">9</span><span class="n">]</span><span class="p">)</span><span class="n">[1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="n">]</span><span class="p">)</span><span class="n">^2</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="correlation-circle-for-food-data">Correlation circle for food data</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1"># Figure 9</span>
+</span></span><span class="line"><span class="cl"><span class="n">corr_score_food</span> <span class="o">=</span> <span class="nf">t</span><span class="p">(</span><span class="n">corr_score_food</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">circle</span> <span class="o">+</span> <span class="nf">geom_point</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">corr_score_food</span><span class="p">),</span> 
+</span></span><span class="line"><span class="cl">                    <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">corr_score_food[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">corr_score_food[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">))</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">geom_text_repel</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">corr_score_food</span><span class="p">),</span> 
+</span></span><span class="line"><span class="cl">                  <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">corr_score_food[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">corr_score_food[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">label</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;Bread&#34;</span><span class="p">,</span><span class="s">&#34;Vegetables&#34;</span><span class="p">,</span><span class="s">&#34;Fruit&#34;</span><span class="p">,</span><span class="s">&#34;Meat&#34;</span><span class="p">,</span><span class="s">&#34;Poultry&#34;</span><span class="p">,</span><span class="s">&#34;Milk&#34;</span><span class="p">,</span><span class="s">&#34;Wine&#34;</span><span class="p">)))</span>
+</span></span></code></pre></div><p>Now observe that our correlation circle plot is almost close to that of the papers (though in opposite quadrants. But this is not a problem as we have previously mentioned).</p>
+<h3 id="eigenvalues">Eigenvalues</h3>
+<p>Eigenvalues of data covariance matrix is square of singular values of centered data matrix. Hence eigenvalues of data covariance matrix can be obtained as below.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="c1">## Table 14</span>
+</span></span><span class="line"><span class="cl"><span class="n">cent_food</span> <span class="o">=</span> <span class="n">food[</span><span class="p">,</span><span class="m">3</span><span class="o">:</span><span class="m">9</span><span class="n">]</span><span class="o">-</span><span class="nf">matrix</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="nf">colMeans</span><span class="p">(</span><span class="n">food[</span><span class="p">,</span><span class="m">3</span><span class="o">:</span><span class="m">9</span><span class="n">]</span><span class="p">),</span><span class="n">times</span> <span class="o">=</span> <span class="m">12</span><span class="p">),</span><span class="n">nrow</span> <span class="o">=</span> <span class="m">12</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">byrow</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">svd_food</span> <span class="o">=</span> <span class="nf">svd</span><span class="p">(</span><span class="n">cent_food</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">Eigenvalues</span> <span class="o">=</span> <span class="p">(</span><span class="n">svd_food</span><span class="o">$</span><span class="n">d</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span>
+</span></span></code></pre></div><p><strong>Important Note:</strong> These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by $(n-1)$, where $n$ is number of data points (in this case $n = 12$). If this point is still not clear, refer to <a href="https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/" target="_blank" rel="noopener">Part-II</a>.</p>
+<h3 id="percentage-contribution-of-each-principal-component">Percentage contribution of each principal component</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">Eigenvalues</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">Eigenvalues</span><span class="p">),</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="cumulative-sum-of-eigenvalues">Cumulative sum of eigenvalues</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="nf">cumsum</span><span class="p">(</span><span class="n">Eigenvalues</span><span class="p">),</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="cumulative-percentage-contribution">Cumulative percentage contribution</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="nf">cumsum</span><span class="p">(</span><span class="n">Eigenvalues</span><span class="p">)</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">Eigenvalues</span><span class="p">),</span><span class="m">2</span><span class="p">))</span>
+</span></span></code></pre></div><h3 id="ress-refer-to-the-paper-for-a-description">RESS (Refer to the paper for a description)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">RESS</span> <span class="o">=</span> <span class="nf">array</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">7</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="kr">for</span> <span class="p">(</span><span class="n">i</span> <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">7</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RESS[i]</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">Eigenvalues</span><span class="p">)</span><span class="o">-</span><span class="nf">sum</span><span class="p">(</span><span class="n">Eigenvalues[1</span><span class="o">:</span><span class="n">i]</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">RESS</span>
+</span></span></code></pre></div><h3 id="ratio-of-ress-and-sum-of-eigenvalues">Ratio of RESS and sum of eigenvalues</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">round</span><span class="p">(</span><span class="n">RESS</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">Eigenvalues</span><span class="p">),</span><span class="m">2</span><span class="p">)</span>
+</span></span></code></pre></div><p>We will not calculate the value of PRESS in this post as it requires us to consider random models. We will not pursue that here.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="nf">sessionInfo</span><span class="p">()</span>
+</span></span></code></pre></div><p>Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to <a href="https://biswajitsahoo1111.github.io/" target="_blank" rel="noopener">author&rsquo;s</a> email.</p>
+<h2 id="reference">Reference</h2>
+<ol>
+<li>Abdi, H., &amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.</li>
+</ol>
+<p>Last updated: 19th January, 2020</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/pca/">PCA</a>
+  
+  <a class="badge badge-light" href="/tag/machine-learning/">Machine Learning</a>
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+  <a class="badge badge-light" href="/tag/python/">Python</a>
+  
+</div>
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fprincipal-component-analysis-part-iii%2F&amp;text=Principal&#43;Component&#43;Analysis&#43;-&#43;Part&#43;III" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fprincipal-component-analysis-part-iii%2F&amp;t=Principal&#43;Component&#43;Analysis&#43;-&#43;Part&#43;III" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a href="mailto:?subject=Principal%20Component%20Analysis%20-%20Part%20III&amp;body=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fprincipal-component-analysis-part-iii%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fprincipal-component-analysis-part-iii%2F&amp;title=Principal&#43;Component&#43;Analysis&#43;-&#43;Part&#43;III" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Principal&#43;Component&#43;Analysis&#43;-&#43;Part&#43;III%20http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fprincipal-component-analysis-part-iii%2F" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fprincipal-component-analysis-part-iii%2F&amp;title=Principal&#43;Component&#43;Analysis&#43;-&#43;Part&#43;III" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="http://localhost:1313/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu3e225c89d6328e00dc57563a3fd76514_183341_270x270_fill_q75_lanczos_center.jpg" alt="Biswajit Sahoo"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="http://localhost:1313/">Biswajit Sahoo</a></h5>
+      <h6 class="card-subtitle">Machine Learning Engineer</h6>
+      <p class="card-text">My research interests include machine learning, deep learning, signal processing and data-driven machinery condition monitoring.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/biswajitsahoo1111" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/biswajitsahoo1111/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.in/citations?hl=en&amp;user=zu2CSBMAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/principal-component-analysis-part-ii/">Principal Component Analysis - Part II</a></li>
+      
+      <li><a href="/post/principal-component-analysis-part-i/">Principal Component Analysis - Part I</a></li>
+      
+      <li><a href="/post/making-github-traffic-type-plots/">Making Github Traffic Type Plots</a></li>
+      
+      <li><a href="/post/reading-multiple-files-in-tensorflow-2-using-sequence/">Reading multiple files in Tensorflow 2 using Sequence</a></li>
+      
+      <li><a href="/post/reading-multiple-csv-files-in-pytorch/">Reading multiple csv files in PyTorch</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+    </div>
+    <div class="col-12 col-lg-10ish article-style">
+    <script src="https://utteranc.es/client.js"
+        repo="biswajitsahoo1111/biswajitsahoo1111.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+    </div>
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <p class="powered-by copyright-license-text">
+    © 2024 Biswajit Sahoo. Powered by <a href="https://hugoblox.com/" target="_blank" rel="noopener">Hugo Blox Builder</a>.
+  </p>
+  
+
+
+
+
+  
+    <p class="powered-by">
+      
+    </p>
+  </footer>
+    </div>
+    
+  </div>
+
+  
+
+
+<script src="/js/vendor-bundle.min.js"></script>
+
+
+
+
+  
+
+  
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script id="search-hit-fuse-template" type="text/x-template">
+    <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+    </div>
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+
+  <script src="/js/wowchemy-headroom.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<script src="/en/js/wowchemy.min.js"></script>
+
+
+
+
+
+
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <pre><code></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="/js/wowchemy-publication.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

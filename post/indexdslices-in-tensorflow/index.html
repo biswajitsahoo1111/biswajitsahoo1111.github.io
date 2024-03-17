@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<!-- This site was created with Hugo Blox. https://hugoblox.com -->
+<!-- Last Published: March 17, 2024 --><html lang="en-us" >
+
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Hugo Blox Builder 5.9.7" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.4/css/academicons.min.css" integrity="sha512-IW0nhlW5MgNydsXJO40En2EoCkTTjZhI3yuODrZIc8cQ4h1XcF53PsqDHa09NqnkXuIe0Oiyyj171BqZFwISBw==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.css" />
+
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
+    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  <meta name="author" content="Biswajit Sahoo" />
+
+
+
+
+
+  
+
+<meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will discuss about IndexedSlices class of Tensorflow. We will try to answer the following questions in this blog:" />
+
+
+
+<link rel="alternate" hreflang="en-us" href="http://localhost:1313/post/indexdslices-in-tensorflow/" />
+<link rel="canonical" href="http://localhost:1313/post/indexdslices-in-tensorflow/" />
+
+
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+
+
+<link rel="icon" type="image/png" href="/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_32x32_fill_lanczos_center_3.png" />
+<link rel="apple-touch-icon" type="image/png" href="/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_180x180_fill_lanczos_center_3.png" />
+
+<meta name="theme-color" content="#1565c0" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:image" content="http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png" />
+
+
+
+  
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Biswajit Sahoo" />
+<meta property="og:url" content="http://localhost:1313/post/indexdslices-in-tensorflow/" />
+<meta property="og:title" content="IndexedSlices in Tensorflow | Biswajit Sahoo" />
+<meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will discuss about IndexedSlices class of Tensorflow. We will try to answer the following questions in this blog:" /><meta property="og:image" content="http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+
+  
+    <meta
+      property="article:published_time"
+      content="2021-04-01T00:00:00&#43;00:00"
+    />
+  
+  
+    <meta property="article:modified_time" content="2021-04-01T00:00:00&#43;00:00">
+  
+
+
+
+
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/post/indexdslices-in-tensorflow/"
+  },
+  "headline": "IndexedSlices in Tensorflow",
+  
+  "datePublished": "2021-04-01T00:00:00Z",
+  "dateModified": "2021-04-01T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Biswajit Sahoo"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Biswajit Sahoo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Run in Google Colab\rView source on GitHub\rDownload notebook\rIn this post, we will discuss about IndexedSlices class of Tensorflow. We will try to answer the following questions in this blog:"
+}
+</script>
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+
+
+  
+  <title>IndexedSlices in Tensorflow | Biswajit Sahoo</title>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="d2cc0d66834cf2f07e72a177252d75f3" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header header--fixed">
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">Biswajit Sahoo</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">Biswajit Sahoo</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#blog"><span>Blog</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#publications"><span>Publications</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/personal"><span>Personal</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+        <li class="nav-item dropdown theme-dropdown">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item js-set-theme-light">
+              <span>Light</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-dark">
+              <span>Dark</span>
+            </a>
+            <a href="#" class="dropdown-item js-set-theme-auto">
+              <span>Automatic</span>
+            </a>
+          </div>
+        </li>
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>IndexedSlices in Tensorflow</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Apr 1, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/blog/">Blog</a>, <a href="/category/tensorflow/">Tensorflow</a>, <a href="/category/deep-learning/">Deep Learning</a>, <a href="/category/attention-mechanism/">Attention Mechanism</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <table class="tfo-notebook-buttons" align="left">
+  <td>
+    <a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Tensorflow_IndexedSlices.ipynb">
+    <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+    Run in Google Colab</a>
+  </td>
+  <td>
+    <a href="https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Tensorflow_IndexedSlices.ipynb">
+    <img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
+    View source on GitHub</a>
+  </td>
+  <td>
+    <a href="https://www.dropbox.com/s/paze6mubda9bvv4/Tensorflow_IndexedSlices.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
+  </td>
+</table>
+<p>In this post, we will discuss about <code>IndexedSlices</code> class of <code>Tensorflow</code>. We will try to answer the following questions in this blog:</p>
+<ul>
+<li><a href="#q1">What are <code>IndexedSlices</code>?</a></li>
+<li><a href="#q2">Where do we get it?</a></li>
+<li><a href="#q3">How to convert from IndexedSlices to tensors?</a></li>
+</ul>
+<p><a id = "q1"></a></p>
+<h2 id="what-are-indexedslices">What are <code>IndexedSlices</code>?</h2>
+<p>According to <a href="https://www.tensorflow.org/api_docs/python/tf/IndexedSlices" target="_blank" rel="noopener"><code>Tensorflow</code> documentation</a>, <code>IndexedSlices</code> are sparse representation of a set of tensor slices at a given index. At an high level it appears to be some kind of sparse representation. Let&rsquo;s try to understand it with examples.</p>
+<p><a id = "q2"></a></p>
+<h2 id="where-do-we-get-it">Where do we get it?</h2>
+<p>We get <code>IndexedSlices</code> while taking gradients of an <code>Embedding</code> layer. Embedding matrices can be huge (depending on vocabulary size). But each batch only contains a small fraction of tokens. So while computing the gradient of loss with respect to embedding layer, in each pass we have to only consider the corresponding token embeedings of the present batch. Naturally a sparse tensor seems to be a better option to record those gradients. <code>Tensorflow</code> does that using <code>IndexedSlices</code>. We will show that below using a contrived example.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Tensorflow version: &#34;</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>Tensorflow version:  2.4.0
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Vocab size: 10, Embedding dimension: 4, Input_shape size: (batch_size, num_words). As usual, batch_size is omitted.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,)),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</span></span></code></pre></div><pre><code>Model: &quot;sequential&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+embedding (Embedding)        (None, 5, 4)              40        
+_________________________________________________________________
+flatten (Flatten)            (None, 20)                0         
+_________________________________________________________________
+dense (Dense)                (None, 1)                 21        
+=================================================================
+Total params: 61
+Trainable params: 61
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">minval</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">maxval</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span> <span class="c1"># Batch size is 1.</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span>
+</span></span></code></pre></div><pre><code>&lt;tf.Tensor: shape=(1, 5), dtype=int32, numpy=array([[6, 1, 1, 4, 8]])&gt;
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">variables</span>  <span class="c1"># Is a list of 3 tensors. 1 from Embedding layer and 2 from Dense layer (Kernel and bias)</span>
+</span></span></code></pre></div><pre><code>[&lt;tf.Variable 'embedding/embeddings:0' shape=(10, 4) dtype=float32, numpy=
+ array([[ 4.10897247e-02, -2.48962641e-03,  1.26880072e-02,
+          3.39310430e-02],
+        [ 3.28579657e-02,  3.90318781e-03,  2.81411521e-02,
+          3.09719704e-02],
+        [ 1.16247907e-02, -1.41257644e-02, -3.36343870e-02,
+         -4.41543460e-02],
+        [-4.67238426e-02,  2.42819674e-02, -4.26802635e-02,
+         -2.59207971e-02],
+        [ 2.28367783e-02, -2.09717881e-02,  1.05572566e-02,
+          3.33249308e-02],
+        [-3.37148309e-02, -4.61939685e-02, -2.61853095e-02,
+         -4.10162285e-03],
+        [-3.59787717e-02,  2.78765075e-02, -3.16200405e-02,
+          4.54976298e-02],
+        [-4.67344411e-02, -1.30221620e-02,  1.52915232e-02,
+          2.22466923e-02],
+        [-1.03901625e-02,  2.40740217e-02, -1.24427900e-02,
+          4.47194651e-03],
+        [-3.57637033e-02,  4.28059734e-02, -2.59280205e-05,
+          4.09286283e-02]], dtype=float32)&gt;,
+ &lt;tf.Variable 'dense/kernel:0' shape=(20, 1) dtype=float32, numpy=
+ array([[ 0.42870212],
+        [ 0.04779923],
+        [ 0.4126016 ],
+        [-0.13294601],
+        [-0.3175783 ],
+        [-0.46080017],
+        [-0.23412797],
+        [ 0.30137837],
+        [-0.5197849 ],
+        [-0.10935467],
+        [ 0.5087845 ],
+        [-0.06930307],
+        [ 0.10028934],
+        [-0.11278141],
+        [-0.21269777],
+        [-0.0214209 ],
+        [ 0.12959635],
+        [-0.13330323],
+        [-0.23972857],
+        [ 0.23718971]], dtype=float32)&gt;,
+ &lt;tf.Variable 'dense/bias:0' shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;]
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">loss_object</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">MeanSquaredError</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">target</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">2.5</span><span class="p">],</span> <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>   <span class="c1"># Let&#39;s run gradient descent for two batches of the same input data. (It&#39;s a contrived examples)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Output has shape: (batch_size, 1). Here batch_size is 1. So output shape is (1,1)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">loss_value</span> <span class="o">=</span> <span class="n">loss_object</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>  <span class="c1"># Calculating some random loss.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss_value</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Gradient descent step</span>
+</span></span><span class="line"><span class="cl">    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">))</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">len</span><span class="p">(</span><span class="n">grads</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>3
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">grads</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span></code></pre></div><pre><code>&lt;tensorflow.python.framework.indexed_slices.IndexedSlices at 0x16c04d4a970&gt;
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">grads</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span></code></pre></div><pre><code>IndexedSlices(indices=tf.Tensor([6 1 1 4 8], shape=(5,), dtype=int32), values=tf.Tensor(
+[[-0.9495101  -0.14344962 -0.91739434  0.25398374]
+ [ 0.69607455  1.0615798   0.5085497  -0.7338184 ]
+ [ 1.1639317   0.24842012 -1.2103697   0.12384857]
+ [-0.25895947  0.2856651   0.47968888  0.01028775]
+ [-0.28760925  0.28005898  0.56933826 -0.5540699 ]], shape=(5, 4), dtype=float32), dense_shape=tf.Tensor([10  4], shape=(2,), dtype=int32))
+</code></pre>
+<p>An <code>IndexedSlices</code> object has 3 main entries.</p>
+<ul>
+<li>indices</li>
+<li>values, and</li>
+<li>dense_shape</li>
+</ul>
+<p><a id = "q3"></a></p>
+<h2 id="how-to-convert-indexedslices-to-tensors">How to convert <code>IndexedSlices</code> to <code>Tensors</code>?</h2>
+<p>Before we do the conversion, let&rsquo;s answer a relevant question: Why do we have to do the conversion from <code>IndexedSlices</code> to tensors given that <code>Tensorflow</code> can do a gradient descent step automatically through the <code>IndexedSlices</code>? In the last section, we could run 2 gradient descent steps without worrying about <code>IndexedSlices</code>.</p>
+<p>But the problem occurs if we want to do some processing on gradient values. One such processing is <code>gradient clipping</code>. In <code>gradient clipping</code>, if sum of norm of gradients exceed a given value, gradients are rescaled to decrease their magnitude. Therefore, to do any gradient clipping, we have to access the gradient tensors. This is precisely where we would like to convert IndexedSlices to tensors. Having an embedding layer is common in deep learning models and applying gradient clipping to gradient values is also a common practice. We will show two approaches to do the conversion.</p>
+<h3 id="easiest-approach">Easiest approach</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">grads</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span></code></pre></div><pre><code>&lt;tf.Tensor: shape=(10, 4), dtype=float32, numpy=
+array([[ 0.        ,  0.        ,  0.        ,  0.        ],
+       [ 1.8600063 ,  1.31      , -0.70182   , -0.60996985],
+       [ 0.        ,  0.        ,  0.        ,  0.        ],
+       [ 0.        ,  0.        ,  0.        ,  0.        ],
+       [-0.25895947,  0.2856651 ,  0.47968888,  0.01028775],
+       [ 0.        ,  0.        ,  0.        ,  0.        ],
+       [-0.9495101 , -0.14344962, -0.91739434,  0.25398374],
+       [ 0.        ,  0.        ,  0.        ,  0.        ],
+       [-0.28760925,  0.28005898,  0.56933826, -0.5540699 ],
+       [ 0.        ,  0.        ,  0.        ,  0.        ]],
+      dtype=float32)&gt;
+</code></pre>
+<h3 id="what-did-just-happen-in-the-last-step">What did just happen in the last step?</h3>
+<p>Though the last approach is a single line elegant solution, it hides many things. How actually is the conversion done? The code below shows the steps in which we can manually do the conversion.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">check_grad</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>   <span class="c1"># Create a dense tensor of all zeros</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grads</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">indices</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">check_grad</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_grad</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">+</span> <span class="n">grads</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">check_grad</span>
+</span></span></code></pre></div><pre><code>array([[ 0.        ,  0.        ,  0.        ,  0.        ],
+       [ 1.8600063 ,  1.31      , -0.70182   , -0.60996985],
+       [ 0.        ,  0.        ,  0.        ,  0.        ],
+       [ 0.        ,  0.        ,  0.        ,  0.        ],
+       [-0.25895947,  0.2856651 ,  0.47968888,  0.01028775],
+       [ 0.        ,  0.        ,  0.        ,  0.        ],
+       [-0.9495101 , -0.14344962, -0.91739434,  0.25398374],
+       [ 0.        ,  0.        ,  0.        ,  0.        ],
+       [-0.28760925,  0.28005898,  0.56933826, -0.5540699 ],
+       [ 0.        ,  0.        ,  0.        ,  0.        ]],
+      dtype=float32)
+</code></pre>
+<p>This brings us to the end of this blog. I hope this blog has demystified a few things about <code>IndexedSlices</code>.</p>
+<p><strong>Motivation for this post</strong>: While writing TF 2 code for <a href="https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF" target="_blank" rel="noopener">Attention Mechanisms chapter of D2L book</a>, the author encountered an error involving <code>IndexedSlices</code>. After spending a good deal of time hopelessly trying to figure out what&rsquo;s going on, the author finally found that the error was occurring because of an user defined gradient clipping function that didn&rsquo;t handle <code>IndexedSlices</code> properly. The model involved embedding layers as it was dealing with machine translation task. Therefore, I thought of writing this blog with the hope that it would be of help to readers who are struggling to figure out what <code>IndexedSlices</code> are.</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/tensorflow/">Tensorflow</a>
+  
+  <a class="badge badge-light" href="/tag/deep-learning/">Deep Learning</a>
+  
+  <a class="badge badge-light" href="/tag/machine-learning/">Machine Learning</a>
+  
+  <a class="badge badge-light" href="/tag/attention-mechanism/">Attention Mechanism</a>
+  
+</div>
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Findexdslices-in-tensorflow%2F&amp;text=IndexedSlices&#43;in&#43;Tensorflow" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Findexdslices-in-tensorflow%2F&amp;t=IndexedSlices&#43;in&#43;Tensorflow" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a href="mailto:?subject=IndexedSlices%20in%20Tensorflow&amp;body=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Findexdslices-in-tensorflow%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Findexdslices-in-tensorflow%2F&amp;title=IndexedSlices&#43;in&#43;Tensorflow" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=IndexedSlices&#43;in&#43;Tensorflow%20http%3A%2F%2Flocalhost%3A1313%2Fpost%2Findexdslices-in-tensorflow%2F" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Findexdslices-in-tensorflow%2F&amp;title=IndexedSlices&#43;in&#43;Tensorflow" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="http://localhost:1313/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu3e225c89d6328e00dc57563a3fd76514_183341_270x270_fill_q75_lanczos_center.jpg" alt="Biswajit Sahoo"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="http://localhost:1313/">Biswajit Sahoo</a></h5>
+      <h6 class="card-subtitle">Machine Learning Engineer</h6>
+      <p class="card-text">My research interests include machine learning, deep learning, signal processing and data-driven machinery condition monitoring.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/biswajitsahoo1111" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/biswajitsahoo1111/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.in/citations?hl=en&amp;user=zu2CSBMAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/">Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book</a></li>
+      
+      <li><a href="/post/reading-multiple-files-in-tensorflow-2-using-sequence/">Reading multiple files in Tensorflow 2 using Sequence</a></li>
+      
+      <li><a href="/post/reading-multiple-files-in-tensorflow-2/">Reading multiple files in Tensorflow 2</a></li>
+      
+      <li><a href="/post/efficiently-reading-multiple-files-in-tensorflow-2/">Efficiently reading multiple files in Tensorflow 2</a></li>
+      
+      <li><a href="/post/using-python-generators/">Using Python Generators</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+    </div>
+    <div class="col-12 col-lg-10ish article-style">
+    <script src="https://utteranc.es/client.js"
+        repo="biswajitsahoo1111/biswajitsahoo1111.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+    </div>
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <p class="powered-by copyright-license-text">
+    © 2024 Biswajit Sahoo. Powered by <a href="https://hugoblox.com/" target="_blank" rel="noopener">Hugo Blox Builder</a>.
+  </p>
+  
+
+
+
+
+  
+    <p class="powered-by">
+      
+    </p>
+  </footer>
+    </div>
+    
+  </div>
+
+  
+
+
+<script src="/js/vendor-bundle.min.js"></script>
+
+
+
+
+  
+
+  
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script id="search-hit-fuse-template" type="text/x-template">
+    <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+    </div>
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+
+  <script src="/js/wowchemy-headroom.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<script src="/en/js/wowchemy.min.js"></script>
+
+
+
+
+
+
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <pre><code></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="/js/wowchemy-publication.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
