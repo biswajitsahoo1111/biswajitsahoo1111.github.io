@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tensorflow | Biswajit Sahoo</title>
-    <link>http://localhost:1313/tag/tensorflow/</link>
-      <atom:link href="http://localhost:1313/tag/tensorflow/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/tag/tensorflow/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/tag/tensorflow/index.xml" rel="self" type="application/rss+xml" />
     <description>Tensorflow</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
+      <url>https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
       <title>Tensorflow</title>
-      <link>http://localhost:1313/tag/tensorflow/</link>
+      <link>https://biswajitsahoo1111.github.io/tag/tensorflow/</link>
     </image>
     
     <item>
       <title>IndexedSlices in Tensorflow</title>
-      <link>http://localhost:1313/post/indexdslices-in-tensorflow/</link>
+      <link>https://biswajitsahoo1111.github.io/post/indexdslices-in-tensorflow/</link>
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/indexdslices-in-tensorflow/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/indexdslices-in-tensorflow/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Tensorflow_IndexedSlices.ipynb&#34;&gt;
@@ -194,9 +194,9 @@ array([[ 0.        ,  0.        ,  0.        ,  0.        ],
     
     <item>
       <title>Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book</title>
-      <link>http://localhost:1313/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
+      <link>https://biswajitsahoo1111.github.io/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
       <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;tr&gt;
   &lt;td align=&#34;left&#34;&gt;
@@ -241,9 +241,9 @@ array([[ 0.        ,  0.        ,  0.        ,  0.        ],
     
     <item>
       <title>Reading multiple files in Tensorflow 2 using Sequence</title>
-      <link>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/</link>
+      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/</link>
       <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb&#34;&gt;
@@ -730,9 +730,9 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
     
     <item>
       <title>Efficiently reading multiple files in Tensorflow 2</title>
-      <link>http://localhost:1313/post/efficiently-reading-multiple-files-in-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/efficiently-reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Whether this method is efficient or not is contestable. Efficiency of a data input pipeline depends on many factors. How efficiently data are loaded? What is the computer architecture on which computations are being done? Is GPU available? And the list goes on. So readers might get different performance results when they use this method in their own problems. For the simple (and small) problem considered in this post, we got no perceivable performance improvement. But for one personal application, involving moderate size data (3-4 GB), I achieved 10x performance improvement. So I hope this method can be of help to others as well. The system on which we ran this notebook has 44 CPU cores. &lt;code&gt;Tensorflow&lt;/code&gt; version was 2.4.0 and we did not use any GPU. Please note that for some weird reason, the speedup technique doesn&amp;rsquo;t work in &lt;code&gt;Google Colab&lt;/code&gt;. But it works in GPU enabled personal systems, that I have checked.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: Along with the method described in this post, readers should also try using &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tensorflow Sequence&lt;/a&gt; and see if it improves input pipeline efficiecy. Define all the complex transformations inside &lt;code&gt;__getitem__&lt;/code&gt; method of seqeuence class and then suitably choose &lt;code&gt;max_queue_size&lt;/code&gt;, &lt;code&gt;workers&lt;/code&gt;, and &lt;code&gt;use_multiprocessing&lt;/code&gt; in &lt;code&gt;model.fit()&lt;/code&gt; to improve pipeline efficiency.&lt;/p&gt;
 &lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
@@ -1353,9 +1353,9 @@ array([[0.13616945, 0.22521223, 0.29032916, 0.11108191, 0.23720728],
     
     <item>
       <title>Doing Linear Algebra using Tensorflow 2</title>
-      <link>http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/</link>
       <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Doing_Linear_Algebra_using_Tensorflow_2.ipynb&#34;&gt;
@@ -3581,9 +3581,9 @@ array([[  0.,   7.,  13.],
     
     <item>
       <title>Reading multiple files in Tensorflow 2</title>
-      <link>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
@@ -4175,9 +4175,9 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
     
     <item>
       <title>Using Python Generators</title>
-      <link>http://localhost:1313/post/using-python-generators/</link>
+      <link>https://biswajitsahoo1111.github.io/post/using-python-generators/</link>
       <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/using-python-generators/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/using-python-generators/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Using_python_generators.ipynb&#34;&gt;

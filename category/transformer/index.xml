@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Transformer | Biswajit Sahoo</title>
-    <link>http://localhost:1313/category/transformer/</link>
-      <atom:link href="http://localhost:1313/category/transformer/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/category/transformer/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/category/transformer/index.xml" rel="self" type="application/rss+xml" />
     <description>Transformer</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Wed, 10 Mar 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
+      <url>https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
       <title>Transformer</title>
-      <link>http://localhost:1313/category/transformer/</link>
+      <link>https://biswajitsahoo1111.github.io/category/transformer/</link>
     </image>
     
     <item>
       <title>Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book</title>
-      <link>http://localhost:1313/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
+      <link>https://biswajitsahoo1111.github.io/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
       <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;tr&gt;
   &lt;td align=&#34;left&#34;&gt;

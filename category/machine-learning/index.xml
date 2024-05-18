@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Machine Learning | Biswajit Sahoo</title>
-    <link>http://localhost:1313/category/machine-learning/</link>
-      <atom:link href="http://localhost:1313/category/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/category/machine-learning/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/category/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <description>Machine Learning</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 26 Dec 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
+      <url>https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
       <title>Machine Learning</title>
-      <link>http://localhost:1313/category/machine-learning/</link>
+      <link>https://biswajitsahoo1111.github.io/category/machine-learning/</link>
     </image>
     
     <item>
       <title>Reading multiple files in Tensorflow 2 using Sequence</title>
-      <link>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/</link>
+      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/</link>
       <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb&#34;&gt;
@@ -503,9 +503,9 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
     
     <item>
       <title>Reading multiple csv files in PyTorch</title>
-      <link>http://localhost:1313/post/reading-multiple-csv-files-in-pytorch/</link>
+      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/</link>
       <pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/reading-multiple-csv-files-in-pytorch/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_multiple_csv_files_in_PyTorch.ipynb&#34;&gt;
@@ -1043,9 +1043,9 @@ torch.Size([5, 1, 32, 32])
     
     <item>
       <title>Reading multiple files in Tensorflow 2</title>
-      <link>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
@@ -1637,9 +1637,9 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
     
     <item>
       <title>Principal Component Analysis - Part III</title>
-      <link>http://localhost:1313/post/principal-component-analysis-part-iii/</link>
+      <link>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/principal-component-analysis-part-iii/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td align=&#34;center&#34;&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/PCA_Abdi_in_python.ipynb&#34;&gt;
@@ -1919,9 +1919,9 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
     
     <item>
       <title>Principal Component Analysis - Part II</title>
-      <link>http://localhost:1313/post/principal-component-analysis-part-ii/</link>
+      <link>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/</link>
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/principal-component-analysis-part-ii/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td align=&#34;center&#34;&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Principal_Component_Analysis_Part_II.ipynb&#34;&gt;
@@ -2267,9 +2267,9 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
     
     <item>
       <title>Principal Component Analysis - Part I</title>
-      <link>http://localhost:1313/post/principal-component-analysis-part-i/</link>
+      <link>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/principal-component-analysis-part-i/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/</guid>
       <description>&lt;p&gt;In this post, we will discuss about Principal Component Analysis (PCA),
 one of the most popular dimensionality reduction techniques used in
 machine learning. Applications of PCA and its variants are ubiquitous.

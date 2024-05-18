@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Story | Biswajit Sahoo</title>
-    <link>http://localhost:1313/tag/story/</link>
-      <atom:link href="http://localhost:1313/tag/story/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/tag/story/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/tag/story/index.xml" rel="self" type="application/rss+xml" />
     <description>Story</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sun, 24 Mar 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
+      <url>https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
       <title>Story</title>
-      <link>http://localhost:1313/tag/story/</link>
+      <link>https://biswajitsahoo1111.github.io/tag/story/</link>
     </image>
     
     <item>
       <title>Fault Diagnosis of Machines</title>
-      <link>http://localhost:1313/post/fault-diagnosis-of-machines/</link>
+      <link>https://biswajitsahoo1111.github.io/post/fault-diagnosis-of-machines/</link>
       <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/fault-diagnosis-of-machines/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/fault-diagnosis-of-machines/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;This story was originally written for &lt;a href=&#34;https://www.awsar-dst.in/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&amp;ldquo;Augmenting Writing Skills for Articulating Research (AWSAR)&amp;rdquo;&lt;/a&gt; award 2018. It is written in a non-technical way so as to be accessible to as many people as possible irrespective of their educational background. The story also featured in the top 100 list of stories for the award. Full list of awardees and their stories can be found &lt;a href=&#34;https://www.awsar-dst.in/awsar_awarded_articles_2018/download_book&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;

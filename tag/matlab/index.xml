@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MATLAB | Biswajit Sahoo</title>
-    <link>http://localhost:1313/tag/matlab/</link>
-      <atom:link href="http://localhost:1313/tag/matlab/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/tag/matlab/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/tag/matlab/index.xml" rel="self" type="application/rss+xml" />
     <description>MATLAB</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 04 Feb 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
+      <url>https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
       <title>MATLAB</title>
-      <link>http://localhost:1313/tag/matlab/</link>
+      <link>https://biswajitsahoo1111.github.io/tag/matlab/</link>
     </image>
     
     <item>
       <title>Principal Component Analysis - Part II</title>
-      <link>http://localhost:1313/post/principal-component-analysis-part-ii/</link>
+      <link>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/</link>
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/principal-component-analysis-part-ii/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td align=&#34;center&#34;&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Principal_Component_Analysis_Part_II.ipynb&#34;&gt;

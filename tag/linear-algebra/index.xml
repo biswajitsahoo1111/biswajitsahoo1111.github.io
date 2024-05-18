@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linear Algebra | Biswajit Sahoo</title>
-    <link>http://localhost:1313/tag/linear-algebra/</link>
-      <atom:link href="http://localhost:1313/tag/linear-algebra/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/tag/linear-algebra/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/tag/linear-algebra/index.xml" rel="self" type="application/rss+xml" />
     <description>Linear Algebra</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 14 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
+      <url>https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
       <title>Linear Algebra</title>
-      <link>http://localhost:1313/tag/linear-algebra/</link>
+      <link>https://biswajitsahoo1111.github.io/tag/linear-algebra/</link>
     </image>
     
     <item>
       <title>Doing Linear Algebra using Tensorflow 2</title>
-      <link>http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/</link>
+      <link>https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/</link>
       <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Doing_Linear_Algebra_using_Tensorflow_2.ipynb&#34;&gt;
@@ -2242,9 +2242,9 @@ array([[  0.,   7.,  13.],
     
     <item>
       <title>Revisiting Systems of Linear Equations</title>
-      <link>http://localhost:1313/post/revisiting-systems-of-linear-equations/</link>
+      <link>https://biswajitsahoo1111.github.io/post/revisiting-systems-of-linear-equations/</link>
       <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/revisiting-systems-of-linear-equations/</guid>
+      <guid>https://biswajitsahoo1111.github.io/post/revisiting-systems-of-linear-equations/</guid>
       <description>&lt;p&gt;Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable. Then the final solution is obtained by back substituting the obtained value of the variable into remaining equations. This method, in mathematical jargon, is called Gaussian elimination and back substitution.&lt;/p&gt;
 &lt;p&gt;It turns out (surprisingly) that linear systems form the basis of many interesting engineering applications. Ultimately the problem boils down to solution (or approximate solution) of a system of linear equations. So a thorough understanding of linear systems is essential to appreciate the applications. In this post we will outline all possible cases of finding solutions to  linear systems and briefly outline two most important applications.&lt;/p&gt;
 &lt;p&gt;We will use matrix notation to represent the equations succinctly. It also gives us better insight into their solution. Using matrix notation the system can be represented as

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects | Biswajit Sahoo</title>
-    <link>http://localhost:1313/project/</link>
-      <atom:link href="http://localhost:1313/project/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://biswajitsahoo1111.github.io/project/</link>
+      <atom:link href="https://biswajitsahoo1111.github.io/project/index.xml" rel="self" type="application/rss+xml" />
     <description>Projects</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 05 Sep 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
+      <url>https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
       <title>Projects</title>
-      <link>http://localhost:1313/project/</link>
+      <link>https://biswajitsahoo1111.github.io/project/</link>
     </image>
     
     <item>
       <title>Data-Driven Remaining Useful Life (RUL) Prediction</title>
-      <link>http://localhost:1313/project/rul_codes_open/</link>
+      <link>https://biswajitsahoo1111.github.io/project/rul_codes_open/</link>
       <pubDate>Sat, 05 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/project/rul_codes_open/</guid>
+      <guid>https://biswajitsahoo1111.github.io/project/rul_codes_open/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;tr&gt;
   &lt;td align=&#34;left&#34;&gt;
@@ -197,9 +197,9 @@
     
     <item>
       <title>Data-Driven Machinery Fault Diagnosis</title>
-      <link>http://localhost:1313/project/cbm_codes_open/</link>
+      <link>https://biswajitsahoo1111.github.io/project/cbm_codes_open/</link>
       <pubDate>Thu, 18 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/project/cbm_codes_open/</guid>
+      <guid>https://biswajitsahoo1111.github.io/project/cbm_codes_open/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;tr&gt;
   &lt;td align=&#34;left&#34;&gt;
