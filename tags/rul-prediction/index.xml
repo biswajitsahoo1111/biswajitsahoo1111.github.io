@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>RUL Prediction | Biswajit Sahoo, Ph.D.</title>
+    <title>RUL Prediction | Biswajit Sahoo</title>
     <link>http://localhost:1313/tags/rul-prediction/</link>
       <atom:link href="http://localhost:1313/tags/rul-prediction/index.xml" rel="self" type="application/rss+xml" />
     <description>RUL Prediction</description>

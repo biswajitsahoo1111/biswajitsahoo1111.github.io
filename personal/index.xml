@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Biswajit Sahoo, Ph.D.</title>
+    <title>Biswajit Sahoo</title>
     <link>http://localhost:1313/personal/</link>
       <atom:link href="http://localhost:1313/personal/index.xml" rel="self" type="application/rss+xml" />
-    <description>Biswajit Sahoo, Ph.D.</description>
+    <description>Biswajit Sahoo</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language>
     <image>
       <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
-      <title>Biswajit Sahoo, Ph.D.</title>
+      <title>Biswajit Sahoo</title>
       <link>http://localhost:1313/personal/</link>
     </image>
     
