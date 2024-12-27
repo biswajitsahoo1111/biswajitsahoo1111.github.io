@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Julia | Biswajit Sahoo, Ph.D.</title>
+    <link>http://localhost:1313/tags/julia/</link>
+      <atom:link href="http://localhost:1313/tags/julia/index.xml" rel="self" type="application/rss+xml" />
+    <description>Julia</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 23 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
+      <title>Julia</title>
+      <link>http://localhost:1313/tags/julia/</link>
+    </image>
+    
+    <item>
+      <title>Compute element stiffness matrix symbolically</title>
+      <link>http://localhost:1313/post/compute-element-stiffness-matrix-symbolically/</link>
+      <pubDate>Fri, 23 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/compute-element-stiffness-matrix-symbolically/</guid>
+      <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
+  &lt;td&gt;
+    &lt;a href=&#34;https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/compute_element_stiffness_matrix_symbolically/compute_element_stiffness_matrix_symbolically.ipynb&#34; target=&#34;_blank&#34;&gt;
+    &lt;img src=&#34;https://www.tensorflow.org/images/GitHub-Mark-32px.png&#34; /&gt;
+    View source on GitHub&lt;/a&gt;
+  &lt;/td&gt;
+&lt;/table&gt;
+&lt;style&gt;
+.wide-matrix-container {
+    overflow-x: auto;
+}
+&lt;/style&gt;
+&lt;p&gt;In this notebook, we will try to compute the stiffness matrix of a rectangular element using symbolic computations in Julia. Traditionally in undergraduate curriculum, computations of stiffness matrix for different elements are taught using hand calculations. However, using symbolic calculations along with matrix notation it is straight forward to derive those matrices. Though MATLAB is still widely used in engineering courses and also contains symbolic computation module, we will use Julia as it is open source and Julia&amp;rsquo;s matrix notations are nearly identical to that of MATLAB&amp;rsquo;s. Steps to run this notebook in VS Code along with different required installations can be found &lt;a href=&#34;https://code.visualstudio.com/docs/languages/julia&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Below, we will go over the steps followed to derive the element stiffness matrix. We will briefly go over the theory and use only the required equations. For a detailed exploration, readers are directed to the books mentioned in the references. Our example is focused on rectangular element only. However, the same approach can be followed for other elements with minor modifications.&lt;/p&gt;
+&lt;p&gt;Steps to derive element stiffness matrix:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Select the element type&lt;/li&gt;
+&lt;li&gt;Select displacement function&lt;/li&gt;
+&lt;li&gt;Define the strain-displacement and stress-strain relationships&lt;/li&gt;
+&lt;li&gt;Derive the element stiffness matrix&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;All the steps are briefly elaborated below along with the code to implement it. The notebook can be run from beginning to end sequentially to get the required results.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: This blog contains several equations. If equations are not rendered properly in this page, readers are requested to download the jupyter notebook (from above) and use it. All the content of this blog is also available in the jupyter notebook.&lt;/p&gt;
+&lt;h2 id=&#34;1-select-the-element-type&#34;&gt;1. Select the element type&lt;/h2&gt;
+&lt;h3 id=&#34;bilinear-rectangle-q4-element&#34;&gt;Bilinear Rectangle (Q4) Element&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-bilinear-rectangle-q4&#34;&gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./rectangular_element_fea.png&#34; alt=&#34;Image of Bilinear Rectangle (Q4) element&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Bilinear Rectangle (Q4)
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;If the above figure is not clearly visible, consider changing the theme of background to &amp;ldquo;light&amp;rdquo;. Then the figure would be seen clearly. The element has 4 nodes and 8 degrees of freedom. It&amp;rsquo;s also called Q4 because it is a quadrilateral having 4 nodes. Standard counter-clockwise convention is used to name the nodes.&lt;/p&gt;
+&lt;p&gt;First load the relevant libraries. If a library is not installed, follow the instructions given in &lt;a href=&#34;https://docs.julialang.org/en/v1/stdlib/Pkg/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this link&lt;/a&gt; to download those.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Symbolics&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SymbolicNumericIntegration&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;ENV&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;COLUMNS&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;240&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;c&#34;&gt;# For better display of symbolic columns&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The variables to be used in the symbolic computation are defined below.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@variables&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ν&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;   &lt;span class=&#34;c&#34;&gt;# Last symbol &amp;#34;nu&amp;#34; can be obtained in Julia by &amp;#34;\nu&amp;#34; command.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-select-the-displacement-function&#34;&gt;2. Select the displacement function&lt;/h2&gt;
+&lt;p&gt;In FEA, usually we are interested in the values of certain field quantities (for e.g., displacement) at the nodes and between the nodes. Therefore, interpolation is used to devise a continuous function that satisfies prescribed conditions (for e.g., for a compatible displacement field, element displacement must be linear along the edge between two nodes) at the nodes. For the rectangular element, following displacement function is used
+$$u = a_1 + a_2x + a_3y + a_4 xy$$
+
+$$v = a_5 + a_6x + a_7y + a_8 xy$$
+
+Where, $a_1, a_2, \ldots, a_8$ are called generalized degrees of freedom. In matrix form, it can be written as
+
+$$\begin{bmatrix}
+u \\
+v 
+\end{bmatrix} = 
+\begin{bmatrix}
+1 &amp; x &amp; y &amp; xy &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; x &amp; y &amp; xy
+\end{bmatrix}
+\begin{bmatrix}
+a_1 \\
+a_2 \\
+a_3 \\
+a_4 \\
+a_5 \\
+a_6 \\
+a_7 \\
+a_8
+\end{bmatrix} = [X]_{2 \times 8} [a]_{8 \times 1}$$
+
+&lt;/p&gt;
+&lt;p&gt;In terms of nodal displacements, the displacement functions can be written as&lt;/p&gt;
+&lt;div class=&#34;wide-matrix-container&#34;&gt;
+\begin{equation}
+\begin{bmatrix}
+\phi_1 \\
+\phi_2 \\
+\phi_3 \\
+\phi_4 \\
+\phi_5 \\
+\phi_6 \\
+\phi_7 \\
+\phi_8 
+\end{bmatrix} = 
+\begin{bmatrix}
+1 &amp; -a &amp; -b &amp; ab &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; -a &amp; -b &amp; ab \\
+1 &amp; a &amp; -a &amp; -ab &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; a &amp; -b &amp; -ab \\
+1 &amp; a &amp; b &amp; ab &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; a &amp; b &amp; ab \\
+1 &amp; -a &amp; b &amp; -ab &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; -a &amp; b &amp; -ab \\
+\end{bmatrix}
+\begin{bmatrix}
+a_1 \\
+a_2 \\
+a_3 \\
+a_4 \\
+a_5 \\
+a_6 \\
+a_7 \\
+a_8
+\end{bmatrix} = [A]_{8 \times 8} [a]_{8 \times 1}
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;Where displacements $\phi_1$, $\phi_2$, etc. are displacements at node 1, 2, etc. respectively. By substituting generalized coordinates obtained from nodal equations in displacement function, we get shape functions (or basis functions).&lt;/p&gt;
+
+$$\begin{bmatrix}
+u \\
+v 
+\end{bmatrix} = [X]_{2 \times 8} 
+\begin{bmatrix}
+a_1 \\
+a_2 \\
+a_3 \\
+a_4 \\
+a_5 \\
+a_6 \\
+a_7 \\
+a_8
+\end{bmatrix} = [X]_{2 \times 8} [A^{-1}]_{8 \times 8}
+\begin{bmatrix}
+\phi_1 \\
+\phi_2 \\
+\phi_3 \\
+\phi_4 \\
+\phi_5 \\
+\phi_6 \\
+\phi_7 \\
+\phi_8 
+\end{bmatrix} = [N]_{2 \times 8}
+\begin{bmatrix}
+\phi_1 \\
+\phi_2 \\
+\phi_3 \\
+\phi_4 \\
+\phi_5 \\
+\phi_6 \\
+\phi_7 \\
+\phi_8 
+\end{bmatrix}
+$$
+
+
+&lt;p&gt;By running following code cells, we can obtain the expression for shape function matrix.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;X&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+$$ \begin{equation}
+\left[
+\begin{array}{cccccccc}
+1 &amp; x &amp; y &amp; x y &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; x &amp; y &amp; x y \\
+\end{array}
+\right]
+\end{equation}
+ $$
+ 
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+$$ \begin{equation}
+\left[
+\begin{array}{cccccccc}
+1 &amp;  - a &amp;  - b &amp; a b &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp;  - a &amp;  - b &amp; a b \\
+1 &amp; a &amp;  - b &amp;  - a b &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; a &amp;  - b &amp;  - a b \\
+1 &amp; a &amp; b &amp; a b &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; a &amp; b &amp; a b \\
+1 &amp;  - a &amp; b &amp;  - a b &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp;  - a &amp; b &amp;  - a b \\
+\end{array}
+\right]
+\end{equation}
+ $$
+ 
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;N&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;X&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;wide-matrix-container&#34;&gt;
+\begin{equation}
+\left[
+\begin{array}{cccccccc}
+\frac{1}{4} + \frac{ - y}{4 b} + \frac{x y}{4 a b} + \frac{ - x}{4 a} &amp; 0 &amp; \frac{1}{4} + \frac{ - x y}{4 a b} + \frac{ - y}{4 b} + \frac{x}{4 a} &amp; 0 &amp; \frac{1}{4} + \frac{y}{4 b} + \frac{x y}{4 a b} + \frac{x}{4 a} &amp; 0 &amp; \frac{1}{4} + \frac{ - x y}{4 a b} + \frac{y}{4 b} + \frac{ - x}{4 a} &amp; 0 \\
+0 &amp; \frac{1}{4} + \frac{ - y}{4 b} + \frac{x y}{4 a b} + \frac{ - x}{4 a} &amp; 0 &amp; \frac{1}{4} + \frac{ - x y}{4 a b} + \frac{ - y}{4 b} + \frac{x}{4 a} &amp; 0 &amp; \frac{1}{4} + \frac{y}{4 b} + \frac{x y}{4 a b} + \frac{x}{4 a} &amp; 0 &amp; \frac{1}{4} + \frac{ - x y}{4 a b} + \frac{y}{4 b} + \frac{ - x}{4 a} \\
+\end{array}
+\right]
+\end{equation}
+&lt;/div&gt;
+&lt;h3 id=&#34;3-define-strain-displacement-and-stress-strain-relationship&#34;&gt;3. Define strain-displacement and stress-strain relationship&lt;/h3&gt;
+&lt;p&gt;Using the definition of axial and shear strain, the strain-displacement equation (in matrix form) can be written as follows:
+
+$$\begin{bmatrix}
+\epsilon_x \\
+\epsilon_y \\
+\gamma_{xy}
+\end{bmatrix} = 
+\begin{bmatrix}
+\frac{\partial}{\partial x} &amp; 0 \\
+0 &amp; \frac{\partial}{\partial y} \\
+\frac{\partial}{\partial y} &amp; \frac{\partial}{\partial x}
+\end{bmatrix}
+\begin{bmatrix}
+u \\
+v
+\end{bmatrix}
+$$
+
+
+In terms of nodal coordinates, the above equation can also be written as:
+
+$$
+\begin{bmatrix}
+\epsilon_x \\
+\epsilon_y \\
+\gamma_{xy}
+\end{bmatrix} = 
+\begin{bmatrix}
+\frac{\partial}{\partial x} &amp; 0 \\
+0 &amp; \frac{\partial}{\partial y} \\
+\frac{\partial}{\partial y} &amp; \frac{\partial}{\partial x}
+\end{bmatrix}
+[N]_{2 \times 8}
+\begin{bmatrix}
+\phi_1 \\
+\phi_2 \\
+\phi_3 \\
+\phi_4 \\
+\phi_5 \\
+\phi_6 \\
+\phi_7 \\
+\phi_8 
+\end{bmatrix} = 
+[B]_{3 \times 8}
+\begin{bmatrix}
+\phi_1 \\
+\phi_2 \\
+\phi_3 \\
+\phi_4 \\
+\phi_5 \\
+\phi_6 \\
+\phi_7 \\
+\phi_8 
+\end{bmatrix}
+$$
+
+
+We need the [B] matrix as that would be used in the computation of stiffness matrix. In the cell below we define the differential operators with respect to x and y.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;D_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Differential&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;D_y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Differential&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;(::Differential) (generic function with 3 methods)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we apply the operator to the first row of [N] matrix.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expand_derivatives&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;D_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+$$ \begin{equation}
+\left[
+\begin{array}{c}
+\frac{-1}{4 a} + \frac{y}{4 a b} \\
+0 \\
+\frac{1}{4 a} + \frac{ - y}{4 a b} \\
+0 \\
+\frac{y}{4 a b} + \frac{1}{4 a} \\
+0 \\
+\frac{-1}{4 a} + \frac{ - y}{4 a b} \\
+0 \\
+\end{array}
+\right]
+\end{equation}
+ $$
+
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vcat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expand_derivatives&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;D_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expand_derivatives&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;D_y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expand_derivatives&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;D_y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expand_derivatives&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;D_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;wide-matrix-container&#34;&gt;
+\begin{equation}
+\left[
+\begin{array}{cccccccc}
+\frac{-1}{4 a} + \frac{y}{4 a b} &amp; 0 &amp; \frac{1}{4 a} + \frac{ - y}{4 a b} &amp; 0 &amp; \frac{y}{4 a b} + \frac{1}{4 a} &amp; 0 &amp; \frac{-1}{4 a} + \frac{ - y}{4 a b} &amp; 0 \\
+0 &amp; \frac{x}{4 a b} + \frac{-1}{4 b} &amp; 0 &amp; \frac{ - x}{4 a b} + \frac{-1}{4 b} &amp; 0 &amp; \frac{x}{4 a b} + \frac{1}{4 b} &amp; 0 &amp; \frac{ - x}{4 a b} + \frac{1}{4 b} \\
+\frac{x}{4 a b} + \frac{-1}{4 b} &amp; \frac{-1}{4 a} + \frac{y}{4 a b} &amp; \frac{ - x}{4 a b} + \frac{-1}{4 b} &amp; \frac{1}{4 a} + \frac{ - y}{4 a b} &amp; \frac{x}{4 a b} + \frac{1}{4 b} &amp; \frac{y}{4 a b} + \frac{1}{4 a} &amp; \frac{ - x}{4 a b} + \frac{1}{4 b} &amp; \frac{-1}{4 a} + \frac{ - y}{4 a b} \\
+\end{array}
+\right]
+\end{equation}
+&lt;/div&gt;
+&lt;h2 id=&#34;4-derive-the-element-stiffness-matrix&#34;&gt;4. Derive the element stiffness matrix&lt;/h2&gt;
+&lt;p&gt;Without derivation, we define the stiffness matrix as:
+
+$$[k]_{8 \times 8} = \int_{-b}^b \int_{-a}^{a}[B]^T_{8 \times 3}[E]_{3 \times 3} [B]_{3 \times 8} t dx dy$$
+
+&lt;/p&gt;
+&lt;p&gt;Where $t$ is the element thickness. Matrix $[E]$ is called the constitutive matrix (it is also named as [D] in some literature).For a derivation, readers are directed to the the excellent books in the references. In the following cell, we define $[E] * (1 - \nu^2)$. We do so to remove $(1 - \nu^2)$ term from all the entries of stiffness matrix.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# Consider the [E] (constitutive matrix) below as product of E (elastic modulus) and (1 - ν^2)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;E&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ν&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;ν&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ν&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+$$ \begin{equation}
+\left[
+\begin{array}{ccc}
+1 &amp; \nu &amp; 0 \\
+\nu &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; \frac{1}{2} \left( 1 - \nu \right) \\
+\end{array}
+\right]
+\end{equation}
+ $$
+ 
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;K&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;B&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;E&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;B&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;wide-matrix-container&#34;&gt;
+\begin{equation}
+\left[
+\begin{array}{cccccccc}
+\left( \frac{-1}{4 a} + \frac{y}{4 a b} \right)^{2} + \frac{1}{2} \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right)^{2} \left( 1 - \nu \right) &amp; \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \nu + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \nu + \frac{1}{2} \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) + \frac{1}{2} \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \nu + \frac{1}{2} \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \nu + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( 1 - \nu \right) \\
+\left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \nu + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right)^{2} + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right)^{2} \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( 1 - \nu \right) + \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \nu &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) + \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \nu &amp; \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( 1 - \nu \right) + \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \nu &amp; \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( 1 - \nu \right) \\
+\left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( 1 - \nu \right) + \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \nu &amp; \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right)^{2} + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right)^{2} \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \nu + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( 1 - \nu \right) + \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \nu &amp; \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) + \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \nu \\
+\left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \nu + \frac{1}{2} \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \nu + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right)^{2} + \frac{1}{2} \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right)^{2} \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \nu + \frac{1}{2} \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) + \frac{1}{2} \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \nu + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) \\
+\left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) + \frac{1}{2} \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) + \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \nu &amp; \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \nu + \frac{1}{2} \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{y}{4 a b} + \frac{1}{4 a} \right)^{2} + \frac{1}{2} \left( \frac{x}{4 a b} + \frac{1}{4 b} \right)^{2} \left( 1 - \nu \right) &amp; \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \nu + \frac{1}{2} \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \nu + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) \\
+\left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \nu + \frac{1}{2} \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( 1 - \nu \right) + \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \nu &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) + \frac{1}{2} \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \nu + \frac{1}{2} \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{x}{4 a b} + \frac{1}{4 b} \right)^{2} + \frac{1}{2} \left( \frac{y}{4 a b} + \frac{1}{4 a} \right)^{2} \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( 1 - \nu \right) + \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \nu &amp; \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( 1 - \nu \right) \\
+\left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( 1 - \nu \right) + \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \nu &amp; \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \nu + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( 1 - \nu \right) + \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \nu &amp; \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right)^{2} + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right)^{2} \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \nu + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) \\
+\left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \nu + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{-1}{4 b} \right) + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{-1}{4 a} + \frac{y}{4 a b} \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) + \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \nu &amp; \left( \frac{ - x}{4 a b} + \frac{-1}{4 b} \right) \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \nu + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{x}{4 a b} + \frac{1}{4 b} \right) + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( \frac{y}{4 a b} + \frac{1}{4 a} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \nu + \frac{1}{2} \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right) \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right) \left( 1 - \nu \right) &amp; \left( \frac{ - x}{4 a b} + \frac{1}{4 b} \right)^{2} + \frac{1}{2} \left( \frac{-1}{4 a} + \frac{ - y}{4 a b} \right)^{2} \left( 1 - \nu \right) \\
+\end{array}
+\right]
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;Substituting values in place of a (width) and b (height). We do so to reduce the number of symbolic variables and simplify expressions further.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;K_evaluated&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;substitute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;K&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Dict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;wide-matrix-container&#34;&gt;
+\begin{equation}
+\left[
+\begin{array}{cccccccc}
+\left( -0.5 + y \right)^{2} + \frac{1}{2} \left( -0.5 + x \right)^{2} \left( 1 - \nu \right) &amp; \left( -0.5 + x \right) \left( -0.5 + y \right) \nu + \frac{1}{2} \left( -0.5 + x \right) \left( -0.5 + y \right) \left( 1 - \nu \right) &amp; \left( -0.5 + y \right) \left( 0.5 - y \right) + \frac{1}{2} \left( -0.5 - x \right) \left( -0.5 + x \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( -0.5 + x \right) \left( 0.5 - y \right) \left( 1 - \nu \right) + \left( -0.5 - x \right) \left( -0.5 + y \right) \nu &amp; \left( -0.5 + y \right) \left( 0.5 + y \right) + \frac{1}{2} \left( 0.5 + x \right) \left( -0.5 + x \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( -0.5 + x \right) \left( 0.5 + y \right) \left( 1 - \nu \right) + \left( 0.5 + x \right) \left( -0.5 + y \right) \nu &amp; \left( -0.5 - y \right) \left( -0.5 + y \right) + \frac{1}{2} \left( -0.5 + x \right) \left( 0.5 - x \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( -0.5 + x \right) \left( -0.5 - y \right) \left( 1 - \nu \right) + \left( 0.5 - x \right) \left( -0.5 + y \right) \nu \\
+\left( -0.5 + x \right) \left( -0.5 + y \right) \nu + \frac{1}{2} \left( -0.5 + x \right) \left( -0.5 + y \right) \left( 1 - \nu \right) &amp; \left( -0.5 + x \right)^{2} + \frac{1}{2} \left( -0.5 + y \right)^{2} \left( 1 - \nu \right) &amp; \left( -0.5 + x \right) \left( 0.5 - y \right) \nu + \frac{1}{2} \left( -0.5 - x \right) \left( -0.5 + y \right) \left( 1 - \nu \right) &amp; \left( -0.5 - x \right) \left( -0.5 + x \right) + \frac{1}{2} \left( -0.5 + y \right) \left( 0.5 - y \right) \left( 1 - \nu \right) &amp; \left( -0.5 + x \right) \left( 0.5 + y \right) \nu + \frac{1}{2} \left( 0.5 + x \right) \left( -0.5 + y \right) \left( 1 - \nu \right) &amp; \left( 0.5 + x \right) \left( -0.5 + x \right) + \frac{1}{2} \left( -0.5 + y \right) \left( 0.5 + y \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( 0.5 - x \right) \left( -0.5 + y \right) \left( 1 - \nu \right) + \left( -0.5 + x \right) \left( -0.5 - y \right) \nu &amp; \left( -0.5 + x \right) \left( 0.5 - x \right) + \frac{1}{2} \left( -0.5 - y \right) \left( -0.5 + y \right) \left( 1 - \nu \right) \\
+\left( -0.5 + y \right) \left( 0.5 - y \right) + \frac{1}{2} \left( -0.5 - x \right) \left( -0.5 + x \right) \left( 1 - \nu \right) &amp; \left( -0.5 + x \right) \left( 0.5 - y \right) \nu + \frac{1}{2} \left( -0.5 - x \right) \left( -0.5 + y \right) \left( 1 - \nu \right) &amp; \left( 0.5 - y \right)^{2} + \frac{1}{2} \left( -0.5 - x \right)^{2} \left( 1 - \nu \right) &amp; \left( -0.5 - x \right) \left( 0.5 - y \right) \nu + \frac{1}{2} \left( -0.5 - x \right) \left( 0.5 - y \right) \left( 1 - \nu \right) &amp; \left( 0.5 + y \right) \left( 0.5 - y \right) + \frac{1}{2} \left( 0.5 + x \right) \left( -0.5 - x \right) \left( 1 - \nu \right) &amp; \left( 0.5 + x \right) \left( 0.5 - y \right) \nu + \frac{1}{2} \left( -0.5 - x \right) \left( 0.5 + y \right) \left( 1 - \nu \right) &amp; \left( -0.5 - y \right) \left( 0.5 - y \right) + \frac{1}{2} \left( -0.5 - x \right) \left( 0.5 - x \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( -0.5 - x \right) \left( -0.5 - y \right) \left( 1 - \nu \right) + \left( 0.5 - x \right) \left( 0.5 - y \right) \nu \\
+\frac{1}{2} \left( -0.5 + x \right) \left( 0.5 - y \right) \left( 1 - \nu \right) + \left( -0.5 - x \right) \left( -0.5 + y \right) \nu &amp; \left( -0.5 - x \right) \left( -0.5 + x \right) + \frac{1}{2} \left( -0.5 + y \right) \left( 0.5 - y \right) \left( 1 - \nu \right) &amp; \left( -0.5 - x \right) \left( 0.5 - y \right) \nu + \frac{1}{2} \left( -0.5 - x \right) \left( 0.5 - y \right) \left( 1 - \nu \right) &amp; \left( -0.5 - x \right)^{2} + \frac{1}{2} \left( 0.5 - y \right)^{2} \left( 1 - \nu \right) &amp; \frac{1}{2} \left( 0.5 + x \right) \left( 0.5 - y \right) \left( 1 - \nu \right) + \left( -0.5 - x \right) \left( 0.5 + y \right) \nu &amp; \left( 0.5 + x \right) \left( -0.5 - x \right) + \frac{1}{2} \left( 0.5 + y \right) \left( 0.5 - y \right) \left( 1 - \nu \right) &amp; \left( -0.5 - x \right) \left( -0.5 - y \right) \nu + \frac{1}{2} \left( 0.5 - x \right) \left( 0.5 - y \right) \left( 1 - \nu \right) &amp; \left( -0.5 - x \right) \left( 0.5 - x \right) + \frac{1}{2} \left( -0.5 - y \right) \left( 0.5 - y \right) \left( 1 - \nu \right) \\
+\left( -0.5 + y \right) \left( 0.5 + y \right) + \frac{1}{2} \left( 0.5 + x \right) \left( -0.5 + x \right) \left( 1 - \nu \right) &amp; \left( -0.5 + x \right) \left( 0.5 + y \right) \nu + \frac{1}{2} \left( 0.5 + x \right) \left( -0.5 + y \right) \left( 1 - \nu \right) &amp; \left( 0.5 + y \right) \left( 0.5 - y \right) + \frac{1}{2} \left( 0.5 + x \right) \left( -0.5 - x \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( 0.5 + x \right) \left( 0.5 - y \right) \left( 1 - \nu \right) + \left( -0.5 - x \right) \left( 0.5 + y \right) \nu &amp; \left( 0.5 + y \right)^{2} + \frac{1}{2} \left( 0.5 + x \right)^{2} \left( 1 - \nu \right) &amp; \left( 0.5 + x \right) \left( 0.5 + y \right) \nu + \frac{1}{2} \left( 0.5 + x \right) \left( 0.5 + y \right) \left( 1 - \nu \right) &amp; \left( -0.5 - y \right) \left( 0.5 + y \right) + \frac{1}{2} \left( 0.5 + x \right) \left( 0.5 - x \right) \left( 1 - \nu \right) &amp; \left( 0.5 - x \right) \left( 0.5 + y \right) \nu + \frac{1}{2} \left( 0.5 + x \right) \left( -0.5 - y \right) \left( 1 - \nu \right) \\
+\frac{1}{2} \left( -0.5 + x \right) \left( 0.5 + y \right) \left( 1 - \nu \right) + \left( 0.5 + x \right) \left( -0.5 + y \right) \nu &amp; \left( 0.5 + x \right) \left( -0.5 + x \right) + \frac{1}{2} \left( -0.5 + y \right) \left( 0.5 + y \right) \left( 1 - \nu \right) &amp; \left( 0.5 + x \right) \left( 0.5 - y \right) \nu + \frac{1}{2} \left( -0.5 - x \right) \left( 0.5 + y \right) \left( 1 - \nu \right) &amp; \left( 0.5 + x \right) \left( -0.5 - x \right) + \frac{1}{2} \left( 0.5 + y \right) \left( 0.5 - y \right) \left( 1 - \nu \right) &amp; \left( 0.5 + x \right) \left( 0.5 + y \right) \nu + \frac{1}{2} \left( 0.5 + x \right) \left( 0.5 + y \right) \left( 1 - \nu \right) &amp; \left( 0.5 + x \right)^{2} + \frac{1}{2} \left( 0.5 + y \right)^{2} \left( 1 - \nu \right) &amp; \left( 0.5 + x \right) \left( -0.5 - y \right) \nu + \frac{1}{2} \left( 0.5 - x \right) \left( 0.5 + y \right) \left( 1 - \nu \right) &amp; \left( 0.5 + x \right) \left( 0.5 - x \right) + \frac{1}{2} \left( -0.5 - y \right) \left( 0.5 + y \right) \left( 1 - \nu \right) \\
+\left( -0.5 - y \right) \left( -0.5 + y \right) + \frac{1}{2} \left( -0.5 + x \right) \left( 0.5 - x \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( 0.5 - x \right) \left( -0.5 + y \right) \left( 1 - \nu \right) + \left( -0.5 + x \right) \left( -0.5 - y \right) \nu &amp; \left( -0.5 - y \right) \left( 0.5 - y \right) + \frac{1}{2} \left( -0.5 - x \right) \left( 0.5 - x \right) \left( 1 - \nu \right) &amp; \left( -0.5 - x \right) \left( -0.5 - y \right) \nu + \frac{1}{2} \left( 0.5 - x \right) \left( 0.5 - y \right) \left( 1 - \nu \right) &amp; \left( -0.5 - y \right) \left( 0.5 + y \right) + \frac{1}{2} \left( 0.5 + x \right) \left( 0.5 - x \right) \left( 1 - \nu \right) &amp; \left( 0.5 + x \right) \left( -0.5 - y \right) \nu + \frac{1}{2} \left( 0.5 - x \right) \left( 0.5 + y \right) \left( 1 - \nu \right) &amp; \left( -0.5 - y \right)^{2} + \frac{1}{2} \left( 0.5 - x \right)^{2} \left( 1 - \nu \right) &amp; \frac{1}{2} \left( 0.5 - x \right) \left( -0.5 - y \right) \left( 1 - \nu \right) + \left( 0.5 - x \right) \left( -0.5 - y \right) \nu \\
+\frac{1}{2} \left( -0.5 + x \right) \left( -0.5 - y \right) \left( 1 - \nu \right) + \left( 0.5 - x \right) \left( -0.5 + y \right) \nu &amp; \left( -0.5 + x \right) \left( 0.5 - x \right) + \frac{1}{2} \left( -0.5 - y \right) \left( -0.5 + y \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( -0.5 - x \right) \left( -0.5 - y \right) \left( 1 - \nu \right) + \left( 0.5 - x \right) \left( 0.5 - y \right) \nu &amp; \left( -0.5 - x \right) \left( 0.5 - x \right) + \frac{1}{2} \left( -0.5 - y \right) \left( 0.5 - y \right) \left( 1 - \nu \right) &amp; \left( 0.5 - x \right) \left( 0.5 + y \right) \nu + \frac{1}{2} \left( 0.5 + x \right) \left( -0.5 - y \right) \left( 1 - \nu \right) &amp; \left( 0.5 + x \right) \left( 0.5 - x \right) + \frac{1}{2} \left( -0.5 - y \right) \left( 0.5 + y \right) \left( 1 - \nu \right) &amp; \frac{1}{2} \left( 0.5 - x \right) \left( -0.5 - y \right) \left( 1 - \nu \right) + \left( 0.5 - x \right) \left( -0.5 - y \right) \nu &amp; \left( 0.5 - x \right)^{2} + \frac{1}{2} \left( -0.5 - y \right)^{2} \left( 1 - \nu \right) \\
+\end{array}
+\right]
+\end{equation}
+&lt;/div&gt;
+&lt;p&gt;First, integrating with respect to x and applying limits.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;first_integration_wrt_x_elementwise&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;element&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;integrate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;element&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;detailed&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;symbolic&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;K_evaluated&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;8×8 Matrix{SymbolicUtils.BasicSymbolic{Real}}:
+ 0.416667 - y - 0.166667ν + y^2      0.125 - 0.25y + 0.125ν - 0.25y*ν                            -0.166667 + y - 0.0833333ν - (y^2)  …  0.0833333 + 0.166667ν - (y^2)       0.125 + 0.25y - 0.375ν + 0.25y*ν
+ 0.125 - 0.25y + 0.125ν - 0.25y*ν    0.458333 - 0.5y - 0.125ν + 0.5(y^2) + 0.5y*ν - 0.5(y^2)*ν   0.125 - 0.25y - 0.375ν + 0.75y*ν       -0.125 + 0.25y + 0.375ν + 0.25y*ν   -0.208333 - 0.125ν - 0.5(y^2) + 0.5(y^2)*ν
+ -0.166667 + y - 0.0833333ν - (y^2)  0.125 - 0.25y - 0.375ν + 0.75y*ν                            0.416667 - y - 0.166667ν + y^2         -0.333333 + 0.0833333ν + y^2        0.125 + 0.25y + 0.125ν - 0.75y*ν
+ -0.125 + 0.25y + 0.375ν - 0.75y*ν   0.0416667 + 0.5y + 0.125ν - 0.5(y^2) - 0.5y*ν + 0.5(y^2)*ν  -0.125 + 0.25y - 0.125ν + 0.25y*ν      0.125 - 0.25y + 0.125ν + 0.75y*ν    -0.291667 + 0.125ν + 0.5(y^2) - 0.5(y^2)*ν
+ -0.333333 + 0.0833333ν + y^2        -0.125 + 0.25y - 0.125ν - 0.75y*ν                           0.0833333 + 0.166667ν - (y^2)          -0.166667 - y - 0.0833333ν - (y^2)  -0.125 - 0.25y + 0.375ν + 0.75y*ν
+ -0.125 - 0.25y - 0.125ν + 0.75y*ν   -0.291667 + 0.125ν + 0.5(y^2) - 0.5(y^2)*ν                  -0.125 - 0.25y + 0.375ν - 0.25y*ν   …  0.125 + 0.25y - 0.375ν - 0.75y*ν    0.0416667 - 0.5y + 0.125ν - 0.5(y^2) + 0.5y*ν + 0.5(y^2)*ν
+ 0.0833333 + 0.166667ν - (y^2)       -0.125 + 0.25y + 0.375ν + 0.25y*ν                           -0.333333 + 0.0833333ν + y^2           0.416667 + y - 0.166667ν + y^2      -0.125 - 0.25y - 0.125ν - 0.25y*ν
+ 0.125 + 0.25y - 0.375ν + 0.25y*ν    -0.208333 - 0.125ν - 0.5(y^2) + 0.5(y^2)*ν                  0.125 + 0.25y + 0.125ν - 0.75y*ν       -0.125 - 0.25y - 0.125ν - 0.25y*ν   0.458333 + 0.5y - 0.125ν + 0.5(y^2) - 0.5y*ν - 0.5(y^2)*ν
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Some matrix elements are not shown in the above matrix. We then integrate with respect to y and apply limits.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;second_integration_wrt_y_elementwise&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;element&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;integrate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;element&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;detailed&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;symbolic&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;first_integration_wrt_x_elementwise&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;8×8 Matrix{SymbolicUtils.BasicSymbolic{Real}}:
+ 0.5 - 0.166667ν     0.125 + 0.125ν           -0.25 - 0.0833333ν  -0.125 + 0.375ν          -0.25 + 0.0833333ν  -0.125 - 0.125ν          0.166667ν           0.125 - 0.375ν
+ 0.125 + 0.125ν      0.5 - 0.166667ν          0.125 - 0.375ν      6.93889e-18 + 0.166667ν  -0.125 - 0.125ν     -0.25 + 0.0833333ν       -0.125 + 0.375ν     -0.25 - 0.0833333ν
+ -0.25 - 0.0833333ν  0.125 - 0.375ν           0.5 - 0.166667ν     -0.125 - 0.125ν          0.166667ν           -0.125 + 0.375ν          -0.25 + 0.0833333ν  0.125 + 0.125ν
+ -0.125 + 0.375ν     6.93889e-18 + 0.166667ν  -0.125 - 0.125ν     0.5 - 0.166667ν          0.125 - 0.375ν      -0.25 - 0.0833333ν       0.125 + 0.125ν      -0.25 + 0.0833333ν
+ -0.25 + 0.0833333ν  -0.125 - 0.125ν          0.166667ν           0.125 - 0.375ν           0.5 - 0.166667ν     0.125 + 0.125ν           -0.25 - 0.0833333ν  -0.125 + 0.375ν
+ -0.125 - 0.125ν     -0.25 + 0.0833333ν       -0.125 + 0.375ν     -0.25 - 0.0833333ν       0.125 + 0.125ν      0.5 - 0.166667ν          0.125 - 0.375ν      6.93889e-18 + 0.166667ν
+ 0.166667ν           -0.125 + 0.375ν          -0.25 + 0.0833333ν  0.125 + 0.125ν           -0.25 - 0.0833333ν  0.125 - 0.375ν           0.5 - 0.166667ν     -0.125 - 0.125ν
+ 0.125 - 0.375ν      -0.25 - 0.0833333ν       0.125 + 0.125ν      -0.25 + 0.0833333ν       -0.125 + 0.375ν     6.93889e-18 + 0.166667ν  -0.125 - 0.125ν     0.5 - 0.166667ν
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For a check of the results, we can compare our obtained stiffness matrix with the stiffness matrix reported in reference 3 (code line number 87 to 99 in paper).&lt;/p&gt;
+&lt;h3 id=&#34;caveat&#34;&gt;Caveat&lt;/h3&gt;
+&lt;p&gt;Though the symbolic approach works well for the rectangular element, it might not work for more complex elements. This is because the symbolic integrations are not always exact. Symbolic integrations in Julia usually produce the solution along with an unsolved portion and error. Fortunately, in our case we did not require the error term. It is also a good practice to substitute values (of symbols) wherever possible to simplify the expression rather than doing all the computations symbolically and then substituting the values at the end.&lt;/p&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Concepts and applications of finite element analysis by Robert D. Cook, et. al. (John Wiley &amp;amp; Sons, Inc., Fourth Edition)&lt;/li&gt;
+&lt;li&gt;A first course in the finite element method by Daryl L. Logan (Cengage Learning, Fifth Edition)&lt;/li&gt;
+&lt;li&gt;A 99 line topology optimization code written in MATLAB (Springer, 2001) by &lt;a href=&#34;https://www.dtu.dk/english/Person/cwis?id=2278&amp;amp;cpid=927&amp;amp;tab=1&amp;amp;entity=profile&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ole Sigmund&lt;/a&gt; (Link: &lt;a href=&#34;https://www.topopt.mek.dtu.dk/apps-and-software/a-99-line-topology-optimization-code-written-in-matlab&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.topopt.mek.dtu.dk/apps-and-software/a-99-line-topology-optimization-code-written-in-matlab&lt;/a&gt;, Last accessed: 25 Feb 2024)&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

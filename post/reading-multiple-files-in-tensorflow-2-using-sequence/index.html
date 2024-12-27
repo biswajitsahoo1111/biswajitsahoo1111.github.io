@@ -1,0 +1,2137 @@
+<!doctype html>
+<!-- This site was created with Hugo Blox. https://hugoblox.com -->
+<!-- Last Published: December 28, 2024 --><html lang="en-us" dir="ltr"
+      data-wc-theme-default="system">
+  
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="generator" content="Hugo Blox Builder 0.3.1" />
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Biswajit Sahoo, Ph.D." />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Create a data pipeline by incrementally reading thousands of `csv` files using Tensorflow `Sequence`." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/" />
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="/css/themes/emerald.min.css" />
+  
+
+  
+  
+    
+    <link href="/dist/wc.min.css" rel="stylesheet" />
+  
+
+  
+  
+  
+
+  
+
+  <script>
+     
+    window.hbb = {
+       defaultTheme: document.documentElement.dataset.wcThemeDefault,
+       setDarkTheme: () => {
+        document.documentElement.classList.add("dark");
+        document.documentElement.style.colorScheme = "dark";
+      },
+       setLightTheme: () => {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.style.colorScheme = "light";
+      }
+    }
+
+    console.debug(`Default Hugo Blox Builder theme is ${window.hbb.defaultTheme}`);
+
+    if ("wc-color-theme" in localStorage) {
+      localStorage.getItem("wc-color-theme") === "dark" ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+    } else {
+      window.hbb.defaultTheme === "dark" ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+      if (window.hbb.defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+      }
+    }
+  </script>
+
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      
+      let checkboxes = document.querySelectorAll('li input[type=\'checkbox\'][disabled]');
+      checkboxes.forEach(e => {
+        e.parentElement.parentElement.classList.add('task-list');
+      });
+
+      
+      const liNodes = document.querySelectorAll('.task-list li');
+      liNodes.forEach(nodes => {
+        let textNodes = Array.from(nodes.childNodes).filter(node => node.nodeType === 3 && node.textContent.trim().length > 1);
+        if (textNodes.length > 0) {
+          const span = document.createElement('label');
+          textNodes[0].after(span);  
+          span.appendChild(nodes.querySelector('input[type=\'checkbox\']'));
+          span.appendChild(textNodes[0]);
+        }
+      });
+    });
+  </script>
+
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  <link rel="icon" type="image/png" href="/media/icon_hu15771692248986819267.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu13363495885888113771.png" />
+
+  <link rel="canonical" href="http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Biswajit Sahoo, Ph.D." />
+  <meta property="og:url" content="http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/" />
+  <meta property="og:title" content="Reading multiple files in Tensorflow 2 using Sequence | Biswajit Sahoo, Ph.D." />
+  <meta property="og:description" content="Create a data pipeline by incrementally reading thousands of `csv` files using Tensorflow `Sequence`." /><meta property="og:image" content="http://localhost:1313/media/icon_hu14255546723713444625.png" />
+    <meta property="twitter:image" content="http://localhost:1313/media/icon_hu14255546723713444625.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2020-12-26T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2020-12-26T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+  
+
+
+  <title>Reading multiple files in Tensorflow 2 using Sequence | Biswajit Sahoo, Ph.D.</title>
+
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <style>
+    @font-face {
+      font-family: 'Inter var';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(/dist/font/Inter.var.woff2) format(woff2);
+    }
+  </style>
+
+  
+
+  
+  
+
+
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="/dist/pagefind/pagefind-ui.be766eb419317a14ec769d216e9779bfe8f3737c80e780f4ba0dafb57a41a482.css" integrity="sha256-vnZutBkxehTsdp0hbpd5v&#43;jzc3yA54D0ug2vtXpBpII=" />
+
+
+<script src="/dist/pagefind/pagefind-ui.87693d7c6f2b3b347ce359d0ede762c033419f0a32b22ce508c335a81d841f1b.js" integrity="sha256-h2k9fG8rOzR841nQ7ediwDNBnwoysizlCMM1qB2EHxs="></script>
+
+
+<script>window.hbb.pagefind = {"baseUrl":"/"};</script>
+
+<style>
+  html.dark {
+    --pagefind-ui-primary: #eeeeee;
+    --pagefind-ui-text: #eeeeee;
+    --pagefind-ui-background: #152028;
+    --pagefind-ui-border: #152028;
+    --pagefind-ui-tag: #152028;
+  }
+</style>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({
+      element: "#search",
+      showSubResults: true,
+      baseUrl: window.hbb.pagefind.baseUrl,
+      bundlePath: window.hbb.pagefind.baseUrl + "pagefind/",
+    });
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    let element = document.getElementById('search');
+    let trigger = document.getElementById('search_toggle');
+
+    if (trigger) {
+      trigger.addEventListener('click', () => {
+        element.classList.toggle('hidden');
+        element.querySelector("input").value = ""
+        element.querySelector("input").focus()
+
+        if (!element.classList.contains('hidden')) {
+          let clear_trigger = document.querySelector('.pagefind-ui__search-clear');
+
+          if (clear_trigger && !clear_trigger.hasAttribute('listenerOnClick')) {
+            clear_trigger.setAttribute('listenerOnClick', 'true');
+
+            clear_trigger.addEventListener('click', () => {
+              element.classList.toggle('hidden');
+            });
+          }
+        }
+
+      });
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link type="text/css" rel="stylesheet" href="/dist/lib/katex/katex.min.505d5f829022bb7b4f24dfee0aa1141cd7bba67afe411d1240335f820960b5c3.css" integrity="sha256-UF1fgpAiu3tPJN/uCqEUHNe7pnr&#43;QR0SQDNfgglgtcM=" />
+  
+  
+  <script defer src="/dist/lib/katex/katex.min.dc84b296ec3e884de093158f760fd9d45b6c7abe58b5381557f4e138f46a58ae.js" integrity="sha256-3ISyluw&#43;iE3gkxWPdg/Z1Ftser5YtTgVV/ThOPRqWK4="></script>
+  
+  
+  
+  
+  <script defer src="/js/katex-renderer.6579ec9683211cfb952064aedf3a3baea5eeb17a061775b32b70917474637c80.js" integrity="sha256-ZXnsloMhHPuVIGSu3zo7rqXusXoGF3WzK3CRdHRjfIA="></script>
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  <script
+    defer
+    src="/js/hugo-blox-en.min.js"
+    integrity=""
+  ></script>
+
+  
+  
+
+
+
+
+
+
+
+
+  
+    
+      
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+      
+    
+  
+
+
+
+
+</head>
+
+  <body class="dark:bg-hb-dark dark:text-white page-wrapper" id="top">
+    <div id="page-bg"></div>
+    <div class="page-header sticky top-0 z-30">
+      
+      
+      
+        
+        
+        
+          <header id="site-header" class="header">
+  <nav class="navbar px-3 flex justify-left">
+    <div class="order-0 h-100">
+      
+      <a class="navbar-brand" href="/" title="Biswajit Sahoo, Ph.D.">
+        Biswajit Sahoo, Ph.D.
+      </a>
+    </div>
+    
+    <input id="nav-toggle" type="checkbox" class="hidden" />
+    <label
+      for="nav-toggle"
+      class="order-3 cursor-pointer flex items-center lg:hidden text-dark dark:text-white lg:order-1">
+      <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
+        <title>Open Menu</title>
+        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+      </svg>
+      <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
+        <title>Close Menu</title>
+        <polygon
+          points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+          transform="rotate(45 10 10)"></polygon>
+      </svg>
+    </label>
+    
+
+    
+    
+    <ul
+      id="nav-menu"
+      class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8 justify-left
+      ml-auto mr-6">
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/"
+        >Home</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#blog"
+        >Blog</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#projects"
+        >Projects</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#experience"
+        >Experience</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#publications"
+        >Publications</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/personal/"
+        >Personal</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#contact"
+        >Contact</a
+        >
+      </li>
+      
+      
+      
+    </ul>
+
+    <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+
+      
+      
+      
+      <button
+        aria-label="search"
+        class="text-black hover:text-primary  inline-block px-3 text-xl dark:text-white"
+        id="search_toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="currentColor"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+      </button>
+      
+
+      
+      
+      <div class="px-3 text-black hover:text-primary-700 dark:text-white dark:hover:text-primary-300
+            [&.active]:font-bold [&.active]:text-black/90 dark:[&.active]:text-white">
+        <button class="theme-toggle mt-1" accesskey="t" title="appearance">
+          <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" class="dark:hidden">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" class=" dark:block [&:not(dark)]:hidden">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+      
+
+      
+      
+
+      
+      
+    </div>
+  </nav>
+</header>
+
+
+<div id="search" class="hidden p-3"></div>
+
+
+        
+      
+    </div>
+    <div class="page-body  my-10">
+      
+
+
+
+
+
+<div class="mx-auto flex max-w-screen-xl">
+  
+
+
+
+<aside class="hb-sidebar-container max-lg:[transform:translate3d(0,-100%,0)] lg:hidden xl:block">
+  
+  <div class="px-4 pt-4 lg:hidden">
+    
+    
+  </div>
+  <div class="hb-scrollbar lg:h-[calc(100vh-var(--navbar-height))]">
+    <ul class="flex flex-col gap-1 lg:hidden">
+      
+      
+        <li class="open"><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/"
+    
+  >Blog
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/compute-element-stiffness-matrix-symbolically/"
+    
+  >Compute element stiffness matrix symbolically
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/making-github-traffic-type-plots/"
+    
+  >Making Github Traffic Type Plots
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/indexdslices-in-tensorflow/"
+    
+  >IndexedSlices in Tensorflow
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/"
+    
+  >Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book
+    </a>
+              
+            </li><li class="flex flex-col open"><a
+    class="hb-sidebar-custom-link
+      sidebar-active-item bg-primary-100 font-semibold text-primary-800 dark:bg-primary-300 dark:text-primary-900"
+    href="/post/reading-multiple-files-in-tensorflow-2-using-sequence/"
+    
+  >Reading multiple files in Tensorflow 2 using Sequence
+    </a>
+  
+    <ul class="hb-sidebar-mobile-toc"><li>
+              <a
+                href="#outline"
+                class="hb-docs-link"
+              >Outline:</a>
+            </li>
+          <li>
+              <a
+                href="#1-create-500-csv-files-of-random-data"
+                class="hb-docs-link"
+              >1. Create 500 .csv files of random data</a>
+            </li>
+          <li>
+              <a
+                href="#2-write-a-custom-sequence-object"
+                class="hb-docs-link"
+              >2. Write a custom Sequence object</a>
+            </li>
+          <li>
+              <a
+                href="#3-feed-the-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs"
+                class="hb-docs-link"
+              >3. Feed the chunks of data to a CNN model and train it for several epochs</a>
+            </li>
+          <li>
+              <a
+                href="#4-how-to-make-predictions"
+                class="hb-docs-link"
+              >4. How to make predictions?</a>
+            </li>
+          <li>
+              <a
+                href="#is-this-method-efficient-will-it-work-at-a-reasobable-speed-if-we-have-many-complex-preprocessing-steps-to-do-before-training-the-model"
+                class="hb-docs-link"
+              >Is this method efficient? Will it work at a reasobable speed if we have many complex preprocessing steps to do before training the model?</a>
+            </li>
+          </ul>
+  
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/reading-multiple-csv-files-in-pytorch/"
+    
+  >Reading multiple csv files in PyTorch
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/efficiently-reading-multiple-files-in-tensorflow-2/"
+    
+  >Efficiently reading multiple files in Tensorflow 2
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/doing-linear-algebra-using-tensorflow-2/"
+    
+  >Doing Linear Algebra using Tensorflow 2
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/reading-multiple-files-in-tensorflow-2/"
+    
+  >Reading multiple files in Tensorflow 2
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/using-python-generators/"
+    
+  >Using Python Generators
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/fault-diagnosis-of-machines/"
+    
+  >Fault Diagnosis of Machines
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/revisiting-systems-of-linear-equations/"
+    
+  >Revisiting Systems of Linear Equations
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/principal-component-analysis-part-iii/"
+    
+  >Principal Component Analysis - Part III
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/principal-component-analysis-part-ii/"
+    
+  >Principal Component Analysis - Part II
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/principal-component-analysis-part-i/"
+    
+  >Principal Component Analysis - Part I
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/"
+    
+  >Publications
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/data_driven_features_fault_diagnosis/"
+    
+  >Multiclass bearing fault classification using features learned by a deep neural network
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/ml_regression_optimization/"
+    
+  >Machine Learning, Regression, and Optimization
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/spca_fault_diagnosis/"
+    
+  >Feature Subset Selection Using Sparse Principal Component Analysis and Multiclass Fault Classification Using Selected Features
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/"
+    
+  >Projects
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/rul_codes_open/"
+    
+  >Data-Driven Remaining Useful Life (RUL) Prediction
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/cbm_codes_open/"
+    
+  >Data-Driven Machinery Fault Diagnosis
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/personal/"
+    
+  >
+    </a></li>
+    </ul>
+
+    <div class="max-xl:hidden h-0 w-64 shrink-0"></div></div>
+
+</aside>
+  
+
+<nav class="hb-toc order-last hidden w-64 shrink-0 xl:block print:hidden px-4" aria-label="table of contents">
+  
+
+
+
+
+
+
+
+
+
+
+
+  <div class="hb-scrollbar text-sm [hyphens:auto] sticky top-16 overflow-y-auto pr-4 pt-6 max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] -mr-4 rtl:-ml-4"><p class="mb-4 font-semibold tracking-tight">On this page</p><ul>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#outline">Outline:</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#1-create-500-csv-files-of-random-data">1. Create 500 .csv files of random data</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#2-write-a-custom-sequence-object">2. Write a custom Sequence object</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#3-feed-the-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs">3. Feed the chunks of data to a CNN model and train it for several epochs</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#4-how-to-make-predictions">4. How to make predictions?</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#is-this-method-efficient-will-it-work-at-a-reasobable-speed-if-we-have-many-complex-preprocessing-steps-to-do-before-training-the-model">Is this method efficient? Will it work at a reasobable speed if we have many complex preprocessing steps to do before training the model?</a>
+      </li></ul>
+
+  
+  
+    
+    
+  
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  </nav>
+
+
+  <article class="w-full break-words flex min-h-[calc(100vh-var(--navbar-height))] min-w-0 justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+    <main class="w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12">
+
+      
+
+      <h1 class="mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Reading multiple files in Tensorflow 2 using Sequence</h1>
+
+      <div class="mt-4 mb-16">
+      <div class="text-gray-500 dark:text-gray-300 text-sm flex items-center flex-wrap gap-y-2"><span class="mr-1">Dec 26, 2020</span>
+        
+
+        
+        <span class="mx-1">·</span>
+        <span class="mx-1">
+          17 min read
+        </span>
+        
+        </div>
+
+        <div class="mt-3">
+          
+
+
+
+
+
+        </div>
+      </div>
+
+
+
+      
+      
+      
+
+      
+      
+
+      <div class="prose prose-slate lg:prose-xl dark:prose-invert">
+        <table class="tfo-notebook-buttons" align="left">
+  <td>
+    <a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb">
+    <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
+    Run in Google Colab</a>
+  </td>
+  <td>
+    <a href="https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb">
+    <img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" />
+    View source on GitHub</a>
+  </td>
+  <td>
+    <a href="https://www.dropbox.com/s/weog8ubsu9qcugv/Reading_mulitple_files_using_tensorflow_sequence.ipynb?dl=1"><img src="https://www.tensorflow.org/images/download_logo_32px.png" />Download notebook</a>
+  </td>
+</table>
+<p>In this post, we will read multiple csv files using <a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence" target="_blank" rel="noopener">Tensroflow Sequence</a>. In an <a href="https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/" target="_blank" rel="noopener">earlier post</a> we had demonstrated the procedure for reading multiple csv files using a custom generator. Though generators are convenient for handling chunks of data from a large dataset, they have limited portability and scalability (<a href="https://www.tensorflow.org/guide/data#consuming_python_generators" target="_blank" rel="noopener">see the caution here</a>). Therefore, Tensorflow prefers <code>Sequence</code> over generators.</p>
+<p>Sequence is similar to <code>Tensorflow Dataset</code> but provides flexibility for batched data preparation in a custom manner. <code>Tensorflow Dataset</code> provides a wide range of functionalities to handle different data types. But for some specific applications we might have to make some custom modifications for which built-in methods are not available in <code>tensorflow dataset</code>. In that case, we can use <code>Sequence</code> to create our own dataset equivalent. In this post, we will show how to use sequence to read multiple csv files. The method we will discuss is general enough to work for other file formats (such as .txt, .npz, etc.) as well. We will demonstrate the procedure using 500 .csv files. But the method can be easily extended to huge datasets involving thousands of csv files.</p>
+<p>This post is self-sufficient in the sense that readers don&rsquo;t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named &ldquo;random_data&rdquo; will be created in current working directory and .csv files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn&rsquo;t have an old folder named &ldquo;random_data&rdquo;. Then run the following code cells. We will use <code>Tensorflow 2</code> to run our deep learning model. Tensorflow is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.</p>
+<h2 id="outline">Outline:</h2>
+<ol>
+<li><a href="#sec_1">Create 500 &ldquo;.csv&rdquo; files and save it in the folder &ldquo;random_data&rdquo; in current directory.</a></li>
+<li><a href="#sec_2">Write a sequence object that reads data from the folder in chunks and preprocesses it.</a></li>
+<li><a href="#sec_3">Feed the chunks of data to a CNN model and train it for several epochs.</a></li>
+<li><a href="#sec_4">Make prediction on new data for which labels are not known.</a></li>
+</ol>
+<p><a id="sec_1"></a></p>
+<h2 id="1-create-500-csv-files-of-random-data">1. Create 500 .csv files of random data</h2>
+<p>As we intend to train a CNN model for classification using our data, we will generate data for 5 different classes. The dataset that we will create is a contrived one. But readers can modify the approach slightly to cater to their need. Following is the process that we will follow.</p>
+<ul>
+<li>Each .csv file will have one column of data with 1024 entries.</li>
+<li>Each file will be saved using one of the following names (Fault_1, Fault_2, Fault_3, Fault_4, Fault_5). The dataset is balanced, meaning, for each category, we have approximately same number of observations. Data files in &ldquo;Fault_1&rdquo; category will have names as &ldquo;Fault_1_001.csv&rdquo;, &ldquo;Fault_1_002.csv&rdquo;, &ldquo;Fault_1_003.csv&rdquo;, &hellip;,&ldquo;Fault_1_100.csv&rdquo;. Similarly for other classes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">glob</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1111</span><span class="p">)</span>
+</span></span></code></pre></div><p>First create a function that will generate random files.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_random_csv_files</span><span class="p">(</span><span class="n">fault_classes</span><span class="p">,</span> <span class="n">number_of_files_in_each_class</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&#34;./random_data/&#34;</span><span class="p">)</span>  <span class="c1"># Make a directory to save created files.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">fault_class</span> <span class="ow">in</span> <span class="n">fault_classes</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_files_in_each_class</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1024</span><span class="p">,)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">file_name</span> <span class="o">=</span> <span class="s2">&#34;./random_data/&#34;</span> <span class="o">+</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;fault_class&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;_&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="si">{0:03}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;.csv&#34;</span> <span class="c1"># This creates file_name</span>
+</span></span><span class="line"><span class="cl">            <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;file_name&#34;</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s2">&#34;,&#34;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="s2">&#34;V1&#34;</span><span class="p">,</span> <span class="n">comments</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;number_of_files_in_each_class&#34;</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&#34; &#34;</span> <span class="o">+</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;fault_class&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34; files&#34;</span>  <span class="o">+</span> <span class="s2">&#34; created.&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Now use the function to create 100 files each for five fault types.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">create_random_csv_files</span><span class="p">([</span><span class="s2">&#34;Fault_1&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_2&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_3&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_4&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_5&#34;</span><span class="p">],</span> <span class="n">number_of_files_in_each_class</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>100 Fault_1 files created.
+100 Fault_2 files created.
+100 Fault_3 files created.
+100 Fault_4 files created.
+100 Fault_5 files created.
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;./random_data/*&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Total number of files: &#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Showing first 10 files...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">files</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</span></span></code></pre></div><pre><code>Total number of files:  500
+Showing first 10 files...
+
+['./random_data\\Fault_1_001.csv',
+ './random_data\\Fault_1_002.csv',
+ './random_data\\Fault_1_003.csv',
+ './random_data\\Fault_1_004.csv',
+ './random_data\\Fault_1_005.csv',
+ './random_data\\Fault_1_006.csv',
+ './random_data\\Fault_1_007.csv',
+ './random_data\\Fault_1_008.csv',
+ './random_data\\Fault_1_009.csv',
+ './random_data\\Fault_1_010.csv']
+</code></pre>
+<p>To extract labels from file name, extract the part of the file name that corresponds to fault type.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span></code></pre></div><pre><code>./random_data\Fault_1_001.csv
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">14</span><span class="p">:</span><span class="mi">21</span><span class="p">])</span>
+</span></span></code></pre></div><pre><code>Fault_1
+</code></pre>
+<p>Now that data have been created, we will go to the next step. That is, create a custom <code>Sequence</code> object, preprocess the time series like data into a matrix like shape such that a 2-D CNN can ingest it. We reshape the data in that way to just illustrate the point. Readers should use their own preprocessing steps.</p>
+<p><a id="sec_2"></a></p>
+<h2 id="2-write-a-custom-sequence-object">2. Write a custom Sequence object</h2>
+<p>According to <code>Tensorflow</code> <a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence" target="_blank" rel="noopener">documentation</a>, every Sequence must implement following two methods:</p>
+<ul>
+<li><code>__getitem__</code> method: Iterates over the dataset chunk by chunk. It must return a complete batch.</li>
+<li><code>__len__</code> method: Returns the length of the Sequence (total number of batches that we can extract from the full dataset).</li>
+</ul>
+<p>As we create a custom sequence object, we have complete control over the arguments we want to pass it. The following sequence object takes a list of file names as first argument. The second argument is batch_size. batch_size determines how many files we will process at one go. As we will be solving a classification problem, we have to assign labels to each raw data. We will use following labels for convenience.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Class</th>
+          <th style="text-align: center">Label</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Fault_1</td>
+          <td style="text-align: center">0</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Fault_2</td>
+          <td style="text-align: center">1</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Fault_3</td>
+          <td style="text-align: center">2</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Fault_4</td>
+          <td style="text-align: center">3</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Fault_5</td>
+          <td style="text-align: center">4</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>    <span class="c1"># To match regular expression for extracting labels</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Tensorflow version: &#34;</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>Tensorflow version:  2.4.0
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">CustomSequence</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Sequence</span><span class="p">):</span>  <span class="c1"># It inherits from `tf.keras.utils.Sequence` class</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>  <span class="c1"># Two input arguments to the class.</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">filenames</span><span class="o">=</span> <span class="n">filenames</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filenames</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>  <span class="c1"># idx is index that runs from 0 to length of sequence</span>
+</span></span><span class="line"><span class="cl">        <span class="n">batch_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filenames</span><span class="p">[</span><span class="n">idx</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">:(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">]</span> <span class="c1"># Select a chunk of file names</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">label_classes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Fault_1&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_2&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_3&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_4&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_5&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">batch_x</span><span class="p">:</span>   <span class="c1"># In this loop read the files in the chunk that was selected previously</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">))</span> <span class="c1"># Change this line to read any other type of file</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># Convert column data to matrix like data with one channel</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&#34;^&#34;</span> <span class="o">+</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;file[14:21]&#34;</span><span class="p">)</span>      <span class="c1"># Pattern extracted from file_name</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">label_classes</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="k">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">label_classes</span><span class="p">[</span><span class="n">j</span><span class="p">]):</span> <span class="c1"># Pattern is matched against different label_classes</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">labels</span>
+</span></span></code></pre></div><p>To read any other file format, inside the <code>__getitem__</code> method change the line that reads files. This will enable us to read different file formats, be it <code>.txt</code> or <code>.npz</code> or any other. Preprocessing of data, different from what we have done in this blog, can be done within the <code>__getitem__</code> method.</p>
+<p>Now we will check whether the dataset works as intended or not. We will set batch_size to 10. This means that files in chunks of 10 will be read and processed. The list of files from which 10 are chosen can be an ordered file list or shuffled list. In case, the files are not shuffled, use np.random.shuffle(file_list) to shuffle files.</p>
+<p>In the demonstration, we will read files from an ordered list. This will help us check any errors in the code.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sequence</span> <span class="o">=</span> <span class="n">CustomSequence</span><span class="p">(</span><span class="n">filenames</span> <span class="o">=</span> <span class="n">files</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><p>Check the length of the sequence.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sequence</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+</span></span></code></pre></div><pre><code>50
+</code></pre>
+<p>Another way to check the length of the sequence.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sequence</span><span class="p">))</span>
+</span></span></code></pre></div><pre><code>50
+</code></pre>
+<p>The sequence is not an infinite loop. Let&rsquo;s check again. This is yet another way to check the length of the sequence.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">_</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>50
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">num</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span> <span class="k">break</span>
+</span></span></code></pre></div><pre><code>(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+(10, 32, 32, 1) (10,)
+[0 0 0 0 0 0 0 0 0 0]
+</code></pre>
+<p>Run the above cell multiple times to observe different labels. Label 1 appears only when all the files corresponding to &ldquo;Fault_1&rdquo; have been read. There are 100 files for &ldquo;Fault_1&rdquo; and we have set batch_size to 10. In the above cell we are iterating over the generator only 6 times. When number of iterations become greater than 10, we see label 1 and subsequently other labels. This will happen only if our initial file list is not shuffled. If the original list is shuffled, we will get random labels.</p>
+<p>We can pass this sequence directly to <code>model.fit()</code> to train our deep learning model. Now that sequence works fine, we will use it to train a simple deep learning model. The focus of this post is not on the model itself. So we will use a simplest model. If readers want a different model, they can do so by just replacing our model with theirs.</p>
+<p><a id="sec_3"></a></p>
+<h2 id="3-feed-the-chunks-of-data-to-a-cnn-model-and-train-it-for-several-epochs">3. Feed the chunks of data to a CNN model and train it for several epochs</h2>
+<p>But before we build the model and train it, we will first move our files to different folders depending on their fault type. We do so as it will be convenient later to create a training, validation, and test set, keeping the balanced nature of the dataset intact.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">shutil</span>
+</span></span></code></pre></div><p>Create five different folders one each for a given fault type.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fault_folders</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Fault_1&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_2&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_3&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_4&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_5&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">folder_name</span> <span class="ow">in</span> <span class="n">fault_folders</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&#34;./random_data&#34;</span><span class="p">,</span> <span class="n">folder_name</span><span class="p">))</span>
+</span></span></code></pre></div><p>Move files into those folders.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&#34;^&#34;</span> <span class="o">+</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;file[14:21]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fault_folders</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="k">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">fault_folders</span><span class="p">[</span><span class="n">j</span><span class="p">]):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dest</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&#34;./random_data/&#34;</span><span class="p">,</span><span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;fault_folders[j]&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;./random_data/*&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>['./random_data\\Fault_1',
+ './random_data\\Fault_2',
+ './random_data\\Fault_3',
+ './random_data\\Fault_4',
+ './random_data\\Fault_5']
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;./random_data/Fault_1/*&#34;</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span> <span class="c1"># Showing first 10 files of Fault_1 folder</span>
+</span></span></code></pre></div><pre><code>['./random_data/Fault_1\\Fault_1_001.csv',
+ './random_data/Fault_1\\Fault_1_002.csv',
+ './random_data/Fault_1\\Fault_1_003.csv',
+ './random_data/Fault_1\\Fault_1_004.csv',
+ './random_data/Fault_1\\Fault_1_005.csv',
+ './random_data/Fault_1\\Fault_1_006.csv',
+ './random_data/Fault_1\\Fault_1_007.csv',
+ './random_data/Fault_1\\Fault_1_008.csv',
+ './random_data/Fault_1\\Fault_1_009.csv',
+ './random_data/Fault_1\\Fault_1_010.csv']
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;./random_data/Fault_3/*&#34;</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span> <span class="c1"># Showing first 10 files of Fault_3 folder</span>
+</span></span></code></pre></div><pre><code>['./random_data/Fault_3\\Fault_3_001.csv',
+ './random_data/Fault_3\\Fault_3_002.csv',
+ './random_data/Fault_3\\Fault_3_003.csv',
+ './random_data/Fault_3\\Fault_3_004.csv',
+ './random_data/Fault_3\\Fault_3_005.csv',
+ './random_data/Fault_3\\Fault_3_006.csv',
+ './random_data/Fault_3\\Fault_3_007.csv',
+ './random_data/Fault_3\\Fault_3_008.csv',
+ './random_data/Fault_3\\Fault_3_009.csv',
+ './random_data/Fault_3\\Fault_3_010.csv']
+</code></pre>
+<p>Prepare the data for training set, validation set, and test_set. For each fault type, we will keep 70 files for training, 10 files for validation and 20 files for testing.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fault_1_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;./random_data/Fault_1/*&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_2_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;./random_data/Fault_2/*&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_3_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;./random_data/Fault_3/*&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_4_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;./random_data/Fault_4/*&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_5_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;./random_data/Fault_5/*&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fault_1_train</span><span class="p">,</span> <span class="n">fault_1_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fault_1_files</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_2_train</span><span class="p">,</span> <span class="n">fault_2_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fault_2_files</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">54</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_3_train</span><span class="p">,</span> <span class="n">fault_3_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fault_3_files</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">543</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_4_train</span><span class="p">,</span> <span class="n">fault_4_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fault_4_files</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">5432</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_5_train</span><span class="p">,</span> <span class="n">fault_5_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fault_5_files</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">54321</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">fault_1_train</span><span class="p">,</span> <span class="n">fault_1_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fault_1_train</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_2_train</span><span class="p">,</span> <span class="n">fault_2_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fault_2_train</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_3_train</span><span class="p">,</span> <span class="n">fault_3_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fault_3_train</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">123</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_4_train</span><span class="p">,</span> <span class="n">fault_4_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fault_4_train</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fault_5_train</span><span class="p">,</span> <span class="n">fault_5_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fault_5_train</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">12345</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">train_file_names</span> <span class="o">=</span> <span class="n">fault_1_train</span> <span class="o">+</span> <span class="n">fault_2_train</span> <span class="o">+</span> <span class="n">fault_3_train</span> <span class="o">+</span> <span class="n">fault_4_train</span> <span class="o">+</span> <span class="n">fault_5_train</span>
+</span></span><span class="line"><span class="cl"><span class="n">validation_file_names</span> <span class="o">=</span> <span class="n">fault_1_val</span> <span class="o">+</span> <span class="n">fault_2_val</span> <span class="o">+</span> <span class="n">fault_3_val</span> <span class="o">+</span> <span class="n">fault_4_val</span> <span class="o">+</span> <span class="n">fault_5_val</span>
+</span></span><span class="line"><span class="cl"><span class="n">test_file_names</span> <span class="o">=</span> <span class="n">fault_1_test</span> <span class="o">+</span> <span class="n">fault_2_test</span> <span class="o">+</span> <span class="n">fault_3_test</span> <span class="o">+</span> <span class="n">fault_4_test</span> <span class="o">+</span> <span class="n">fault_5_test</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Shuffle training files (We don&#39;t need to shuffle validation and test data)</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">train_file_names</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Number of train_files:&#34;</span> <span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">train_file_names</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Number of validation_files:&#34;</span> <span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">validation_file_names</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Number of test_files:&#34;</span> <span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_file_names</span><span class="p">))</span>
+</span></span></code></pre></div><pre><code>Number of train_files: 350
+Number of validation_files: 50
+Number of test_files: 100
+</code></pre>
+<p>Create sequences for training, validation, and test set.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">train_sequence</span> <span class="o">=</span> <span class="n">CustomSequence</span><span class="p">(</span><span class="n">filenames</span> <span class="o">=</span> <span class="n">train_file_names</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">val_sequence</span> <span class="o">=</span> <span class="n">CustomSequence</span><span class="p">(</span><span class="n">filenames</span> <span class="o">=</span> <span class="n">validation_file_names</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">test_sequence</span> <span class="o">=</span> <span class="n">CustomSequence</span><span class="p">(</span><span class="n">filenames</span> <span class="o">=</span> <span class="n">test_file_names</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&#34;relu&#34;</span><span class="p">,</span> <span class="n">input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">layers</span><span class="o">.</span><span class="n">MaxPool2D</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&#34;relu&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">layers</span><span class="o">.</span><span class="n">MaxPool2D</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&#34;relu&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&#34;softmax&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</span></span></code></pre></div><pre><code>Model: &quot;sequential&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 30, 30, 16)        160       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 15, 15, 16)        0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 13, 13, 32)        4640      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 6, 6, 32)          0         
+_________________________________________________________________
+flatten (Flatten)            (None, 1152)              0         
+_________________________________________________________________
+dense (Dense)                (None, 16)                18448     
+_________________________________________________________________
+dense_1 (Dense)              (None, 5)                 85        
+=================================================================
+Total params: 23,333
+Trainable params: 23,333
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre>
+<p>Compile the model.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s2">&#34;sparse_categorical_crossentropy&#34;</span><span class="p">,</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="s2">&#34;adam&#34;</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;accuracy&#34;</span><span class="p">])</span>
+</span></span></code></pre></div><p>Fit the model using sequence.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_sequence</span><span class="p">,</span> <span class="n">validation_data</span> <span class="o">=</span> <span class="n">val_sequence</span><span class="p">,</span> <span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>Epoch 1/10
+35/35 [==============================] - 2s 38ms/step - loss: 1.6305 - accuracy: 0.1788 - val_loss: 1.6095 - val_accuracy: 0.1800
+Epoch 2/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6086 - accuracy: 0.2212 - val_loss: 1.6093 - val_accuracy: 0.2200
+Epoch 3/10
+35/35 [==============================] - 1s 16ms/step - loss: 1.6089 - accuracy: 0.2057 - val_loss: 1.6094 - val_accuracy: 0.2200
+Epoch 4/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6092 - accuracy: 0.1987 - val_loss: 1.6100 - val_accuracy: 0.2000
+Epoch 5/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6105 - accuracy: 0.1173 - val_loss: 1.6095 - val_accuracy: 0.2000
+Epoch 6/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6069 - accuracy: 0.2062 - val_loss: 1.6098 - val_accuracy: 0.2000
+Epoch 7/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6070 - accuracy: 0.2332 - val_loss: 1.6097 - val_accuracy: 0.2200
+Epoch 8/10
+35/35 [==============================] - 1s 17ms/step - loss: 1.6067 - accuracy: 0.2255 - val_loss: 1.6100 - val_accuracy: 0.2200
+Epoch 9/10
+35/35 [==============================] - 1s 19ms/step - loss: 1.6044 - accuracy: 0.2510 - val_loss: 1.6090 - val_accuracy: 0.2400
+Epoch 10/10
+35/35 [==============================] - 1s 20ms/step - loss: 1.5998 - accuracy: 0.3180 - val_loss: 1.6094 - val_accuracy: 0.2400
+
+
+
+
+
+&lt;tensorflow.python.keras.callbacks.History at 0x24f86841b80&gt;
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">test_loss</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_sequence</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>10/10 [==============================] - 0s 14ms/step - loss: 1.6097 - accuracy: 0.2000
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Test loss: &#34;</span><span class="p">,</span> <span class="n">test_loss</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Test accuracy:&#34;</span><span class="p">,</span> <span class="n">test_accuracy</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>Test loss:  1.609706997871399
+Test accuracy: 0.20000000298023224
+</code></pre>
+<p>As expected, model performs terribly.</p>
+<p><a id="sec_4"></a></p>
+<h2 id="4-how-to-make-predictions">4. How to make predictions?</h2>
+<p>Until now, we have evaluated our model on a kept out test set. For our test set, both data and labels were known. So we evaluated its performance. But oftentimes, for test set, we don&rsquo;t have access to true labels. Rather, we have to make predictions on the data available. This is the case in online competitions where we have to submit our predictions on a test set for which we don&rsquo;t know the labels. We will call this set (without any labels) the prediction set. This naming convention is arbitrary but we will stick with it.</p>
+<p>If the whole of our prediction set fits into memory, we can just make prediction on this data by calling <code>model.evaluate()</code> and then use np.argmax() to obtain predicted class labels. Otherwise, we can read files in prediction set in chunks, make predictions on the chunks and finally append our result.</p>
+<p>Yet another pedantic way of doing this is to write a separate <code>Sequence</code> to read files from the prediction set in chunks and make predictions on it. We will show how this approach works. As we don&rsquo;t have a prediction set yet, we will first create some files and save it to the prediction set.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_prediction_set</span><span class="p">(</span><span class="n">num_files</span> <span class="o">=</span> <span class="mi">20</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&#34;./random_data/prediction_set&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_files</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1024</span><span class="p">,)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">file_name</span> <span class="o">=</span> <span class="s2">&#34;./random_data/prediction_set/&#34;</span>  <span class="o">+</span> <span class="s2">&#34;file_&#34;</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="si">{0:03}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;.csv&#34;</span> <span class="c1"># This creates file_name</span>
+</span></span><span class="line"><span class="cl">        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;file_name&#34;</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s2">&#34;,&#34;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="s2">&#34;V1&#34;</span><span class="p">,</span> <span class="n">comments</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="s2">&#34;num_files&#34;</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&#34; &#34;</span><span class="o">+</span> <span class="s2">&#34; files created in prediction set.&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Create some files for prediction set.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">create_prediction_set</span><span class="p">(</span><span class="n">num_files</span> <span class="o">=</span> <span class="mi">55</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>55  files created in prediction set.
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prediction_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;./random_data/prediction_set/*&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Total number of files: &#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">prediction_files</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Showing first 10 files...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">prediction_files</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</span></span></code></pre></div><pre><code>Total number of files:  55
+Showing first 10 files...
+
+['./random_data/prediction_set\\file_001.csv',
+ './random_data/prediction_set\\file_002.csv',
+ './random_data/prediction_set\\file_003.csv',
+ './random_data/prediction_set\\file_004.csv',
+ './random_data/prediction_set\\file_005.csv',
+ './random_data/prediction_set\\file_006.csv',
+ './random_data/prediction_set\\file_007.csv',
+ './random_data/prediction_set\\file_008.csv',
+ './random_data/prediction_set\\file_009.csv',
+ './random_data/prediction_set\\file_010.csv']
+</code></pre>
+<p>The prediction sequence will be slightly different from our previous custom dataset class. We only need to return data in this case.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">PredictionSequence</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">Sequence</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">filenames</span><span class="o">=</span> <span class="n">filenames</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filenames</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">batch_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filenames</span><span class="p">[</span><span class="n">idx</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">:(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">label_classes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Fault_1&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_2&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_3&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_4&#34;</span><span class="p">,</span> <span class="s2">&#34;Fault_5&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">batch_x</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">data</span>
+</span></span></code></pre></div><p>Check whether the generator sequence works or not. First we will check its length.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">prediction_seq</span> <span class="o">=</span> <span class="n">PredictionSequence</span><span class="p">(</span><span class="n">filenames</span> <span class="o">=</span> <span class="n">prediction_files</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">prediction_seq</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())</span>
+</span></span></code></pre></div><pre><code>6
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">prediction_seq</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>(10, 32, 32, 1)
+(10, 32, 32, 1)
+(10, 32, 32, 1)
+(10, 32, 32, 1)
+(10, 32, 32, 1)
+(5, 32, 32, 1)
+</code></pre>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">prediction_seq</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Shape of prediction array: &#34;</span><span class="p">,</span> <span class="n">predictions</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">predictions</span>
+</span></span></code></pre></div><pre><code>Shape of prediction array:  (55, 5)
+
+array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
+       [0.17025462, 0.23611873, 0.21584883, 0.15583281, 0.22194503],
+       [0.16997598, 0.23636353, 0.2160589 , 0.15556051, 0.22204101],
+       [0.17808239, 0.23929793, 0.20060928, 0.15217312, 0.22983731],
+       [0.16749388, 0.24041025, 0.21612632, 0.15114665, 0.22482291],
+       [0.16648369, 0.24155213, 0.21663304, 0.14991023, 0.22542089],
+       [0.16956756, 0.24306948, 0.21019061, 0.14832966, 0.2288426 ],
+       [0.16461462, 0.23314428, 0.22771336, 0.15880677, 0.21572094],
+       [0.16099085, 0.24614859, 0.22101355, 0.14492905, 0.22691788],
+       [0.16029194, 0.23579895, 0.2323411 , 0.15559815, 0.21596995],
+       [0.15644614, 0.24322459, 0.23156258, 0.14755438, 0.22121225],
+       [0.16045825, 0.23727809, 0.23065342, 0.1540593 , 0.2175509 ],
+       [0.18453611, 0.2363899 , 0.19367108, 0.1549771 , 0.23042585],
+       [0.16539477, 0.23163731, 0.22783667, 0.16050129, 0.21463   ],
+       [0.16019677, 0.2387398 , 0.22967993, 0.15250796, 0.21887548],
+       [0.164585  , 0.241522  , 0.2197408 , 0.14987943, 0.22427279],
+       [0.1423634 , 0.2492775 , 0.25001773, 0.13962528, 0.21871613],
+       [0.1685916 , 0.23507524, 0.21948369, 0.15692794, 0.21992151],
+       [0.1899035 , 0.23893598, 0.18335396, 0.15139207, 0.23641457],
+       [0.16065492, 0.2413149 , 0.2264044 , 0.14987133, 0.22175437],
+       [0.17529766, 0.24322936, 0.20103565, 0.14799424, 0.23244311],
+       [0.16809338, 0.24051304, 0.2150641 , 0.15104856, 0.22528093],
+       [0.17161693, 0.23075785, 0.21867743, 0.16179037, 0.21715748],
+       [0.16884513, 0.23852658, 0.21579023, 0.15319362, 0.22364433],
+       [0.17458686, 0.2428582 , 0.20250764, 0.14843197, 0.23161522],
+       [0.1646341 , 0.2297526 , 0.23079726, 0.16249931, 0.21231675],
+       [0.15729222, 0.23233345, 0.24062563, 0.15889668, 0.210852  ],
+       [0.14776482, 0.23704691, 0.2526417 , 0.15245639, 0.21009028],
+       [0.16680573, 0.23577859, 0.22168827, 0.15609236, 0.21963505],
+       [0.17260087, 0.24030833, 0.20811835, 0.15126604, 0.22770639],
+       [0.13550763, 0.24409433, 0.26797664, 0.1427981 , 0.20962337],
+       [0.15663186, 0.23662733, 0.23769669, 0.15432158, 0.21472257],
+       [0.1549199 , 0.23210286, 0.24487424, 0.15878738, 0.20931558],
+       [0.1547824 , 0.24484529, 0.23276137, 0.14575545, 0.22185549],
+       [0.1587394 , 0.23657197, 0.23419838, 0.15462619, 0.21586415],
+       [0.16478752, 0.24151964, 0.21941346, 0.14988995, 0.22438939],
+       [0.16816008, 0.23736185, 0.21800458, 0.15443383, 0.22203967],
+       [0.16076393, 0.24149327, 0.22604792, 0.14969479, 0.22200012],
+       [0.17530249, 0.23095778, 0.21273129, 0.16161412, 0.21939443],
+       [0.15688972, 0.2358581 , 0.23799387, 0.15515216, 0.21410616],
+       [0.16600947, 0.23382592, 0.22481105, 0.15816282, 0.21719065],
+       [0.14932008, 0.24364983, 0.24340245, 0.14621353, 0.21741422],
+       [0.17864552, 0.22986974, 0.20857714, 0.16281399, 0.22009356],
+       [0.1659024 , 0.22970615, 0.2287755 , 0.1626553 , 0.21296065],
+       [0.17181188, 0.24148299, 0.2082077 , 0.15000671, 0.22849073],
+       [0.17638905, 0.23389527, 0.20834343, 0.15828574, 0.22308654],
+       [0.15240492, 0.24294852, 0.23874305, 0.14735675, 0.21854681],
+       [0.18557529, 0.2407352 , 0.18793964, 0.14989276, 0.23585702],
+       [0.13773988, 0.2396555 , 0.2682667 , 0.14754502, 0.20679286],
+       [0.15072912, 0.24018031, 0.2443891 , 0.1498653 , 0.21483612],
+       [0.15102535, 0.24379413, 0.24028388, 0.14632827, 0.2185683 ],
+       [0.17316325, 0.23940398, 0.20811678, 0.1522415 , 0.22707452],
+       [0.14266515, 0.24046816, 0.25842705, 0.14801402, 0.21042569],
+       [0.16398384, 0.23465969, 0.22732665, 0.1571278 , 0.21690205],
+       [0.16170275, 0.23673837, 0.22910713, 0.15473619, 0.2177155 ]],
+      dtype=float32)
+</code></pre>
+<p>Outputs of prediction are 5 dimensional vector. This is so because we have used 5 neurons in the output layer and our activation function is softmax. The 5 dimensional output vector for an input add to 1. So it can be interpreted as probability. Thus we should classify the input to a class, for which prediction probability is maximum. To get the class corresponding to maximum probability, we can use np.argmax() command.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></div><pre><code>array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1,
+       1, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1,
+       1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1], dtype=int64)
+</code></pre>
+<p>Remember that our data are randomly generated. So we should not be surprised by this result.</p>
+<p>This brings us to the end of the blog. As we had planned in the beginning, we have created random data files, a custom sequence, trained a model using that sequence, and made predictions on new data. The above code can be tweaked slightly to read any type of files other than .csv. And now we can train our model without worrying about the data size. Whether the data size is 10GB or 750GB, our approach will work for both.</p>
+<h2 id="is-this-method-efficient-will-it-work-at-a-reasobable-speed-if-we-have-many-complex-preprocessing-steps-to-do-before-training-the-model">Is this method efficient? Will it work at a reasobable speed if we have many complex preprocessing steps to do before training the model?</h2>
+<p>In this blog, we have mentioned nothing about the ways to speed up the data loading process. Tensorflow prefers sequences over generators as sequences are a safer way to do multiprocessing (<a href="https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence" target="_blank" rel="noopener">see this</a>). Sequences can be passed to <code>model.fit()</code> along with parameters like <code>max_queue_size</code>, <code>workers</code>, and <code>use_multiprocessing</code> (<a href="https://www.tensorflow.org/api_docs/python/tf/keras/Model#fit" target="_blank" rel="noopener">see this</a>). To efficiently load data, we have to choose suitable values for <code>max_queue_size</code>, <code>workers</code>, and <code>use_multiprocessing</code>. The next obvious question is: How do we choose suitable values for the parameters for our particular system architecture? The best approach, that this author can suggest, is to try different values and choose the ones that work best for your system architecture. Even when we are using complex preprocessing steps, suitable choice of above parameters will, hopefully, speedup our training process.</p>
+<p>As a final note, I want to stress that, this is not the only approach to do the task. As I have mentioned previously, in <code>Tensorflow</code>, you can do the same thing in several different ways. The approach I have chosen seemed natural to me. I have neither strived for efficiency nor elegance. If readers have any better idea, I would be happy to know of it.</p>
+<p>I hope, this blog will be of help to readers. Please bring any errors or omissions to my notice.</p>
+
+      </div>
+
+      
+  <time class="mt-12 mb-8 block text-xs text-gray-500 ltr:text-right rtl:text-left dark:text-gray-400" datetime="2020-12-26T00:00:00.000Z">
+    <span>Last updated on</span>
+    Dec 26, 2020</time>
+
+      <div class="container mx-auto prose prose-slate lg:prose-xl dark:prose-invert mt-5">
+        
+        <div class="max-w-prose print:hidden">
+  
+  
+
+  
+
+<div class="flex justify-center">
+  
+  <a class="no-underline bg-primary-100 hover:bg-primary-300 text-primary-800 text-xs font-medium mr-2 px-2.5 py-0.5 lg:px-5 lg:py-2 rounded dark:bg-primary-900 dark:hover:bg-primary-700 dark:text-primary-300" href="/tags/tensorflow/">Tensorflow</a>
+  
+  <a class="no-underline bg-primary-100 hover:bg-primary-300 text-primary-800 text-xs font-medium mr-2 px-2.5 py-0.5 lg:px-5 lg:py-2 rounded dark:bg-primary-900 dark:hover:bg-primary-700 dark:text-primary-300" href="/tags/machine-learning/">Machine Learning</a>
+  
+  <a class="no-underline bg-primary-100 hover:bg-primary-300 text-primary-800 text-xs font-medium mr-2 px-2.5 py-0.5 lg:px-5 lg:py-2 rounded dark:bg-primary-900 dark:hover:bg-primary-700 dark:text-primary-300" href="/tags/deep-learning/">Deep Learning</a>
+  
+</div>
+
+
+  
+<section class="flex flex-row flex-wrap justify-center pt-4 text-xl">
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Freading-multiple-files-in-tensorflow-2-using-sequence%2F&amp;text=Reading&#43;multiple&#43;files&#43;in&#43;Tensorflow&#43;2&#43;using&#43;Sequence"
+    title="X"
+    aria-label="X"
+    id="share-link-x"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Freading-multiple-files-in-tensorflow-2-using-sequence%2F&amp;t=Reading&#43;multiple&#43;files&#43;in&#43;Tensorflow&#43;2&#43;using&#43;Sequence"
+    title="Facebook"
+    aria-label="Facebook"
+    id="share-link-facebook"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+    
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="mailto:?subject=Reading%20multiple%20files%20in%20Tensorflow%202%20using%20Sequence&amp;body=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Freading-multiple-files-in-tensorflow-2-using-sequence%2F"
+    title="Email"
+    aria-label="Email"
+    id="share-link-email"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M16.5 12a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Freading-multiple-files-in-tensorflow-2-using-sequence%2F&amp;title=Reading&#43;multiple&#43;files&#43;in&#43;Tensorflow&#43;2&#43;using&#43;Sequence"
+    title="LinkedIn"
+    aria-label="LinkedIn"
+    id="share-link-linkedin"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="whatsapp://send?text=Reading&#43;multiple&#43;files&#43;in&#43;Tensorflow&#43;2&#43;using&#43;Sequence%20http%3A%2F%2Flocalhost%3A1313%2Fpost%2Freading-multiple-files-in-tensorflow-2-using-sequence%2F"
+    title="WhatsApp"
+    aria-label="WhatsApp"
+    id="share-link-whatsapp"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="m187.58 144.84-32-16a8 8 0 0 0-8 .5l-14.69 9.8a40.55 40.55 0 0 1-16-16l9.8-14.69a8 8 0 0 0 .5-8l-16-32A8 8 0 0 0 104 64a40 40 0 0 0-40 40 88.1 88.1 0 0 0 88 88 40 40 0 0 0 40-40 8 8 0 0 0-4.42-7.16ZM152 176a72.08 72.08 0 0 1-72-72 24 24 0 0 1 19.29-23.54l11.48 23L101 118a8 8 0 0 0-.73 7.51 56.47 56.47 0 0 0 30.15 30.15A8 8 0 0 0 138 155l14.61-9.74 23 11.48A24 24 0 0 1 152 176ZM128 24a104 104 0 0 0-91.82 152.88l-11.35 34.05a16 16 0 0 0 20.24 20.24l34.05-11.35A104 104 0 1 0 128 24Zm0 192a87.87 87.87 0 0 1-44.06-11.81 8 8 0 0 0-6.54-.67L40 216l12.47-37.4a8 8 0 0 0-.66-6.54A88 88 0 1 1 128 216Z"/></svg>
+  </a>
+  
+</section>
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+
+<div class="flex pt-12 pb-4">
+  
+  
+  <img
+    class="mr-4 h-24 w-24 rounded-full"
+    width="96"
+    height="96"
+    alt="Biswajit Sahoo, Ph.D."
+  src="/author/biswajit-sahoo-ph.d./avatar_hu13253178770287002488.jpg"
+  loading="lazy"
+  />
+  
+  <div class="place-self-center">
+    <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+      Authors
+    </div>
+    <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+      <a href="http://localhost:1313/" class="no-underline">
+      Biswajit Sahoo, Ph.D.
+      </a>
+    </div>
+
+    
+    <div class="text-sm font-bold text-neutral-700 dark:text-neutral-300">
+    Machine Learning Engineer
+    </div>
+    
+
+
+    
+    <div class="text-sm text-neutral-700 dark:text-neutral-300">My research interests include machine learning, deep learning, signal processing and data-driven machinery condition monitoring.</div>
+    
+
+    <div class="text-2xl sm:text-lg pt-1">
+
+      
+<div class="flex flex-wrap text-neutral-500 dark:text-neutral-300">
+  
+    
+    
+    
+    
+      
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="/#contact"
+      
+      aria-label="Envelope"
+    ><svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg></a>
+  
+    
+    
+    
+    
+      
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="https://github.com/biswajitsahoo1111"
+      target="_blank" rel="noopener" rel="me noopener noreferrer"
+      aria-label="Brands/Github"
+    ><svg style="height: 1em;" fill="currentColor" viewBox="3 3 18 18"><path d="M12 3C7.0275 3 3 7.12937 3 12.2276C3 16.3109 5.57625 19.7597 9.15374 20.9824C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441C9.77249 20.3249 9.76125 19.5982 9.76125 18.8254C7.5 19.2522 6.915 18.2602 6.735 17.7412C6.63375 17.4759 6.19499 16.6569 5.8125 16.4378C5.4975 16.2647 5.0475 15.838 5.80124 15.8264C6.51 15.8149 7.01625 16.4954 7.18499 16.7723C7.99499 18.1679 9.28875 17.7758 9.80625 17.5335C9.885 16.9337 10.1212 16.53 10.38 16.2993C8.3775 16.0687 6.285 15.2728 6.285 11.7432C6.285 10.7397 6.63375 9.9092 7.20749 9.26326C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794C7.2975 6.81794 8.05125 6.57571 9.77249 7.76377C10.4925 7.55615 11.2575 7.45234 12.0225 7.45234C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377C15.9937 6.56418 16.7475 6.81794 16.7475 6.81794C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326C17.4113 9.9092 17.76 10.7281 17.76 11.7432C17.76 15.2843 15.6563 16.0687 13.6537 16.2993C13.98 16.5877 14.2613 17.1414 14.2613 18.0065C14.2613 19.2407 14.25 20.2326 14.25 20.5441C14.25 20.7863 14.4188 21.0746 14.8688 20.9824C16.6554 20.364 18.2079 19.1866 19.3078 17.6162C20.4077 16.0457 20.9995 14.1611 21 12.2276C21 7.12937 16.9725 3 12 3Z"></path></svg></a>
+  
+    
+    
+    
+    
+      
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="https://www.linkedin.com/in/biswajitsahoo1111/"
+      target="_blank" rel="noopener" rel="me noopener noreferrer"
+      aria-label="Brands/Linkedin"
+    ><svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+  
+    
+    
+    
+    
+      
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="https://scholar.google.co.in/citations?hl=en&amp;user=zu2CSBMAAAAJ"
+      target="_blank" rel="noopener" rel="me noopener noreferrer"
+      aria-label="Academicons/Google-Scholar"
+    ><svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M343.759 106.662V79.43L363.524 64h-213.89L20.476 176.274h85.656a82.339 82.339 0 0 0-.219 6.225c0 20.845 7.22 38.087 21.672 51.861c14.453 13.797 32.252 20.648 53.327 20.648c4.923 0 9.75-.368 14.438-1.024c-2.907 6.5-4.374 12.523-4.374 18.142c0 9.875 4.499 20.43 13.467 31.642c-39.234 2.67-68.061 9.732-86.437 21.163c-10.531 6.5-19 14.704-25.39 24.531c-6.391 9.9-9.578 20.515-9.578 31.962c0 9.648 2.062 18.336 6.219 26.062c4.156 7.726 9.578 14.07 16.312 18.984c6.718 4.968 14.469 9.101 23.219 12.469c8.734 3.344 17.406 5.718 26.061 7.062A167.052 167.052 0 0 0 180.555 448c13.469 0 26.953-1.734 40.547-5.187c13.562-3.485 26.28-8.642 38.171-15.493c11.86-6.805 21.515-16.086 28.922-27.718c7.39-11.68 11.094-24.805 11.094-39.336c0-11.016-2.25-21.039-6.75-30.14c-4.468-9.073-9.938-16.542-16.452-22.345c-6.501-5.813-13-11.155-19.516-15.968c-6.5-4.845-12-9.75-16.468-14.813c-4.485-5.046-6.735-10.054-6.735-14.984c0-4.921 1.734-9.672 5.216-14.265c3.455-4.61 7.674-9.048 12.61-13.306c4.937-4.25 9.875-8.968 14.796-14.133c4.922-5.147 9.141-11.827 12.61-20.008c3.485-8.18 5.203-17.445 5.203-27.757c0-13.453-2.547-24.46-7.547-33.314c-.594-1.022-1.218-1.803-1.875-3.022l56.907-46.672v17.119c-7.393.93-6.624 5.345-6.624 10.635V245.96c0 5.958 4.875 10.834 10.834 10.834h3.989c5.958 0 10.833-4.875 10.833-10.834V117.293c0-5.277.778-9.688-6.561-10.63zm-107.36 222.48c1.14.75 3.704 2.78 7.718 6.038c4.05 3.243 6.797 5.695 8.266 7.414a443.553 443.553 0 0 1 6.376 7.547c2.813 3.375 4.718 6.304 5.718 8.734c1 2.477 2.016 5.461 3.047 8.946a38.27 38.27 0 0 1 1.485 10.562c0 17.048-6.564 29.68-19.656 37.859c-13.125 8.18-28.767 12.274-46.938 12.274c-9.187 0-18.203-1.093-27.063-3.196c-8.843-2.116-17.311-5.336-25.39-9.601c-8.078-4.258-14.577-10.204-19.5-17.797c-4.938-7.64-7.407-16.415-7.407-26.25c0-10.32 2.797-19.29 8.422-26.906c5.594-7.625 12.938-13.391 22.032-17.315c9.063-3.946 18.25-6.742 27.562-8.398a157.865 157.865 0 0 1 28.438-2.555c4.47 0 7.936.25 10.405.696c.455.219 3.032 2.07 7.735 5.563c4.704 3.462 7.625 5.595 8.75 6.384zm-3.359-100.579c-7.406 8.86-17.734 13.288-30.953 13.288c-11.86 0-22.298-4.764-31.266-14.312c-9-9.523-15.422-20.328-19.344-32.43c-3.937-12.109-5.906-23.984-5.906-35.648c0-13.694 3.596-25.352 10.781-34.976c7.187-9.65 17.5-14.485 30.938-14.485c11.875 0 22.374 5.038 31.437 15.157c9.094 10.085 15.61 21.413 19.517 33.968c3.922 12.54 5.873 24.53 5.873 35.984c0 13.446-3.702 24.61-11.076 33.454z"/></svg></a>
+  
+</div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+  
+  
+    
+    
+    
+      
+      
+    
+<div class="pt-1 no-prose w-full">
+  <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+  <div class="flex flex-col md:flex-row flex-nowrap justify-between gap-5 pt-2">
+    <div class="">
+      
+        <a class="group flex no-underline" href="/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/">
+          <span
+            class="mt-[-0.3rem] me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+          ><span class="ltr:inline rtl:hidden">&larr;</span></span>
+          <span class="flex flex-col">
+            <span
+              class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+            >Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book</span>
+            <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+              
+                Mar 10, 2021
+              
+            </span>
+          </span>
+        </a>
+      
+    </div>
+    <div class="">
+      
+        <a class="group flex text-right no-underline" href="/post/reading-multiple-csv-files-in-pytorch/">
+          <span class="flex flex-col">
+            <span
+              class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+            >Reading multiple csv files in PyTorch</span
+            >
+            <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+              
+                Dec 19, 2020
+              
+            </span>
+          </span>
+          <span
+            class="mt-[-0.3rem] ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+          ><span class="ltr:inline">&rarr;</span></span>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+  
+
+  
+  
+<hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+  <div class="text-sm">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/reading-multiple-files-in-tensorflow-2/">Reading multiple files in Tensorflow 2</a></li>
+      
+      <li><a href="/post/reading-multiple-csv-files-in-pytorch/">Reading multiple csv files in PyTorch</a></li>
+      
+      <li><a href="/project/rul_codes_open/">Data-Driven Remaining Useful Life (RUL) Prediction</a></li>
+      
+      <li><a href="/post/efficiently-reading-multiple-files-in-tensorflow-2/">Efficiently reading multiple files in Tensorflow 2</a></li>
+      
+      <li><a href="/post/using-python-generators/">Using Python Generators</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+  
+
+
+  
+  
+  
+
+  
+
+  
+  <section id="comments">
+    
+  
+  <script src="https://giscus.app/client.js"
+          data-repo="biswajitsahoo1111/biswajitsahoo1111.github.io"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE5MzExMzM="
+          data-category="General"
+          data-category-id="DIC_kwDOCj91_c4CljPc"
+          data-mapping="title"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          data-loading="lazy"
+          crossorigin="anonymous"
+          async>
+  </script>
+
+
+  </section>
+  
+
+
+</div>
+
+      </div>
+
+    </main>
+  </article>
+</div>
+
+    </div>
+    <div class="page-footer">
+      <footer class="container mx-auto flex flex-col justify-items-center text-sm leading-6 mt-24 mb-4 text-slate-700 dark:text-slate-200">
+
+    
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <p class="powered-by text-center">
+    © 2024 Biswajit Sahoo. Powered by <a href="https://hugoblox.com/" target="_blank" rel="noopener">Hugo Blox Builder</a>.
+  </p>
+  
+
+
+
+
+  
+    <p class="powered-by text-center">
+      
+    </p>
+  
+  </footer>
+    </div>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

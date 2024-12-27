@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Publications | Biswajit Sahoo, Ph.D.</title>
+    <link>http://localhost:1313/publication/</link>
+      <atom:link href="http://localhost:1313/publication/index.xml" rel="self" type="application/rss+xml" />
+    <description>Publications</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
+      <title>Publications</title>
+      <link>http://localhost:1313/publication/</link>
+    </image>
+    
+    <item>
+      <title>Multiclass bearing fault classification using features learned by a deep neural network</title>
+      <link>http://localhost:1313/publication/data_driven_features_fault_diagnosis/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publication/data_driven_features_fault_diagnosis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning, Regression, and Optimization</title>
+      <link>http://localhost:1313/publication/ml_regression_optimization/</link>
+      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publication/ml_regression_optimization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Feature Subset Selection Using Sparse Principal Component Analysis and Multiclass Fault Classification Using Selected Features</title>
+      <link>http://localhost:1313/publication/spca_fault_diagnosis/</link>
+      <pubDate>Thu, 20 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publication/spca_fault_diagnosis/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
