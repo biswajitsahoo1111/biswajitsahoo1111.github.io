@@ -1,17 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- This site was created with Hugo Blox. https://hugoblox.com -->
-<!-- Last Published: May 18, 2024 --><html lang="en-us" >
-
-
-<head>
+<!-- Last Published: December 28, 2024 --><html lang="en-us" dir="ltr"
+      data-wc-theme-default="system">
+  
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  
-  
-  
-    <meta name="generator" content="Hugo Blox Builder 5.9.7" />
-  
+  <meta name="generator" content="Hugo Blox Builder 0.3.1" />
 
   
   
@@ -27,202 +23,6 @@
 
 
 
-  
-  
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-  
-  
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  
-
-  
-  
-  
-    
-      
-      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
-    
-  
-
-  
-  
-
-  
-  
-    
-    <script src="/js/mathjax-config.js"></script>
-  
-
-  
-
-  <link rel="stylesheet" href="/css/vendor-bundle.min.26c458e6907dc03073573976b7f4044e.css" media="print" onload="this.media='all'">
-
-  
-  
-  
-    
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.4/css/academicons.min.css" integrity="sha512-IW0nhlW5MgNydsXJO40En2EoCkTTjZhI3yuODrZIc8cQ4h1XcF53PsqDHa09NqnkXuIe0Oiyyj171BqZFwISBw==" crossorigin="anonymous" media="print" onload="this.media='all'">
-    
-
-    
-    
-    
-    
-      
-      
-    
-    
-    
-
-    
-    
-    
-
-    
-
-    
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-      
-      
-
-      
-      
-
-      
-    
-  
-
-  
-  
-  
-  
-  
-  
-  <link rel="stylesheet" href="/css/wowchemy.f6689966c0a10712f95f034011917db0.css" />
-
-  
-  
-  
-
-  
-  
   
   
   
@@ -230,112 +30,120 @@
   
     
     
-    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
-    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+    
+  
+  
+
+  <meta name="author" content="Biswajit Sahoo, Ph.D." />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Perform linear algebraic operations only using Tensorflow." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/" />
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="/css/themes/emerald.min.css" />
   
 
   
   
+    
+    <link href="/dist/wc.min.css" rel="stylesheet" />
+  
 
+  
+  
+  
 
+  
 
-
-
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153208457-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-
-  function gtag() {
-      dataLayer.push(arguments);
-  }
-
-  function trackOutboundLink(url, target) {
-    gtag('event', 'click', {
-         'event_category': 'outbound',
-         'event_label': url,
-         'transport_type': 'beacon',
-         'event_callback': function () {
-           if (target !== '_blank') {
-             document.location = url;
-           }
-         }
-    });
-    console.debug("Outbound link clicked: " + url);
-  }
-
-  function onClickCallback(event) {
-    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
-      return;
+  <script>
+     
+    window.hbb = {
+       defaultTheme: document.documentElement.dataset.wcThemeDefault,
+       setDarkTheme: () => {
+        document.documentElement.classList.add("dark");
+        document.documentElement.style.colorScheme = "dark";
+      },
+       setLightTheme: () => {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.style.colorScheme = "light";
+      }
     }
-    trackOutboundLink(event.target, event.target.getAttribute('target'));  
-  }
 
-  gtag('js', new Date());
-  gtag('config', 'UA-153208457-1', {});
-  gtag('set', {'cookie_flags': 'SameSite=None;Secure'});
+    console.debug(`Default Hugo Blox Builder theme is ${window.hbb.defaultTheme}`);
 
-  
-  document.addEventListener('click', onClickCallback, false);
-</script>
+    if ("wc-color-theme" in localStorage) {
+      localStorage.getItem("wc-color-theme") === "dark" ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+    } else {
+      window.hbb.defaultTheme === "dark" ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+      if (window.hbb.defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+      }
+    }
+  </script>
 
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      
+      let checkboxes = document.querySelectorAll('li input[type=\'checkbox\'][disabled]');
+      checkboxes.forEach(e => {
+        e.parentElement.parentElement.classList.add('task-list');
+      });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-
-
-
-
-
-
-  <meta name="author" content="Biswajit Sahoo" />
-
-
-
-
+      
+      const liNodes = document.querySelectorAll('.task-list li');
+      liNodes.forEach(nodes => {
+        let textNodes = Array.from(nodes.childNodes).filter(node => node.nodeType === 3 && node.textContent.trim().length > 1);
+        if (textNodes.length > 0) {
+          const span = document.createElement('label');
+          textNodes[0].after(span);  
+          span.appendChild(nodes.querySelector('input[type=\'checkbox\']'));
+          span.appendChild(textNodes[0]);
+        }
+      });
+    });
+  </script>
 
   
-
-<meta name="description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will explore ways of doing linear algebra only using tensorflow. We will only import tensorflow and nothing else." />
-
-
-
-<link rel="alternate" hreflang="en-us" href="https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/" />
-<link rel="canonical" href="https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/" />
+  
+  
 
 
 
-  <link rel="manifest" href="/manifest.webmanifest" />
 
 
 
-<link rel="icon" type="image/png" href="/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_32x32_fill_lanczos_center_3.png" />
-<link rel="apple-touch-icon" type="image/png" href="/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_180x180_fill_lanczos_center_3.png" />
 
-<meta name="theme-color" content="#1565c0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -349,105 +157,468 @@
   
   
 
+  
+  <link rel="icon" type="image/png" href="/media/icon_hu15771692248986819267.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu13363495885888113771.png" />
 
-
-
-
-
-<meta property="twitter:card" content="summary" />
-<meta property="twitter:image" content="https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png" />
-
-
+  <link rel="canonical" href="http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/" />
 
   
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
 
-<meta property="og:type" content="article" />
-<meta property="og:site_name" content="Biswajit Sahoo" />
-<meta property="og:url" content="https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/" />
-<meta property="og:title" content="Doing Linear Algebra using Tensorflow 2 | Biswajit Sahoo" />
-<meta property="og:description" content="Run in Google ColabView source on GitHubDownload notebookIn this post, we will explore ways of doing linear algebra only using tensorflow. We will only import tensorflow and nothing else." /><meta property="og:image" content="https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
-
-  
-    <meta
-      property="article:published_time"
-      content="2020-05-14T00:00:00&#43;00:00"
-    />
   
   
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Biswajit Sahoo, Ph.D." />
+  <meta property="og:url" content="http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/" />
+  <meta property="og:title" content="Doing Linear Algebra using Tensorflow 2 | Biswajit Sahoo, Ph.D." />
+  <meta property="og:description" content="Perform linear algebraic operations only using Tensorflow." /><meta property="og:image" content="http://localhost:1313/media/icon_hu14255546723713444625.png" />
+    <meta property="twitter:image" content="http://localhost:1313/media/icon_hu14255546723713444625.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2020-05-14T00:00:00&#43;00:00"
+      />
+    
     <meta property="article:modified_time" content="2020-05-14T00:00:00&#43;00:00">
   
 
+  
 
 
 
+  
 
 
+  <title>Doing Linear Algebra using Tensorflow 2 | Biswajit Sahoo, Ph.D.</title>
+
+  
+  
+  
+  
+  
     
-
-
-
-
-
-
+    
   
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/"
-  },
-  "headline": "Doing Linear Algebra using Tensorflow 2",
   
-  "datePublished": "2020-05-14T00:00:00Z",
-  "dateModified": "2020-05-14T00:00:00Z",
-  
-  "author": {
-    "@type": "Person",
-    "name": "Biswajit Sahoo"
-  },
-  
-  "publisher": {
-    "@type": "Organization",
-    "name": "Biswajit Sahoo",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_192x192_fill_lanczos_center_3.png"
+  <style>
+    @font-face {
+      font-family: 'Inter var';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(/dist/font/Inter.var.woff2) format(woff2);
     }
-  },
-  "description": "Run in Google Colab\rView source on GitHub\rDownload notebook\rIn this post, we will explore ways of doing linear algebra only using tensorflow. We will only import tensorflow and nothing else."
-}
+  </style>
+
+  
+
+  
+  
+
+
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="/dist/pagefind/pagefind-ui.be766eb419317a14ec769d216e9779bfe8f3737c80e780f4ba0dafb57a41a482.css" integrity="sha256-vnZutBkxehTsdp0hbpd5v&#43;jzc3yA54D0ug2vtXpBpII=" />
+
+
+<script src="/dist/pagefind/pagefind-ui.87693d7c6f2b3b347ce359d0ede762c033419f0a32b22ce508c335a81d841f1b.js" integrity="sha256-h2k9fG8rOzR841nQ7ediwDNBnwoysizlCMM1qB2EHxs="></script>
+
+
+<script>window.hbb.pagefind = {"baseUrl":"/"};</script>
+
+<style>
+  html.dark {
+    --pagefind-ui-primary: #eeeeee;
+    --pagefind-ui-text: #eeeeee;
+    --pagefind-ui-background: #152028;
+    --pagefind-ui-border: #152028;
+    --pagefind-ui-tag: #152028;
+  }
+</style>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({
+      element: "#search",
+      showSubResults: true,
+      baseUrl: window.hbb.pagefind.baseUrl,
+      bundlePath: window.hbb.pagefind.baseUrl + "pagefind/",
+    });
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    let element = document.getElementById('search');
+    let trigger = document.getElementById('search_toggle');
+
+    if (trigger) {
+      trigger.addEventListener('click', () => {
+        element.classList.toggle('hidden');
+        element.querySelector("input").value = ""
+        element.querySelector("input").focus()
+
+        if (!element.classList.contains('hidden')) {
+          let clear_trigger = document.querySelector('.pagefind-ui__search-clear');
+
+          if (clear_trigger && !clear_trigger.hasAttribute('listenerOnClick')) {
+            clear_trigger.setAttribute('listenerOnClick', 'true');
+
+            clear_trigger.addEventListener('click', () => {
+              element.classList.toggle('hidden');
+            });
+          }
+        }
+
+      });
+    }
+  });
 </script>
 
-  
-
-  
 
 
 
 
-  
-  
-  
 
-  
-  
 
-  
+
 
 
   
-  <title>Doing Linear Algebra using Tensorflow 2 | Biswajit Sahoo</title>
-
+  
+  <link type="text/css" rel="stylesheet" href="/dist/lib/katex/katex.min.505d5f829022bb7b4f24dfee0aa1141cd7bba67afe411d1240335f820960b5c3.css" integrity="sha256-UF1fgpAiu3tPJN/uCqEUHNe7pnr&#43;QR0SQDNfgglgtcM=" />
+  
+  
+  <script defer src="/dist/lib/katex/katex.min.dc84b296ec3e884de093158f760fd9d45b6c7abe58b5381557f4e138f46a58ae.js" integrity="sha256-3ISyluw&#43;iE3gkxWPdg/Z1Ftser5YtTgVV/ThOPRqWK4="></script>
   
   
   
   
+  <script defer src="/js/katex-renderer.6579ec9683211cfb952064aedf3a3baea5eeb17a061775b32b70917474637c80.js" integrity="sha256-ZXnsloMhHPuVIGSu3zo7rqXusXoGF3WzK3CRdHRjfIA="></script>
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  <script
+    defer
+    src="/js/hugo-blox-en.min.js"
+    integrity=""
+  ></script>
+
+  
+  
 
 
 
@@ -455,458 +626,826 @@
 
 
 
+
+  
+    
+      
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+      
+    
+  
 
 
 
 
 </head>
 
-
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="fe3c2316eb99f7420428fd9bb51bb06f" >
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <script src="/js/wowchemy-init.min.9e4214442a7711d35691acd58f6f6361.js"></script>
-
-  
-
-
-<aside class="search-modal" id="search">
-  <div class="container">
-    <section class="search-header">
-
-      <div class="row no-gutters justify-content-between mb-3">
-        <div class="col-6">
-          <h1>Search</h1>
-        </div>
-        <div class="col-6 col-search-close">
-          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
-        </div>
-      </div>
-
-      <div id="search-box">
+  <body class="dark:bg-hb-dark dark:text-white page-wrapper" id="top">
+    <div id="page-bg"></div>
+    <div class="page-header sticky top-0 z-30">
+      
+      
+      
         
-        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
-        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
-        aria-label="Search...">
         
-      </div>
-
-      
-      
-
-      
-
-    </section>
-    <section class="section-search-results">
-
-      <div id="search-hits">
         
-      </div>
+          <header id="site-header" class="header">
+  <nav class="navbar px-3 flex justify-left">
+    <div class="order-0 h-100">
+      
+      <a class="navbar-brand" href="/" title="Biswajit Sahoo, Ph.D.">
+        Biswajit Sahoo, Ph.D.
+      </a>
+    </div>
+    
+    <input id="nav-toggle" type="checkbox" class="hidden" />
+    <label
+      for="nav-toggle"
+      class="order-3 cursor-pointer flex items-center lg:hidden text-dark dark:text-white lg:order-1">
+      <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
+        <title>Open Menu</title>
+        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+      </svg>
+      <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
+        <title>Close Menu</title>
+        <polygon
+          points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+          transform="rotate(45 10 10)"></polygon>
+      </svg>
+    </label>
+    
 
-    </section>
-  </div>
-</aside>
+    
+    
+    <ul
+      id="nav-menu"
+      class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8 justify-left
+      ml-auto mr-6">
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/"
+        >Home</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#blog"
+        >Blog</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#projects"
+        >Projects</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#experience"
+        >Experience</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#publications"
+        >Publications</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/personal/"
+        >Personal</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/#contact"
+        >Contact</a
+        >
+      </li>
+      
+      
+      
+    </ul>
 
-
-
-  <div class="page-header header--fixed">
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-<header>
-  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
-    <div class="container-xl">
+    <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
 
       
-      <div class="d-none d-lg-inline-flex">
-        <a class="navbar-brand" href="/">Biswajit Sahoo</a>
-      </div>
       
-
       
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
-      <span><i class="fas fa-bars"></i></span>
+      <button
+        aria-label="search"
+        class="text-black hover:text-primary  inline-block px-3 text-xl dark:text-white"
+        id="search_toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="currentColor"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
       </button>
       
 
       
-      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
-        <a class="navbar-brand" href="/">Biswajit Sahoo</a>
+      
+      <div class="px-3 text-black hover:text-primary-700 dark:text-white dark:hover:text-primary-300
+            [&.active]:font-bold [&.active]:text-black/90 dark:[&.active]:text-white">
+        <button class="theme-toggle mt-1" accesskey="t" title="appearance">
+          <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" class="dark:hidden">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" class=" dark:block [&:not(dark)]:hidden">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </div>
       
 
       
       
-      <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
 
-        
-        <ul class="navbar-nav d-md-inline-flex">
-          
-
-          
-
-          
-          
-          
-            
-          
-
-          
-
-          
-          
-          
-          
-
-          
-            
-              
-              
-            
-            
-              
-              
-              
-                
-              
-              
-            
-          
-
-          <li class="nav-item">
-            <a class="nav-link " href="/#about"><span>Home</span></a>
-          </li>
-
-          
-          
-
-          
-
-          
-          
-          
-            
-          
-
-          
-
-          
-          
-          
-          
-
-          
-            
-              
-              
-            
-            
-              
-              
-              
-                
-              
-              
-            
-          
-
-          <li class="nav-item">
-            <a class="nav-link " href="/#blog"><span>Blog</span></a>
-          </li>
-
-          
-          
-
-          
-
-          
-          
-          
-            
-          
-
-          
-
-          
-          
-          
-          
-
-          
-            
-              
-              
-            
-            
-              
-              
-              
-                
-              
-              
-            
-          
-
-          <li class="nav-item">
-            <a class="nav-link " href="/#projects"><span>Projects</span></a>
-          </li>
-
-          
-          
-
-          
-
-          
-          
-          
-            
-          
-
-          
-
-          
-          
-          
-          
-
-          
-            
-              
-              
-            
-            
-              
-              
-              
-                
-              
-              
-            
-          
-
-          <li class="nav-item">
-            <a class="nav-link " href="/#publications"><span>Publications</span></a>
-          </li>
-
-          
-          
-
-          
-
-          
-          
-          
-            
-          
-
-          
-
-          
-          
-          
-          
-
-          
-            
-              
-              
-            
-            
-          
-
-          <li class="nav-item">
-            <a class="nav-link " href="/personal"><span>Personal</span></a>
-          </li>
-
-          
-          
-
-          
-
-          
-          
-          
-            
-          
-
-          
-
-          
-          
-          
-          
-
-          
-            
-              
-              
-            
-            
-              
-              
-              
-                
-              
-              
-            
-          
-
-          <li class="nav-item">
-            <a class="nav-link " href="/#contact"><span>Contact</span></a>
-          </li>
-
-          
-          
-
-        
-
-          
-        </ul>
-      </div>
-
-      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
-
-        
-        
-          
-        
-
-        
-        
-        
-        <li class="nav-item">
-          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
-        </li>
-        
-
-        
-        
-        
-        <li class="nav-item dropdown theme-dropdown">
-          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
-            <i class="fas fa-moon" aria-hidden="true"></i>
-          </a>
-          <div class="dropdown-menu">
-            <a href="#" class="dropdown-item js-set-theme-light">
-              <span>Light</span>
-            </a>
-            <a href="#" class="dropdown-item js-set-theme-dark">
-              <span>Dark</span>
-            </a>
-            <a href="#" class="dropdown-item js-set-theme-auto">
-              <span>Automatic</span>
-            </a>
-          </div>
-        </li>
-        
-
-        
-        
-
-      </ul>
-
+      
+      
     </div>
   </nav>
 </header>
 
 
-  </div>
-
-  <div class="page-body">
-    
-    
-    
-
-    <article class="article">
-
-  
+<div id="search" class="hidden p-3"></div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-  
-  
-<div class="article-container pt-3">
-  <h1>Doing Linear Algebra using Tensorflow 2</h1>
-
-  
-
-  
-    
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
+        
       
+    </div>
+    <div class="page-body  my-10">
+      
+
+
+
+
+
+<div class="mx-auto flex max-w-screen-xl">
+  
+
+
+
+<aside class="hb-sidebar-container max-lg:[transform:translate3d(0,-100%,0)] lg:hidden xl:block">
+  
+  <div class="px-4 pt-4 lg:hidden">
     
-    May 14, 2020
-  </span>
+    
+  </div>
+  <div class="hb-scrollbar lg:h-[calc(100vh-var(--navbar-height))]">
+    <ul class="flex flex-col gap-1 lg:hidden">
+      
+      
+        <li class="open"><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/"
+    
+  >Blog
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/compute-element-stiffness-matrix-symbolically/"
+    
+  >Compute element stiffness matrix symbolically
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/making-github-traffic-type-plots/"
+    
+  >Making Github Traffic Type Plots
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/indexdslices-in-tensorflow/"
+    
+  >IndexedSlices in Tensorflow
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/"
+    
+  >Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/reading-multiple-files-in-tensorflow-2-using-sequence/"
+    
+  >Reading multiple files in Tensorflow 2 using Sequence
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/reading-multiple-csv-files-in-pytorch/"
+    
+  >Reading multiple csv files in PyTorch
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/efficiently-reading-multiple-files-in-tensorflow-2/"
+    
+  >Efficiently reading multiple files in Tensorflow 2
+    </a>
+              
+            </li><li class="flex flex-col open"><a
+    class="hb-sidebar-custom-link
+      sidebar-active-item bg-primary-100 font-semibold text-primary-800 dark:bg-primary-300 dark:text-primary-900"
+    href="/post/doing-linear-algebra-using-tensorflow-2/"
+    
+  >Doing Linear Algebra using Tensorflow 2
+    </a>
+  
+    <ul class="hb-sidebar-mobile-toc"><li>
+              <a
+                href="#basics"
+                class="hb-docs-link"
+              >Basics</a>
+            </li>
+          <li>
+              <a
+                href="#matrix-factorizations"
+                class="hb-docs-link"
+              >Matrix factorizations</a>
+            </li>
+          <li>
+              <a
+                href="#eigenvalues-and-eigenvectors"
+                class="hb-docs-link"
+              >Eigenvalues and eigenvectors</a>
+            </li>
+          <li>
+              <a
+                href="#solving-dense-linear-systems"
+                class="hb-docs-link"
+              >Solving dense linear systems</a>
+            </li>
+          <li>
+              <a
+                href="#solving-structured-linear-systems"
+                class="hb-docs-link"
+              >Solving structured linear systems</a>
+            </li>
+          <li>
+              <a
+                href="#solving-triangular-systems"
+                class="hb-docs-link"
+              >Solving triangular systems</a>
+            </li>
+          <li>
+              <a
+                href="#solving-least-squares-problems"
+                class="hb-docs-link"
+              >Solving least squares problems</a>
+            </li>
+          <li>
+              <a
+                href="#some-specialized-operations"
+                class="hb-docs-link"
+              >Some specialized operations</a>
+            </li>
+          <li>
+              <a
+                href="#linear-operators"
+                class="hb-docs-link"
+              >Linear operators</a>
+            </li>
+          <li>
+              <a
+                href="#conclusion"
+                class="hb-docs-link"
+              >Conclusion</a>
+            </li>
+          <li>
+              <a
+                href="#references"
+                class="hb-docs-link"
+              >References</a>
+            </li>
+          </ul>
+  
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/reading-multiple-files-in-tensorflow-2/"
+    
+  >Reading multiple files in Tensorflow 2
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/using-python-generators/"
+    
+  >Using Python Generators
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/fault-diagnosis-of-machines/"
+    
+  >Fault Diagnosis of Machines
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/revisiting-systems-of-linear-equations/"
+    
+  >Revisiting Systems of Linear Equations
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/principal-component-analysis-part-iii/"
+    
+  >Principal Component Analysis - Part III
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/principal-component-analysis-part-ii/"
+    
+  >Principal Component Analysis - Part II
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/principal-component-analysis-part-i/"
+    
+  >Principal Component Analysis - Part I
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/"
+    
+  >Publications
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/data_driven_features_fault_diagnosis/"
+    
+  >Multiclass bearing fault classification using features learned by a deep neural network
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/ml_regression_optimization/"
+    
+  >Machine Learning, Regression, and Optimization
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/spca_fault_diagnosis/"
+    
+  >Feature Subset Selection Using Sparse Principal Component Analysis and Multiclass Fault Classification Using Selected Features
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/"
+    
+  >Projects
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/rul_codes_open/"
+    
+  >Data-Driven Remaining Useful Life (RUL) Prediction
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/cbm_codes_open/"
+    
+  >Data-Driven Machinery Fault Diagnosis
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/personal/"
+    
+  >
+    </a></li>
+    </ul>
+
+    <div class="max-xl:hidden h-0 w-64 shrink-0"></div></div>
+
+</aside>
   
 
+<nav class="hb-toc order-last hidden w-64 shrink-0 xl:block print:hidden px-4" aria-label="table of contents">
   
 
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    57 min read
-  </span>
-  
+
+
+
+
+
+
+
+
+
+
+  <div class="hb-scrollbar text-sm [hyphens:auto] sticky top-16 overflow-y-auto pr-4 pt-6 max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] -mr-4 rtl:-ml-4"><p class="mb-4 font-semibold tracking-tight">On this page</p><ul>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#basics">Basics</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#creating-tensors">Creating tensors</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#creating-a-sequence-of-numbers">Creating a sequence of numbers</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#slicing">Slicing</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#modifying-elements-of-a-matrix">Modifying elements of a matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#creating-a-complex-matrix">Creating a complex matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#transpose-of-a-matrix">Transpose of a matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#transpose-of-a-real-matrix">Transpose of a real matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#transpose-of-a-complex-matrix">Transpose of a complex matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#some-common-matrices">Some common matrices</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#identity-matrix">Identity matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#diagonal-matrix">Diagonal matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#note-on-alignment-strategy">Note on alignment strategy</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#why-do-we-need-an-alignment-strategy">Why do we need an alignment strategy?</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#tri-diagonal-matrix">Tri-diagonal matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#tri-digonal-matrix-using-tflinalgset_diag">Tri-digonal matrix using tf.linalg.set_diag</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#matrix-of-all-zeros-and-ones">Matrix of all zeros and ones</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#random-matrices">Random matrices</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-12 rtl:pr-12 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#random-uniform-matrix">Random uniform matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-12 rtl:pr-12 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#random-normal-matrix">Random normal matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-12 rtl:pr-12 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#truncated-random-normal-matrix">Truncated random normal matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-12 rtl:pr-12 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#random-poisson-matrix">Random Poisson matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-12 rtl:pr-12 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#random-gamma-matrix">Random gamma matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#some-special-matrices">Some special matrices</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#sparse-matrices">Sparse matrices</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#matrix-multiplication">Matrix multiplication</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#multiplying-two-column-vectors">Multiplying two column vectors</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-12 rtl:pr-12 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#inner-product">Inner product</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-12 rtl:pr-12 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#outer-product">Outer product</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#multiplying-a-matrix-with-a-vector">Multiplying a matrix with a vector</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#multiplying-two-matrices">Multiplying two matrices</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#multiplying-two-tri-diagonal-matrices">Multiplying two tri-diagonal matrices</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#how-to-multiply-two-tri-diagonal-matrices">How to multiply two tri-diagonal matrices?</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#some-common-operations-on-matrices">Some common operations on matrices</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#trace">Trace</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#determinant">Determinant</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#rank">Rank</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#matrix-inverse">Matrix inverse</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#inverse-using-lu-factors">Inverse using  factors</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#extract-diagonals-of-a-matrix">Extract diagonals of a matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#extract-band-part-of-a-matrix">Extract band part of a matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#matrix-factorizations">Matrix factorizations</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#lu">LU</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#cholesky">Cholesky</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#qr">QR</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#svd">SVD</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#eigenvalues-and-eigenvectors">Eigenvalues and eigenvectors</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#eigen-analysis-of-hermitian-matrices">Eigen-analysis of Hermitian matrices</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#what-happens-if-you-pass-a-nonsymmetric-matrix-to-eigh-by-mistake">What happens if you pass a nonsymmetric matrix to eigh by mistake?</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#eigen-analysis-of-non-hermitian-matrices">Eigen-analysis of non-Hermitian matrices</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#what-happens-when-you-pass-a-symmetric-matrix-to-eig">What happens when you pass a symmetric matrix to eig?</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#solving-dense-linear-systems">Solving dense linear systems</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#using-lu-decomposition">Using LU decomposition</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#using-cholesky-decomposition">Using Cholesky decomposition</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#solving-structured-linear-systems">Solving structured linear systems</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#solving-triangular-systems">Solving triangular systems</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#solving-tri-diagonal-systems">Solving tri-diagonal systems</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#solving-banded-triangular-systems">Solving banded triangular systems</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#solving-least-squares-problems">Solving least squares problems</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#ordinary-least-squares">Ordinary least squares</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#regularized-least-squares">Regularized least squares</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#some-specialized-operations">Some specialized operations</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#norm">Norm</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#normalizing-a-tensor">Normalizing a tensor</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#global-norm">Global norm</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#cross-product-of-vectors">Cross product of vectors</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#matrix-square-root">Matrix square root</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#matrix-exponential">Matrix exponential</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#matrix-logarithm">Matrix logarithm</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#log-determinant-of-a-matrix">Log-determinant of a matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#pseudo-inverse-of-a-matrix">Pseudo inverse of a matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#linear-operators">Linear operators</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#common-methods-on-linear-operators">Common methods on linear operators</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#special-matrices-using-operators">Special matrices using operators</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#toeplitz-matrix">Toeplitz matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#circulant-matrix">Circulant matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#block-diagonal-matrix">Block diagonal matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#block-lower-triangular-matrix">Block lower triangular matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#householder-matrix">Householder matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#kronecker-matrix">Kronecker matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#permutation-matrix">Permutation matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#common-matrices-using-operators">Common matrices using operators</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#identity-matrix-1">Identity matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#scaled-identity-matrix">Scaled identity matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#diagonal-matrix-1">Diagonal matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#tri-diagonal-matrix-1">Tri-diagonal matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#lower-triangular-matrix">Lower triangular matrix</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#matrix-of-zeros">Matrix of zeros</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#matrix-operations-using-operators">Matrix operations using operators</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#low-rank-update">Low-rank update</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#operator-inversion">Operator inversion</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#operator-composition">Operator composition</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#conclusion">Conclusion</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#references">References</a>
+      </li></ul>
 
   
   
-  
-  
-
-  
-  
-  <span class="middot-divider"></span>
-  <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/category/blog/">Blog</a>, <a href="/category/linear-algebra/">Linear Algebra</a>, <a href="/category/tensorflow/">Tensorflow</a></span>
+    
+    
   
 
-</div>
+
 
     
 
@@ -914,15 +1453,57 @@
 
 
 
-  
-</div>
 
 
 
-  <div class="article-container">
 
-    <div class="article-style">
-      <table class="tfo-notebook-buttons" align="left">
+
+
+
+  </div>
+  </nav>
+
+
+  <article class="w-full break-words flex min-h-[calc(100vh-var(--navbar-height))] min-w-0 justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+    <main class="w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12">
+
+      
+
+      <h1 class="mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Doing Linear Algebra using Tensorflow 2</h1>
+
+      <div class="mt-4 mb-16">
+      <div class="text-gray-500 dark:text-gray-300 text-sm flex items-center flex-wrap gap-y-2"><span class="mr-1">May 14, 2020</span>
+        
+
+        
+        <span class="mx-1">·</span>
+        <span class="mx-1">
+          54 min read
+        </span>
+        
+        </div>
+
+        <div class="mt-3">
+          
+
+
+
+
+
+        </div>
+      </div>
+
+
+
+      
+      
+      
+
+      
+      
+
+      <div class="prose prose-slate lg:prose-xl dark:prose-invert">
+        <table class="tfo-notebook-buttons" align="left">
   <td>
     <a href="https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Doing_Linear_Algebra_using_Tensorflow_2.ipynb">
     <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />
@@ -938,145 +1519,92 @@
   </td>
 </table>
 <p>In this post, we will explore ways of doing linear algebra <strong>only</strong> using <code>tensorflow</code>. We will only import <code>tensorflow</code> and nothing else. As we will see, we can do all the common linear algebra operations without using any other library. This post is very long as it covers almost all the functions that are there in the linear algebra library <code>tf.linalg</code>. But this is not a copy of <code>tensorflow</code> documentation. Rather, the <code>tensorflow</code> documentation is a super set of what has been discussed here. This post also assumes that readers have a working knowledge of linear algebra. Most of the times, we will give examples to illustrate a function without going into the underlying theory. Interested readers should use the contents to browse relevant sections of their interest.</p>
-<ul>
-<li><a href="#basics">Basics</a>
-<ul>
-<li><a href="#creating_tensors">Creating tensors</a></li>
-<li><a href="#creating_a_sequence_of_numbers">Creating a sequence of numbers</a></li>
-<li><a href="#slicing">Slicing</a></li>
-<li><a href="#modifying_elements_of_a_matrix">Modifying elements of a matrix</a></li>
-<li><a href="#creating_a_complex_matrix">Creating a complex matrix</a></li>
-<li><a href="#transpose_of_a_matrix">Transpose of a matrix</a>
-<ul>
-<li><a href="#transpose_of_a_real_matrix">Transpose of a real matrix</a></li>
-<li><a href="#transpose_of_a_complex_matrix">Transpose of a complex matrix</a></li>
-</ul>
-</li>
-<li><a href="#some_common_matrices">Some common matrices</a>
-<ul>
-<li><a href="#identity_matrix">Identity matrix</a></li>
-<li><a href="#diagonal_matrix">Diagonal matrix</a></li>
-<li><a href="#tri-diagonal_matrix">Tri-diagonal matrix</a></li>
-<li><a href="#matrix_of_all_zeros_and_ones">Matrix of all zeros and ones</a></li>
-<li><a href="#random_matrices">Random matrices</a>
-<ul>
-<li><a href="#random_uniform_matrix">Random uniform matrix</a></li>
-<li><a href="#random_normal_matrix">Random normal matrix</a></li>
-<li><a href="#truncated_random_normal_matrix">Truncated random normal matrix</a></li>
-<li><a href="#random_poisson_matrix">Random Poisson matrix</a></li>
-<li><a href="#random_gamma_matrix">Random gamma matrix</a></li>
-</ul>
-</li>
-<li><a href="#some_special_matrices">Some special matrices</a></li>
-</ul>
-</li>
-<li><a href="#sparse_matrices">Sparse matrices</a></li>
-<li><a href="#matrix_multiplication">Matrix multiplication</a>
-<ul>
-<li><a href="#multiplying_two_column_vectors">Multiplying two column vectors</a>
-<ul>
-<li><a href="#inner_product">Inner product</a></li>
-<li><a href="#outer_product">Outer product</a></li>
-</ul>
-</li>
-<li><a href="#multiplying_a_matrix_with_a_vector">Multiplying a matrix with a vector</a></li>
-<li><a href="#multiplying_two_matrices">Multiplying two matrices</a></li>
-<li><a href="#multiplying_two_tri-diagonal_matrices">Multiplying two tri-diagonal matrices</a></li>
-</ul>
-</li>
-<li><a href="#some_common_operations_on_matrices">Some common operations on matrices</a>
-<ul>
-<li><a href="#trace">Trace</a></li>
-<li><a href="#determinant">Determinant</a></li>
-<li><a href="#rank">Rank</a></li>
-<li><a href="#matrix_inverse">Matrix inverse</a></li>
-<li><a href="#extract_diagonals_of_a_matrix">Extract diagonals of a matrix</a></li>
-<li><a href="#extract_band_part_of_a_matrix">Extract band part of a matrix</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#matrix_factorizations">Matrix factorizations</a>
-<ul>
-<li><a href="#lu">LU</a></li>
-<li><a href="#cholesky">Cholesky</a></li>
-<li><a href="#qr">QR</a></li>
-<li><a href="#svd">SVD</a></li>
-</ul>
-</li>
-<li><a href="#eigenvalues_and_eigenvectors">Eigenvalues and eigenvectors</a>
-<ul>
-<li><a href="#eigen-analysis_of_hermitian_matrices">Eigen-analysis of Hermitian matrices</a></li>
-<li><a href="#eigen-analysis_of_non-Hermitian_matrices">Eigen-analysis of non-Hermitian matrices</a></li>
-</ul>
-</li>
-<li><a href="#solving_dense_linear_systems">Solving dense linear systems</a>
-<ul>
-<li><a href="#using_lu_decomposition">Using LU decomposition</a></li>
-<li><a href="#using_cholesky_decomposition">Using Cholesky decomposition</a></li>
-</ul>
-</li>
-<li><a href="#solving_structured_linear_systems">Solving structured linear systems</a>
-<ul>
-<li><a href="#solving_triangular_systems">Solving triangular systems</a></li>
-<li><a href="#solving_tri-diagonal_systems">Solving tri-diagonal systems</a></li>
-<li><a href="#solving_banded_triangular_systems">Solving banded triangular systems</a></li>
-</ul>
-</li>
-<li><a href="#solving_least_squares_problems">Solving least squares problems</a>
-<ul>
-<li><a href="#ordinary_least_squares">Ordinary least squares</a></li>
-<li><a href="#regularized_least_squares">Regularized least squares</a></li>
-</ul>
-</li>
-<li><a href="#some_specialized_operations">Some specialized operations</a>
-<ul>
-<li><a href="#norm">Norm</a></li>
-<li><a href="#normalizing_a_tensor">Normalizing a tensor</a></li>
-<li><a href="#global_norm">Global norm</a></li>
-<li><a href="#cross_product_of_vectors">Cross product of vectors</a></li>
-<li><a href="#matrix_square_root">Matrix square root</a></li>
-<li><a href="#matrix_exponential">Matrix exponential</a></li>
-<li><a href="#matrix_logarithm">Matrix logarithm</a></li>
-<li><a href="#log-determinant_of_a_matrix">Log-determinant of a matrix</a></li>
-<li><a href="#pseudo_inverse_of_a_matrix">Pseudo inverse of a matrix</a></li>
-</ul>
-</li>
-<li><a href="#linear_operators">Linear operators</a>
-<ul>
-<li><a href="#common_methods_on_linear_operators">Common methods on linear operators</a></li>
-<li><a href="#special_matrices_using_operators">Special matrices using operators</a>
-<ul>
-<li><a href="#toeplitz_matrix">Toeplitz matrix</a></li>
-<li><a href="#circulant_matrix">Circulant matrix</a></li>
-<li><a href="#block_diagonal_matrix">Block diagonal matrix</a></li>
-<li><a href="#block_lower_triangular_matrix">Block lower triangular matrix</a></li>
-<li><a href="#householder_matrix">Householder matrix</a></li>
-<li><a href="#kronecker_matrix">Kronecker matrix</a></li>
-<li><a href="#permutation_matrix">Permutation matrix</a></li>
-</ul>
-</li>
-<li><a href="#common_matrices_using_operators">Common matrices using operators</a>
-<ul>
-<li><a href="#identity_matrix">Identity matrix</a></li>
-<li><a href="#scaled_identity_matrix">Scaled identity matrix</a></li>
-<li><a href="#diagonal_matrix">Diagonal matrix</a></li>
-<li><a href="#tri-diagonal_matrix">Tri-diagonal matrix</a></li>
-<li><a href="#lower_triangular_matrix">Lower triangular matrix</a></li>
-<li><a href="#matrix_of_zeros">Matrix of zeros</a></li>
-</ul>
-</li>
-<li><a href="#matrix_operations_using_operators">Matrix operations using operators</a>
-<ul>
-<li><a href="#low-rank_update">Low-rank update</a></li>
-<li><a href="#operator_inversion">Operator inversion</a></li>
-<li><a href="#operator_composition">Operator composition</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#conclusion">Conclusion</a></li>
-</ul>
+<!-- * [Basics](#basics)
+  * [Creating tensors](#creating_tensors)
+  * [Creating a sequence of numbers](#creating_a_sequence_of_numbers)
+  * [Slicing](#slicing)
+  * [Modifying elements of a matrix](#modifying_elements_of_a_matrix)
+  * [Creating a complex matrix](#creating_a_complex_matrix)
+  * [Transpose of a matrix](#transpose_of_a_matrix)
+    * [Transpose of a real matrix](#transpose_of_a_real_matrix)
+    * [Transpose of a complex matrix](#transpose_of_a_complex_matrix)
+  * [Some common matrices](#some_common_matrices)
+    * [Identity matrix](#identity_matrix)
+    * [Diagonal matrix](#diagonal_matrix)
+    * [Tri-diagonal matrix](#tri-diagonal_matrix)
+    * [Matrix of all zeros and ones](#matrix_of_all_zeros_and_ones)
+    * [Random matrices](#random_matrices)
+      * [Random uniform matrix](#random_uniform_matrix)
+      * [Random normal matrix](#random_normal_matrix)
+      * [Truncated random normal matrix](#truncated_random_normal_matrix)
+      * [Random Poisson matrix](#random_poisson_matrix)
+      * [Random gamma matrix](#random_gamma_matrix)
+    * [Some special matrices](#some_special_matrices)
+  * [Sparse matrices](#sparse_matrices)
+  * [Matrix multiplication](#matrix_multiplication)
+    * [Multiplying two column vectors](#multiplying_two_column_vectors)
+      * [Inner product](#inner_product)
+      * [Outer product](#outer_product)
+    * [Multiplying a matrix with a vector](#multiplying_a_matrix_with_a_vector)
+    * [Multiplying two matrices](#multiplying_two_matrices)
+    * [Multiplying two tri-diagonal matrices](#multiplying_two_tri-diagonal_matrices)
+  * [Some common operations on matrices](#some_common_operations_on_matrices)
+    * [Trace](#trace)
+    * [Determinant](#determinant)
+    * [Rank](#rank)
+    * [Matrix inverse](#matrix_inverse)
+    * [Extract diagonals of a matrix](#extract_diagonals_of_a_matrix)
+    * [Extract band part of a matrix](#extract_band_part_of_a_matrix)
+* [Matrix factorizations](#matrix_factorizations)
+  * [LU](#lu)
+  * [Cholesky](#cholesky)
+  * [QR](#qr)
+  * [SVD](#svd)
+* [Eigenvalues and eigenvectors](#eigenvalues_and_eigenvectors)
+  * [Eigen-analysis of Hermitian matrices](#eigen-analysis_of_hermitian_matrices)
+  * [Eigen-analysis of non-Hermitian matrices](#eigen-analysis_of_non-Hermitian_matrices)
+* [Solving dense linear systems](#solving_dense_linear_systems)
+  * [Using LU decomposition](#using_lu_decomposition)
+  * [Using Cholesky decomposition](#using_cholesky_decomposition)
+* [Solving structured linear systems](#solving_structured_linear_systems)
+  * [Solving triangular systems](#solving_triangular_systems)
+  * [Solving tri-diagonal systems](#solving_tri-diagonal_systems)
+  * [Solving banded triangular systems](#solving_banded_triangular_systems)
+* [Solving least squares problems](#solving_least_squares_problems)
+  * [Ordinary least squares](#ordinary_least_squares)
+  * [Regularized least squares](#regularized_least_squares)
+* [Some specialized operations](#some_specialized_operations)
+  * [Norm](#norm)
+  * [Normalizing a tensor](#normalizing_a_tensor)
+  * [Global norm](#global_norm)
+  * [Cross product of vectors](#cross_product_of_vectors)
+  * [Matrix square root](#matrix_square_root)
+  * [Matrix exponential](#matrix_exponential)
+  * [Matrix logarithm](#matrix_logarithm)
+  * [Log-determinant of a matrix](#log-determinant_of_a_matrix)
+  * [Pseudo inverse of a matrix](#pseudo_inverse_of_a_matrix)
+* [Linear operators](#linear_operators)
+  * [Common methods on linear operators](#common_methods_on_linear_operators)
+  * [Special matrices using operators](#special_matrices_using_operators)
+    * [Toeplitz matrix](#toeplitz_matrix)
+    * [Circulant matrix](#circulant_matrix)
+    * [Block diagonal matrix](#block_diagonal_matrix)
+    * [Block lower triangular matrix](#block_lower_triangular_matrix)
+    * [Householder matrix](#householder_matrix)
+    * [Kronecker matrix](#kronecker_matrix)
+    * [Permutation matrix](#permutation_matrix)
+  * [Common matrices using operators](#common_matrices_using_operators)
+    * [Identity matrix](#identity_matrix)
+    * [Scaled identity matrix](#scaled_identity_matrix)
+    * [Diagonal matrix](#diagonal_matrix)
+    * [Tri-diagonal matrix](#tri-diagonal_matrix)
+    * [Lower triangular matrix](#lower_triangular_matrix)
+    * [Matrix of zeros](#matrix_of_zeros)
+  * [Matrix operations using operators](#matrix_operations_using_operators)
+    * [Low-rank update](#low-rank_update)
+    * [Operator inversion](#operator_inversion)
+    * [Operator composition](#operator_composition)
+* [Conclusion](#conclusion) -->
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </span></span></code></pre></div><pre><code>2.3.0
@@ -1087,30 +1615,30 @@
 <h2 id="basics">Basics</h2>
 <p>Tensorflow operates on <code>Tensors</code>. <code>Tensors</code> are characterized by their rank. Following table shows different types of tensors and their corresponding rank.</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:center">Tensors</th>
-<th style="text-align:center">Rank</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Scalars</td>
-<td style="text-align:center">Rank 0 Tensor</td>
-</tr>
-<tr>
-<td style="text-align:center">Vectors (1D array)</td>
-<td style="text-align:center">Rank 1 Tensor</td>
-</tr>
-<tr>
-<td style="text-align:center">Matrices (2D array)</td>
-<td style="text-align:center">Rank 2 Tensor</td>
-</tr>
-<tr>
-<td style="text-align:center">3D array</td>
-<td style="text-align:center">Rank 3 Tensor</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">Tensors</th>
+          <th style="text-align: center">Rank</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">Scalars</td>
+          <td style="text-align: center">Rank 0 Tensor</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Vectors (1D array)</td>
+          <td style="text-align: center">Rank 1 Tensor</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Matrices (2D array)</td>
+          <td style="text-align: center">Rank 2 Tensor</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">3D array</td>
+          <td style="text-align: center">Rank 3 Tensor</td>
+      </tr>
+  </tbody>
 </table>
 <p><a id = "creating_tensors"></a></p>
 <h3 id="creating-tensors">Creating tensors</h3>
@@ -1729,8 +2257,7 @@ array([[ 9.9999970e-01,  1.1920929e-07, -1.1920929e-07],
 </code></pre>
 <h4 id="inverse-using-lu-factors">Inverse using $LU$ factors</h4>
 <p>If $LU$ decomposition result is already available from some prior computation, it can be used to compute the inverse using command <code>tf.linalg.lu_matrix_inverse</code>. This command basically solves the following system:</p>
-<p>$$AX=I \Leftrightarrow LUX=I$$</p>
-<p>As $L$ and $U$ are lower and upper triangular respectively, two triangular systems can be solved to obtain $X$ which is nothing but $A^{-1}$. The triangular systems are $LY = I$ (this gives $Y$ as result) and $UX=Y$ (this gives $X$, i.e., $A^{-1}$ as result). Here, the right hand side has more than one column in both the triangular systems. We will see how to solve those triangular systems at a <a href="#solving_triangular_systems">later section</a>. For the time being, we will just compute the inverse using the built-in command.</p>
+$$AX=I \Leftrightarrow LUX=I$$<p>As $L$ and $U$ are lower and upper triangular respectively, two triangular systems can be solved to obtain $X$ which is nothing but $A^{-1}$. The triangular systems are $LY = I$ (this gives $Y$ as result) and $UX=Y$ (this gives $X$, i.e., $A^{-1}$ as result). Here, the right hand side has more than one column in both the triangular systems. We will see how to solve those triangular systems at a <a href="#solving_triangular_systems">later section</a>. For the time being, we will just compute the inverse using the built-in command.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">lu</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">A_inv_by_lu</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lu_matrix_inverse</span><span class="p">(</span><span class="n">lu</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">A_inv_by_lu</span>
@@ -1803,9 +2330,7 @@ array([[ 0.,  0.,  0.,  0.,  0.],
 <p>Some of the most common and widely used matrix factorizations are available in <code>Tensorflow</code>.</p>
 <p><a id = "lu"></a></p>
 <h3 id="lu">LU</h3>
-<p>Matrix $A$ is factorized into a unit lower triangular matrix $L$ and an upper triangular matrix $U$, such that $$A=LU$$</p>
-<p>To reduce round-off errors, partial pivoting is used. In partial pivoting, the following factorization is done.
-$$PA = LU$$
+$$A=LU$$$$PA = LU$$<p>
 Where, $P$ is called the permutation matrix.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">A</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
@@ -1827,8 +2352,7 @@ tf.Tensor(
 P = 
 tf.Tensor([1 2 0 3], shape=(4,), dtype=int32)
 </code></pre>
-<p>What does the above result mean? Well, both $L$, and $U$ matrices have been merged into one. And $P$ contains permutation indices. In practice, we don&rsquo;t have to reconstruct individual matrices $L$,$U$, and $P$, because <code>tensorflow</code> has built-in functions for further analysis that uses the result of <code>tf.linalg.lu</code> as given above. For the sake of demonstration, we will show how to reconstruct those matrices from above result. To reconstruct $P$, we will use a linear operator that is discussed next. After constructing the matrices $A$ will be $$A = P^TLU$$</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">L</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">band_part</span><span class="p">(</span><span class="n">lu</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag_part</span><span class="p">(</span><span class="n">lu</span><span class="p">))</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">lu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span>
+$$A = P^TLU$$<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">L</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">band_part</span><span class="p">(</span><span class="n">lu</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag_part</span><span class="p">(</span><span class="n">lu</span><span class="p">))</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">lu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span>
 </span></span><span class="line"><span class="cl"><span class="n">U</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">band_part</span><span class="p">(</span><span class="n">lu</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">permu_operator</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinearOperatorPermutation</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">P</span> <span class="o">=</span> <span class="n">permu_operator</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span>
@@ -1880,8 +2404,7 @@ array([[  1.       ,   4.0000005,   7.       ,   8.       ],
 </code></pre>
 <p><a id = "cholesky"></a></p>
 <h3 id="cholesky">Cholesky</h3>
-<p>It is defined for symmetric positive definite matrices. If A is a symmetric positive definite matrix, its Cholesky decomposition can be written as:
-$$ A = LL^T$$
+$$ A = LL^T$$<p>
 Where, $L$ is a lower triangular matrix.</p>
 <p><strong>Note</strong>: Cholesky decomposition is used as a test for positive definiteness of a matrix. If Cholesky decomposition succeeds, the matrix is positive definite, otherwise it is not. Another widely reported test for positive definiteness is to check the signs of all eigenvalues of the matrix. If all the eigenvalues are positive, the matrix is positive definite. But this method requires computation of all eigenvalues which is computationally nontrivial. Therefore, Cholesky decomposition is the preferred method to test for positive definiteness. If the matrix is not positive definite, Cholesky decomposition will stop at an intermediate step. On the other hand, if it succeeds, along with verifying positive definiteness of the matrix, we will get the Cholesky factor as a byproduct. Cholesky factor can then be used to solve linear systems as we will see later.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">A</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
@@ -1945,8 +2468,7 @@ tf.Tensor(
 </code></pre>
 <p><a id = "svd"></a></p>
 <h3 id="svd">SVD</h3>
-<p>Singular value decomposition (SVD) of a matrix $A\in R^{m\times n}$ is defined as
-$$A = U\Sigma V^T$$
+$$A = U\Sigma V^T$$<p>
 Where, $U\in R^{m\times m}$ and $V\in R^{n\times n}$ are orthogonal matrices, commonly known as left and right singular vectors respectively. $\Sigma \in R^{m\times n}$ is a diagonal matrix.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">mat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                   <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
@@ -2068,8 +2590,7 @@ Eigenvectors:
 <p>Nothing! We will still get the correct answer. <code>Tensorflow</code> will use more operations to compute results when it could have been done using less computations.</p>
 <p><a id = "solving_dense_linear_systems"></a></p>
 <h2 id="solving-dense-linear-systems">Solving dense linear systems</h2>
-<p>A linear system is (usually) written as $$ Ax = b$$</p>
-<p>In general, $A$ can be square or rectangular. In our case, it is dense, i.e., most of its entries are nonzero. Right hand side $b$ is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same $A$, the RHS can be replaced by a matrix whose columns are different RHS vectors.</p>
+$$ Ax = b$$<p>In general, $A$ can be square or rectangular. In our case, it is dense, i.e., most of its entries are nonzero. Right hand side $b$ is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same $A$, the RHS can be replaced by a matrix whose columns are different RHS vectors.</p>
 <p>Depending on the structure of $A$ (whether triangular, or tri-diagonal, or positive definite), suitable algorithm is chosen to solve the linear system. <code>Tensorflow</code> has a function <code>tf.linalg.solve</code> to solve linear systems. But this function doesn&rsquo;t take into account the special structure of $A$.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">A</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
@@ -2086,8 +2607,6 @@ array([[1.   ],
 <p>If $LU$ decomposition factors of $A$ are known, those can be used to solve the linear system.
 For example, solve:
 
-
-
 $$\begin{pmatrix}
   1 & 1 & 1\\
   1 & 5 & 5\\
@@ -2098,7 +2617,8 @@ $$\begin{pmatrix}
  11\\
  20\\
  \end{pmatrix}$$
- </p>
+ 
+</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">A</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">13</span><span class="p">]],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
@@ -2117,9 +2637,7 @@ array([[ 3.],
        [11.],
        [20.]], dtype=float32)&gt;
 </code></pre>
-<p>Once we have obtained factors $L$ and $U$, we can use <code>tf.linalg.triangular_solve</code> to solve the linear system by solving following two triangular system. $$Ly = b$$
-and $$Ux = y$$</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">L</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">band_part</span><span class="p">(</span><span class="n">lu</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag_part</span><span class="p">(</span><span class="n">lu</span><span class="p">))</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">lu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span>
+$$Ly = b$$$$Ux = y$$<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">L</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">band_part</span><span class="p">(</span><span class="n">lu</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag_part</span><span class="p">(</span><span class="n">lu</span><span class="p">))</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">lu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span>
 </span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">triangular_solve</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>    <span class="c1"># Solves Ly = b</span>
 </span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">triangular_solve</span><span class="p">(</span><span class="n">lu</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># Solves Ux = y</span>
 </span></span><span class="line"><span class="cl"><span class="n">x</span>
@@ -2130,16 +2648,8 @@ array([[1.   ],
 </code></pre>
 <p><a id = "using_cholesky_decomposition"></a></p>
 <h3 id="using-cholesky-decomposition">Using Cholesky decomposition</h3>
-<p>If $A$ is positive definite, Cholesky decomposition is an efficient method for solving the linear system. For positive definite $A$, Cholesky decomposition requires fewer computations than $LU$ decomposition. This is because it exploits the symmetry of the matrix $A$. Once the Cholesky factor $L$ is found, we solve the linear system by solving two triangular systems. Solving triangular systems only requires $O(n^2)$ operations.
-$$ LL^Tx = b$$
-Two triangular systems are:
-$$ Ly = b$$
-This gives us $y$. Using $y$ we solve for $x$ using the following equation.
-$$L^Tx = y$$</p>
-<p>In <code>tensorflow</code>, we solve the system using <code>tf.linalg.cholesky_solve</code>. It takes cholesky factor $(L)$ and right hand side $b$ as input.</p>
+$$ LL^Tx = b$$$$ Ly = b$$$$L^Tx = y$$<p>In <code>tensorflow</code>, we solve the system using <code>tf.linalg.cholesky_solve</code>. It takes cholesky factor $(L)$ and right hand side $b$ as input.</p>
 <p>For example, solve:
-
-
 
 $$\begin{pmatrix}
   1 & 1 & 1\\
@@ -2151,7 +2661,8 @@ $$\begin{pmatrix}
  11\\
  20\\
  \end{pmatrix}$$
- </p>
+ 
+</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">A</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">13</span><span class="p">]],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
@@ -2207,8 +2718,6 @@ array([[7.],
 <h3 id="solving-tri-diagonal-systems">Solving tri-diagonal systems</h3>
 <p>If matrix $A$ is tri-diagonal, <code>tf.linalg.tridiagonal_solve</code> can be used to solve the linear system efficiently. For example, we will solve the following tri-diagonal system.
 
-
-
 $$\begin{pmatrix}
 2 & -1 & 0 &0 & 0\\
 -1 & 2 & -1 & 0 & 0\\
@@ -2222,6 +2731,7 @@ $$\begin{pmatrix}
 -5\\
 7\\
 9\end{pmatrix}$$
+
 </p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">diags</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                     <span class="p">[</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
@@ -2250,8 +2760,6 @@ array([[ 3.      ],
 <p>However, please keep in mind that flop count is not the only criteria that determines the computational time of a system. For very very large systems, communication time between different parts of computer can be significant as compared to processing required number of flops for that system.</p>
 <p>We can solve both <code>banded lower triangular</code> and <code>banded upper triangular</code> systems. To illustrate this we will use the following example.
 
-
-
 $$\begin{pmatrix}
 1 & 0 & 0 & 0 & 0\\
 6 & 2 & 0 & 0 & 0\\
@@ -2265,6 +2773,7 @@ $$\begin{pmatrix}
 -5\\
 7\\
 9\end{pmatrix}$$
+
 </p>
 <p>As the matrix is banded, we need not create the full dense matrix. Instead, we can only pass the band part to the solver. Subdiagonals (or superdiagonals) contain less number of entries than main diagonal. While passing the band part to <code>tensorflow</code>, these subdiagonals (or superdiagonals) have to be appended either at left or right to make it of the same length as main diagonal. Whether the subdiagonals or superdiagonals will be appended at the left or right, is decided by the alignment strategy. There are four types of <code>alignment strategies</code> used in <code>tensorflow</code>. Those are:</p>
 <ul>
@@ -2311,8 +2820,6 @@ array([[ 3.],
 </code></pre>
 <p>Similarly we can solve banded upper triangular matrix. For illustration, we will use the transpose of the above coefficient matrix. We will use the same right hand side vector.
 
-
-
 $$\begin{pmatrix}
 1 & 6 & 0 & 0 & 0\\
 0 & 2 & 7 & 0 & 0\\
@@ -2326,6 +2833,7 @@ $$\begin{pmatrix}
 -5\\
 7\\
 9\end{pmatrix}$$
+
 </p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">bands</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                     <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>  <span class="c1"># Because of LEFT_RIGHT alignment as we have a superdiagonal here</span>
@@ -2368,14 +2876,11 @@ array([[ 3.],
 <h3 id="ordinary-least-squares">Ordinary least squares</h3>
 <p>Both over determined and under determined least squares problem can be solved using the command <code>tf.linalg.lstsq</code>. In the underdetermined case, the output is the least norm solution. Least squares problem can be written as</p>
 
-
-
 $$\underset{x}{\mathrm{argmin}}{\lVert{Ax-b}\rVert}_2^2$$
+
 
 <p>That is, we try to find an $x$ such that the residual error is as small as possible.
 For example, we will solve following two problems.
-
-
 
 $$\begin{pmatrix}
 1 & 2\\
@@ -2397,6 +2902,7 @@ $$\begin{pmatrix}
 7.2\\
 -5.8\\
 \end{pmatrix}$$
+
 </p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">A_over</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mf">5.</span><span class="p">]])</span>
 </span></span><span class="line"><span class="cl"><span class="n">A_under</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">4.</span><span class="p">]])</span>
@@ -2433,8 +2939,7 @@ array([[-0.04100358],
 <p><a id = "regularized_least_squares"></a></p>
 <h3 id="regularized-least-squares">Regularized least squares</h3>
 <p>Only $l_2$ regularization is supported. The following regularized problem is solved.</p>
-<p>$$\underset{x}{\mathrm{argmin}}{\lVert{Ax-b}\rVert}_2^2 + \lambda {\lVert{x}\rVert}_2^2$$</p>
-<p>Here, $\lambda$ is a hyperparameter. Usually several values of $\lambda$ are tried over a logarithmic scale before choosing the best one.</p>
+$$\underset{x}{\mathrm{argmin}}{\lVert{Ax-b}\rVert}_2^2 + \lambda {\lVert{x}\rVert}_2^2$$<p>Here, $\lambda$ is a hyperparameter. Usually several values of $\lambda$ are tried over a logarithmic scale before choosing the best one.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x_over_reg</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A_over</span><span class="p">,</span> <span class="n">b_over</span><span class="p">,</span> <span class="n">l2_regularizer</span><span class="o">=</span> <span class="mf">2.0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">x_over_reg</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 </span></span></code></pre></div><pre><code>array([[1.3890449 ],
@@ -2454,15 +2959,13 @@ array([[-0.04763567],
 <h3 id="norm">Norm</h3>
 <p>Norm can be defined for vectors as well as matrices. $p$ norm of vector is defined as
 
-
-
 $${\lVert{x}\rVert}_p = (\Sigma_{i=1}^{n}|x_i|^p)^\frac{1}{p}$$
+
 </p>
 <p>Matrix is norm is defined as
 
-
-
 $${\lVert{A}\rVert}_p= \max_{x\neq 0}\frac{{\lVert{Ax}\rVert}_p}{{\lVert{x}\rVert}_p}$$
+
 </p>
 <p><code>Tensorflow</code> supports all the usual vector and matrix norms that are used in practice. Using only <code>tensorflow</code> we can calculate all norms except <code>infinity</code> norm. To calculate <code>infinity</code> norm we have to use <code>ord = np.inf</code>.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mf">3.</span><span class="p">]),</span> <span class="nb">ord</span> <span class="o">=</span> <span class="s2">&#34;euclidean&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
@@ -2586,13 +3089,12 @@ array([[0.11322771, 0.9058217 , 0.22645542, 0.33968312],
 <h3 id="cross-product-of-vectors">Cross product of vectors</h3>
 <p>It is defined for 3-element vectors. For two vectors $a = (a_1, a_2, a_3)^T$, and $b = (b_1, b_2, b_3)^T$, cross product is defined as the determinant of following matrix
 
-
-
 $$\begin{pmatrix}
 i & j & k\\
 a_1 & a_2 & a_3\\
 b_1 & b_2 & b_3
 \end{pmatrix}$$
+
 
 Where $i, j$, and $k$ are unit direction vectors along three perpendicular right handed system.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
@@ -2634,11 +3136,8 @@ array([[4.9999986, 2.0000007, 3.0000038],
 <p><a id = "matrix_exponential"></a></p>
 <h3 id="matrix-exponential">Matrix exponential</h3>
 <p>Exponential of a matrix $A$ is defined as</p>
-<p>$$ e^A = \sum_{n=0}^\infty \frac{A^n}{n!}$$</p>
-<p>In practice, the sum is not taken to infinity. Rather, approximations are used to compute matrix exponential. <code>Tensorflow</code> implementation is based on <a href="https://epubs.siam.org/doi/10.1137/04061101X" target="_blank" rel="noopener">this paper</a>.</p>
-<p>When the matrix has a full set of independent eigenvectors, the formula can be simplified to
-$$e^A = Se^{\Lambda}S^{-1}$$</p>
-<p>where, $S$ is the eigenvector matrix and $e^\Lambda$ is a diagonal matrix whose diagonal entries are exponentials of eigenvalues of the matrix $A$.</p>
+$$ e^A = \sum_{n=0}^\infty \frac{A^n}{n!}$$<p>In practice, the sum is not taken to infinity. Rather, approximations are used to compute matrix exponential. <code>Tensorflow</code> implementation is based on <a href="https://epubs.siam.org/doi/10.1137/04061101X" target="_blank" rel="noopener">this paper</a>.</p>
+$$e^A = Se^{\Lambda}S^{-1}$$<p>where, $S$ is the eigenvector matrix and $e^\Lambda$ is a diagonal matrix whose diagonal entries are exponentials of eigenvalues of the matrix $A$.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">A</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.</span><span class="p">]])</span>
 </span></span><span class="line"><span class="cl"><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">expm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -2697,10 +3196,8 @@ Log of absolute value of determinant =  4.0943446
 <p><a id = "pseudo_inverse_of_a_matrix"></a></p>
 <h3 id="pseudo-inverse-of-a-matrix">Pseudo inverse of a matrix</h3>
 <p>While matrix inverse is defined only for square matrices, pseudo inverse is defined for matrices of any shape. It is also defined for singular matrices. Pseudo inverse can also be used to solve ordinary least squares problem. For the problem</p>
-<p>$$\underset{x}{\mathrm{argmin}}{\lVert {Ax-b} \rVert}_2^2$$</p>
-<p>the approximate least squares solution can be written as</p>
-<p>$$x_{ls} = A^{\dagger}b$$</p>
-<p>Where, $A^{\dagger}$ is the pseudo inverse of $A$.</p>
+$$\underset{x}{\mathrm{argmin}}{\lVert {Ax-b} \rVert}_2^2$$<p>the approximate least squares solution can be written as</p>
+$$x_{ls} = A^{\dagger}b$$<p>Where, $A^{\dagger}$ is the pseudo inverse of $A$.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.</span><span class="p">]]))</span>
 </span></span></code></pre></div><pre><code>&lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
 array([[0.06896552, 0.        , 0.17241378],
@@ -2896,8 +3393,6 @@ array([[ 1.,  2.,  3.,  0.,  0.],
 <h4 id="householder-matrix">Householder matrix</h4>
 <p>Householder matrix can be used to triangularize a matrix using orthogonal matrices (the process is called orthogonal triangularization). But we will not pursue that point here. We will only show the method using only a column vector. Given a vector $v = [1, 4, 7]^T$, Householder transform can transform the vector into $v = {\lVert{v}\rVert}_2[1,0,0]^T$. It is achieved by multiplying the vector $v$ by an orthogonal Householder matrix $H$.
 
-
-
 $$H\begin{pmatrix}
 v_1\\
 v_2\\
@@ -2905,6 +3400,7 @@ v_3\end{pmatrix}={\lVert{v}\rVert}_2\begin{pmatrix}
 1\\
 0\\
 0\end{pmatrix}$$
+
 </p>
 <p>This process can be repeated with other columns of a matrix to transform it into an upper triangular one. For more details, have a look at the references.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">first_column_of_operator_1</span> <span class="o">=</span> <span class="n">operator_1</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()[:,</span><span class="mi">0</span><span class="p">]</span>
@@ -3044,8 +3540,7 @@ array([[0., 0., 0., 0., 0.],
 <p><a id = "low-rank_update"></a></p>
 <h4 id="low-rank-update">Low-rank update</h4>
 <p>When a low rank matrix is added to a given matrix, the resulting matrix is called a low-rank update of the original matrix. Let&rsquo;s suppose our original matrix was $A$ and we add a rank 1 update to it. The resulting matrix is $B$. So</p>
-<p>$$B = A + uv^T$$</p>
-<p>Where, $u$, and $v$ are column vectors. It should be noted that low-rank matrix update doesn&rsquo;t always increase the rank of the original matrix. For example, if rank of $A$ was 2, updating it with a rank 1 matrix will not always  make its rank 3. Here is an example.</p>
+$$B = A + uv^T$$<p>Where, $u$, and $v$ are column vectors. It should be noted that low-rank matrix update doesn&rsquo;t always increase the rank of the original matrix. For example, if rank of $A$ was 2, updating it with a rank 1 matrix will not always  make its rank 3. Here is an example.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">A</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                 <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">                 <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
@@ -3064,9 +3559,7 @@ Rank of B =  2
 <p><strong>Why is it useful?</strong></p>
 <p>It turns out that this low rank update appears in many applications. One of the applications is in least squares. Imagine that you have solved the least squares problem using the available data. And now you get some new data. The problem is to get the new least squares fit. Well, you can start form scratch by including the new data to your old data and then fit the model on the whole data. But this is a wasteful approach. A better alternative is to use the new data to modify your old fit. If you do some mathematics, you will arrive at matrix update equation. We will not do the math here. Interested readers can check references.</p>
 <p>Computations can be much faster if we use low-rank matrix update equation. In tensorflow it is done using <code>tf.linalg.OperatorLowRankUpdate</code> operator. Though the operator can handle more than rank 1 update, we will use it only for rank 1 update.</p>
-<p>As an example, let&rsquo;s suppose we want to compute the inverse of $B$. We can do so by modifying the inverse of $A$ that we have previously computed. The result is the famous Sherman–Morrison-Woodbury formula.
-$$B^{-1} = (A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$$</p>
-<p>Provided that the denominator is not equal to zero. Note that denominator is a scalar for rank 1 update. This equation show that we can compute new inverse from the old inverse by using matrix-vector and vector-vector multiplications.</p>
+$$B^{-1} = (A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$$<p>Provided that the denominator is not equal to zero. Note that denominator is a scalar for rank 1 update. This equation show that we can compute new inverse from the old inverse by using matrix-vector and vector-vector multiplications.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">operator</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span>
 </span></span></code></pre></div><pre><code>&lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
 array([[1., 2., 3.],
@@ -3143,246 +3636,251 @@ array([[  0.,   7.,  13.],
 </ol>
 <p>Last updated: 30 July, 2020.</p>
 
+      </div>
+
+      
+  <time class="mt-12 mb-8 block text-xs text-gray-500 ltr:text-right rtl:text-left dark:text-gray-400" datetime="2020-05-14T00:00:00.000Z">
+    <span>Last updated on</span>
+    May 14, 2020</time>
+
+      <div class="container mx-auto prose prose-slate lg:prose-xl dark:prose-invert mt-5">
+        
+        <div class="max-w-prose print:hidden">
+  
+  
+
+  
+
+<div class="flex justify-center">
+  
+  <a class="no-underline bg-primary-100 hover:bg-primary-300 text-primary-800 text-xs font-medium mr-2 px-2.5 py-0.5 lg:px-5 lg:py-2 rounded dark:bg-primary-900 dark:hover:bg-primary-700 dark:text-primary-300" href="/tags/linear-algebra/">Linear Algebra</a>
+  
+  <a class="no-underline bg-primary-100 hover:bg-primary-300 text-primary-800 text-xs font-medium mr-2 px-2.5 py-0.5 lg:px-5 lg:py-2 rounded dark:bg-primary-900 dark:hover:bg-primary-700 dark:text-primary-300" href="/tags/tensorflow/">Tensorflow</a>
+  
+</div>
+
+
+  
+<section class="flex flex-row flex-wrap justify-center pt-4 text-xl">
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F&amp;text=Doing&#43;Linear&#43;Algebra&#43;using&#43;Tensorflow&#43;2"
+    title="X"
+    aria-label="X"
+    id="share-link-x"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F&amp;t=Doing&#43;Linear&#43;Algebra&#43;using&#43;Tensorflow&#43;2"
+    title="Facebook"
+    aria-label="Facebook"
+    id="share-link-facebook"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+    
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="mailto:?subject=Doing%20Linear%20Algebra%20using%20Tensorflow%202&amp;body=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F"
+    title="Email"
+    aria-label="Email"
+    id="share-link-email"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M16.5 12a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F&amp;title=Doing&#43;Linear&#43;Algebra&#43;using&#43;Tensorflow&#43;2"
+    title="LinkedIn"
+    aria-label="LinkedIn"
+    id="share-link-linkedin"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+  </a>
+  
+
+  
+  
+  
+  
+  
+  
+  <a
+    target="_blank" rel="noopener"
+    class="m-1 rounded-md bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="whatsapp://send?text=Doing&#43;Linear&#43;Algebra&#43;using&#43;Tensorflow&#43;2%20http%3A%2F%2Flocalhost%3A1313%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F"
+    title="WhatsApp"
+    aria-label="WhatsApp"
+    id="share-link-whatsapp"
+  >
+    <svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="m187.58 144.84-32-16a8 8 0 0 0-8 .5l-14.69 9.8a40.55 40.55 0 0 1-16-16l9.8-14.69a8 8 0 0 0 .5-8l-16-32A8 8 0 0 0 104 64a40 40 0 0 0-40 40 88.1 88.1 0 0 0 88 88 40 40 0 0 0 40-40 8 8 0 0 0-4.42-7.16ZM152 176a72.08 72.08 0 0 1-72-72 24 24 0 0 1 19.29-23.54l11.48 23L101 118a8 8 0 0 0-.73 7.51 56.47 56.47 0 0 0 30.15 30.15A8 8 0 0 0 138 155l14.61-9.74 23 11.48A24 24 0 0 1 152 176ZM128 24a104 104 0 0 0-91.82 152.88l-11.35 34.05a16 16 0 0 0 20.24 20.24l34.05-11.35A104 104 0 1 0 128 24Zm0 192a87.87 87.87 0 0 1-44.06-11.81 8 8 0 0 0-6.54-.67L40 216l12.47-37.4a8 8 0 0 0-.66-6.54A88 88 0 1 1 128 216Z"/></svg>
+  </a>
+  
+</section>
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+
+<div class="flex pt-12 pb-4">
+  
+  
+  <img
+    class="mr-4 h-24 w-24 rounded-full"
+    width="96"
+    height="96"
+    alt="Biswajit Sahoo, Ph.D."
+  src="/author/biswajit-sahoo-ph.d./avatar_hu13253178770287002488.jpg"
+  loading="lazy"
+  />
+  
+  <div class="place-self-center">
+    <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+      Authors
+    </div>
+    <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+      <a href="http://localhost:1313/" class="no-underline">
+      Biswajit Sahoo, Ph.D.
+      </a>
     </div>
 
     
+    <div class="text-sm font-bold text-neutral-700 dark:text-neutral-300">
+    Machine Learning Engineer
+    </div>
+    
 
 
+    
+    <div class="text-sm text-neutral-700 dark:text-neutral-300">My research interests include machine learning, deep learning, signal processing and data-driven machinery condition monitoring.</div>
+    
 
+    <div class="text-2xl sm:text-lg pt-1">
 
-
-<div class="article-tags">
+      
+<div class="flex flex-wrap text-neutral-500 dark:text-neutral-300">
   
-  <a class="badge badge-light" href="/tag/linear-algebra/">Linear Algebra</a>
+    
+    
+    
+    
+      
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="/#contact"
+      
+      aria-label="Envelope"
+    ><svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg></a>
   
-  <a class="badge badge-light" href="/tag/tensorflow/">Tensorflow</a>
+    
+    
+    
+    
+      
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="https://github.com/biswajitsahoo1111"
+      target="_blank" rel="noopener" rel="me noopener noreferrer"
+      aria-label="Brands/Github"
+    ><svg style="height: 1em;" fill="currentColor" viewBox="3 3 18 18"><path d="M12 3C7.0275 3 3 7.12937 3 12.2276C3 16.3109 5.57625 19.7597 9.15374 20.9824C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441C9.77249 20.3249 9.76125 19.5982 9.76125 18.8254C7.5 19.2522 6.915 18.2602 6.735 17.7412C6.63375 17.4759 6.19499 16.6569 5.8125 16.4378C5.4975 16.2647 5.0475 15.838 5.80124 15.8264C6.51 15.8149 7.01625 16.4954 7.18499 16.7723C7.99499 18.1679 9.28875 17.7758 9.80625 17.5335C9.885 16.9337 10.1212 16.53 10.38 16.2993C8.3775 16.0687 6.285 15.2728 6.285 11.7432C6.285 10.7397 6.63375 9.9092 7.20749 9.26326C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794C7.2975 6.81794 8.05125 6.57571 9.77249 7.76377C10.4925 7.55615 11.2575 7.45234 12.0225 7.45234C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377C15.9937 6.56418 16.7475 6.81794 16.7475 6.81794C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326C17.4113 9.9092 17.76 10.7281 17.76 11.7432C17.76 15.2843 15.6563 16.0687 13.6537 16.2993C13.98 16.5877 14.2613 17.1414 14.2613 18.0065C14.2613 19.2407 14.25 20.2326 14.25 20.5441C14.25 20.7863 14.4188 21.0746 14.8688 20.9824C16.6554 20.364 18.2079 19.1866 19.3078 17.6162C20.4077 16.0457 20.9995 14.1611 21 12.2276C21 7.12937 16.9725 3 12 3Z"></path></svg></a>
+  
+    
+    
+    
+    
+      
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="https://www.linkedin.com/in/biswajitsahoo1111/"
+      target="_blank" rel="noopener" rel="me noopener noreferrer"
+      aria-label="Brands/Linkedin"
+    ><svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+  
+    
+    
+    
+    
+      
+    
+    <a
+      class="pr-2 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+      style="will-change:transform;"
+      href="https://scholar.google.co.in/citations?hl=en&amp;user=zu2CSBMAAAAJ"
+      target="_blank" rel="noopener" rel="me noopener noreferrer"
+      aria-label="Academicons/Google-Scholar"
+    ><svg style="height: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M343.759 106.662V79.43L363.524 64h-213.89L20.476 176.274h85.656a82.339 82.339 0 0 0-.219 6.225c0 20.845 7.22 38.087 21.672 51.861c14.453 13.797 32.252 20.648 53.327 20.648c4.923 0 9.75-.368 14.438-1.024c-2.907 6.5-4.374 12.523-4.374 18.142c0 9.875 4.499 20.43 13.467 31.642c-39.234 2.67-68.061 9.732-86.437 21.163c-10.531 6.5-19 14.704-25.39 24.531c-6.391 9.9-9.578 20.515-9.578 31.962c0 9.648 2.062 18.336 6.219 26.062c4.156 7.726 9.578 14.07 16.312 18.984c6.718 4.968 14.469 9.101 23.219 12.469c8.734 3.344 17.406 5.718 26.061 7.062A167.052 167.052 0 0 0 180.555 448c13.469 0 26.953-1.734 40.547-5.187c13.562-3.485 26.28-8.642 38.171-15.493c11.86-6.805 21.515-16.086 28.922-27.718c7.39-11.68 11.094-24.805 11.094-39.336c0-11.016-2.25-21.039-6.75-30.14c-4.468-9.073-9.938-16.542-16.452-22.345c-6.501-5.813-13-11.155-19.516-15.968c-6.5-4.845-12-9.75-16.468-14.813c-4.485-5.046-6.735-10.054-6.735-14.984c0-4.921 1.734-9.672 5.216-14.265c3.455-4.61 7.674-9.048 12.61-13.306c4.937-4.25 9.875-8.968 14.796-14.133c4.922-5.147 9.141-11.827 12.61-20.008c3.485-8.18 5.203-17.445 5.203-27.757c0-13.453-2.547-24.46-7.547-33.314c-.594-1.022-1.218-1.803-1.875-3.022l56.907-46.672v17.119c-7.393.93-6.624 5.345-6.624 10.635V245.96c0 5.958 4.875 10.834 10.834 10.834h3.989c5.958 0 10.833-4.875 10.833-10.834V117.293c0-5.277.778-9.688-6.561-10.63zm-107.36 222.48c1.14.75 3.704 2.78 7.718 6.038c4.05 3.243 6.797 5.695 8.266 7.414a443.553 443.553 0 0 1 6.376 7.547c2.813 3.375 4.718 6.304 5.718 8.734c1 2.477 2.016 5.461 3.047 8.946a38.27 38.27 0 0 1 1.485 10.562c0 17.048-6.564 29.68-19.656 37.859c-13.125 8.18-28.767 12.274-46.938 12.274c-9.187 0-18.203-1.093-27.063-3.196c-8.843-2.116-17.311-5.336-25.39-9.601c-8.078-4.258-14.577-10.204-19.5-17.797c-4.938-7.64-7.407-16.415-7.407-26.25c0-10.32 2.797-19.29 8.422-26.906c5.594-7.625 12.938-13.391 22.032-17.315c9.063-3.946 18.25-6.742 27.562-8.398a157.865 157.865 0 0 1 28.438-2.555c4.47 0 7.936.25 10.405.696c.455.219 3.032 2.07 7.735 5.563c4.704 3.462 7.625 5.595 8.75 6.384zm-3.359-100.579c-7.406 8.86-17.734 13.288-30.953 13.288c-11.86 0-22.298-4.764-31.266-14.312c-9-9.523-15.422-20.328-19.344-32.43c-3.937-12.109-5.906-23.984-5.906-35.648c0-13.694 3.596-25.352 10.781-34.976c7.187-9.65 17.5-14.485 30.938-14.485c11.875 0 22.374 5.038 31.437 15.157c9.094 10.085 15.61 21.413 19.517 33.968c3.922 12.54 5.873 24.53 5.873 35.984c0 13.446-3.702 24.61-11.076 33.454z"/></svg></a>
   
 </div>
 
 
-
-<div class="share-box">
-  <ul class="share">
-    
-      
-      
-      
-        
-      
-      
-      
-      
-      
-      
-      
-      <li>
-        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fbiswajitsahoo1111.github.io%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F&amp;text=Doing&#43;Linear&#43;Algebra&#43;using&#43;Tensorflow&#43;2" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      
-      
-      
-      
-      <li>
-        <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fbiswajitsahoo1111.github.io%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F&amp;t=Doing&#43;Linear&#43;Algebra&#43;using&#43;Tensorflow&#43;2" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a href="mailto:?subject=Doing%20Linear%20Algebra%20using%20Tensorflow%202&amp;body=https%3A%2F%2Fbiswajitsahoo1111.github.io%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      
-      
-      
-      
-      <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fbiswajitsahoo1111.github.io%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F&amp;title=Doing&#43;Linear&#43;Algebra&#43;using&#43;Tensorflow&#43;2" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      
-      
-      
-      
-      <li>
-        <a href="whatsapp://send?text=Doing&#43;Linear&#43;Algebra&#43;using&#43;Tensorflow&#43;2%20https%3A%2F%2Fbiswajitsahoo1111.github.io%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      
-      
-      
-      
-      <li>
-        <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fbiswajitsahoo1111.github.io%2Fpost%2Fdoing-linear-algebra-using-tensorflow-2%2F&amp;title=Doing&#43;Linear&#43;Algebra&#43;using&#43;Tensorflow&#43;2" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
-          <i class="fab fa-weibo"></i>
-        </a>
-      </li>
-    
-  </ul>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-  
-  
-  
-    
-  
-  
-  
-  <div class="media author-card content-widget-hr">
-    
-      
-      <a href="https://biswajitsahoo1111.github.io/"><img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu3e225c89d6328e00dc57563a3fd76514_183341_270x270_fill_q75_lanczos_center.jpg" alt="Biswajit Sahoo"></a>
-    
-
-    <div class="media-body">
-      <h5 class="card-title"><a href="https://biswajitsahoo1111.github.io/">Biswajit Sahoo</a></h5>
-      <h6 class="card-subtitle">Machine Learning Engineer</h6>
-      <p class="card-text">My research interests include machine learning, deep learning, signal processing and data-driven machinery condition monitoring.</p>
-      <ul class="network-icon" aria-hidden="true">
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="/#contact" >
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://github.com/biswajitsahoo1111" target="_blank" rel="noopener">
-        <i class="fab fa-github"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://www.linkedin.com/in/biswajitsahoo1111/" target="_blank" rel="noopener">
-        <i class="fab fa-linkedin"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://scholar.google.co.in/citations?hl=en&amp;user=zu2CSBMAAAAJ" target="_blank" rel="noopener">
-        <i class="ai ai-google-scholar"></i>
-      </a>
-    </li>
-  
-</ul>
 
     </div>
   </div>
-
-
-
-
-
-
-
-
+</div>
 
 
 
@@ -3392,47 +3890,125 @@ array([[  0.,   7.,  13.],
 
   
   
-  <div class="article-widget content-widget-hr">
+    
+    
+    
+      
+      
+    
+<div class="pt-1 no-prose w-full">
+  <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+  <div class="flex flex-col md:flex-row flex-nowrap justify-between gap-5 pt-2">
+    <div class="">
+      
+        <a class="group flex no-underline" href="/post/efficiently-reading-multiple-files-in-tensorflow-2/">
+          <span
+            class="mt-[-0.3rem] me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+          ><span class="ltr:inline rtl:hidden">&larr;</span></span>
+          <span class="flex flex-col">
+            <span
+              class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+            >Efficiently reading multiple files in Tensorflow 2</span>
+            <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+              
+                May 17, 2020
+              
+            </span>
+          </span>
+        </a>
+      
+    </div>
+    <div class="">
+      
+        <a class="group flex text-right no-underline" href="/post/reading-multiple-files-in-tensorflow-2/">
+          <span class="flex flex-col">
+            <span
+              class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+            >Reading multiple files in Tensorflow 2</span
+            >
+            <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+              
+                Jan 9, 2020
+              
+            </span>
+          </span>
+          <span
+            class="mt-[-0.3rem] ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+          ><span class="ltr:inline">&rarr;</span></span>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+  
+
+  
+  
+<hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+  <div class="text-sm">
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/indexdslices-in-tensorflow/">IndexedSlices in Tensorflow</a></li>
-      
-      <li><a href="/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/">Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book</a></li>
-      
-      <li><a href="/post/reading-multiple-files-in-tensorflow-2-using-sequence/">Reading multiple files in Tensorflow 2 using Sequence</a></li>
-      
-      <li><a href="/post/efficiently-reading-multiple-files-in-tensorflow-2/">Efficiently reading multiple files in Tensorflow 2</a></li>
-      
       <li><a href="/post/reading-multiple-files-in-tensorflow-2/">Reading multiple files in Tensorflow 2</a></li>
+      
+      <li><a href="/post/using-python-generators/">Using Python Generators</a></li>
+      
+      <li><a href="/post/revisiting-systems-of-linear-equations/">Revisiting Systems of Linear Equations</a></li>
       
     </ul>
   </div>
   
 
 
+  
 
+
+  
+  
+  
+
+  
+
+  
+  <section id="comments">
+    
+  
+  <script src="https://giscus.app/client.js"
+          data-repo="biswajitsahoo1111/biswajitsahoo1111.github.io"
+          data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE5MzExMzM="
+          data-category="General"
+          data-category-id="DIC_kwDOCj91_c4CljPc"
+          data-mapping="title"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          data-loading="lazy"
+          crossorigin="anonymous"
+          async>
+  </script>
+
+
+  </section>
+  
+
+
+</div>
+
+      </div>
+
+    </main>
+  </article>
+</div>
 
     </div>
-    <div class="col-12 col-lg-10ish article-style">
-    <script src="https://utteranc.es/client.js"
-        repo="biswajitsahoo1111/biswajitsahoo1111.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-    </script>
-    </div>
-
-  </div>
-</article>
-  </div>
-
-  <div class="page-footer">
-    
-    
-    <div class="container">
-      <footer class="site-footer">
+    <div class="page-footer">
+      <footer class="container mx-auto flex flex-col justify-items-center text-sm leading-6 mt-24 mb-4 text-slate-700 dark:text-slate-200">
 
     
 
@@ -3465,8 +4041,9 @@ array([[  0.,   7.,  13.],
 
 
 
+
   
-  <p class="powered-by copyright-license-text">
+  <p class="powered-by text-center">
     © 2024 Biswajit Sahoo. Powered by <a href="https://hugoblox.com/" target="_blank" rel="noopener">Hugo Blox Builder</a>.
   </p>
   
@@ -3475,164 +4052,25 @@ array([[  0.,   7.,  13.],
 
 
   
-    <p class="powered-by">
+    <p class="powered-by text-center">
       
     </p>
+  
   </footer>
     </div>
+
     
-  </div>
+    
 
-  
 
 
-<script src="/js/vendor-bundle.min.b2240102cb8b24bcbe037562ce2ea60a.js"></script>
 
 
 
 
-  
 
-  
-  
 
-  
 
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script id="search-hit-fuse-template" type="text/x-template">
-    <div class="search-hit" id="summary-{{key}}">
-      <div class="search-hit-content">
-        <div class="search-hit-name">
-          <a href="{{relpermalink}}">{{title}}</a>
-          <div class="article-metadata search-hit-type">{{type}}</div>
-          <p class="search-hit-description">{{snippet}}</p>
-        </div>
-      </div>
-    </div>
-  </script>
-  
-    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script id="page-data" type="application/json">{"use_headroom":true}</script>
-
-
-  <script src="/js/wowchemy-headroom.db4755770454eb63685f8de785c0a172.js" type="module"></script>
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-<script src="/en/js/wowchemy.min.7f5ebaff62ae468cff8bb3dd1337bb9b.js"></script>
-
-
-
-
-
-
-
-  
-<div id="modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-        <pre><code></code></pre>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
-          <i class="fas fa-copy"></i> Copy
-        </a>
-        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
-          <i class="fas fa-download"></i> Download
-        </a>
-        <div id="modal-error"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-  <script src="/js/wowchemy-publication.9c0e895144aef5a693008b5c5d450147.js" type="module"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
+  </body>
 </html>

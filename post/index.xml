@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts | Biswajit Sahoo</title>
-    <link>https://biswajitsahoo1111.github.io/post/</link>
-      <atom:link href="https://biswajitsahoo1111.github.io/post/index.xml" rel="self" type="application/rss+xml" />
-    <description>Posts</description>
+    <title>Blog | Biswajit Sahoo, Ph.D.</title>
+    <link>http://localhost:1313/post/</link>
+      <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Blog</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 23 Feb 2024 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
-      <title>Posts</title>
-      <link>https://biswajitsahoo1111.github.io/post/</link>
+      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
+      <title>Blog</title>
+      <link>http://localhost:1313/post/</link>
     </image>
     
     <item>
       <title>Compute element stiffness matrix symbolically</title>
-      <link>https://biswajitsahoo1111.github.io/post/compute-element-stiffness-matrix-symbolically/</link>
+      <link>http://localhost:1313/post/compute-element-stiffness-matrix-symbolically/</link>
       <pubDate>Fri, 23 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/compute-element-stiffness-matrix-symbolically/</guid>
+      <guid>http://localhost:1313/post/compute-element-stiffness-matrix-symbolically/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/compute_element_stiffness_matrix_symbolically/compute_element_stiffness_matrix_symbolically.ipynb&#34; target=&#34;_blank&#34;&gt;
@@ -59,7 +59,7 @@
 
 
 &lt;figure  id=&#34;figure-bilinear-rectangle-q4&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
     &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./rectangular_element_fea.png&#34; alt=&#34;Image of Bilinear Rectangle (Q4) element&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;figcaption&gt;
       Bilinear Rectangle (Q4)
@@ -73,15 +73,11 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@variables&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ν&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;   &lt;span class=&#34;c&#34;&gt;# Last symbol &amp;#34;nu&amp;#34; can be obtained in Julia by &amp;#34;\nu&amp;#34; command.&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-select-the-displacement-function&#34;&gt;2. Select the displacement function&lt;/h2&gt;
 &lt;p&gt;In FEA, usually we are interested in the values of certain field quantities (for e.g., displacement) at the nodes and between the nodes. Therefore, interpolation is used to devise a continuous function that satisfies prescribed conditions (for e.g., for a compatible displacement field, element displacement must be linear along the edge between two nodes) at the nodes. For the rectangular element, following displacement function is used
-
-
 $$u = a_1 + a_2x + a_3y + a_4 xy$$
 
-
 $$v = a_5 + a_6x + a_7y + a_8 xy$$
+
 Where, $a_1, a_2, \ldots, a_8$ are called generalized degrees of freedom. In matrix form, it can be written as
-
-
 
 $$\begin{bmatrix}
 u \\
@@ -101,6 +97,7 @@ a_6 \\
 a_7 \\
 a_8
 \end{bmatrix} = [X]_{2 \times 8} [a]_{8 \times 1}$$
+
 &lt;/p&gt;
 &lt;p&gt;In terms of nodal displacements, the displacement functions can be written as&lt;/p&gt;
 &lt;div class=&#34;wide-matrix-container&#34;&gt;
@@ -139,8 +136,6 @@ a_8
 &lt;/div&gt;
 &lt;p&gt;Where displacements $\phi_1$, $\phi_2$, etc. are displacements at node 1, 2, etc. respectively. By substituting generalized coordinates obtained from nodal equations in displacement function, we get shape functions (or basis functions).&lt;/p&gt;
 
-
-
 $$\begin{bmatrix}
 u \\
 v 
@@ -177,11 +172,10 @@ a_8
 \end{bmatrix}
 $$
 
+
 &lt;p&gt;By running following code cells, we can obtain the expression for shape function matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;X&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
 $$ \begin{equation}
 \left[
 \begin{array}{cccccccc}
@@ -192,6 +186,7 @@ $$ \begin{equation}
 \end{equation}
  $$
  
+
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
@@ -201,8 +196,6 @@ $$ \begin{equation}
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
 $$ \begin{equation}
 \left[
 \begin{array}{cccccccc}
@@ -219,6 +212,7 @@ $$ \begin{equation}
 \end{equation}
  $$
  
+
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;N&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;X&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;wide-matrix-container&#34;&gt;
 \begin{equation}
@@ -232,8 +226,6 @@ $$ \begin{equation}
 &lt;/div&gt;
 &lt;h3 id=&#34;3-define-strain-displacement-and-stress-strain-relationship&#34;&gt;3. Define strain-displacement and stress-strain relationship&lt;/h3&gt;
 &lt;p&gt;Using the definition of axial and shear strain, the strain-displacement equation (in matrix form) can be written as follows:
-
-
 
 $$\begin{bmatrix}
 \epsilon_x \\
@@ -251,9 +243,8 @@ v
 \end{bmatrix}
 $$
 
+
 In terms of nodal coordinates, the above equation can also be written as:
-
-
 
 $$
 \begin{bmatrix}
@@ -290,6 +281,7 @@ $$
 \end{bmatrix}
 $$
 
+
 We need the [B] matrix as that would be used in the computation of stiffness matrix. In the cell below we define the differential operators with respect to x and y.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;D_x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Differential&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;D_y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Differential&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -298,8 +290,6 @@ We need the [B] matrix as that would be used in the computation of stiffness mat
 &lt;p&gt;Then we apply the operator to the first row of [N] matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expand_derivatives&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;D_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
 $$ \begin{equation}
 \left[
 \begin{array}{c}
@@ -315,6 +305,7 @@ $$ \begin{equation}
 \right]
 \end{equation}
  $$
+
 
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vcat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expand_derivatives&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;D_x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expand_derivatives&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;D_y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
@@ -333,9 +324,8 @@ $$ \begin{equation}
 &lt;h2 id=&#34;4-derive-the-element-stiffness-matrix&#34;&gt;4. Derive the element stiffness matrix&lt;/h2&gt;
 &lt;p&gt;Without derivation, we define the stiffness matrix as:
 
-
-
 $$[k]_{8 \times 8} = \int_{-b}^b \int_{-a}^{a}[B]^T_{8 \times 3}[E]_{3 \times 3} [B]_{3 \times 8} t dx dy$$
+
 &lt;/p&gt;
 &lt;p&gt;Where $t$ is the element thickness. Matrix $[E]$ is called the constitutive matrix (it is also named as [D] in some literature).For a derivation, readers are directed to the the excellent books in the references. In the following cell, we define $[E] * (1 - \nu^2)$. We do so to remove $(1 - \nu^2)$ term from all the entries of stiffness matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# Consider the [E] (constitutive matrix) below as product of E (elastic modulus) and (1 - ν^2)&lt;/span&gt;
@@ -343,8 +333,6 @@ $$[k]_{8 \times 8} = \int_{-b}^b \int_{-a}^{a}[B]^T_{8 \times 3}[E]_{3 \times 3}
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;ν&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ν&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
 $$ \begin{equation}
 \left[
 \begin{array}{ccc}
@@ -356,6 +344,7 @@ $$ \begin{equation}
 \end{equation}
  $$
  
+
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;K&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;B&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;E&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;B&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;wide-matrix-container&#34;&gt;
 \begin{equation}
@@ -429,9 +418,9 @@ $$ \begin{equation}
     
     <item>
       <title>Making Github Traffic Type Plots</title>
-      <link>https://biswajitsahoo1111.github.io/post/making-github-traffic-type-plots/</link>
+      <link>http://localhost:1313/post/making-github-traffic-type-plots/</link>
       <pubDate>Sat, 18 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/making-github-traffic-type-plots/</guid>
+      <guid>http://localhost:1313/post/making-github-traffic-type-plots/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/github_plot_plotly.ipynb&#34; target=&#34;_blank&#34;&gt;
@@ -456,7 +445,7 @@ $$ \begin{equation}
 
 
 &lt;figure  &gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
     &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./github_views.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 &lt;/p&gt;
@@ -666,7 +655,7 @@ Matlpotlib version:  3.6.3
 
 
 &lt;figure  &gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
     &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./plotly_figure.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 &lt;/p&gt;
@@ -720,7 +709,7 @@ Matlpotlib version:  3.6.3
 
 
 &lt;figure  &gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
     &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./matplotlib_fig.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 &lt;/p&gt;
@@ -729,9 +718,9 @@ Matlpotlib version:  3.6.3
     
     <item>
       <title>IndexedSlices in Tensorflow</title>
-      <link>https://biswajitsahoo1111.github.io/post/indexdslices-in-tensorflow/</link>
+      <link>http://localhost:1313/post/indexdslices-in-tensorflow/</link>
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/indexdslices-in-tensorflow/</guid>
+      <guid>http://localhost:1313/post/indexdslices-in-tensorflow/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Tensorflow_IndexedSlices.ipynb&#34;&gt;
@@ -909,9 +898,9 @@ array([[ 0.        ,  0.        ,  0.        ,  0.        ],
     
     <item>
       <title>Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book</title>
-      <link>https://biswajitsahoo1111.github.io/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
+      <link>http://localhost:1313/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
       <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
+      <guid>http://localhost:1313/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;tr&gt;
   &lt;td align=&#34;left&#34;&gt;
@@ -956,9 +945,9 @@ array([[ 0.        ,  0.        ,  0.        ,  0.        ],
     
     <item>
       <title>Reading multiple files in Tensorflow 2 using Sequence</title>
-      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/</link>
+      <link>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/</link>
       <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
+      <guid>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb&#34;&gt;
@@ -1047,34 +1036,34 @@ Showing first 10 files...
 &lt;/ul&gt;
 &lt;p&gt;As we create a custom sequence object, we have complete control over the arguments we want to pass it. The following sequence object takes a list of file names as first argument. The second argument is batch_size. batch_size determines how many files we will process at one go. As we will be solving a classification problem, we have to assign labels to each raw data. We will use following labels for convenience.&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Class&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Label&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Fault_1&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Fault_2&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Fault_3&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Fault_4&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;3&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Fault_5&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;4&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Class&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Label&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Fault_1&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Fault_2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Fault_3&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;2&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Fault_4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;3&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Fault_5&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;4&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pandas&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pd&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;re&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;# To match regular expression for extracting labels&lt;/span&gt;
@@ -1445,9 +1434,9 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
     
     <item>
       <title>Reading multiple csv files in PyTorch</title>
-      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/</link>
+      <link>http://localhost:1313/post/reading-multiple-csv-files-in-pytorch/</link>
       <pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-csv-files-in-pytorch/</guid>
+      <guid>http://localhost:1313/post/reading-multiple-csv-files-in-pytorch/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_multiple_csv_files_in_PyTorch.ipynb&#34;&gt;
@@ -1532,34 +1521,34 @@ Showing first 10 files...
 &lt;p&gt;We have to first create a &lt;code&gt;Dataset&lt;/code&gt; class. Then we can pass the dataset to the dataloader. Every dataset class must implement the &lt;code&gt;__len__&lt;/code&gt; method that determines the length of the dataset and &lt;code&gt;__getitem__&lt;/code&gt; method that iterates over the dataset item by item. In our case, item would mean the processed version of a chunk of data.&lt;/p&gt;
 &lt;p&gt;The following dataset class takes a list of file names as first argument. The second argument is batch_size. batch_size determines how many files we will process at one go. As we will be solving a classification problem, we have to assign labels to each raw data. We will use following labels for convenience.&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Class&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Label&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Fault_1&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Fault_2&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Fault_3&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Fault_4&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;3&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Fault_5&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;4&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Class&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Label&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Fault_1&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Fault_2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Fault_3&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;2&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Fault_4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;3&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Fault_5&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;4&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pandas&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pd&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;re&lt;/span&gt;   
@@ -1985,9 +1974,9 @@ torch.Size([5, 1, 32, 32])
     
     <item>
       <title>Efficiently reading multiple files in Tensorflow 2</title>
-      <link>https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/</link>
+      <link>http://localhost:1313/post/efficiently-reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>http://localhost:1313/post/efficiently-reading-multiple-files-in-tensorflow-2/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Whether this method is efficient or not is contestable. Efficiency of a data input pipeline depends on many factors. How efficiently data are loaded? What is the computer architecture on which computations are being done? Is GPU available? And the list goes on. So readers might get different performance results when they use this method in their own problems. For the simple (and small) problem considered in this post, we got no perceivable performance improvement. But for one personal application, involving moderate size data (3-4 GB), I achieved 10x performance improvement. So I hope this method can be of help to others as well. The system on which we ran this notebook has 44 CPU cores. &lt;code&gt;Tensorflow&lt;/code&gt; version was 2.4.0 and we did not use any GPU. Please note that for some weird reason, the speedup technique doesn&amp;rsquo;t work in &lt;code&gt;Google Colab&lt;/code&gt;. But it works in GPU enabled personal systems, that I have checked.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: Along with the method described in this post, readers should also try using &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tensorflow Sequence&lt;/a&gt; and see if it improves input pipeline efficiecy. Define all the complex transformations inside &lt;code&gt;__getitem__&lt;/code&gt; method of seqeuence class and then suitably choose &lt;code&gt;max_queue_size&lt;/code&gt;, &lt;code&gt;workers&lt;/code&gt;, and &lt;code&gt;use_multiprocessing&lt;/code&gt; in &lt;code&gt;model.fit()&lt;/code&gt; to improve pipeline efficiency.&lt;/p&gt;
 &lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
@@ -2076,34 +2065,34 @@ array([&#39;./random_data/Fault_1_001.csv&#39;, &#39;./random_data/Fault_1_002.c
 &lt;/ol&gt;
 &lt;p&gt;As we will be solving a classification problem, we have to assign labels to each raw data. We will use following labels for convenience.&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Class&lt;/th&gt;
-&lt;th&gt;Label&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Fault_1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Fault_2&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Fault_3&lt;/td&gt;
-&lt;td&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Fault_4&lt;/td&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Fault_5&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Class&lt;/th&gt;
+          &lt;th&gt;Label&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fault_1&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fault_2&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fault_3&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fault_4&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fault_5&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;The generator will &lt;code&gt;yield&lt;/code&gt; both data and labels. The generator takes a list of file names as first argument. The second argument is &lt;code&gt;batch_size&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tensorflow&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tf&lt;/span&gt;
@@ -2608,9 +2597,9 @@ array([[0.13616945, 0.22521223, 0.29032916, 0.11108191, 0.23720728],
     
     <item>
       <title>Doing Linear Algebra using Tensorflow 2</title>
-      <link>https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/</link>
+      <link>http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/</link>
       <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/doing-linear-algebra-using-tensorflow-2/</guid>
+      <guid>http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Doing_Linear_Algebra_using_Tensorflow_2.ipynb&#34;&gt;
@@ -2627,145 +2616,92 @@ array([[0.13616945, 0.22521223, 0.29032916, 0.11108191, 0.23720728],
   &lt;/td&gt;
 &lt;/table&gt;
 &lt;p&gt;In this post, we will explore ways of doing linear algebra &lt;strong&gt;only&lt;/strong&gt; using &lt;code&gt;tensorflow&lt;/code&gt;. We will only import &lt;code&gt;tensorflow&lt;/code&gt; and nothing else. As we will see, we can do all the common linear algebra operations without using any other library. This post is very long as it covers almost all the functions that are there in the linear algebra library &lt;code&gt;tf.linalg&lt;/code&gt;. But this is not a copy of &lt;code&gt;tensorflow&lt;/code&gt; documentation. Rather, the &lt;code&gt;tensorflow&lt;/code&gt; documentation is a super set of what has been discussed here. This post also assumes that readers have a working knowledge of linear algebra. Most of the times, we will give examples to illustrate a function without going into the underlying theory. Interested readers should use the contents to browse relevant sections of their interest.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#basics&#34;&gt;Basics&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#creating_tensors&#34;&gt;Creating tensors&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#creating_a_sequence_of_numbers&#34;&gt;Creating a sequence of numbers&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#slicing&#34;&gt;Slicing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#modifying_elements_of_a_matrix&#34;&gt;Modifying elements of a matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#creating_a_complex_matrix&#34;&gt;Creating a complex matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#transpose_of_a_matrix&#34;&gt;Transpose of a matrix&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#transpose_of_a_real_matrix&#34;&gt;Transpose of a real matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#transpose_of_a_complex_matrix&#34;&gt;Transpose of a complex matrix&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#some_common_matrices&#34;&gt;Some common matrices&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#identity_matrix&#34;&gt;Identity matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#diagonal_matrix&#34;&gt;Diagonal matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#tri-diagonal_matrix&#34;&gt;Tri-diagonal matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#matrix_of_all_zeros_and_ones&#34;&gt;Matrix of all zeros and ones&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#random_matrices&#34;&gt;Random matrices&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#random_uniform_matrix&#34;&gt;Random uniform matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#random_normal_matrix&#34;&gt;Random normal matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#truncated_random_normal_matrix&#34;&gt;Truncated random normal matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#random_poisson_matrix&#34;&gt;Random Poisson matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#random_gamma_matrix&#34;&gt;Random gamma matrix&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#some_special_matrices&#34;&gt;Some special matrices&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#sparse_matrices&#34;&gt;Sparse matrices&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#matrix_multiplication&#34;&gt;Matrix multiplication&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#multiplying_two_column_vectors&#34;&gt;Multiplying two column vectors&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#inner_product&#34;&gt;Inner product&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#outer_product&#34;&gt;Outer product&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#multiplying_a_matrix_with_a_vector&#34;&gt;Multiplying a matrix with a vector&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#multiplying_two_matrices&#34;&gt;Multiplying two matrices&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#multiplying_two_tri-diagonal_matrices&#34;&gt;Multiplying two tri-diagonal matrices&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#some_common_operations_on_matrices&#34;&gt;Some common operations on matrices&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#trace&#34;&gt;Trace&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#determinant&#34;&gt;Determinant&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#rank&#34;&gt;Rank&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#matrix_inverse&#34;&gt;Matrix inverse&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#extract_diagonals_of_a_matrix&#34;&gt;Extract diagonals of a matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#extract_band_part_of_a_matrix&#34;&gt;Extract band part of a matrix&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#matrix_factorizations&#34;&gt;Matrix factorizations&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#lu&#34;&gt;LU&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#cholesky&#34;&gt;Cholesky&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#qr&#34;&gt;QR&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#svd&#34;&gt;SVD&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#eigenvalues_and_eigenvectors&#34;&gt;Eigenvalues and eigenvectors&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#eigen-analysis_of_hermitian_matrices&#34;&gt;Eigen-analysis of Hermitian matrices&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#eigen-analysis_of_non-Hermitian_matrices&#34;&gt;Eigen-analysis of non-Hermitian matrices&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#solving_dense_linear_systems&#34;&gt;Solving dense linear systems&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#using_lu_decomposition&#34;&gt;Using LU decomposition&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#using_cholesky_decomposition&#34;&gt;Using Cholesky decomposition&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#solving_structured_linear_systems&#34;&gt;Solving structured linear systems&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#solving_triangular_systems&#34;&gt;Solving triangular systems&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#solving_tri-diagonal_systems&#34;&gt;Solving tri-diagonal systems&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#solving_banded_triangular_systems&#34;&gt;Solving banded triangular systems&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#solving_least_squares_problems&#34;&gt;Solving least squares problems&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#ordinary_least_squares&#34;&gt;Ordinary least squares&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#regularized_least_squares&#34;&gt;Regularized least squares&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#some_specialized_operations&#34;&gt;Some specialized operations&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#norm&#34;&gt;Norm&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#normalizing_a_tensor&#34;&gt;Normalizing a tensor&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#global_norm&#34;&gt;Global norm&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#cross_product_of_vectors&#34;&gt;Cross product of vectors&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#matrix_square_root&#34;&gt;Matrix square root&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#matrix_exponential&#34;&gt;Matrix exponential&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#matrix_logarithm&#34;&gt;Matrix logarithm&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#log-determinant_of_a_matrix&#34;&gt;Log-determinant of a matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#pseudo_inverse_of_a_matrix&#34;&gt;Pseudo inverse of a matrix&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#linear_operators&#34;&gt;Linear operators&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#common_methods_on_linear_operators&#34;&gt;Common methods on linear operators&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#special_matrices_using_operators&#34;&gt;Special matrices using operators&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#toeplitz_matrix&#34;&gt;Toeplitz matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#circulant_matrix&#34;&gt;Circulant matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#block_diagonal_matrix&#34;&gt;Block diagonal matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#block_lower_triangular_matrix&#34;&gt;Block lower triangular matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#householder_matrix&#34;&gt;Householder matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#kronecker_matrix&#34;&gt;Kronecker matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#permutation_matrix&#34;&gt;Permutation matrix&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#common_matrices_using_operators&#34;&gt;Common matrices using operators&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#identity_matrix&#34;&gt;Identity matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#scaled_identity_matrix&#34;&gt;Scaled identity matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#diagonal_matrix&#34;&gt;Diagonal matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#tri-diagonal_matrix&#34;&gt;Tri-diagonal matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#lower_triangular_matrix&#34;&gt;Lower triangular matrix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#matrix_of_zeros&#34;&gt;Matrix of zeros&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#matrix_operations_using_operators&#34;&gt;Matrix operations using operators&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#low-rank_update&#34;&gt;Low-rank update&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#operator_inversion&#34;&gt;Operator inversion&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#operator_composition&#34;&gt;Operator composition&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;!-- * [Basics](#basics)
+  * [Creating tensors](#creating_tensors)
+  * [Creating a sequence of numbers](#creating_a_sequence_of_numbers)
+  * [Slicing](#slicing)
+  * [Modifying elements of a matrix](#modifying_elements_of_a_matrix)
+  * [Creating a complex matrix](#creating_a_complex_matrix)
+  * [Transpose of a matrix](#transpose_of_a_matrix)
+    * [Transpose of a real matrix](#transpose_of_a_real_matrix)
+    * [Transpose of a complex matrix](#transpose_of_a_complex_matrix)
+  * [Some common matrices](#some_common_matrices)
+    * [Identity matrix](#identity_matrix)
+    * [Diagonal matrix](#diagonal_matrix)
+    * [Tri-diagonal matrix](#tri-diagonal_matrix)
+    * [Matrix of all zeros and ones](#matrix_of_all_zeros_and_ones)
+    * [Random matrices](#random_matrices)
+      * [Random uniform matrix](#random_uniform_matrix)
+      * [Random normal matrix](#random_normal_matrix)
+      * [Truncated random normal matrix](#truncated_random_normal_matrix)
+      * [Random Poisson matrix](#random_poisson_matrix)
+      * [Random gamma matrix](#random_gamma_matrix)
+    * [Some special matrices](#some_special_matrices)
+  * [Sparse matrices](#sparse_matrices)
+  * [Matrix multiplication](#matrix_multiplication)
+    * [Multiplying two column vectors](#multiplying_two_column_vectors)
+      * [Inner product](#inner_product)
+      * [Outer product](#outer_product)
+    * [Multiplying a matrix with a vector](#multiplying_a_matrix_with_a_vector)
+    * [Multiplying two matrices](#multiplying_two_matrices)
+    * [Multiplying two tri-diagonal matrices](#multiplying_two_tri-diagonal_matrices)
+  * [Some common operations on matrices](#some_common_operations_on_matrices)
+    * [Trace](#trace)
+    * [Determinant](#determinant)
+    * [Rank](#rank)
+    * [Matrix inverse](#matrix_inverse)
+    * [Extract diagonals of a matrix](#extract_diagonals_of_a_matrix)
+    * [Extract band part of a matrix](#extract_band_part_of_a_matrix)
+* [Matrix factorizations](#matrix_factorizations)
+  * [LU](#lu)
+  * [Cholesky](#cholesky)
+  * [QR](#qr)
+  * [SVD](#svd)
+* [Eigenvalues and eigenvectors](#eigenvalues_and_eigenvectors)
+  * [Eigen-analysis of Hermitian matrices](#eigen-analysis_of_hermitian_matrices)
+  * [Eigen-analysis of non-Hermitian matrices](#eigen-analysis_of_non-Hermitian_matrices)
+* [Solving dense linear systems](#solving_dense_linear_systems)
+  * [Using LU decomposition](#using_lu_decomposition)
+  * [Using Cholesky decomposition](#using_cholesky_decomposition)
+* [Solving structured linear systems](#solving_structured_linear_systems)
+  * [Solving triangular systems](#solving_triangular_systems)
+  * [Solving tri-diagonal systems](#solving_tri-diagonal_systems)
+  * [Solving banded triangular systems](#solving_banded_triangular_systems)
+* [Solving least squares problems](#solving_least_squares_problems)
+  * [Ordinary least squares](#ordinary_least_squares)
+  * [Regularized least squares](#regularized_least_squares)
+* [Some specialized operations](#some_specialized_operations)
+  * [Norm](#norm)
+  * [Normalizing a tensor](#normalizing_a_tensor)
+  * [Global norm](#global_norm)
+  * [Cross product of vectors](#cross_product_of_vectors)
+  * [Matrix square root](#matrix_square_root)
+  * [Matrix exponential](#matrix_exponential)
+  * [Matrix logarithm](#matrix_logarithm)
+  * [Log-determinant of a matrix](#log-determinant_of_a_matrix)
+  * [Pseudo inverse of a matrix](#pseudo_inverse_of_a_matrix)
+* [Linear operators](#linear_operators)
+  * [Common methods on linear operators](#common_methods_on_linear_operators)
+  * [Special matrices using operators](#special_matrices_using_operators)
+    * [Toeplitz matrix](#toeplitz_matrix)
+    * [Circulant matrix](#circulant_matrix)
+    * [Block diagonal matrix](#block_diagonal_matrix)
+    * [Block lower triangular matrix](#block_lower_triangular_matrix)
+    * [Householder matrix](#householder_matrix)
+    * [Kronecker matrix](#kronecker_matrix)
+    * [Permutation matrix](#permutation_matrix)
+  * [Common matrices using operators](#common_matrices_using_operators)
+    * [Identity matrix](#identity_matrix)
+    * [Scaled identity matrix](#scaled_identity_matrix)
+    * [Diagonal matrix](#diagonal_matrix)
+    * [Tri-diagonal matrix](#tri-diagonal_matrix)
+    * [Lower triangular matrix](#lower_triangular_matrix)
+    * [Matrix of zeros](#matrix_of_zeros)
+  * [Matrix operations using operators](#matrix_operations_using_operators)
+    * [Low-rank update](#low-rank_update)
+    * [Operator inversion](#operator_inversion)
+    * [Operator composition](#operator_composition)
+* [Conclusion](#conclusion) --&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tensorflow&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;tf&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;__version__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;2.3.0
@@ -2776,30 +2712,30 @@ array([[0.13616945, 0.22521223, 0.29032916, 0.11108191, 0.23720728],
 &lt;h2 id=&#34;basics&#34;&gt;Basics&lt;/h2&gt;
 &lt;p&gt;Tensorflow operates on &lt;code&gt;Tensors&lt;/code&gt;. &lt;code&gt;Tensors&lt;/code&gt; are characterized by their rank. Following table shows different types of tensors and their corresponding rank.&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Tensors&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Rank&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Scalars&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Rank 0 Tensor&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Vectors (1D array)&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Rank 1 Tensor&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Matrices (2D array)&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Rank 2 Tensor&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;3D array&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Rank 3 Tensor&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Tensors&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Rank&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Scalars&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Rank 0 Tensor&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Vectors (1D array)&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Rank 1 Tensor&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Matrices (2D array)&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Rank 2 Tensor&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;3D array&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Rank 3 Tensor&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;&lt;a id = &#34;creating_tensors&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;creating-tensors&#34;&gt;Creating tensors&lt;/h3&gt;
@@ -3418,8 +3354,7 @@ array([[ 9.9999970e-01,  1.1920929e-07, -1.1920929e-07],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h4 id=&#34;inverse-using-lu-factors&#34;&gt;Inverse using $LU$ factors&lt;/h4&gt;
 &lt;p&gt;If $LU$ decomposition result is already available from some prior computation, it can be used to compute the inverse using command &lt;code&gt;tf.linalg.lu_matrix_inverse&lt;/code&gt;. This command basically solves the following system:&lt;/p&gt;
-&lt;p&gt;$$AX=I \Leftrightarrow LUX=I$$&lt;/p&gt;
-&lt;p&gt;As $L$ and $U$ are lower and upper triangular respectively, two triangular systems can be solved to obtain $X$ which is nothing but $A^{-1}$. The triangular systems are $LY = I$ (this gives $Y$ as result) and $UX=Y$ (this gives $X$, i.e., $A^{-1}$ as result). Here, the right hand side has more than one column in both the triangular systems. We will see how to solve those triangular systems at a &lt;a href=&#34;#solving_triangular_systems&#34;&gt;later section&lt;/a&gt;. For the time being, we will just compute the inverse using the built-in command.&lt;/p&gt;
+$$AX=I \Leftrightarrow LUX=I$$&lt;p&gt;As $L$ and $U$ are lower and upper triangular respectively, two triangular systems can be solved to obtain $X$ which is nothing but $A^{-1}$. The triangular systems are $LY = I$ (this gives $Y$ as result) and $UX=Y$ (this gives $X$, i.e., $A^{-1}$ as result). Here, the right hand side has more than one column in both the triangular systems. We will see how to solve those triangular systems at a &lt;a href=&#34;#solving_triangular_systems&#34;&gt;later section&lt;/a&gt;. For the time being, we will just compute the inverse using the built-in command.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A_inv_by_lu&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu_matrix_inverse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A_inv_by_lu&lt;/span&gt;
@@ -3492,9 +3427,7 @@ array([[ 0.,  0.,  0.,  0.,  0.],
 &lt;p&gt;Some of the most common and widely used matrix factorizations are available in &lt;code&gt;Tensorflow&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;lu&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;lu&#34;&gt;LU&lt;/h3&gt;
-&lt;p&gt;Matrix $A$ is factorized into a unit lower triangular matrix $L$ and an upper triangular matrix $U$, such that $$A=LU$$&lt;/p&gt;
-&lt;p&gt;To reduce round-off errors, partial pivoting is used. In partial pivoting, the following factorization is done.
-$$PA = LU$$
+$$A=LU$$$$PA = LU$$&lt;p&gt;
 Where, $P$ is called the permutation matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
@@ -3516,8 +3449,7 @@ tf.Tensor(
 P = 
 tf.Tensor([1 2 0 3], shape=(4,), dtype=int32)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;What does the above result mean? Well, both $L$, and $U$ matrices have been merged into one. And $P$ contains permutation indices. In practice, we don&amp;rsquo;t have to reconstruct individual matrices $L$,$U$, and $P$, because &lt;code&gt;tensorflow&lt;/code&gt; has built-in functions for further analysis that uses the result of &lt;code&gt;tf.linalg.lu&lt;/code&gt; as given above. For the sake of demonstration, we will show how to reconstruct those matrices from above result. To reconstruct $P$, we will use a linear operator that is discussed next. After constructing the matrices $A$ will be $$A = P^TLU$$&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;L&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;band_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ones&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],))&lt;/span&gt;
+$$A = P^TLU$$&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;L&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;band_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ones&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;U&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;band_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;permu_operator&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LinearOperatorPermutation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;P&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;permu_operator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_dense&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
@@ -3569,8 +3501,7 @@ array([[  1.       ,   4.0000005,   7.       ,   8.       ],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;cholesky&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;cholesky&#34;&gt;Cholesky&lt;/h3&gt;
-&lt;p&gt;It is defined for symmetric positive definite matrices. If A is a symmetric positive definite matrix, its Cholesky decomposition can be written as:
-$$ A = LL^T$$
+$$ A = LL^T$$&lt;p&gt;
 Where, $L$ is a lower triangular matrix.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Cholesky decomposition is used as a test for positive definiteness of a matrix. If Cholesky decomposition succeeds, the matrix is positive definite, otherwise it is not. Another widely reported test for positive definiteness is to check the signs of all eigenvalues of the matrix. If all the eigenvalues are positive, the matrix is positive definite. But this method requires computation of all eigenvalues which is computationally nontrivial. Therefore, Cholesky decomposition is the preferred method to test for positive definiteness. If the matrix is not positive definite, Cholesky decomposition will stop at an intermediate step. On the other hand, if it succeeds, along with verifying positive definiteness of the matrix, we will get the Cholesky factor as a byproduct. Cholesky factor can then be used to solve linear systems as we will see later.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
@@ -3634,8 +3565,7 @@ tf.Tensor(
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;svd&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;svd&#34;&gt;SVD&lt;/h3&gt;
-&lt;p&gt;Singular value decomposition (SVD) of a matrix $A\in R^{m\times n}$ is defined as
-$$A = U\Sigma V^T$$
+$$A = U\Sigma V^T$$&lt;p&gt;
 Where, $U\in R^{m\times m}$ and $V\in R^{n\times n}$ are orthogonal matrices, commonly known as left and right singular vectors respectively. $\Sigma \in R^{m\times n}$ is a diagonal matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;mat&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                   &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
@@ -3757,8 +3687,7 @@ Eigenvectors:
 &lt;p&gt;Nothing! We will still get the correct answer. &lt;code&gt;Tensorflow&lt;/code&gt; will use more operations to compute results when it could have been done using less computations.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;solving_dense_linear_systems&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;solving-dense-linear-systems&#34;&gt;Solving dense linear systems&lt;/h2&gt;
-&lt;p&gt;A linear system is (usually) written as $$ Ax = b$$&lt;/p&gt;
-&lt;p&gt;In general, $A$ can be square or rectangular. In our case, it is dense, i.e., most of its entries are nonzero. Right hand side $b$ is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same $A$, the RHS can be replaced by a matrix whose columns are different RHS vectors.&lt;/p&gt;
+$$ Ax = b$$&lt;p&gt;In general, $A$ can be square or rectangular. In our case, it is dense, i.e., most of its entries are nonzero. Right hand side $b$ is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same $A$, the RHS can be replaced by a matrix whose columns are different RHS vectors.&lt;/p&gt;
 &lt;p&gt;Depending on the structure of $A$ (whether triangular, or tri-diagonal, or positive definite), suitable algorithm is chosen to solve the linear system. &lt;code&gt;Tensorflow&lt;/code&gt; has a function &lt;code&gt;tf.linalg.solve&lt;/code&gt; to solve linear systems. But this function doesn&amp;rsquo;t take into account the special structure of $A$.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
@@ -3775,8 +3704,6 @@ array([[1.   ],
 &lt;p&gt;If $LU$ decomposition factors of $A$ are known, those can be used to solve the linear system.
 For example, solve:
 
-
-
 $$\begin{pmatrix}
   1 &amp; 1 &amp; 1\\
   1 &amp; 5 &amp; 5\\
@@ -3787,7 +3714,8 @@ $$\begin{pmatrix}
  11\\
  20\\
  \end{pmatrix}$$
- &lt;/p&gt;
+ 
+&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dtype&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;float32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -3806,9 +3734,7 @@ array([[ 3.],
        [11.],
        [20.]], dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Once we have obtained factors $L$ and $U$, we can use &lt;code&gt;tf.linalg.triangular_solve&lt;/code&gt; to solve the linear system by solving following two triangular system. $$Ly = b$$
-and $$Ux = y$$&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;L&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;band_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ones&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],))&lt;/span&gt;
+$$Ly = b$$$$Ux = y$$&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;L&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;band_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ones&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;triangular_solve&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;# Solves Ly = b&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;triangular_solve&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lower&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# Solves Ux = y&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;
@@ -3819,16 +3745,8 @@ array([[1.   ],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;using_cholesky_decomposition&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;using-cholesky-decomposition&#34;&gt;Using Cholesky decomposition&lt;/h3&gt;
-&lt;p&gt;If $A$ is positive definite, Cholesky decomposition is an efficient method for solving the linear system. For positive definite $A$, Cholesky decomposition requires fewer computations than $LU$ decomposition. This is because it exploits the symmetry of the matrix $A$. Once the Cholesky factor $L$ is found, we solve the linear system by solving two triangular systems. Solving triangular systems only requires $O(n^2)$ operations.
-$$ LL^Tx = b$$
-Two triangular systems are:
-$$ Ly = b$$
-This gives us $y$. Using $y$ we solve for $x$ using the following equation.
-$$L^Tx = y$$&lt;/p&gt;
-&lt;p&gt;In &lt;code&gt;tensorflow&lt;/code&gt;, we solve the system using &lt;code&gt;tf.linalg.cholesky_solve&lt;/code&gt;. It takes cholesky factor $(L)$ and right hand side $b$ as input.&lt;/p&gt;
+$$ LL^Tx = b$$$$ Ly = b$$$$L^Tx = y$$&lt;p&gt;In &lt;code&gt;tensorflow&lt;/code&gt;, we solve the system using &lt;code&gt;tf.linalg.cholesky_solve&lt;/code&gt;. It takes cholesky factor $(L)$ and right hand side $b$ as input.&lt;/p&gt;
 &lt;p&gt;For example, solve:
-
-
 
 $$\begin{pmatrix}
   1 &amp; 1 &amp; 1\\
@@ -3840,7 +3758,8 @@ $$\begin{pmatrix}
  11\\
  20\\
  \end{pmatrix}$$
- &lt;/p&gt;
+ 
+&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dtype&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;float32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -3896,8 +3815,6 @@ array([[7.],
 &lt;h3 id=&#34;solving-tri-diagonal-systems&#34;&gt;Solving tri-diagonal systems&lt;/h3&gt;
 &lt;p&gt;If matrix $A$ is tri-diagonal, &lt;code&gt;tf.linalg.tridiagonal_solve&lt;/code&gt; can be used to solve the linear system efficiently. For example, we will solve the following tri-diagonal system.
 
-
-
 $$\begin{pmatrix}
 2 &amp; -1 &amp; 0 &amp;0 &amp; 0\\
 -1 &amp; 2 &amp; -1 &amp; 0 &amp; 0\\
@@ -3911,6 +3828,7 @@ $$\begin{pmatrix}
 -5\\
 7\\
 9\end{pmatrix}$$
+
 &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;diags&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                     &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
@@ -3939,8 +3857,6 @@ array([[ 3.      ],
 &lt;p&gt;However, please keep in mind that flop count is not the only criteria that determines the computational time of a system. For very very large systems, communication time between different parts of computer can be significant as compared to processing required number of flops for that system.&lt;/p&gt;
 &lt;p&gt;We can solve both &lt;code&gt;banded lower triangular&lt;/code&gt; and &lt;code&gt;banded upper triangular&lt;/code&gt; systems. To illustrate this we will use the following example.
 
-
-
 $$\begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
 6 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
@@ -3954,6 +3870,7 @@ $$\begin{pmatrix}
 -5\\
 7\\
 9\end{pmatrix}$$
+
 &lt;/p&gt;
 &lt;p&gt;As the matrix is banded, we need not create the full dense matrix. Instead, we can only pass the band part to the solver. Subdiagonals (or superdiagonals) contain less number of entries than main diagonal. While passing the band part to &lt;code&gt;tensorflow&lt;/code&gt;, these subdiagonals (or superdiagonals) have to be appended either at left or right to make it of the same length as main diagonal. Whether the subdiagonals or superdiagonals will be appended at the left or right, is decided by the alignment strategy. There are four types of &lt;code&gt;alignment strategies&lt;/code&gt; used in &lt;code&gt;tensorflow&lt;/code&gt;. Those are:&lt;/p&gt;
 &lt;ul&gt;
@@ -4000,8 +3917,6 @@ array([[ 3.],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Similarly we can solve banded upper triangular matrix. For illustration, we will use the transpose of the above coefficient matrix. We will use the same right hand side vector.
 
-
-
 $$\begin{pmatrix}
 1 &amp; 6 &amp; 0 &amp; 0 &amp; 0\\
 0 &amp; 2 &amp; 7 &amp; 0 &amp; 0\\
@@ -4015,6 +3930,7 @@ $$\begin{pmatrix}
 -5\\
 7\\
 9\end{pmatrix}$$
+
 &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;bands&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                     &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dtype&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;float32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# Because of LEFT_RIGHT alignment as we have a superdiagonal here&lt;/span&gt;
@@ -4057,14 +3973,11 @@ array([[ 3.],
 &lt;h3 id=&#34;ordinary-least-squares&#34;&gt;Ordinary least squares&lt;/h3&gt;
 &lt;p&gt;Both over determined and under determined least squares problem can be solved using the command &lt;code&gt;tf.linalg.lstsq&lt;/code&gt;. In the underdetermined case, the output is the least norm solution. Least squares problem can be written as&lt;/p&gt;
 
-
-
 $$\underset{x}{\mathrm{argmin}}{\lVert{Ax-b}\rVert}_2^2$$
+
 
 &lt;p&gt;That is, we try to find an $x$ such that the residual error is as small as possible.
 For example, we will solve following two problems.
-
-
 
 $$\begin{pmatrix}
 1 &amp; 2\\
@@ -4086,6 +3999,7 @@ $$\begin{pmatrix}
 7.2\\
 -5.8\\
 \end{pmatrix}$$
+
 &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A_over&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;5.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]])&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A_under&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;4.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]])&lt;/span&gt;
@@ -4122,8 +4036,7 @@ array([[-0.04100358],
 &lt;p&gt;&lt;a id = &#34;regularized_least_squares&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;regularized-least-squares&#34;&gt;Regularized least squares&lt;/h3&gt;
 &lt;p&gt;Only $l_2$ regularization is supported. The following regularized problem is solved.&lt;/p&gt;
-&lt;p&gt;$$\underset{x}{\mathrm{argmin}}{\lVert{Ax-b}\rVert}_2^2 + \lambda {\lVert{x}\rVert}_2^2$$&lt;/p&gt;
-&lt;p&gt;Here, $\lambda$ is a hyperparameter. Usually several values of $\lambda$ are tried over a logarithmic scale before choosing the best one.&lt;/p&gt;
+$$\underset{x}{\mathrm{argmin}}{\lVert{Ax-b}\rVert}_2^2 + \lambda {\lVert{x}\rVert}_2^2$$&lt;p&gt;Here, $\lambda$ is a hyperparameter. Usually several values of $\lambda$ are tried over a logarithmic scale before choosing the best one.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x_over_reg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lstsq&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A_over&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b_over&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l2_regularizer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x_over_reg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;numpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;array([[1.3890449 ],
@@ -4143,15 +4056,13 @@ array([[-0.04763567],
 &lt;h3 id=&#34;norm&#34;&gt;Norm&lt;/h3&gt;
 &lt;p&gt;Norm can be defined for vectors as well as matrices. $p$ norm of vector is defined as
 
-
-
 $${\lVert{x}\rVert}_p = (\Sigma_{i=1}^{n}|x_i|^p)^\frac{1}{p}$$
+
 &lt;/p&gt;
 &lt;p&gt;Matrix is norm is defined as
 
-
-
 $${\lVert{A}\rVert}_p= \max_{x\neq 0}\frac{{\lVert{Ax}\rVert}_p}{{\lVert{x}\rVert}_p}$$
+
 &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Tensorflow&lt;/code&gt; supports all the usual vector and matrix norms that are used in practice. Using only &lt;code&gt;tensorflow&lt;/code&gt; we can calculate all norms except &lt;code&gt;infinity&lt;/code&gt; norm. To calculate &lt;code&gt;infinity&lt;/code&gt; norm we have to use &lt;code&gt;ord = np.inf&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;norm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;3.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]),&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ord&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;euclidean&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;numpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
@@ -4275,13 +4186,12 @@ array([[0.11322771, 0.9058217 , 0.22645542, 0.33968312],
 &lt;h3 id=&#34;cross-product-of-vectors&#34;&gt;Cross product of vectors&lt;/h3&gt;
 &lt;p&gt;It is defined for 3-element vectors. For two vectors $a = (a_1, a_2, a_3)^T$, and $b = (b_1, b_2, b_3)^T$, cross product is defined as the determinant of following matrix
 
-
-
 $$\begin{pmatrix}
 i &amp; j &amp; k\\
 a_1 &amp; a_2 &amp; a_3\\
 b_1 &amp; b_2 &amp; b_3
 \end{pmatrix}$$
+
 
 Where $i, j$, and $k$ are unit direction vectors along three perpendicular right handed system.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
@@ -4323,11 +4233,8 @@ array([[4.9999986, 2.0000007, 3.0000038],
 &lt;p&gt;&lt;a id = &#34;matrix_exponential&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;matrix-exponential&#34;&gt;Matrix exponential&lt;/h3&gt;
 &lt;p&gt;Exponential of a matrix $A$ is defined as&lt;/p&gt;
-&lt;p&gt;$$ e^A = \sum_{n=0}^\infty \frac{A^n}{n!}$$&lt;/p&gt;
-&lt;p&gt;In practice, the sum is not taken to infinity. Rather, approximations are used to compute matrix exponential. &lt;code&gt;Tensorflow&lt;/code&gt; implementation is based on &lt;a href=&#34;https://epubs.siam.org/doi/10.1137/04061101X&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this paper&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;When the matrix has a full set of independent eigenvectors, the formula can be simplified to
-$$e^A = Se^{\Lambda}S^{-1}$$&lt;/p&gt;
-&lt;p&gt;where, $S$ is the eigenvector matrix and $e^\Lambda$ is a diagonal matrix whose diagonal entries are exponentials of eigenvalues of the matrix $A$.&lt;/p&gt;
+$$ e^A = \sum_{n=0}^\infty \frac{A^n}{n!}$$&lt;p&gt;In practice, the sum is not taken to infinity. Rather, approximations are used to compute matrix exponential. &lt;code&gt;Tensorflow&lt;/code&gt; implementation is based on &lt;a href=&#34;https://epubs.siam.org/doi/10.1137/04061101X&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this paper&lt;/a&gt;.&lt;/p&gt;
+$$e^A = Se^{\Lambda}S^{-1}$$&lt;p&gt;where, $S$ is the eigenvector matrix and $e^\Lambda$ is a diagonal matrix whose diagonal entries are exponentials of eigenvalues of the matrix $A$.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]])&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -4386,10 +4293,8 @@ Log of absolute value of determinant =  4.0943446
 &lt;p&gt;&lt;a id = &#34;pseudo_inverse_of_a_matrix&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;pseudo-inverse-of-a-matrix&#34;&gt;Pseudo inverse of a matrix&lt;/h3&gt;
 &lt;p&gt;While matrix inverse is defined only for square matrices, pseudo inverse is defined for matrices of any shape. It is also defined for singular matrices. Pseudo inverse can also be used to solve ordinary least squares problem. For the problem&lt;/p&gt;
-&lt;p&gt;$$\underset{x}{\mathrm{argmin}}{\lVert {Ax-b} \rVert}_2^2$$&lt;/p&gt;
-&lt;p&gt;the approximate least squares solution can be written as&lt;/p&gt;
-&lt;p&gt;$$x_{ls} = A^{\dagger}b$$&lt;/p&gt;
-&lt;p&gt;Where, $A^{\dagger}$ is the pseudo inverse of $A$.&lt;/p&gt;
+$$\underset{x}{\mathrm{argmin}}{\lVert {Ax-b} \rVert}_2^2$$&lt;p&gt;the approximate least squares solution can be written as&lt;/p&gt;
+$$x_{ls} = A^{\dagger}b$$&lt;p&gt;Where, $A^{\dagger}$ is the pseudo inverse of $A$.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pinv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
 array([[0.06896552, 0.        , 0.17241378],
@@ -4585,8 +4490,6 @@ array([[ 1.,  2.,  3.,  0.,  0.],
 &lt;h4 id=&#34;householder-matrix&#34;&gt;Householder matrix&lt;/h4&gt;
 &lt;p&gt;Householder matrix can be used to triangularize a matrix using orthogonal matrices (the process is called orthogonal triangularization). But we will not pursue that point here. We will only show the method using only a column vector. Given a vector $v = [1, 4, 7]^T$, Householder transform can transform the vector into $v = {\lVert{v}\rVert}_2[1,0,0]^T$. It is achieved by multiplying the vector $v$ by an orthogonal Householder matrix $H$.
 
-
-
 $$H\begin{pmatrix}
 v_1\\
 v_2\\
@@ -4594,6 +4497,7 @@ v_3\end{pmatrix}={\lVert{v}\rVert}_2\begin{pmatrix}
 1\\
 0\\
 0\end{pmatrix}$$
+
 &lt;/p&gt;
 &lt;p&gt;This process can be repeated with other columns of a matrix to transform it into an upper triangular one. For more details, have a look at the references.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;first_column_of_operator_1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;operator_1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_dense&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()[:,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
@@ -4733,8 +4637,7 @@ array([[0., 0., 0., 0., 0.],
 &lt;p&gt;&lt;a id = &#34;low-rank_update&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;low-rank-update&#34;&gt;Low-rank update&lt;/h4&gt;
 &lt;p&gt;When a low rank matrix is added to a given matrix, the resulting matrix is called a low-rank update of the original matrix. Let&amp;rsquo;s suppose our original matrix was $A$ and we add a rank 1 update to it. The resulting matrix is $B$. So&lt;/p&gt;
-&lt;p&gt;$$B = A + uv^T$$&lt;/p&gt;
-&lt;p&gt;Where, $u$, and $v$ are column vectors. It should be noted that low-rank matrix update doesn&amp;rsquo;t always increase the rank of the original matrix. For example, if rank of $A$ was 2, updating it with a rank 1 matrix will not always  make its rank 3. Here is an example.&lt;/p&gt;
+$$B = A + uv^T$$&lt;p&gt;Where, $u$, and $v$ are column vectors. It should be noted that low-rank matrix update doesn&amp;rsquo;t always increase the rank of the original matrix. For example, if rank of $A$ was 2, updating it with a rank 1 matrix will not always  make its rank 3. Here is an example.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dtype&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;float32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -4753,9 +4656,7 @@ Rank of B =  2
 &lt;p&gt;&lt;strong&gt;Why is it useful?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;It turns out that this low rank update appears in many applications. One of the applications is in least squares. Imagine that you have solved the least squares problem using the available data. And now you get some new data. The problem is to get the new least squares fit. Well, you can start form scratch by including the new data to your old data and then fit the model on the whole data. But this is a wasteful approach. A better alternative is to use the new data to modify your old fit. If you do some mathematics, you will arrive at matrix update equation. We will not do the math here. Interested readers can check references.&lt;/p&gt;
 &lt;p&gt;Computations can be much faster if we use low-rank matrix update equation. In tensorflow it is done using &lt;code&gt;tf.linalg.OperatorLowRankUpdate&lt;/code&gt; operator. Though the operator can handle more than rank 1 update, we will use it only for rank 1 update.&lt;/p&gt;
-&lt;p&gt;As an example, let&amp;rsquo;s suppose we want to compute the inverse of $B$. We can do so by modifying the inverse of $A$ that we have previously computed. The result is the famous Sherman–Morrison-Woodbury formula.
-$$B^{-1} = (A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$$&lt;/p&gt;
-&lt;p&gt;Provided that the denominator is not equal to zero. Note that denominator is a scalar for rank 1 update. This equation show that we can compute new inverse from the old inverse by using matrix-vector and vector-vector multiplications.&lt;/p&gt;
+$$B^{-1} = (A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$$&lt;p&gt;Provided that the denominator is not equal to zero. Note that denominator is a scalar for rank 1 update. This equation show that we can compute new inverse from the old inverse by using matrix-vector and vector-vector multiplications.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;operator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_dense&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
 array([[1., 2., 3.],
@@ -4836,9 +4737,9 @@ array([[  0.,   7.,  13.],
     
     <item>
       <title>Reading multiple files in Tensorflow 2</title>
-      <link>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/</link>
+      <link>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
@@ -4930,34 +4831,34 @@ Showing first 10 files...
 &lt;p&gt;The following generator takes a list of file names as first argument. The second argument is &lt;code&gt;batch_size&lt;/code&gt;. &lt;code&gt;batch_size&lt;/code&gt; determines how many files we will process at one go. This is determined by how much memory do we have. If all data can be loaded into memory, there is no need for generators. In case our data size is huge, we can process chunks of it.&lt;/p&gt;
 &lt;p&gt;As we will be solving a classification problem, we have to assign labels to each raw data. We will use following labels for convenience.&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Class&lt;/th&gt;
-&lt;th&gt;Label&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Fault_1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Fault_2&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Fault_3&lt;/td&gt;
-&lt;td&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Fault_4&lt;/td&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Fault_5&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Class&lt;/th&gt;
+          &lt;th&gt;Label&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fault_1&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fault_2&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fault_3&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fault_4&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fault_5&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;The generator will &lt;code&gt;yield&lt;/code&gt; both data and labels.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pandas&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pd&lt;/span&gt;
@@ -5430,9 +5331,9 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
     
     <item>
       <title>Using Python Generators</title>
-      <link>https://biswajitsahoo1111.github.io/post/using-python-generators/</link>
+      <link>http://localhost:1313/post/using-python-generators/</link>
       <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/using-python-generators/</guid>
+      <guid>http://localhost:1313/post/using-python-generators/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Using_python_generators.ipynb&#34;&gt;
@@ -5768,9 +5669,9 @@ Test Accuracy: 0.9922000169754028
     
     <item>
       <title>Fault Diagnosis of Machines</title>
-      <link>https://biswajitsahoo1111.github.io/post/fault-diagnosis-of-machines/</link>
+      <link>http://localhost:1313/post/fault-diagnosis-of-machines/</link>
       <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/fault-diagnosis-of-machines/</guid>
+      <guid>http://localhost:1313/post/fault-diagnosis-of-machines/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;This story was originally written for &lt;a href=&#34;https://www.awsar-dst.in/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&amp;ldquo;Augmenting Writing Skills for Articulating Research (AWSAR)&amp;rdquo;&lt;/a&gt; award 2018. It is written in a non-technical way so as to be accessible to as many people as possible irrespective of their educational background. The story also featured in the top 100 list of stories for the award. Full list of awardees and their stories can be found &lt;a href=&#34;https://www.awsar-dst.in/awsar_awarded_articles_2018/download_book&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -5795,13 +5696,12 @@ Test Accuracy: 0.9922000169754028
     
     <item>
       <title>Revisiting Systems of Linear Equations</title>
-      <link>https://biswajitsahoo1111.github.io/post/revisiting-systems-of-linear-equations/</link>
+      <link>http://localhost:1313/post/revisiting-systems-of-linear-equations/</link>
       <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/revisiting-systems-of-linear-equations/</guid>
+      <guid>http://localhost:1313/post/revisiting-systems-of-linear-equations/</guid>
       <description>&lt;p&gt;Almost every reader would have seen systems of linear equations from their high school days. Whether they liked it or not is a separate story. But, in all likelihood, they would have solved these equations by gradually removing variables one by one by substitution. In this way, three equations with three variables(or unknowns) gets transformed to two equations in two variables and one further step of reduction gives us an equation with only one variable which is readily solvable. Then the final solution is obtained by back substituting the obtained value of the variable into remaining equations. This method, in mathematical jargon, is called Gaussian elimination and back substitution.&lt;/p&gt;
 &lt;p&gt;It turns out (surprisingly) that linear systems form the basis of many interesting engineering applications. Ultimately the problem boils down to solution (or approximate solution) of a system of linear equations. So a thorough understanding of linear systems is essential to appreciate the applications. In this post we will outline all possible cases of finding solutions to  linear systems and briefly outline two most important applications.&lt;/p&gt;
-&lt;p&gt;We will use matrix notation to represent the equations succinctly. It also gives us better insight into their solution. Using matrix notation the system can be represented as
-$$\textbf{Ax}=\textbf{b}$$
+$$\textbf{Ax}=\textbf{b}$$&lt;p&gt;
 Where $\textbf{A}$ is the matrix of coefficients of size $(m\times n)$, $\textbf{x}$ is a vector of variables of size $(n\times 1)$, and $\textbf{b}$
 is a vector of size $(m\times 1)$ representing constant right hand sides. Note that $\textbf{b}$ can be a vector of all zeros, i.e., $\textbf{b} = \textbf{0}$ or it can be any arbitrary vector with some nonzero values, i.e.,$\textbf{b}\neq \textbf{0}$. The solution(s) of linear systems depend to a large extent on what the right hand side is as we will see shortly.&lt;/p&gt;
 &lt;p&gt;Apart from notation, we need two other concepts from matrix theory. One is of rank and other is the range space (or column space) of a matrix. Rank $(Rank(\textbf{A}))$ of a matrix (say, $\textbf{A}$) is defined as number of independent rows or columns of a matrix. It is a well known result in matrix theory that row rank (number of independent rows) is equal to column rank (number of independent columns) and $Rank(\textbf{A})\leq min(m,n)$.&lt;/p&gt;
@@ -5815,8 +5715,6 @@ is a vector of size $(m\times 1)$ representing constant right hand sides. Note t
 &lt;p&gt;$Rank(\textbf{A}) = m$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Unique solution (for any $\textbf{b}$). For example,
-
-
 
         $$ \begin{equation}
         \begin{bmatrix}
@@ -5837,16 +5735,15 @@ is a vector of size $(m\times 1)$ representing constant right hand sides. Note t
         \end{bmatrix}
         \end{equation}$$
         
+
 This system has unique solution.&lt;/li&gt;
 &lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : Impossible (This case will never happen because $Rank(\textbf{A})=m$)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$Rank(\textbf{A}) &amp;lt; m$&lt;/p&gt;
+&lt;p&gt;$Rank(\textbf{A}) &lt; m$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Infinitely many solutions. For example,
-
-
 
         $$ \begin{equation}
         \begin{bmatrix}
@@ -5867,10 +5764,9 @@ This system has unique solution.&lt;/li&gt;
         \end{bmatrix}
         \end{equation}$$
         
+
 This system has infinitely many solutions.&lt;/li&gt;
 &lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : No solution. For example,$$
-
-
 
         \begin{equation}
         \begin{bmatrix}
@@ -5891,21 +5787,20 @@ This system has infinitely many solutions.&lt;/li&gt;
         \end{bmatrix}
         \end{equation}$$
         
+
 This system has no solution.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Case - II: $(m &amp;gt; n)$&lt;/p&gt;
+&lt;p&gt;Case - II: $(m &gt; n)$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;$Rank(\textbf{A}) = n$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Unique solution. For example,$$
 
-
-
         \begin{equation}
         \begin{bmatrix}
         1 &amp; 2 \\
@@ -5924,11 +5819,10 @@ This system has no solution.&lt;/li&gt;
         \end{bmatrix}
         \end{equation}$$
         
+
 This system has unique solution.&lt;/li&gt;
 &lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : No solution. For example,$$
 
-
-
         \begin{equation}
         \begin{bmatrix}
         1 &amp; 2 \\
@@ -5947,15 +5841,14 @@ This system has unique solution.&lt;/li&gt;
         \end{bmatrix}
         \end{equation}$$
         
+
 This system has no solution. But this case is immensely useful from application point of view. Sometimes it is not desirable to obtain the exact solution. Rather an approximate solution suffices for all practical purposes. Finding an approximate solution to an overdetermined system leads to the famous &lt;a href=&#34;https://en.wikipedia.org/wiki/Least_squares&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Least Squares&lt;/a&gt; problem.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$Rank(\textbf{A}) &amp;lt; n$&lt;/p&gt;
+&lt;p&gt;$Rank(\textbf{A}) &lt; n$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Infinitely many solutions. For example,
-
-
 
         $$ \begin{equation}
         \begin{bmatrix}
@@ -5975,10 +5868,9 @@ This system has no solution. But this case is immensely useful from application 
         \end{bmatrix}
         \end{equation}$$
         
+
 It has infinitely many solutions.&lt;/li&gt;
 &lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : No solution. For example,$$
-
-
 
         \begin{equation}
         \begin{bmatrix}
@@ -5998,20 +5890,19 @@ It has infinitely many solutions.&lt;/li&gt;
         \end{bmatrix}
         \end{equation}$$
         
+
 This system has no solution.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Case - III: $(m &amp;lt; n)$&lt;/p&gt;
+&lt;p&gt;Case - III: $(m &lt; n)$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;$Rank(\textbf{A}) = m$ :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Infinitely many solutions. For example,
-
-
 
         $$ \begin{equation}
         \begin{bmatrix}
@@ -6030,16 +5921,15 @@ This system has no solution.&lt;/li&gt;
         \end{bmatrix}
         \end{equation}$$
         
+
 This system has infinitely many solutions. This case is also used in many applications. As there are infinitely many solutions, a natural choice is to choose the best solution. The qualifier &amp;lsquo;best&amp;rsquo; determines what application we have in our mind. If we seek minimum $(l_2)$ norm, we get the so called minimum energy solution, a concept used in signal processing. Yet another concern is to seek for the sparsest solution (a solution with only a few nonzero entries and all other entries being zero). This idea is used in &lt;a href=&#34;https://en.wikipedia.org/wiki/Compressed_sensing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Compressed Sensing&lt;/a&gt;, an active research area with many interesting applications.&lt;/li&gt;
 &lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : Impossible. This case will never happen since $Rank(\textbf{A})=m$.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$Rank(\textbf{A}) &amp;lt; m$&lt;/p&gt;
+&lt;p&gt;$Rank(\textbf{A}) &lt; m$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\textbf{b} \in \mathcal{R}(\textbf{A})$ : Infinitely many solutions. For example,
-
-
 
         $$ \begin{equation}
         \begin{bmatrix}
@@ -6058,10 +5948,9 @@ This system has infinitely many solutions. This case is also used in many applic
         \end{bmatrix}
         \end{equation}$$
         
+
 This system has infinitely many solutions.&lt;/li&gt;
 &lt;li&gt;$\textbf{b} \not\in \mathcal{R}(\textbf{A})$ : No solution. For example, $$
-
-
 
         \begin{equation}
         \begin{bmatrix}
@@ -6080,6 +5969,7 @@ This system has infinitely many solutions.&lt;/li&gt;
         \end{bmatrix}
         \end{equation}$$
         
+
 This system has no solution.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -6092,9 +5982,9 @@ This system has no solution.&lt;/li&gt;
     
     <item>
       <title>Principal Component Analysis - Part III</title>
-      <link>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/</link>
+      <link>http://localhost:1313/post/principal-component-analysis-part-iii/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/</guid>
+      <guid>http://localhost:1313/post/principal-component-analysis-part-iii/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td align=&#34;center&#34;&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/PCA_Abdi_in_python.ipynb&#34;&gt;
@@ -6374,9 +6264,9 @@ This system has no solution.&lt;/li&gt;
     
     <item>
       <title>Principal Component Analysis - Part II</title>
-      <link>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/</link>
+      <link>http://localhost:1313/post/principal-component-analysis-part-ii/</link>
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/</guid>
+      <guid>http://localhost:1313/post/principal-component-analysis-part-ii/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td align=&#34;center&#34;&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Principal_Component_Analysis_Part_II.ipynb&#34;&gt;
@@ -6722,9 +6612,9 @@ This system has no solution.&lt;/li&gt;
     
     <item>
       <title>Principal Component Analysis - Part I</title>
-      <link>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/</link>
+      <link>http://localhost:1313/post/principal-component-analysis-part-i/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/</guid>
+      <guid>http://localhost:1313/post/principal-component-analysis-part-i/</guid>
       <description>&lt;p&gt;In this post, we will discuss about Principal Component Analysis (PCA),
 one of the most popular dimensionality reduction techniques used in
 machine learning. Applications of PCA and its variants are ubiquitous.
@@ -6794,22 +6684,19 @@ recognize that total variance is $\frac{1}{n - 1}$ times the square of
 &lt;strong&gt;Frobenius norm&lt;/strong&gt; of $\textbf{X}$. Frobenius norm is nothing but square
 root of sum of squares of all elements of a matrix.
 
-
-
 $$ \|\textbf{X}\|_{F} = (\sum_{i,j}{x_{ij}^2})^{\frac{1}{2}}=\sqrt{trace(\textbf{X}^T\textbf{X}})=\sqrt{trace(\textbf{X}\textbf{X}^T})$$
+
 &lt;/p&gt;
 &lt;p&gt;Using this definition, total variance before transformation =
-
-
 
 $$\begin{aligned}\frac{1}{n-1}\sum_{i,j}{x_{ij}^2}=\frac{1}{n-1}trace(\textbf{X}^T\textbf{X})
 &amp;= trace(\frac{1}{n-1}\textbf{X}^T\textbf{X}) \\
 &amp;= \frac{1}{n-1}\|\textbf{X}\|_{F}^2\end{aligned}$$
+
 &lt;/p&gt;
 &lt;p&gt;Where, trace of a matrix is the sum of its diagonal entries and
-
-
- $\|\textbf{X}\|_{F}^2$  is the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt;.&lt;/p&gt;
+ $\|\textbf{X}\|_{F}^2$ 
+ is the square of &lt;strong&gt;Frobenius norm&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The aim of PCA is to transform the data in such a way that along first
 principal direction, variance of transformed data is maximum. It
 subsequently finds second principal direction orthogonal to the first
@@ -6817,9 +6704,8 @@ one in such a way that it explains maximum of the remaining variance
 among all possible direction in the orthogonal subspace.&lt;/p&gt;
 &lt;p&gt;In matrix form the transformation can be written as
 
-
-
 $$\textbf{Y}_{n\times p}=\textbf{X}_{n\times p}\textbf{P}_{p\times p}$$
+
 
 Where $\textbf{Y}$ is the transformed data matrix. The columns of
 $\textbf{Y}$ are called principal components and $\textbf{P}$ is usually
@@ -6828,9 +6714,7 @@ find $\textbf{P}$ we can then find $\textbf{Y}$ just by a matrix
 multiplication. We will show in the next section that matrix
 $\textbf{P}$ is the eigenvector matrix of the covariance matrix. Before
 that, let&amp;rsquo;s first define the covariance matrix.&lt;/p&gt;
-&lt;p&gt;Given a data matrix $\textbf{X}$(centered), its covariance matrix
-$(\textbf{S})$ is defined as
-$$\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}$$
+$$\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}$$&lt;p&gt;
 Now we will show how to compute the loading vectors (columns of $\textbf{P}$) and consequently the principal components (columns of $\textbf{Y}$) from the given centered data matrix $\textbf{X}$.&lt;/p&gt;
 &lt;h3 id=&#34;sketch-of-the-proof&#34;&gt;Sketch of the Proof&lt;/h3&gt;
 &lt;p&gt;We call it a sketch because we will not be giving the full proof.
@@ -6838,95 +6722,72 @@ Rather, we will give the proof only for the first principal component
 and then give a commentary as to how it can be extended for other
 principal components.&lt;/p&gt;
 &lt;p&gt;The first principal component is the result obtained by transforming
-original data matrix 
-
-$\textbf{X}_{n\times p}$ in such a way that
+original data matrix $\textbf{X}_{n\times p}$
+ in such a way that
 variance of data along first principal component is the highest. The
 transformation is a linear transformation that is obtained by taking
-linear combination of the columns of 
-
-$\textbf{X}_{n\times p}$. The
+linear combination of the columns of $\textbf{X}_{n\times p}$
+. The
 coefficients of the linear combination are called loading scores
-corresponding to original variables of 
-
-$\textbf{X}_{n\times p}$.&lt;/p&gt;
-&lt;p&gt;Assuming 
-
-$\boldsymbol{\alpha}_{p\times 1} = [\alpha_1, \alpha_2, \ldots, \alpha_p]^T$,
+corresponding to original variables of $\textbf{X}_{n\times p}$
+.&lt;/p&gt;
+&lt;p&gt;Assuming $\boldsymbol{\alpha}_{p\times 1} = [\alpha_1, \alpha_2, \ldots, \alpha_p]^T$
+,
 where $\alpha_1$, $\alpha_2$, $\ldots$ , $\alpha_p$ are scalars, to be the
 loading vector (we don&amp;rsquo;t know, as of now, from where to get
 $\alpha_{p \times 1}$. We will find that out shortly.), first principal
 component is obtained by the the product
-
-
-$\textbf{X}_{n\times p} \boldsymbol{\alpha}_{p\times 1}$. This product can be written
+$\textbf{X}_{n\times p} \boldsymbol{\alpha}_{p\times 1}$
+. This product can be written
 as
-
-
 
 $$
 \textbf{X}_{n\times p}\boldsymbol{\alpha}_{p\times 1} = \alpha_1 \textbf{X}_{[:,1]} +\alpha_2 \textbf{X}_{[:,2]} + ...  + \alpha_p \textbf{X}_{[:,p]} 
 $$
+
 &lt;/p&gt;
-&lt;p&gt;Where, 
-
-$\textbf{X}_{[:,1]}$ is the first column of
-
-
-$\textbf{X}_{n\times p}$. Similarly for other columns. The above
+&lt;p&gt;Where, $\textbf{X}_{[:,1]}$
+ is the first column of
+$\textbf{X}_{n\times p}$
+. Similarly for other columns. The above
 equation makes it clear as to why first principal component is a linear
 combination of variables of original data matrix. In the original data
 matrix, each column corresponds to a variable.&lt;/p&gt;
 &lt;p&gt;Variance of first principal component is given by
-
-
-$ \boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}$ (As the columns are already
+$ \boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}$
+ (As the columns are already
 centered. We have also ignored the factor $(\frac{1}{n-1})$ as it is
-just a scaling factor.). Now our goal is to find an 
+just a scaling factor.). Now our goal is to find an  $\boldsymbol{\alpha}_{p\times 1}$ 
 
- $\boldsymbol{\alpha}_{p\times 1}$ 
-that maximizes 
-
-$\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}$. As
-
-
-$\boldsymbol{\alpha}_{p\times 1}$ is arbitrary, we can choose its entries in such a
+that maximizes $\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}$
+. As
+$\boldsymbol{\alpha}_{p\times 1}$
+ is arbitrary, we can choose its entries in such a
 way that variance increases as much as we please. So to get any
 meaningful solution, we have to apply some constraints on
-
-
-$\boldsymbol{\alpha}_{p\times 1}$. The conventional condition is
-
-
-$\|\boldsymbol{\alpha}_{p\times 1}\|^2 = 1$. The optimization problem becomes
-
-
+$\boldsymbol{\alpha}_{p\times 1}$
+. The conventional condition is
+$\|\boldsymbol{\alpha}_{p\times 1}\|^2 = 1$
+. The optimization problem becomes
 $$ maximize \ \ \   \boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha}$$
 
-
-$$s.t. \|\boldsymbol{\alpha}\|^2 = 1$$ Using Lagrange multipliers, this problem can
+$$s.t. \|\boldsymbol{\alpha}\|^2 = 1$$
+ Using Lagrange multipliers, this problem can
 be written as
-
-
 
 $$maximize \ \ \  \mathcal{L}(\boldsymbol{\alpha}, \lambda)=\boldsymbol{\alpha}^T\textbf{X}^T \textbf{X}\boldsymbol{\alpha} + \lambda (1 - \boldsymbol{\alpha}^T\boldsymbol{\alpha})$$
 
-Taking gradient of 
 
-$\mathcal{L}(\boldsymbol{\alpha}, \lambda)$ with respect to
-
-
-$\boldsymbol{\alpha}$ we get, 
-
-$\textbf{X}^T\textbf{X}\boldsymbol{\alpha} = \lambda \boldsymbol{\alpha}$. So
-
-
-$\boldsymbol{\alpha}$ is the eigenvector of 
-
-$\textbf{X}^T\textbf{X}$. It turns out
-that for first principal component, 
-
-$\boldsymbol{\alpha}$ is the eigenvector
+Taking gradient of $\mathcal{L}(\boldsymbol{\alpha}, \lambda)$
+ with respect to
+$\boldsymbol{\alpha}$
+ we get, $\textbf{X}^T\textbf{X}\boldsymbol{\alpha} = \lambda \boldsymbol{\alpha}$
+. So
+$\boldsymbol{\alpha}$
+ is the eigenvector of $\textbf{X}^T\textbf{X}$
+. It turns out
+that for first principal component, $\boldsymbol{\alpha}$
+ is the eigenvector
 corresponding to the largest eigenvalue.&lt;/p&gt;
 &lt;p&gt;Loading vector for second principal component is computed with the added condition that second loading vector is orthogonal to the first one. With little bit of more work it can be shown that loading vectors for successive principal components are obtained from eigenvectors corresponding to eigenvalues in decreasing order. More details can be found in reference [1].&lt;/p&gt;
 &lt;p&gt;Now, it is straightforward to first form the covariance matrix and by
@@ -6945,11 +6806,7 @@ will prove these two propositions as the proofs are short.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Principal components are centered.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;: Let $\textbf{1}$ be a column vector of all ones of size
-$(n\times 1)$. To prove that columns of $\textbf{Y}$ are centered,
-just premultiply it by $\textbf{1}^T$ (this finds column sum for
-each column). So
-$$\textbf{1}^T \textbf{Y} = \textbf{1}^T\textbf{X}\textbf{P}$$ But
+$$\textbf{1}^T \textbf{Y} = \textbf{1}^T\textbf{X}\textbf{P}$$&lt;p&gt; But
 columns of $\textbf{X}$ are already centered, so
 $\textbf{1}^T\textbf{X}=\textbf{0}$. Thus
 $\textbf{1}^T \textbf{Y}= \textbf{0}$. Hence columns of $\textbf{Y}$
@@ -6961,12 +6818,11 @@ of variables before transformation.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;: To prove that total variance of $\textbf{Y}$ also remains
 same, observe that
 
-
-
     $$\begin{aligned} \mbox{total covariance of} \ \  \textbf{Y} &amp;=
     trace(\frac{1}{n-1}\textbf{Y}^{T}\textbf{Y}) \\ &amp;=\frac{1}{n-1}trace((\textbf{P}^T\textbf{X}^{T}\textbf{X})\textbf{P}) \\ &amp;=\frac{1}{n-1}trace((\textbf{P}\textbf{P}^T)\textbf{X}^{T}\textbf{X}) \\ 
     &amp;= trace(\frac{1}{n-1}\textbf{X}^T\textbf{X})\end{aligned}$$
     
+
 The previous equation uses the fact that trace is
 commutative(i.e.$trace(\textbf{AB})=trace(\textbf{BA})$) and
 $\textbf{P}$ is orthogonal (i.e.
@@ -7021,21 +6877,11 @@ $\textbf{P}$.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;how-actually-are-principal-components-computed&#34;&gt;How actually are principal components computed?&lt;/h3&gt;
-&lt;p&gt;The previously stated method of finding eigenvectors of covariance
-matrix is not computationally efficient. In practice, singular value
-decomposition (SVD) is used to compute the matrix $\textbf{P}$. SVD
-theorem tells that any real matrix $\textbf{X}$ can be decomposed into
-three matrices such that $$ \textbf{X} = \textbf{U}\Sigma\textbf{V}^T$$
+$$ \textbf{X} = \textbf{U}\Sigma\textbf{V}^T$$&lt;p&gt;
 Where, $\textbf{X}$ is of size $n\times p$. $\textbf{U}$ and
 $\textbf{V}$ are orthogonal matrices of size $n\times n$ and $p\times p$
 respectively. $\Sigma$ is a diagonal matrix of size $n\times p$.&lt;/p&gt;
-&lt;p&gt;Given the SVD decomposition of a matrix $\textbf{X}$,
-$$\textbf{X}^T\textbf{X}=\textbf{V}\Sigma^2\textbf{V}^T$$&lt;/p&gt;
-&lt;p&gt;This is the eigen-decomposition of $\textbf{X}^T\textbf{X}$. So
-$\textbf{V}$ is the eigenvector matrix of $\textbf{X}^T\textbf{X}$. For
-PCA we need eigenvector matrix of covariance matrix. So converting the
-equation into convenient form, we get
-$$\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}=\textbf{V}(\frac{1}{n-1}\Sigma^2)\textbf{V}^T$$
+$$\textbf{X}^T\textbf{X}=\textbf{V}\Sigma^2\textbf{V}^T$$$$\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}=\textbf{V}(\frac{1}{n-1}\Sigma^2)\textbf{V}^T$$&lt;p&gt;
 Thus eigenvalues of S are diagonal entries of $(\frac{1}{n-1}\Sigma^2)$.
 As SVD is computationally efficient, all built-in functions use SVD to
 compute the loading matrix and then use the loading matrix to find

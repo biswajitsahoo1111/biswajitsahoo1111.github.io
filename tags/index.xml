@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags | Biswajit Sahoo</title>
-    <link>https://biswajitsahoo1111.github.io/tags/</link>
-      <atom:link href="https://biswajitsahoo1111.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <title>Tags | Biswajit Sahoo, Ph.D.</title>
+    <link>http://localhost:1313/tags/</link>
+      <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 23 Feb 2024 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
+      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
       <title>Tags</title>
-      <link>https://biswajitsahoo1111.github.io/tags/</link>
+      <link>http://localhost:1313/tags/</link>
     </image>
     
   </channel>

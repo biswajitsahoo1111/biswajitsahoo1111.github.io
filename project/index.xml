@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects | Biswajit Sahoo</title>
-    <link>https://biswajitsahoo1111.github.io/project/</link>
-      <atom:link href="https://biswajitsahoo1111.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+    <title>Projects | Biswajit Sahoo, Ph.D.</title>
+    <link>http://localhost:1313/project/</link>
+      <atom:link href="http://localhost:1313/project/index.xml" rel="self" type="application/rss+xml" />
     <description>Projects</description>
     <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 05 Sep 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://biswajitsahoo1111.github.io/media/icon_hubfdc04a733bd2d8af21820718fcf71ca_131045_512x512_fill_lanczos_center_3.png</url>
+      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
       <title>Projects</title>
-      <link>https://biswajitsahoo1111.github.io/project/</link>
+      <link>http://localhost:1313/project/</link>
     </image>
     
     <item>
       <title>Data-Driven Remaining Useful Life (RUL) Prediction</title>
-      <link>https://biswajitsahoo1111.github.io/project/rul_codes_open/</link>
+      <link>http://localhost:1313/project/rul_codes_open/</link>
       <pubDate>Sat, 05 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/project/rul_codes_open/</guid>
+      <guid>http://localhost:1313/project/rul_codes_open/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;tr&gt;
   &lt;td align=&#34;left&#34;&gt;
@@ -59,109 +59,109 @@
 &lt;p&gt;&lt;strong&gt;Note on last column of following table&lt;/strong&gt;: The last column specifies the degradation model used in the notebooks. There are two common degradation models that are used for this particular turbofan dataset: Linear degradation model and Piecewise linear degradation model. For more details about both, see &lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_data_description_and_preprocessing.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this&lt;/a&gt;. When we use piecewise linear degradation model, we have to assume an early RUL value. This is nothing but the value of RUL that is assumed when the component is relatively new. In literature, different people use different early RUL values. In our examples, when we specify an early RUL value, that means that we apply the same early RUL across all 4 datasets.&lt;/p&gt;
 &lt;center&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Method&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD001&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD002&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD003&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD004&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Degradation Model&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Gradient Boosting&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_xgboost_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;19.06&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_xgboost_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;28.97&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_xgboost_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;20.55&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_xgboost_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;29.49&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Piecewise Linear (Early RUL = 125)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Random Forest&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_random_forest_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;19.15&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_random_forest_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;29.00&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_random_forest_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;20.53&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_random_forest_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;29.75&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Piecewise Linear (Early RUL = 125)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Support Vector Regression (SVR)&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_SVR_early_rul_125.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;18.28&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_SVR_early_rul_150.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;30.50&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_SVR_early_rul_125.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;21.37&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_SVR_early_rul_150.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;34.11&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Gradient Boosting&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_xgboost_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;33.24&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_xgboost_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;29.88&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_xgboost_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;47.94&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_xgboost_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;40.34&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Linear&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Method&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD001&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD002&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD003&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD004&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Degradation Model&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Gradient Boosting&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_xgboost_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;19.06&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_xgboost_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;28.97&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_xgboost_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;20.55&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_xgboost_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;29.49&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Piecewise Linear (Early RUL = 125)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Random Forest&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_random_forest_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;19.15&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_random_forest_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;29.00&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_random_forest_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;20.53&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_random_forest_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;29.75&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Piecewise Linear (Early RUL = 125)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Support Vector Regression (SVR)&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_SVR_early_rul_125.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;18.28&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_SVR_early_rul_150.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;30.50&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_SVR_early_rul_125.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;21.37&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_SVR_early_rul_150.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;34.11&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Gradient Boosting&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_xgboost_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;33.24&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_xgboost_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;29.88&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_xgboost_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;47.94&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_xgboost_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;40.34&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Linear&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/center&gt;
 &lt;h2 id=&#34;enter-deep-learning&#34;&gt;Enter Deep Learning&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;In this section, we will apply deep learning to predict RUL of Turbofan dataset. Due to the nondeterministic nature of operations used in deep learning and dependence of libraries like &lt;code&gt;Tensorflow&lt;/code&gt; on computer architecture, readers might obtain slightly different results than those in the notebooks. For reproducibility of our results, we also share the saved models of each notebook. All saved models for Turbofan dataset can be found at this &lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/tree/master/saved_models/cmapss&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;link&lt;/a&gt;. A notebook describing the steps to use the saved models can be found &lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_using_saved_model_deep_learning.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Method&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD001&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD002&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD003&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD004&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Degradation Model&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;LSTM&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_LSTM_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;15.16&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_LSTM_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;27.57&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_LSTM_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;15.54&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_LSTM_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;28.21&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;1D CNN&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_1D_CNN_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;15.84&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_1D_CNN_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;30.38&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_1D_CNN_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;15.78&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_1D_CNN_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;32.35&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Method&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD001&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD002&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD003&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD004&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Degradation Model&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;LSTM&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_LSTM_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;15.16&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_LSTM_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;27.57&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_LSTM_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;15.54&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_LSTM_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;28.21&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;1D CNN&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD001_1D_CNN_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;15.84&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD002_1D_CNN_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;30.38&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD003_1D_CNN_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;15.78&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/CMAPSS_FD004_1D_CNN_piecewise_linear_degradation_model.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;32.35&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&#34;attention-based-rul-prediction&#34;&gt;Attention Based RUL Prediction&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;What is attention? We recommend &lt;a href=&#34;https://classic.d2l.ai/chapter_attention-mechanisms/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chapter 10&lt;/a&gt; of &lt;a href=&#34;https://classic.d2l.ai/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this book&lt;/a&gt; for more details. We provide notebooks that implement GRU based additive attention for RUL prediction. For reproducibility of our results, we share trained weights. All trained weights can be found &lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/tree/master/notebooks/cmapss_notebooks/attention_based_RUL/saved_weights&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. We also provide &lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/tree/master/notebooks/cmapss_notebooks/attention_based_RUL&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;separate notebooks&lt;/a&gt; describing steps to use trained weights to reproduce exact results as obtained by us.&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Method&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD001&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD002&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD003&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;FD004&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Degradation Model&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;GRU + Additive Attention&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD001_additive_attention_early_rul_125_GRU_based_final.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;14.21&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD002_additive_attention_early_rul_150_GRU_based_final.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;27.99&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD003_additive_attention_early_rul_125_GRU_based_final.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;14.64&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD004_additive_attention_early_rul_150_GRU_based_final.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;26.77&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Method&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD001&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD002&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD003&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;FD004&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Degradation Model&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;GRU + Additive Attention&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD001_additive_attention_early_rul_125_GRU_based_final.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;14.21&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD002_additive_attention_early_rul_150_GRU_based_final.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;27.99&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD003_additive_attention_early_rul_125_GRU_based_final.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;14.64&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/rul_codes_open/blob/master/notebooks/cmapss_notebooks/attention_based_RUL/CMAPSS_FD004_additive_attention_early_rul_150_GRU_based_final.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;26.77&lt;/a&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Piecewise Linear (Early RUL: 125 (FD001, FD003), 150 (FD002, FD004))&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;(This table will be updated gradually.)&lt;/p&gt;
 &lt;h2 id=&#34;frequently-asked-questions-faqshttpsbiswajitsahoo1111githubiorul_codes_openfaqhtml&#34;&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/rul_codes_open/faq.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Frequently Asked Questions (FAQs)&lt;/a&gt;&lt;/h2&gt;
@@ -197,9 +197,9 @@
     
     <item>
       <title>Data-Driven Machinery Fault Diagnosis</title>
-      <link>https://biswajitsahoo1111.github.io/project/cbm_codes_open/</link>
+      <link>http://localhost:1313/project/cbm_codes_open/</link>
       <pubDate>Thu, 18 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>https://biswajitsahoo1111.github.io/project/cbm_codes_open/</guid>
+      <guid>http://localhost:1313/project/cbm_codes_open/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;tr&gt;
   &lt;td align=&#34;left&#34;&gt;
