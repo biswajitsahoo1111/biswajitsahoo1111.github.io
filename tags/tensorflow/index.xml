@@ -5,18 +5,18 @@
     <link>http://localhost:1313/tags/tensorflow/</link>
       <atom:link href="http://localhost:1313/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
     <description>Tensorflow</description>
-    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
+      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
       <title>Tensorflow</title>
       <link>http://localhost:1313/tags/tensorflow/</link>
     </image>
     
     <item>
       <title>IndexedSlices in Tensorflow</title>
-      <link>http://localhost:1313/blog/indexdslices-in-tensorflow/</link>
+      <link>http://localhost:1313/post/indexdslices-in-tensorflow/</link>
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/indexdslices-in-tensorflow/</guid>
+      <guid>http://localhost:1313/post/indexdslices-in-tensorflow/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Tensorflow_IndexedSlices.ipynb&#34;&gt;
@@ -34,17 +34,13 @@
 &lt;/table&gt;
 &lt;p&gt;In this post, we will discuss about &lt;code&gt;IndexedSlices&lt;/code&gt; class of &lt;code&gt;Tensorflow&lt;/code&gt;. We will try to answer the following questions in this blog:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#q1&#34;&gt;What are &lt;code&gt;IndexedSlices&lt;/code&gt;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#q2&#34;&gt;Where do we get it?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#q3&#34;&gt;How to convert from IndexedSlices to tensors?&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a id = &#34;q1&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;what-are-indexedslices&#34;&gt;What are &lt;code&gt;IndexedSlices&lt;/code&gt;?&lt;/h2&gt;
-&lt;p&gt;According to 
-, &lt;code&gt;IndexedSlices&lt;/code&gt; are sparse representation of a set of tensor slices at a given index. At an high level it appears to be some kind of sparse representation. Let&amp;rsquo;s try to understand it with examples.&lt;/p&gt;
+&lt;p&gt;According to &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/IndexedSlices&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;Tensorflow&lt;/code&gt; documentation&lt;/a&gt;, &lt;code&gt;IndexedSlices&lt;/code&gt; are sparse representation of a set of tensor slices at a given index. At an high level it appears to be some kind of sparse representation. Let&amp;rsquo;s try to understand it with examples.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;q2&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;where-do-we-get-it&#34;&gt;Where do we get it?&lt;/h2&gt;
 &lt;p&gt;We get &lt;code&gt;IndexedSlices&lt;/code&gt; while taking gradients of an &lt;code&gt;Embedding&lt;/code&gt; layer. Embedding matrices can be huge (depending on vocabulary size). But each batch only contains a small fraction of tokens. So while computing the gradient of loss with respect to embedding layer, in each pass we have to only consider the corresponding token embeedings of the present batch. Naturally a sparse tensor seems to be a better option to record those gradients. &lt;code&gt;Tensorflow&lt;/code&gt; does that using &lt;code&gt;IndexedSlices&lt;/code&gt;. We will show that below using a contrived example.&lt;/p&gt;
@@ -192,16 +188,15 @@ array([[ 0.        ,  0.        ,  0.        ,  0.        ],
       dtype=float32)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This brings us to the end of this blog. I hope this blog has demystified a few things about &lt;code&gt;IndexedSlices&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Motivation for this post&lt;/strong&gt;: While writing TF 2 code for 
-, the author encountered an error involving &lt;code&gt;IndexedSlices&lt;/code&gt;. After spending a good deal of time hopelessly trying to figure out what&amp;rsquo;s going on, the author finally found that the error was occurring because of an user defined gradient clipping function that didn&amp;rsquo;t handle &lt;code&gt;IndexedSlices&lt;/code&gt; properly. The model involved embedding layers as it was dealing with machine translation task. Therefore, I thought of writing this blog with the hope that it would be of help to readers who are struggling to figure out what &lt;code&gt;IndexedSlices&lt;/code&gt; are.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Motivation for this post&lt;/strong&gt;: While writing TF 2 code for &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Attention Mechanisms chapter of D2L book&lt;/a&gt;, the author encountered an error involving &lt;code&gt;IndexedSlices&lt;/code&gt;. After spending a good deal of time hopelessly trying to figure out what&amp;rsquo;s going on, the author finally found that the error was occurring because of an user defined gradient clipping function that didn&amp;rsquo;t handle &lt;code&gt;IndexedSlices&lt;/code&gt; properly. The model involved embedding layers as it was dealing with machine translation task. Therefore, I thought of writing this blog with the hope that it would be of help to readers who are struggling to figure out what &lt;code&gt;IndexedSlices&lt;/code&gt; are.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book</title>
-      <link>http://localhost:1313/blog/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
+      <link>http://localhost:1313/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
       <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
+      <guid>http://localhost:1313/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;tr&gt;
   &lt;td align=&#34;left&#34;&gt;
@@ -225,44 +220,30 @@ array([[ 0.        ,  0.        ,  0.        ,  0.        ],
   &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;span style=&#34;color: purple;&#34;&gt;&lt;strong&gt;This code has been merged with D2L book. See PR: 
-, 
-&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;This post contains &lt;code&gt;Tensorflow 2&lt;/code&gt; code for Attention Mechanisms chapter of 
- book. The chapter has 7 sections and code for each section can be found at the following links. We have given only code implementations. For theory, readers should refer the book.&lt;/p&gt;
-&lt;p&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: purple;&#34;&gt;&lt;strong&gt;This code has been merged with D2L book. See PR: &lt;a href=&#34;https://github.com/d2l-ai/d2l-en/pull/1756&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;1756&lt;/a&gt;, &lt;a href=&#34;https://github.com/d2l-ai/d2l-en/pull/1768&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;1768&lt;/a&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;This post contains &lt;code&gt;Tensorflow 2&lt;/code&gt; code for Attention Mechanisms chapter of &lt;a href=&#34;http://d2l.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Dive into Deep Learning (D2L)&lt;/a&gt; book. The chapter has 7 sections and code for each section can be found at the following links. We have given only code implementations. For theory, readers should refer the book.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_1_Visualization_of_attention.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.1. Attention Cues&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_2_Attention_based_regression.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.2. Attention Pooling: Nadaraya-Watson Kernel Regression&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_3_Attention_scoring_functions.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.3. Attention Scoring Functions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_4_Bahdanau_attention.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.4. Bahdanau Attention&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_5_Multi-head_attention.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.5. Multi-Head Attention&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_6_Self-attention_and_positional_encoding.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.6. Self-Attention and Positional Encoding&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_7_Transformer.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.7. Transformer&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;additional-sections&#34;&gt;Additional sections:&lt;/h3&gt;
-&lt;p&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/additional_sections/9_7_Sequence_to_Sequence_Learning.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;9.7. Sequence to Sequence Learning&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;additional-chapters&#34;&gt;Additional Chapters:&lt;/h3&gt;
-&lt;p&gt;Chapter 17: 
-&lt;/p&gt;
+&lt;p&gt;Chapter 17: &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Generative_Adversarial_Networks_in_TF&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Generative Adversarial Networks&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;how-to-run-these-code&#34;&gt;How to run these code:&lt;/h3&gt;
 &lt;p&gt;The best way (in our opinion) is to either clone the repo (or download the zipped repo) and then run each notebook from the cloned (or extracted) folder. All the notebooks will run without any issue.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: We claim no originality for the code. Credit goes to the authors of this excellent 
-. However, all errors and omissions are my own and readers are encouraged to bring it to my notice. Finally, no TF code was available (to the best of my knowledge) for &lt;code&gt;Attention Mechanisms&lt;/code&gt; chapter when 
- was first made public.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: We claim no originality for the code. Credit goes to the authors of this excellent &lt;a href=&#34;http://d2l.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;book&lt;/a&gt;. However, all errors and omissions are my own and readers are encouraged to bring it to my notice. Finally, no TF code was available (to the best of my knowledge) for &lt;code&gt;Attention Mechanisms&lt;/code&gt; chapter when &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this repo&lt;/a&gt; was first made public.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Reading multiple files in Tensorflow 2 using Sequence</title>
-      <link>http://localhost:1313/blog/reading-multiple-files-in-tensorflow-2-using-sequence/</link>
+      <link>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/</link>
       <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
+      <guid>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2-using-sequence/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_mulitple_files_using_tensorflow_sequence.ipynb&#34;&gt;
@@ -278,22 +259,15 @@ array([[ 0.        ,  0.        ,  0.        ,  0.        ],
     &lt;a href=&#34;https://www.dropbox.com/s/weog8ubsu9qcugv/Reading_mulitple_files_using_tensorflow_sequence.ipynb?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download notebook&lt;/a&gt;
   &lt;/td&gt;
 &lt;/table&gt;
-&lt;p&gt;In this post, we will read multiple csv files using 
-. In an 
- we had demonstrated the procedure for reading multiple csv files using a custom generator. Though generators are convenient for handling chunks of data from a large dataset, they have limited portability and scalability (
-). Therefore, Tensorflow prefers &lt;code&gt;Sequence&lt;/code&gt; over generators.&lt;/p&gt;
+&lt;p&gt;In this post, we will read multiple csv files using &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tensroflow Sequence&lt;/a&gt;. In an &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;earlier post&lt;/a&gt; we had demonstrated the procedure for reading multiple csv files using a custom generator. Though generators are convenient for handling chunks of data from a large dataset, they have limited portability and scalability (&lt;a href=&#34;https://www.tensorflow.org/guide/data#consuming_python_generators&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;see the caution here&lt;/a&gt;). Therefore, Tensorflow prefers &lt;code&gt;Sequence&lt;/code&gt; over generators.&lt;/p&gt;
 &lt;p&gt;Sequence is similar to &lt;code&gt;Tensorflow Dataset&lt;/code&gt; but provides flexibility for batched data preparation in a custom manner. &lt;code&gt;Tensorflow Dataset&lt;/code&gt; provides a wide range of functionalities to handle different data types. But for some specific applications we might have to make some custom modifications for which built-in methods are not available in &lt;code&gt;tensorflow dataset&lt;/code&gt;. In that case, we can use &lt;code&gt;Sequence&lt;/code&gt; to create our own dataset equivalent. In this post, we will show how to use sequence to read multiple csv files. The method we will discuss is general enough to work for other file formats (such as .txt, .npz, etc.) as well. We will demonstrate the procedure using 500 .csv files. But the method can be easily extended to huge datasets involving thousands of csv files.&lt;/p&gt;
 &lt;p&gt;This post is self-sufficient in the sense that readers don&amp;rsquo;t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named &amp;ldquo;random_data&amp;rdquo; will be created in current working directory and .csv files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn&amp;rsquo;t have an old folder named &amp;ldquo;random_data&amp;rdquo;. Then run the following code cells. We will use &lt;code&gt;Tensorflow 2&lt;/code&gt; to run our deep learning model. Tensorflow is very flexible. A given task can be done in different ways in it. The method we will use is not the only one. Readers are encouraged to explore other ways of doing the same. Below is an outline of three different tasks considered in this post.&lt;/p&gt;
 &lt;h2 id=&#34;outline&#34;&gt;Outline:&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sec_1&#34;&gt;Create 500 &amp;ldquo;.csv&amp;rdquo; files and save it in the folder &amp;ldquo;random_data&amp;rdquo; in current directory.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sec_2&#34;&gt;Write a sequence object that reads data from the folder in chunks and preprocesses it.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sec_3&#34;&gt;Feed the chunks of data to a CNN model and train it for several epochs.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#sec_4&#34;&gt;Make prediction on new data for which labels are not known.&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;a id=&#34;sec_1&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;1-create-500-csv-files-of-random-data&#34;&gt;1. Create 500 .csv files of random data&lt;/h2&gt;
@@ -351,8 +325,7 @@ Showing first 10 files...
 &lt;p&gt;Now that data have been created, we will go to the next step. That is, create a custom &lt;code&gt;Sequence&lt;/code&gt; object, preprocess the time series like data into a matrix like shape such that a 2-D CNN can ingest it. We reshape the data in that way to just illustrate the point. Readers should use their own preprocessing steps.&lt;/p&gt;
 &lt;p&gt;&lt;a id=&#34;sec_2&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;2-write-a-custom-sequence-object&#34;&gt;2. Write a custom Sequence object&lt;/h2&gt;
-&lt;p&gt;According to &lt;code&gt;Tensorflow&lt;/code&gt; 
-, every Sequence must implement following two methods:&lt;/p&gt;
+&lt;p&gt;According to &lt;code&gt;Tensorflow&lt;/code&gt; &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation&lt;/a&gt;, every Sequence must implement following two methods:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;__getitem__&lt;/code&gt; method: Iterates over the dataset chunk by chunk. It must return a complete batch.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;__len__&lt;/code&gt; method: Returns the length of the Sequence (total number of batches that we can extract from the full dataset).&lt;/li&gt;
@@ -749,9 +722,7 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
 &lt;p&gt;Remember that our data are randomly generated. So we should not be surprised by this result.&lt;/p&gt;
 &lt;p&gt;This brings us to the end of the blog. As we had planned in the beginning, we have created random data files, a custom sequence, trained a model using that sequence, and made predictions on new data. The above code can be tweaked slightly to read any type of files other than .csv. And now we can train our model without worrying about the data size. Whether the data size is 10GB or 750GB, our approach will work for both.&lt;/p&gt;
 &lt;h2 id=&#34;is-this-method-efficient-will-it-work-at-a-reasobable-speed-if-we-have-many-complex-preprocessing-steps-to-do-before-training-the-model&#34;&gt;Is this method efficient? Will it work at a reasobable speed if we have many complex preprocessing steps to do before training the model?&lt;/h2&gt;
-&lt;p&gt;In this blog, we have mentioned nothing about the ways to speed up the data loading process. Tensorflow prefers sequences over generators as sequences are a safer way to do multiprocessing (
-). Sequences can be passed to &lt;code&gt;model.fit()&lt;/code&gt; along with parameters like &lt;code&gt;max_queue_size&lt;/code&gt;, &lt;code&gt;workers&lt;/code&gt;, and &lt;code&gt;use_multiprocessing&lt;/code&gt; (
-). To efficiently load data, we have to choose suitable values for &lt;code&gt;max_queue_size&lt;/code&gt;, &lt;code&gt;workers&lt;/code&gt;, and &lt;code&gt;use_multiprocessing&lt;/code&gt;. The next obvious question is: How do we choose suitable values for the parameters for our particular system architecture? The best approach, that this author can suggest, is to try different values and choose the ones that work best for your system architecture. Even when we are using complex preprocessing steps, suitable choice of above parameters will, hopefully, speedup our training process.&lt;/p&gt;
+&lt;p&gt;In this blog, we have mentioned nothing about the ways to speed up the data loading process. Tensorflow prefers sequences over generators as sequences are a safer way to do multiprocessing (&lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/keras/utils/Sequence&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;see this&lt;/a&gt;). Sequences can be passed to &lt;code&gt;model.fit()&lt;/code&gt; along with parameters like &lt;code&gt;max_queue_size&lt;/code&gt;, &lt;code&gt;workers&lt;/code&gt;, and &lt;code&gt;use_multiprocessing&lt;/code&gt; (&lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/keras/Model#fit&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;see this&lt;/a&gt;). To efficiently load data, we have to choose suitable values for &lt;code&gt;max_queue_size&lt;/code&gt;, &lt;code&gt;workers&lt;/code&gt;, and &lt;code&gt;use_multiprocessing&lt;/code&gt;. The next obvious question is: How do we choose suitable values for the parameters for our particular system architecture? The best approach, that this author can suggest, is to try different values and choose the ones that work best for your system architecture. Even when we are using complex preprocessing steps, suitable choice of above parameters will, hopefully, speedup our training process.&lt;/p&gt;
 &lt;p&gt;As a final note, I want to stress that, this is not the only approach to do the task. As I have mentioned previously, in &lt;code&gt;Tensorflow&lt;/code&gt;, you can do the same thing in several different ways. The approach I have chosen seemed natural to me. I have neither strived for efficiency nor elegance. If readers have any better idea, I would be happy to know of it.&lt;/p&gt;
 &lt;p&gt;I hope, this blog will be of help to readers. Please bring any errors or omissions to my notice.&lt;/p&gt;
 </description>
@@ -759,12 +730,11 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
     
     <item>
       <title>Efficiently reading multiple files in Tensorflow 2</title>
-      <link>http://localhost:1313/blog/efficiently-reading-multiple-files-in-tensorflow-2/</link>
+      <link>http://localhost:1313/post/efficiently-reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Sun, 17 May 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/efficiently-reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>http://localhost:1313/post/efficiently-reading-multiple-files-in-tensorflow-2/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Whether this method is efficient or not is contestable. Efficiency of a data input pipeline depends on many factors. How efficiently data are loaded? What is the computer architecture on which computations are being done? Is GPU available? And the list goes on. So readers might get different performance results when they use this method in their own problems. For the simple (and small) problem considered in this post, we got no perceivable performance improvement. But for one personal application, involving moderate size data (3-4 GB), I achieved 10x performance improvement. So I hope this method can be of help to others as well. The system on which we ran this notebook has 44 CPU cores. &lt;code&gt;Tensorflow&lt;/code&gt; version was 2.4.0 and we did not use any GPU. Please note that for some weird reason, the speedup technique doesn&amp;rsquo;t work in &lt;code&gt;Google Colab&lt;/code&gt;. But it works in GPU enabled personal systems, that I have checked.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: Along with the method described in this post, readers should also try using 
- and see if it improves input pipeline efficiecy. Define all the complex transformations inside &lt;code&gt;__getitem__&lt;/code&gt; method of seqeuence class and then suitably choose &lt;code&gt;max_queue_size&lt;/code&gt;, &lt;code&gt;workers&lt;/code&gt;, and &lt;code&gt;use_multiprocessing&lt;/code&gt; in &lt;code&gt;model.fit()&lt;/code&gt; to improve pipeline efficiency.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: Along with the method described in this post, readers should also try using &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tensorflow Sequence&lt;/a&gt; and see if it improves input pipeline efficiecy. Define all the complex transformations inside &lt;code&gt;__getitem__&lt;/code&gt; method of seqeuence class and then suitably choose &lt;code&gt;max_queue_size&lt;/code&gt;, &lt;code&gt;workers&lt;/code&gt;, and &lt;code&gt;use_multiprocessing&lt;/code&gt; in &lt;code&gt;model.fit()&lt;/code&gt; to improve pipeline efficiency.&lt;/p&gt;
 &lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a target=&#34;_blank&#34; href=&#34;https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/Efficiently_reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
@@ -775,23 +745,15 @@ array([[0.1673972 , 0.24178548, 0.21493195, 0.14968236, 0.22620301],
     &lt;a href=&#34;https://www.dropbox.com/s/0naikdujqvzosh4/Efficiently_reading_multiple_files_in_Tensorflow_2.ipynb?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download notebook&lt;/a&gt;
   &lt;/td&gt;
 &lt;/table&gt;
-&lt;p&gt;This post is a sequel to 
-. In the previous post, we discussed ways in which we can read multiple files in &lt;code&gt;Tensorflow 2&lt;/code&gt;. If our aim is only to read files without doing any transformation on data, that method might work well for most applications. But if we need to make complex transformations on data before training our deep learning algorithm, the old method might turn out to be slow. In this post, we will describe a way in which we can speedup that process. The transformations that we will consider are &lt;code&gt;spectrogram&lt;/code&gt; and normalizing (converting each value to a standard normal value). We have chosen these transformations just to illustrate the point. Readers can use any transformation (or no transformation) of their choice. More details regarding improving data performance can be found in this 
-.&lt;/p&gt;
-&lt;p&gt;As this post is a sequel, we expect readers to be familiar with the old post. We will not elaborate on points that have already been discussed. Rather, we will focus on 
- which is the main topic of this post.&lt;/p&gt;
+&lt;p&gt;This post is a sequel to &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;an older post&lt;/a&gt;. In the previous post, we discussed ways in which we can read multiple files in &lt;code&gt;Tensorflow 2&lt;/code&gt;. If our aim is only to read files without doing any transformation on data, that method might work well for most applications. But if we need to make complex transformations on data before training our deep learning algorithm, the old method might turn out to be slow. In this post, we will describe a way in which we can speedup that process. The transformations that we will consider are &lt;code&gt;spectrogram&lt;/code&gt; and normalizing (converting each value to a standard normal value). We have chosen these transformations just to illustrate the point. Readers can use any transformation (or no transformation) of their choice. More details regarding improving data performance can be found in this &lt;a href=&#34;https://www.tensorflow.org/guide/data_performance&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tensorflow guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As this post is a sequel, we expect readers to be familiar with the old post. We will not elaborate on points that have already been discussed. Rather, we will focus on &lt;a href=&#34;#speedup&#34;&gt;section 4&lt;/a&gt; which is the main topic of this post.&lt;/p&gt;
 &lt;h2 id=&#34;outline&#34;&gt;Outline:&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#create_files&#34;&gt;Create 500 &lt;code&gt;&amp;quot;.csv&amp;quot;&lt;/code&gt; files and save it in the folder &amp;ldquo;random_data&amp;rdquo; in current directory.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#generator&#34;&gt;Write a generator that reads data from the folder in chunks and transforms it.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#model&#34;&gt;Build data pipeline and train a CNN model.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#speedup&#34;&gt;How to make the code run faster?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#predictions&#34;&gt;How to make predictions?&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;a id = &#34;create_files&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;1-create-500-csv-files-of-random-data&#34;&gt;1. Create 500 &lt;code&gt;.csv&lt;/code&gt; files of random data&lt;/h2&gt;
@@ -1391,9 +1353,9 @@ array([[0.13616945, 0.22521223, 0.29032916, 0.11108191, 0.23720728],
     
     <item>
       <title>Doing Linear Algebra using Tensorflow 2</title>
-      <link>http://localhost:1313/blog/doing-linear-algebra-using-tensorflow-2/</link>
+      <link>http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/</link>
       <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/doing-linear-algebra-using-tensorflow-2/</guid>
+      <guid>http://localhost:1313/post/doing-linear-algebra-using-tensorflow-2/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Doing_Linear_Algebra_using_Tensorflow_2.ipynb&#34;&gt;
@@ -1855,8 +1817,7 @@ array([[1., 0., 0., 0., 0.],
 &lt;p&gt;In the next section, we will see a way to create tri-diagonal matrix using &lt;code&gt;tf.linalg.set_diag&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;tri-diagonal_matrix&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;tri-diagonal-matrix&#34;&gt;Tri-diagonal matrix&lt;/h4&gt;
-&lt;p&gt;Let&amp;rsquo;s create 
- favorite matrix.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s create &lt;a href=&#34;http://www-math.mit.edu/~gs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Gilbert Strang&amp;rsquo;s&lt;/a&gt; favorite matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;repeat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;repeats&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;repeat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;repeats&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;k&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;repeat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;repeats&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;k&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(5, 5), dtype=int32, numpy=
 array([[ 2, -1,  0,  0,  0],
@@ -1953,8 +1914,7 @@ array([[ 2.3130474 ,  1.917585  ,  1.1134342 , -3.6221776 , -2.242488  ],
        [-0.60492915,  3.6320126 ,  3.9752324 , -0.4684417 , -3.2791114 ]],
       dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There are ways to create deterministic random numbers using &lt;code&gt;stateless_normal&lt;/code&gt;, &lt;code&gt;stateless_uniform&lt;/code&gt;, etc. To know more about random number generation in &lt;code&gt;Tensorflow&lt;/code&gt;, go to 
-&lt;/p&gt;
+&lt;p&gt;There are ways to create deterministic random numbers using &lt;code&gt;stateless_normal&lt;/code&gt;, &lt;code&gt;stateless_uniform&lt;/code&gt;, etc. To know more about random number generation in &lt;code&gt;Tensorflow&lt;/code&gt;, go to &lt;a href=&#34;https://www.tensorflow.org/guide/random_numbers&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;random_poisson_matrix&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h5 id=&#34;random-poisson-matrix&#34;&gt;Random Poisson matrix&lt;/h5&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;random&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;poisson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lam&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;seed&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -1978,12 +1938,10 @@ array([[0.78733766, 2.5200539 , 0.9812998 , 5.141082  , 1.9184761 ],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;some_special_matrices&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;some-special-matrices&#34;&gt;Some special matrices&lt;/h4&gt;
-&lt;p&gt;Special matrices like &lt;code&gt;toeplitz&lt;/code&gt;, &lt;code&gt;circulant&lt;/code&gt;, &lt;code&gt;Kronecker&lt;/code&gt;, etc can be created using linear operators. We will discuss this in the 
- section.&lt;/p&gt;
+&lt;p&gt;Special matrices like &lt;code&gt;toeplitz&lt;/code&gt;, &lt;code&gt;circulant&lt;/code&gt;, &lt;code&gt;Kronecker&lt;/code&gt;, etc can be created using linear operators. We will discuss this in the &lt;a href=&#34;#special_matrices_using_operators&#34;&gt;linear operator&lt;/a&gt; section.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;sparse_matrices&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;sparse-matrices&#34;&gt;Sparse matrices&lt;/h3&gt;
-&lt;p&gt;Sparse matrices are within &lt;code&gt;tf.sparse&lt;/code&gt; library. There are several functions specifically designed for sparse matrices. Full list of function in &lt;code&gt;tf.sparse&lt;/code&gt; library can be found at 
-. In this section, we will see how sparse matrices are created. The first argument is set of indices (rows and columns), second argument is the values at those indices. Third argument is the &lt;code&gt;dense_shape&lt;/code&gt; of the sparse matrix.&lt;/p&gt;
+&lt;p&gt;Sparse matrices are within &lt;code&gt;tf.sparse&lt;/code&gt; library. There are several functions specifically designed for sparse matrices. Full list of function in &lt;code&gt;tf.sparse&lt;/code&gt; library can be found at &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/sparse&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this link&lt;/a&gt;. In this section, we will see how sparse matrices are created. The first argument is set of indices (rows and columns), second argument is the values at those indices. Third argument is the &lt;code&gt;dense_shape&lt;/code&gt; of the sparse matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;sparse_mat&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sparse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SparseTensor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]],&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dense_shape&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;sparse_mat&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tensorflow.python.framework.sparse_tensor.SparseTensor at 0x7f8f505203a0&amp;gt;
@@ -2130,15 +2088,9 @@ array([[ 5., -4.,  1.,  0.,  0.],
 &lt;p&gt;&lt;a id = &#34;matrix_inverse&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;matrix-inverse&#34;&gt;Matrix inverse&lt;/h4&gt;
 &lt;p&gt;Computes the matrix inverse if it exists. It uses $LU$ decomposition to calculate inverse. What happens if inverse doesn&amp;rsquo;t exist? Here is the answer taken directly from &lt;code&gt;tensorflow&lt;/code&gt; documentation:&lt;/p&gt;
-
-
-
-  
-  &lt;blockquote class=&#34;border-l-4 border-neutral-300 dark:border-neutral-600 pl-4 italic text-neutral-600 dark:text-neutral-400 my-6&#34;&gt;
-    &lt;p&gt;[&amp;hellip;] If a matrix is not invertible there is no guarantee what the op does. It may detect the condition and raise an exception or it may simply return a garbage result. [&amp;hellip;]&lt;/p&gt;
-
-  &lt;/blockquote&gt;
-
+&lt;blockquote&gt;
+&lt;p&gt;[&amp;hellip;] If a matrix is not invertible there is no guarantee what the op does. It may detect the condition and raise an exception or it may simply return a garbage result. [&amp;hellip;]&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Having read the documentation, we will apply the function to an invertible matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
@@ -2156,10 +2108,9 @@ array([[ 9.9999970e-01,  1.1920929e-07, -1.1920929e-07],
        [-5.9604645e-07,  1.0000002e+00,  0.0000000e+00],
        [-2.3841858e-07,  0.0000000e+00,  1.0000000e+00]], dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;inverse-using--factors&#34;&gt;Inverse using $LU$ factors&lt;/h4&gt;
+&lt;h4 id=&#34;inverse-using-lu-factors&#34;&gt;Inverse using $LU$ factors&lt;/h4&gt;
 &lt;p&gt;If $LU$ decomposition result is already available from some prior computation, it can be used to compute the inverse using command &lt;code&gt;tf.linalg.lu_matrix_inverse&lt;/code&gt;. This command basically solves the following system:&lt;/p&gt;
-$$AX=I \Leftrightarrow LUX=I$$&lt;p&gt;As $L$ and $U$ are lower and upper triangular respectively, two triangular systems can be solved to obtain $X$ which is nothing but $A^{-1}$. The triangular systems are $LY = I$ (this gives $Y$ as result) and $UX=Y$ (this gives $X$, i.e., $A^{-1}$ as result). Here, the right hand side has more than one column in both the triangular systems. We will see how to solve those triangular systems at a 
-. For the time being, we will just compute the inverse using the built-in command.&lt;/p&gt;
+$$AX=I \Leftrightarrow LUX=I$$&lt;p&gt;As $L$ and $U$ are lower and upper triangular respectively, two triangular systems can be solved to obtain $X$ which is nothing but $A^{-1}$. The triangular systems are $LY = I$ (this gives $Y$ as result) and $UX=Y$ (this gives $X$, i.e., $A^{-1}$ as result). Here, the right hand side has more than one column in both the triangular systems. We will see how to solve those triangular systems at a &lt;a href=&#34;#solving_triangular_systems&#34;&gt;later section&lt;/a&gt;. For the time being, we will just compute the inverse using the built-in command.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A_inv_by_lu&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu_matrix_inverse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A_inv_by_lu&lt;/span&gt;
@@ -2232,10 +2183,7 @@ array([[ 0.,  0.,  0.,  0.,  0.],
 &lt;p&gt;Some of the most common and widely used matrix factorizations are available in &lt;code&gt;Tensorflow&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;lu&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;lu&#34;&gt;LU&lt;/h3&gt;
-&lt;p&gt;Matrix $A$ is factorized into a unit lower triangular matrix $L$ and an upper triangular matrix $U$, such that &lt;/p&gt;
-$$A=LU$$&lt;p&gt;To reduce round-off errors, partial pivoting is used. In partial pivoting, the following factorization is done.
-&lt;/p&gt;
-$$PA = LU$$&lt;p&gt;
+$$A=LU$$$$PA = LU$$&lt;p&gt;
 Where, $P$ is called the permutation matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
@@ -2257,7 +2205,6 @@ tf.Tensor(
 P = 
 tf.Tensor([1 2 0 3], shape=(4,), dtype=int32)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;What does the above result mean? Well, both $L$, and $U$ matrices have been merged into one. And $P$ contains permutation indices. In practice, we don&amp;rsquo;t have to reconstruct individual matrices $L$,$U$, and $P$, because &lt;code&gt;tensorflow&lt;/code&gt; has built-in functions for further analysis that uses the result of &lt;code&gt;tf.linalg.lu&lt;/code&gt; as given above. For the sake of demonstration, we will show how to reconstruct those matrices from above result. To reconstruct $P$, we will use a linear operator that is discussed next. After constructing the matrices $A$ will be &lt;/p&gt;
 $$A = P^TLU$$&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;L&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;band_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ones&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;U&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;band_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;permu_operator&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LinearOperatorPermutation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -2310,8 +2257,6 @@ array([[  1.       ,   4.0000005,   7.       ,   8.       ],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;cholesky&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;cholesky&#34;&gt;Cholesky&lt;/h3&gt;
-&lt;p&gt;It is defined for symmetric positive definite matrices. If A is a symmetric positive definite matrix, its Cholesky decomposition can be written as:
-&lt;/p&gt;
 $$ A = LL^T$$&lt;p&gt;
 Where, $L$ is a lower triangular matrix.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Cholesky decomposition is used as a test for positive definiteness of a matrix. If Cholesky decomposition succeeds, the matrix is positive definite, otherwise it is not. Another widely reported test for positive definiteness is to check the signs of all eigenvalues of the matrix. If all the eigenvalues are positive, the matrix is positive definite. But this method requires computation of all eigenvalues which is computationally nontrivial. Therefore, Cholesky decomposition is the preferred method to test for positive definiteness. If the matrix is not positive definite, Cholesky decomposition will stop at an intermediate step. On the other hand, if it succeeds, along with verifying positive definiteness of the matrix, we will get the Cholesky factor as a byproduct. Cholesky factor can then be used to solve linear systems as we will see later.&lt;/p&gt;
@@ -2376,8 +2321,6 @@ tf.Tensor(
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;svd&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;svd&#34;&gt;SVD&lt;/h3&gt;
-&lt;p&gt;Singular value decomposition (SVD) of a matrix $A\in R^{m\times n}$ is defined as
-&lt;/p&gt;
 $$A = U\Sigma V^T$$&lt;p&gt;
 Where, $U\in R^{m\times m}$ and $V\in R^{n\times n}$ are orthogonal matrices, commonly known as left and right singular vectors respectively. $\Sigma \in R^{m\times n}$ is a diagonal matrix.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;mat&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
@@ -2500,7 +2443,6 @@ Eigenvectors:
 &lt;p&gt;Nothing! We will still get the correct answer. &lt;code&gt;Tensorflow&lt;/code&gt; will use more operations to compute results when it could have been done using less computations.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;solving_dense_linear_systems&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;solving-dense-linear-systems&#34;&gt;Solving dense linear systems&lt;/h2&gt;
-&lt;p&gt;A linear system is (usually) written as &lt;/p&gt;
 $$ Ax = b$$&lt;p&gt;In general, $A$ can be square or rectangular. In our case, it is dense, i.e., most of its entries are nonzero. Right hand side $b$ is a vector in this case. If we have to solve the linear system for multiple right hand side vectors involving same $A$, the RHS can be replaced by a matrix whose columns are different RHS vectors.&lt;/p&gt;
 &lt;p&gt;Depending on the structure of $A$ (whether triangular, or tri-diagonal, or positive definite), suitable algorithm is chosen to solve the linear system. &lt;code&gt;Tensorflow&lt;/code&gt; has a function &lt;code&gt;tf.linalg.solve&lt;/code&gt; to solve linear systems. But this function doesn&amp;rsquo;t take into account the special structure of $A$.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
@@ -2548,10 +2490,7 @@ array([[ 3.],
        [11.],
        [20.]], dtype=float32)&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Once we have obtained factors $L$ and $U$, we can use &lt;code&gt;tf.linalg.triangular_solve&lt;/code&gt; to solve the linear system by solving following two triangular system. &lt;/p&gt;
-$$Ly = b$$&lt;p&gt;
-and &lt;/p&gt;
-$$Ux = y$$&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;L&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;band_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ones&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],))&lt;/span&gt;
+$$Ly = b$$$$Ux = y$$&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;L&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;band_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag_part&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ones&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;triangular_solve&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;# Solves Ly = b&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linalg&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;triangular_solve&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lower&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# Solves Ux = y&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;
@@ -2562,15 +2501,7 @@ array([[1.   ],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;using_cholesky_decomposition&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;using-cholesky-decomposition&#34;&gt;Using Cholesky decomposition&lt;/h3&gt;
-&lt;p&gt;If $A$ is positive definite, Cholesky decomposition is an efficient method for solving the linear system. For positive definite $A$, Cholesky decomposition requires fewer computations than $LU$ decomposition. This is because it exploits the symmetry of the matrix $A$. Once the Cholesky factor $L$ is found, we solve the linear system by solving two triangular systems. Solving triangular systems only requires $O(n^2)$ operations.
-&lt;/p&gt;
-$$ LL^Tx = b$$&lt;p&gt;
-Two triangular systems are:
-&lt;/p&gt;
-$$ Ly = b$$&lt;p&gt;
-This gives us $y$. Using $y$ we solve for $x$ using the following equation.
-&lt;/p&gt;
-$$L^Tx = y$$&lt;p&gt;In &lt;code&gt;tensorflow&lt;/code&gt;, we solve the system using &lt;code&gt;tf.linalg.cholesky_solve&lt;/code&gt;. It takes cholesky factor $(L)$ and right hand side $b$ as input.&lt;/p&gt;
+$$ LL^Tx = b$$$$ Ly = b$$$$L^Tx = y$$&lt;p&gt;In &lt;code&gt;tensorflow&lt;/code&gt;, we solve the system using &lt;code&gt;tf.linalg.cholesky_solve&lt;/code&gt;. It takes cholesky factor $(L)$ and right hand side $b$ as input.&lt;/p&gt;
 &lt;p&gt;For example, solve:
 
 $$\begin{pmatrix}
@@ -2609,8 +2540,7 @@ array([[ 3.      ],
 &lt;p&gt;Structured solvers have immensely useful as in many practical applications resulting coefficient matrix has some kind of structure. This is especially true in mechanical applications, such as finite element modeling, computational heat transfer, etc. In finite element modeling, a body is divided into several elements and each element has certain number of nodes. A node is connected to only a few neighboring nodes. So interaction of a node is limited to only those neighboring nodes. This results in banded systems. Other types of structured matrices are also common in applications.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;solving_triangular_systems&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;solving-triangular-systems&#34;&gt;Solving triangular systems&lt;/h2&gt;
-&lt;p&gt;We have already used triangular solvers in the section on 
-. For completeness, we will again describe it in this section. &lt;code&gt;tf.linalg.triangular_solve&lt;/code&gt; solves both &lt;code&gt;lower triangular&lt;/code&gt; and &lt;code&gt;upper triangular&lt;/code&gt; systems. Following examples demonstrate that.&lt;/p&gt;
+&lt;p&gt;We have already used triangular solvers in the section on &lt;a href=&#34;#using_lu_decomposition&#34;&gt;LU decomposition&lt;/a&gt;. For completeness, we will again describe it in this section. &lt;code&gt;tf.linalg.triangular_solve&lt;/code&gt; solves both &lt;code&gt;lower triangular&lt;/code&gt; and &lt;code&gt;upper triangular&lt;/code&gt; systems. Following examples demonstrate that.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;lower_triangular_mat&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                    &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                    &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dtype&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;float32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -3059,10 +2989,7 @@ array([[4.9999986, 2.0000007, 3.0000038],
 &lt;p&gt;&lt;a id = &#34;matrix_exponential&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;matrix-exponential&#34;&gt;Matrix exponential&lt;/h3&gt;
 &lt;p&gt;Exponential of a matrix $A$ is defined as&lt;/p&gt;
-$$ e^A = \sum_{n=0}^\infty \frac{A^n}{n!}$$&lt;p&gt;In practice, the sum is not taken to infinity. Rather, approximations are used to compute matrix exponential. &lt;code&gt;Tensorflow&lt;/code&gt; implementation is based on 
-.&lt;/p&gt;
-&lt;p&gt;When the matrix has a full set of independent eigenvectors, the formula can be simplified to
-&lt;/p&gt;
+$$ e^A = \sum_{n=0}^\infty \frac{A^n}{n!}$$&lt;p&gt;In practice, the sum is not taken to infinity. Rather, approximations are used to compute matrix exponential. &lt;code&gt;Tensorflow&lt;/code&gt; implementation is based on &lt;a href=&#34;https://epubs.siam.org/doi/10.1137/04061101X&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this paper&lt;/a&gt;.&lt;/p&gt;
 $$e^A = Se^{\Lambda}S^{-1}$$&lt;p&gt;where, $S$ is the eigenvector matrix and $e^\Lambda$ is a diagonal matrix whose diagonal entries are exponentials of eigenvalues of the matrix $A$.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]])&lt;/span&gt;
@@ -3073,8 +3000,7 @@ array([[1.5430806, 1.1752012],
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a id = &#34;matrix_logarithm&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;matrix-logarithm&#34;&gt;Matrix logarithm&lt;/h3&gt;
-&lt;p&gt;Computes logarithm of the matrix such that matrix exponential of the result gives back the original matrix. Refer to the 
- for further details. It is defined only for complex matrices.&lt;/p&gt;
+&lt;p&gt;Computes logarithm of the matrix such that matrix exponential of the result gives back the original matrix. Refer to the &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/linalg/logm&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation&lt;/a&gt; for further details. It is defined only for complex matrices.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;mat&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;constant&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                   &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                   &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;6.&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dtype&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;complex64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -3486,8 +3412,6 @@ Rank of B =  2
 &lt;p&gt;&lt;strong&gt;Why is it useful?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;It turns out that this low rank update appears in many applications. One of the applications is in least squares. Imagine that you have solved the least squares problem using the available data. And now you get some new data. The problem is to get the new least squares fit. Well, you can start form scratch by including the new data to your old data and then fit the model on the whole data. But this is a wasteful approach. A better alternative is to use the new data to modify your old fit. If you do some mathematics, you will arrive at matrix update equation. We will not do the math here. Interested readers can check references.&lt;/p&gt;
 &lt;p&gt;Computations can be much faster if we use low-rank matrix update equation. In tensorflow it is done using &lt;code&gt;tf.linalg.OperatorLowRankUpdate&lt;/code&gt; operator. Though the operator can handle more than rank 1 update, we will use it only for rank 1 update.&lt;/p&gt;
-&lt;p&gt;As an example, let&amp;rsquo;s suppose we want to compute the inverse of $B$. We can do so by modifying the inverse of $A$ that we have previously computed. The result is the famous Sherman–Morrison-Woodbury formula.
-&lt;/p&gt;
 $$B^{-1} = (A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$$&lt;p&gt;Provided that the denominator is not equal to zero. Note that denominator is a scalar for rank 1 update. This equation show that we can compute new inverse from the old inverse by using matrix-vector and vector-vector multiplications.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;operator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_dense&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;tf.Tensor: shape=(3, 3), dtype=float32, numpy=
@@ -3559,8 +3483,7 @@ array([[  0.,   7.,  13.],
 &lt;p&gt;As we have seen, using only &lt;code&gt;tensorflow&lt;/code&gt; we can do quite a bit of linear algebra. In this post, we have only glossed over some of the functionalities. Clever use of the functions and operators will enable us to do much more than what has been covered here. At times, it might feel a little verbose. But the flexibility that it offers will make the exploration a rewarding experience.&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/linalg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Tensorflow documentation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Datta, Biswa Nath. Numerical linear algebra and applications. Vol. 116. Siam, 2010.&lt;/li&gt;
 &lt;li&gt;(The Book) Golub, Gene H., and Charles F. Van Loan. Matrix computations. Vol. 3. JHU press, 2012.&lt;/li&gt;
 &lt;/ol&gt;
@@ -3570,9 +3493,9 @@ array([[  0.,   7.,  13.],
     
     <item>
       <title>Reading multiple files in Tensorflow 2</title>
-      <link>http://localhost:1313/blog/reading-multiple-files-in-tensorflow-2/</link>
+      <link>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/reading-multiple-files-in-tensorflow-2/</guid>
+      <guid>http://localhost:1313/post/reading-multiple-files-in-tensorflow-2/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/Reading_multiple_files_in_Tensorflow_2.ipynb&#34;&gt;
@@ -4156,19 +4079,17 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
 &lt;p&gt;This brings us to the end of the blog. As we had planned in the beginning, we have created random data files, a generator, and trained a model using that generator. The above code can be tweaked slightly to read any type of files other than &lt;code&gt;.csv&lt;/code&gt;. And now we can train our model without worrying about the data size. Whether the data size is 10GB or 750GB, our approach will work for both.&lt;/p&gt;
 &lt;p&gt;As a final note, I want to stress that, this is not the only approach to do the task. As I have mentioned previously, in &lt;code&gt;Tensorflow&lt;/code&gt;, you can do the same thing in several different ways. The approach I have chosen seemed natural to me. I have neither strived for efficiency nor elegance. If readers have any better idea, I would be happy to know of it.&lt;/p&gt;
 &lt;p&gt;I hope, this blog will be of help to readers. Please bring any errors or omissions to my notice.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Update 1&lt;/strong&gt;: While generators are convenient for handling chunks of data from a large dataset, they have limited portability and scalability. Therefore, in Tensorflow Sequences are preferred instead of generators. 
- for a complete workflow for reading multiple files using Sequence.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Update 2&lt;/strong&gt;: If along with reading, one has to perform complex transformations on extracted data (say, doing spectrogram on each segment of data, etc.), the naive approach presented in this blog may turn out to be slow. But there are ways to make these computations faster. One such speedup technique can be found at 
-.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update 1&lt;/strong&gt;: While generators are convenient for handling chunks of data from a large dataset, they have limited portability and scalability. Therefore, in Tensorflow Sequences are preferred instead of generators. &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;See this blog&lt;/a&gt; for a complete workflow for reading multiple files using Sequence.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update 2&lt;/strong&gt;: If along with reading, one has to perform complex transformations on extracted data (say, doing spectrogram on each segment of data, etc.), the naive approach presented in this blog may turn out to be slow. But there are ways to make these computations faster. One such speedup technique can be found at &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/efficiently-reading-multiple-files-in-tensorflow-2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this blog&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Last modified: 27th April, 2020.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Using Python Generators</title>
-      <link>http://localhost:1313/blog/using-python-generators/</link>
+      <link>http://localhost:1313/post/using-python-generators/</link>
       <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/using-python-generators/</guid>
+      <guid>http://localhost:1313/post/using-python-generators/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Using_python_generators.ipynb&#34;&gt;
@@ -4237,9 +4158,7 @@ labels: [3 5 8 4 0 9 1 6 7 2]
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;batch_size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;batch_size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;yield&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;X&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that we have conveniently glossed over a technical point here. As the data is a numpy ndarry, to extract parts of it, we have to first load it. If our data set is huge, this method fails there. But there are ways to work around this problem. First, we can read numpy files without loading the whole file into RAM. More details can be found 
-. Secondly, in deep learning we encounter multiple files each of small size. In that case we can create a dictionary of indexes and file names and then load only a few of those as per index value. These modifications can be easily incorporated as per our need. Details can be found 
-.&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that we have conveniently glossed over a technical point here. As the data is a numpy ndarry, to extract parts of it, we have to first load it. If our data set is huge, this method fails there. But there are ways to work around this problem. First, we can read numpy files without loading the whole file into RAM. More details can be found &lt;a href=&#34;https://stackoverflow.com/questions/42727412/efficient-way-to-partially-read-large-numpy-file&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. Secondly, in deep learning we encounter multiple files each of small size. In that case we can create a dictionary of indexes and file names and then load only a few of those as per index value. These modifications can be easily incorporated as per our need. Details can be found &lt;a href=&#34;https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Now that we have created a generator, we have to test it to see whether it functions as intended or not. So we will extract 10 batches of size 2 each from the (data, labels) pair and see. Here we have assumed that our original data is shuffled. If it is not, we can easily shuffle it by using &amp;ldquo;np.shuffle()&amp;rdquo;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;get_data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;my_gen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
@@ -4498,13 +4417,9 @@ Test Loss: 0.0281691811978817
 Test Accuracy: 0.9922000169754028
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We have reached close to 99% accuracy which is not bad! This example might seem a bit stretched as we don&amp;rsquo;t need generators for small datasets like MNIST. The aim of the example is just to show different implementation using generators.&lt;/p&gt;
-&lt;p&gt;Perhaps the most detailed blog about using generators for deep learning is 
-. I also found 
- helpful.&lt;/p&gt;
-&lt;p&gt;Update 1: With the release of &lt;code&gt;Tensorflow-2.0&lt;/code&gt;, it is much easier to use &lt;code&gt;tf.data.Dataset&lt;/code&gt; API for handling large datasets. Generators can still be used for training using &lt;code&gt;tf.keras&lt;/code&gt;. As a final note, use generators if it is absolutely essential to do so. Otherwise, use &lt;code&gt;tf.data.Dataset&lt;/code&gt; API. Check out 
- for an end-to-end data pipeline and training using generators in &lt;code&gt;Tensorflow 2&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Update 2: See 
- for a complete workflow for reading multiple files using &lt;code&gt;Tensorflow Sequence&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Perhaps the most detailed blog about using generators for deep learning is &lt;a href=&#34;https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this one&lt;/a&gt;. I also found &lt;a href=&#34;https://github.com/keras-team/keras/issues/9707#issuecomment-374609666&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;these comments&lt;/a&gt; helpful.&lt;/p&gt;
+&lt;p&gt;Update 1: With the release of &lt;code&gt;Tensorflow-2.0&lt;/code&gt;, it is much easier to use &lt;code&gt;tf.data.Dataset&lt;/code&gt; API for handling large datasets. Generators can still be used for training using &lt;code&gt;tf.keras&lt;/code&gt;. As a final note, use generators if it is absolutely essential to do so. Otherwise, use &lt;code&gt;tf.data.Dataset&lt;/code&gt; API. Check out &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this post&lt;/a&gt; for an end-to-end data pipeline and training using generators in &lt;code&gt;Tensorflow 2&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Update 2: See &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/reading-multiple-files-in-tensorflow-2-using-sequence/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this blog&lt;/a&gt; for a complete workflow for reading multiple files using &lt;code&gt;Tensorflow Sequence&lt;/code&gt;.&lt;/p&gt;
 </description>
     </item>
     
