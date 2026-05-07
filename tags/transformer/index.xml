@@ -1,31 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Transformer | Biswajit Sahoo</title><link>https://biswajitsahoo1111.github.io/tags/transformer/</link><atom:link href="https://biswajitsahoo1111.github.io/tags/transformer/index.xml" rel="self" type="application/rss+xml"/><description>Transformer</description><generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Wed, 10 Mar 2021 00:00:00 +0000</lastBuildDate><image><url>https://biswajitsahoo1111.github.io/media/icon_hu_8653216acba6f460.png</url><title>Transformer</title><link>https://biswajitsahoo1111.github.io/tags/transformer/</link></image><item><title>Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book</title><link>https://biswajitsahoo1111.github.io/blog/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link><pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate><guid>https://biswajitsahoo1111.github.io/blog/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid><description>&lt;table class="tfo-notebook-buttons" align="left"&gt;
-&lt;tr&gt;
-&lt;td align="left"&gt;
-&lt;iframe src="https://ghbtns.com/github-btn.html?user=biswajitsahoo1111&amp;repo=D2L_Attention_Mechanisms_in_TF&amp;type=star&amp;count=true&amp;size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"&gt;&lt;/iframe&gt;
-&lt;/td&gt;
-&lt;!-----
-&lt;td align="left" rowspan="2"&gt;
-&lt;a href="https://biswajitsahoo1111.github.io/rul_codes_open/"&gt;&lt;img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" /&gt;View GitHub Page&lt;/a&gt;
-&lt;/td&gt;
------&gt;
-&lt;td align="left" rowspan="2"&gt;
-&lt;a href="https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF"&gt;&lt;img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" /&gt;View source on GitHub&lt;/a&gt;
-&lt;/td&gt;
-&lt;td align="left" rowspan="2"&gt;
-&lt;a href="https://codeload.github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/zip/master"&gt;&lt;img src="https://www.tensorflow.org/images/download_logo_32px.png" /&gt;Download code (.zip)&lt;/a&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align="right"&gt;
-&lt;iframe src="https://ghbtns.com/github-btn.html?user=biswajitsahoo1111&amp;repo=D2L_Attention_Mechanisms_in_TF&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="170" height="30" title="GitHub" margin-left="auto" margin-right="auto"&gt;&lt;/iframe&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Transformer | Biswajit Sahoo</title>
+    <link>http://localhost:1313/tags/transformer/</link>
+      <atom:link href="http://localhost:1313/tags/transformer/index.xml" rel="self" type="application/rss+xml" />
+    <description>Transformer</description>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Wed, 10 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
+      <title>Transformer</title>
+      <link>http://localhost:1313/tags/transformer/</link>
+    </image>
+    
+    <item>
+      <title>Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book</title>
+      <link>http://localhost:1313/blog/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
+      <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
+      <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
+  &lt;tr&gt;
+  &lt;td align=&#34;left&#34;&gt;
+    &lt;iframe src=&#34;https://ghbtns.com/github-btn.html?user=biswajitsahoo1111&amp;repo=D2L_Attention_Mechanisms_in_TF&amp;type=star&amp;count=true&amp;size=large&#34; frameborder=&#34;0&#34; scrolling=&#34;0&#34; width=&#34;170&#34; height=&#34;30&#34; title=&#34;GitHub&#34;&gt;&lt;/iframe&gt;
+  &lt;/td&gt;
+  &lt;!-----
+  &lt;td align=&#34;left&#34; rowspan=&#34;2&#34;&gt;
+    &lt;a href=&#34;https://biswajitsahoo1111.github.io/rul_codes_open/&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/GitHub-Mark-32px.png&#34; /&gt;View GitHub Page&lt;/a&gt;
+  &lt;/td&gt;
+  -----&gt;
+  &lt;td align=&#34;left&#34; rowspan=&#34;2&#34;&gt;
+    &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/GitHub-Mark-32px.png&#34; /&gt;View source on GitHub&lt;/a&gt;
+  &lt;/td&gt;
+  &lt;td align=&#34;left&#34; rowspan=&#34;2&#34;&gt;
+    &lt;a href=&#34;https://codeload.github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/zip/master&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download code (.zip)&lt;/a&gt;
+  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td align=&#34;right&#34;&gt;  
+    &lt;iframe src=&#34;https://ghbtns.com/github-btn.html?user=biswajitsahoo1111&amp;repo=D2L_Attention_Mechanisms_in_TF&amp;type=fork&amp;count=true&amp;size=small&#34; frameborder=&#34;0&#34; scrolling=&#34;0&#34; width=&#34;170&#34; height=&#34;30&#34; title=&#34;GitHub&#34; margin-left=&#34;auto&#34; margin-right=&#34;auto&#34;&gt;&lt;/iframe&gt;
+  &lt;/td&gt;
+  &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;span style="color: purple;"&gt;&lt;strong&gt;This code has been merged with D2L book. See PR:
-,
+&lt;p&gt;&lt;span style=&#34;color: purple;&#34;&gt;&lt;strong&gt;This code has been merged with D2L book. See PR: 
+, 
 &lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;This post contains &lt;code&gt;Tensorflow 2&lt;/code&gt; code for Attention Mechanisms chapter of
-book. The chapter has 7 sections and code for each section can be found at the following links. We have given only code implementations. For theory, readers should refer the book.&lt;/p&gt;
+&lt;p&gt;This post contains &lt;code&gt;Tensorflow 2&lt;/code&gt; code for Attention Mechanisms chapter of 
+ book. The chapter has 7 sections and code for each section can be found at the following links. We have given only code implementations. For theory, readers should refer the book.&lt;/p&gt;
 &lt;p&gt;
 &lt;/p&gt;
 &lt;p&gt;
@@ -40,14 +59,19 @@ book. The chapter has 7 sections and code for each section can be found at the f
 &lt;/p&gt;
 &lt;p&gt;
 &lt;/p&gt;
-&lt;h3 id="additional-sections"&gt;Additional sections:&lt;/h3&gt;
+&lt;h3 id=&#34;additional-sections&#34;&gt;Additional sections:&lt;/h3&gt;
 &lt;p&gt;
 &lt;/p&gt;
-&lt;h3 id="additional-chapters"&gt;Additional Chapters:&lt;/h3&gt;
-&lt;p&gt;Chapter 17:
+&lt;h3 id=&#34;additional-chapters&#34;&gt;Additional Chapters:&lt;/h3&gt;
+&lt;p&gt;Chapter 17: 
 &lt;/p&gt;
-&lt;h3 id="how-to-run-these-code"&gt;How to run these code:&lt;/h3&gt;
+&lt;h3 id=&#34;how-to-run-these-code&#34;&gt;How to run these code:&lt;/h3&gt;
 &lt;p&gt;The best way (in our opinion) is to either clone the repo (or download the zipped repo) and then run each notebook from the cloned (or extracted) folder. All the notebooks will run without any issue.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: We claim no originality for the code. Credit goes to the authors of this excellent
-. However, all errors and omissions are my own and readers are encouraged to bring it to my notice. Finally, no TF code was available (to the best of my knowledge) for &lt;code&gt;Attention Mechanisms&lt;/code&gt; chapter when
-was first made public.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: We claim no originality for the code. Credit goes to the authors of this excellent 
+. However, all errors and omissions are my own and readers are encouraged to bring it to my notice. Finally, no TF code was available (to the best of my knowledge) for &lt;code&gt;Attention Mechanisms&lt;/code&gt; chapter when 
+ was first made public.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

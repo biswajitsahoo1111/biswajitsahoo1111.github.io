@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Optimization | Biswajit Sahoo</title><link>https://biswajitsahoo1111.github.io/tags/optimization/</link><atom:link href="https://biswajitsahoo1111.github.io/tags/optimization/index.xml" rel="self" type="application/rss+xml"/><description>Optimization</description><generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 14 Aug 2021 00:00:00 +0000</lastBuildDate><image><url>https://biswajitsahoo1111.github.io/media/icon_hu_8653216acba6f460.png</url><title>Optimization</title><link>https://biswajitsahoo1111.github.io/tags/optimization/</link></image><item><title>Machine Learning, Regression, and Optimization</title><link>https://biswajitsahoo1111.github.io/publications/ml_regression_optimization/</link><pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate><guid>https://biswajitsahoo1111.github.io/publications/ml_regression_optimization/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Optimization | Biswajit Sahoo</title>
+    <link>http://localhost:1313/tags/optimization/</link>
+      <atom:link href="http://localhost:1313/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
+    <description>Optimization</description>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 14 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
+      <title>Optimization</title>
+      <link>http://localhost:1313/tags/optimization/</link>
+    </image>
+    
+    <item>
+      <title>Machine Learning, Regression, and Optimization</title>
+      <link>http://localhost:1313/publications/ml_regression_optimization/</link>
+      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publications/ml_regression_optimization/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
