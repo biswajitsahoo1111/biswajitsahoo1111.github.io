@@ -5,18 +5,18 @@
     <link>http://localhost:1313/tags/r/</link>
       <atom:link href="http://localhost:1313/tags/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Tue, 05 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Tue, 05 Feb 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
+      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
       <title>R</title>
       <link>http://localhost:1313/tags/r/</link>
     </image>
     
     <item>
       <title>Principal Component Analysis - Part III</title>
-      <link>http://localhost:1313/blog/principal-component-analysis-part-iii/</link>
+      <link>http://localhost:1313/post/principal-component-analysis-part-iii/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/principal-component-analysis-part-iii/</guid>
+      <guid>http://localhost:1313/post/principal-component-analysis-part-iii/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td align=&#34;center&#34;&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/cbm_codes_open/blob/master/notebooks/PCA_Abdi_in_python.ipynb&#34;&gt;
@@ -30,20 +30,13 @@
     &lt;a href=&#34;https://www.dropbox.com/s/tp56l6v7upa1apf/PCA_blog_Biswajit_Sahoo_part_3.Rmd?dl=1&#34;&gt;&lt;img src=&#34;https://www.tensorflow.org/images/download_logo_32px.png&#34; /&gt;Download R code (R Markdown)&lt;/a&gt;
   &lt;/td&gt;
 &lt;/table&gt;
-&lt;p&gt;In this post, we will reproduce the results of a popular paper on PCA. The paper is titled &amp;lsquo;
-&amp;rsquo; and is authored by 
- and 
-. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).&lt;/p&gt;
+&lt;p&gt;In this post, we will reproduce the results of a popular paper on PCA. The paper is titled &amp;lsquo;&lt;a href=&#34;https://personal.utdallas.edu/~herve/abdi-awPCA2010.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Principal component analysis&lt;/a&gt;&amp;rsquo; and is authored by &lt;a href=&#34;https://personal.utdallas.edu/~herve/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Herve Abdi&lt;/a&gt; and &lt;a href=&#34;https://ljwilliams.github.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Lynne J. Williams&lt;/a&gt;. It got published in 2010 and since then its popularity has only grown. Its number of citations are more than 4800 as per Google Scholar data (This was the number when this post was last revised).&lt;/p&gt;
 &lt;p&gt;This post is Part-III of a three part series on PCA. Other parts of the series can be found at the links below.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-II: PCA Implementation with and without using built-in functions&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;This post contains code snippets in R. Equivalent 
- can be written using commands of 
-. For figures, the reader has to write his/her own code in MATLAB.&lt;/p&gt;
+&lt;p&gt;This post contains code snippets in R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MATLAB codes&lt;/a&gt; can be written using commands of &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-II&lt;/a&gt;. For figures, the reader has to write his/her own code in MATLAB.&lt;/p&gt;
 &lt;h3 id=&#34;structure-of-the-paper&#34;&gt;Structure of the paper&lt;/h3&gt;
 &lt;p&gt;Along with basic theory, the paper contains three examples on PCA, one example on correspondence analysis, and one example on multiple factor analysis. We will only focus on PCA examples in this post.&lt;/p&gt;
 &lt;p&gt;To run following R codes seamlessly, readers have to load following packages. If these packages have not been installed previously, use &lt;code&gt;install.packages(&amp;quot;package_name&amp;quot;)&lt;/code&gt; to install those.&lt;/p&gt;
@@ -60,7 +53,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Lines_in_dict&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;words&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;data.frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Words&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Word_length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Lines_in_dict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;stringsAsFactors&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;F&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;words
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;words_centered&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;scale&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;words[&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;scale&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;F&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# Centering after reemoving the first column&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;words_centered&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;scale&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;words[&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;scale&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;F&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# Centering after reemoving the first column&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;covariance-pca&#34;&gt;Covariance PCA&lt;/h3&gt;
 &lt;p&gt;Covariance PCA uses centered data matrix. But data matrix is not scaled. &lt;code&gt;prcomp()&lt;/code&gt; centers data by default.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;pca_words_cov&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;prcomp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;words[&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;scale&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;F&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# cov stands for Covariance PCA&lt;/span&gt;
@@ -110,15 +103,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sur_centered&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sur&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;colMeans&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;words[&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;factor_scores_sur&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;round&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sur_centered&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%*%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pca_words_cov&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rotation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;eigenvalues-and-variance&#34;&gt;Eigenvalues and variance&lt;/h3&gt;
-&lt;p&gt;See 
- for details.&lt;/p&gt;
+&lt;p&gt;See &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-II&lt;/a&gt; for details.&lt;/p&gt;
 &lt;h3 id=&#34;total-variance-before-transformation&#34;&gt;Total variance before transformation&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;total_var_before&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;round&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;var&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;words_centered&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))),&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;total-variance-after-transformation&#34;&gt;Total variance after transformation&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;total_var_after&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;round&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;diag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;var&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pca_words_cov&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))),&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;correlation-between-principal-components-and-original-variables&#34;&gt;Correlation between principal components and original variables&lt;/h3&gt;
-&lt;p&gt;In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix $\textbf{P}$ (see 
-)&lt;/p&gt;
+&lt;p&gt;In the paper,this correlation is also termed loading. But we will strictly reserve the loading term to mean loading matrix $\textbf{P}$ (see &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-I&lt;/a&gt;)&lt;/p&gt;
 &lt;p&gt;The sum of correlation coefficients between variables and principal components is 1. Intuitively, this means that variables are orthogonally projected onto the principal components.&lt;/p&gt;
 &lt;h3 id=&#34;correlation-matrix&#34;&gt;Correlation matrix&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Correlation between PCs and original variables&lt;/span&gt;
@@ -277,8 +268,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                              &lt;span class=&#34;n&#34;&gt;byrow&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;svd_food&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;svd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cent_food&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Eigenvalues&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;svd_food&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;^2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Important Note:&lt;/strong&gt; These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by $(n-1)$, where $n$ is number of data points (in this case $n = 12$). If this point is still not clear, refer to 
-.&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Important Note:&lt;/strong&gt; These eigenvalues are not the same as variance of factor scores in principal components. Variance of principal component factor scores can be obtained by dividing the eigenvalues by $(n-1)$, where $n$ is number of data points (in this case $n = 12$). If this point is still not clear, refer to &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;percentage-contribution-of-each-principal-component&#34;&gt;Percentage contribution of each principal component&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;round&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Eigenvalues&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Eigenvalues&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;cumulative-sum-of-eigenvalues&#34;&gt;Cumulative sum of eigenvalues&lt;/h3&gt;
@@ -295,8 +285,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;round&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RESS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Eigenvalues&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We will not calculate the value of PRESS in this post as it requires us to consider random models. We will not pursue that here.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;sessionInfo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to 
- email.&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Though unusually long, I hope, this post will be of help to (courageous) readers who work there way through it till end. Comments regarding any errors or omissions may be sent to &lt;a href=&#34;https://biswajitsahoo1111.github.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;author&amp;rsquo;s&lt;/a&gt; email.&lt;/p&gt;
 &lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
@@ -307,9 +296,9 @@
     
     <item>
       <title>Principal Component Analysis - Part II</title>
-      <link>http://localhost:1313/blog/principal-component-analysis-part-ii/</link>
+      <link>http://localhost:1313/post/principal-component-analysis-part-ii/</link>
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/principal-component-analysis-part-ii/</guid>
+      <guid>http://localhost:1313/post/principal-component-analysis-part-ii/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td align=&#34;center&#34;&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Principal_Component_Analysis_Part_II.ipynb&#34;&gt;
@@ -328,15 +317,11 @@
 &lt;/table&gt;
 &lt;p&gt;This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-III: Reproducing results of a published paper on PCA&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;In this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.&lt;/p&gt;
-&lt;p&gt;This post is written in R. Equivalent 
- for the same can be obtained from this 
-.&lt;/p&gt;
+&lt;p&gt;This post is written in R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MATLAB code&lt;/a&gt; for the same can be obtained from this &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result. As the dataset is pretty small, one way to load the data into R is to create a dataframe in R using the values in the paper. Another way is to first create a csv file and then read the file into R/MATLAB. We have used the later approach.&lt;/p&gt;
 &lt;h3 id=&#34;load-data&#34;&gt;Load Data&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#Create a dataframe of food data&lt;/span&gt;
@@ -455,8 +440,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Variance of principal components&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;round&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;svd_food_cov&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d^2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer 
-&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-I&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;performing-covariance-pca-using-eigen-decomopositionnot-recommended&#34;&gt;Performing covariance PCA using Eigen-decomoposition(Not recommended)&lt;/h3&gt;
 &lt;p&gt;This procedure is not recommended because forming a covariance matrix is computationally not efficient for large matrices if data matrix contains smaller entries. So doing eigen analysis on covariance matrix may give erroneous results. However, for our example we can use it to obtain results.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;eigen_food_cov&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;eigen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;cov&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cent_food&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
@@ -660,9 +644,9 @@
     
     <item>
       <title>Principal Component Analysis - Part I</title>
-      <link>http://localhost:1313/blog/principal-component-analysis-part-i/</link>
+      <link>http://localhost:1313/post/principal-component-analysis-part-i/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/principal-component-analysis-part-i/</guid>
+      <guid>http://localhost:1313/post/principal-component-analysis-part-i/</guid>
       <description>&lt;p&gt;In this post, we will discuss about Principal Component Analysis (PCA),
 one of the most popular dimensionality reduction techniques used in
 machine learning. Applications of PCA and its variants are ubiquitous.
@@ -684,19 +668,17 @@ Part-I and work their way through gradually. Beginners are also
 encouraged to explore the references at the end of this post for further
 information. Here is the outline of different parts:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-I: Basic Theory of
+PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-II: PCA Implementation with and without using built-in
+functions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-III: Reproducing results of a published paper on
+PCA&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For
-
-,
+&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-II&lt;/a&gt;,
 Python, R, and MATLAB code are available to reproduce all the results.
-
-
+&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-III&lt;/a&gt;
 contains both R and Python code to reproduce results of the paper. In
 this post, we will discuss the theory behind PCA in brief.&lt;/p&gt;
 &lt;h1 id=&#34;principal-component-analysis&#34;&gt;Principal Component Analysis&lt;/h1&gt;
@@ -764,9 +746,6 @@ find $\textbf{P}$ we can then find $\textbf{Y}$ just by a matrix
 multiplication. We will show in the next section that matrix
 $\textbf{P}$ is the eigenvector matrix of the covariance matrix. Before
 that, let&amp;rsquo;s first define the covariance matrix.&lt;/p&gt;
-&lt;p&gt;Given a data matrix $\textbf{X}$(centered), its covariance matrix
-$(\textbf{S})$ is defined as
-&lt;/p&gt;
 $$\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}$$&lt;p&gt;
 Now we will show how to compute the loading vectors (columns of $\textbf{P}$) and consequently the principal components (columns of $\textbf{Y}$) from the given centered data matrix $\textbf{X}$.&lt;/p&gt;
 &lt;h3 id=&#34;sketch-of-the-proof&#34;&gt;Sketch of the Proof&lt;/h3&gt;
@@ -859,11 +838,6 @@ will prove these two propositions as the proofs are short.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Principal components are centered.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;: Let $\textbf{1}$ be a column vector of all ones of size
-$(n\times 1)$. To prove that columns of $\textbf{Y}$ are centered,
-just premultiply it by $\textbf{1}^T$ (this finds column sum for
-each column). So
-&lt;/p&gt;
 $$\textbf{1}^T \textbf{Y} = \textbf{1}^T\textbf{X}\textbf{P}$$&lt;p&gt; But
 columns of $\textbf{X}$ are already centered, so
 $\textbf{1}^T\textbf{X}=\textbf{0}$. Thus
@@ -890,15 +864,13 @@ $\textbf{P}\textbf{P}^T=\textbf{I}$).&lt;/p&gt;
 &lt;p&gt;Principal components are orthogonal.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;: To prove the above claim, it is sufficient to show that
 the matrix $\textbf{Y}^T\textbf{Y}$ is diagonal. Remember that columns of $\textbf{Y}$ are principal components. So if we can somehow show $\textbf{Y}^T\textbf{Y}$ to be diagonal, it would automatically mean that principal components are orthogonal.
-We know, $\textbf{Y} = \textbf{X}\textbf{P}$. So $\textbf{Y}^T\textbf{Y} = \textbf{P}^T\textbf{X}^T\textbf{X}\textbf{P}$. From sketch of the proof, we know that $\textbf{P}$ is orthogonal as we have required successive loading vectors to be orthogonal to previous ones. We also know that $\textbf{P}$ is the eigenvector matrix of $\textbf{X}^T\textbf{X}$. So from 
-, it follows that $\textbf{P}^T(\textbf{X}^T\textbf{X})\textbf{P}$ is diagonal as $\textbf{P}$ is the eigenvector matrix of $\textbf{X}^T\textbf{X}$ and $\textbf{P}$ is orthogonal (so $\textbf{P}^{-1} = \textbf{P}^T$).&lt;/p&gt;
+We know, $\textbf{Y} = \textbf{X}\textbf{P}$. So $\textbf{Y}^T\textbf{Y} = \textbf{P}^T\textbf{X}^T\textbf{X}\textbf{P}$. From sketch of the proof, we know that $\textbf{P}$ is orthogonal as we have required successive loading vectors to be orthogonal to previous ones. We also know that $\textbf{P}$ is the eigenvector matrix of $\textbf{X}^T\textbf{X}$. So from &lt;a href=&#34;https://mathworld.wolfram.com/EigenDecompositionTheorem.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Eigen Decomposition Theorem&lt;/a&gt;, it follows that $\textbf{P}^T(\textbf{X}^T\textbf{X})\textbf{P}$ is diagonal as $\textbf{P}$ is the eigenvector matrix of $\textbf{X}^T\textbf{X}$ and $\textbf{P}$ is orthogonal (so $\textbf{P}^{-1} = \textbf{P}^T$).&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;link-between-total-variance-and-eigenvalues&#34;&gt;Link between total variance and eigenvalues&lt;/h3&gt;
 &lt;p&gt;Total variance is sum of eigenvalues of covariance matrix
 $(\textbf{S})$. This follows from the fact that &lt;span style=&#34;color: hotpink&#34;&gt;&lt;em&gt;trace of a matrix is sum of its eigenvalues&lt;/em&gt;&lt;/span&gt;. Total variance of original data matrix is $\frac{1}{n-1}trace(\textbf{X}^T\textbf{X}) =trace(\frac{1}{n-1}\textbf{X}^T\textbf{X}) = trace(\textbf{S})$. We will show these calculations using a publicly available dataset in
-
-.&lt;/p&gt;
+&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-II&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;variations-of-pca&#34;&gt;Variations of PCA&lt;/h3&gt;
 &lt;p&gt;Sometimes our data matrix contains variables that are measured in
 different units. So we might have to scale the centered matrix to reduce
@@ -909,8 +881,7 @@ on which PCA is performed, it is divided into two types.&lt;/p&gt;
 &lt;li&gt;Correlation PCA (Data matrix is centered and scaled)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Examples of these two types can be found in
-
-.
+&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-ii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-II&lt;/a&gt;.
 Please note that the above two variations are just two among many
 variations. There are &lt;strong&gt;Sparse PCA&lt;/strong&gt;, &lt;strong&gt;Kernel PCA&lt;/strong&gt;, &lt;strong&gt;Robust PCA&lt;/strong&gt;,
 &lt;strong&gt;Non-negative PCA&lt;/strong&gt; and many others. We have mentioned the two that are
@@ -938,23 +909,11 @@ $\textbf{P}$.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;how-actually-are-principal-components-computed&#34;&gt;How actually are principal components computed?&lt;/h3&gt;
-&lt;p&gt;The previously stated method of finding eigenvectors of covariance
-matrix is not computationally efficient. In practice, singular value
-decomposition (SVD) is used to compute the matrix $\textbf{P}$. SVD
-theorem tells that any real matrix $\textbf{X}$ can be decomposed into
-three matrices such that &lt;/p&gt;
 $$ \textbf{X} = \textbf{U}\Sigma\textbf{V}^T$$&lt;p&gt;
 Where, $\textbf{X}$ is of size $n\times p$. $\textbf{U}$ and
 $\textbf{V}$ are orthogonal matrices of size $n\times n$ and $p\times p$
 respectively. $\Sigma$ is a diagonal matrix of size $n\times p$.&lt;/p&gt;
-&lt;p&gt;Given the SVD decomposition of a matrix $\textbf{X}$,
-&lt;/p&gt;
-$$\textbf{X}^T\textbf{X}=\textbf{V}\Sigma^2\textbf{V}^T$$&lt;p&gt;This is the eigen-decomposition of $\textbf{X}^T\textbf{X}$. So
-$\textbf{V}$ is the eigenvector matrix of $\textbf{X}^T\textbf{X}$. For
-PCA we need eigenvector matrix of covariance matrix. So converting the
-equation into convenient form, we get
-&lt;/p&gt;
-$$\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}=\textbf{V}(\frac{1}{n-1}\Sigma^2)\textbf{V}^T$$&lt;p&gt;
+$$\textbf{X}^T\textbf{X}=\textbf{V}\Sigma^2\textbf{V}^T$$$$\textbf{S} = \frac{1}{n-1}\textbf{X}^T\textbf{X}=\textbf{V}(\frac{1}{n-1}\Sigma^2)\textbf{V}^T$$&lt;p&gt;
 Thus eigenvalues of S are diagonal entries of $(\frac{1}{n-1}\Sigma^2)$.
 As SVD is computationally efficient, all built-in functions use SVD to
 compute the loading matrix and then use the loading matrix to find

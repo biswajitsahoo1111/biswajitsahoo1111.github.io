@@ -5,29 +5,21 @@
     <link>http://localhost:1313/tags/story/</link>
       <atom:link href="http://localhost:1313/tags/story/index.xml" rel="self" type="application/rss+xml" />
     <description>Story</description>
-    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sun, 24 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sun, 24 Mar 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
+      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
       <title>Story</title>
       <link>http://localhost:1313/tags/story/</link>
     </image>
     
     <item>
       <title>Fault Diagnosis of Machines</title>
-      <link>http://localhost:1313/blog/fault-diagnosis-of-machines/</link>
+      <link>http://localhost:1313/post/fault-diagnosis-of-machines/</link>
       <pubDate>Sun, 24 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blog/fault-diagnosis-of-machines/</guid>
-      <description>
-
-
-  
-  &lt;blockquote class=&#34;border-l-4 border-neutral-300 dark:border-neutral-600 pl-4 italic text-neutral-600 dark:text-neutral-400 my-6&#34;&gt;
-    &lt;p&gt;This story was originally written for 
- award 2018. It is written in a non-technical way so as to be accessible to as many people as possible irrespective of their educational background. The story also featured in the top 100 list of stories for the award. Full list of awardees and their stories can be found 
-.&lt;/p&gt;
-
-  &lt;/blockquote&gt;
-
+      <guid>http://localhost:1313/post/fault-diagnosis-of-machines/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;This story was originally written for &lt;a href=&#34;https://www.awsar-dst.in/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&amp;ldquo;Augmenting Writing Skills for Articulating Research (AWSAR)&amp;rdquo;&lt;/a&gt; award 2018. It is written in a non-technical way so as to be accessible to as many people as possible irrespective of their educational background. The story also featured in the top 100 list of stories for the award. Full list of awardees and their stories can be found &lt;a href=&#34;https://www.awsar-dst.in/awsar_awarded_articles_2018/download_book&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;prelude&#34;&gt;Prelude&lt;/h2&gt;
 &lt;p&gt;Rising sun with its gentle light marks the arrival of morning. Birds’ chirp as well as time on our clock, sometimes with a blaring alarm, confirm the arrival of morning. Each of these, among several others, is an indicator of the morning. But can we know about morning by following only one indicator? Let’s deliberate. What if the sky is cloudy and we don’t see the sun rising, will this mean that morning is yet to come? Of course not! Our alarm will remind us of morning irrespective of whether there is sun or not. But what if, on some occasion, our clock doesn’t work. In that case, birds may chirp or sun may rise or our near and dear ones may remind us that it’s morning already. So in essence, we usually don’t look for only one indicator. Rather, we consider several indicators. If one indicator fails, we can check another and thus be sure. It is very unlikely that all the indicators will fail simultaneously.&lt;/p&gt;
 &lt;p&gt;So the best way to get an idea about an event, it seems, is not to rely on only one indicator. Rather, observe several indicators and depending on their collective state, arrive at some conclusion. In this way, we deliberately add redundancy in order to get reliable results. This is exactly what we do in fault diagnosis of machines. Fault diagnosis is a broad term that addresses mainly three questions. First, find out whether fault is there in the machine or not. If fault is present, next question is to find the location of the fault. Once location of the fault is found, finally, find out the type of fault and its severity. In this article, we will only limit ourselves to the last aspect. But for simplicity, we will still use the term fault diagnosis to address that particular problem.&lt;/p&gt;
@@ -43,8 +35,7 @@
 &lt;p&gt;Apart from data-driven methods there also exists another class of techniques that go by the broad name of model-based methods. In model-based methods, we formulate a full mathematical model of the machine and then try to find out how the response of the model changes if a fault is introduced and using this fact, try to find the nature of fault for a new problem. Though model-based techniques are important in their own right, in many cases it becomes very difficult to find an accurate model of the system because of the uncertainties involved. In contrast, data-driven methods are more robust against external noise and are flexible, meaning, we can perform different analysis using the same data and obtain deeper insights. Another advantage of using data-driven methods is that the whole process of fault diagnosis can easily be automated.&lt;/p&gt;
 &lt;p&gt;In this article, we have only considered the field of fault diagnosis. In fault diagnosis, faults are already present and we wish to either detect them or segregate them depending on fault type. But there exists another branch that deals with ways to predict the time of occurrence of fault in future, given the present state. Basically, they determine the remaining useful life of the machine. This sub-branch is called fault prognosis which is also an active area of research.&lt;/p&gt;
 &lt;p&gt;Given the advancement of research and scope for automation, it may be possible, in not so distant future, to get updates on your phone about possible malfunction of a part of your car while driving your car or while enjoying a ride in a self-driving car, maybe!!&lt;/p&gt;
-&lt;p&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.awsar-dst.in/2019/assets/winner_article_2018/30_PhD.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Published story can be found at this link&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
