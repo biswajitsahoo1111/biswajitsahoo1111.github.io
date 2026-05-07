@@ -5,18 +5,18 @@
     <link>http://localhost:1313/tags/matlab/</link>
       <atom:link href="http://localhost:1313/tags/matlab/index.xml" rel="self" type="application/rss+xml" />
     <description>MATLAB</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 04 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 04 Feb 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
+      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
       <title>MATLAB</title>
       <link>http://localhost:1313/tags/matlab/</link>
     </image>
     
     <item>
       <title>Principal Component Analysis - Part II</title>
-      <link>http://localhost:1313/post/principal-component-analysis-part-ii/</link>
+      <link>http://localhost:1313/blog/principal-component-analysis-part-ii/</link>
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/principal-component-analysis-part-ii/</guid>
+      <guid>http://localhost:1313/blog/principal-component-analysis-part-ii/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;center&#34;&gt;
   &lt;td align=&#34;center&#34;&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Principal_Component_Analysis_Part_II.ipynb&#34;&gt;
@@ -35,11 +35,15 @@
 &lt;/table&gt;
 &lt;p&gt;This post is Part-II of a three part series post on PCA. Other parts of the series can be found at the links below.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-I: Basic Theory of PCA&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-iii/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-III: Reproducing results of a published paper on PCA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;In this post, we will first apply built in commands to obtain results and then show how the same results can be obtained without using built-in commands. Through this post our aim is not to advocate the use of non-built-in functions. Rather, in our opinion, it enhances understanding by knowing what happens under the hood when a built-in function is called. In actual applications, readers should always use built functions as they are robust(almost always) and tested for efficiency.&lt;/p&gt;
-&lt;p&gt;This post is written in R. Equivalent &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MATLAB code&lt;/a&gt; for the same can be obtained from this &lt;a href=&#34;https://github.com/biswajitsahoo1111/PCA/blob/master/pca_part_II_MATLAB_codes.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This post is written in R. Equivalent 
+ for the same can be obtained from this 
+.&lt;/p&gt;
 &lt;p&gt;We will use French food data form reference [2]. Refer to the paper to know about the original source of the data. We will apply different methods to this data and compare the result. As the dataset is pretty small, one way to load the data into R is to create a dataframe in R using the values in the paper. Another way is to first create a csv file and then read the file into R/MATLAB. We have used the later approach.&lt;/p&gt;
 &lt;h3 id=&#34;load-data&#34;&gt;Load Data&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#Create a dataframe of food data&lt;/span&gt;
@@ -158,7 +162,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Variance of principal components&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;round&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;svd_food_cov&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d^2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[1] 274831.02  26415.99   6254.11   2299.90   2090.20    338.39     65.81
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer &lt;a href=&#34;https://biswajitsahoo1111.github.io/post/principal-component-analysis-part-i/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Part-I&lt;/a&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Our data matrix contains 12 data points. So to find variance of principal components we have to divide the square of the diagonal matrix by 11. To know the theory behind it, refer 
+&lt;/p&gt;
 &lt;h3 id=&#34;performing-covariance-pca-using-eigen-decomopositionnot-recommended&#34;&gt;Performing covariance PCA using Eigen-decomoposition(Not recommended)&lt;/h3&gt;
 &lt;p&gt;This procedure is not recommended because forming a covariance matrix is computationally not efficient for large matrices if data matrix contains smaller entries. So doing eigen analysis on covariance matrix may give erroneous results. However, for our example we can use it to obtain results.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;eigen_food_cov&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;eigen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;cov&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cent_food&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;

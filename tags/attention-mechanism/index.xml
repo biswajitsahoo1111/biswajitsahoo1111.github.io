@@ -5,18 +5,18 @@
     <link>http://localhost:1313/tags/attention-mechanism/</link>
       <atom:link href="http://localhost:1313/tags/attention-mechanism/index.xml" rel="self" type="application/rss+xml" />
     <description>Attention Mechanism</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
+      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
       <title>Attention Mechanism</title>
       <link>http://localhost:1313/tags/attention-mechanism/</link>
     </image>
     
     <item>
       <title>IndexedSlices in Tensorflow</title>
-      <link>http://localhost:1313/post/indexdslices-in-tensorflow/</link>
+      <link>http://localhost:1313/blog/indexdslices-in-tensorflow/</link>
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/indexdslices-in-tensorflow/</guid>
+      <guid>http://localhost:1313/blog/indexdslices-in-tensorflow/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Tensorflow_IndexedSlices.ipynb&#34;&gt;
@@ -34,13 +34,17 @@
 &lt;/table&gt;
 &lt;p&gt;In this post, we will discuss about &lt;code&gt;IndexedSlices&lt;/code&gt; class of &lt;code&gt;Tensorflow&lt;/code&gt;. We will try to answer the following questions in this blog:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#q1&#34;&gt;What are &lt;code&gt;IndexedSlices&lt;/code&gt;?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#q2&#34;&gt;Where do we get it?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#q3&#34;&gt;How to convert from IndexedSlices to tensors?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a id = &#34;q1&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;what-are-indexedslices&#34;&gt;What are &lt;code&gt;IndexedSlices&lt;/code&gt;?&lt;/h2&gt;
-&lt;p&gt;According to &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/IndexedSlices&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;Tensorflow&lt;/code&gt; documentation&lt;/a&gt;, &lt;code&gt;IndexedSlices&lt;/code&gt; are sparse representation of a set of tensor slices at a given index. At an high level it appears to be some kind of sparse representation. Let&amp;rsquo;s try to understand it with examples.&lt;/p&gt;
+&lt;p&gt;According to 
+, &lt;code&gt;IndexedSlices&lt;/code&gt; are sparse representation of a set of tensor slices at a given index. At an high level it appears to be some kind of sparse representation. Let&amp;rsquo;s try to understand it with examples.&lt;/p&gt;
 &lt;p&gt;&lt;a id = &#34;q2&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;where-do-we-get-it&#34;&gt;Where do we get it?&lt;/h2&gt;
 &lt;p&gt;We get &lt;code&gt;IndexedSlices&lt;/code&gt; while taking gradients of an &lt;code&gt;Embedding&lt;/code&gt; layer. Embedding matrices can be huge (depending on vocabulary size). But each batch only contains a small fraction of tokens. So while computing the gradient of loss with respect to embedding layer, in each pass we have to only consider the corresponding token embeedings of the present batch. Naturally a sparse tensor seems to be a better option to record those gradients. &lt;code&gt;Tensorflow&lt;/code&gt; does that using &lt;code&gt;IndexedSlices&lt;/code&gt;. We will show that below using a contrived example.&lt;/p&gt;
@@ -188,15 +192,16 @@ array([[ 0.        ,  0.        ,  0.        ,  0.        ],
       dtype=float32)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This brings us to the end of this blog. I hope this blog has demystified a few things about &lt;code&gt;IndexedSlices&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Motivation for this post&lt;/strong&gt;: While writing TF 2 code for &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Attention Mechanisms chapter of D2L book&lt;/a&gt;, the author encountered an error involving &lt;code&gt;IndexedSlices&lt;/code&gt;. After spending a good deal of time hopelessly trying to figure out what&amp;rsquo;s going on, the author finally found that the error was occurring because of an user defined gradient clipping function that didn&amp;rsquo;t handle &lt;code&gt;IndexedSlices&lt;/code&gt; properly. The model involved embedding layers as it was dealing with machine translation task. Therefore, I thought of writing this blog with the hope that it would be of help to readers who are struggling to figure out what &lt;code&gt;IndexedSlices&lt;/code&gt; are.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Motivation for this post&lt;/strong&gt;: While writing TF 2 code for 
+, the author encountered an error involving &lt;code&gt;IndexedSlices&lt;/code&gt;. After spending a good deal of time hopelessly trying to figure out what&amp;rsquo;s going on, the author finally found that the error was occurring because of an user defined gradient clipping function that didn&amp;rsquo;t handle &lt;code&gt;IndexedSlices&lt;/code&gt; properly. The model involved embedding layers as it was dealing with machine translation task. Therefore, I thought of writing this blog with the hope that it would be of help to readers who are struggling to figure out what &lt;code&gt;IndexedSlices&lt;/code&gt; are.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Tensorflow 2 code for Attention Mechanisms chapter of Dive into Deep Learning (D2L) book</title>
-      <link>http://localhost:1313/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
+      <link>http://localhost:1313/blog/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</link>
       <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
+      <guid>http://localhost:1313/blog/tensorflow-2-code-for-attention-mechanisms-chapter-of-d2l-book/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;tr&gt;
   &lt;td align=&#34;left&#34;&gt;
@@ -220,22 +225,36 @@ array([[ 0.        ,  0.        ,  0.        ,  0.        ],
   &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;span style=&#34;color: purple;&#34;&gt;&lt;strong&gt;This code has been merged with D2L book. See PR: &lt;a href=&#34;https://github.com/d2l-ai/d2l-en/pull/1756&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;1756&lt;/a&gt;, &lt;a href=&#34;https://github.com/d2l-ai/d2l-en/pull/1768&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;1768&lt;/a&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;This post contains &lt;code&gt;Tensorflow 2&lt;/code&gt; code for Attention Mechanisms chapter of &lt;a href=&#34;http://d2l.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Dive into Deep Learning (D2L)&lt;/a&gt; book. The chapter has 7 sections and code for each section can be found at the following links. We have given only code implementations. For theory, readers should refer the book.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_1_Visualization_of_attention.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.1. Attention Cues&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_2_Attention_based_regression.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.2. Attention Pooling: Nadaraya-Watson Kernel Regression&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_3_Attention_scoring_functions.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.3. Attention Scoring Functions&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_4_Bahdanau_attention.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.4. Bahdanau Attention&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_5_Multi-head_attention.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.5. Multi-Head Attention&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_6_Self-attention_and_positional_encoding.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.6. Self-Attention and Positional Encoding&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/10_7_Transformer.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;10.7. Transformer&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: purple;&#34;&gt;&lt;strong&gt;This code has been merged with D2L book. See PR: 
+, 
+&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;This post contains &lt;code&gt;Tensorflow 2&lt;/code&gt; code for Attention Mechanisms chapter of 
+ book. The chapter has 7 sections and code for each section can be found at the following links. We have given only code implementations. For theory, readers should refer the book.&lt;/p&gt;
+&lt;p&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;additional-sections&#34;&gt;Additional sections:&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF/blob/master/additional_sections/9_7_Sequence_to_Sequence_Learning.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;9.7. Sequence to Sequence Learning&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;/p&gt;
 &lt;h3 id=&#34;additional-chapters&#34;&gt;Additional Chapters:&lt;/h3&gt;
-&lt;p&gt;Chapter 17: &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Generative_Adversarial_Networks_in_TF&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Generative Adversarial Networks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Chapter 17: 
+&lt;/p&gt;
 &lt;h3 id=&#34;how-to-run-these-code&#34;&gt;How to run these code:&lt;/h3&gt;
 &lt;p&gt;The best way (in our opinion) is to either clone the repo (or download the zipped repo) and then run each notebook from the cloned (or extracted) folder. All the notebooks will run without any issue.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: We claim no originality for the code. Credit goes to the authors of this excellent &lt;a href=&#34;http://d2l.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;book&lt;/a&gt;. However, all errors and omissions are my own and readers are encouraged to bring it to my notice. Finally, no TF code was available (to the best of my knowledge) for &lt;code&gt;Attention Mechanisms&lt;/code&gt; chapter when &lt;a href=&#34;https://github.com/biswajitsahoo1111/D2L_Attention_Mechanisms_in_TF&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this repo&lt;/a&gt; was first made public.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: We claim no originality for the code. Credit goes to the authors of this excellent 
+. However, all errors and omissions are my own and readers are encouraged to bring it to my notice. Finally, no TF code was available (to the best of my knowledge) for &lt;code&gt;Attention Mechanisms&lt;/code&gt; chapter when 
+ was first made public.&lt;/p&gt;
 </description>
     </item>
     

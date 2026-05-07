@@ -5,18 +5,18 @@
     <link>http://localhost:1313/tags/julia/</link>
       <atom:link href="http://localhost:1313/tags/julia/index.xml" rel="self" type="application/rss+xml" />
     <description>Julia</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 23 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 23 Feb 2024 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
+      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
       <title>Julia</title>
       <link>http://localhost:1313/tags/julia/</link>
     </image>
     
     <item>
       <title>Compute element stiffness matrix symbolically</title>
-      <link>http://localhost:1313/post/compute-element-stiffness-matrix-symbolically/</link>
+      <link>http://localhost:1313/blog/compute-element-stiffness-matrix-symbolically/</link>
       <pubDate>Fri, 23 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/compute-element-stiffness-matrix-symbolically/</guid>
+      <guid>http://localhost:1313/blog/compute-element-stiffness-matrix-symbolically/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://github.com/biswajitsahoo1111/blog_notebooks/blob/master/compute_element_stiffness_matrix_symbolically/compute_element_stiffness_matrix_symbolically.ipynb&#34; target=&#34;_blank&#34;&gt;
@@ -29,7 +29,8 @@
     overflow-x: auto;
 }
 &lt;/style&gt;
-&lt;p&gt;In this notebook, we will try to compute the stiffness matrix of a rectangular element using symbolic computations in Julia. Traditionally in undergraduate curriculum, computations of stiffness matrix for different elements are taught using hand calculations. However, using symbolic calculations along with matrix notation it is straight forward to derive those matrices. Though MATLAB is still widely used in engineering courses and also contains symbolic computation module, we will use Julia as it is open source and Julia&amp;rsquo;s matrix notations are nearly identical to that of MATLAB&amp;rsquo;s. Steps to run this notebook in VS Code along with different required installations can be found &lt;a href=&#34;https://code.visualstudio.com/docs/languages/julia&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this notebook, we will try to compute the stiffness matrix of a rectangular element using symbolic computations in Julia. Traditionally in undergraduate curriculum, computations of stiffness matrix for different elements are taught using hand calculations. However, using symbolic calculations along with matrix notation it is straight forward to derive those matrices. Though MATLAB is still widely used in engineering courses and also contains symbolic computation module, we will use Julia as it is open source and Julia&amp;rsquo;s matrix notations are nearly identical to that of MATLAB&amp;rsquo;s. Steps to run this notebook in VS Code along with different required installations can be found 
+.&lt;/p&gt;
 &lt;p&gt;Below, we will go over the steps followed to derive the element stiffness matrix. We will briefly go over the theory and use only the required equations. For a detailed exploration, readers are directed to the books mentioned in the references. Our example is focused on rectangular element only. However, the same approach can be followed for other elements with minor modifications.&lt;/p&gt;
 &lt;p&gt;Steps to derive element stiffness matrix:&lt;/p&gt;
 &lt;ol&gt;
@@ -60,13 +61,21 @@
 
 &lt;figure  id=&#34;figure-bilinear-rectangle-q4&#34;&gt;
   &lt;div class=&#34;flex justify-center	&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./rectangular_element_fea.png&#34; alt=&#34;Image of Bilinear Rectangle (Q4) element&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-full&#34; &gt;
+          &lt;img alt=&#34;Image of Bilinear Rectangle (Q4) element&#34; 
+               srcset=&#34;http://localhost:1313/blog/compute-element-stiffness-matrix-symbolically/rectangular_element_fea_hu_4414850190adf384.webp 320w, http://localhost:1313/blog/compute-element-stiffness-matrix-symbolically/rectangular_element_fea_hu_e61e5aefe827b8f3.webp 434w&#34;
+               sizes=&#34;(max-width: 480px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 760px&#34;
+               src=&#34;http://localhost:1313/blog/compute-element-stiffness-matrix-symbolically/rectangular_element_fea_hu_4414850190adf384.webp&#34;
+               width=&#34;434&#34;
+               height=&#34;335&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;figcaption&gt;
       Bilinear Rectangle (Q4)
     &lt;/figcaption&gt;&lt;/figure&gt;
 &lt;/p&gt;
 &lt;p&gt;If the above figure is not clearly visible, consider changing the theme of background to &amp;ldquo;light&amp;rdquo;. Then the figure would be seen clearly. The element has 4 nodes and 8 degrees of freedom. It&amp;rsquo;s also called Q4 because it is a quadrilateral having 4 nodes. Standard counter-clockwise convention is used to name the nodes.&lt;/p&gt;
-&lt;p&gt;First load the relevant libraries. If a library is not installed, follow the instructions given in &lt;a href=&#34;https://docs.julialang.org/en/v1/stdlib/Pkg/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this link&lt;/a&gt; to download those.&lt;/p&gt;
+&lt;p&gt;First load the relevant libraries. If a library is not installed, follow the instructions given in 
+ to download those.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Symbolics&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SymbolicNumericIntegration&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;ENV&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;COLUMNS&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;240&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;c&#34;&gt;# For better display of symbolic columns&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The variables to be used in the symbolic computation are defined below.&lt;/p&gt;
@@ -411,7 +420,9 @@ $$ \begin{equation}
 &lt;ol&gt;
 &lt;li&gt;Concepts and applications of finite element analysis by Robert D. Cook, et. al. (John Wiley &amp;amp; Sons, Inc., Fourth Edition)&lt;/li&gt;
 &lt;li&gt;A first course in the finite element method by Daryl L. Logan (Cengage Learning, Fifth Edition)&lt;/li&gt;
-&lt;li&gt;A 99 line topology optimization code written in MATLAB (Springer, 2001) by &lt;a href=&#34;https://www.dtu.dk/english/Person/cwis?id=2278&amp;amp;cpid=927&amp;amp;tab=1&amp;amp;entity=profile&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ole Sigmund&lt;/a&gt; (Link: &lt;a href=&#34;https://www.topopt.mek.dtu.dk/apps-and-software/a-99-line-topology-optimization-code-written-in-matlab&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.topopt.mek.dtu.dk/apps-and-software/a-99-line-topology-optimization-code-written-in-matlab&lt;/a&gt;, Last accessed: 25 Feb 2024)&lt;/li&gt;
+&lt;li&gt;A 99 line topology optimization code written in MATLAB (Springer, 2001) by 
+ (Link: 
+, Last accessed: 25 Feb 2024)&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>

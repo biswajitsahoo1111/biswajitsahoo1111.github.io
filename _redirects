@@ -1,4 +1,4 @@
 # Netlify redirects
 # Automatically generated
 # Documentation: https://docs.netlify.com/routing/redirects/
-/project/personal-project/ /project/cbm_codes_open/
+/project/personal-project /projects/cbm_codes_open/

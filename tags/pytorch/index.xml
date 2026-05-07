@@ -5,18 +5,18 @@
     <link>http://localhost:1313/tags/pytorch/</link>
       <atom:link href="http://localhost:1313/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
     <description>PyTorch</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 19 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 19 Dec 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>http://localhost:1313/media/icon_hu14255546723713444625.png</url>
+      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
       <title>PyTorch</title>
       <link>http://localhost:1313/tags/pytorch/</link>
     </image>
     
     <item>
       <title>Reading multiple csv files in PyTorch</title>
-      <link>http://localhost:1313/post/reading-multiple-csv-files-in-pytorch/</link>
+      <link>http://localhost:1313/blog/reading-multiple-csv-files-in-pytorch/</link>
       <pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/reading-multiple-csv-files-in-pytorch/</guid>
+      <guid>http://localhost:1313/blog/reading-multiple-csv-files-in-pytorch/</guid>
       <description>&lt;table class=&#34;tfo-notebook-buttons&#34; align=&#34;left&#34;&gt;
   &lt;td&gt;
     &lt;a href=&#34;https://colab.research.google.com/github/biswajitsahoo1111/blog_notebooks/blob/master/Reading_multiple_csv_files_in_PyTorch.ipynb&#34;&gt;
@@ -37,10 +37,14 @@
 &lt;p&gt;This post is self-sufficient in the sense that readers don’t have to download any data from anywhere. Just run the following codes sequentially. First, a folder named “random_data” will be created in current working directory and .csv files will be saved in it. Subsequently, files will be read from that folder and processed. Just make sure that your current working directory doesn’t have an old folder named “random_data”. Then run the following code cells. We will use PyTorch to run our deep learning model. For efficiency in data loading, we will use PyTorch dataloaders.&lt;/p&gt;
 &lt;h2 id=&#34;outline&#34;&gt;Outline:&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#sec_1&#34;&gt;Create 500 &amp;ldquo;.csv&amp;rdquo; files and save it in the folder “random_data” in current working directory.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#sec_2&#34;&gt;Create a custom dataloader.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#sec_3&#34;&gt;Feed the chunks of data to a CNN model and train it for several epochs.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#sec_4&#34;&gt;Make prediction on new data for which labels are not known.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;a id=&#34;sec_1&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;1-create-500-csv-files-of-random-data&#34;&gt;1. Create 500 .csv files of random data&lt;/h2&gt;
