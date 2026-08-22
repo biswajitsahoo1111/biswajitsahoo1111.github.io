@@ -6,7 +6,7 @@
   <url>
     <loc>http://localhost:1313/projects/</loc><lastmod>2024-05-19T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/blog/</loc><lastmod>2024-02-23T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/blog/</loc><lastmod>2026-08-22T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/blog/compute-element-stiffness-matrix-symbolically/</loc><lastmod>2024-02-23T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
@@ -14,7 +14,7 @@
   <url>
     <loc>http://localhost:1313/tags/julia/</loc><lastmod>2024-02-23T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/tags/</loc><lastmod>2024-02-23T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/tags/</loc><lastmod>2026-08-22T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/experience/</loc><lastmod>2023-10-24T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
@@ -86,9 +86,9 @@
   <url>
     <loc>http://localhost:1313/projects/cbm_codes_open/</loc><lastmod>2019-04-18T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/blog/fault-diagnosis-of-machines/</loc><lastmod>2019-03-24T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/blog/fault-diagnosis-of-machines/</loc><lastmod>2026-08-22T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/tags/story/</loc><lastmod>2019-03-24T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/tags/story/</loc><lastmod>2026-08-22T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/blog/revisiting-systems-of-linear-equations/</loc><lastmod>2019-02-12T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
