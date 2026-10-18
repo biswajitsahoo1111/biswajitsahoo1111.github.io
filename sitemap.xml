@@ -4,6 +4,52 @@
   
   
   <url>
+    <loc>http://localhost:1313/tags/ai/</loc><lastmod>2026-08-07T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/events/2026_08_07_srm/</loc><lastmod>2026-08-07T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/deployment/</loc><lastmod>2026-08-07T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/fault-diagnosis/</loc><lastmod>2026-08-07T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/</loc><lastmod>2026-08-22T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/events/</loc><lastmod>2026-08-07T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/generative-ai/</loc><lastmod>2025-09-19T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/industry-4.0/</loc><lastmod>2025-09-19T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/smart-manufacturing/</loc><lastmod>2025-09-19T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/events/2025_09_19_kiit/</loc><lastmod>2025-09-19T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/anomaly-detection/</loc><lastmod>2025-09-18T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/events/2025_09_18_kiit/</loc><lastmod>2025-09-18T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/large-language-models/</loc><lastmod>2025-02-22T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/events/2025_02_22_giet/</loc><lastmod>2025-02-22T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/events/2025_02_19_giet/</loc><lastmod>2025-02-19T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/events/2025_01_08_nist/</loc><lastmod>2025-01-08T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/optimization/</loc><lastmod>2025-01-08T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/python/</loc><lastmod>2025-01-08T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/regression/</loc><lastmod>2025-01-08T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/events/2025_01_07_nist/</loc><lastmod>2025-01-07T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/industry-5.0/</loc><lastmod>2024-12-21T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/events/2024_12_21_kiit/</loc><lastmod>2024-12-21T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/events/2024_12_18_kiit/</loc><lastmod>2024-12-18T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
     <loc>http://localhost:1313/projects/</loc><lastmod>2024-05-19T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/blog/</loc><lastmod>2026-08-22T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
@@ -14,13 +60,23 @@
   <url>
     <loc>http://localhost:1313/tags/julia/</loc><lastmod>2024-02-23T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/tags/</loc><lastmod>2026-08-22T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
-  <url>
     <loc>http://localhost:1313/experience/</loc><lastmod>2023-10-24T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/blog/making-github-traffic-type-plots/</loc><lastmod>2023-02-18T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/publication_types/article-journal/</loc><lastmod>2023-06-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/tags/python/</loc><lastmod>2023-02-18T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/publications/estimation_of_torque_variation/</loc><lastmod>2023-06-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/kalman-filter/</loc><lastmod>2023-06-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/publication_types/</loc><lastmod>2023-06-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/publications/</loc><lastmod>2023-06-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/rotating-systems/</loc><lastmod>2023-06-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/tags/torque-estimation/</loc><lastmod>2023-06-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>http://localhost:1313/blog/making-github-traffic-type-plots/</loc><lastmod>2023-02-18T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/tags/visualization/</loc><lastmod>2023-02-18T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
@@ -28,23 +84,13 @@
   <url>
     <loc>http://localhost:1313/tags/deep-learning/</loc><lastmod>2022-01-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/tags/fault-diagnosis/</loc><lastmod>2022-01-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
-  <url>
     <loc>http://localhost:1313/tags/machine-learning/</loc><lastmod>2022-01-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/publications/data_driven_features_fault_diagnosis/</loc><lastmod>2022-01-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/publication_types/paper-conference/</loc><lastmod>2022-01-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/publication_types/</loc><lastmod>2022-01-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
-  <url>
-    <loc>http://localhost:1313/publications/</loc><lastmod>2022-01-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
-  <url>
     <loc>http://localhost:1313/publications/ml_regression_optimization/</loc><lastmod>2021-08-14T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
-  <url>
-    <loc>http://localhost:1313/tags/optimization/</loc><lastmod>2021-08-14T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
-  <url>
-    <loc>http://localhost:1313/tags/regression/</loc><lastmod>2021-08-14T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/tags/attention-mechanism/</loc><lastmod>2021-04-01T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
@@ -72,15 +118,15 @@
   <url>
     <loc>http://localhost:1313/publications/spca_fault_diagnosis/</loc><lastmod>2020-08-20T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/tags/pca/</loc><lastmod>2020-08-20T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/tags/pca/</loc><lastmod>2021-05-05T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/blog/efficiently-reading-multiple-files-in-tensorflow-2/</loc><lastmod>2020-05-17T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/blog/doing-linear-algebra-using-tensorflow-2/</loc><lastmod>2020-05-14T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/blog/doing-linear-algebra-using-tensorflow-2/</loc><lastmod>2020-07-30T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/tags/linear-algebra/</loc><lastmod>2020-05-14T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/tags/linear-algebra/</loc><lastmod>2020-07-30T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/blog/reading-multiple-files-in-tensorflow-2/</loc><lastmod>2020-01-09T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/blog/reading-multiple-files-in-tensorflow-2/</loc><lastmod>2020-04-27T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/blog/using-python-generators/</loc><lastmod>2019-06-29T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
@@ -92,14 +138,14 @@
   <url>
     <loc>http://localhost:1313/blog/revisiting-systems-of-linear-equations/</loc><lastmod>2019-02-12T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/blog/principal-component-analysis-part-iii/</loc><lastmod>2019-02-05T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/blog/principal-component-analysis-part-iii/</loc><lastmod>2020-01-19T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/tags/r/</loc><lastmod>2019-02-05T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/tags/r/</loc><lastmod>2021-05-05T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/tags/matlab/</loc><lastmod>2019-02-04T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/blog/principal-component-analysis-part-ii/</loc><lastmod>2019-02-04T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
-    <loc>http://localhost:1313/blog/principal-component-analysis-part-i/</loc><lastmod>2019-02-03T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
+    <loc>http://localhost:1313/blog/principal-component-analysis-part-i/</loc><lastmod>2021-05-05T00:00:00+00:00</lastmod><changefreq>weekly</changefreq></url>
   <url>
     <loc>http://localhost:1313/personal/</loc><changefreq>weekly</changefreq></url></urlset>

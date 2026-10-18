@@ -5,12 +5,28 @@
     <link>http://localhost:1313/tags/optimization/</link>
       <atom:link href="http://localhost:1313/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
     <description>Optimization</description>
-    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 14 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Wed, 08 Jan 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
       <title>Optimization</title>
       <link>http://localhost:1313/tags/optimization/</link>
     </image>
+    
+    <item>
+      <title>Hands-on Linear Regression, Support Vector Regression, and Artificial Neural Networks (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2025_01_08_nist/</link>
+      <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_01_08_nist/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python Basics (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2025_01_07_nist/</link>
+      <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_01_07_nist/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Machine Learning, Regression, and Optimization</title>

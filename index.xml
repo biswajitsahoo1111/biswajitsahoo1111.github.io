@@ -13,6 +13,78 @@
     </image>
     
     <item>
+      <title>AI/ML for Mechanical Engineers: Domains, Data, and Deployment</title>
+      <link>http://localhost:1313/events/2026_08_07_srm/</link>
+      <pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2026_08_07_srm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Use of Generative AI in Industry 4.0 and Beyond (AICTE VAANI)</title>
+      <link>http://localhost:1313/events/2025_09_19_kiit/</link>
+      <pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_09_19_kiit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Use of AI for Fault Diagnosis (AICTE VAANI)</title>
+      <link>http://localhost:1313/events/2025_09_18_kiit/</link>
+      <pubDate>Thu, 18 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_09_18_kiit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Use of Large Language Models in Industry 4.0 and Beyond (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2025_02_22_giet/</link>
+      <pubDate>Sat, 22 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_02_22_giet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Use of AI for Fault Diagnosis and Anomaly Detection (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2025_02_19_giet/</link>
+      <pubDate>Wed, 19 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_02_19_giet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hands-on Linear Regression, Support Vector Regression, and Artificial Neural Networks (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2025_01_08_nist/</link>
+      <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_01_08_nist/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python Basics (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2025_01_07_nist/</link>
+      <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_01_07_nist/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Manufacturing System Design in Industry 5.0 (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2024_12_21_kiit/</link>
+      <pubDate>Sat, 21 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2024_12_21_kiit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Use of AI in Industry 5.0 (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2024_12_18_kiit/</link>
+      <pubDate>Wed, 18 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2024_12_18_kiit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Compute element stiffness matrix symbolically</title>
       <link>http://localhost:1313/blog/compute-element-stiffness-matrix-symbolically/</link>
       <pubDate>Fri, 23 Feb 2024 00:00:00 +0000</pubDate>
@@ -432,6 +504,14 @@ $$ \begin{equation}
       <link>http://localhost:1313/experience/</link>
       <pubDate>Tue, 24 Oct 2023 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/experience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Estimation of torque variation due to torsional vibration in a rotating system using a kalman filter-based approach</title>
+      <link>http://localhost:1313/publications/estimation_of_torque_variation/</link>
+      <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publications/estimation_of_torque_variation/</guid>
       <description></description>
     </item>
     
@@ -5104,7 +5184,6 @@ array([[  0.,   7.,  13.],
 &lt;li&gt;Datta, Biswa Nath. Numerical linear algebra and applications. Vol. 116. Siam, 2010.&lt;/li&gt;
 &lt;li&gt;(The Book) Golub, Gene H., and Charles F. Van Loan. Matrix computations. Vol. 3. JHU press, 2012.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Last updated: 30 July, 2020.&lt;/p&gt;
 </description>
     </item>
     
@@ -5700,7 +5779,6 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
  for a complete workflow for reading multiple files using Sequence.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Update 2&lt;/strong&gt;: If along with reading, one has to perform complex transformations on extracted data (say, doing spectrogram on each segment of data, etc.), the naive approach presented in this blog may turn out to be slow. But there are ways to make these computations faster. One such speedup technique can be found at 
 .&lt;/p&gt;
-&lt;p&gt;Last modified: 27th April, 2020.&lt;/p&gt;
 </description>
     </item>
     
@@ -6909,7 +6987,6 @@ This system has no solution.&lt;/li&gt;
 &lt;ol&gt;
 &lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Last updated: 19th January, 2020&lt;/p&gt;
 </description>
     </item>
     
@@ -7573,7 +7650,6 @@ fraction of everything. Entire books have been written on PCA.
 Interested readers who want to pursue this further can refer the
 references of this post as a starting point. Readers are encouraged to
 bring any errors or omissions to my notice.&lt;/p&gt;
-&lt;p&gt;Last modified: May 5, 2021&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New

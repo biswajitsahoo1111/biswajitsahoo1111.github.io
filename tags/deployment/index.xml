@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deployment | Biswajit Sahoo</title>
+    <link>http://localhost:1313/tags/deployment/</link>
+      <atom:link href="http://localhost:1313/tags/deployment/index.xml" rel="self" type="application/rss+xml" />
+    <description>Deployment</description>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
+      <title>Deployment</title>
+      <link>http://localhost:1313/tags/deployment/</link>
+    </image>
+    
+    <item>
+      <title>AI/ML for Mechanical Engineers: Domains, Data, and Deployment</title>
+      <link>http://localhost:1313/events/2026_08_07_srm/</link>
+      <pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2026_08_07_srm/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

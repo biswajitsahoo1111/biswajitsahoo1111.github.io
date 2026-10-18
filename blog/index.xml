@@ -4844,7 +4844,6 @@ array([[  0.,   7.,  13.],
 &lt;li&gt;Datta, Biswa Nath. Numerical linear algebra and applications. Vol. 116. Siam, 2010.&lt;/li&gt;
 &lt;li&gt;(The Book) Golub, Gene H., and Charles F. Van Loan. Matrix computations. Vol. 3. JHU press, 2012.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Last updated: 30 July, 2020.&lt;/p&gt;
 </description>
     </item>
     
@@ -5440,7 +5439,6 @@ array([[0.28138927, 0.3383776 , 0.17806269, 0.18918239, 0.01298801],
  for a complete workflow for reading multiple files using Sequence.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Update 2&lt;/strong&gt;: If along with reading, one has to perform complex transformations on extracted data (say, doing spectrogram on each segment of data, etc.), the naive approach presented in this blog may turn out to be slow. But there are ways to make these computations faster. One such speedup technique can be found at 
 .&lt;/p&gt;
-&lt;p&gt;Last modified: 27th April, 2020.&lt;/p&gt;
 </description>
     </item>
     
@@ -6399,7 +6397,6 @@ This system has no solution.&lt;/li&gt;
 &lt;ol&gt;
 &lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Last updated: 19th January, 2020&lt;/p&gt;
 </description>
     </item>
     
@@ -7063,7 +7060,6 @@ fraction of everything. Entire books have been written on PCA.
 Interested readers who want to pursue this further can refer the
 references of this post as a starting point. Readers are encouraged to
 bring any errors or omissions to my notice.&lt;/p&gt;
-&lt;p&gt;Last modified: May 5, 2021&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New

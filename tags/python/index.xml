@@ -5,12 +5,28 @@
     <link>http://localhost:1313/tags/python/</link>
       <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <description>Python</description>
-    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 18 Feb 2023 00:00:00 +0000</lastBuildDate>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Wed, 08 Jan 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
       <title>Python</title>
       <link>http://localhost:1313/tags/python/</link>
     </image>
+    
+    <item>
+      <title>Hands-on Linear Regression, Support Vector Regression, and Artificial Neural Networks (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2025_01_08_nist/</link>
+      <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_01_08_nist/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python Basics (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2025_01_07_nist/</link>
+      <pubDate>Tue, 07 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_01_07_nist/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Making Github Traffic Type Plots</title>
@@ -966,7 +982,6 @@ Test Accuracy: 0.9922000169754028
 &lt;ol&gt;
 &lt;li&gt;Abdi, H., &amp;amp; Williams, L. J. (2010). Principal component analysis. Wiley interdisciplinary reviews: computational statistics, 2(4), 433-459.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Last updated: 19th January, 2020&lt;/p&gt;
 </description>
     </item>
     
@@ -1630,7 +1645,6 @@ fraction of everything. Entire books have been written on PCA.
 Interested readers who want to pursue this further can refer the
 references of this post as a starting point. Readers are encouraged to
 bring any errors or omissions to my notice.&lt;/p&gt;
-&lt;p&gt;Last modified: May 5, 2021&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;I.T. Jolliffe, Principal component analysis, 2nd ed, Springer, New

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Generative AI | Biswajit Sahoo</title>
+    <link>http://localhost:1313/tags/generative-ai/</link>
+      <atom:link href="http://localhost:1313/tags/generative-ai/index.xml" rel="self" type="application/rss+xml" />
+    <description>Generative AI</description>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 19 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
+      <title>Generative AI</title>
+      <link>http://localhost:1313/tags/generative-ai/</link>
+    </image>
+    
+    <item>
+      <title>Use of Generative AI in Industry 4.0 and Beyond (AICTE VAANI)</title>
+      <link>http://localhost:1313/events/2025_09_19_kiit/</link>
+      <pubDate>Fri, 19 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_09_19_kiit/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

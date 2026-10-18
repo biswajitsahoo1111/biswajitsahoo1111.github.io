@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Anomaly Detection | Biswajit Sahoo</title>
+    <link>http://localhost:1313/tags/anomaly-detection/</link>
+      <atom:link href="http://localhost:1313/tags/anomaly-detection/index.xml" rel="self" type="application/rss+xml" />
+    <description>Anomaly Detection</description>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 18 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
+      <title>Anomaly Detection</title>
+      <link>http://localhost:1313/tags/anomaly-detection/</link>
+    </image>
+    
+    <item>
+      <title>Use of AI for Fault Diagnosis (AICTE VAANI)</title>
+      <link>http://localhost:1313/events/2025_09_18_kiit/</link>
+      <pubDate>Thu, 18 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_09_18_kiit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Use of AI for Fault Diagnosis and Anomaly Detection (AICTE ATAL FDP)</title>
+      <link>http://localhost:1313/events/2025_02_19_giet/</link>
+      <pubDate>Wed, 19 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/events/2025_02_19_giet/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

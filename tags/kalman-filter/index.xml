@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kalman Filter | Biswajit Sahoo</title>
+    <link>http://localhost:1313/tags/kalman-filter/</link>
+      <atom:link href="http://localhost:1313/tags/kalman-filter/index.xml" rel="self" type="application/rss+xml" />
+    <description>Kalman Filter</description>
+    <generator>HugoBlox Kit (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Jun 2023 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>http://localhost:1313/media/icon_hu_8653216acba6f460.png</url>
+      <title>Kalman Filter</title>
+      <link>http://localhost:1313/tags/kalman-filter/</link>
+    </image>
+    
+    <item>
+      <title>Estimation of torque variation due to torsional vibration in a rotating system using a kalman filter-based approach</title>
+      <link>http://localhost:1313/publications/estimation_of_torque_variation/</link>
+      <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publications/estimation_of_torque_variation/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
